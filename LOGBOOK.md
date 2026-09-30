@@ -1414,3 +1414,14 @@ the first changes DD-TRANS-004; DD-TRANS-001's sentence about `link`'s
 shape changes too. All five are marked changed with the proposed wording,
 approval pending at G4 link. IT-020 and the transport DD's `Stub`
 description got editorial notes.
+
+### G4 link approved
+
+The user approved the link module design, revision 2 of
+docs/v-model/4-detailed-design/link.md, on 2026-10-01 (commit `1a49fef`,
+tag `g4-link-approved`), and with it the changes to AR-022, SR-028 and
+IT-022 (every immediate request that times out counts toward the loss
+rule), to DD-TRANS-004 (a frame that fails to decode is dropped and
+counted; the link goes on) and to DD-TRANS-001 (only the link task is
+generic). The user also asked on 2026-10-01 that implementation work be
+delegated to Opus 5.5 agents from now on; the link module is the first.
