@@ -9,7 +9,7 @@ Open and finished work, grouped by V-model phase. The process is described in
 | Gate | Level | Status |
 |---|---|---|
 | G1 | User requirements + acceptance test spec | approved 2026-09-30 (UR rev 9, AT rev 9, tag g1-approved) |
-| G2 | System requirements + system test spec | not started |
+| G2 | System requirements + system test spec | approved 2026-09-30 (SR rev 10, ST rev 7, tag g2-approved) |
 | G3 | Architecture + integration test spec | not started (a draft architecture was agreed in chat, "yes, looks right"; that is input for 3-architecture.md, not a gate approval; see LOGBOOK 2026-09-29, "Corrections, second round") |
 | G4 | Detailed design + unit test spec, per module | not started |
 
@@ -52,8 +52,9 @@ Open and finished work, grouped by V-model phase. The process is described in
       with the Parallels VM code (2026-09-30)
 - [x] Traceability generator scripts/check_traceability.py; the matrix is
       generated from now on (2026-09-30)
-- [ ] G1 and G2 with the user. TBD-009, TBD-015 and TBD-017 settled on
-      2026-09-30; the approval of UR revision 9 and AT revision 9 is next
+- [x] G1 and G2 with the user (2026-09-30, tags g1-approved and g2-approved)
+- [ ] G3: docs/v-model/3-architecture.md and the integration test
+      specification, against the device model and the approved SRs
 
 ## Research
 
@@ -190,7 +191,7 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] TBD-016. Find out how an over-current trip shows in `0xC3` (bit 5,
       output off, or both) and check the 50 ms OCP delay in the settings
       menu (HIL with the user's approval)
-- [ ] TBD-014. Question (user): minimum OS versions to support
+- [x] TBD-014 settled 2026-09-30: macOS 13, Ubuntu 22.04, Windows 10 22H2
 - [ ] TBD-012. Spike (needs explicit user approval, changes device state): request
       remote control with `0xC8` and observe `0xC9` (result codes, reply
       time), with nothing on the output

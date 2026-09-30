@@ -1,11 +1,10 @@
 # 7. System test specification (ST)
 
-Status: draft
+Status: approved (G2, user, 2026-09-30)
 
 System tests verify the system requirements in
-[2-system-requirements.md](2-system-requirements.md), revision 8. Like that
-document, this draft was written ahead of G1 and is not put up for G2 until
-G1 has passed.
+[2-system-requirements.md](2-system-requirements.md), revision 8. Both
+passed G2 on 2026-09-30.
 
 Automated system tests are pytest tests in `tests/system/`. They drive the
 system through the installed Python library, carry `@pytest.mark.spec("ST-nnn")`
@@ -117,3 +116,4 @@ column means CI.
 | 4 | 2026-09-29 | TBD-015 mitigations: ST-041 (unclean-exit marker) and ST-042 (bench note) added. | not yet approved |
 | 5 | 2026-09-30 | Matched SR revision 8: ST-001, ST-003, ST-005 to ST-012, ST-014 to ST-018, ST-022, ST-023, ST-027, ST-028, ST-032, ST-033, ST-038 to ST-040 rewritten; ST-043 to ST-049 added for SR-048 to SR-054; coverage table with the Parallels VM code (TBD-009); every HIL test records the supply's versions. | not yet approved |
 | 6 | 2026-09-30 | ST-050 for SR-055 (automatic reconnection). | not yet approved |
+| 7 | 2026-09-30 | G2: status approved. No test procedure changed. | user, 2026-09-30 (G2) |

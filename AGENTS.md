@@ -43,7 +43,7 @@ Using the software for personal, research, or internal business operations (e.g.
 testing DUTs in a lab) is permitted; commercial sale of the software, charging
 for distribution, or selling derivative products is strictly prohibited.
 
-Current phase: system requirements (level 2). G1 passed on 2026-09-30.
+Current phase: architecture (level 3). G1 and G2 passed on 2026-09-30.
 There is no production code yet.
 See [TODO.md](TODO.md) for where things stand.
 
