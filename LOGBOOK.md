@@ -1343,3 +1343,23 @@ revision 2 (gate G4 for the transport module). The approved documents are
 in commit `cb5ea3b`, tagged `g4-transport-approved`. AGENTS.md carries the
 coverage exclusion pattern. Implementation of the transport module may
 start.
+
+## 2026-10-01
+
+### Transport module implemented
+
+The `transport` module of `mp305-core` written test first from the
+approved DD: the `Transport` trait, `Guarded` (allowlist and route check,
+one write permit that travels with a spawned write task so a cancelled
+send cannot overlap the next, producer-side timestamps, the frame log under
+`mp305_core::frames`), `ble` and `hid` glue over `btleplug` 0.13 and
+`hidapi` 2.6 with the pure parts in `ble_route` and `hid_report`, the
+scripted `mock` with its factory, `AnyTransport`, and `Error::Transport`.
+Verification: fmt, clippy `-D warnings`, docs, 58 in-crate tests, 4
+external tests and 3 doctests pass; line coverage 96.4 % of `mp305-core`
+with the vendor glue excluded under ADR-0013; the two glue files inspected
+against the DD checklists; traceability without defects. The record is
+docs/v-model/records/2026-10-01-unit-transport.md, which also lists the
+deviations (crate-private constructors instead of `pub(crate)` trait
+methods, scheduled-time stamps in the mock). The DD carries an editorial
+revision 3 for the constructor wording.

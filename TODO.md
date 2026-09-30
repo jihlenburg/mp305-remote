@@ -61,7 +61,9 @@ Open and finished work, grouped by V-model phase. The process is described in
       docs/v-model/records/2026-09-30-unit-protocol.md; workspace skeleton
       with the lints of AR-004
 - [x] G4 transport approved 2026-09-30 (DD rev 2); ADR-0013 accepted
-- [ ] Implement the transport module from its DD, test first
+- [x] Implement the transport module from its DD, test first (2026-10-01):
+      65 tests, 96.4 % line coverage with the ADR-0013 exclusion, record
+      docs/v-model/records/2026-10-01-unit-transport.md
 - [ ] G4 per module: DD files for link, session, discovery, store, csv,
       then mp305-py and mp305-app
 

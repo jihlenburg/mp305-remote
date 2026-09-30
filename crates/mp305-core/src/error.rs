@@ -28,6 +28,12 @@ pub enum Error {
         /// The raw live mode the reading reported.
         live_mode: u8,
     },
+    /// A transport failed: the vendor library's error text, or the
+    /// transport's own reason.
+    Transport {
+        /// What went wrong.
+        message: String,
+    },
 }
 
 impl fmt::Display for Error {
@@ -40,6 +46,7 @@ impl fmt::Display for Error {
             Error::Mode { live_mode } => {
                 write!(f, "the supply is not in DC mode (mode {live_mode})")
             }
+            Error::Transport { message } => write!(f, "transport: {message}"),
         }
     }
 }
@@ -56,6 +63,18 @@ impl From<Reason> for Error {
 mod tests {
     use super::*;
     use crate::protocol::error::Reason;
+
+    /// Test: UT-TRANS-040
+    #[test]
+    fn display_of_transport() {
+        assert_eq!(
+            Error::Transport {
+                message: "x".to_string()
+            }
+            .to_string(),
+            "transport: x"
+        );
+    }
 
     /// Test: UT-PROTO-004 (the protocol variants' `Display`)
     #[test]
