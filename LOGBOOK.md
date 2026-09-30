@@ -1203,3 +1203,14 @@ The user settled the open points put to G1:
 1-user-requirements.md revision 9, 2-system-requirements.md revision 9,
 7-system-tests.md revision 6 and 8-acceptance-tests.md revision 9 carry the
 decisions. The traceability matrix was regenerated with no defects.
+
+### G1 approved
+
+The user approved docs/v-model/README.md as the process baseline,
+1-user-requirements.md revision 9 and 8-acceptance-tests.md revision 9
+(gate G1), and accepted ADR-0007 (synchronous Python API) and ADR-0008
+(quality standards). The approved documents are in commit `7715b97`, tagged
+`g1-approved`. The open points that remain are hardware checks of code
+findings (TBD-002 to TBD-008, TBD-011 to TBD-013, TBD-016, TBD-018) and
+TBD-014 (minimum OS versions). Next: G2 (2-system-requirements.md
+revision 9 and 7-system-tests.md revision 6).
