@@ -1182,3 +1182,24 @@ scripts/check_traceability.py now generates docs/v-model/traceability.md
 from the Parent, Mitigation and Verifies columns and, once code exists,
 from the spec tags in the code. It reports no defects for the current
 documents. AGENTS.md names the script and its `--check` mode.
+
+### G1 decisions
+
+The user settled the open points put to G1:
+
+- TBD-017: automatic reconnection is allowed as an opt-in per session. When
+  enabled, the software reconnects to the same supply (over Bluetooth with
+  the remembered host), reads the state again first, and never takes remote
+  control or changes the output until the user acts again. New UR-037,
+  SR-055, ST-050 and AT-037; UR-024 and SR-028 allow the opt-in. The
+  bench-safety note recommends USB for unattended runs (UR-031, SR-047).
+- TBD-009: the Mac natively; Linux and Windows as Parallels VMs with the
+  supply passed through for USB. The user buys a USB Bluetooth dongle for
+  the VMs; until it works, Bluetooth on Linux and Windows is CI only.
+- TBD-015: the residual risks of H-004 and H-006 are accepted with the
+  mitigations of revision 8. The hardware spikes TBD-005 and TBD-006 still
+  confirm the code findings.
+
+1-user-requirements.md revision 9, 2-system-requirements.md revision 9,
+7-system-tests.md revision 6 and 8-acceptance-tests.md revision 9 carry the
+decisions. The traceability matrix was regenerated with no defects.

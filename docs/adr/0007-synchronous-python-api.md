@@ -1,8 +1,8 @@
 # ADR-0007: Synchronous Python API
 
-- Status: Proposed
-- Date: 2026-09-29
-- Decided by: pending (agent's recommendation, not yet approved by the user)
+- Status: Accepted
+- Date: 2026-09-30 (proposed 2026-09-29)
+- Decided by: user
 - Related: ADR-0003, ADR-0006
 
 ## Context

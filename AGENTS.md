@@ -43,7 +43,8 @@ Using the software for personal, research, or internal business operations (e.g.
 testing DUTs in a lab) is permitted; commercial sale of the software, charging
 for distribution, or selling derivative products is strictly prohibited.
 
-Current phase: user requirements (level 1). There is no production code yet.
+Current phase: system requirements (level 2). G1 passed on 2026-09-30.
+There is no production code yet.
 See [TODO.md](TODO.md) for where things stand.
 
 ## Agent anonymity and ownership
@@ -62,8 +63,8 @@ Any AI coding agent contributing to this project:
 ## Process rules
 
 This project follows the V-model described in
-[docs/v-model/README.md](docs/v-model/README.md). The user has not yet
-approved that document as the process baseline. In short:
+[docs/v-model/README.md](docs/v-model/README.md), approved by the user as
+the process baseline on 2026-09-30. In short:
 
 1. No production code for a module before its DD file
    (`docs/v-model/4-detailed-design/<module>.md`, the design plus its unit

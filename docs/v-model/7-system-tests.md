@@ -47,6 +47,7 @@ column means CI.
 | ST | macOS BLE | macOS USB | Linux BLE | Linux USB | Windows BLE | Windows USB |
 |---|---|---|---|---|---|---|
 | ST-001, ST-002, ST-005, ST-007 to ST-010, ST-039, ST-045, ST-048 | HW | n/a | VM | n/a | VM | n/a |
+| ST-050 | HW | HW | VM | VM | VM | VM |
 | ST-003, ST-011, ST-040, ST-046 | n/a | HW | n/a | VM | n/a | VM |
 | ST-004, ST-006, ST-012 to ST-015, ST-018 to ST-024, ST-026 to ST-031, ST-033 to ST-036, ST-038, ST-041, ST-043, ST-049 | HW | HW | VM | VM | VM | VM |
 | ST-016, ST-017, ST-025, ST-032, ST-037, ST-042, ST-044, ST-047 | A | A | A | A | A | A |
@@ -104,6 +105,7 @@ column means CI.
 | ST-047 | SR-052 | Check every request in the frame logs of ST-006, ST-008 and ST-018 against the payload lengths of protocol.md 3 and 4. | Every request carries its full payload. | automated, log check |
 | ST-048 | SR-053 | Over Bluetooth: connect, then call `set_voltage(1.0)`. Run 1: the person presses deny. Run 2: nobody presses anything. Run 3: the person presses allow after 10 s while the test queues a second control call. | Run 1 `RemoteControlDeniedError` after the `0xC9` 1. Run 2 `RemoteControlDeniedError` within 70 s. Run 3 the frame log shows no control command between the request and the `0xC9` 0; the queued call is sent after it. The confirmation text was logged in all runs. | automated, HIL, person |
 | ST-049 | SR-054 | Connect, take remote control, put the supply in PD mode on the front panel, then close the library connection. | The frame log shows no `0xC8` with `remoteCon = 0` after the mode change; a warning is logged. Restore DC mode. | automated, HIL, person |
+| ST-050 | SR-055 | 1. Enable automatic reconnection, connect over Bluetooth to a supply that remembers the host, stream readings, then switch off Bluetooth on the host for 20 s and switch it on again. 2. Repeat over USB by pulling and re-plugging the cable. 3. Repeat step 1 with the remembered host ID deleted. 4. With reconnection disabled, repeat step 1. | 1 and 2: the library reports the loss and, within 10 s of the link being available again, the reconnection; readings resume; no `0xC8` in the frame log until a control call. 3: the fast bind gets `19 FF`, the retry stops and is reported. 4: `LinkLostError`, no retry. | automated, HIL, person |
 
 ## 4. Revisions
 
@@ -114,3 +116,4 @@ column means CI.
 | 3 | 2026-09-29 | Independent review findings: Load B defined, HIL limits kept in ST-022, ST-030, ST-038; ST-034 matches SR-034; ST-038 measures frame times; coverage codes match methods. | not yet approved |
 | 4 | 2026-09-29 | TBD-015 mitigations: ST-041 (unclean-exit marker) and ST-042 (bench note) added. | not yet approved |
 | 5 | 2026-09-30 | Matched SR revision 8: ST-001, ST-003, ST-005 to ST-012, ST-014 to ST-018, ST-022, ST-023, ST-027, ST-028, ST-032, ST-033, ST-038 to ST-040 rewritten; ST-043 to ST-049 added for SR-048 to SR-054; coverage table with the Parallels VM code (TBD-009); every HIL test records the supply's versions. | not yet approved |
+| 6 | 2026-09-30 | ST-050 for SR-055 (automatic reconnection). | not yet approved |

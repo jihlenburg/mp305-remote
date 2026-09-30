@@ -21,9 +21,8 @@ the user's unit, which reported 1.6.0.40; the SR names the TBD that settles
 it. "Frame" means the framed request or reply of protocol.md 2. "Reading"
 means a decoded `0xC3`.
 
-Where TBD-017 (automatic reconnection to a remembered supply) changes a
-requirement, the requirement is written for the conservative answer, no
-automatic reconnection, and the alternative is noted in its rationale.
+TBD-017 was settled on 2026-09-30: automatic reconnection is opt-in per
+session (SR-055) and the bench-safety note recommends USB.
 
 ## 1. Discovery and connection
 
@@ -83,7 +82,8 @@ automatic reconnection, and the alternative is noted in its rationale.
 | ID | Requirement | Parent or source | Priority | Verification | Status | Rationale |
 |---|---|---|---|---|---|---|
 | SR-027 | The system shall decode `chargeError` bits 0 to 8 into named faults (reversed output, low battery, battery too cold, battery overheat, system overheat, over-current, over-voltage, power-stage start failure, output voltage failure) and report any of bits 9 to 15 as "unknown fault bit n". Every change in the set of active faults shall be reported with the reading that shows it. | UR-009, H-008 | must | T | draft | device-model.md 8 (code): bits 9 to 15 are never set in `0xC3`; only 0 seen on hardware. |
-| SR-028 | The system shall declare the link lost on an OS disconnect event, a transport error, or three `0xC2` polls in a row without a reply within 1 s each, and shall report it within 4 s of the last reply, saying that the output is still in its last state and that the supply has released remote control. After that it shall send nothing and not reconnect until the user asks. | UR-024, H-004 | must | T | draft | device-model.md 4.4 (code, TBD-005). If TBD-017 allows automatic reconnection, this SR gains an opt-in reconnect that uses SR-050 and repeats SR-012 before any control. |
+| SR-028 | The system shall declare the link lost on an OS disconnect event, a transport error, or three `0xC2` polls in a row without a reply within 1 s each, and shall report it within 4 s of the last reply, saying that the output is still in its last state and that the supply has released remote control. After that it shall send nothing and not reconnect until the user asks, unless automatic reconnection is enabled (SR-055). | UR-024, H-004 | must | T | draft | device-model.md 4.4 (code, TBD-005). |
+| SR-055 | Automatic reconnection shall be off by default and enabled per session by the user. When enabled and the link is lost, the system shall retry the connection to the same identifier every 5 s for up to 10 min, over Bluetooth with the fast bind only (SR-050 without the prompt step), and after a successful connection repeat SR-012 and resume polling. It shall not send `0xC8` until the user issues a new control request, and it shall report each reconnection. | UR-037, H-003, H-004 | should | T | draft | An unattended log run survives a short link loss. Without a remembered host the fast bind gets `19 FF` and the retry stops with a report; a prompt would need a person anyway. |
 | SR-029 | When a library connection closes (`close()` or the end of a `with` block) on an allowed connection in DC mode, the library shall switch the output off as in SR-022, then send `0xC8` with `output = 0` and `remoteCon = 0`, and then disconnect, whether or not the script ever took remote control. An error during this shall be logged and shall not hide an exception already in flight. | UR-018, UR-006, H-004 | must | T | draft | The supply keeps the output on and only releases the grant when the link drops (device-model.md 4.4, code). The app's behavior is SR-030. |
 | SR-030 | When the user disconnects in the app or closes its window while the output is on, the app shall ask whether to switch the output off. Either way it shall then send `0xC8` with `remoteCon = 0` (and `output = 0` if chosen) before disconnecting. | H-004, UR-006 | should | D | draft | Some users want a DUT to stay powered after the app closes; nobody should lose that choice by accident. |
 
@@ -122,7 +122,7 @@ automatic reconnection, and the alternative is noted in its rationale.
 | ID | Requirement | Parent or source | Priority | Verification | Status | Rationale |
 |---|---|---|---|---|---|---|
 | SR-046 | While a connection holds remote control and the latest reading reports the output on, the system shall keep a persistent marker in the user's state directory holding the supply identifier and a timestamp, refresh it with each reading that still shows the output on, and remove it during an orderly close (SR-029, SR-030) or when the output is switched off. On connecting to a supply whose marker is still present, the system shall warn the user, before any control action, that a previous session may have left the output on. | UR-030, H-004 | should | T | draft | The marker survives a crash because it is on disk. It is advisory, so a stale marker (for example after a power cycle of the supply) only produces a warning, never an action. |
-| SR-047 | The README of the app and the library shall carry the bench-safety note of UR-031, and the app shall link to it from its connection screen. | UR-031, H-004 | should | I | draft | The note only helps if the user meets it near where they run unattended sessions. Which transport it recommends follows TBD-017. |
+| SR-047 | The README of the app and the library shall carry the bench-safety note of UR-031, recommending USB for unattended runs, and the app shall link to it from its connection screen. | UR-031, H-004 | should | I | draft | The note only helps if the user meets it near where they run unattended sessions. |
 
 ## 9. Open points added at this level
 
@@ -148,3 +148,4 @@ These continue the list in 1-user-requirements.md.
 | 6 | 2026-09-29 | SR-045 rationale: the product ID and report ID 2 read from the device firmware are used in full. | not yet approved |
 | 7 | 2026-09-30 | Editorial: rationales state the deny rule and the 1 s timeout directly. No requirement text changed. | not yet approved |
 | 8 | 2026-09-30 | Rewrite from the device firmware findings (docs/research/device-model.md) against UR revision 8. Rewritten: SR-001, SR-003, SR-005, SR-006, SR-007, SR-008, SR-009, SR-011, SR-012, SR-014, SR-015, SR-016, SR-017, SR-018, SR-021, SR-022, SR-023, SR-025, SR-027, SR-028, SR-032, SR-033, SR-042, SR-044, SR-045. Added SR-048 (one connection per supply), SR-049 (per-installation host ID), SR-050 (fast bind first), SR-051 (USB keepalive), SR-052 (complete payloads), SR-053 (remote-control confirmation), SR-054 (release only in DC mode). TBD-010 to TBD-013 carry their code answers. TBD-017 taken conservatively, alternative noted in SR-028. | not yet approved |
+| 9 | 2026-09-30 | TBD-017 settled: SR-055 (opt-in automatic reconnection), SR-028 and SR-047 updated. | not yet approved |

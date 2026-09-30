@@ -1,6 +1,6 @@
 # Development process: V-model
 
-Status: draft
+Status: approved (process baseline, user, 2026-09-30)
 
 The project follows the V-model
 ([ADR-0001](../adr/0001-v-model-docs-as-code.md)). The process details in this
@@ -266,4 +266,4 @@ editorial in the revision table.
 | Rev | Date | Change | Approved by |
 |---|---|---|---|
 | 1 | 2026-09-29 | First draft, revised the same day after an independent review | not yet approved |
-| 2 | 2026-09-30 | Editorial: the V-model is stated as the project process. No process rule changed. | not yet approved |
+| 2 | 2026-09-30 | Editorial: the V-model is stated as the project process. No process rule changed. | user, 2026-09-30 (process baseline) |

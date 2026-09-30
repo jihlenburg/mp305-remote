@@ -8,7 +8,7 @@ Open and finished work, grouped by V-model phase. The process is described in
 
 | Gate | Level | Status |
 |---|---|---|
-| G1 | User requirements + acceptance test spec | in progress |
+| G1 | User requirements + acceptance test spec | approved 2026-09-30 (UR rev 9, AT rev 9, tag g1-approved) |
 | G2 | System requirements + system test spec | not started |
 | G3 | Architecture + integration test spec | not started (a draft architecture was agreed in chat, "yes, looks right"; that is input for 3-architecture.md, not a gate approval; see LOGBOOK 2026-09-29, "Corrections, second round") |
 | G4 | Detailed design + unit test spec, per module | not started |
@@ -18,11 +18,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Initialize git repository
 - [x] AGENTS.md, README.md, TODO.md, LOGBOOK.md
 - [x] Draft the V-model process document (docs/v-model/README.md)
-- [ ] User review and approval of docs/v-model/README.md (process baseline)
+- [x] User review and approval of docs/v-model/README.md (process baseline, 2026-09-30)
 - [x] ADRs 0001 to 0006 for decisions made so far
 - [x] Select project license: GNU GPLv3 with Commons Clause (ADR-0011, LICENSE)
 - [x] Agent anonymity and ownership rule (ADR-0012, AGENTS.md)
-- [ ] User approval of ADR-0007 (synchronous Python API)
+- [x] User approval of ADR-0007 (synchronous Python API, 2026-09-30)
 - [x] User approval of ADR-0008 (IEC 61508 functional safety, MISRA-aligned
       guidelines, coverage and HIL safety standards)
 - [ ] User review of the changed decision and consequence text in the
@@ -39,8 +39,10 @@ Open and finished work, grouped by V-model phase. The process is described in
       the hazards and the 2026-09-29 decisions (revision 8, 2026-09-30):
       UR-032 to UR-036 added, TBD-017 and TBD-018 added, TBD-009 revised
       for Parallels
-- [ ] TBD-017 (user decision at G1): automatic reconnect to a remembered
-      supply, and the transport the bench-safety note recommends
+- [x] TBD-017 settled 2026-09-30: opt-in automatic reconnection per
+      session (UR-037), USB recommended for unattended runs
+- [ ] Buy a USB Bluetooth dongle for the Parallels VMs and check that
+      Linux and Windows see the supply over it (TBD-009)
 - [ ] TBD-018: read-only Bluetooth spike that records the unsolicited
       `0xC5` when a setting is changed on the front panel
 - [x] Rewrite 2-system-requirements.md (revision 8) and 7-system-tests.md
@@ -50,8 +52,8 @@ Open and finished work, grouped by V-model phase. The process is described in
       with the Parallels VM code (2026-09-30)
 - [x] Traceability generator scripts/check_traceability.py; the matrix is
       generated from now on (2026-09-30)
-- [ ] G1 and G2 with the user. Decisions needed at G1: TBD-009 (VM
-      coverage), TBD-015 (residual risk), TBD-017 (automatic reconnect)
+- [ ] G1 and G2 with the user. TBD-009, TBD-015 and TBD-017 settled on
+      2026-09-30; the approval of UR revision 9 and AT revision 9 is next
 
 ## Research
 

@@ -1,6 +1,6 @@
 # 8. Acceptance test specification (AT)
 
-Status: draft
+Status: approved (G1, user, 2026-09-30)
 
 Acceptance tests validate the software against the user requirements in
 [1-user-requirements.md](1-user-requirements.md). They run against a release
@@ -71,6 +71,7 @@ These apply to every AT that uses the supply, unless the test says otherwise:
 | AT-034 | HW | HW | VM | VM | VM | VM |
 | AT-035 | n/a | HW | n/a | VM | n/a | VM |
 | AT-036 | HW | HW (TBD-004) | VM | VM (TBD-004) | VM | VM (TBD-004) |
+| AT-037 | HW | HW | VM | VM | VM | VM |
 
 AT-027 is Bluetooth only: a USB device cannot be held by another app in the
 same way. Whether it can, and what the software then reports, is a system
@@ -106,19 +107,20 @@ automated test in `tests/acceptance/` that the user starts and watches.
 | AT-020 | UR-020 | 1. Inspect `mp305-app`'s dependencies. 2. Start the release app on each OS in the coverage table and connect. | The app uses egui and runs on each OS tested. | inspection plus manual |
 | AT-021 | UR-021 | Inspect `crates/mp305-py/Cargo.toml` and the wheel. | The extension is built with PyO3 on `mp305-core`. | inspection |
 | AT-023 | UR-023 | 1. Connect the app, 3.00 V, 0.050 A, output off. 2. On the front panel, change the voltage to 4.00 V. 3. In the app, change the current limit to 0.080 A. | The supply ends at 4.00 V, 0.080 A, output off. The front panel change survived. | manual |
-| AT-024 | UR-024 | 1. 5.00 V, 0.100 A, no load, output on from the app. 2. Break the link: switch off Bluetooth on the host, or pull the USB cable. 3. Wait 30 s. 4. Check the supply's screen for the output state and the remote-control marker, then switch the output off on the front panel. | Within 4 s the app says that the link is lost, that the output is still in its last state and that the supply has released remote control. It sends nothing and does not reconnect by itself. The record notes what the supply's screen showed (TBD-005: the firmware keeps the output on and drops the remote marker). | manual |
+| AT-024 | UR-024 | 0. Automatic reconnection off. 1. 5.00 V, 0.100 A, no load, output on from the app. 2. Break the link: switch off Bluetooth on the host, or pull the USB cable. 3. Wait 30 s. 4. Check the supply's screen for the output state and the remote-control marker, then switch the output off on the front panel. | Within 4 s the app says that the link is lost, that the output is still in its last state and that the supply has released remote control. It sends nothing and does not reconnect by itself. The record notes what the supply's screen showed (TBD-005: the firmware keeps the output on and drops the remote marker). | manual |
 | AT-025 | UR-025 | Search the code for firmware update functions and for use of the `FEE0` service. | None found. | inspection |
 | AT-026 | UR-026 | 1. Connect with the app and with the library, over Bluetooth and over USB. 2. Compare with the supply's information screen. | Model, application version and hardware revision match on both transports. The USB layout is recorded for TBD-010. | manual |
 | AT-027 | UR-027 | 1. Connect WebLink in Chrome to the supply over Bluetooth. 2. Search with the app and with the library. 3. Disconnect WebLink, disable remote control on the supply's screen, search again. | In both cases the app and the library report that no supply was found and list the possible reasons: off or out of range, another app connected, a USB host active, remote control disabled on the supply. Restore remote control. | manual |
 | AT-028 | UR-028 | 1. Load A, 5 V, 0.1 A, output on. 2. Stream readings at 2 per second for 60 s to a CSV file with the helper. 3. Open the file. | About 120 rows (at least 110), each with time, voltage, current and power in V, A and W. | script (`tests/acceptance/test_python_logging.py`) |
 | AT-029 | UR-029 | 1. No load, 0.100 A. 2. Ramp from 1 V to 5 V in 1 V steps, 1 s each, while logging. | The logged setpoints step 1, 2, 3, 4, 5 V at about 1 s intervals. The ramp stops at 5 V. | script (`tests/acceptance/test_python_ramp.py`) |
 | AT-030 | UR-030 | 1. Connect, 5.00 V, 0.100 A, nothing on the output, output on. 2. Kill the process (for example `kill -9`, or close the laptop lid until the link drops). 3. Start the software again and connect to the same supply. 4. Switch the output off. | On the restart the software warns, before any control, that the previous session may have left the output on, naming the supply. Nothing is connected throughout. | manual |
-| AT-031 | UR-031 | Read the README of the app and of the library. | Both carry the unattended-run bench-safety note (front-panel current limit and OCP, safe load, the output stays on when the link drops, and the transport recommendation TBD-017 settles). | inspection |
+| AT-031 | UR-031 | Read the README of the app and of the library. | Both carry the unattended-run bench-safety note (front-panel current limit and OCP, safe load, the output stays on when the link drops, prefer USB for unattended runs). | inspection |
 | AT-032 | UR-032 | 1. Clear the remembered host ID, connect over Bluetooth with the app, press allow, disconnect. 2. Connect again and watch the supply's screen. 3. Repeat steps 1 and 2 with the library. | On the second connection no prompt appears, the software connects within 5 s and tells the user the supply recognised it. The record settles TBD-006. | manual |
 | AT-033 | UR-033 | 1. Inspect the transport's allowlist and never-send list in the code. 2. Read the frame log of AT-015. | Only `0x18`, `0xE0`, `0xC2` and `0xC8` can be sent; the never-send list names `0x10`, `0xC0`, `0xBE`, `0x20`, `0xF0` to `0xFE` with reasons; the log contains only allowed requests. | inspection |
 | AT-034 | UR-034 | 1. Connect the app, output off. 2. On the front panel, change the ramp step setting. 3. In the app, check the settings display. 4. Run the library's mock-transport test that injects a `0xC5` and a late `0xC9`. | The app shows the new ramp step without any action in the app (TBD-018). The mock test passes: the injected frames are reported as events and never taken as the reply to another request. | manual plus script (`tests/acceptance/test_unsolicited.py`) |
 | AT-035 | UR-035 | 1. Connect over USB with the library, take remote control by setting 1.00 V. 2. Wait 20 s without any call. 3. Set 1.50 V. | Step 3 is accepted at once; the supply did not release remote control, and its screen kept the remote marker throughout. | script (`tests/acceptance/test_usb_keepalive.py`) with the user watching the screen |
 | AT-036 | UR-036 | 1. Connect the app over Bluetooth, then change the voltage. 2. While the supply shows "Allow Remote Control", check what the app shows. 3. Press allow. 4. Repeat and press deny. 5. Repeat over USB. | Over Bluetooth the app says to allow remote control on the supply; after allow the change is applied, after deny the app reports the refusal and keeps the controls disabled until the user asks again. Over USB no prompt appears and the change is applied at once (TBD-004, TBD-012). | manual |
+| AT-037 | UR-037 | 1. In the app, enable automatic reconnection for the session, connect over Bluetooth to a supply that has allowed this host before, 5.00 V, 0.100 A, nothing on the output, output on. 2. Switch Bluetooth off on the Mac for 20 s, then on. 3. Watch the app and the supply's screen. 4. Change the voltage in the app. 5. Repeat with reconnection disabled. | 1 to 4: the app reports the loss, reconnects by itself without a prompt on the supply, shows fresh readings, and the output state is unchanged; the supply's remote marker returns only at step 4, after the app asks for control again (a prompt over Bluetooth). 5: the app stays disconnected and offers the reconnect button. | manual |
 
 ## 4. Revisions
 
@@ -132,3 +134,4 @@ automated test in `tests/acceptance/` that the user starts and watches.
 | 6 | 2026-09-29 | AT-022 withdrawn with UR-022. | not yet approved |
 | 7 | 2026-09-30 | Editorial: the CI coverage note states the Linux and Windows gap directly. No test procedure changed. | not yet approved |
 | 8 | 2026-09-30 | Matched UR revision 8: AT-002, AT-004, AT-008, AT-010, AT-016, AT-024, AT-026, AT-027, AT-031 rewritten; AT-032 to AT-036 added for UR-032 to UR-036; coverage table with the VM code for Parallels (TBD-009). | not yet approved |
+| 9 | 2026-09-30 | AT-037 for UR-037 (automatic reconnection); AT-024 and AT-031 match the TBD-017 decision. | user, 2026-09-30 (G1) |
