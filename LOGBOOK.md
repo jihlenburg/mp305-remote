@@ -1160,3 +1160,25 @@ are kept and the oldest is dropped. The BLE library, DataFlash and
 notification calls are stubbed, and the unit at the bench runs 1.6.0.40
 with an unknown CH58x version, so the hardware spike for TBD-006 stays
 open. device-model.md 4.1 records the check. No device I/O.
+
+### System requirements, tests and traceability rewritten
+
+2-system-requirements.md revision 8 and 7-system-tests.md revision 5 were
+rewritten against device-model.md and UR revision 8. Surviving SRs keep
+their IDs. Added SR-048 (one connection per supply), SR-049
+(per-installation host ID), SR-050 (fast bind first, prompt second),
+SR-051 (USB keepalive every 2 s), SR-052 (complete payloads), SR-053
+(remote-control confirmation over Bluetooth, 70 s bound), SR-054 (release
+only in DC mode), with ST-043 to ST-049. The bind wait is bounded at 30 s
+(SR-009), the placeholder byte and route tag are named for what they are
+(SR-044), and the USB report format follows the firmware (SR-045).
+TBD-017 is taken conservatively, no automatic reconnection, with the
+alternative noted in SR-028.
+
+8-acceptance-tests.md revision 8 adds AT-032 to AT-036 for the new URs and
+the VM coverage code for Parallels (TBD-009).
+
+scripts/check_traceability.py now generates docs/v-model/traceability.md
+from the Parent, Mitigation and Verifies columns and, once code exists,
+from the spec tags in the code. It reports no defects for the current
+documents. AGENTS.md names the script and its `--check` mode.

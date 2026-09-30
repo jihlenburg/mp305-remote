@@ -43,10 +43,15 @@ Open and finished work, grouped by V-model phase. The process is described in
       supply, and the transport the bench-safety note recommends
 - [ ] TBD-018: read-only Bluetooth spike that records the unsolicited
       `0xC5` when a setting is changed on the front panel
-- [ ] Rewrite 2-system-requirements.md and 7-system-tests.md against the
-      device model
-- [ ] Rewrite 8-acceptance-tests.md coverage table per OS and transport
-- [ ] G1 and G2 with the user
+- [x] Rewrite 2-system-requirements.md (revision 8) and 7-system-tests.md
+      (revision 5) against the device model (2026-09-30): SR-048 to SR-054
+      and ST-043 to ST-049 added, TBD-017 taken conservatively
+- [x] 8-acceptance-tests.md revision 8: AT-032 to AT-036, coverage table
+      with the Parallels VM code (2026-09-30)
+- [x] Traceability generator scripts/check_traceability.py; the matrix is
+      generated from now on (2026-09-30)
+- [ ] G1 and G2 with the user. Decisions needed at G1: TBD-009 (VM
+      coverage), TBD-015 (residual risk), TBD-017 (automatic reconnect)
 
 ## Research
 

@@ -82,8 +82,10 @@ approved that document as the process baseline. In short:
    (see Testing standards). A check script generates
    `docs/v-model/traceability.md` from the Parent columns, the test
    specification entries and these code tags. The output is committed and
-   never edited by hand. Until the script exists, keep the file by hand. The
-   script must exist before the first module is implemented.
+   never edited by hand. The script is `scripts/check_traceability.py`;
+   run it after any change to a requirement or test document and commit
+   the regenerated file with the change. `--check` reports defects and an
+   out-of-date matrix without writing.
 5. Any change to an approved document (UR, SR, AR, DD or any test
    specification) needs the user's approval before the changed item is
    implemented or re-verified. Until then, set the item's Status to `changed`
@@ -309,6 +311,7 @@ version belongs to is inferred.
 The workspace does not exist yet. Once it does, the expected commands are:
 
 ```sh
+python3 scripts/check_traceability.py --check
 cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
@@ -348,4 +351,5 @@ crates/           (planned) mp305-core, mp305-app, mp305-py
 python/mp305/     (planned) Python package
 tests/            (planned) system/ and acceptance/ tests
 spikes/           throwaway experiments, outside the Cargo workspace
+scripts/          repository tooling (traceability check)
 ```
