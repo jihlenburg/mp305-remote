@@ -1,0 +1,37 @@
+
+#### Deferred and unsolicited frames built by the transmit service 0x133BC
+
+| Case | Flag bits (0x1FFF9550) | State | Frames sent |
+|---|---|---|---|
+| remote grant allowed, DC | 0x0004 | S+0x3=1, S+0x42=1, S+0x45=1, S+0x30=0 | addr 26 `C9 00 31` |
+| remote grant denied, DC | 0x0004 | S+0x3=1, S+0x42=0, S+0x45=0, S+0x30=0 | addr 26 `C9 01 31` |
+| remote grant allowed, Prog | 0x0004 | S+0x3=1, S+0x42=1, S+0x45=1, S+0x30=1 | addr 26 `E3 00 31` |
+| remote grant allowed, PD | 0x0004 | S+0x3=1, S+0x42=1, S+0x45=1, S+0x30=2 | addr 26 `E9 00 31` |
+| remote grant denied, Charge | 0x0004 | S+0x3=1, S+0x42=0, S+0x45=0, S+0x30=3 | addr 26 `EF 01 31` |
+| remote grant, USB link | 0x0004 | S+0x3=2, S+0x42=1, S+0x45=1, S+0x30=0 | addr 21 `C9 00` |
+| remote grant, no link | 0x0004 | S+0x3=0, S+0x42=1, S+0x45=1, S+0x30=0 | nothing |
+| bind allowed, BLE | 0x0002 | S+0x3=1, S+0x46=1, 0x1ffe018a=6 | addr 26 `19 00 00` |
+| bind denied, BLE | 0x0002 | S+0x3=0, S+0x46=0, 0x1ffe018a=6 | addr 26 `19 FF 00` |
+| settings push | 0x1000 | S+0x3=1, S+0x2d=90, S+0x32=3 | addr 26 `C5 5A 03 00 00 00 00 00 00 00 00 00 31` |
+| active PD profile push | 0x0400 | S+0x3=1, 0x1fffa34a=1 | addr 26 `E5 02 31` |
+| charge settings push | 0x0800 | S+0x3=1, S+0x1ca=2 | addr 26 `EB 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 31` |
+| selected program push | 0x0200 | S+0x3=1, 0x1fffa3fe=1, 0x1fffa3f4=4 | addr 26 `DD 01 04 31` |
+| program saved | 0x0100 | S+0x3=1 | addr 26 `DB 00 31` |
+| program saved, USB | 0x0100 | S+0x3=2 | addr 21 `DB 00` |
+| ask companion identity | 0x2000 | S+0x3=1 | addr 23 `E0` |
+| companion update prepare | 0x4000 | S+0x3=1 | addr 23 `F0 AC` |
+| bit 3 | 0x0008 | S+0x3=1 | addr 25 `B8 B0` |
+| bit 6 | 0x0040 | S+0x3=1 | addr 25 `BE` |
+| bit 0, ab1c=1 | 0x0001 | S+0x3=1, 0x1ffe018c=1, 0x1fffab1c=1 | addr 23 `52 53` |
+| bit 0, ab1c=0 | 0x0001 | S+0x3=1, 0x1ffe018c=1, 0x1fffab1c=0 | addr 23 `52 20` |
+| link state change notice | 0x0000 | S+0x3=1, 0x1ffe018c=0, 0x1fffab1c=1 | addr 23 `50 01` |
+| idle heartbeat | 0x0000 | S+0x3=1 | addr 23 `10` |
+
+#### Further edge cases
+
+| # | Setup | Type | Request | Reply | State changes | Calls |
+|---|---|---|---|---|---|---|
+| 1 | reset state | 6 | `20 07 31` | `31` | - | - |
+| 2 | reset state | 1 | `20 07` | `none` | S+0x3:00>02 | - |
+| 3 | reset state | 6 | `D0 00 31` | `D1 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 31` | - | - |
+| 4 | reset state | 3 | `E0` | `E1 4D 50 33 30 35 42 00 00 00 00 00 00 00 00 00 00 01 06 00 33 4D 50 33 30 35 42 00 00 00 00` | - | - |

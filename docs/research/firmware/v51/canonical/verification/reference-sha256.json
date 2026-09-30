@@ -1,0 +1,242 @@
+{
+  "reference/AGENTS.md": {
+    "bytes": 15474,
+    "sha256": "0ff99e66661b60a67e42a6ac92dcf6a78896cf6837ae686faf537f3c3755cd68"
+  },
+  "reference/CH583SFR.h": {
+    "bytes": 124587,
+    "sha256": "400058f7095936bc6060c0fb70c63bd12b22e77426b7d87c1c47a70ea5fe46e0"
+  },
+  "reference/CH58xBLE_ROM-v1.8.h": {
+    "bytes": 229252,
+    "sha256": "0f277e3a20ca8e2835b4e4af582fed1a3060eec5676084db7292fff6a94108d0"
+  },
+  "reference/CH58xBLE_ROM.h": {
+    "bytes": 232982,
+    "sha256": "76d65427766b6969e382558965837e1d29f004576242ca686d10c733fd9a104a"
+  },
+  "reference/CH58xBLE_ROMx-v1.8.hex": {
+    "bytes": 501060,
+    "sha256": "af097d55e8730080878d00de9fe214bbc7640a328734510ad95a9518c07ff9c3"
+  },
+  "reference/HC32F448.h": {
+    "bytes": 628591,
+    "sha256": "62827ba185f22b3d3d9432634bbd3d4b1889735b40e64d9d314e96209f7a1c0a"
+  },
+  "reference/HC32F448.svd": {
+    "bytes": 2568065,
+    "sha256": "76f0d8e55dfa60c7522969ad4115c95b66b5fe6348738d3803ae572e7731b83b"
+  },
+  "reference/HC32F451.h": {
+    "bytes": 544641,
+    "sha256": "4ca2069fc46e8e5a1083e75da4d82cf77400d319c01d7d2b20f4ef146ffe930c"
+  },
+  "reference/HC32F451.svd": {
+    "bytes": 2240647,
+    "sha256": "60c942c08bdde116072695e4abae45564ff03841364a9a8faf46d7011d85cbfe"
+  },
+  "reference/HC32F452.h": {
+    "bytes": 562605,
+    "sha256": "4ac85d8cdb82bb4056538b6a5f81b537ef2cb88075793d6f3c07252980cfa3e0"
+  },
+  "reference/HC32F452.svd": {
+    "bytes": 2278982,
+    "sha256": "e674057e2540d4ee7f037e1d3a4ab868c8e894d026fb0ebcdf63d91d196cbda0"
+  },
+  "reference/HC32F460.h": {
+    "bytes": 562672,
+    "sha256": "4a2aa9c869550ad2d5beaba364981162bc5e9791448229770c4ed84444766c75"
+  },
+  "reference/HC32F460.svd": {
+    "bytes": 2304582,
+    "sha256": "1c106f8ab85a80718adec359ca2ce8674cc4b465e36f439dc03b751d4ece6a57"
+  },
+  "reference/HC32F467.h": {
+    "bytes": 939526,
+    "sha256": "90fa9d872410a0703fe4fafb5824c43535e2d8fdb92a1702539b714b226f4067"
+  },
+  "reference/HC32F467.svd": {
+    "bytes": 4366597,
+    "sha256": "ad2bbf6df20d76df3d1073f6d877c0f1463cfcec387f13c31481657f8585ba9d"
+  },
+  "reference/HC32F467_IDE_Rev1.0.2.zip": {
+    "bytes": 2103551,
+    "sha256": "7c597431fd76cd0a42111a82d4e35d265d9bda56fe28e406d9658b6bcf240112"
+  },
+  "reference/HC32F472.h": {
+    "bytes": 718432,
+    "sha256": "dc053d443107ca28e842e9e1a3552b972429052edae71f9ecf188dd5c5d36451"
+  },
+  "reference/HC32F472.svd": {
+    "bytes": 3338882,
+    "sha256": "cb9304f6bda782f71cb01bd96bfba2ec9000f252eff08794271395f5b10d694b"
+  },
+  "reference/HC32F472JCTI.h": {
+    "bytes": 717013,
+    "sha256": "a74df191b12ca8adb9b1dd328bc4483bf5ec6039fe8c09de46cbf8d0189f8b6c"
+  },
+  "reference/HC32F472JCTI.svd": {
+    "bytes": 2934345,
+    "sha256": "0ae609e8312f4283051de532b304b802b93f416ddca64ab2e0418710311705b3"
+  },
+  "reference/HC32F472JETI.h": {
+    "bytes": 717013,
+    "sha256": "edff4f3256fc291e61a6de17ce39f1ad55513eabb9c8c7ff69992bca44210e55"
+  },
+  "reference/HC32F472JETI.svd": {
+    "bytes": 2934345,
+    "sha256": "f169ce76d86df34bca9107afd52865a6147efcb247405a6afc34828ab8034660"
+  },
+  "reference/HC32F472KCHI.h": {
+    "bytes": 736289,
+    "sha256": "1a6a470274444c0c55f0f778d2993c8f589dde53a5b52accce6696c890e9cbfb"
+  },
+  "reference/HC32F472KCHI.svd": {
+    "bytes": 3060102,
+    "sha256": "1d0c77221c236013eae447e9b907ad5064363194854365db61b2f66b65e51d44"
+  },
+  "reference/HC32F472KEHI.h": {
+    "bytes": 736289,
+    "sha256": "7061290fd07e3dbd840d142cae5134cf5cb90b9178703d30d9bdda4cbf1661bd"
+  },
+  "reference/HC32F472KEHI.svd": {
+    "bytes": 3060102,
+    "sha256": "ca0ac3b26c5d9c063b51931ba4b6fa81ed9a47ed9867dcf5de6df5b2b43f4400"
+  },
+  "reference/HC32F472PCTI.h": {
+    "bytes": 723411,
+    "sha256": "3258d4223aea5cf79d22b49c3ad35e27ad682354cc2decfef4f90b795ddfffc2"
+  },
+  "reference/HC32F472PCTI.svd": {
+    "bytes": 3293683,
+    "sha256": "2fc5f416fa044b38e78a2a56f052de1d35fb804d4aa59409e82fa4bc59bc064b"
+  },
+  "reference/HC32F472PETI.h": {
+    "bytes": 723411,
+    "sha256": "37e1df3f136dde5784ea214533033d62758b36115db39b6d67f63f994e2fd73d"
+  },
+  "reference/HC32F472PETI.svd": {
+    "bytes": 3293683,
+    "sha256": "a5229ec5ba1977a20800b6cacc7e682af55bd3bcbe1801233a83e820a2ae75ff"
+  },
+  "reference/HC32F4A0PITB.h": {
+    "bytes": 996949,
+    "sha256": "4765b9f6dc9102c4a45e66ad77828bef18fe739c61906c6a13a347ba3f0ee709"
+  },
+  "reference/HC32F4A0PITB.svd": {
+    "bytes": 4265704,
+    "sha256": "11cdc025eb6e5f246b5598a8af218356480961cedc283ac4a111e5cd38cd7616"
+  },
+  "reference/HDSC.HC32F448.1.0.1.pack": {
+    "bytes": 4157903,
+    "sha256": "a2bcfc5b36c6a521e0fc068a7639fea094316d54e436944603e40618b8d1029c"
+  },
+  "reference/HDSC.HC32F448.pdsc": {
+    "bytes": 24712,
+    "sha256": "54039185b880a96836c6e90864aa75746872ef8acaacecc3239002830a699d95"
+  },
+  "reference/HDSC.HC32F451.1.0.2.pack": {
+    "bytes": 1694685,
+    "sha256": "df9b53a706623d1556da5739feb15a31b4d6a9f0d165722bd214bd699966f3de"
+  },
+  "reference/HDSC.HC32F451.pdsc": {
+    "bytes": 13259,
+    "sha256": "5bdad5e98f2f6fb8a3c0e36dcd347721cc245080d506576b94a63094f5cd5339"
+  },
+  "reference/HDSC.HC32F452.1.0.2.pack": {
+    "bytes": 1729195,
+    "sha256": "45c66cca8131246ba0bd1b17978868a1ec1b3adf6f6da02ab0041aa4afe4e008"
+  },
+  "reference/HDSC.HC32F452.pdsc": {
+    "bytes": 13201,
+    "sha256": "25d6fead989b3a94f6b1cb87e55c3fd14065d625d32b56529702e8acd4026139"
+  },
+  "reference/HDSC.HC32F460.1.0.11.pack": {
+    "bytes": 3407498,
+    "sha256": "43ed3801ae30013f1c0008e7be7b70f19acb14cf78cd7233c3e2edcdfebc8173"
+  },
+  "reference/HDSC.HC32F460.pdsc": {
+    "bytes": 23448,
+    "sha256": "6a69ec28247c538fa0dff4b48b614e79b26389c5efafe17418820ecfecbdfa89"
+  },
+  "reference/HDSC.HC32F467.pdsc": {
+    "bytes": 11571,
+    "sha256": "745abad4b239cf011f892c1ec19e36beb13c0e71061800e98b4df06f171fbd5c"
+  },
+  "reference/HDSC.HC32F472.1.1.0.pack": {
+    "bytes": 3383318,
+    "sha256": "753aaac62f2266787fe2b66b1943f2ea1a0a862694e7026af2c44ac3c5f0be2f"
+  },
+  "reference/HDSC.HC32F472.pdsc": {
+    "bytes": 17248,
+    "sha256": "18e6fef89255ff273504cdee24ac2066ae32ce3360d9b82c58259de17df2436e"
+  },
+  "reference/HDSC.HC32F4A0.1.0.8.pack": {
+    "bytes": 7846865,
+    "sha256": "4658425a75fa03ef34c9beda5b85f2bcf57fff462f37664f42ce2c50235ebc26"
+  },
+  "reference/HDSC.HC32F4A0.pdsc": {
+    "bytes": 26258,
+    "sha256": "d04393f1b92216e331d41bb8d7dd507907042a7de6c735e2192bfa5a8fdb2e18"
+  },
+  "reference/ch583-rom-history.json": {
+    "bytes": 38828,
+    "sha256": "8fbf668f8f1439c70c37cbaa0f9599536e049bfa5e4811491c9bc27310b0ac14"
+  },
+  "reference/ch583-tree.json": {
+    "bytes": 805641,
+    "sha256": "2dbf71cd0398933a48cb39655fc7281e7769871a8d1ab5eb893bfba5cf82d271"
+  },
+  "reference/ch583-v1.8-tree.json": {
+    "bytes": 515730,
+    "sha256": "c7a8cb3a47316f106002bab7230054ca6aa2e14bfb9a97f1d42d3daca6016d49"
+  },
+  "reference/downloads.json": {
+    "bytes": 704,
+    "sha256": "dbf34d521f0d488e81bd7dc732332c341d8e3a90a1e95310ff2299d2e33f53fb"
+  },
+  "reference/firmware.md": {
+    "bytes": 11074,
+    "sha256": "4cb869e1e524dd35433568b1f84da2a4182fd0382adcac0e38f2a39e43a8d0b5"
+  },
+  "reference/hc32f467-page.html": {
+    "bytes": 68798,
+    "sha256": "29c7cef8ec4152249f176f084f322e7e6b88ac6a106db823c78d4dbc792316a9"
+  },
+  "reference/protocol.md": {
+    "bytes": 21656,
+    "sha256": "141e97d1a64f07798ea3a82e4efc4bd82b6a1ba6b8f8bbaeda853226d51d8814"
+  },
+  "reference/startup_CH583.S": {
+    "bytes": 4921,
+    "sha256": "c2021d0b1fa1ade86a1021ba716bfe4c390ac1839dc77429f9108c3905ed35fd"
+  },
+  "reference/system_hc32f448.h": {
+    "bytes": 3467,
+    "sha256": "90e4960dd50013c941166c44f667254c7684880431245a216681bd84a7342355"
+  },
+  "reference/system_hc32f451.h": {
+    "bytes": 3601,
+    "sha256": "f7922523c8b3c72a7e094c4faa82152f687eb9a723ca07c7573f3b1442c3b1fa"
+  },
+  "reference/system_hc32f452.h": {
+    "bytes": 3601,
+    "sha256": "45695b7409c2731b3c74f3c833d6c746244da7e95e73eec1b7b885e0efd0c420"
+  },
+  "reference/system_hc32f460.h": {
+    "bytes": 3601,
+    "sha256": "c35b39153dcbe82a59613985e61b400cdc388e50af62610a09e388a5c1ac46be"
+  },
+  "reference/system_hc32f467.h": {
+    "bytes": 3733,
+    "sha256": "219e72b1a56533917ee933fbc9f4f161766dc0ffb5a26a2bafdb8723df6263b0"
+  },
+  "reference/system_hc32f472.h": {
+    "bytes": 3467,
+    "sha256": "1bc20d6e7ab8643d1e643c64ab0c6219f56bf4de0ff631bd50291392acc60610"
+  },
+  "reference/wch-sdk-rom-v1.8.bin": {
+    "bytes": 182144,
+    "sha256": "49a090191005cdbcf859d3bfce0d32731d4c714baf9a7d58f896646323fc4b66"
+  }
+}

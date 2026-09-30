@@ -1,0 +1,1341 @@
+{
+  "scope": "Original ARM settings worker 0x128a4. UI callees replaced with no-op returns. Tables from original startup recovery. No UI rendering, persistence or hardware.",
+  "passed": 82,
+  "failed": 0,
+  "cases": [
+    {
+      "field": "limit",
+      "input": 0,
+      "output": 80,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 79,
+      "output": 80,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 80,
+      "output": 80,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 84,
+      "output": 85,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 85,
+      "output": 85,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 89,
+      "output": 90,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 90,
+      "output": 90,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 94,
+      "output": 95,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 95,
+      "output": 95,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 99,
+      "output": 100,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 100,
+      "output": 100,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "limit",
+      "input": 101,
+      "output": 101,
+      "table": [
+        80,
+        85,
+        90,
+        95,
+        100
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 0,
+      "output": 0,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 4,
+      "output": 5,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 5,
+      "output": 5,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 9,
+      "output": 10,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 10,
+      "output": 10,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 14,
+      "output": 15,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 15,
+      "output": 15,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 19,
+      "output": 20,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 20,
+      "output": 20,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 29,
+      "output": 30,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 30,
+      "output": 30,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "shutdown",
+      "input": 31,
+      "output": 31,
+      "table": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        30
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 0,
+      "output": 100,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 99,
+      "output": 100,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 100,
+      "output": 100,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 199,
+      "output": 200,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 200,
+      "output": 200,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 299,
+      "output": 300,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 300,
+      "output": 300,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 399,
+      "output": 400,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 400,
+      "output": 400,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 499,
+      "output": 500,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 500,
+      "output": 500,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 599,
+      "output": 600,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 600,
+      "output": 600,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 699,
+      "output": 700,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 700,
+      "output": 700,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 799,
+      "output": 800,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 800,
+      "output": 800,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 899,
+      "output": 900,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 900,
+      "output": 900,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 999,
+      "output": 1000,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 1000,
+      "output": 1000,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "slope",
+      "input": 1001,
+      "output": 1001,
+      "table": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 0,
+      "output": 50,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 49,
+      "output": 50,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 50,
+      "output": 50,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 99,
+      "output": 100,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 100,
+      "output": 100,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 199,
+      "output": 200,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 200,
+      "output": 200,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 299,
+      "output": 300,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 300,
+      "output": 300,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 499,
+      "output": 500,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 500,
+      "output": 500,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 999,
+      "output": 1000,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 1000,
+      "output": 1000,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "ocp",
+      "input": 1001,
+      "output": 1001,
+      "table": [
+        50,
+        100,
+        200,
+        300,
+        500,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 0,
+      "output": 0,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 99,
+      "output": 100,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 100,
+      "output": 100,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 199,
+      "output": 200,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 200,
+      "output": 200,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 299,
+      "output": 300,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 300,
+      "output": 300,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 399,
+      "output": 400,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 400,
+      "output": 400,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 499,
+      "output": 500,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 500,
+      "output": 500,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 599,
+      "output": 600,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 600,
+      "output": 600,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 699,
+      "output": 700,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 700,
+      "output": 700,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 799,
+      "output": 800,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 800,
+      "output": 800,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 899,
+      "output": 900,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 900,
+      "output": 900,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 999,
+      "output": 1000,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 1000,
+      "output": 1000,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    },
+    {
+      "field": "usb_line",
+      "input": 1001,
+      "output": 1001,
+      "table": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000
+      ],
+      "pass_result": true
+    }
+  ]
+}

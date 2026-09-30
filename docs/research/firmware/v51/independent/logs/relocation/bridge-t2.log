@@ -1,0 +1,26 @@
+MCU->AF01 c5: notify: ['31 c5 5a 02 00 00 01 f4 01 32 00 00 00'] | UART: aa 32 03 55 00 00 8a
+MCU->AF02 e1: notify: ['e1 01 06 00 28 4d 50 33 30 35 42 00 00 02 00 02 00'] | UART: aa 32 03 55 00 00 8a
+MCU->AF02 19 00: notify: ['19 00'] | UART: aa 32 03 55 00 00 8a aa 62 03 bd 01 31 54
+bind state ff4 = 02  flash 6f00: 00 08 08 08 08 08 08 08 08 08 08 08 08 08 08 00 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+fast bind known: notify: ['19 00'] | UART: 
+fast bind unknown: notify: ['19 ff'] | UART: aa 62 03 bd 00 31 53
+MCU->AF01 with CCCD off: notify: [] | UART: aa 32 03 55 00 ff 89
+MCU->CH58x e0: notify: [] | UART: aa 32 1f e1 4d 50 33 30 35 42 00 00 01 00 66 00 01 00 00 00 01 00 00 0f 4d 50 33 30 35 42 00 00 00 00 98 aa 32 03 55 00 ff 89
+MCU->CH58x 10: notify: [] | UART: aa 32 05 11 00 00 00 00 48 aa 32 03 55 00 ff 89
+MCU->CH58x 52 53: notify: [] | UART: aa 32 02 53 00 87 aa 32 03 55 00 ff 89
+MCU->CH58x 52 20: notify: [] | UART: aa 32 02 53 00 87 aa 32 03 55 00 ff 89
+MCU->CH58x 50 02: notify: [] | UART: aa 32 02 51 00 85 aa 32 03 55 00 ff 89
+MCU->CH58x 50 00: notify: [] | UART: aa 32 02 51 00 85 aa 32 03 55 00 ff 89
+MCU->CH58x 50 01: notify: [] | UART: aa 32 02 51 00 85 aa 32 03 55 00 ff 89
+MCU->CH58x f0 ac: notify: [] | UART: aa 32 02 f1 00 25 aa 32 03 55 00 ff 89
+MCU->CH58x ef 2a: notify: [] | UART: aa 32 03 55 00 ff 89
+MCU->CH58x fc 2a 4d 50 33 30 35 42 20 20 01 35 02 00: notify: [] | UART: aa 32 02 fd 03 34 aa 32 03 55 00 ff 89
+MCU->CH58x 00: notify: [] | UART: aa 32 02 01 00 35 aa 32 03 55 00 ff 89
+MCU->CH58x 55: notify: [] | UART: aa 32 03 55 00 ff 89
+MCU->CH58x c2: notify: [] | UART: aa 32 03 55 00 ff 89
+adv: 02 01 06 03 02 00 af 17 ff ba ab af fa 01 35 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+scanrsp: 1e 09 30 30 33 30 4d 50 33 30 35 42 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
+flash 6e00: ff ff ff ff ff ff ff ff ff ff ff ff ff ff 4d 50 33 30 35 42 20 20
+usb product string: 0e 03 4d 00 50 00 33 00 30 00 35 00 42 00 00 00 ce 56
+2f89/2f8a/3a48: 0100 00
+[('GAPRole_SetParameter', [773, 1, 536901048, 1073745920, 4194304, 328424]), ('GAPRole_SetParameter', [773, 1, 536901048, 1073745920, 0, 328424]), ('GAPRole_SetParameter', [773, 1, 536901048, 536901328, 2, 328424]), ('GAPRole_SetParameter', [773, 1, 536901048, 536901328, 2, 328424]), ('GAPRole_SetParameter', [774, 31, 536882808, 22, 48, 327800])]

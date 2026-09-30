@@ -1,0 +1,21 @@
+{
+  "original_only": [],
+  "restored_only": [
+    {
+      "ADDRESS": "ram:00004dd8",
+      "NAME": "thunk_FUN_ram_00002914",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "ram:00004e18",
+      "NAME": "thunk_FUN_ram_00004ddc",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    }
+  ]
+}

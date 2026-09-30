@@ -1,0 +1,28 @@
+kind	address	name	evidence
+function	000146b8	decode_transport_byte	Byte-stream parser. Pairwise AA stuffing, additive checksum. Verified offline with original instructions.
+function	00012690	build_bind_reply	Builds 19 00 or 19 ff from device state +0x46; adds zero route byte for type 6.
+function	000133bc	service_companion_tx	Companion transmit scheduling, retries, bind and remote-control notifications.
+function	0001af64	set_voltage_raw	Stores the requested raw voltage at 0x1fffa940 inside a critical section.
+function	0001aea4	set_current_raw	Stores the requested raw current at 0x1fffa944 inside a critical section.
+function	0001a128	get_output_enabled	Returns byte at 0x1fffaa2e.
+function	0001a134	get_output_faults	Returns halfword at 0x1fffaa1e.
+function	0006571c	enter_critical	BASEPRI 0x50 and nested critical counter. FreeRTOS attribution inferred from pattern.
+function	00065744	exit_critical	Decrements critical counter, clears BASEPRI when zero.
+function	00054688	service_bind_prompt	Main UI bind-prompt state machine. May decline when a different screen is active.
+function	0002483c	bind_decline_ui	Clears bind decision and pending bytes; sets pending response flag.
+function	0001dae8	update_system_clock	Reads 0x40010684 and clock registers at 0x40054000; MCU part number unresolved.
+label	1fffab0e	remote_granted	Confirmed in code: see command handlers and related state machine.
+label	1fffab11	remote_request	Confirmed in code: see command handlers and related state machine.
+label	1fffab12	bind_decision	Confirmed in code: see command handlers and related state machine.
+label	1fffab13	bind_pending	Confirmed in code: see command handlers and related state machine.
+label	1fffab14	settings_dirty	Confirmed in code: see command handlers and related state machine.
+label	1fffab15	control_dirty	Confirmed in code: see command handlers and related state machine.
+label	1fffaafc	current_mode	Confirmed in code: see command handlers and related state machine.
+label	1fffaafd	requested_mode	Confirmed in code: see command handlers and related state machine.
+label	1fffa940	voltage_requested_raw	Confirmed in code: see command handlers and related state machine.
+label	1fffa944	current_requested_raw	Confirmed in code: see command handlers and related state machine.
+function	0001d7a0	Start_Task	Confirmed by caller passing name Start_Task and by creation of all four named tasks.
+function	00053338	lvgl_task	Confirmed by task-create function pointer and literal name lvgl_task.
+function	0001f208	User_task	Confirmed by task-create function pointer and literal name User_task; calls dispatcher and companion transmit service.
+function	0001e020	Time_task	Confirmed by task-create function pointer and literal name Time_task.
+function	0001b494	Power_task	Confirmed by task-create function pointer and literal name Power_task.

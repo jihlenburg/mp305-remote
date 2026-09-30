@@ -1,0 +1,26 @@
+MCU->CH58x e0                                       reply aa 32 1f e1 4d 50 33 30 35 42 00 00 01 00 66 00 01 00 00 00 01 00 00 0f 4d 50 33 30 35 42 00 00 00 00 98 f89=0 f8a=0 lib=[]
+MCU->CH58x 00                                       reply aa 32 02 01 00 35                                  f89=0 f8a=0 lib=[]
+MCU->CH58x 10                                       reply aa 32 05 11 44 33 22 11 f2                         f89=0 f8a=0 lib=[]
+MCU->CH58x 50 00                                    reply aa 32 02 51 00 85                                  f89=0 f8a=0 lib=['0x40174(0x305,0x1,0x2000bec8)']
+MCU->CH58x 50 01                                    reply aa 32 02 51 00 85                                  f89=1 f8a=0 lib=[]
+MCU->CH58x 50 02                                    reply aa 32 02 51 00 85                                  f89=2 f8a=0 lib=['0x40174(0x305,0x1,0x2000bec8)']
+MCU->CH58x 52 53                                    reply aa 32 02 53 00 87                                  f89=0 f8a=1 lib=['0x40174(0x305,0x1,0x2000bec8)']
+MCU->CH58x 52 20                                    reply aa 32 02 53 00 87                                  f89=0 f8a=0 lib=['0x40174(0x305,0x1,0x2000bec8)']
+MCU->CH58x f0 ac                                    reply aa 32 02 f1 00 25                                  f89=0 f8a=0 lib=[]
+MCU->CH58x ef 2a                                    reply                                                    f89=0 f8a=0 lib=[]
+MCU->CH58x fc 2a 4d 50 33 30 35 42 20 20 01 35 02 00 reply aa 32 02 fd 03 34                                  f89=0 f8a=0 lib=[]
+MCU->CH58x 55                                       reply                                                    f89=0 f8a=0 lib=[]
+USB OUT addr 0x12        aa 12 01 c2 d5           -> UART ['aa 12 01 c2 d5']
+USB OUT addr 0x62        aa 62 02 c2 31 57        -> UART ['aa 62 02 c2 31 57']
+USB OUT addr 0x32        aa 32 02 fd 03 34        -> UART ['aa 32 02 fd 03 34']
+USB OUT addr 0x52        aa 52 02 be 01 13        -> UART ['aa 52 02 be 01 13']
+MCU->USB (0x21) wire aa 21 0c c5 00 00 00 00 00 00 00 00 00 00 00 f2
+    USB IN report: 02 10 aa 21 0c c5 00 00 00 00 00 00 00 00 00 00 00 f2
+MCU->USB 123-byte body wire aa 21 7b d9 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 20 21 22 23 24 25 26 27 28 29 2a 2b 2c 2d 2e 2f 30 31 32 33 34 35 36 37 38 39 3a 3b 3c 3d 3e 3f 40 41 42 43 44 45 46 47 48 49 4a 4b 4c 4d 4e 4f 50 51 52 53 54 55 56 57 58 59 5a 5b 5c 5d 5e 5f 60 61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 71 72 73 74 75 76 77 78 79 7a c4
+    USB IN report: 02 3e aa 21 7b d9 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 20 21 22 23 24 25 26 27 28 29 2a 2b 2c 2d 2e 2f 30 31 32 33 34 35 36 37 38 39 3a
+    USB IN report: 02 3e 3b 3c 3d 3e 3f 40 41 42 43 44 45 46 47 48 49 4a 4b 4c 4d 4e 4f 50 51 52 53 54 55 56 57 58 59 5a 5b 5c 5d 5e 5f 60 61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 71 72 73 74 75 76 77 78
+    USB IN report: 02 03 79 7a c4
+MCU->BLE suffix 31 wire aa 26 0d c5 00 00 00 00 00 00 00 00 00 00 00 31 29
+    GATT AF01 notify: 31 c5 00 00 00 00 00 00 00 00 00 00 00
+MCU->BLE suffix 00 wire aa 26 03 19 00 00 42
+    GATT AF02 notify: 19 00

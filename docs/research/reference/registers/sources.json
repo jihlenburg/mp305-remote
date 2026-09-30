@@ -1,0 +1,72 @@
+[
+  {
+    "file": "CH583SFR.h",
+    "source_url": "https://raw.githubusercontent.com/semickolon/kirei/main/src/platforms/ch58x/lib/CH583SFR.h",
+    "sha256": "aa444c550e112debb2629307d26fb4ddcb10fc2057e8374b93af68e21b6d12b1",
+    "bytes": 124754,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "HC32F448.svd",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f448/Source/GCC/svd/HC32F448.svd",
+    "sha256": "fa997f90cd20afe6d00861d8e1063ef1ddbffea5bcafd1aa7a991133d71aba01",
+    "bytes": 2511271,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "HC32F460.svd",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f460/Source/GCC/svd/HC32F460.svd",
+    "sha256": "3c688987de97fdc6fcfadc6bb21532610101df1838f5134a12af928053769658",
+    "bytes": 2250876,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "HC32F467.svd",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f467/Source/GCC/svd/HC32F467.svd",
+    "sha256": "eab07560769bd8669bf2db776026e324489ac8f12d2e1968c2cc01f5e1669dd4",
+    "bytes": 4270193,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "HC32F472.svd",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f472/Source/GCC/svd/HC32F472.svd",
+    "sha256": "d50562dc13cc494be464cd4c3278cccfed8e355c2aee0a75dd7c96fbba1f6f8e",
+    "bytes": 3265006,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "HC32F4A0.svd",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f4a0/Source/GCC/svd/HC32F4A0.svd",
+    "sha256": "9fb9c86f4ef3376e68d7b9b6786c6265076ffcf01c7eca0679c91f4da8f823a8",
+    "bytes": 4583501,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "HC32F4A2.svd",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f4a2/Source/GCC/svd/HC32F4A2.svd",
+    "sha256": "e784924e55591e665589b31d78086d2de2e9e7ed9f5f4e1669ccfec609a12a7e",
+    "bytes": 4584602,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "HC32F4A8.svd",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f4a8/Source/GCC/svd/HC32F4A8.svd",
+    "sha256": "d10fc7085688469c6713a5365014d1143f30d6d3931e21fe119ce90e1a5f8d84",
+    "bytes": 5501942,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "hc32f460.h",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f460/Include/hc32f460.h",
+    "sha256": "a8fb4e00e4f4bc8a109482b1dbe03772219e5c7503854ee39f93603fcbb04c27",
+    "bytes": 543159,
+    "role": "external register-definition comparison, not installed-device identification"
+  },
+  {
+    "file": "hc32f4a0.h",
+    "source_url": "https://raw.githubusercontent.com/RT-Thread-packages/hc32-f4-cmsis/master/Device/HDSC/hc32f4a0/Include/hc32f4a0.h",
+    "sha256": "895a1096468d52ebd2b1d703ec67fb3d02f6bdbafe9b61900082931d27240c42",
+    "bytes": 995588,
+    "role": "external register-definition comparison, not installed-device identification"
+  }
+]

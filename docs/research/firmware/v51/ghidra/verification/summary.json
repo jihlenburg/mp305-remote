@@ -1,0 +1,58 @@
+[
+  {
+    "snapshot": "canonical-ble",
+    "functions": 232,
+    "core_restoration_passed": true,
+    "variable_difference_count": 0,
+    "symbol_table_equal": false,
+    "functions_xml_equal": true
+  },
+  {
+    "snapshot": "canonical-main",
+    "functions": 2455,
+    "core_restoration_passed": true,
+    "variable_difference_count": 0,
+    "symbol_table_equal": false,
+    "functions_xml_equal": true
+  },
+  {
+    "snapshot": "canonical-pd",
+    "functions": 1007,
+    "core_restoration_passed": true,
+    "variable_difference_count": 0,
+    "symbol_table_equal": false,
+    "functions_xml_equal": true
+  },
+  {
+    "snapshot": "recovered-ble",
+    "functions": 255,
+    "core_restoration_passed": true,
+    "variable_difference_count": 1,
+    "symbol_table_equal": false,
+    "functions_xml_equal": false
+  },
+  {
+    "snapshot": "recovered-main",
+    "functions": 2453,
+    "core_restoration_passed": true,
+    "variable_difference_count": 64,
+    "symbol_table_equal": false,
+    "functions_xml_equal": false
+  },
+  {
+    "snapshot": "recovered-pd",
+    "functions": 380,
+    "core_restoration_passed": true,
+    "variable_difference_count": 0,
+    "symbol_table_equal": false,
+    "functions_xml_equal": true
+  },
+  {
+    "snapshot": "sdk-reference",
+    "functions": 1047,
+    "core_restoration_passed": true,
+    "variable_difference_count": 3,
+    "symbol_table_equal": false,
+    "functions_xml_equal": false
+  }
+]

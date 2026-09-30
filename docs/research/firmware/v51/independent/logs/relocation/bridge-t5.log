@@ -1,0 +1,4 @@
+two frames in one report -> UART: aa 12 01 c2 d5
+frame + start of next -> UART: aa 12 0c c8 01 02 00 00 00 00 00 00 00 00 00 e9
+   rest -> UART: aa 12 0c c8 01 02 03 04 05 06 07 08 09 0a 0b 28
+n field used as-is: reads ep1+2 .. ep1+2+n

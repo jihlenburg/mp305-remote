@@ -1,0 +1,38 @@
+{
+  "workspace": "/Users/jihlenburg/mp305b-fw-re",
+  "python": "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+  "cwd": "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/scripts",
+  "environment": {
+    "MP305_RE_WORKSPACE": "/Users/jihlenburg/mp305b-fw-re",
+    "MP305_RE_REPO": "/Users/jihlenburg/mp305b",
+    "PYTHONPATH": "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/scripts"
+  },
+  "inputs": {
+    "app.bin": "58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f",
+    "ch58x.bin": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+    "data.bin": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd",
+    "pd8051.bin": "6ea3a7640e44c2aedf4cb054c5ee4d185203ce913a32ee1bb6829c0c39a3a10e",
+    "ram_rw_init.bin": "e831601923ebee907f50d4d739ce2f0fd32be9045d36f0d0f3b5ea40085546eb"
+  },
+  "scripts": {
+    "ch58x_bridge_checks.py": "5b3c411f29c4932f19f799b9f322d428291dbf10b95aca1810819d75c2d050c4",
+    "ch58x_dis.py": "650420eb8d51bc0e51e5becf529de1cf7f47f125feff97fe9d4f1274b439bb8f",
+    "ch58x_emu.py": "210be2a7b59368e16062bdfe84469f89671a3cee17774fc9e7ec176d2def91f5",
+    "commands_emu.py": "854cea5e20780fe15e7c108eb416e1a3541647b7cb7e7f404f821668334e82f5",
+    "commands_vectors.py": "2fe7ebe792065b41162e0aece3df41ea48c3ea0f0da1ff80cbff3e35167a1a25",
+    "emu_app.py": "d628d9052f9b7a86f10eeb3d2d25687d00b0c37f147edd4ecf7dc009a7f4f79f",
+    "emu_scatter.py": "5f141816a4c1898f7f451612e39f0a8c149bebebe45e9097a1f8e01d0bc34884",
+    "gen_ch58x_regs.py": "a0550e515010dcb6804064f484c345f02171795e59922451ead8b34d79a16d5b",
+    "gen_symbols.py": "68fe0df02d38c5b8640bab77b7117c3b0321ff431f8d080db960d4d2d5bfceec",
+    "hostlink_ch58x_route_tests.py": "d0e9460b0911e3282ce136993d870c35b81be14a15c0d969c3f693ba0df2838e",
+    "hostlink_emu_ch58x.py": "07ec62697164c2b8ddce53677429b6604049de7537dbe0da36e6ec01073a2bc3",
+    "hostlink_emu_tests.py": "fc2143f1e2cfc3a3a90ab73d961367a335245e77fd4ff6b461df2adb4e64038a",
+    "hostlink_rvdis.py": "3da41141bad5824da3393f41073367a89bbf09dd0a0c4deca401ccda36c53c4b",
+    "hostlink_xref.py": "9bf37228732b818d052f43f275869fb5c03546a2a5cc9dc4fad565c5adcfcaf1",
+    "pd8051_base.py": "75423039fe090b9355397c039a821ed5ec1baa920190487c69a5b52c3268171e",
+    "power_dis.py": "8df37dcd2e07a847d2cbf8111ff6ce7b2e7f6043538625a544096e873716f762",
+    "power_xref.py": "3c0b57aabe2d0c09fe7cb462f01a77005302f79a9e8b2e6cb5efd6d8b7e9417b",
+    "svd_score.py": "ccdcf71cf40b405fba4903df6ad5da9aa139c7051a3eb7d4218a1b9e794eeaae",
+    "tdis.py": "be66c1d8cd8b31a8efbba77b2a14cfaccdd205aa8a5ff8ccb0fddea662a70585"
+  }
+}

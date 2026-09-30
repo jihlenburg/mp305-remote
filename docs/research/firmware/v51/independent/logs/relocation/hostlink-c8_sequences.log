@@ -1,0 +1,5 @@
+BLE: rc2 -> no reply | rc1 while pending -> no reply | S+0x45=2
+BLE granted: rc1 -> c9 00 31 | rc2 again -> no reply S+0x45=2 S+0x42=1
+BLE: rc0 -> c9 00 31 S+0x42=0
+BLE unbound (S+3=0): rc2 -> no reply | rc1 -> no reply
+USB first frame rc2 -> c9 00 S+3=2 | rc1 -> c9 00 | rc3 -> c9 ff

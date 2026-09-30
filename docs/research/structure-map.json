@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-30",
+  "paths": {
+    "docs/research/device.md": "docs/research/device/overview.md",
+    "docs/research/hardware.md": "docs/research/device/hardware.md",
+    "docs/research/hardware-buses.md": "docs/research/device/buses.md",
+    "docs/research/hardware-registers.md": "docs/research/device/registers.md",
+    "docs/research/hardware-ui-and-analog.md": "docs/research/device/ui-and-analog.md",
+    "docs/research/firmware-architecture.md": "docs/research/firmware/architecture.md",
+    "docs/research/firmware-command-map.md": "docs/research/firmware/command-map.md",
+    "docs/research/firmware-permissions.md": "docs/research/firmware/permissions.md",
+    "docs/research/firmware-readable.md": "docs/research/firmware/readable.md",
+    "docs/research/firmware-rtos.md": "docs/research/firmware/rtos.md",
+    "docs/research/firmware-verification.md": "docs/research/firmware/verification.md",
+    "docs/research/firmware-v51": "docs/research/firmware/v51/canonical",
+    "docs/research/firmware-recovery/references": "docs/research/reference/registers",
+    "docs/research/firmware-recovery": "docs/research/firmware/v51/independent"
+  },
+  "note": "Historical logs and manifests retain the paths recorded at run time. Apply this longest-prefix mapping to locate moved artifacts."
+}

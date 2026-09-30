@@ -1,0 +1,148 @@
+{
+  "scope": "Original main UI denial callback, reply builder, dispatcher and handlers with UI functions substituted; original RV32 AF01 and queue code with SDK memory substitutes. Synthetic RAM only; no device I/O. Does not establish vendor intent or all command permissions.",
+  "passed": 34,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "deny callback with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "deny reply with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "dispatch after denial c2",
+      "pass_result": true,
+      "reply": "c300000000000000000000000000000000000000000000000000000000000000010000000031"
+    },
+    {
+      "case": "deny callback with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "deny reply with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "dispatch after denial c4",
+      "pass_result": true,
+      "reply": "c5000000000000000000000031"
+    },
+    {
+      "case": "deny callback with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "deny reply with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "dispatch after denial e0",
+      "pass_result": true,
+      "reply": "e1010600334d503330354200000200020031"
+    },
+    {
+      "case": "deny callback with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "deny reply with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "dispatch after denial c6",
+      "pass_result": true,
+      "reply": "c70031"
+    },
+    {
+      "case": "C6 changes settings without binding or remote grant",
+      "pass_result": true
+    },
+    {
+      "case": "deny callback with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "deny reply with prior grant 0",
+      "pass_result": true
+    },
+    {
+      "case": "dispatch after denial c8",
+      "pass_result": true,
+      "reply": "c90131"
+    },
+    {
+      "case": "C8 remote-active request fails without remote grant",
+      "pass_result": true
+    },
+    {
+      "case": "deny callback with prior grant 1",
+      "pass_result": true
+    },
+    {
+      "case": "deny reply with prior grant 1",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c2 state 0",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c4 state 0",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode e0 state 0",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c6 state 0",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c8 state 0",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c2 state 1",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c4 state 1",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode e0 state 1",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c6 state 1",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c8 state 1",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c2 state 2",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c4 state 2",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode e0 state 2",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c6 state 2",
+      "pass_result": true
+    },
+    {
+      "case": "AF01 forwards opcode c8 state 2",
+      "pass_result": true
+    }
+  ]
+}

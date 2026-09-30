@@ -1,0 +1,37 @@
+{
+  "original_only": [],
+  "restored_only": [
+    {
+      "ADDRESS": "CODE:1ffd",
+      "NAME": "thunk_FUN_CODE_996c",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7c0",
+      "NAME": "thunk_FUN_CODE_793a",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a833",
+      "NAME": "thunk_FUN_CODE_9281",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a839",
+      "NAME": "thunk_FUN_CODE_a0f5",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    }
+  ]
+}

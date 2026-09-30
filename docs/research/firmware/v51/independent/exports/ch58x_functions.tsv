@@ -1,0 +1,256 @@
+addr	name	size	ncallers	callers	callees
+ram:000010ce	FUN_ram_000010ce	64	0		FUN_ram_000018de
+ram:0000110e	FUN_ram_0000110e	206	0		FUN_ram_000018de
+ram:000011dc	FUN_ram_000011dc	304	0		FUN_ram_000015fc,FUN_ram_000018de
+ram:0000130c	FUN_ram_0000130c	250	0		FUN_ram_00001406,FUN_ram_000018de
+ram:00001406	FUN_ram_00001406	372	1	ram:0000130c	
+ram:0000157a	FUN_ram_0000157a	60	0		FUN_ram_000018de
+ram:000015fc	FUN_ram_000015fc	14	2	ram:000011dc,ram:0000160a	
+ram:0000160a	FUN_ram_0000160a	40	0		FUN_ram_000015fc
+ram:00001822	FUN_ram_00001822	18	3	ram:0000185e,ram:000018a6,ram:000018de	
+ram:00001834	FUN_ram_00001834	14	3	ram:0000185e,ram:000018a6,ram:000018de	
+ram:00001842	FUN_ram_00001842	14	2	ram:000018a6,ram:000018de	
+ram:00001850	FUN_ram_00001850	14	2	ram:0000185e,ram:000018de	
+ram:0000185e	FUN_ram_0000185e	72	1	ram:000018de	FUN_ram_00001822,FUN_ram_00001834,FUN_ram_00001850
+ram:000018a6	FUN_ram_000018a6	56	1	ram:000018de	FUN_ram_00001822,FUN_ram_00001834,FUN_ram_00001842
+ram:000018de	FUN_ram_000018de	874	5	ram:000010ce,ram:0000110e,ram:000011dc,ram:0000130c,ram:0000157a	FUN_ram_00001822,FUN_ram_00001834,FUN_ram_00001842,FUN_ram_00001850,FUN_ram_0000185e,FUN_ram_000018a6
+ram:00001c48	handle_reset	206	0		FUN_ram_00007804,FUN_ram_00007846
+ram:00001d1a	memset	106	21	ram:0000388a,ram:00003c48,ram:00003d8a,ram:00003dd2,ram:00003ed6,ram:00003f76,ram:00003fac,ram:000040dc,ram:00004224,ram:000042ac,ram:00004486,ram:00004eca,ram:000055c0,ram:00005864,ram:00005af0,ram:000064b8,ram:000065a0,ram:0000698c,ram:00007ed6,ram:00007f4a,ram:00007ffa	
+ram:00001dc2	FUN_ram_00001dc2	40	1	ram:000031b8	
+ram:00001dea	FUN_ram_00001dea	46	0		
+ram:00001e18	FUN_ram_00001e18	398	1	ram:0000343e	
+ram:00001fa6	FUN_ram_00001fa6	24	1	ram:00001fbe	
+ram:00001fbe	FUN_ram_00001fbe	1242	1	ram:00003156	FUN_ram_00001fa6,FUN_ram_000026e8
+ram:00002498	GPIOA_ModeCfg	166	3	ram:00004810,ram:00004ddc,ram:00007794	
+ram:0000253e	GPIOB_ModeCfg	166	3	ram:00004810,ram:0000566a,ram:00007794	
+ram:000025e4	GPIOPinRemap	26	1	ram:00004810	
+ram:000025fe	PWMX_CycleCfg	140	1	ram:00004810	
+ram:0000268a	PWMX_ACTOUT	94	2	ram:00004810,ram:000048c2	
+ram:000026e8	FUN_ram_000026e8	66	3	ram:00001fbe,ram:000027e2,ram:0000286e	
+ram:0000272a	FUN_ram_0000272a	28	1	ram:00007466	
+ram:00002746	FUN_ram_00002746	20	0		
+ram:00002764	FUN_ram_00002764	56	1	ram:000072e0	
+ram:0000279c	TMR0_CapInit	26	1	ram:00004810	
+ram:000027b6	TMR1_TimerInit	22	1	ram:00004b14	
+ram:000027cc	TMR2_TimerInit	22	1	ram:00004b14	
+ram:000027e2	FUN_ram_000027e2	48	1	ram:00002812	FUN_ram_000026e8
+ram:00002812	uart0_init_115200	50	1	ram:00007794	FUN_ram_000027e2
+ram:00002844	uart0_drain_rx	42	1	ram:20002746	
+ram:0000286e	FUN_ram_0000286e	48	1	ram:0000289e	FUN_ram_000026e8
+ram:0000289e	uart1_init_115200	50	1	ram:00004ddc	FUN_ram_0000286e
+ram:000028d0	FUN_ram_000028d0	26	1	ram:00004ddc	
+ram:000028ea	FUN_ram_000028ea	42	1	ram:00004ddc	
+ram:00002914	uart1_send	40	0		
+ram:0000293c	uart1_read_fifo	42	1	ram:2000277e	
+ram:00002966	usb_hw_init	146	1	ram:000055c0	
+ram:000029f8	usb_hw_off	102	1	ram:0000566a	
+ram:00002a5e	usb_ep1_in_arm	22	1	ram:00004eca	
+ram:00002a74	FUN_ram_00002a74	22	1	ram:00004f3c	
+ram:00002a8a	FUN_ram_00002a8a	22	1	ram:00004f66	
+ram:00002aa0	FUN_ram_00002aa0	22	1	ram:00004f90	
+ram:00002ab6	af_read_cb	130	0		
+ram:00002b38	af_write_cb	202	0		
+ram:00002c6a	af_service_register	114	1	ram:000072e0	
+ram:00002cdc	af01_notify_raw	88	1	ram:00006ff6	
+ram:00002d34	af02_notify_raw	88	1	ram:00006f6c	
+ram:00002d8c	db_read_cb	156	0		
+ram:00002e28	db_write_cb	118	0		
+ram:00002efc	db_service_register	92	1	ram:000072e0	
+ram:00002f58	devinfo_read_cb	462	0		
+ram:00003126	devinfo_register	30	1	ram:000072e0	
+ram:00003144	FUN_ram_00003144	18	1	ram:000072e0	
+ram:00003156	FUN_ram_00003156	6	2	ram:0000322a,ram:0000343e	FUN_ram_00001fbe
+ram:0000315c	ble_flash_read_cb	28	0		FLASH_EEPROM_CMD
+ram:00003178	ble_flash_write_cb	64	0		FLASH_EEPROM_CMD
+ram:000031b8	ble_temp_sample_cb	114	0		FUN_ram_00001dc2
+ram:0000322a	hal_task_event	140	0		FUN_ram_00003156
+ram:000032b6	ble_lib_init	282	1	ram:00007794	FLASH_EEPROM_CMD
+ram:000033d0	hal_init	70	1	ram:00007794	FUN_ram_0000343e,FUN_ram_0000354a
+ram:00003416	FUN_ram_00003416	40	0		
+ram:0000343e	FUN_ram_0000343e	104	1	ram:000033d0	FUN_ram_00001e18,FUN_ram_00003156
+ram:0000354a	FUN_ram_0000354a	78	1	ram:000033d0	
+ram:00003598	FUN_ram_00003598	2	1	ram:000047c8	
+ram:0000359a	frame_decoder_reset	14	1	ram:00003876	
+ram:000035a8	frame_encode	186	5	ram:0000388a,ram:00003c48,ram:00003d8a,ram:00003dd2,ram:00004628	
+ram:00003662	frame_decode_byte	194	1	ram:0000384e	
+ram:00003724	tmr1_1ms_tick	116	1	ram:200026fc	
+ram:00003798	FUN_ram_00003798	24	1	ram:00004bb8	
+ram:000037b0	FUN_ram_000037b0	24	1	ram:00004bb8	
+ram:000037c8	FUN_ram_000037c8	24	1	ram:00004bb8	
+ram:000037e0	FUN_ram_000037e0	24	1	ram:00004bb8	
+ram:000037f8	FUN_ram_000037f8	24	1	ram:00004bb8	
+ram:00003810	acc_to_mcu_queue	62	2	ram:000042a4,ram:000042ac	
+ram:0000384e	decoder_feed_slot	20	1	ram:00004e86	frame_decode_byte
+ram:00003862	slot_rx_frame_ptr	20	1	ram:00004cee	
+ram:00003876	decoder_reset_slot	20	2	ram:000055c0,ram:0000566a	frame_decoder_reset
+ram:0000388a	mcu_ctl_cmd	958	1	ram:00004628	FLASH_EEPROM_CMD,adv_mfr_set_from_fc,frame_encode,get_uptime_ms,memset,usb_disable,usb_enable
+ram:00003c48	usb_partial_frame_ack	196	1	ram:00004628	frame_encode,memset
+ram:00003d0c	usb_in_queue_push	126	1	ram:00003d8a	memcpy
+ram:00003d8a	mcu_to_usb_enqueue	72	1	ram:00004628	frame_encode,memset,usb_in_queue_push
+ram:00003dd2	slot_forward_to_mcu	72	1	ram:00004628	frame_encode,memset,uart1_send
+ram:00003e1a	usb_in_pump	188	1	ram:00004b9c	usb_ep1_in_send
+ram:00003ed6	acc_af02_notify_handle	74	1	ram:00005af0	memset
+ram:00003f20	acc_cmd_b8	26	1	ram:000045d4	
+ram:00003f3a	acc_cmd_bc_set_addr	60	1	ram:000045d4	
+ram:00003f76	acc_cmd_be_disconnect	54	1	ram:000045d4	memset
+ram:00003fac	mcu_to_ble_router	200	1	ram:00004628	af01_notify,af02_notify,host_id_save,memset
+ram:00004074	ble_to_mcu_queue	104	3	ram:000040dc,ram:00004224,ram:000042ac	
+ram:000040dc	af02_write_handler	328	0		ble_to_mcu_queue,host_id_lookup,memset
+ram:00004224	af01_write_handler	128	0		adv_mfr_tail_store,ble_to_mcu_queue,memset
+ram:000042a4	acc_to_mcu_send	8	3	ram:000042ac,ram:00004486,ram:00005af0	acc_to_mcu_queue
+ram:000042ac	link_state_reporter	474	1	ram:00004b9c	acc_to_mcu_queue,acc_to_mcu_send,ble_to_mcu_queue,debug_hexdump,memset
+ram:00004486	acc_list_build_bb	334	1	ram:000045d4	acc_to_mcu_send,memset
+ram:000045d4	acc_cmd_dispatch	84	1	ram:00004628	acc_cmd_b8,acc_cmd_bc_set_addr,acc_cmd_be_disconnect,acc_list_build_bb
+ram:00004628	bridge_loop	414	1	ram:00004b9c	acc_cmd_dispatch,frame_encode,mcu_ctl_cmd,mcu_to_ble_router,mcu_to_usb_enqueue,slot_forward_to_mcu,uart1_send,usb_partial_frame_ack
+ram:000047c6	FUN_ram_000047c6	2	1	ram:00004b14	
+ram:000047c8	FUN_ram_000047c8	54	1	ram:0000780e	FUN_ram_00003598
+ram:000047fe	name_variant_flag	18	1	ram:00006cb0	
+ram:00004810	rgb_led_init	178	1	ram:00004b14	GPIOA_ModeCfg,GPIOB_ModeCfg,GPIOPinRemap,PWMX_ACTOUT,PWMX_CycleCfg,TMR0_CapInit
+ram:000048c2	pwm_set_channel	84	1	ram:00004916	PWMX_ACTOUT
+ram:00004916	rgb_led_set_grb	78	1	ram:00004964	printf,pwm_set_channel
+ram:00004964	ws2812_rx_decode	340	1	ram:00004bb8	printf,putchar,rgb_led_set_grb
+ram:00004ab8	update_prep_countdown	92	1	ram:00004bb2	enter_iap,usb_disable
+ram:00004b14	periph_init	136	1	ram:000072e0	FUN_ram_000047c6,TMR1_TimerInit,TMR2_TimerInit,rgb_led_init,uart1_init,usb_disable
+ram:00004b9c	bridge_tick	22	1	ram:00004bb8	bridge_loop,link_state_reporter,usb_in_pump
+ram:00004bb2	FUN_ram_00004bb2	6	1	ram:00004bb8	update_prep_countdown
+ram:00004bb8	periodic_dispatch	40	1	ram:00006cb0	FUN_ram_00003798,FUN_ram_000037b0,FUN_ram_000037c8,FUN_ram_000037e0,FUN_ram_000037f8,FUN_ram_00004bb2,bridge_tick,ws2812_rx_decode
+ram:00004be0	get_uptime_ms	12	1	ram:0000388a	
+ram:00004bec	uart1_frame_decode_byte	258	1	ram:00004cee	
+ram:00004cee	uart1_rx_route	234	1	ram:2000277e	memcpy,slot_rx_frame_ptr,uart1_frame_decode_byte
+ram:00004dd8	uart1_send	4	2	ram:00003dd2,ram:00004628	
+ram:00004ddc	uart1_init	60	0		FUN_ram_000028d0,FUN_ram_000028ea,GPIOA_ModeCfg,uart1_init_115200
+ram:00004e18	uart1_init	2	1	ram:00004b14	
+ram:00004e1a	debug_hexdump	108	3	ram:000042ac,ram:00005af0,ram:000065a0	printf,putchar
+ram:00004e86	usb_ep1_out_handler	68	1	ram:00004fba	decoder_feed_slot
+ram:00004eca	usb_ep1_in_send	114	1	ram:00003e1a	memset,usb_ep1_in_arm
+ram:00004f3c	usb_ep2_echo	42	1	ram:00004fba	FUN_ram_00002a74
+ram:00004f66	usb_ep3_echo	42	1	ram:00004fba	FUN_ram_00002a8a
+ram:00004f90	usb_ep4_echo	42	1	ram:00004fba	FUN_ram_00002aa0
+ram:00004fba	usb_irq_handler	1344	1	ram:200027fe	memcpy,usb_ep1_out_handler,usb_ep2_echo,usb_ep3_echo,usb_ep4_echo
+ram:000054fa	usb_product_string_from_flash	198	1	ram:000055c0	FLASH_EEPROM_CMD
+ram:000055c0	usb_enable	170	1	ram:0000388a	decoder_reset_slot,memset,usb_hw_init,usb_product_string_from_flash
+ram:0000566a	usb_disable	86	3	ram:0000388a,ram:00004ab8,ram:00004b14	GPIOB_ModeCfg,decoder_reset_slot,usb_hw_off
+ram:000056c0	FUN_ram_000056c0	2	0		
+ram:000056c2	FUN_ram_000056c2	12	0		
+ram:000056ce	central_passcode_cb	48	0		
+ram:000056fe	central_pair_state_cb	18	0		
+ram:00005710	acc_addr_load	52	1	ram:00005744	FLASH_EEPROM_CMD,memcpy
+ram:00005744	central_app_init	288	1	ram:00007794	acc_addr_load
+ram:00005864	hid_report_map_parse	652	1	ram:00005af0	FUN_ram_00007ab4,memset,printf
+ram:00005af0	central_task_event	2504	0		FLASH_EEPROM_CMD,FUN_ram_00007ab4,acc_af02_notify_handle,acc_to_mcu_send,debug_hexdump,hid_report_map_parse,memcpy,memset,printf,putchar
+ram:000064b8	central_link_reset	232	1	ram:0000698c	memset
+ram:000065a0	adv_report_parse	698	1	ram:0000698c	FLASH_EEPROM_CMD,debug_hexdump,memcpy,memset,printf
+ram:0000685a	acc_list_add	276	1	ram:0000698c	memcpy
+ram:0000696e	FUN_ram_0000696e	20	1	ram:00006982	
+ram:00006982	FUN_ram_00006982	10	0		FUN_ram_0000696e
+ram:0000698c	central_event_cb	746	0		acc_list_add,adv_report_parse,central_link_reset,memset
+ram:00006c76	FUN_ram_00006c76	2	0		
+ram:00006c78	periph_param_update_cb	54	0		
+ram:00006cae	FUN_ram_00006cae	2	0		
+ram:00006cb0	periph_task_event	700	0		FLASH_EEPROM_CMD,name_variant_flag,periodic_dispatch
+ram:00006f6c	af02_notify	138	1	ram:00003fac	af02_notify_raw
+ram:00006ff6	af01_notify	138	1	ram:00003fac	af01_notify_raw
+ram:00007080	periph_link_terminated	102	1	ram:00007106	
+ram:000070e6	FUN_ram_000070e6	30	0		
+ram:00007104	FUN_ram_00007104	2	0		
+ram:00007106	periph_state_cb	416	0		periph_link_terminated
+ram:000072e0	periph_app_init	390	1	ram:00007794	FUN_ram_00002764,FUN_ram_00003144,af_service_register,db_service_register,devinfo_register,periph_init
+ram:00007466	FUN_ram_00007466	6	1	ram:000074bc	FUN_ram_0000272a
+ram:0000746c	iap_flag_write	80	1	ram:000074bc	FLASH_EEPROM_CMD
+ram:000074bc	enter_iap	22	1	ram:00004ab8	FUN_ram_00007466,iap_flag_write,sys_soft_reset
+ram:000074d2	adv_mfr_tail_load	96	1	ram:00007532	FLASH_EEPROM_CMD
+ram:00007532	adv_mfr_set_from_fc	54	1	ram:0000388a	adv_mfr_tail_load
+ram:00007568	adv_mfr_tail_store	176	1	ram:00004224	FLASH_EEPROM_CMD
+ram:00007618	host_ids_load	126	2	ram:00007696,ram:0000773c	FLASH_EEPROM_CMD
+ram:00007696	host_id_save	166	1	ram:00003fac	FLASH_EEPROM_CMD,host_ids_load
+ram:0000773c	host_id_lookup	88	1	ram:000040dc	host_ids_load
+ram:00007794	main	108	0		FUN_ram_200023fe,FUN_ram_2000280a,GPIOA_ModeCfg,GPIOB_ModeCfg,ble_lib_init,central_app_init,hal_init,periph_app_init,uart0_init_115200
+ram:00007800	FUN_ram_00007800	2	1	ram:00007846	
+ram:00007804	FUN_ram_00007804	10	2	ram:00001c48,ram:00007d1e	FUN_ram_00007c92
+ram:0000780e	FUN_ram_0000780e	58	0		FUN_ram_000047c8
+ram:00007846	FUN_ram_00007846	108	1	ram:00001c48	FUN_ram_00007800,FUN_ram_00007d1e
+ram:000078b2	memcpy	182	8	ram:00003d0c,ram:00004cee,ram:00004fba,ram:00005710,ram:00005af0,ram:000065a0,ram:0000685a,ram:2000277e	
+ram:00007968	printf	68	6	ram:00004916,ram:00004964,ram:00004e1a,ram:00005864,ram:00005af0,ram:000065a0	FUN_ram_00007f90,FUN_ram_00008402
+ram:000079ac	putchar	46	3	ram:00004964,ram:00004e1a,ram:00005af0	FUN_ram_00007f90,FUN_ram_00008a52
+ram:00007ab4	FUN_ram_00007ab4	232	2	ram:00005864,ram:00005af0	FUN_ram_00007ac2,FUN_ram_00007b82,FUN_ram_00007f90
+ram:00007ac2	FUN_ram_00007ac2	192	3	ram:00007ab4,ram:00008396,ram:00008a52	FUN_ram_00007b82,FUN_ram_00007e72,FUN_ram_00007f90
+ram:00007b82	FUN_ram_00007b82	272	3	ram:00007ab4,ram:00007ac2,ram:00008402	FUN_ram_00007f90,FUN_ram_00008160,FUN_ram_000081fe
+ram:00007c92	FUN_ram_00007c92	140	1	ram:00007804	
+ram:00007d1e	FUN_ram_00007d1e	24	1	ram:00007846	FUN_ram_00007804
+ram:00007d36	FUN_ram_00007d36	316	1	ram:00007e72	FUN_ram_000081fe
+ram:00007e72	FUN_ram_00007e72	100	1	ram:00007ac2	FUN_ram_00007d36,FUN_ram_00007f90
+ram:00007ed6	FUN_ram_00007ed6	106	1	ram:00007f90	memset
+ram:00007f40	FUN_ram_00007f40	10	0		FUN_ram_0000809a
+ram:00007f4a	FUN_ram_00007f4a	70	1	ram:00007ffa	FUN_ram_000082ae,memset
+ram:00007f90	FUN_ram_00007f90	106	9	ram:00007968,ram:000079ac,ram:00007ab4,ram:00007ac2,ram:00007b82,ram:00007e72,ram:00007ffa,ram:00008402,ram:00008a52	FUN_ram_00007ed6,FUN_ram_00007ffa
+ram:00007ffa	FUN_ram_00007ffa	160	1	ram:00007f90	FUN_ram_00007f4a,FUN_ram_00007f90,memset
+ram:0000809a	FUN_ram_0000809a	108	1	ram:00007f40	
+ram:00008106	FUN_ram_00008106	90	1	ram:00008160	FUN_ram_00008c26
+ram:00008160	FUN_ram_00008160	158	1	ram:00007b82	FUN_ram_00008106,FUN_ram_000082ae,FUN_ram_00008c58
+ram:000081fe	FUN_ram_000081fe	176	2	ram:00007b82,ram:00007d36	FUN_ram_00008cd6,FUN_ram_00008cd8
+ram:000082ae	FUN_ram_000082ae	232	2	ram:00007f4a,ram:00008160	FUN_ram_00008ad8,FUN_ram_00008cd6,FUN_ram_00008cd8
+ram:00008396	FUN_ram_00008396	42	1	ram:000083c0	FUN_ram_00007ac2
+ram:000083c0	FUN_ram_000083c0	66	1	ram:00008402	FUN_ram_00008396
+ram:00008402	FUN_ram_00008402	668	1	ram:00007968	FUN_ram_00007b82,FUN_ram_00007f90,FUN_ram_000083c0,FUN_ram_000087aa,FUN_ram_00008cbc
+ram:0000869e	FUN_ram_0000869e	268	1	ram:000087aa	
+ram:000087aa	FUN_ram_000087aa	680	1	ram:00008402	FUN_ram_0000869e,FUN_ram_00008cbc
+ram:00008a52	FUN_ram_00008a52	134	1	ram:000079ac	FUN_ram_00007ac2,FUN_ram_00007f90
+ram:00008ad8	FUN_ram_00008ad8	48	1	ram:000082ae	FUN_ram_00008d5e
+ram:00008b08	FUN_ram_00008b08	48	0		FUN_ram_00008cda
+ram:00008b86	FUN_ram_00008b86	54	0		FUN_ram_00008c88
+ram:00008bc2	FUN_ram_00008bc2	52	0		_write_stub
+ram:00008bf6	FUN_ram_00008bf6	48	0		FUN_ram_00008d0e
+ram:00008c26	FUN_ram_00008c26	50	1	ram:00008106	FUN_ram_00008d1e
+ram:00008c58	FUN_ram_00008c58	48	1	ram:00008160	FUN_ram_00008d2e
+ram:00008c88	FUN_ram_00008c88	52	1	ram:00008b86	FUN_ram_00008d3e
+ram:00008cbc	FUN_ram_00008cbc	26	2	ram:00008402,ram:000087aa	
+ram:00008cd6	FUN_ram_00008cd6	2	2	ram:000081fe,ram:000082ae	
+ram:00008cd8	FUN_ram_00008cd8	2	2	ram:000081fe,ram:000082ae	
+ram:00008cda	FUN_ram_00008cda	52	1	ram:00008b08	FUN_ram_00008d4e
+ram:00008d0e	FUN_ram_00008d0e	16	1	ram:00008bf6	
+ram:00008d1e	FUN_ram_00008d1e	16	1	ram:00008c26	
+ram:00008d2e	FUN_ram_00008d2e	16	1	ram:00008c58	
+ram:00008d3e	FUN_ram_00008d3e	16	1	ram:00008c88	
+ram:00008d4e	FUN_ram_00008d4e	16	1	ram:00008cda	
+ram:00008d5e	FUN_ram_00008d5e	48	1	ram:00008ad8	
+ram:00008d8e	_write_stub	16	1	ram:00008bc2	
+ram:20002090	NMI_Handler	2	0		
+ram:2000209a	SysTick_Handler	2	0		
+ram:2000209c	SW_Handler	2	0		
+ram:200020a0	GPIOA_IRQHandler	2	0		
+ram:200020a2	GPIOB_IRQHandler	2	0		
+ram:200020a4	SPI0_IRQHandler	2	0		
+ram:200020a6	BB_IRQHandler	2	0		
+ram:200020a8	LLE_IRQHandler	2	0		
+ram:200020ac	USB2_IRQHandler	2	0		
+ram:200020b8	ADC_IRQHandler	2	0		
+ram:200020ba	I2C_IRQHandler	2	0		
+ram:200020bc	PWMX_IRQHandler	2	0		
+ram:200020be	TMR3_IRQHandler	2	0		
+ram:200020c0	UART2_IRQHandler	2	0		
+ram:200020c4	WDOG_BAT_IRQHandler	2	0		
+ram:200020c6	FUN_ram_200020c6	64	0		FLASH_EEPROM_CMD
+ram:20002106	FUN_ram_20002106	206	0		FLASH_EEPROM_CMD
+ram:200021d4	FUN_ram_200021d4	304	0		FLASH_EEPROM_CMD,FUN_ram_200025f4
+ram:20002304	FUN_ram_20002304	250	0		FLASH_EEPROM_CMD,FUN_ram_200023fe
+ram:200023fe	FUN_ram_200023fe	372	2	ram:00007794,ram:20002304	
+ram:20002572	sys_soft_reset	60	1	ram:000074bc	FLASH_EEPROM_CMD
+ram:200025ae	HardFault_Handler	70	0		FLASH_EEPROM_CMD
+ram:200025f4	FUN_ram_200025f4	14	2	ram:200021d4,ram:20002602	
+ram:20002602	FUN_ram_20002602	40	0		FUN_ram_200025f4
+ram:2000262a	RTC_IRQHandler	26	0		
+ram:20002644	TMR0_IRQHandler	184	0		
+ram:200026fc	TMR1_IRQHandler	30	0		tmr1_1ms_tick
+ram:2000271a	TMR2_IRQHandler	44	0		
+ram:20002746	UART0_IRQHandler	44	0		uart0_drain_rx
+ram:20002772	UART3_IRQHandler	12	0		
+ram:2000277e	UART1_IRQHandler	128	0		memcpy,uart1_read_fifo,uart1_rx_route
+ram:200027fe	USB_IRQHandler	12	0		usb_irq_handler
+ram:2000280a	FUN_ram_2000280a	16	1	ram:00007794	
+ram:2000281a	FUN_ram_2000281a	18	3	ram:20002856,ram:2000289e,ram:200028d6	
+ram:2000282c	FUN_ram_2000282c	14	3	ram:20002856,ram:2000289e,ram:200028d6	
+ram:2000283a	FUN_ram_2000283a	14	2	ram:2000289e,ram:200028d6	
+ram:20002848	FUN_ram_20002848	14	2	ram:20002856,ram:200028d6	
+ram:20002856	FUN_ram_20002856	72	1	ram:200028d6	FUN_ram_2000281a,FUN_ram_2000282c,FUN_ram_20002848
+ram:2000289e	FUN_ram_2000289e	56	1	ram:200028d6	FUN_ram_2000281a,FUN_ram_2000282c,FUN_ram_2000283a
+ram:200028d6	FLASH_EEPROM_CMD	874	20	ram:0000315c,ram:00003178,ram:000032b6,ram:0000388a,ram:000054fa,ram:00005710,ram:00005af0,ram:000065a0,ram:00006cb0,ram:0000746c,ram:000074d2,ram:00007568,ram:00007618,ram:00007696,ram:200020c6,ram:20002106,ram:200021d4,ram:20002304,ram:20002572,ram:200025ae	FUN_ram_2000281a,FUN_ram_2000282c,FUN_ram_2000283a,FUN_ram_20002848,FUN_ram_20002856,FUN_ram_2000289e

@@ -1,0 +1,55 @@
+12f34	host_dispatch_command	main host command dispatcher (USART3), picks mailbox by ready flag, calls handler, queues reply
+133bc	host_tx_service	serialises outbound frames to CH58x; watches 0x1FFF9550 work mask; bind/remote/stream/update sends; retransmit watchdog
+12690	build_bind_reply	builds 0x19: byte1=0 if S+0x46 else 0xFF; type6 appends 0
+15430	encode_frame_wrapper	channel*0x214+0x1FFF9BE4 then tail-calls encoder 0x1FEDC
+1fedc	encode_frame	AA,addr=(dst<<4|src),len,opcode,payload,cksum; doubles AA
+1fff0	stuff_byte	write byte, write again if 0xAA
+146b8	decode_frame_wrapper	channel*0x214 base, tail-calls decoder 0x1FF38
+1ff38	decode_frame_byte	UART frame byte state machine; nibble split, checksum, returns record ptr on complete
+15fa4	tx_stage_ptr	returns channel*0x214+0x1FFF9CE8 (transmit staging record)
+15ed4	rx_work_ptr	returns channel*0x214+0x1FFF9BE4 (decoded work record)
+1ef5c	usart3_rx_isr_cb	USART3 RX byte -> decoder ch1 -> copy 260B record to mailbox by source nibble, set ready flag
+1ef0c	usart1_rx_isr_cb	USART1 (PD) RX byte -> decoder ch0 -> PD parser 0x11900
+1e24c	uart_dma_tx_start	program DMA2 src/count and enable UART TX for a queued frame
+1787c	uart3_console_init	init USART3 (host, 115200, DMA2 ch1) and USART7 console
+644a4	uart1_init	init USART1 (PD companion, 115200, DMA2 ch0)
+27d24	usart7_console_init	init USART7 debug/factory console at 1 Mbaud, line buffer 0x1FFF8A8C
+1f026	uart_read_rdr	returns halfword at uart_base+6 (RDR)
+1efd4	uart_int_enable	set/clear USART CR1/CR2 interrupt bits
+153b4	gpio_set_mux	set function-select nibble for a port bitmask
+1227c	console_parse_line	parse USART7 command line: VSET=/TSET=/FanCompareValue=/language=
+58a6c	console_putc	poll USART7 TX empty then write TDR (or to a buffer)
+13126	cmd_18_bind_pending	inline: set S+0x47=1 pending, K+6=type; no reply
+2478c	bind_allow_cb	Allow button: S+0x46=1, S+0x47=0, set 0x1FFF9550 bit1
+2483c	bind_deny_cb	Deny button: S+0x46=0, S+0x47=0, set 0x1FFF9550 bit1
+2840c	build_confirm_bind_dialog	builds "Confirm Bluetooth Binding" prompt, registers allow/deny callbacks
+5af88	remote_allow_cb	Allow Remote Control: S+0x42=1, S+0x45=1, set 0x1FFF9550 bit2 (deferred C9 00)
+5b034	remote_deny_cb	Deny Remote Control: leaves S+0x42=0 (deferred C9 01)
+5eeac	build_remote_active_dialog	builds "Remote Control Active" / allow-remote dialog (string idx 0x25/0x26)
+5eeb0	remote_active_ui_cb	remote-active dialog callback
+54688	bind_ui_service	per-pass bind UI handler; can clear S+0x46 and set bit1
+5553c	remote_ui_service	per-pass remote-request UI handler; sets bit2
+1e284	ui_state_snapshot	copies S to mirror bytes each UI pass; clears S+0x42 when S+3==0; sets aa4f when S+3==2
+1e7b4	ui_service_main	lvgl UI service; popup timers, calls per-widget updaters
+14b14	ui_input_event	input/key event -> dialog button callbacks
+14660	cmd_bd_conn_state	0xBD: type6 sets S+3 (host link up/down), type5 sets S+4 and accessory name at S+0x58
+1855c	cmd_be_accessory_input	0xBE: accessory wheel/button input -> K+0x0D..0F, K+0x2C, S+0x1D/0x1E
+15aa0	cmd_bb_accessory_list	0xBB: Bluetooth Accessories scan-result list at 0x1FFF9A70, stride 0x26
+15b54	accessory_wheel_read	returns and clears accessory wheel delta (K+0x2C) for LVGL encoder
+1868c	accessory_key_read_a	accessory button A read (S+0x1D)
+1919c	accessory_key_read_b	accessory button B read (S+0x1E)
+18680	build_cmd_ba	build 0xBA accessory-list request to CH58x (node 2)
+185ec	build_cmd_bc	build 0xBC connect-to-accessory (6-byte MAC) to CH58x
+13c40	cmd_e1_ch58x_info	0xE1 from CH58x (type3): copies CH58x version field (record+0x11) to 0x1FFF9434/0x1FFF942C
+13c88	cmd_11_time_sync	0x11 from CH58x: 4-byte time value -> mAh integrator 0x1FFE0160
+30d8	cmd_f1_update_ack	inline 0xF1 type3: ack of F0, 0x1FFFA00C+2 1->2
+32c0	cmd_fd_update_progress	inline 0xFD: payload 3 sets 0x1FFF9449, bit13; 0xFF clears, bumps 0x1FFF943C
+312e	cmd_51_ack	inline 0x51 type3: clear 0x1FFF954B, arm 1000ms timer (ack of 0x50)
+313c	cmd_53_ack	inline 0x53 type3: clear 0x1FFF954C (ack of 0x52)
+b7f4	cmd_c8_dc_control	0xC8 DC control + remote grant; remoteCon 2 grants USB now / pends BLE
+12850	reset_worker	watches 0x1FFE01C4 reset-pending, calls 0x1B71C then system reset
+1b71c	do_settings_reset	final reset path (0x14824 storage) then system reset via 0x1FEB8
+1feb8	system_reset	AIRCR SYSRESETREQ
+1ae70	set_update_active	stores 0x1FFFAA4E (CH58x update flag) in critical section
+54390	build_accessory_list_ui	rebuilds Bluetooth Accessories list when S+0x3D set
+57d54	ui_show_ch58x_version	formats CH58x version block %d.%d/%d.%d/... from 0x1FFF9430/0x1FFF9434

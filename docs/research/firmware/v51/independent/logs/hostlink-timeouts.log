@@ -1,0 +1,7 @@
+(a) no-ack resend: [(0, '26', 'c5 00 00 00 00 00 00 00 00 00 00 00 31'), (5000, '26', 'c5 00 00 00 00 00 00 00 00 00 00 00 31'), (10001, '26', 'c5 00 00 00 00 00 00 00 00 00 00 00 31')] ... total 3
+(b) USB link S+3=2 cleared after 8000 dispatcher iterations
+(c) after 55 00 FF: K+0=1 K+1=0 K+2=1
+    resends=50, S+3 cleared after 5001 iterations, K+2=0
+(d) queue-full polls: [(0, '23', '5002'), (100, '23', '55'), (200, '23', '55')] count 51 S+3 cleared after 5002
+(e) 50 without 51: [(0, '50 01'), (1, '10'), (1000, '50 01'), (2000, '50 01'), (3000, '50 01')]
+    after 51 00: 954b=0 K+8=1

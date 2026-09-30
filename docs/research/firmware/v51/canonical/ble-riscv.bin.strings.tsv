@@ -1,0 +1,59 @@
+00000879	Ee7e?
+000008b5	7q7i7*
+000009f3	T2DRY
+00000c13	E9199
+00000c21	E=1I1
+00000d18	 0=C*
+000023c9	@fD%a
+00002999	(\\!F
+00003471	\B]%a
+000038b3	@"DAg#
+00003a1b	 0y2F
+00003e33	 p32F
+00003e5b	DBI)E
+0000406b	&)Fcd
+00004528	@;\\!F
+00006501	=\\9F
+00006cc9	C}H}UcG
+00007963	JBKEa
+00007dea	experimental
+00007df8	Firmware Revision
+00007e0c	Hardware Revision
+00007e20	Manufacturer Name
+00007e34	Model Number
+00007e44	Serial Number
+00007e54	Software Revision
+00007e68	CH58x_BLE_LIB_V1.8
+00007e9c	%d,%d,%d,%d
+00007eac	------------%d,%d
+00007ec0	GRB:(%d,%d,%d)
+00007ed4	MP305B
+00007f0c	Data-%x:
+00008020	TypeRspAnalysis
+00008030	%02x 
+00008038	ReadcentralCharHdl:%x
+00008050	----------------Analysis------------------
+0000807c	------USAGE_PAGE:Generic Desktop--------
+000080a8	-GLOBAL_LOG_MIN:%x-
+000080c0	-GLOBAL_LOG_MAX:%x-
+000080d8	-GLOBAL_PHY_MIN:%x-
+000080f0	-GLOBAL_PHY_MAX:%x-
+00008108	-GLOBAL_REPORT_SIZE:%x-
+00008124	-GLOBAL_REPORT_ID:%x-
+0000813c	-GLOBAL_REPORT_CNT:%x-
+00008154	Collection: 
+00008164	End Collection
+00008174	Input: 
+0000817c	Output: 
+00008188	------END_COLLECTION--------
+000081a8	Button:%x,Wheel:%x,Num:%x
+000081c4	16-bit UUID: 0x%04X
+000081dc	16-bit ad_type: %x
+000081f0	Manufacturer Data Len:%d
+0000820c	%02X 
+00008274	#-0+ 
+00008280	efgEFG
+00008288	0123456789ABCDEF
+0000829c	0123456789abcdef
+00008572	0030MP305B
+0000857e	                 

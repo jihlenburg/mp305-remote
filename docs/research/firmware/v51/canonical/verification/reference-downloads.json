@@ -1,0 +1,17 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/openwch/ch583/main/EVT/EXAM/BLE/LIB/CH58xBLE_ROM.h",
+    "file": "reference/CH58xBLE_ROM.h",
+    "sha256": "76d65427766b6969e382558965837e1d29f004576242ca686d10c733fd9a104a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/openwch/ch583/main/EVT/EXAM/SRC/StdPeriphDriver/inc/CH583SFR.h",
+    "file": "reference/CH583SFR.h",
+    "sha256": "400058f7095936bc6060c0fb70c63bd12b22e77426b7d87c1c47a70ea5fe46e0"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/openwch/ch583/main/EVT/EXAM/SRC/Startup/startup_CH583.S",
+    "file": "reference/startup_CH583.S",
+    "sha256": "c2021d0b1fa1ade86a1021ba716bfe4c390ac1839dc77429f9108c3905ed35fd"
+  }
+]

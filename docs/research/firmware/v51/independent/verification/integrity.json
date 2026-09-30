@@ -1,0 +1,109 @@
+{
+  "date": "2026-09-30",
+  "revision": "uncommitted",
+  "scope": "Offline recovery, relocation, metadata restoration and artifact preservation; not a hardware or V-model verification run",
+  "passed": true,
+  "original_workspace": {
+    "files": 110,
+    "all_hashes_unchanged": true
+  },
+  "captures": {
+    "files": 4,
+    "all_hashes_unchanged": true
+  },
+  "canonical_non_markdown_artifacts": {
+    "files": 4854,
+    "all_hashes_unchanged": true
+  },
+  "original_research_files": {
+    "files": 4878,
+    "all_present_after_relocation": true
+  },
+  "logbook_original_prefix_unchanged": true,
+  "probe_jobs": 33,
+  "distinct_asserted_cases": 657,
+  "observed_command_rows": 324,
+  "post_relocation_jobs": 33,
+  "post_relocation_assertions": 44,
+  "ghidra_snapshots": [
+    "canonical-ble",
+    "canonical-main",
+    "canonical-pd",
+    "recovered-ble",
+    "recovered-main",
+    "recovered-pd",
+    "sdk-reference"
+  ],
+  "ghidra_core_restoration_passes": 7,
+  "ghidra_lossless_restoration_claimed": false,
+  "current_research_local_file_links_passed": true,
+  "current_research_heading_anchors_passed": true,
+  "outside_scope_planned_links": [
+    "docs/v-model/3-architecture.md",
+    "docs/v-model/6-integration-tests.md",
+    "docs/v-model/4-detailed-design/"
+  ],
+  "firmware_or_project_files_in_research": 0,
+  "xml_memory_contents_elements": 0,
+  "python_syntax_files": 28,
+  "pdf": {
+    "pages": 22,
+    "all_pages_visually_inspected": true,
+    "overfull_boxes": 0,
+    "sha256": "25a84d4978b77278ba2552f84dc091629806c026eb7c92188050a6b2d6e6687b"
+  },
+  "tool_sha256": {
+    "spikes/firmware_workflow/scripts/ExportAnalysis.java": "a41781dba6589eb3c331fa32a9d851c8af42d2f89d0395d39a84a74ea2c77ef2",
+    "spikes/firmware_workflow/scripts/ImportAnalysis.java": "898abe6858bc58921b9f8500e2a04e92e59b52335b07eef3a8737038ad13b4a5",
+    "spikes/firmware_workflow/scripts/audit_research.py": "248edb852eb13b2554e8b840b38ae85820d6dd36724c58ff7255eba22c64cb94",
+    "spikes/firmware_workflow/scripts/compare_analysis.py": "e046ed111b3a518b2f45d8cc6439e01e3fa5da9898eaffa5f44e91e81d9777f2",
+    "spikes/firmware_workflow/scripts/import_release.py": "6df0bf221684ec10fabdbfaa7d464819602ea6a8d3ce0a15cd845723da9ddbe4",
+    "spikes/firmware_workflow/scripts/restore_analysis.py": "1570794aac981ce2fd4f5fc450b9c61934725c1468688f2f532f3975ee416b5b",
+    "spikes/firmware_workflow/scripts/stage_release.py": "383e56c9327fa0a9c0f4dd98e024638f20ffd5f634aa7408d1ef0ee7ce32a409",
+    "spikes/firmware_reconstruct/requirements.txt": "b8036588ab7e7818a12c89daff2e0ddcda009e77833f7e09496576fa36207297",
+    "spikes/firmware_reconstruct/scripts/ApplyNames.java": "575a485f7ab723a49e4f9053e719a0c028d31e739252e5f16949342286318a04",
+    "spikes/firmware_reconstruct/scripts/Export.java": "be0628dc8f9658dffdc0b8d114302f7c65eec422f24641f18d82e3cbfe8a5e2d",
+    "spikes/firmware_reconstruct/scripts/ExportRefs.java": "b76fac27b9dcc8c5a16ffc7eaba32a4df86a15afbbf4421cc5c0fa2629dc3f41",
+    "spikes/firmware_reconstruct/scripts/RecoveryFixups.java": "79a486cdec14e5e866774f5efe127a01ccd04ea0bba898c3f8c32115a2536369",
+    "spikes/firmware_reconstruct/scripts/Setup.java": "bff8678af744714df24588a4cb569a130b2094ef2626a32363e28efb66f0fac6",
+    "spikes/firmware_reconstruct/scripts/Setup8051.java": "4fc8b1e979c6e9a3cf0cf2fab905f8b046573c5a8edadea080ceb66a9481eb2c",
+    "spikes/firmware_reconstruct/scripts/SetupCH58x.java": "fb7a3285aa8be2dbff4156f7dfb6fe46ec8cea73e8b068a5cbed283765130d42",
+    "spikes/firmware_reconstruct/scripts/build_report.py": "a64642f4c0aa18af8e903e70cc6faec52f0c85180056c26c534e401356cb75d1",
+    "spikes/firmware_reconstruct/scripts/ch58x_BridgeFix.java": "2fed5e33fe3058f5bfc55f3c82097902c65a8cda03c262c55e8eb9c127c927b2",
+    "spikes/firmware_reconstruct/scripts/ch58x_bridge_checks.py": "1f2e834aa4b74fbbdac8d9419caa679f601f52c0f22f18f3c793e4f8dff7c5e3",
+    "spikes/firmware_reconstruct/scripts/ch58x_dis.py": "650420eb8d51bc0e51e5becf529de1cf7f47f125feff97fe9d4f1274b439bb8f",
+    "spikes/firmware_reconstruct/scripts/ch58x_emu.py": "201e71284a1f11ec970172b04cb57a81f4b74503a94818013cec0ca86f2dab84",
+    "spikes/firmware_reconstruct/scripts/commands_emu.py": "d87b7a7098c3b6b1074a4d06000e286e0cf2c233a4e6560f1d22f18748c967e8",
+    "spikes/firmware_reconstruct/scripts/commands_vectors.py": "2c6f1c9b88c9679fcf8e68669ad990bff05c2d9a3884c356744c303ebee596f6",
+    "spikes/firmware_reconstruct/scripts/emu_app.py": "0b42eeb67b980a7f7cce440063a2ac4b60dd0d35f39e386779b4da9626433f63",
+    "spikes/firmware_reconstruct/scripts/emu_scatter.py": "5f141816a4c1898f7f451612e39f0a8c149bebebe45e9097a1f8e01d0bc34884",
+    "spikes/firmware_reconstruct/scripts/fetch_references.sh": "016a47943875e8217f57d63781a3829f178aba6ab18c761d2f4af5724f1a722f",
+    "spikes/firmware_reconstruct/scripts/gen_ch58x_regs.py": "a0550e515010dcb6804064f484c345f02171795e59922451ead8b34d79a16d5b",
+    "spikes/firmware_reconstruct/scripts/gen_symbols.py": "68fe0df02d38c5b8640bab77b7117c3b0321ff431f8d080db960d4d2d5bfceec",
+    "spikes/firmware_reconstruct/scripts/hostlink_ch58x_route_tests.py": "95d959a6e3b91a234942a5a7a9cad53423c340f6ba07f38729a7de3a1b49f41b",
+    "spikes/firmware_reconstruct/scripts/hostlink_emu_ch58x.py": "61630eb5a208a66b6dff77bf4278ffa2e2a65562f4746e74e746cce796ec0d68",
+    "spikes/firmware_reconstruct/scripts/hostlink_emu_tests.py": "1993cb80127ae5a63c632ec5a94ed46ae4e61206210ee117fbe179e6145c8798",
+    "spikes/firmware_reconstruct/scripts/hostlink_rvdis.py": "40819b03c2175f913e1b106b4a17e3dc310593175b29a3d2fd6055f2c56a1bc8",
+    "spikes/firmware_reconstruct/scripts/hostlink_xref.py": "36551d2ebea7dcb02775dce19a7d1899a5e3831b5bcfe3c4ea16a327b1ee206f",
+    "spikes/firmware_reconstruct/scripts/pd8051_base.py": "75423039fe090b9355397c039a821ed5ec1baa920190487c69a5b52c3268171e",
+    "spikes/firmware_reconstruct/scripts/power_Fix.java": "6c39f0a43f0d84ffc212847751f56f4d89fe633683d879ae56889cabed28f436",
+    "spikes/firmware_reconstruct/scripts/power_dis.py": "8df37dcd2e07a847d2cbf8111ff6ce7b2e7f6043538625a544096e873716f762",
+    "spikes/firmware_reconstruct/scripts/power_xref.py": "25e99b8914d487a262a105710604f4d54d76b5fb45890ea68513f8e9a704021e",
+    "spikes/firmware_reconstruct/scripts/recover_exports.py": "800ba335d28afaa32ed47cfce8cbb3a495b621d43b7b1b9c57e9e595d397646b",
+    "spikes/firmware_reconstruct/scripts/recover_jobs.py": "1a758990c32dfbc3198422b6e4730ae3e9da5bf8896bd522fcf7d0eb49868f7c",
+    "spikes/firmware_reconstruct/scripts/run_pipeline.sh": "f931b9f03f2d1ea7cb8f9a2baa9375eab82bdea890425bbbab4059e9250a1020",
+    "spikes/firmware_reconstruct/scripts/svd_score.py": "ccdcf71cf40b405fba4903df6ad5da9aa139c7051a3eb7d4218a1b9e794eeaae",
+    "spikes/firmware_reconstruct/scripts/tdis.py": "be66c1d8cd8b31a8efbba77b2a14cfaccdd205aa8a5ff8ccb0fddea662a70585",
+    "spikes/firmware_reconstruct/scripts/verify_recovery.py": "8a8474db4142ba0ef06a1232847a3169ada7260bd345573f7534400bbff44a56"
+  },
+  "checks": [
+    "Original SHA-256 comparisons",
+    "Original logbook prefix comparison",
+    "Job completion and log SHA-256 checks",
+    "Fresh project restore/re-export comparisons",
+    "FWD checksum and input-hash rejection checks",
+    "Local Markdown file links and heading anchors",
+    "Python AST parsing and Ruff E9/F63/F7/F82",
+    "PDF rendering and all-page visual inspection"
+  ]
+}

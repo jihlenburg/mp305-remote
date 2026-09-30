@@ -1,0 +1,5 @@
+host BE 01 / BE 00 (src 6): S+0x1D=1
+   output-key worker 0x18728 -> [('set_output', 1)] S+0x1D=0
+   wheel +1 -> 0x15b54 returns 101
+   push (BE 04) then release -> 0x15b54 returns [0, 0, 0] 3
+host-sent BD 01 on AF01 (src 6, len 3): S+3=1

@@ -1,0 +1,5497 @@
+{
+  "schema": 1,
+  "program": "ble-riscv.bin",
+  "language": "RISCV:LE:32:default",
+  "compiler_spec": "gcc",
+  "executable_sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+  "memory_contents_exported": false,
+  "memory_blocks": [
+    {
+      "name": "ram",
+      "start": "ram:00001000",
+      "length": 34432,
+      "read": true,
+      "write": false,
+      "execute": true,
+      "volatile": false,
+      "initialized": true,
+      "sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+      "source_name": "ble-riscv.bin",
+      "source_sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+      "source_offset": 0
+    },
+    {
+      "name": "SRAM_reserved",
+      "start": "ram:20000000",
+      "length": 8192,
+      "read": true,
+      "write": true,
+      "execute": false,
+      "volatile": false,
+      "initialized": false
+    },
+    {
+      "name": "RAM_code_and_vectors",
+      "start": "ram:20002000",
+      "length": 3136,
+      "read": true,
+      "write": true,
+      "execute": true,
+      "volatile": false,
+      "initialized": true,
+      "sha256": "899192b68315427f3277e7f0021323c56c152f26d7fa607ed2891f3306969b68",
+      "source_name": "ble-riscv.bin",
+      "source_sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+      "source_offset": 8
+    },
+    {
+      "name": "RAM_data",
+      "start": "ram:20002c40",
+      "length": 784,
+      "read": true,
+      "write": true,
+      "execute": false,
+      "volatile": false,
+      "initialized": true,
+      "sha256": "ff45af84785e50c93c7c3579e2f087c546e2449c0dd99491019653a15a14bb8e",
+      "source_name": "ble-riscv.bin",
+      "source_sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+      "source_offset": 33560
+    },
+    {
+      "name": "BSS_and_stack",
+      "start": "ram:20002f50",
+      "length": 53424,
+      "read": true,
+      "write": true,
+      "execute": false,
+      "volatile": false,
+      "initialized": false
+    },
+    {
+      "name": "peripherals",
+      "start": "ram:40000000",
+      "length": 65536,
+      "read": true,
+      "write": true,
+      "execute": false,
+      "volatile": false,
+      "initialized": false
+    },
+    {
+      "name": "system",
+      "start": "ram:e000e000",
+      "length": 8192,
+      "read": true,
+      "write": true,
+      "execute": false,
+      "volatile": false,
+      "initialized": false
+    },
+    {
+      "name": "csr",
+      "start": "csreg:0000",
+      "length": 16384,
+      "read": true,
+      "write": true,
+      "execute": false,
+      "volatile": false,
+      "initialized": false
+    }
+  ],
+  "functions": [
+    {
+      "entry": "ram:00001000",
+      "name": "image_entry",
+      "prototype": "undefined image_entry()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "d911c3735066f13b811e59df6044d4c75c7004cde9d902c58f7135ac2479679b",
+      "mnemonics_sha256": "cee00b08a818db87e17e703273818e5194f83280e1ef3eae9214ff14675d9e6d",
+      "thunk_target": "ram:00001c48",
+      "body": [
+        [
+          "ram:00001000",
+          "ram:00001003"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000010ce",
+      "name": "FUN_ram_000010ce",
+      "prototype": "undefined FUN_ram_000010ce()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 23,
+      "instruction_bytes_sha256": "6a69e1b2c2574444e6aff007652d644e440da717cd2b91303025c586752713de",
+      "mnemonics_sha256": "05dd6dacfaaa5dbcdcabebdf2894934d3f34756554a74fba7e0e04950d3efd7b",
+      "body": [
+        [
+          "ram:000010ce",
+          "ram:0000110d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000110e",
+      "name": "FUN_ram_0000110e",
+      "prototype": "undefined FUN_ram_0000110e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 63,
+      "instruction_bytes_sha256": "22164888fcf66ce50bb4ec667d1ef53ffa966eeeb5d0b76c7094820652336b7b",
+      "mnemonics_sha256": "e40117c319c13085357abaf33348a448f9a6118be327b8d52c5f5016b5b26782",
+      "body": [
+        [
+          "ram:0000110e",
+          "ram:000011db"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000011dc",
+      "name": "FUN_ram_000011dc",
+      "prototype": "undefined FUN_ram_000011dc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_20",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x20]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 99,
+      "instruction_bytes_sha256": "37195f443fcf7db9b0ae3d56867c4194c285107b1673ba151a1005da5aac891f",
+      "mnemonics_sha256": "37e092d952fed2b755c777e03227082644d3143ebc9fad935a577f017befc015",
+      "body": [
+        [
+          "ram:000011dc",
+          "ram:0000130b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000130c",
+      "name": "FUN_ram_0000130c",
+      "prototype": "undefined FUN_ram_0000130c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 83,
+      "instruction_bytes_sha256": "d63125d866ee55c8e31cb16df757486e610767ddda6b9757c44b272e04c5666a",
+      "mnemonics_sha256": "8884d9a78ae47fb3b57b21d17ee96f851e307846e4c5553f8003c981466aaa67",
+      "body": [
+        [
+          "ram:0000130c",
+          "ram:00001405"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001406",
+      "name": "FUN_ram_00001406",
+      "prototype": "undefined FUN_ram_00001406()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 118,
+      "instruction_bytes_sha256": "af06c9f59ea827b850c40dce682eadaf443c9c270251eb82b9d1358583adeedb",
+      "mnemonics_sha256": "e5e45ce348c0dd015d3926964d7ed2a9d42b370d90cd58e7dafa8019ead6586b",
+      "body": [
+        [
+          "ram:00001406",
+          "ram:00001579"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000157a",
+      "name": "FUN_ram_0000157a",
+      "prototype": "undefined FUN_ram_0000157a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 21,
+      "instruction_bytes_sha256": "27d68707fa8b59b6598291cacd9c3ad1203bfe768c75014c14c4aca3a4796a94",
+      "mnemonics_sha256": "23a2c2375649f4578f267cab9926f74b62a324a44363ccdebc915157b7d22e53",
+      "body": [
+        [
+          "ram:0000157a",
+          "ram:000015b5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000015fc",
+      "name": "FUN_ram_000015fc",
+      "prototype": "undefined FUN_ram_000015fc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "71c05d143dae8b1d10b61f513e1f2210883e1387c6acf18ee186e29cbb235ab7",
+      "mnemonics_sha256": "efaba8d91bd65450e24836ac13f67be1fe7ae74c74f6e39ce382a9d1e0a3a6a2",
+      "body": [
+        [
+          "ram:000015fc",
+          "ram:00001609"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000160a",
+      "name": "FUN_ram_0000160a",
+      "prototype": "undefined FUN_ram_0000160a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 18,
+      "instruction_bytes_sha256": "df2949ed84a621d9d4fea29f5d3e83a86579225f2f4391a875580830620ebaaf",
+      "mnemonics_sha256": "c86a5ee267e75eed49665596a6d132f606560170cb1fca9a108d6e3e6cebc46b",
+      "body": [
+        [
+          "ram:0000160a",
+          "ram:00001631"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001822",
+      "name": "FUN_ram_00001822",
+      "prototype": "undefined FUN_ram_00001822()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "970277307749efb9ac94f20fe8fb4f4fd746b6f512d3abee719ef0255ddf4dd8",
+      "mnemonics_sha256": "6f244c2d4d772dee3652340103a64875681a2569f7131f7b5ab1682d1dff6691",
+      "body": [
+        [
+          "ram:00001822",
+          "ram:00001833"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001834",
+      "name": "FUN_ram_00001834",
+      "prototype": "undefined FUN_ram_00001834()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "db094a512c4f1d98e88d2d3bebac3d82b883c8179637b4223bb65a7547d85db7",
+      "mnemonics_sha256": "3814011e9e9f5591f0c01d4c57fed5958c47bb9861916574f567d6d109b8c8e2",
+      "body": [
+        [
+          "ram:00001834",
+          "ram:00001841"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001842",
+      "name": "FUN_ram_00001842",
+      "prototype": "undefined FUN_ram_00001842()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "1b831f58221e69eb85e383f00a67796291022b3e15865e2f2734ec08b0c55d6c",
+      "mnemonics_sha256": "590e42543c5ec32ed96d67962bc6fbaf38dc220a0a6b3a7e1b6f0e06c4daeddb",
+      "body": [
+        [
+          "ram:00001842",
+          "ram:0000184f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001850",
+      "name": "FUN_ram_00001850",
+      "prototype": "undefined FUN_ram_00001850()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "41106e9ffded6552dfdfd56beaadb0824547fed0cddb7d7cb21b95ffcf4ed19e",
+      "mnemonics_sha256": "3814011e9e9f5591f0c01d4c57fed5958c47bb9861916574f567d6d109b8c8e2",
+      "body": [
+        [
+          "ram:00001850",
+          "ram:0000185d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000185e",
+      "name": "FUN_ram_0000185e",
+      "prototype": "undefined FUN_ram_0000185e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 31,
+      "instruction_bytes_sha256": "aaf182fd9708e346392d6d7b7316d7312f52645802db14770a806abe37ca07e5",
+      "mnemonics_sha256": "8da91c26e7411fc094041c0021cefd77f05c58296c90aa08857b77f75a369d61",
+      "body": [
+        [
+          "ram:0000185e",
+          "ram:000018a5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000018a6",
+      "name": "FUN_ram_000018a6",
+      "prototype": "undefined FUN_ram_000018a6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 24,
+      "instruction_bytes_sha256": "f1f016a512a846327339500ef0d14f15f116ba49ce61fab682e5b95d7b59dc4c",
+      "mnemonics_sha256": "8d713e2aab1699535788ae9f27a55160d302454d9aaf0a9ed36b75e106278aa5",
+      "body": [
+        [
+          "ram:000018a6",
+          "ram:000018dd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000018de",
+      "name": "FUN_ram_000018de",
+      "prototype": "undefined FUN_ram_000018de()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 299,
+      "instruction_bytes_sha256": "313c731339c5afbd8b76940430605bf6ce80b6e6961b3715fd249ed8bf142453",
+      "mnemonics_sha256": "071d3a8b34865954f861596bb8260c8888d332bc6cd15924271c43f80aa598e3",
+      "body": [
+        [
+          "ram:000018de",
+          "ram:00001c47"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001c48",
+      "name": "runtime_start",
+      "prototype": "undefined runtime_start()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 55,
+      "instruction_bytes_sha256": "ba686c5a111a562f47efe3ff6504a8b84bef4c75157bfbc8d21498064b3b81ab",
+      "mnemonics_sha256": "43c248477be435a97f7398eef6721084fa99d463ab96357c3109d7a37c6911c0",
+      "body": [
+        [
+          "ram:00001c48",
+          "ram:00001d15"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001d1a",
+      "name": "FUN_ram_00001d1a",
+      "prototype": "undefined FUN_ram_00001d1a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 39,
+      "instruction_bytes_sha256": "f3aea4c808cf9eab634c8cafb79362006e49c36636d24f6e4ca3d7699dc55120",
+      "mnemonics_sha256": "1fa4dce1cbeedac78a6c8d22b51e403160cef52879686a1593f86ce3ed2e9995",
+      "body": [
+        [
+          "ram:00001d1a",
+          "ram:00001d53"
+        ],
+        [
+          "ram:00001d92",
+          "ram:00001dc1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001dc2",
+      "name": "FUN_ram_00001dc2",
+      "prototype": "undefined FUN_ram_00001dc2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 11,
+      "instruction_bytes_sha256": "9b2541d7a572a2ab9000b48452be96e93050fa3ee78de330814b286c8d2da415",
+      "mnemonics_sha256": "ddc257976972df31d905861445a301d1765bb3f749f19dd07d315187e6ec1f4d",
+      "body": [
+        [
+          "ram:00001dc2",
+          "ram:00001de9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001dea",
+      "name": "FUN_ram_00001dea",
+      "prototype": "undefined FUN_ram_00001dea()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 14,
+      "instruction_bytes_sha256": "614303b623ce597c888b9b4b43246a01e8bf7a84b91aebfa93afb05bd540b8ee",
+      "mnemonics_sha256": "8265124a4b0017bc85719f8281a0e605d944bcf580b28ede72585276fd57ac7f",
+      "body": [
+        [
+          "ram:00001dea",
+          "ram:00001e17"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001e18",
+      "name": "FUN_ram_00001e18",
+      "prototype": "undefined FUN_ram_00001e18()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 124,
+      "instruction_bytes_sha256": "9b046b62958f5e65b5ffe26334be3ac6ccca5f94fbd020087ae5f48a104d3241",
+      "mnemonics_sha256": "929264603e7431e0c4ab761a76a850e32147d8e5dda5cb4aafdd5592d4bb1fc2",
+      "body": [
+        [
+          "ram:00001e18",
+          "ram:00001fa5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001fa6",
+      "name": "FUN_ram_00001fa6",
+      "prototype": "undefined FUN_ram_00001fa6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 10,
+      "instruction_bytes_sha256": "37c3135c6b83728fc944934529e6e43d6b4d281e374b9073449b035fde070a93",
+      "mnemonics_sha256": "dd82237a67f189055b9780b75b78bfc653734c87dba33df8d38cb83387b30e1d",
+      "body": [
+        [
+          "ram:00001fa6",
+          "ram:00001fbd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00001fbe",
+      "name": "FUN_ram_00001fbe",
+      "prototype": "undefined FUN_ram_00001fbe()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 385,
+      "instruction_bytes_sha256": "a4f1363b6442f319d09fa3f5a2642c8c19b0e782676c6ddec6d66b34298e2ae9",
+      "mnemonics_sha256": "1b84cbf12bba1d7457f7b968ce0db89ebdc5905889f2867f37308485e38ab221",
+      "body": [
+        [
+          "ram:00001fbe",
+          "ram:00002497"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002498",
+      "name": "FUN_ram_00002498",
+      "prototype": "undefined FUN_ram_00002498()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 52,
+      "instruction_bytes_sha256": "8a9a5ad1d88d5aca02140c914300b279b25226d32a1c3be5dba74c296d4050e1",
+      "mnemonics_sha256": "cf6bf660b2d865e8cedf7bf3ac0de72950bf9501083b3fae20720462d6a2d98a",
+      "body": [
+        [
+          "ram:00002498",
+          "ram:0000253d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000253e",
+      "name": "FUN_ram_0000253e",
+      "prototype": "undefined FUN_ram_0000253e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 52,
+      "instruction_bytes_sha256": "05b4bf5c62c51083a1fdb0c394fc4329dd7129865e8c425452430a1561c582e5",
+      "mnemonics_sha256": "cf6bf660b2d865e8cedf7bf3ac0de72950bf9501083b3fae20720462d6a2d98a",
+      "body": [
+        [
+          "ram:0000253e",
+          "ram:000025e3"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000025e4",
+      "name": "FUN_ram_000025e4",
+      "prototype": "undefined FUN_ram_000025e4()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 9,
+      "instruction_bytes_sha256": "85eb51ff1f2eec60a190bda737a58e393dc6a7f90984abb18b952d7669fd69db",
+      "mnemonics_sha256": "a91ec84c62f5ffb2c296a906b2e02213c86adfe91cd365863d567cd6c103b163",
+      "body": [
+        [
+          "ram:000025e4",
+          "ram:000025fd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000025fe",
+      "name": "FUN_ram_000025fe",
+      "prototype": "undefined FUN_ram_000025fe()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 42,
+      "instruction_bytes_sha256": "6741615453f0213b693abe5a813ea03b9aa4e418d9ae3bfca6f5084c064fab5b",
+      "mnemonics_sha256": "83c2a55eeaf78e0385e449f44b6259be87b6892a8f2b7ec65e421653e4043d6a",
+      "body": [
+        [
+          "ram:000025fe",
+          "ram:00002689"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000268a",
+      "name": "FUN_ram_0000268a",
+      "prototype": "undefined FUN_ram_0000268a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 31,
+      "instruction_bytes_sha256": "422124353f90fd301f2e509d546ec383232601a0ee85377c1fd03e47becaeceb",
+      "mnemonics_sha256": "5e53ead4cc705724e5481dabe80ce3cba1a93e31f4b337d656e570cd8547e2d3",
+      "body": [
+        [
+          "ram:0000268a",
+          "ram:000026e7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000026e8",
+      "name": "FUN_ram_000026e8",
+      "prototype": "undefined FUN_ram_000026e8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 20,
+      "instruction_bytes_sha256": "672c2b7db5bc50380336ae018da9fcfe149dc3254f10870759c6a4ece9c98b28",
+      "mnemonics_sha256": "339073434f2d27fd6fcc7c3b75c4f1b1b71ed97d0aa9554afbba6de7296f8e44",
+      "body": [
+        [
+          "ram:000026e8",
+          "ram:00002729"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000272a",
+      "name": "FUN_ram_0000272a",
+      "prototype": "undefined FUN_ram_0000272a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 11,
+      "instruction_bytes_sha256": "fdf98949d1988a3fafa8647bcaa53640d497357beec5b190915efb233cc4e83a",
+      "mnemonics_sha256": "e66720f73537286e034733f29a160bfc9c7492f1df65c4e3dc97a6999d6295c9",
+      "body": [
+        [
+          "ram:0000272a",
+          "ram:00002745"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002746",
+      "name": "FUN_ram_00002746",
+      "prototype": "undefined FUN_ram_00002746()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "36111e96b5475e4108dc9c8618810aad99371ad98f692720f0edbcf4051ab0e0",
+      "mnemonics_sha256": "d44ecaa56d091d3e1c633a1c4824504563371c2ab0ea0933d21a42ff24a3d896",
+      "body": [
+        [
+          "ram:00002746",
+          "ram:00002759"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002764",
+      "name": "FUN_ram_00002764",
+      "prototype": "undefined FUN_ram_00002764()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 16,
+      "instruction_bytes_sha256": "bc96fcfba899e66356298d8d5accee4ccd801d28fdcba6b9572f660397ca100a",
+      "mnemonics_sha256": "0f9dd73bfc858d370a69f891b4f8a761fdebe2b5e5d5fa140b4f38ddd23e2b88",
+      "body": [
+        [
+          "ram:00002764",
+          "ram:0000279b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000279c",
+      "name": "FUN_ram_0000279c",
+      "prototype": "undefined FUN_ram_0000279c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "96c5c0bb6ce3cba0b3e160919249aabc75387857728f1cf24580e4c6b10136cc",
+      "mnemonics_sha256": "3715805c8058736098f07f4b9a8c58f4452ecf870abb4eee68aa6c1aa7aa8de0",
+      "body": [
+        [
+          "ram:0000279c",
+          "ram:000027b5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000027b6",
+      "name": "FUN_ram_000027b6",
+      "prototype": "undefined FUN_ram_000027b6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 7,
+      "instruction_bytes_sha256": "0a204914cabf6e078ab603f22d7de78317c5a7de65c4b31d61ba47bc75193161",
+      "mnemonics_sha256": "5ff1e59dbda069a360b38ccf63b878570276c92972b850c1d07a8b1bf399261f",
+      "body": [
+        [
+          "ram:000027b6",
+          "ram:000027cb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000027cc",
+      "name": "FUN_ram_000027cc",
+      "prototype": "undefined FUN_ram_000027cc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 7,
+      "instruction_bytes_sha256": "8027926e98293d6c70c632881c990a0213fbf94547c293402b7dbce77b53e68d",
+      "mnemonics_sha256": "5ff1e59dbda069a360b38ccf63b878570276c92972b850c1d07a8b1bf399261f",
+      "body": [
+        [
+          "ram:000027cc",
+          "ram:000027e1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000027e2",
+      "name": "FUN_ram_000027e2",
+      "prototype": "undefined FUN_ram_000027e2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "414a53bee796dc12dea5073db425e796abf4579c75efbbac2f8c1a6eee4db8fa",
+      "mnemonics_sha256": "2eb30d53dfb77e01301f0814197cc7e95ed60f557c41e640831a599dd2ecdf75",
+      "body": [
+        [
+          "ram:000027e2",
+          "ram:00002811"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002812",
+      "name": "FUN_ram_00002812",
+      "prototype": "undefined FUN_ram_00002812()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 17,
+      "instruction_bytes_sha256": "66198a02f0feb905f30ff965453e3ad63f1017c38c6577a43e391bf39df01510",
+      "mnemonics_sha256": "38cc6c65d1efb284f9ce158ecb329e758c146fb1097bd1eb0920d016c8d4177a",
+      "body": [
+        [
+          "ram:00002812",
+          "ram:00002843"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002844",
+      "name": "FUN_ram_00002844",
+      "prototype": "undefined FUN_ram_00002844()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 14,
+      "instruction_bytes_sha256": "0ee85a0014e0599ec0d6171b0fcc2adc8f1e85b141ba506a0e612ddf8bc13f00",
+      "mnemonics_sha256": "77ae055639bc73d58e0df5c92dcfd4114796b4302660bf568ad11acd8d76dd45",
+      "body": [
+        [
+          "ram:00002844",
+          "ram:0000286d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000286e",
+      "name": "FUN_ram_0000286e",
+      "prototype": "undefined FUN_ram_0000286e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "6b55ef86f42a75fbeef98680d99c285caa06b4bce970f65a2d6af0e846ddc388",
+      "mnemonics_sha256": "2eb30d53dfb77e01301f0814197cc7e95ed60f557c41e640831a599dd2ecdf75",
+      "body": [
+        [
+          "ram:0000286e",
+          "ram:0000289d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000289e",
+      "name": "FUN_ram_0000289e",
+      "prototype": "undefined FUN_ram_0000289e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 17,
+      "instruction_bytes_sha256": "426358300d93a4c7b6f35bd7f7fddd257e2cb6f0c024dd51428b3bd4b4b2ad6e",
+      "mnemonics_sha256": "38cc6c65d1efb284f9ce158ecb329e758c146fb1097bd1eb0920d016c8d4177a",
+      "body": [
+        [
+          "ram:0000289e",
+          "ram:000028cf"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000028d0",
+      "name": "FUN_ram_000028d0",
+      "prototype": "undefined FUN_ram_000028d0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "22e34827db4da3793b4e3c468622fdc30dba4dcea7cb5c004ad6a61be130a271",
+      "mnemonics_sha256": "a98351aee48a7fde5f5202a73f853ebd0c2cc0446d3cad60d003850c5d69982c",
+      "body": [
+        [
+          "ram:000028d0",
+          "ram:000028e9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000028ea",
+      "name": "FUN_ram_000028ea",
+      "prototype": "undefined FUN_ram_000028ea()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 13,
+      "instruction_bytes_sha256": "0f1bad4b4b7a75811a22239728b0a5fe2118e61cb8491669d866bc3f5069340a",
+      "mnemonics_sha256": "654f6d882001fcdc0e40e6dc2f09c6686aad4223d890f637ba9f8970849cb2a6",
+      "body": [
+        [
+          "ram:000028ea",
+          "ram:00002913"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002914",
+      "name": "FUN_ram_00002914",
+      "prototype": "undefined FUN_ram_00002914()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 14,
+      "instruction_bytes_sha256": "4da575bd92fd8427cd7b4b419f722161b5726cec995fe21dc0540cf101b86739",
+      "mnemonics_sha256": "cce3997607b87304b4de2246667fee0d1a7455e453928a877504b8e94dd0ee7d",
+      "body": [
+        [
+          "ram:00002914",
+          "ram:0000293b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000293c",
+      "name": "FUN_ram_0000293c",
+      "prototype": "undefined FUN_ram_0000293c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 14,
+      "instruction_bytes_sha256": "f0c85aa53f1c057427044059a083770fac3792947ca1c778ed11858b52b9f377",
+      "mnemonics_sha256": "77ae055639bc73d58e0df5c92dcfd4114796b4302660bf568ad11acd8d76dd45",
+      "body": [
+        [
+          "ram:0000293c",
+          "ram:00002965"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002966",
+      "name": "FUN_ram_00002966",
+      "prototype": "undefined FUN_ram_00002966()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 39,
+      "instruction_bytes_sha256": "d45d3cabdfd8e9cae6af71019093622ce34606c41ceac01bc99d2048b0d33bc5",
+      "mnemonics_sha256": "89dcdca16493d0c695b8c2dd32788446ff078e8d2a569812472c7c536b8e5caf",
+      "body": [
+        [
+          "ram:00002966",
+          "ram:000029f7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000029f8",
+      "name": "FUN_ram_000029f8",
+      "prototype": "undefined FUN_ram_000029f8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 28,
+      "instruction_bytes_sha256": "57c035c7b23328171f0fca8676fdbe5fcce4d967088491dcaa69422c3e3a554f",
+      "mnemonics_sha256": "6c1b4444f56726e9ebda5d7de1f9a1dad808be718c6c119a7ff8daca136b7750",
+      "body": [
+        [
+          "ram:000029f8",
+          "ram:00002a5d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002a5e",
+      "name": "FUN_ram_00002a5e",
+      "prototype": "undefined FUN_ram_00002a5e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "3ad2e7db07df3a6874f02a15a0cfee6cd7d9338713c3ac0f24a9cb5f67203537",
+      "mnemonics_sha256": "ebe31f1a690818e9bb663e0b25658183f012284f355a5736aef1dda9ae38682d",
+      "body": [
+        [
+          "ram:00002a5e",
+          "ram:00002a73"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002a74",
+      "name": "FUN_ram_00002a74",
+      "prototype": "undefined FUN_ram_00002a74()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "f94dae5c63e4174ded37efc8ac34de6bb043e118af5995316216080ba3c8619b",
+      "mnemonics_sha256": "ebe31f1a690818e9bb663e0b25658183f012284f355a5736aef1dda9ae38682d",
+      "body": [
+        [
+          "ram:00002a74",
+          "ram:00002a89"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002a8a",
+      "name": "FUN_ram_00002a8a",
+      "prototype": "undefined FUN_ram_00002a8a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "146def4788f835dba2cb0213cf0926e9e8962236a429156ddd5493b0d8c121b3",
+      "mnemonics_sha256": "ebe31f1a690818e9bb663e0b25658183f012284f355a5736aef1dda9ae38682d",
+      "body": [
+        [
+          "ram:00002a8a",
+          "ram:00002a9f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002aa0",
+      "name": "FUN_ram_00002aa0",
+      "prototype": "undefined FUN_ram_00002aa0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "fbd2f3ad8df1e074bef2fc4b96a9c2ffe5aae6036452beb30ef42df2913b3e36",
+      "mnemonics_sha256": "ebe31f1a690818e9bb663e0b25658183f012284f355a5736aef1dda9ae38682d",
+      "body": [
+        [
+          "ram:00002aa0",
+          "ram:00002ab5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002c6a",
+      "name": "FUN_ram_00002c6a",
+      "prototype": "undefined FUN_ram_00002c6a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 38,
+      "instruction_bytes_sha256": "9e78252e2d153ba80b711f34e2d2e20339124d7cb57800b99c9be6ec415a1b0b",
+      "mnemonics_sha256": "2f4d7c8869f57606db776bc74f8b907938c50f8380fa515a718077fefe542f70",
+      "body": [
+        [
+          "ram:00002c6a",
+          "ram:00002cdb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002cdc",
+      "name": "FUN_ram_00002cdc",
+      "prototype": "undefined FUN_ram_00002cdc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 35,
+      "instruction_bytes_sha256": "873b38e97740beea536324afbcc566ab4dac648c7bb6db49bbe36dce975f458d",
+      "mnemonics_sha256": "ee4553be40cab2600f216f9041947f60fdb445109d12c8969c38138891025a0d",
+      "body": [
+        [
+          "ram:00002cdc",
+          "ram:00002d33"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002d34",
+      "name": "FUN_ram_00002d34",
+      "prototype": "undefined FUN_ram_00002d34()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 35,
+      "instruction_bytes_sha256": "d3cee733c19a50468f387cdcb968cf253fb3a4db2904cbb636216675aa46bf19",
+      "mnemonics_sha256": "ee4553be40cab2600f216f9041947f60fdb445109d12c8969c38138891025a0d",
+      "body": [
+        [
+          "ram:00002d34",
+          "ram:00002d8b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002dea",
+      "name": "FUN_ram_00002dea",
+      "prototype": "undefined FUN_ram_00002dea()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 10,
+      "instruction_bytes_sha256": "a590e65253974901a557036772dc9eb64d87ec18239cf1bf0b0c787ce10274a5",
+      "mnemonics_sha256": "c49677da49776452ae90b575ef641d0ef302faa1ead59ece5a100cd06b63d664",
+      "body": [
+        [
+          "ram:00002dea",
+          "ram:00002dfd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002dfe",
+      "name": "FUN_ram_00002dfe",
+      "prototype": "undefined FUN_ram_00002dfe()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 11,
+      "instruction_bytes_sha256": "cc2728feab3696ad766a5cadcc548cf61cc24b4c282e562df5f49aae0c1ba81b",
+      "mnemonics_sha256": "c757a2ad8bb604079bb00df34ab7609db5579f8b9608e292e951ccdb95467eb8",
+      "body": [
+        [
+          "ram:00002dfe",
+          "ram:00002e1d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00002efc",
+      "name": "FUN_ram_00002efc",
+      "prototype": "undefined FUN_ram_00002efc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 32,
+      "instruction_bytes_sha256": "d73c16e4d9d345f70d837eaa7f47af065d110a84588d5d33fa74099ea832c683",
+      "mnemonics_sha256": "f48f01088879b7e9d7828986c130ce1777609e9681ad1e9b0c2a7a90d21795f5",
+      "body": [
+        [
+          "ram:00002efc",
+          "ram:00002f57"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003126",
+      "name": "FUN_ram_00003126",
+      "prototype": "undefined FUN_ram_00003126()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 9,
+      "instruction_bytes_sha256": "216ad51f3abbc5f60f31665e3164b51738b37eb5fd9a8451c17e170bcb5b0f6b",
+      "mnemonics_sha256": "4e23abe39b42bfe5fd3260d1882c762c219f66a9fc196276a1ec507b7d258dda",
+      "body": [
+        [
+          "ram:00003126",
+          "ram:00003143"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003144",
+      "name": "FUN_ram_00003144",
+      "prototype": "undefined FUN_ram_00003144()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 7,
+      "instruction_bytes_sha256": "509b53c3c1014304f4d324c437482dcb98e6a129b3c92066449f1db166ab9ec7",
+      "mnemonics_sha256": "bf69efa3a3e8ee6f179ea195d19cb5d4f8ef9ebf79414bf6d0ecc863ac56b0ff",
+      "body": [
+        [
+          "ram:00003144",
+          "ram:00003155"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003156",
+      "name": "FUN_ram_00003156",
+      "prototype": "undefined FUN_ram_00003156()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 2,
+      "instruction_bytes_sha256": "34829b3cfebff8cf2b77b7d4c09e1c63424ace947bd401cd754a066510789ae2",
+      "mnemonics_sha256": "e1d57d287ca04b8d6349cfe047a464876fb6fcbf3d369451f0e1157684730b7d",
+      "body": [
+        [
+          "ram:00003156",
+          "ram:0000315b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000315c",
+      "name": "FUN_ram_0000315c",
+      "prototype": "undefined FUN_ram_0000315c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 11,
+      "instruction_bytes_sha256": "7560e03256a219818817798625813c7b5026a6ef89f42adcef16b4591d8d1d76",
+      "mnemonics_sha256": "c43fded805ce82b4c79515dafb01aa3c483df18c4c787a3306a340524b63ce23",
+      "body": [
+        [
+          "ram:0000315c",
+          "ram:00003177"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003178",
+      "name": "FUN_ram_00003178",
+      "prototype": "undefined FUN_ram_00003178()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 27,
+      "instruction_bytes_sha256": "7104c3352ed248278f9e41a1bd9cc7b3064366183fe2bf11407fd00cc82abd8e",
+      "mnemonics_sha256": "8a6dc3a591b6a8562f98678548ee5b2684932ef42fba735f9f5ba395a909e3c2",
+      "body": [
+        [
+          "ram:00003178",
+          "ram:000031b7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000031b8",
+      "name": "FUN_ram_000031b8",
+      "prototype": "undefined FUN_ram_000031b8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 37,
+      "instruction_bytes_sha256": "8fdf23f0aceedede1f53a675f238df265889299029df69aea6ca429e4e89c320",
+      "mnemonics_sha256": "75408db8ff07112abc4b3dcdbab43edb39903f1f2ed630d673417736de799f99",
+      "body": [
+        [
+          "ram:000031b8",
+          "ram:00003229"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000322a",
+      "name": "FUN_ram_0000322a",
+      "prototype": "undefined FUN_ram_0000322a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 51,
+      "instruction_bytes_sha256": "4cdacc6f5d267219333906c51effa5edd2f8ebd3b15ee6d63205b7baaab4766f",
+      "mnemonics_sha256": "4d7b5b253ca9303e350ab585f76d669e81c8dd3440ab1a834cee9ec88bd207ad",
+      "body": [
+        [
+          "ram:0000322a",
+          "ram:000032b5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000032b6",
+      "name": "FUN_ram_000032b6",
+      "prototype": "undefined FUN_ram_000032b6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_54",
+          "datatype": "/undefined1",
+          "storage": "Stack[-0x54]:1",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 99,
+      "instruction_bytes_sha256": "f36afd17a54cd1452dca8e1e5248b7e92ce3fb3cbe12bee7e867bfc684ed8f95",
+      "mnemonics_sha256": "b46661eec641a08696ba532022e13671074c3b8a9fca0486f52a1e57046ec0a4",
+      "body": [
+        [
+          "ram:000032b6",
+          "ram:000033cf"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000033d0",
+      "name": "FUN_ram_000033d0",
+      "prototype": "undefined FUN_ram_000033d0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 24,
+      "instruction_bytes_sha256": "bcf0638b12da2515a9548757c06cea761cf1056d1da67bfb3065632d79ccf50d",
+      "mnemonics_sha256": "b32bde292f8658d8d9f6fc2eaa7387f83c30783e08abdffe1875b2a715fbec7c",
+      "body": [
+        [
+          "ram:000033d0",
+          "ram:00003415"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003416",
+      "name": "FUN_ram_00003416",
+      "prototype": "undefined FUN_ram_00003416()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 12,
+      "instruction_bytes_sha256": "002730dc4907b5086b6f4ebeb077ec679670be41a16d72d6bfd4cbb06c2f3453",
+      "mnemonics_sha256": "0bcb79b4b88ef01ecf43d93a380a810bf69bc53967f24bb93740300a9dd676ba",
+      "body": [
+        [
+          "ram:00003416",
+          "ram:0000343d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000343e",
+      "name": "FUN_ram_0000343e",
+      "prototype": "undefined FUN_ram_0000343e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 34,
+      "instruction_bytes_sha256": "84c0c8cc7e63a568db83c424bc512e8f9b8c26ee9e2968960533ee83345b51c5",
+      "mnemonics_sha256": "85dd1dfcab9203e83a3aafb829b6b211ae1192a7cda586f374032ebe9dddbf4a",
+      "body": [
+        [
+          "ram:0000343e",
+          "ram:000034a5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000354a",
+      "name": "FUN_ram_0000354a",
+      "prototype": "undefined FUN_ram_0000354a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 22,
+      "instruction_bytes_sha256": "976dc356a612a443369ec5e3790dc211c0ada305a38d3954973b92c9b0574b18",
+      "mnemonics_sha256": "5898a037a9cf4094f789f0de0e49ef801b119355dabfb339de5035a8401c8e75",
+      "body": [
+        [
+          "ram:0000354a",
+          "ram:00003597"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003598",
+      "name": "FUN_ram_00003598",
+      "prototype": "undefined FUN_ram_00003598()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "7529d4e6ceb037815e2664a7277abb404b02f0bf9ddbf5c11658f52448221cba",
+      "mnemonics_sha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9",
+      "body": [
+        [
+          "ram:00003598",
+          "ram:00003599"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000359a",
+      "name": "FUN_ram_0000359a",
+      "prototype": "undefined FUN_ram_0000359a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "91cb93eb157a613df6c58c123c79599ee1629a9faaa8e482caf63de441c93acb",
+      "mnemonics_sha256": "1fc7e6f894b0e5fe6315d7de348671b1811f11b3b408fc101cd18074aa70cfee",
+      "body": [
+        [
+          "ram:0000359a",
+          "ram:000035a7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000035a8",
+      "name": "encode_transport_frame",
+      "prototype": "undefined encode_transport_frame()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Confirmed in code: AA stuffing and additive checksum.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 53,
+      "instruction_bytes_sha256": "46718b11c510268a19893c9a2a9311ba1d02d77707e3460d6fcb30fd4c187915",
+      "mnemonics_sha256": "dfd7f06fb620df681de0eb3542b1a42e8bb7ce498657d890c83de7b4ffee28f6",
+      "body": [
+        [
+          "ram:000035a8",
+          "ram:00003661"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003662",
+      "name": "decode_transport_byte",
+      "prototype": "undefined decode_transport_byte()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Confirmed in code: stateful AA-stuffed stream decoder.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 63,
+      "instruction_bytes_sha256": "64a3e04626045320ec9b512c02b56a1554146d49f15c30f08006ccb802c23b1d",
+      "mnemonics_sha256": "d321b278107d58fc86ac5b11ca51948f38eabddc0166f25166a3f06c5b2fd898",
+      "body": [
+        [
+          "ram:00003662",
+          "ram:00003723"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003724",
+      "name": "FUN_ram_00003724",
+      "prototype": "undefined FUN_ram_00003724()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 37,
+      "instruction_bytes_sha256": "b9759785dd4a5bc13a3bef9a42f2eba80791c05dbb542b82c761970f605039ea",
+      "mnemonics_sha256": "27fc327775ddfc72c47da2b9f6a262bce9b762e59e09607cba727032816dee9d",
+      "body": [
+        [
+          "ram:00003724",
+          "ram:00003797"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003798",
+      "name": "FUN_ram_00003798",
+      "prototype": "undefined FUN_ram_00003798()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "2baec2dfb7cb35aaace323df173824245e36609b0a3d57d06b886bc7903c44ff",
+      "mnemonics_sha256": "7d7b7e1f94ad6c7fd3690892a5e008fa49933f3022e8cca121b477e7f86205fb",
+      "body": [
+        [
+          "ram:00003798",
+          "ram:000037af"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000037b0",
+      "name": "FUN_ram_000037b0",
+      "prototype": "undefined FUN_ram_000037b0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "adf56495ef97ec0f7cb491d2a5dd46f935a812213f29d3a4dd46681e2a5119a8",
+      "mnemonics_sha256": "7d7b7e1f94ad6c7fd3690892a5e008fa49933f3022e8cca121b477e7f86205fb",
+      "body": [
+        [
+          "ram:000037b0",
+          "ram:000037c7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000037c8",
+      "name": "FUN_ram_000037c8",
+      "prototype": "undefined FUN_ram_000037c8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "a1eed7c95576a36eec138f5f4cd1f4fc3dc9f2cfe158815cc31a98908c9008a6",
+      "mnemonics_sha256": "7d7b7e1f94ad6c7fd3690892a5e008fa49933f3022e8cca121b477e7f86205fb",
+      "body": [
+        [
+          "ram:000037c8",
+          "ram:000037df"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000037e0",
+      "name": "FUN_ram_000037e0",
+      "prototype": "undefined FUN_ram_000037e0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "cb03d24e75380aab396a1cb568b56a9f56830470a629f8e5e712a803cab1ec26",
+      "mnemonics_sha256": "7d7b7e1f94ad6c7fd3690892a5e008fa49933f3022e8cca121b477e7f86205fb",
+      "body": [
+        [
+          "ram:000037e0",
+          "ram:000037f7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000037f8",
+      "name": "FUN_ram_000037f8",
+      "prototype": "undefined FUN_ram_000037f8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "22a404051ebb149e2d8beae7f4e5fe5f04ce04e85e0f16027d637c7b20604bf2",
+      "mnemonics_sha256": "7d7b7e1f94ad6c7fd3690892a5e008fa49933f3022e8cca121b477e7f86205fb",
+      "body": [
+        [
+          "ram:000037f8",
+          "ram:0000380f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003810",
+      "name": "FUN_ram_00003810",
+      "prototype": "undefined FUN_ram_00003810()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 22,
+      "instruction_bytes_sha256": "9e4f1f11801268c7b128ef0a9010e1cbfa20e33e39af5b8f232829bf20a7368e",
+      "mnemonics_sha256": "8ea89c8ad1410cc1aa6e73f7e752ef77523bba6448c222d616cb5f7eeb751199",
+      "body": [
+        [
+          "ram:00003810",
+          "ram:0000384d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000384e",
+      "name": "FUN_ram_0000384e",
+      "prototype": "undefined FUN_ram_0000384e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "f5c8d139427b2247dafc13b8a09b3b692dc800b7497abfd86f4b13d5a3f2dc25",
+      "mnemonics_sha256": "92a7437cb640affdde65676353fafe3f8caac2186dfc5e091b0c647ae37c9f79",
+      "body": [
+        [
+          "ram:0000384e",
+          "ram:00003861"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003862",
+      "name": "FUN_ram_00003862",
+      "prototype": "undefined FUN_ram_00003862()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "aff871352346aa78026931ebbc60cef5adc8a908b36b26ba41a4d85acc0fba75",
+      "mnemonics_sha256": "3b6d9279e16c5066d86772112aac4afb2e4aa6b0979ff3373e1e1cf116e29c35",
+      "body": [
+        [
+          "ram:00003862",
+          "ram:00003875"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003876",
+      "name": "FUN_ram_00003876",
+      "prototype": "undefined FUN_ram_00003876()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "862f5cd50c30522dea7d0d2ad09ee8c34333950cb9528e11479809aeae3094dd",
+      "mnemonics_sha256": "92a7437cb640affdde65676353fafe3f8caac2186dfc5e091b0c647ae37c9f79",
+      "body": [
+        [
+          "ram:00003876",
+          "ram:00003889"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000388a",
+      "name": "dispatch_local_uart_command",
+      "prototype": "undefined dispatch_local_uart_command()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Handles companion-local identity, advertising and update commands.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 286,
+      "instruction_bytes_sha256": "d4224dcc960d2a99e6cc84abe26b4f4624c2c33b07ab2322a0780c0f77ef14e8",
+      "mnemonics_sha256": "0fb8f232cd268fcf66555e5790037745281931ea079bb8984e4429c4ae0cb8e0",
+      "body": [
+        [
+          "ram:0000388a",
+          "ram:00003c47"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003c48",
+      "name": "FUN_ram_00003c48",
+      "prototype": "undefined FUN_ram_00003c48()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 57,
+      "instruction_bytes_sha256": "5b2ee965dfe3095bf4698c63eb8bd14ba02beb942fcc4c94fa96707442ef574b",
+      "mnemonics_sha256": "df02dde6dccc0f838ca8c91506fce1e469f8b6018b7b938354ddd37e858f474b",
+      "body": [
+        [
+          "ram:00003c48",
+          "ram:00003d0b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003d0c",
+      "name": "FUN_ram_00003d0c",
+      "prototype": "undefined FUN_ram_00003d0c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 41,
+      "instruction_bytes_sha256": "47f1e3f834a222406fb977e40d7dfda40399fde9963a6412f5bdba1ba1fe4c52",
+      "mnemonics_sha256": "befcaa3e0e838ddc4d7bee5e83755fcbb5048c0792295ab24c258d4ea8bb9fc1",
+      "body": [
+        [
+          "ram:00003d0c",
+          "ram:00003d89"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003d8a",
+      "name": "FUN_ram_00003d8a",
+      "prototype": "undefined FUN_ram_00003d8a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 23,
+      "instruction_bytes_sha256": "5dc8a655ca2a7643c45d05a80434e050c9a2eb4cbceaf36cde3c76328b9c4aa9",
+      "mnemonics_sha256": "399b4e66473880f69539f744b6a335b68829e4d887810355e5af0091facf3372",
+      "body": [
+        [
+          "ram:00003d8a",
+          "ram:00003dd1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003dd2",
+      "name": "FUN_ram_00003dd2",
+      "prototype": "undefined FUN_ram_00003dd2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 23,
+      "instruction_bytes_sha256": "f5cfc28ece40525f30cb9da795269c8d4505cc877f141842018bf3ea568b96d9",
+      "mnemonics_sha256": "4e9b77410ff46cc620e56057a0709dcb7442f0ed1d78c726e6930195b4a778e9",
+      "body": [
+        [
+          "ram:00003dd2",
+          "ram:00003e19"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003e1a",
+      "name": "usb_tx_queue_service",
+      "prototype": "undefined usb_tx_queue_service()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Splits outgoing frames into chunks of at most 62 bytes.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 56,
+      "instruction_bytes_sha256": "f6333e738351b0b44bf252d112b3b03c8cb7a98a266c5fda84795bf34dd76840",
+      "mnemonics_sha256": "928b101034fc340d28cae8091c4906898e13e2c1b1c18e09c81e72b35ec93ffb",
+      "body": [
+        [
+          "ram:00003e1a",
+          "ram:00003ed5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003ed6",
+      "name": "FUN_ram_00003ed6",
+      "prototype": "undefined FUN_ram_00003ed6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 25,
+      "instruction_bytes_sha256": "88b982d11daecf6b58ac76b42008053cd2e1042aad4db32fae2d787e4e4be1af",
+      "mnemonics_sha256": "39033c1ebba11a99337de5a51f23c81dd43c05546cc6f709fbea1cb33e6241b5",
+      "body": [
+        [
+          "ram:00003ed6",
+          "ram:00003f1f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003f20",
+      "name": "FUN_ram_00003f20",
+      "prototype": "undefined FUN_ram_00003f20()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 8,
+      "instruction_bytes_sha256": "02a906771c13f685b004454cddb609ec0bb3250f5f624d6654f4f62bf571f860",
+      "mnemonics_sha256": "a7bbb742a9388f003c1ab34ce94c6c92c4a85782fb59df78106b1a2676fc87ea",
+      "body": [
+        [
+          "ram:00003f20",
+          "ram:00003f39"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003f3a",
+      "name": "FUN_ram_00003f3a",
+      "prototype": "undefined FUN_ram_00003f3a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 16,
+      "instruction_bytes_sha256": "c8458e49abcb353f596d791635b2fe61e64bcefc32a00ac96bd34b7711d2c911",
+      "mnemonics_sha256": "196fa85db2d40b10e02c0e6166b72795ee254b7f1b4751102b92ede2dd46376e",
+      "body": [
+        [
+          "ram:00003f3a",
+          "ram:00003f75"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003f76",
+      "name": "FUN_ram_00003f76",
+      "prototype": "undefined FUN_ram_00003f76()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "750b7d70d7042f9bcce93071d4946a269d0f7bf0612280dc6a63895547a5672f",
+      "mnemonics_sha256": "344fae098a6fd27123c5efe8f857018ed4b6f1e3934952c1ae80efecb489f202",
+      "body": [
+        [
+          "ram:00003f76",
+          "ram:00003fab"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00003fac",
+      "name": "route_main_reply_to_gatt",
+      "prototype": "undefined route_main_reply_to_gatt()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Routes trailing 0x31 to AF01 with prefix 0x31; otherwise AF02. Saves host after successful bind reply notification.",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_120",
+          "datatype": "/undefined1",
+          "storage": "Stack[-0x120]:1",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 60,
+      "instruction_bytes_sha256": "4e515ad51c49a5e434b3eb478913b2ebe4789d7d58e7b2d44a575460b664d565",
+      "mnemonics_sha256": "c437912204e01b6afa376259f568e69b6b2e9914e318bd66b2723aaf78b07cc8",
+      "body": [
+        [
+          "ram:00003fac",
+          "ram:00004073"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004074",
+      "name": "queue_gatt_to_main",
+      "prototype": "undefined queue_gatt_to_main()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Copies payload, appends 0x31 for route 0 or zero otherwise, creates type 6 internal frame.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 37,
+      "instruction_bytes_sha256": "877fa4fc7e039e03c629ac1315cefd02bd2d5c5863aeec71c34e80bdb5c0522d",
+      "mnemonics_sha256": "724cea6b5682af561f15b2bb158e2cd33bec2b67f8b2bd001b9bbe53cec384d8",
+      "body": [
+        [
+          "ram:00004074",
+          "ram:000040db"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000040dc",
+      "name": "handle_af02_write",
+      "prototype": "undefined handle_af02_write()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Handles 18 bind and 00 status locally, forwards other requests to main. Last request byte selects fast lookup.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 100,
+      "instruction_bytes_sha256": "7b59a07a14e6482e8a262a9a62c89803a66cf6407a69c980549c0444ffd7b3ab",
+      "mnemonics_sha256": "8fd5bb06d6c8c197ef8bbb95ac79dce663382fa49741edb949405b5b81d27063",
+      "body": [
+        [
+          "ram:000040dc",
+          "ram:00004223"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004224",
+      "name": "handle_af01_write",
+      "prototype": "undefined handle_af01_write()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Handles C0/10 local settings; forwards other application commands.",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_110",
+          "datatype": "/undefined2",
+          "storage": "Stack[-0x110]:2",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 42,
+      "instruction_bytes_sha256": "50d58e5baf4e09b65a83c2aef227b7df2395f99d109cd4470a545ecf27828b1f",
+      "mnemonics_sha256": "7ec75e6e444d290bb1a8b7f7148dadef8ead17f714c9753af97a2fdf2ac76f46",
+      "body": [
+        [
+          "ram:00004224",
+          "ram:000042a3"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000042a4",
+      "name": "FUN_ram_000042a4",
+      "prototype": "undefined FUN_ram_000042a4()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 3,
+      "instruction_bytes_sha256": "9613752224fad4a14dfd3d2840e4d8e9eedba48efb453179dddba8a9295e6fdc",
+      "mnemonics_sha256": "a58268863fd24b5f4cbb808dc21a413457d77ed6082e59117eb8be74ad882c8f",
+      "body": [
+        [
+          "ram:000042a4",
+          "ram:000042ab"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000042ac",
+      "name": "FUN_ram_000042ac",
+      "prototype": "undefined FUN_ram_000042ac()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 156,
+      "instruction_bytes_sha256": "f23c7ca518fe0a6d6d0a44cdc76c103c30bedd486ad2b86eb605999adc6b8a92",
+      "mnemonics_sha256": "f3fc0cd8724f7fc7c474579e23cb9bb9fcdf9c2f71fed016dc657df5d6f3b165",
+      "body": [
+        [
+          "ram:000042ac",
+          "ram:00004485"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004486",
+      "name": "FUN_ram_00004486",
+      "prototype": "undefined FUN_ram_00004486()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 103,
+      "instruction_bytes_sha256": "93f1006fe1d563e4cb6df0861ed61cc3b977cf76907d3288234aefd1789127a6",
+      "mnemonics_sha256": "a99ac253ec656f377ad10e99dec771d1f0095bc32cbc7ab1f6e064fbe3893ba9",
+      "body": [
+        [
+          "ram:00004486",
+          "ram:000045d3"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000045d4",
+      "name": "FUN_ram_000045d4",
+      "prototype": "undefined FUN_ram_000045d4()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 24,
+      "instruction_bytes_sha256": "b8bac5551cf493948fa9e68d0c2b339c35112e7b2a61467eb7bba629080e88d9",
+      "mnemonics_sha256": "fe6f2d56842bfb182a7181a25f052d6937e7df4950aa61e485d0e6371d05eff8",
+      "body": [
+        [
+          "ram:000045d4",
+          "ram:00004627"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004628",
+      "name": "FUN_ram_00004628",
+      "prototype": "undefined FUN_ram_00004628()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 125,
+      "instruction_bytes_sha256": "c32c0389f1c75e1efd3b427cd50173b655d0bf136e05ed19d16780b2d63fc07a",
+      "mnemonics_sha256": "380ccfbe58081b134077f5c8c2cd9875a1361ca61e246f223640d6bd5e3154cc",
+      "body": [
+        [
+          "ram:00004628",
+          "ram:000047c5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000047c6",
+      "name": "FUN_ram_000047c6",
+      "prototype": "undefined FUN_ram_000047c6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "7529d4e6ceb037815e2664a7277abb404b02f0bf9ddbf5c11658f52448221cba",
+      "mnemonics_sha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9",
+      "body": [
+        [
+          "ram:000047c6",
+          "ram:000047c7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000047c8",
+      "name": "FUN_ram_000047c8",
+      "prototype": "undefined FUN_ram_000047c8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 20,
+      "instruction_bytes_sha256": "f61b6d974bfc3280f4861cac506abd8669d25153161048b51a73699047fb4b7c",
+      "mnemonics_sha256": "84125bf74e7004691e272888fe2c43ccdb1d8e1f86e2638b001b9ff79453a10d",
+      "body": [
+        [
+          "ram:000047c8",
+          "ram:000047fd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000047fe",
+      "name": "FUN_ram_000047fe",
+      "prototype": "undefined FUN_ram_000047fe()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "15cfe2f30a1db1a0e0a1195581df062cb4cc40652ac25e53316046b2c3e55141",
+      "mnemonics_sha256": "6f78086aa40c1d424b1095095e2d459b47d0ffa648e4c16fbc2edcfa97ab3d35",
+      "body": [
+        [
+          "ram:000047fe",
+          "ram:0000480f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004810",
+      "name": "FUN_ram_00004810",
+      "prototype": "undefined FUN_ram_00004810()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 63,
+      "instruction_bytes_sha256": "511c0b96a29b8e6d7bf6a04baa5dd06b4cc6bed76d1920639199a77fe98c1343",
+      "mnemonics_sha256": "f66952736306ec2141873dec284fd97c787d0c6a3316310e00f45fb4782e8839",
+      "body": [
+        [
+          "ram:00004810",
+          "ram:000048c1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000048c2",
+      "name": "FUN_ram_000048c2",
+      "prototype": "undefined FUN_ram_000048c2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 26,
+      "instruction_bytes_sha256": "e1799f59abdb0f8c0f054de46da8c80e6c2f53e5ef1eebf4bd12d3040e2d9cb6",
+      "mnemonics_sha256": "d5ed27d47a235c40e074aa619d6fa8effe193f77070440e4a81cf0dced0ad5ee",
+      "body": [
+        [
+          "ram:000048c2",
+          "ram:00004915"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004916",
+      "name": "FUN_ram_00004916",
+      "prototype": "undefined FUN_ram_00004916()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 30,
+      "instruction_bytes_sha256": "caa4c3b77d9360d0d2e17c1bd7893a2102f785afb39e093d45181128d2a5524d",
+      "mnemonics_sha256": "c72516c2a6a48822466499f5aac1596857299c4af282f8255aacd81e1b55fd81",
+      "body": [
+        [
+          "ram:00004916",
+          "ram:00004963"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004964",
+      "name": "FUN_ram_00004964",
+      "prototype": "undefined FUN_ram_00004964()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 121,
+      "instruction_bytes_sha256": "aec045d2ef187a045c2785dd00ca3751efd7891436d74766bf8d5e3c000d3870",
+      "mnemonics_sha256": "0298d5657d17d3f4bf94a1822752f4dfb172248ccaee882bdaf0aeedd79e35a8",
+      "body": [
+        [
+          "ram:00004964",
+          "ram:00004ab7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004ab8",
+      "name": "FUN_ram_00004ab8",
+      "prototype": "undefined FUN_ram_00004ab8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 30,
+      "instruction_bytes_sha256": "8821764b17289b58f75570e2959142875564f73ea586ae6228f0f8b672270815",
+      "mnemonics_sha256": "81a5f073301b76789e98e64aa57ebc04af942b4b5addbde6b922faf82797622d",
+      "body": [
+        [
+          "ram:00004ab8",
+          "ram:00004b13"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004b14",
+      "name": "FUN_ram_00004b14",
+      "prototype": "undefined FUN_ram_00004b14()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 41,
+      "instruction_bytes_sha256": "06d001ccaea2663af8f7f5f7d0457884fef43dcec273e935246301b3484ac651",
+      "mnemonics_sha256": "8b1b32867bfbcab8e68e3c0ac7d20ec4a4ef067b8d895403885716b45ef16c7e",
+      "body": [
+        [
+          "ram:00004b14",
+          "ram:00004b9b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004b9c",
+      "name": "FUN_ram_00004b9c",
+      "prototype": "undefined FUN_ram_00004b9c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 9,
+      "instruction_bytes_sha256": "d1757dbb889a50f6200563f18f029fe0d049625b55adb11bd252ae653200d1d1",
+      "mnemonics_sha256": "6c6e217eb0802e7c427223d35061defa3fcaa6113a97bb333f1acfd1b2b28032",
+      "body": [
+        [
+          "ram:00004b9c",
+          "ram:00004bb1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004bb2",
+      "name": "FUN_ram_00004bb2",
+      "prototype": "undefined FUN_ram_00004bb2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 2,
+      "instruction_bytes_sha256": "77b2a039c77665c9c759fa561018854218516b9c4b9278b3ab40b6d3ece2a5be",
+      "mnemonics_sha256": "d413d582a03974f341c3d3a143b820360545e6e2e56be0987f241bd99ddd7e16",
+      "body": [
+        [
+          "ram:00004bb2",
+          "ram:00004bb7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004bb8",
+      "name": "FUN_ram_00004bb8",
+      "prototype": "undefined FUN_ram_00004bb8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 15,
+      "instruction_bytes_sha256": "eeca90e20cbd0bedb780f3ee9b8d10328812d707020de6b05c85550d58315e36",
+      "mnemonics_sha256": "8a79bbd35de27ec0dcf95f0f5d1b9e95659a24fee9cf082d341e4ba8ea567e1f",
+      "body": [
+        [
+          "ram:00004bb8",
+          "ram:00004bdf"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004be0",
+      "name": "FUN_ram_00004be0",
+      "prototype": "undefined FUN_ram_00004be0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "010fe96db681cb41a13e9bb7562c63e70fadec884113dcb1e688903822788f15",
+      "mnemonics_sha256": "62843c2de1449d6768ba8b54f41b567a4b644ef121696959b075e549af37ac7a",
+      "body": [
+        [
+          "ram:00004be0",
+          "ram:00004beb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004bec",
+      "name": "decode_main_uart_byte",
+      "prototype": "undefined decode_main_uart_byte()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "AA-stuffed UART parser and checksum validation.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 77,
+      "instruction_bytes_sha256": "dc5e9eacfc52071fdaa6f7fd8897f9ec0ad172544e0358ed5715bc642f560985",
+      "mnemonics_sha256": "e55fe3ec3e361ec2c277bd216c7d79d5dbaa48f884322b9f6e19c3621311a431",
+      "body": [
+        [
+          "ram:00004bec",
+          "ram:00004ced"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004cee",
+      "name": "route_main_uart_frame",
+      "prototype": "undefined route_main_uart_frame()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Routes completed internal frames by destination type 6,1,5 or fallback.",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 72,
+      "instruction_bytes_sha256": "07a640f93c3f297366f6b8b1bf74dad3204dd76dd5f00325d4e4a6c86d1a47ac",
+      "mnemonics_sha256": "b8a7fafd70273641a60acfbe439ca953fda05b727136c0a5d9365e744bbec496",
+      "body": [
+        [
+          "ram:00004cee",
+          "ram:00004dd7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004dd8",
+      "name": "thunk_FUN_ram_00002914",
+      "prototype": "undefined thunk_FUN_ram_00002914()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "bc5c715f79b6f6013726ae4b156709f27a04bd5795a0ab58eedbe6bb581b9d8d",
+      "mnemonics_sha256": "cee00b08a818db87e17e703273818e5194f83280e1ef3eae9214ff14675d9e6d",
+      "thunk_target": "ram:00002914",
+      "body": [
+        [
+          "ram:00004dd8",
+          "ram:00004ddb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004ddc",
+      "name": "FUN_ram_00004ddc",
+      "prototype": "undefined FUN_ram_00004ddc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 20,
+      "instruction_bytes_sha256": "7907c91e2ecb4bf6c8f51b7e77a51105ffe875f37334a05229a679a1d82984d6",
+      "mnemonics_sha256": "0bb32c0feee314243b7770f4648a4536cc3866e38aae0375c58bffe739654942",
+      "body": [
+        [
+          "ram:00004ddc",
+          "ram:00004e17"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004e18",
+      "name": "thunk_FUN_ram_00004ddc",
+      "prototype": "undefined thunk_FUN_ram_00004ddc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "d5c559c794c4fcdd3d9eaad26c88ee75b735445ac3029f61def531642944d9ee",
+      "mnemonics_sha256": "718fa2f966b29fb987141da3aa28e481c19e05393f9c52836293fc2a0cfcab3b",
+      "thunk_target": "ram:00004ddc",
+      "body": [
+        [
+          "ram:00004e18",
+          "ram:00004e19"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004e1a",
+      "name": "FUN_ram_00004e1a",
+      "prototype": "undefined FUN_ram_00004e1a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 38,
+      "instruction_bytes_sha256": "4b74b68a94436bae4248204f134040faef3ed02276a42244b2a8fd2723c83f0b",
+      "mnemonics_sha256": "303ba132647b06a8256a8ce68441603a854f48dec9c708f89581b1b8d9c9a485",
+      "body": [
+        [
+          "ram:00004e1a",
+          "ram:00004e85"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004e86",
+      "name": "usb_receive_report",
+      "prototype": "undefined usb_receive_report()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Reads length at HID byte 1 and feeds bytes starting at byte 2 into stream decoder.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 24,
+      "instruction_bytes_sha256": "d3a061e64908668f95d81431c03fdc656c45138df7012732fe2613e746380183",
+      "mnemonics_sha256": "06d3d84c52ae4e10955b6be17f14fc7883bcd058c60ffb0c3ea6b6db55b2fdca",
+      "body": [
+        [
+          "ram:00004e86",
+          "ram:00004ec9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004eca",
+      "name": "usb_send_report",
+      "prototype": "undefined usb_send_report()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Writes report ID 2 at byte 0, chunk length at byte 1, data at byte 2, sends 64 bytes.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 39,
+      "instruction_bytes_sha256": "db673a17120c1266cca214087aafb0338d76374c5b581a4db09c2b6a85e45e88",
+      "mnemonics_sha256": "9bd09ac10675ac6b147a7e144e697beac8e7c48c3222992f3c42143315c5aafc",
+      "body": [
+        [
+          "ram:00004eca",
+          "ram:00004f3b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004f3c",
+      "name": "FUN_ram_00004f3c",
+      "prototype": "undefined FUN_ram_00004f3c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 13,
+      "instruction_bytes_sha256": "df98326ba523cc74d6c534fb07c85f1941cca930ac34c468c5200bac8d3a99e1",
+      "mnemonics_sha256": "10fcb9b888248362fdc5572c5c3cee53d8f2ced9f6aa4c0d6459cf71cee5e071",
+      "body": [
+        [
+          "ram:00004f3c",
+          "ram:00004f65"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004f66",
+      "name": "FUN_ram_00004f66",
+      "prototype": "undefined FUN_ram_00004f66()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 13,
+      "instruction_bytes_sha256": "d97f9cc72519c6ffcdca8410f90d4a340324700bbb85cb664d5f330b66db72f8",
+      "mnemonics_sha256": "10fcb9b888248362fdc5572c5c3cee53d8f2ced9f6aa4c0d6459cf71cee5e071",
+      "body": [
+        [
+          "ram:00004f66",
+          "ram:00004f8f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004f90",
+      "name": "FUN_ram_00004f90",
+      "prototype": "undefined FUN_ram_00004f90()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 13,
+      "instruction_bytes_sha256": "b5323108f66138cc17a5d6566ba2a16d9296955707c4edb72a1a85894400ff07",
+      "mnemonics_sha256": "10fcb9b888248362fdc5572c5c3cee53d8f2ced9f6aa4c0d6459cf71cee5e071",
+      "body": [
+        [
+          "ram:00004f90",
+          "ram:00004fb9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00004fba",
+      "name": "usb_interrupt_handler",
+      "prototype": "undefined usb_interrupt_handler()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "USB endpoint events and descriptor/control transfers.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 398,
+      "instruction_bytes_sha256": "f0a5c564f198c3d5285fab40ba783b62ed2c42fd2e0e4e5d264b0439b7535274",
+      "mnemonics_sha256": "51a8f3af2e47ee843a6bf6e2dcbac8601d41aaa6df17f63550ad5a81bd636fa3",
+      "body": [
+        [
+          "ram:00004fba",
+          "ram:000054f9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000054fa",
+      "name": "FUN_ram_000054fa",
+      "prototype": "undefined FUN_ram_000054fa()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 66,
+      "instruction_bytes_sha256": "2d941d246eb8b2a8e7f999a35d2f356d8a18cd4a7548732382f5cdd23c356ad3",
+      "mnemonics_sha256": "c217fcdd5cf13d733b9329b21a8e53b1774d37fa75a22a2421e53c7b1885a63a",
+      "body": [
+        [
+          "ram:000054fa",
+          "ram:000055bf"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000055c0",
+      "name": "FUN_ram_000055c0",
+      "prototype": "undefined FUN_ram_000055c0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 51,
+      "instruction_bytes_sha256": "fea7e9968799e398de1f53e8c24c85a9db33b3862042b4fa6b9d9087472028cf",
+      "mnemonics_sha256": "96ca77f73a28291b8f8994ab920681f6fe0861d19184c06c4808bea1fc060ef3",
+      "body": [
+        [
+          "ram:000055c0",
+          "ram:00005669"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000566a",
+      "name": "FUN_ram_0000566a",
+      "prototype": "undefined FUN_ram_0000566a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 27,
+      "instruction_bytes_sha256": "3c59ed89b657e4813d143eb286484807cea9e56f5b3622fe3a4097c7d32c9065",
+      "mnemonics_sha256": "224abbfc4be1e51eb114350069f3b28ddbd08175e2dd4e3a42d3143f38486d38",
+      "body": [
+        [
+          "ram:0000566a",
+          "ram:000056bf"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000056ce",
+      "name": "FUN_ram_000056ce",
+      "prototype": "undefined FUN_ram_000056ce()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "2de782c9b8e332c371d447eeaf33bc7af97fdaaba8dba0f9f3f6dd2404507d3c",
+      "mnemonics_sha256": "d48ea3acb5964c0161e7b7ff821106b08134714c315f39afb7fcc4d9b0db6842",
+      "body": [
+        [
+          "ram:000056ce",
+          "ram:000056fd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00005710",
+      "name": "FUN_ram_00005710",
+      "prototype": "undefined FUN_ram_00005710()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "1b969e750ab568dbdec5968171e3f73d7887795f18365f2f6d8b67cf5de25580",
+      "mnemonics_sha256": "002219a16db03bba017c88d527caf8c7e3482971edddb1290724a01bd237444a",
+      "body": [
+        [
+          "ram:00005710",
+          "ram:00005743"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00005744",
+      "name": "FUN_ram_00005744",
+      "prototype": "undefined FUN_ram_00005744()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 97,
+      "instruction_bytes_sha256": "e3ebdd94cbef59ab04d3a7d4ed5d1249096311489938c60de205b1807585fcd1",
+      "mnemonics_sha256": "85fda191f326cff3c95f2c041a6e5cd10401e838f1a393672967c7dc27112079",
+      "body": [
+        [
+          "ram:00005744",
+          "ram:00005863"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00005864",
+      "name": "FUN_ram_00005864",
+      "prototype": "undefined FUN_ram_00005864()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 210,
+      "instruction_bytes_sha256": "3147b54fced09a7b966f55d9144591fb369f469ee81ff56703c78a88d647d10c",
+      "mnemonics_sha256": "c9cda3536ca0c89d9c0c16ed4743041c297b886eea5462755f809a5cd5510a0d",
+      "body": [
+        [
+          "ram:00005864",
+          "ram:00005aef"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00005af0",
+      "name": "FUN_ram_00005af0",
+      "prototype": "undefined FUN_ram_00005af0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 749,
+      "instruction_bytes_sha256": "0598a042d84e36d30368eb41a18fe21b93b717f017853d0ceee0c6bf8d4665fa",
+      "mnemonics_sha256": "e577a0732f4ba4048755367c1437af3178ca422f17085c294c38b2ca093373aa",
+      "body": [
+        [
+          "ram:00005af0",
+          "ram:000064b7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000064b8",
+      "name": "FUN_ram_000064b8",
+      "prototype": "undefined FUN_ram_000064b8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 64,
+      "instruction_bytes_sha256": "6442b195d7fb20e6244f259f4ae9fbd4fb6f2faa97323a75163d9a25d60b7afb",
+      "mnemonics_sha256": "3db14ae16a3e26c897fc07515437ca158446859fd97afc1cd3d0380cda1a9403",
+      "body": [
+        [
+          "ram:000064b8",
+          "ram:0000659f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000065a0",
+      "name": "FUN_ram_000065a0",
+      "prototype": "undefined FUN_ram_000065a0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 238,
+      "instruction_bytes_sha256": "b4ebb388c5d0251bedb0332b356cef80d719cac8d92f461b218555f7bf8a6342",
+      "mnemonics_sha256": "c130230e8e250233a961c6824af348247fe7ef5db69ac8c8a8ecfa949ace10e6",
+      "body": [
+        [
+          "ram:000065a0",
+          "ram:00006859"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000685a",
+      "name": "FUN_ram_0000685a",
+      "prototype": "undefined FUN_ram_0000685a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_20",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x20]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 93,
+      "instruction_bytes_sha256": "1e36972ab17e6aa821c1f38147ca051c5208c905974b75415bed6d49a4af8628",
+      "mnemonics_sha256": "35776b4410bbd7a338fa99050957afcf8e310700934d2ad6be9922599a7de227",
+      "body": [
+        [
+          "ram:0000685a",
+          "ram:0000696d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000696e",
+      "name": "FUN_ram_0000696e",
+      "prototype": "undefined FUN_ram_0000696e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 10,
+      "instruction_bytes_sha256": "149bca15f51bf26d0c77efd46862edf43633d1d725924f1ab1a7d734f7f3d42b",
+      "mnemonics_sha256": "c97511dee43249123602541091cf03f020be1236ad5f12c12b3929845f8e3774",
+      "body": [
+        [
+          "ram:0000696e",
+          "ram:00006981"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00006982",
+      "name": "FUN_ram_00006982",
+      "prototype": "undefined FUN_ram_00006982()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 3,
+      "instruction_bytes_sha256": "b355fa47b968aaadf1ab586025a408752048acf8c4b2dfadf31c53617b17f937",
+      "mnemonics_sha256": "6bbdeb30ad899dc6558e7105074220aacf969eb4309edb64541c084512a49a57",
+      "body": [
+        [
+          "ram:00006982",
+          "ram:0000698b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00006c78",
+      "name": "FUN_ram_00006c78",
+      "prototype": "undefined FUN_ram_00006c78()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 14,
+      "instruction_bytes_sha256": "3d5a05d87f69e52a04187ae3bef640935ea7cc81a65f18d36510d445eb2329ea",
+      "mnemonics_sha256": "2df50cb61640cda57304795eb954dfb89ce8be33cd71ee15e4ec855102b15c1e",
+      "body": [
+        [
+          "ram:00006c78",
+          "ram:00006cad"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00006cb0",
+      "name": "FUN_ram_00006cb0",
+      "prototype": "undefined FUN_ram_00006cb0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 222,
+      "instruction_bytes_sha256": "2b0329306f7e19601a678767450134fcea41c4466fce6fa027d0337c47166678",
+      "mnemonics_sha256": "5a483c31f1e70471f81fab6f5169b1960c372aaf0996a413fcb379d0749b8e97",
+      "body": [
+        [
+          "ram:00006cb0",
+          "ram:00006f6b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00006f6c",
+      "name": "notify_af02",
+      "prototype": "undefined notify_af02()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Notification path using CCCD at 0x20003014 and AF02 handle at 0x20002c9a.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 52,
+      "instruction_bytes_sha256": "90d45e07e21a2d4e82a764f381527998f4511d136db1301c6abae40e5fd37353",
+      "mnemonics_sha256": "0ac39faec9b924b54aa2fb6d55967efd742d9e7cfa0ad4dd93d1bd1126f906d9",
+      "body": [
+        [
+          "ram:00006f6c",
+          "ram:00006ff5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00006ff6",
+      "name": "notify_af01",
+      "prototype": "undefined notify_af01()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Notification path using CCCD at 0x20003224 and AF01 handle at 0x20002c6a.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 52,
+      "instruction_bytes_sha256": "83e2e155b4b18a35bfaec68189ea21a1ec5a541b6364e05835fff63a57252e30",
+      "mnemonics_sha256": "0ac39faec9b924b54aa2fb6d55967efd742d9e7cfa0ad4dd93d1bd1126f906d9",
+      "body": [
+        [
+          "ram:00006ff6",
+          "ram:0000707f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007080",
+      "name": "FUN_ram_00007080",
+      "prototype": "undefined FUN_ram_00007080()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 32,
+      "instruction_bytes_sha256": "39c350b10aab8993156f88b17b44638bbeea2fa11be871a894fc70775a78a33f",
+      "mnemonics_sha256": "b419c1c8eaee9704545ebb9016d438ccbbdaa75edcaf5fb7e94802dd1b2a0f9f",
+      "body": [
+        [
+          "ram:00007080",
+          "ram:000070e5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000070e6",
+      "name": "FUN_ram_000070e6",
+      "prototype": "undefined FUN_ram_000070e6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 13,
+      "instruction_bytes_sha256": "68346b86d68644096dc85e76ed353219a5d8923a9ca519c2488fc95d27590259",
+      "mnemonics_sha256": "5cb815848d21d447cd596df7ae50f037dc90323cb915d59971e396ec9ff5c7a3",
+      "body": [
+        [
+          "ram:000070e6",
+          "ram:00007103"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007106",
+      "name": "FUN_ram_00007106",
+      "prototype": "undefined FUN_ram_00007106()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 130,
+      "instruction_bytes_sha256": "5fdfa12101e53bee19e26b8d2a383511c794ad484df8ccc8858b49923914bbf5",
+      "mnemonics_sha256": "ffd393f4fa3cad62a9ec87f3fbc1b2da0a1d6e987dc2e4bcc34cee70296c7842",
+      "body": [
+        [
+          "ram:00007106",
+          "ram:000072a5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000072e0",
+      "name": "initialize_ble_application",
+      "prototype": "undefined initialize_ble_application()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Registers BLE task, services, advertising and scan response data.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 125,
+      "instruction_bytes_sha256": "e88c72fd8331fdb7dfdae04b01279d44db11ec79c5757217e9e5b0a62efd0cbe",
+      "mnemonics_sha256": "629a22af91c248495c2d00649c52b5728d93c62cf3ce23b125266f4a18382283",
+      "body": [
+        [
+          "ram:000072e0",
+          "ram:00007465"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007466",
+      "name": "FUN_ram_00007466",
+      "prototype": "undefined FUN_ram_00007466()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 2,
+      "instruction_bytes_sha256": "7829bc2ab4ac3894ba2d7c92f564e8c114d4da9e0f64e43f48007fa2049c1098",
+      "mnemonics_sha256": "e1d57d287ca04b8d6349cfe047a464876fb6fcbf3d369451f0e1157684730b7d",
+      "body": [
+        [
+          "ram:00007466",
+          "ram:0000746b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000746c",
+      "name": "FUN_ram_0000746c",
+      "prototype": "undefined FUN_ram_0000746c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 30,
+      "instruction_bytes_sha256": "4d97136468dd483c4100ce6d1a3675f3ef553970b8126c6a657a5d20d6fb381d",
+      "mnemonics_sha256": "3d1b5c141b2e2ee6b839e3400f7af9fe5a477a365cd5968bcd41b102cec3ec70",
+      "body": [
+        [
+          "ram:0000746c",
+          "ram:000074bb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000074bc",
+      "name": "FUN_ram_000074bc",
+      "prototype": "undefined FUN_ram_000074bc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 9,
+      "instruction_bytes_sha256": "4a073f2f954e66c6f2e59fac2191118b728dc27a119f68ac7fb6c1af785982f0",
+      "mnemonics_sha256": "eff056f7dfd2097b835ec9a07163ac2a8f1415b33b2044baf1d93850b06cbaf8",
+      "body": [
+        [
+          "ram:000074bc",
+          "ram:000074d1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000074d2",
+      "name": "FUN_ram_000074d2",
+      "prototype": "undefined FUN_ram_000074d2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 35,
+      "instruction_bytes_sha256": "edf02c4a4a4ccf6ce72105c28ccca85697c24cf230aa56a521aaec2ecf54620c",
+      "mnemonics_sha256": "1044d68c25a41ee9f77a945faf2679c94bf321bb4eafac172705b6f6efbdc1f7",
+      "body": [
+        [
+          "ram:000074d2",
+          "ram:00007531"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007532",
+      "name": "FUN_ram_00007532",
+      "prototype": "undefined FUN_ram_00007532()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 20,
+      "instruction_bytes_sha256": "deffc5301fb2ab36d6b2d27b016db9ba9bf71fea5198a02da706627e1970fd48",
+      "mnemonics_sha256": "6488950500684f36fa038fe8c22632c32ed952d3362ee084bb6a1f519080e1ff",
+      "body": [
+        [
+          "ram:00007532",
+          "ram:00007567"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007568",
+      "name": "FUN_ram_00007568",
+      "prototype": "undefined FUN_ram_00007568()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 58,
+      "instruction_bytes_sha256": "b15e681008d6cf2834414c722dadd79097249e47c94dda00b533a55abedecbf2",
+      "mnemonics_sha256": "47a63a7449b996a3c9b617c1817acd3931e2460d5ef49812f367b5e63db7eb4d",
+      "body": [
+        [
+          "ram:00007568",
+          "ram:00007617"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007618",
+      "name": "load_saved_host_ids",
+      "prototype": "undefined load_saved_host_ids()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Reads 80 bytes at nonvolatile offset 0x6f00 and counts non-ff 16-byte slots.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 45,
+      "instruction_bytes_sha256": "8306388c278f28f5c11fd9075db0ba07eb6d75afcdaad22b99f80ac84a42068e",
+      "mnemonics_sha256": "17bdc10e43a0f0909bb8e2a23c2058e95711ff2af30b36f336e358661d570bb6",
+      "body": [
+        [
+          "ram:00007618",
+          "ram:00007695"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007696",
+      "name": "save_host_id",
+      "prototype": "undefined save_host_id()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Appends a 16-byte ID, shifts when five slots are filled, erases and writes offset 0x6f00.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 59,
+      "instruction_bytes_sha256": "9b415b0c23a224301b33a832f2216014d53ef3ccb70a573ffc360e2aa7e59f7f",
+      "mnemonics_sha256": "48ac7532231339b920622974db0dfbce92ad04ea2c1334ee08441adba312c99f",
+      "body": [
+        [
+          "ram:00007696",
+          "ram:0000773b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000773c",
+      "name": "find_saved_host_id",
+      "prototype": "undefined find_saved_host_id()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "comment": "Compares 16 input bytes with stored host IDs. Uses SDK tmos_memcmp boolean semantics.",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 35,
+      "instruction_bytes_sha256": "882c52b8e3380b0e07408ffb8eeeafea0de55735e6a0fc07ba1ae3cdb33b7556",
+      "mnemonics_sha256": "4949d8ff6ae3fa84eed3b8f5a17147b081544aaa463cf1ee5c0932bc3ffcdfcb",
+      "body": [
+        [
+          "ram:0000773c",
+          "ram:00007793"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007794",
+      "name": "application_main",
+      "prototype": "undefined application_main()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 33,
+      "instruction_bytes_sha256": "e933725681310d8034a8f2b5389af96f2209e65c6b59b4a06fbd96b693283d3b",
+      "mnemonics_sha256": "b2198872ce2c110dd05e51489d4a761643487326605f25bffbc4370048f263ce",
+      "body": [
+        [
+          "ram:00007794",
+          "ram:000077ff"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007800",
+      "name": "FUN_ram_00007800",
+      "prototype": "undefined FUN_ram_00007800()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "7529d4e6ceb037815e2664a7277abb404b02f0bf9ddbf5c11658f52448221cba",
+      "mnemonics_sha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9",
+      "body": [
+        [
+          "ram:00007800",
+          "ram:00007801"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007804",
+      "name": "FUN_ram_00007804",
+      "prototype": "undefined FUN_ram_00007804()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "b1f0020c41022663165c31a338ea885f59b141280e1102ba14bda60461de4c10",
+      "mnemonics_sha256": "7a911c824dbb2bd842e77ce0d3072ceb37716d8424661ad2721c1c270f9f6ada",
+      "body": [
+        [
+          "ram:00007804",
+          "ram:0000780d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000780e",
+      "name": "FUN_ram_0000780e",
+      "prototype": "undefined FUN_ram_0000780e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 24,
+      "instruction_bytes_sha256": "bc909ce8e07a711a207526b4ee4772367976fca1941c38dc6e352fc3f5c9e5f1",
+      "mnemonics_sha256": "8c16e607128ff92cf230a1881ca95fb9eb2aad4129ba618439c16b8d8a7ade53",
+      "body": [
+        [
+          "ram:00007802",
+          "ram:00007803"
+        ],
+        [
+          "ram:0000780e",
+          "ram:00007845"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007846",
+      "name": "FUN_ram_00007846",
+      "prototype": "undefined FUN_ram_00007846()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 42,
+      "instruction_bytes_sha256": "95e2ee12653f296c183cee537789489ae56bba7e02738a49bf592ecfafb070fd",
+      "mnemonics_sha256": "85d2d4f8be83eb38259f5ca3d96f2d752af89e5119c436b1341e9302c556a765",
+      "body": [
+        [
+          "ram:00007846",
+          "ram:000078b1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000078b2",
+      "name": "FUN_ram_000078b2",
+      "prototype": "undefined FUN_ram_000078b2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 54,
+      "instruction_bytes_sha256": "7ad28bf9e3e203cdaf62539ed4dad2cb81ffe938f457ae43203a5868877836bb",
+      "mnemonics_sha256": "0b29f3eed0de72b33098c375432e99df804cc5b3c275018e3d99d65e7afa59c5",
+      "body": [
+        [
+          "ram:000078b2",
+          "ram:00007967"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007968",
+      "name": "FUN_ram_00007968",
+      "prototype": "undefined FUN_ram_00007968()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 31,
+      "instruction_bytes_sha256": "c7147f3db7065441d6d9766ca6d20337ba4f8e7d53dc96b0282fcf211528c487",
+      "mnemonics_sha256": "e7d64b5b4aa7c85fb137951972ef1564f05258d33d21f39c14b70259df7604c0",
+      "body": [
+        [
+          "ram:00007968",
+          "ram:000079ab"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000079ac",
+      "name": "FUN_ram_000079ac",
+      "prototype": "undefined FUN_ram_000079ac()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 20,
+      "instruction_bytes_sha256": "8c8a42da53543b54ec901183b18d9dfff5a3d45a0e6af21ff645f721110e799d",
+      "mnemonics_sha256": "b46cdd4017c52661d4b5d26f652d257e263dfdabaefa7735192be7ebe67cc9c9",
+      "body": [
+        [
+          "ram:000079ac",
+          "ram:000079d9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000079da",
+      "name": "FUN_ram_000079da",
+      "prototype": "undefined FUN_ram_000079da()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 88,
+      "instruction_bytes_sha256": "af2b124d3cd44f064948af60f379dd924e5b665aef667c7dcaaf4e430e7a5b00",
+      "mnemonics_sha256": "419d4e2532714ea3269d2c60a08e1b4b2604df62c616abc24f4a70ea071c4420",
+      "body": [
+        [
+          "ram:000079da",
+          "ram:00007ab3"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007ab4",
+      "name": "FUN_ram_00007ab4",
+      "prototype": "undefined FUN_ram_00007ab4()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "56c54145ef1bd1ac3910489b876c2c0369185d0a93f6ae12997a2f7b9f06254b",
+      "mnemonics_sha256": "c46f4d50a285411f5f520444f8577c6e0d49642256d6822918bbdb10afb5ea46",
+      "body": [
+        [
+          "ram:00007ab4",
+          "ram:00007ac1"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007ac2",
+      "name": "FUN_ram_00007ac2",
+      "prototype": "undefined FUN_ram_00007ac2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 78,
+      "instruction_bytes_sha256": "089845b455bedd2064f7f06b2b0b7bdcc10e4218df047662c948c8594eef8987",
+      "mnemonics_sha256": "eb00910c80775b0c84d3b1c0e18a4ca7241efbc724986e2485dc8843f0676dae",
+      "body": [
+        [
+          "ram:00007ac2",
+          "ram:00007b81"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007b82",
+      "name": "FUN_ram_00007b82",
+      "prototype": "undefined FUN_ram_00007b82()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 96,
+      "instruction_bytes_sha256": "1adf4801c98f9f4a7086f9ca3a93c29297cb20d5d4d380babfe852d2f9d1a442",
+      "mnemonics_sha256": "aae6293993bca33d2a7dc1b1ee50db3d5f760478fcc9c492a6c4d32bfccd106f",
+      "body": [
+        [
+          "ram:00007b82",
+          "ram:00007c91"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007c92",
+      "name": "FUN_ram_00007c92",
+      "prototype": "undefined FUN_ram_00007c92()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 45,
+      "instruction_bytes_sha256": "036da800c40507cd00b47cdcb46dedcf378450b902a81273ed5ff6d2642b78af",
+      "mnemonics_sha256": "4dd98e7c3efbe728f8039cf223ad50d95be79f791dae2da563590f2d9db1ae5b",
+      "body": [
+        [
+          "ram:00007c92",
+          "ram:00007d1d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007d1e",
+      "name": "FUN_ram_00007d1e",
+      "prototype": "undefined FUN_ram_00007d1e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 7,
+      "instruction_bytes_sha256": "c2cde210bb54c18d8dbe5f432d028ca7f5ce82ea39fa6ad99e91fc140cf8e91f",
+      "mnemonics_sha256": "e7c80d961380fdccebd6896a178e1b76685a52d1d0dd15995b63d40802a62666",
+      "body": [
+        [
+          "ram:00007d1e",
+          "ram:00007d35"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007d36",
+      "name": "FUN_ram_00007d36",
+      "prototype": "undefined FUN_ram_00007d36()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 119,
+      "instruction_bytes_sha256": "b07eab41296c81b8f060957513ffda00c010518caeceda61065056194a208b63",
+      "mnemonics_sha256": "699aa4e62ce4dfae59899cd8c1d876228d403aace3650704e1ad3f37c7fbb383",
+      "body": [
+        [
+          "ram:00007d36",
+          "ram:00007e71"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007e72",
+      "name": "FUN_ram_00007e72",
+      "prototype": "undefined FUN_ram_00007e72()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 40,
+      "instruction_bytes_sha256": "d12db07079c9d7c8245727d7385de60fe5b9d9e986b7518359ab900ee51b24f0",
+      "mnemonics_sha256": "b755424d18274bb9ec95c57fccd86a9257bb3af2a8b62a86f1644e2f94f44cc7",
+      "body": [
+        [
+          "ram:00007e72",
+          "ram:00007ed5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007ed6",
+      "name": "FUN_ram_00007ed6",
+      "prototype": "undefined FUN_ram_00007ed6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 34,
+      "instruction_bytes_sha256": "940fbefac61d23327f3778bafa84ed9f42ce9085997b0f57d9688ddf952180b2",
+      "mnemonics_sha256": "3a68ab0906171d75940dae4021bd9ac310163030d8723e248fa36fdb85fb2de4",
+      "body": [
+        [
+          "ram:00007ed6",
+          "ram:00007f3f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007f40",
+      "name": "FUN_ram_00007f40",
+      "prototype": "undefined FUN_ram_00007f40()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 3,
+      "instruction_bytes_sha256": "815394828cd70407cf0dcceb4873ee7c3cfce1b6f7c8c0f75b461273c2914e1d",
+      "mnemonics_sha256": "3cb20dbee7313999b2eeead1226505109cec932a2ebafc907077544f77d61891",
+      "body": [
+        [
+          "ram:00007f40",
+          "ram:00007f49"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007f4a",
+      "name": "FUN_ram_00007f4a",
+      "prototype": "undefined FUN_ram_00007f4a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 27,
+      "instruction_bytes_sha256": "c8ff5a057e734f4b7d8fefeea98cbb64fd399c8b429f73302b9466c4e42685d4",
+      "mnemonics_sha256": "7685a15ec7b047f296d6c3424f361ca44019a4f9ed37a17e3ee31427d7fe12e4",
+      "body": [
+        [
+          "ram:00007f4a",
+          "ram:00007f8f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007f90",
+      "name": "FUN_ram_00007f90",
+      "prototype": "undefined FUN_ram_00007f90()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 45,
+      "instruction_bytes_sha256": "b4115c657e0b9a29c596032cc46d7937007fad897e6f5e786fbfb25ab5655b94",
+      "mnemonics_sha256": "34bff44fc9a847bd646797c4ef04993123e434547b0379160c3ef3b88fc51e64",
+      "body": [
+        [
+          "ram:00007f90",
+          "ram:00007ff9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00007ffa",
+      "name": "FUN_ram_00007ffa",
+      "prototype": "undefined FUN_ram_00007ffa()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 60,
+      "instruction_bytes_sha256": "fbb68fd19f9f292aca68e63b77b8ded58fc34c0e293649612917139d0515ec7d",
+      "mnemonics_sha256": "46a17767036f5712bc799892b026673f5d87535e20e3c66efcecb9dce6b64cac",
+      "body": [
+        [
+          "ram:00007ffa",
+          "ram:00008099"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000809a",
+      "name": "FUN_ram_0000809a",
+      "prototype": "undefined FUN_ram_0000809a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 45,
+      "instruction_bytes_sha256": "fb0a98485eb5b9463b322d4df34cd504ae602f3a570626acea4d8c2a967712cb",
+      "mnemonics_sha256": "4468f2b371e036e71807f6abc2c011821e093c78f2354f49b2ddab65594848dd",
+      "body": [
+        [
+          "ram:0000809a",
+          "ram:00008105"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008106",
+      "name": "FUN_ram_00008106",
+      "prototype": "undefined FUN_ram_00008106()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 35,
+      "instruction_bytes_sha256": "f355da627c60aa7f34ee1a6e24ceeb0ae80de753c615203eebba6811f9d915ea",
+      "mnemonics_sha256": "83273dd7c207f0bd1b74d2ea92de73971ea39b5bc587c83baa31b3c2d7f7875c",
+      "body": [
+        [
+          "ram:00008106",
+          "ram:0000815f"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008160",
+      "name": "FUN_ram_00008160",
+      "prototype": "undefined FUN_ram_00008160()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 60,
+      "instruction_bytes_sha256": "d4c91ce6be4d8475f49866b78ec4dc5a1d1d6878b0416190969a118b78b1eb78",
+      "mnemonics_sha256": "d3971c8142f53489a57096af9028b1580b931c44ea4d1db75c1158ac705a6b8c",
+      "body": [
+        [
+          "ram:00008160",
+          "ram:000081fd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000081fe",
+      "name": "FUN_ram_000081fe",
+      "prototype": "undefined FUN_ram_000081fe()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 67,
+      "instruction_bytes_sha256": "6237db5dc785ebbaed4eeac8a647de1572bdae2e21e37d7849ab82e167b9d8de",
+      "mnemonics_sha256": "f632d4595c7e78594c41e814cea2aeb4b2aa957654142129a8e14f1b32ddc762",
+      "body": [
+        [
+          "ram:000081fe",
+          "ram:000082ad"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000082ae",
+      "name": "FUN_ram_000082ae",
+      "prototype": "undefined FUN_ram_000082ae()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 87,
+      "instruction_bytes_sha256": "aeefc2dcf08d30aa29409bbafb824f29586849f3dbf13ec8a7778c6c31f866be",
+      "mnemonics_sha256": "376d24ad93ff3e47cbb6d3c17463bb9ffa6dd227d256274a9b052150067b36b4",
+      "body": [
+        [
+          "ram:000082ae",
+          "ram:00008395"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008396",
+      "name": "FUN_ram_00008396",
+      "prototype": "undefined FUN_ram_00008396()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 15,
+      "instruction_bytes_sha256": "16ad15f7f22237686fff4d41d6b9c09d8371ebdf350f72532d8ac9b2fc565924",
+      "mnemonics_sha256": "f29a3afa3f497f2e5e0e17a5b11815c428b6b96fb983b1c7817b745a81bea3f9",
+      "body": [
+        [
+          "ram:00008396",
+          "ram:000083bf"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000083c0",
+      "name": "FUN_ram_000083c0",
+      "prototype": "undefined FUN_ram_000083c0()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 29,
+      "instruction_bytes_sha256": "6ad833433328ef22680cbb078d49d6d099959fb5e66d8d33627db501208d943b",
+      "mnemonics_sha256": "3c268bf18fc2fb0a95528af8811cce762b6ecb3791970074fbb1305f638f6909",
+      "body": [
+        [
+          "ram:000083c0",
+          "ram:00008401"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008402",
+      "name": "FUN_ram_00008402",
+      "prototype": "undefined FUN_ram_00008402()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 242,
+      "instruction_bytes_sha256": "02fd84b7debf99bc111b8521955d6a93c84ddc22e870e550f55838021d3d7c9e",
+      "mnemonics_sha256": "ca2e494d112f4c2b31911b5839f1a6fa1ccb5ef2f66ee55acce7cbe9ee561338",
+      "body": [
+        [
+          "ram:00008402",
+          "ram:0000869d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:0000869e",
+      "name": "FUN_ram_0000869e",
+      "prototype": "undefined FUN_ram_0000869e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 108,
+      "instruction_bytes_sha256": "e26e5a4651505eedd6d3d9c31beeac4c36289c9716fc22d9704c65dece04aba7",
+      "mnemonics_sha256": "ebc43e13f1a8aed38f26c6d9dcfd0065ca78406138a6f3164e3a9205efcb2821",
+      "body": [
+        [
+          "ram:0000869e",
+          "ram:000087a9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:000087aa",
+      "name": "FUN_ram_000087aa",
+      "prototype": "undefined FUN_ram_000087aa()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 244,
+      "instruction_bytes_sha256": "0d32efdb45eb8031bda7811797725afb89b3fd1aa08b72404789a6206b075183",
+      "mnemonics_sha256": "99b07a70a37c117c534e30f0451e1b2ef0d9d72506d320025431ed966876f88a",
+      "body": [
+        [
+          "ram:000087aa",
+          "ram:00008a51"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008a52",
+      "name": "FUN_ram_00008a52",
+      "prototype": "undefined FUN_ram_00008a52()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 49,
+      "instruction_bytes_sha256": "b2bcd5aac5347f9fdd5b7a029be00451221329a5283954f4d721c91fbe586479",
+      "mnemonics_sha256": "919f9487090bec8bb47b75b0335cb024141034ad7b94326c6ed44aca5c636442",
+      "body": [
+        [
+          "ram:00008a52",
+          "ram:00008ad7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008ad8",
+      "name": "FUN_ram_00008ad8",
+      "prototype": "undefined FUN_ram_00008ad8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "ff49dec4734cc080f5071064201febec37b900a23d5dd5efbdd39f39cbe8f8bd",
+      "mnemonics_sha256": "c7321a55756dd1a201c9375c153ae92a57825b904b86a4fbcfe66a51528dc445",
+      "body": [
+        [
+          "ram:00008ad8",
+          "ram:00008b07"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008b08",
+      "name": "FUN_ram_00008b08",
+      "prototype": "undefined FUN_ram_00008b08()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 20,
+      "instruction_bytes_sha256": "ab9cf01066a44068535cc6ae2ed6a0bd1b232e4cace6423af3bc3b1c6d749f3d",
+      "mnemonics_sha256": "643fdf68d3c337faac4adb14008dfac8db9fd52dc1fab3bd6de830d4754cabf8",
+      "body": [
+        [
+          "ram:00008b08",
+          "ram:00008b37"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008b86",
+      "name": "FUN_ram_00008b86",
+      "prototype": "undefined FUN_ram_00008b86()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 22,
+      "instruction_bytes_sha256": "51369931f2de4c56b07dab444315965ba885880a60a4abafd7fb9cfa9fa68c7b",
+      "mnemonics_sha256": "b8e49c0cb933b277493b343a54790a17f16efa662176aaa0e59702ca20cea8c4",
+      "body": [
+        [
+          "ram:00008b86",
+          "ram:00008bbb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008bc2",
+      "name": "FUN_ram_00008bc2",
+      "prototype": "undefined FUN_ram_00008bc2()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 21,
+      "instruction_bytes_sha256": "d9873824d03b09dcc96450bed517185bedc54d62d7d8ee0f4e2eba7d759350fe",
+      "mnemonics_sha256": "04e120b0b5b0e5a57baa709bf7bee5baa01f259b298f2b855ccedd47516c4072",
+      "body": [
+        [
+          "ram:00008bc2",
+          "ram:00008bf5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008bf6",
+      "name": "FUN_ram_00008bf6",
+      "prototype": "undefined FUN_ram_00008bf6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "3943ad967a00cf1542590be0dca3ef7e25ef2280b323cd7cc77cd1cf8419d88a",
+      "mnemonics_sha256": "c7321a55756dd1a201c9375c153ae92a57825b904b86a4fbcfe66a51528dc445",
+      "body": [
+        [
+          "ram:00008bf6",
+          "ram:00008c25"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008c26",
+      "name": "FUN_ram_00008c26",
+      "prototype": "undefined FUN_ram_00008c26()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 20,
+      "instruction_bytes_sha256": "0023c22cb26c98f09599265ef08d310341b1e885a6aafcea8f751d20ec7fc35c",
+      "mnemonics_sha256": "47af494422b354e75b4d5b2641acdd721d59892c2c2bbad49fc5fb352f201b6d",
+      "body": [
+        [
+          "ram:00008c26",
+          "ram:00008c57"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008c58",
+      "name": "FUN_ram_00008c58",
+      "prototype": "undefined FUN_ram_00008c58()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 19,
+      "instruction_bytes_sha256": "e42082e90f2a8be1de0e5bae7241d8d9b704f3dad0e2440c5fa6b43904dd8f53",
+      "mnemonics_sha256": "c7321a55756dd1a201c9375c153ae92a57825b904b86a4fbcfe66a51528dc445",
+      "body": [
+        [
+          "ram:00008c58",
+          "ram:00008c87"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008c88",
+      "name": "FUN_ram_00008c88",
+      "prototype": "undefined FUN_ram_00008c88()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 21,
+      "instruction_bytes_sha256": "c116160f5d0ba43cd85128d3764c65c38ad1d1e31f51dc763ac88db4bd94d60d",
+      "mnemonics_sha256": "04e120b0b5b0e5a57baa709bf7bee5baa01f259b298f2b855ccedd47516c4072",
+      "body": [
+        [
+          "ram:00008c88",
+          "ram:00008cbb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008cbc",
+      "name": "FUN_ram_00008cbc",
+      "prototype": "undefined FUN_ram_00008cbc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 9,
+      "instruction_bytes_sha256": "d2f5adaa8758f526cc9dcca1a07f53a05998268da8d397ff8b80d8c774463072",
+      "mnemonics_sha256": "22bf5b33e32b222507d32236d26b4aab913ff5023e73375168e3652efd23a1a0",
+      "body": [
+        [
+          "ram:00008cbc",
+          "ram:00008cd5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008cd6",
+      "name": "FUN_ram_00008cd6",
+      "prototype": "undefined FUN_ram_00008cd6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "7529d4e6ceb037815e2664a7277abb404b02f0bf9ddbf5c11658f52448221cba",
+      "mnemonics_sha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9",
+      "body": [
+        [
+          "ram:00008cd6",
+          "ram:00008cd7"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008cd8",
+      "name": "FUN_ram_00008cd8",
+      "prototype": "undefined FUN_ram_00008cd8()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 1,
+      "instruction_bytes_sha256": "7529d4e6ceb037815e2664a7277abb404b02f0bf9ddbf5c11658f52448221cba",
+      "mnemonics_sha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9",
+      "body": [
+        [
+          "ram:00008cd8",
+          "ram:00008cd9"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008cda",
+      "name": "FUN_ram_00008cda",
+      "prototype": "undefined FUN_ram_00008cda()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 21,
+      "instruction_bytes_sha256": "64e063148d5907d460d9034dc508a414ffa8432f7e67e23c6b26c98ee0ad627b",
+      "mnemonics_sha256": "04e120b0b5b0e5a57baa709bf7bee5baa01f259b298f2b855ccedd47516c4072",
+      "body": [
+        [
+          "ram:00008cda",
+          "ram:00008d0d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008d0e",
+      "name": "FUN_ram_00008d0e",
+      "prototype": "undefined FUN_ram_00008d0e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "a78e92d5b5efb57b4e549de307c131618ed80ff195970fd6f980696bda3fb8a7",
+      "mnemonics_sha256": "f6f33694b5300eeadc120d1ad5f33c6961ecdc6762f15f5703351a0fc9cb432e",
+      "body": [
+        [
+          "ram:00008d0e",
+          "ram:00008d1d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008d1e",
+      "name": "FUN_ram_00008d1e",
+      "prototype": "undefined FUN_ram_00008d1e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "8f34fc5d8f79a49a3abcd53f940ca3127b922bdbc97676815ffc70cfc2bc107b",
+      "mnemonics_sha256": "f6f33694b5300eeadc120d1ad5f33c6961ecdc6762f15f5703351a0fc9cb432e",
+      "body": [
+        [
+          "ram:00008d1e",
+          "ram:00008d2d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008d2e",
+      "name": "FUN_ram_00008d2e",
+      "prototype": "undefined FUN_ram_00008d2e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "3c743ac43f5fe5fe5900ba70ef0c97971464bdcff70a10ec92c018929e589e67",
+      "mnemonics_sha256": "f6f33694b5300eeadc120d1ad5f33c6961ecdc6762f15f5703351a0fc9cb432e",
+      "body": [
+        [
+          "ram:00008d2e",
+          "ram:00008d3d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008d3e",
+      "name": "FUN_ram_00008d3e",
+      "prototype": "undefined FUN_ram_00008d3e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "bfa6b84dd3d6ae53035cf4f186fc9ad41b9760fc978a8e5ae9ef2287fc4cd82d",
+      "mnemonics_sha256": "f6f33694b5300eeadc120d1ad5f33c6961ecdc6762f15f5703351a0fc9cb432e",
+      "body": [
+        [
+          "ram:00008d3e",
+          "ram:00008d4d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008d4e",
+      "name": "FUN_ram_00008d4e",
+      "prototype": "undefined FUN_ram_00008d4e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "6bd20e5a0e6fadc0cda3dce87d88228e34cf06a77bec330f6411c87bfcfc0717",
+      "mnemonics_sha256": "f6f33694b5300eeadc120d1ad5f33c6961ecdc6762f15f5703351a0fc9cb432e",
+      "body": [
+        [
+          "ram:00008d4e",
+          "ram:00008d5d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008d5e",
+      "name": "FUN_ram_00008d5e",
+      "prototype": "undefined FUN_ram_00008d5e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 16,
+      "instruction_bytes_sha256": "082484e78b5d09e7670b1bacab615ac162b977fe24c61dd8f7f47685df0fdcef",
+      "mnemonics_sha256": "b82168a90d0d892759a2ead60a1f5ff93f1cded23b275ed06ad8070fb38b0025",
+      "body": [
+        [
+          "ram:00008d5e",
+          "ram:00008d8d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:00008d8e",
+      "name": "FUN_ram_00008d8e",
+      "prototype": "undefined FUN_ram_00008d8e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 5,
+      "instruction_bytes_sha256": "904708c8ace7de77c785e473efbb68c84d920697e3fb24fa6ac87d8ffd19a257",
+      "mnemonics_sha256": "f6f33694b5300eeadc120d1ad5f33c6961ecdc6762f15f5703351a0fc9cb432e",
+      "body": [
+        [
+          "ram:00008d8e",
+          "ram:00008d9d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200020c6",
+      "name": "FUN_ram_200020c6",
+      "prototype": "undefined FUN_ram_200020c6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 23,
+      "instruction_bytes_sha256": "6a69e1b2c2574444e6aff007652d644e440da717cd2b91303025c586752713de",
+      "mnemonics_sha256": "05dd6dacfaaa5dbcdcabebdf2894934d3f34756554a74fba7e0e04950d3efd7b",
+      "body": [
+        [
+          "ram:200020c6",
+          "ram:20002105"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002106",
+      "name": "FUN_ram_20002106",
+      "prototype": "undefined FUN_ram_20002106()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 63,
+      "instruction_bytes_sha256": "22164888fcf66ce50bb4ec667d1ef53ffa966eeeb5d0b76c7094820652336b7b",
+      "mnemonics_sha256": "e40117c319c13085357abaf33348a448f9a6118be327b8d52c5f5016b5b26782",
+      "body": [
+        [
+          "ram:20002106",
+          "ram:200021d3"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200021d4",
+      "name": "FUN_ram_200021d4",
+      "prototype": "undefined FUN_ram_200021d4()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_20",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x20]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 99,
+      "instruction_bytes_sha256": "37195f443fcf7db9b0ae3d56867c4194c285107b1673ba151a1005da5aac891f",
+      "mnemonics_sha256": "37e092d952fed2b755c777e03227082644d3143ebc9fad935a577f017befc015",
+      "body": [
+        [
+          "ram:200021d4",
+          "ram:20002303"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002304",
+      "name": "FUN_ram_20002304",
+      "prototype": "undefined FUN_ram_20002304()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 83,
+      "instruction_bytes_sha256": "d63125d866ee55c8e31cb16df757486e610767ddda6b9757c44b272e04c5666a",
+      "mnemonics_sha256": "8884d9a78ae47fb3b57b21d17ee96f851e307846e4c5553f8003c981466aaa67",
+      "body": [
+        [
+          "ram:20002304",
+          "ram:200023fd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200023fe",
+      "name": "FUN_ram_200023fe",
+      "prototype": "undefined FUN_ram_200023fe()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 118,
+      "instruction_bytes_sha256": "af06c9f59ea827b850c40dce682eadaf443c9c270251eb82b9d1358583adeedb",
+      "mnemonics_sha256": "e5e45ce348c0dd015d3926964d7ed2a9d42b370d90cd58e7dafa8019ead6586b",
+      "body": [
+        [
+          "ram:200023fe",
+          "ram:20002571"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002572",
+      "name": "FUN_ram_20002572",
+      "prototype": "undefined FUN_ram_20002572()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 21,
+      "instruction_bytes_sha256": "27d68707fa8b59b6598291cacd9c3ad1203bfe768c75014c14c4aca3a4796a94",
+      "mnemonics_sha256": "23a2c2375649f4578f267cab9926f74b62a324a44363ccdebc915157b7d22e53",
+      "body": [
+        [
+          "ram:20002572",
+          "ram:200025ad"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200025ae",
+      "name": "FUN_ram_200025ae",
+      "prototype": "undefined FUN_ram_200025ae()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 23,
+      "instruction_bytes_sha256": "88fc03b19ff820b517c257c13fcfc8fcda52875c30a887c988d55e28f21d60f3",
+      "mnemonics_sha256": "4d38b77a522c3809a691b86f4a2d63c5d0e55e1c834f6c7b60a41e88a96e471d",
+      "body": [
+        [
+          "ram:200025ae",
+          "ram:200025f3"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200025f4",
+      "name": "FUN_ram_200025f4",
+      "prototype": "undefined FUN_ram_200025f4()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "71c05d143dae8b1d10b61f513e1f2210883e1387c6acf18ee186e29cbb235ab7",
+      "mnemonics_sha256": "efaba8d91bd65450e24836ac13f67be1fe7ae74c74f6e39ce382a9d1e0a3a6a2",
+      "body": [
+        [
+          "ram:200025f4",
+          "ram:20002601"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002602",
+      "name": "FUN_ram_20002602",
+      "prototype": "undefined FUN_ram_20002602()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 18,
+      "instruction_bytes_sha256": "df2949ed84a621d9d4fea29f5d3e83a86579225f2f4391a875580830620ebaaf",
+      "mnemonics_sha256": "c86a5ee267e75eed49665596a6d132f606560170cb1fca9a108d6e3e6cebc46b",
+      "body": [
+        [
+          "ram:20002602",
+          "ram:20002629"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000262a",
+      "name": "FUN_ram_2000262a",
+      "prototype": "undefined FUN_ram_2000262a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 7,
+      "instruction_bytes_sha256": "b1da9f572bb683342d51ef60e45c747be8ec74afcd8032b177f3ade0ef9073e4",
+      "mnemonics_sha256": "c4c6734ca8b454e9d9d6d8c0a9db9f58e364220aca213803914fc700a9771a07",
+      "body": [
+        [
+          "ram:2000262a",
+          "ram:20002643"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002644",
+      "name": "FUN_ram_20002644",
+      "prototype": "undefined FUN_ram_20002644()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 53,
+      "instruction_bytes_sha256": "a0bbfaf8d10c8f7890cd19758b26f1bd4069372345ed19c82efde6d62e677def",
+      "mnemonics_sha256": "fc96a06d94aeb4e2e7885f80c0b612d3c2eb8e86cb9292f18dd4c76b1f0cfc72",
+      "body": [
+        [
+          "ram:20002644",
+          "ram:200026fb"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200026fc",
+      "name": "FUN_ram_200026fc",
+      "prototype": "undefined FUN_ram_200026fc()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 9,
+      "instruction_bytes_sha256": "8e718740d3fee60f75f8319da76ab5d38b4ebd84b267c5249002f57ac9e5b998",
+      "mnemonics_sha256": "e9f92bc39648f55ed96fae4767b88f225ca9156b050d1c97fdd1f551faf75c91",
+      "body": [
+        [
+          "ram:200026fc",
+          "ram:20002719"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000271a",
+      "name": "FUN_ram_2000271a",
+      "prototype": "undefined FUN_ram_2000271a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 13,
+      "instruction_bytes_sha256": "f15a0b67d11fbe9947ce99fec0e14370a0dcde2a53d0ff894fab230c7d28de4f",
+      "mnemonics_sha256": "065a4f93bd7c44c05783a30d948d0d8947850daa193986e990f92a90d37b9bff",
+      "body": [
+        [
+          "ram:2000271a",
+          "ram:20002745"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002746",
+      "name": "FUN_ram_20002746",
+      "prototype": "undefined FUN_ram_20002746()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 14,
+      "instruction_bytes_sha256": "849d19da5b6dbc4bc8838bb52abb71e07ac444865f157c4b5f8c240d28e0de22",
+      "mnemonics_sha256": "eb043bd3ad05dcb4694409c8210adff967509c0747b4baac77f639f2ca3d187e",
+      "body": [
+        [
+          "ram:20002746",
+          "ram:20002771"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002772",
+      "name": "FUN_ram_20002772",
+      "prototype": "undefined FUN_ram_20002772()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 3,
+      "instruction_bytes_sha256": "75c15ac5b8bfdf7c071184f4b97208c7524d287ee695b5ea0d34cd5c947e93b8",
+      "mnemonics_sha256": "e513a0a6b12b1f8673da7c6db41d2717c89e531ed4cf22034dab2584929c8686",
+      "body": [
+        [
+          "ram:20002772",
+          "ram:2000277d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000277e",
+      "name": "FUN_ram_2000277e",
+      "prototype": "undefined FUN_ram_2000277e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 39,
+      "instruction_bytes_sha256": "ba9dd5f330b28888b794d918566d674431e2229fd525e0ac9bca251ee13fb9d9",
+      "mnemonics_sha256": "01cac356bc8b12018d5a1950796e277407b52f759a623a110c6e775cbe77b23f",
+      "body": [
+        [
+          "ram:2000277e",
+          "ram:200027fd"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200027fe",
+      "name": "FUN_ram_200027fe",
+      "prototype": "undefined FUN_ram_200027fe()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 3,
+      "instruction_bytes_sha256": "81287dc25894a568044d977f06989c2ee2895b33e8d993add6557465e2413781",
+      "mnemonics_sha256": "9734fbe5d6fc2f82f232ac3bcc939d02e385cec572337cb4eef818cd4c865463",
+      "body": [
+        [
+          "ram:200027fe",
+          "ram:20002809"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000280a",
+      "name": "FUN_ram_2000280a",
+      "prototype": "undefined FUN_ram_2000280a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 7,
+      "instruction_bytes_sha256": "8612e6c795f6f3cab2308e9998253dcb8d5e33bfdb7de347f16447c98315c519",
+      "mnemonics_sha256": "b063b14d6c1be88142d15190b35db62152aa17ccd1f10e22c0fa7bff2fade23d",
+      "body": [
+        [
+          "ram:2000280a",
+          "ram:20002819"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000281a",
+      "name": "FUN_ram_2000281a",
+      "prototype": "undefined FUN_ram_2000281a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 6,
+      "instruction_bytes_sha256": "970277307749efb9ac94f20fe8fb4f4fd746b6f512d3abee719ef0255ddf4dd8",
+      "mnemonics_sha256": "6f244c2d4d772dee3652340103a64875681a2569f7131f7b5ab1682d1dff6691",
+      "body": [
+        [
+          "ram:2000281a",
+          "ram:2000282b"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000282c",
+      "name": "FUN_ram_2000282c",
+      "prototype": "undefined FUN_ram_2000282c()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "db094a512c4f1d98e88d2d3bebac3d82b883c8179637b4223bb65a7547d85db7",
+      "mnemonics_sha256": "3814011e9e9f5591f0c01d4c57fed5958c47bb9861916574f567d6d109b8c8e2",
+      "body": [
+        [
+          "ram:2000282c",
+          "ram:20002839"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000283a",
+      "name": "FUN_ram_2000283a",
+      "prototype": "undefined FUN_ram_2000283a()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "1b831f58221e69eb85e383f00a67796291022b3e15865e2f2734ec08b0c55d6c",
+      "mnemonics_sha256": "590e42543c5ec32ed96d67962bc6fbaf38dc220a0a6b3a7e1b6f0e06c4daeddb",
+      "body": [
+        [
+          "ram:2000283a",
+          "ram:20002847"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002848",
+      "name": "FUN_ram_20002848",
+      "prototype": "undefined FUN_ram_20002848()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 4,
+      "instruction_bytes_sha256": "41106e9ffded6552dfdfd56beaadb0824547fed0cddb7d7cb21b95ffcf4ed19e",
+      "mnemonics_sha256": "3814011e9e9f5591f0c01d4c57fed5958c47bb9861916574f567d6d109b8c8e2",
+      "body": [
+        [
+          "ram:20002848",
+          "ram:20002855"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:20002856",
+      "name": "FUN_ram_20002856",
+      "prototype": "undefined FUN_ram_20002856()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [
+        {
+          "name": "local_10",
+          "datatype": "/undefined4",
+          "storage": "Stack[-0x10]:4",
+          "source": "DEFAULT",
+          "first_use_offset": 0
+        }
+      ],
+      "instruction_count": 31,
+      "instruction_bytes_sha256": "aaf182fd9708e346392d6d7b7316d7312f52645802db14770a806abe37ca07e5",
+      "mnemonics_sha256": "8da91c26e7411fc094041c0021cefd77f05c58296c90aa08857b77f75a369d61",
+      "body": [
+        [
+          "ram:20002856",
+          "ram:2000289d"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:2000289e",
+      "name": "FUN_ram_2000289e",
+      "prototype": "undefined FUN_ram_2000289e()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 24,
+      "instruction_bytes_sha256": "f1f016a512a846327339500ef0d14f15f116ba49ce61fab682e5b95d7b59dc4c",
+      "mnemonics_sha256": "8d713e2aab1699535788ae9f27a55160d302454d9aaf0a9ed36b75e106278aa5",
+      "body": [
+        [
+          "ram:2000289e",
+          "ram:200028d5"
+        ]
+      ]
+    },
+    {
+      "entry": "ram:200028d6",
+      "name": "FUN_ram_200028d6",
+      "prototype": "undefined FUN_ram_200028d6()",
+      "signature_source": "DEFAULT",
+      "no_return": false,
+      "inline": false,
+      "calling_convention": "unknown",
+      "custom_variable_storage": false,
+      "variables": [],
+      "instruction_count": 299,
+      "instruction_bytes_sha256": "313c731339c5afbd8b76940430605bf6ce80b6e6961b3715fd249ed8bf142453",
+      "mnemonics_sha256": "071d3a8b34865954f861596bb8260c8888d332bc6cd15924271c43f80aa598e3",
+      "body": [
+        [
+          "ram:200028d6",
+          "ram:20002c3f"
+        ]
+      ]
+    }
+  ],
+  "options": {
+    "Decompiler": {
+      "Prototype Evaluation": {
+        "type": "STRING_TYPE",
+        "value": "__stdcall"
+      }
+    },
+    "Specification Extensions": {
+      "FormatVersion": {
+        "type": "INT_TYPE",
+        "value": 0
+      },
+      "VersionCounter": {
+        "type": "INT_TYPE",
+        "value": 0
+      }
+    },
+    "Analyzers": {
+      "ASCII Strings": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "ASCII Strings.Create Strings Containing Existing Strings": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "ASCII Strings.Create Strings Containing References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "ASCII Strings.Force Model Reload": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "ASCII Strings.Minimum String Length": {
+        "type": "ENUM_TYPE",
+        "value": "LEN_5"
+      },
+      "ASCII Strings.Model File": {
+        "type": "STRING_TYPE",
+        "value": "StringModel.sng"
+      },
+      "ASCII Strings.Require Null Termination for String": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "ASCII Strings.Search Only in Accessible Memory Blocks": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "ASCII Strings.String Start Alignment": {
+        "type": "ENUM_TYPE",
+        "value": "ALIGN_1"
+      },
+      "ASCII Strings.String end alignment": {
+        "type": "INT_TYPE",
+        "value": 4
+      },
+      "Aggressive Instruction Finder": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Aggressive Instruction Finder.Create Analysis Bookmarks": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Apply Data Archives": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Apply Data Archives.Archive Chooser": {
+        "type": "STRING_TYPE",
+        "value": "[Auto-Detect]"
+      },
+      "Apply Data Archives.Create Analysis Bookmarks": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Apply Data Archives.GDT User File Archive Path": {
+        "type": "FILE_TYPE"
+      },
+      "Apply Data Archives.User Project Archive Path": {
+        "type": "STRING_TYPE"
+      },
+      "Call Convention ID": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Call Convention ID.Analysis Decompiler Timeout (sec)": {
+        "type": "INT_TYPE",
+        "value": 60
+      },
+      "Call-Fixup Installer": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Condense Filler Bytes": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Condense Filler Bytes.Filler Value": {
+        "type": "STRING_TYPE",
+        "value": "Auto"
+      },
+      "Condense Filler Bytes.Minimum number of sequential bytes": {
+        "type": "INT_TYPE",
+        "value": 1
+      },
+      "Create Address Tables": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Create Address Tables.Allow Offcut References": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Create Address Tables.Auto Label Table": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Create Address Tables.Create Analysis Bookmarks": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Create Address Tables.Maxmimum Pointer Distance": {
+        "type": "LONG_TYPE",
+        "value": 16777215
+      },
+      "Create Address Tables.Minimum Pointer Address": {
+        "type": "LONG_TYPE",
+        "value": 4132
+      },
+      "Create Address Tables.Minimum Table Size": {
+        "type": "INT_TYPE",
+        "value": 3
+      },
+      "Create Address Tables.Pointer Alignment": {
+        "type": "INT_TYPE",
+        "value": 1
+      },
+      "Create Address Tables.Relocation Table Guide": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Create Address Tables.Table Alignment": {
+        "type": "INT_TYPE",
+        "value": 4
+      },
+      "Data Reference": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Data Reference.Address Table Alignment": {
+        "type": "INT_TYPE",
+        "value": 1
+      },
+      "Data Reference.Address Table Minimum Size": {
+        "type": "INT_TYPE",
+        "value": 3
+      },
+      "Data Reference.Align End of Strings": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Data Reference.Ascii String References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Data Reference.Create Address Tables": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Data Reference.Minimum String Length": {
+        "type": "INT_TYPE",
+        "value": 5
+      },
+      "Data Reference.References to Pointers": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Data Reference.Relocation Table Guide": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Data Reference.Respect Execute Flag": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Data Reference.Subroutine References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Data Reference.Switch Table References": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Data Reference.Unicode String References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Decompiler Parameter ID": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Decompiler Parameter ID.Analysis Clear Level": {
+        "type": "ENUM_TYPE",
+        "value": "ANALYSIS"
+      },
+      "Decompiler Parameter ID.Analysis Decompiler Timeout (sec)": {
+        "type": "INT_TYPE",
+        "value": 60
+      },
+      "Decompiler Parameter ID.Commit Data Types": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Decompiler Parameter ID.Commit Void Return Values": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Decompiler Parameter ID.Prototype Evaluation": {
+        "type": "STRING_TYPE",
+        "value": "__stdcall"
+      },
+      "Decompiler Switch Analysis": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Decompiler Switch Analysis.Analysis Decompiler Timeout (sec)": {
+        "type": "INT_TYPE",
+        "value": 60
+      },
+      "Demangler GNU": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Demangler GNU.Apply Function Calling Conventions": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Demangler GNU.Apply Function Signatures": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Demangler GNU.Demangle Only Known Mangled Symbols": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Demangler GNU.Demangler Format": {
+        "type": "ENUM_TYPE",
+        "value": "AUTO"
+      },
+      "Demangler GNU.Timeout (seconds)": {
+        "type": "LONG_TYPE",
+        "value": 3
+      },
+      "Demangler GNU.Use Deprecated Demangler": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Demangler GNU.Use Standard Text Replacements": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Disassemble Entry Points": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Disassemble Entry Points.Respect Execute Flag": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Embedded Media": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Embedded Media.Create Analysis Bookmarks": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "External Entry References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Function ID": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Function ID.Always Apply FID Labels": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Function ID.Create Analysis Bookmarks": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Function ID.Instruction Count Threshold": {
+        "type": "FLOAT_TYPE",
+        "value": 14.6
+      },
+      "Function ID.Multiple Match Threshold": {
+        "type": "FLOAT_TYPE",
+        "value": 30.0
+      },
+      "Function Start Search": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Function Start Search.Bookmark Functions": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Function Start Search.Search Data Blocks": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Non-Returning Functions - Discovered": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Non-Returning Functions - Discovered.Create Analysis Bookmarks": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Non-Returning Functions - Discovered.Function Non-return Threshold": {
+        "type": "INT_TYPE",
+        "value": 3
+      },
+      "Non-Returning Functions - Discovered.Repair Flow Damage": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "RISCV Constant Reference Analyzer": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "RISCV Constant Reference Analyzer.Create Data from pointer": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "RISCV Constant Reference Analyzer.Function parameter/return Pointer analysis": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "RISCV Constant Reference Analyzer.Max Threads": {
+        "type": "INT_TYPE",
+        "value": 2
+      },
+      "RISCV Constant Reference Analyzer.Min absolute reference": {
+        "type": "LONG_TYPE",
+        "value": 4
+      },
+      "RISCV Constant Reference Analyzer.Require pointer param data type": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "RISCV Constant Reference Analyzer.Speculative reference max": {
+        "type": "LONG_TYPE",
+        "value": 256
+      },
+      "RISCV Constant Reference Analyzer.Speculative reference min": {
+        "type": "LONG_TYPE",
+        "value": 1024
+      },
+      "RISCV Constant Reference Analyzer.Stored Value Pointer analysis": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "RISCV Constant Reference Analyzer.Trust values read from writable memory": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Reference": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Reference.Address Table Alignment": {
+        "type": "INT_TYPE",
+        "value": 1
+      },
+      "Reference.Address Table Minimum Size": {
+        "type": "INT_TYPE",
+        "value": 3
+      },
+      "Reference.Align End of Strings": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Reference.Ascii String References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Reference.Create Address Tables": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Reference.Minimum String Length": {
+        "type": "INT_TYPE",
+        "value": 5
+      },
+      "Reference.References to Pointers": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Reference.Relocation Table Guide": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Reference.Respect Execute Flag": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Reference.Subroutine References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Reference.Switch Table References": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Reference.Unicode String References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Scalar Operand References": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Scalar Operand References.Relocation Table Guide": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Shared Return Calls": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Shared Return Calls.Allow Conditional Jumps": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Shared Return Calls.Assume Contiguous Functions Only": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Stack": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Stack.Create Local Variables": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Stack.Create Param Variables": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Stack.Max Threads": {
+        "type": "INT_TYPE",
+        "value": 2
+      },
+      "Subroutine References": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Subroutine References.Create Thunks Early": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Variadic Function Signature Override": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      },
+      "Variadic Function Signature Override.Create Analysis Bookmarks": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      }
+    },
+    "Program Information": {
+      "Analysis Times.Times": {
+        "type": "CUSTOM_TYPE",
+        "value": {
+          "taskTimes": {
+            "Decompiler Switch Analysis": 5461,
+            "Shared Return Calls": 152,
+            "Data Reference": 83,
+            "RISCV Constant Reference Analyzer": 1807,
+            "Reference": 181,
+            "Function ID": 98,
+            "Subroutine References": 104,
+            "Embedded Media": 36,
+            "Non-Returning Functions - Discovered": 141,
+            "Disassemble Entry Points": 68,
+            "Stack": 895,
+            "Demangler GNU": 128,
+            "ASCII Strings": 798,
+            "Create Address Tables - One Time": 7,
+            "Function Start Search": 33,
+            "Subroutine References - One Time": 0,
+            "Call Convention ID": 10,
+            "Call-Fixup Installer": 16,
+            "Create Function": 78,
+            "Apply Data Archives": 2257,
+            "Disassemble": 236,
+            "Function Start Search delayed - One Time": 6,
+            "Create Address Tables": 93,
+            "External Entry References": 0
+          }
+        }
+      },
+      "Analyzed": {
+        "type": "BOOLEAN_TYPE",
+        "value": true
+      },
+      "Compiler": {
+        "type": "STRING_TYPE",
+        "value": "unknown"
+      },
+      "Created With Ghidra Version": {
+        "type": "STRING_TYPE",
+        "value": "12.1.3"
+      },
+      "Date Created": {
+        "type": "DATE_TYPE",
+        "value": "Sep 29, 2026, 11:25:39 PM"
+      },
+      "Executable Format": {
+        "type": "STRING_TYPE",
+        "value": "Raw Binary"
+      },
+      "Executable Location": {
+        "type": "STRING_TYPE",
+        "value": "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/ble-riscv.bin"
+      },
+      "Executable MD5": {
+        "type": "STRING_TYPE",
+        "value": "08010ac964a55e73b5c002235592c1e8"
+      },
+      "Executable SHA256": {
+        "type": "STRING_TYPE",
+        "value": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a"
+      },
+      "FSRL": {
+        "type": "STRING_TYPE",
+        "value": "file:///Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/ble-riscv.bin?MD5\u003d08010ac964a55e73b5c002235592c1e8"
+      },
+      "Preferred Root Namespace Category": {
+        "type": "STRING_TYPE",
+        "value": ""
+      },
+      "Should Ask To Analyze": {
+        "type": "BOOLEAN_TYPE",
+        "value": false
+      }
+    }
+  }
+}

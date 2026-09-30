@@ -1,0 +1,2796 @@
+{
+  "baseline_sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+  "candidate_sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+  "mappings_applied": false,
+  "results": [
+    {
+      "old_entry": "ram:00001000",
+      "old_name": "image_entry",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00004dd8",
+          "name": "thunk_FUN_ram_00002914"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000010ce",
+      "old_name": "FUN_ram_000010ce",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000010ce",
+          "name": "FUN_ram_000010ce"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000110e",
+      "old_name": "FUN_ram_0000110e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000110e",
+          "name": "FUN_ram_0000110e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000011dc",
+      "old_name": "FUN_ram_000011dc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000011dc",
+          "name": "FUN_ram_000011dc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000130c",
+      "old_name": "FUN_ram_0000130c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000130c",
+          "name": "FUN_ram_0000130c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001406",
+      "old_name": "FUN_ram_00001406",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001406",
+          "name": "FUN_ram_00001406"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000157a",
+      "old_name": "FUN_ram_0000157a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000157a",
+          "name": "FUN_ram_0000157a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000015fc",
+      "old_name": "FUN_ram_000015fc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000015fc",
+          "name": "FUN_ram_000015fc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000160a",
+      "old_name": "FUN_ram_0000160a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000160a",
+          "name": "FUN_ram_0000160a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001822",
+      "old_name": "FUN_ram_00001822",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001822",
+          "name": "FUN_ram_00001822"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001834",
+      "old_name": "FUN_ram_00001834",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001834",
+          "name": "FUN_ram_00001834"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001842",
+      "old_name": "FUN_ram_00001842",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001842",
+          "name": "FUN_ram_00001842"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001850",
+      "old_name": "FUN_ram_00001850",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001850",
+          "name": "FUN_ram_00001850"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000185e",
+      "old_name": "FUN_ram_0000185e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000185e",
+          "name": "FUN_ram_0000185e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000018a6",
+      "old_name": "FUN_ram_000018a6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000018a6",
+          "name": "FUN_ram_000018a6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000018de",
+      "old_name": "FUN_ram_000018de",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000018de",
+          "name": "FUN_ram_000018de"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001c48",
+      "old_name": "runtime_start",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001d1a",
+      "old_name": "FUN_ram_00001d1a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001d1a",
+          "name": "FUN_ram_00001d1a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001dc2",
+      "old_name": "FUN_ram_00001dc2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001dc2",
+          "name": "FUN_ram_00001dc2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001dea",
+      "old_name": "FUN_ram_00001dea",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001dea",
+          "name": "FUN_ram_00001dea"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001e18",
+      "old_name": "FUN_ram_00001e18",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001e18",
+          "name": "FUN_ram_00001e18"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001fa6",
+      "old_name": "FUN_ram_00001fa6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001fa6",
+          "name": "FUN_ram_00001fa6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00001fbe",
+      "old_name": "FUN_ram_00001fbe",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001fbe",
+          "name": "FUN_ram_00001fbe"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002498",
+      "old_name": "FUN_ram_00002498",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002498",
+          "name": "FUN_ram_00002498"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000253e",
+      "old_name": "FUN_ram_0000253e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000253e",
+          "name": "FUN_ram_0000253e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000025e4",
+      "old_name": "FUN_ram_000025e4",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000025e4",
+          "name": "FUN_ram_000025e4"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000025fe",
+      "old_name": "FUN_ram_000025fe",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000025fe",
+          "name": "FUN_ram_000025fe"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000268a",
+      "old_name": "FUN_ram_0000268a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000268a",
+          "name": "FUN_ram_0000268a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000026e8",
+      "old_name": "FUN_ram_000026e8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000026e8",
+          "name": "FUN_ram_000026e8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000272a",
+      "old_name": "FUN_ram_0000272a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000272a",
+          "name": "FUN_ram_0000272a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002746",
+      "old_name": "FUN_ram_00002746",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002746",
+          "name": "FUN_ram_00002746"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002764",
+      "old_name": "FUN_ram_00002764",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002764",
+          "name": "FUN_ram_00002764"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000279c",
+      "old_name": "FUN_ram_0000279c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000279c",
+          "name": "FUN_ram_0000279c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000027b6",
+      "old_name": "FUN_ram_000027b6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000027b6",
+          "name": "FUN_ram_000027b6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000027cc",
+      "old_name": "FUN_ram_000027cc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000027cc",
+          "name": "FUN_ram_000027cc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000027e2",
+      "old_name": "FUN_ram_000027e2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000027e2",
+          "name": "FUN_ram_000027e2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002812",
+      "old_name": "FUN_ram_00002812",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002812",
+          "name": "FUN_ram_00002812"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002844",
+      "old_name": "FUN_ram_00002844",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000286e",
+      "old_name": "FUN_ram_0000286e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000286e",
+          "name": "FUN_ram_0000286e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000289e",
+      "old_name": "FUN_ram_0000289e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000289e",
+          "name": "FUN_ram_0000289e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000028d0",
+      "old_name": "FUN_ram_000028d0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000028d0",
+          "name": "FUN_ram_000028d0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000028ea",
+      "old_name": "FUN_ram_000028ea",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000028ea",
+          "name": "FUN_ram_000028ea"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002914",
+      "old_name": "FUN_ram_00002914",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002914",
+          "name": "FUN_ram_00002914"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000293c",
+      "old_name": "FUN_ram_0000293c",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002966",
+      "old_name": "FUN_ram_00002966",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002966",
+          "name": "FUN_ram_00002966"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000029f8",
+      "old_name": "FUN_ram_000029f8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000029f8",
+          "name": "FUN_ram_000029f8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002a5e",
+      "old_name": "FUN_ram_00002a5e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002a5e",
+          "name": "FUN_ram_00002a5e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002a74",
+      "old_name": "FUN_ram_00002a74",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002a74",
+          "name": "FUN_ram_00002a74"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002a8a",
+      "old_name": "FUN_ram_00002a8a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002a8a",
+          "name": "FUN_ram_00002a8a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002aa0",
+      "old_name": "FUN_ram_00002aa0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002aa0",
+          "name": "FUN_ram_00002aa0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002c6a",
+      "old_name": "FUN_ram_00002c6a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002c6a",
+          "name": "FUN_ram_00002c6a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002cdc",
+      "old_name": "FUN_ram_00002cdc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002cdc",
+          "name": "FUN_ram_00002cdc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002d34",
+      "old_name": "FUN_ram_00002d34",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002d34",
+          "name": "FUN_ram_00002d34"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002dea",
+      "old_name": "FUN_ram_00002dea",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002dfe",
+      "old_name": "FUN_ram_00002dfe",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00002efc",
+      "old_name": "FUN_ram_00002efc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00002efc",
+          "name": "FUN_ram_00002efc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003126",
+      "old_name": "FUN_ram_00003126",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003126",
+          "name": "FUN_ram_00003126"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003144",
+      "old_name": "FUN_ram_00003144",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003144",
+          "name": "FUN_ram_00003144"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003156",
+      "old_name": "FUN_ram_00003156",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00003156",
+          "name": "FUN_ram_00003156"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000315c",
+      "old_name": "FUN_ram_0000315c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000315c",
+          "name": "FUN_ram_0000315c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003178",
+      "old_name": "FUN_ram_00003178",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003178",
+          "name": "FUN_ram_00003178"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000031b8",
+      "old_name": "FUN_ram_000031b8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000031b8",
+          "name": "FUN_ram_000031b8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000322a",
+      "old_name": "FUN_ram_0000322a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000322a",
+          "name": "FUN_ram_0000322a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000032b6",
+      "old_name": "FUN_ram_000032b6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000032b6",
+          "name": "FUN_ram_000032b6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000033d0",
+      "old_name": "FUN_ram_000033d0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000033d0",
+          "name": "FUN_ram_000033d0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003416",
+      "old_name": "FUN_ram_00003416",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003416",
+          "name": "FUN_ram_00003416"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000343e",
+      "old_name": "FUN_ram_0000343e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000343e",
+          "name": "FUN_ram_0000343e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000354a",
+      "old_name": "FUN_ram_0000354a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000354a",
+          "name": "FUN_ram_0000354a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003598",
+      "old_name": "FUN_ram_00003598",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00003598",
+          "name": "FUN_ram_00003598"
+        },
+        {
+          "entry": "ram:000047c6",
+          "name": "FUN_ram_000047c6"
+        },
+        {
+          "entry": "ram:00007800",
+          "name": "FUN_ram_00007800"
+        },
+        {
+          "entry": "ram:00008cd6",
+          "name": "FUN_ram_00008cd6"
+        },
+        {
+          "entry": "ram:00008cd8",
+          "name": "FUN_ram_00008cd8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000359a",
+      "old_name": "FUN_ram_0000359a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000359a",
+          "name": "FUN_ram_0000359a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000035a8",
+      "old_name": "encode_transport_frame",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000035a8",
+          "name": "FUN_ram_000035a8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003662",
+      "old_name": "decode_transport_byte",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003662",
+          "name": "FUN_ram_00003662"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003724",
+      "old_name": "FUN_ram_00003724",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003724",
+          "name": "FUN_ram_00003724"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003798",
+      "old_name": "FUN_ram_00003798",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003798",
+          "name": "FUN_ram_00003798"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000037b0",
+      "old_name": "FUN_ram_000037b0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000037b0",
+          "name": "FUN_ram_000037b0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000037c8",
+      "old_name": "FUN_ram_000037c8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000037c8",
+          "name": "FUN_ram_000037c8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000037e0",
+      "old_name": "FUN_ram_000037e0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000037e0",
+          "name": "FUN_ram_000037e0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000037f8",
+      "old_name": "FUN_ram_000037f8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000037f8",
+          "name": "FUN_ram_000037f8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003810",
+      "old_name": "FUN_ram_00003810",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003810",
+          "name": "FUN_ram_00003810"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000384e",
+      "old_name": "FUN_ram_0000384e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000384e",
+          "name": "FUN_ram_0000384e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003862",
+      "old_name": "FUN_ram_00003862",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003862",
+          "name": "FUN_ram_00003862"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003876",
+      "old_name": "FUN_ram_00003876",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003876",
+          "name": "FUN_ram_00003876"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000388a",
+      "old_name": "dispatch_local_uart_command",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000388a",
+          "name": "FUN_ram_0000388a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003c48",
+      "old_name": "FUN_ram_00003c48",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003c48",
+          "name": "FUN_ram_00003c48"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003d0c",
+      "old_name": "FUN_ram_00003d0c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003d0c",
+          "name": "FUN_ram_00003d0c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003d8a",
+      "old_name": "FUN_ram_00003d8a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003d8a",
+          "name": "FUN_ram_00003d8a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003dd2",
+      "old_name": "FUN_ram_00003dd2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003dd2",
+          "name": "FUN_ram_00003dd2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003e1a",
+      "old_name": "usb_tx_queue_service",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003e1a",
+          "name": "FUN_ram_00003e1a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003ed6",
+      "old_name": "FUN_ram_00003ed6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003ed6",
+          "name": "FUN_ram_00003ed6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003f20",
+      "old_name": "FUN_ram_00003f20",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003f20",
+          "name": "FUN_ram_00003f20"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003f3a",
+      "old_name": "FUN_ram_00003f3a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003f3a",
+          "name": "FUN_ram_00003f3a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003f76",
+      "old_name": "FUN_ram_00003f76",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003f76",
+          "name": "FUN_ram_00003f76"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00003fac",
+      "old_name": "route_main_reply_to_gatt",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00003fac",
+          "name": "FUN_ram_00003fac"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004074",
+      "old_name": "queue_gatt_to_main",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004074",
+          "name": "FUN_ram_00004074"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000040dc",
+      "old_name": "handle_af02_write",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000040dc",
+          "name": "FUN_ram_000040dc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004224",
+      "old_name": "handle_af01_write",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004224",
+          "name": "FUN_ram_00004224"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000042a4",
+      "old_name": "FUN_ram_000042a4",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:000042a4",
+          "name": "FUN_ram_000042a4"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000042ac",
+      "old_name": "FUN_ram_000042ac",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000042ac",
+          "name": "FUN_ram_000042ac"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004486",
+      "old_name": "FUN_ram_00004486",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004486",
+          "name": "FUN_ram_00004486"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000045d4",
+      "old_name": "FUN_ram_000045d4",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000045d4",
+          "name": "FUN_ram_000045d4"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004628",
+      "old_name": "FUN_ram_00004628",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004628",
+          "name": "FUN_ram_00004628"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000047c6",
+      "old_name": "FUN_ram_000047c6",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00003598",
+          "name": "FUN_ram_00003598"
+        },
+        {
+          "entry": "ram:000047c6",
+          "name": "FUN_ram_000047c6"
+        },
+        {
+          "entry": "ram:00007800",
+          "name": "FUN_ram_00007800"
+        },
+        {
+          "entry": "ram:00008cd6",
+          "name": "FUN_ram_00008cd6"
+        },
+        {
+          "entry": "ram:00008cd8",
+          "name": "FUN_ram_00008cd8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000047c8",
+      "old_name": "FUN_ram_000047c8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000047c8",
+          "name": "FUN_ram_000047c8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000047fe",
+      "old_name": "FUN_ram_000047fe",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000047fe",
+          "name": "FUN_ram_000047fe"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004810",
+      "old_name": "FUN_ram_00004810",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004810",
+          "name": "FUN_ram_00004810"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000048c2",
+      "old_name": "FUN_ram_000048c2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000048c2",
+          "name": "FUN_ram_000048c2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004916",
+      "old_name": "FUN_ram_00004916",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004916",
+          "name": "FUN_ram_00004916"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004964",
+      "old_name": "FUN_ram_00004964",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004964",
+          "name": "FUN_ram_00004964"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004ab8",
+      "old_name": "FUN_ram_00004ab8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004ab8",
+          "name": "FUN_ram_00004ab8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004b14",
+      "old_name": "FUN_ram_00004b14",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004b14",
+          "name": "FUN_ram_00004b14"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004b9c",
+      "old_name": "FUN_ram_00004b9c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004b9c",
+          "name": "FUN_ram_00004b9c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004bb2",
+      "old_name": "FUN_ram_00004bb2",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00004bb2",
+          "name": "FUN_ram_00004bb2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004bb8",
+      "old_name": "FUN_ram_00004bb8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004bb8",
+          "name": "FUN_ram_00004bb8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004be0",
+      "old_name": "FUN_ram_00004be0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004be0",
+          "name": "FUN_ram_00004be0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004bec",
+      "old_name": "decode_main_uart_byte",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004bec",
+          "name": "FUN_ram_00004bec"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004cee",
+      "old_name": "route_main_uart_frame",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004cee",
+          "name": "FUN_ram_00004cee"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004dd8",
+      "old_name": "thunk_FUN_ram_00002914",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00004dd8",
+          "name": "thunk_FUN_ram_00002914"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004ddc",
+      "old_name": "FUN_ram_00004ddc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004ddc",
+          "name": "FUN_ram_00004ddc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004e18",
+      "old_name": "thunk_FUN_ram_00004ddc",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00004e18",
+          "name": "thunk_FUN_ram_00004ddc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004e1a",
+      "old_name": "FUN_ram_00004e1a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004e1a",
+          "name": "FUN_ram_00004e1a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004e86",
+      "old_name": "usb_receive_report",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004e86",
+          "name": "FUN_ram_00004e86"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004eca",
+      "old_name": "usb_send_report",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004eca",
+          "name": "FUN_ram_00004eca"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004f3c",
+      "old_name": "FUN_ram_00004f3c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004f3c",
+          "name": "FUN_ram_00004f3c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004f66",
+      "old_name": "FUN_ram_00004f66",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004f66",
+          "name": "FUN_ram_00004f66"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004f90",
+      "old_name": "FUN_ram_00004f90",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004f90",
+          "name": "FUN_ram_00004f90"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00004fba",
+      "old_name": "usb_interrupt_handler",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00004fba",
+          "name": "FUN_ram_00004fba"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000054fa",
+      "old_name": "FUN_ram_000054fa",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000054fa",
+          "name": "FUN_ram_000054fa"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000055c0",
+      "old_name": "FUN_ram_000055c0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000055c0",
+          "name": "FUN_ram_000055c0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000566a",
+      "old_name": "FUN_ram_0000566a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000566a",
+          "name": "FUN_ram_0000566a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000056ce",
+      "old_name": "FUN_ram_000056ce",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000056ce",
+          "name": "FUN_ram_000056ce"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00005710",
+      "old_name": "FUN_ram_00005710",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00005710",
+          "name": "FUN_ram_00005710"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00005744",
+      "old_name": "FUN_ram_00005744",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00005744",
+          "name": "FUN_ram_00005744"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00005864",
+      "old_name": "FUN_ram_00005864",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00005864",
+          "name": "FUN_ram_00005864"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00005af0",
+      "old_name": "FUN_ram_00005af0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00005af0",
+          "name": "FUN_ram_00005af0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000064b8",
+      "old_name": "FUN_ram_000064b8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000064b8",
+          "name": "FUN_ram_000064b8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000065a0",
+      "old_name": "FUN_ram_000065a0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000065a0",
+          "name": "FUN_ram_000065a0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000685a",
+      "old_name": "FUN_ram_0000685a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000685a",
+          "name": "FUN_ram_0000685a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000696e",
+      "old_name": "FUN_ram_0000696e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000696e",
+          "name": "FUN_ram_0000696e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00006982",
+      "old_name": "FUN_ram_00006982",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00006982",
+          "name": "FUN_ram_00006982"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00006c78",
+      "old_name": "FUN_ram_00006c78",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00006c78",
+          "name": "FUN_ram_00006c78"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00006cb0",
+      "old_name": "FUN_ram_00006cb0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00006cb0",
+          "name": "FUN_ram_00006cb0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00006f6c",
+      "old_name": "notify_af02",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00006f6c",
+          "name": "FUN_ram_00006f6c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00006ff6",
+      "old_name": "notify_af01",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00006ff6",
+          "name": "FUN_ram_00006ff6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007080",
+      "old_name": "FUN_ram_00007080",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007080",
+          "name": "FUN_ram_00007080"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000070e6",
+      "old_name": "FUN_ram_000070e6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000070e6",
+          "name": "FUN_ram_000070e6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007106",
+      "old_name": "FUN_ram_00007106",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007106",
+          "name": "FUN_ram_00007106"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000072e0",
+      "old_name": "initialize_ble_application",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000072e0",
+          "name": "FUN_ram_000072e0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007466",
+      "old_name": "FUN_ram_00007466",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00007466",
+          "name": "FUN_ram_00007466"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000746c",
+      "old_name": "FUN_ram_0000746c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000746c",
+          "name": "FUN_ram_0000746c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000074bc",
+      "old_name": "FUN_ram_000074bc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000074bc",
+          "name": "FUN_ram_000074bc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000074d2",
+      "old_name": "FUN_ram_000074d2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000074d2",
+          "name": "FUN_ram_000074d2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007532",
+      "old_name": "FUN_ram_00007532",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007532",
+          "name": "FUN_ram_00007532"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007568",
+      "old_name": "FUN_ram_00007568",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007568",
+          "name": "FUN_ram_00007568"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007618",
+      "old_name": "load_saved_host_ids",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007618",
+          "name": "FUN_ram_00007618"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007696",
+      "old_name": "save_host_id",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007696",
+          "name": "FUN_ram_00007696"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000773c",
+      "old_name": "find_saved_host_id",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000773c",
+          "name": "FUN_ram_0000773c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007794",
+      "old_name": "application_main",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007794",
+          "name": "FUN_ram_00007794"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007800",
+      "old_name": "FUN_ram_00007800",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00003598",
+          "name": "FUN_ram_00003598"
+        },
+        {
+          "entry": "ram:000047c6",
+          "name": "FUN_ram_000047c6"
+        },
+        {
+          "entry": "ram:00007800",
+          "name": "FUN_ram_00007800"
+        },
+        {
+          "entry": "ram:00008cd6",
+          "name": "FUN_ram_00008cd6"
+        },
+        {
+          "entry": "ram:00008cd8",
+          "name": "FUN_ram_00008cd8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007804",
+      "old_name": "FUN_ram_00007804",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007804",
+          "name": "FUN_ram_00007804"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000780e",
+      "old_name": "FUN_ram_0000780e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000780e",
+          "name": "FUN_ram_0000780e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007846",
+      "old_name": "FUN_ram_00007846",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007846",
+          "name": "FUN_ram_00007846"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000078b2",
+      "old_name": "FUN_ram_000078b2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000078b2",
+          "name": "FUN_ram_000078b2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007968",
+      "old_name": "FUN_ram_00007968",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007968",
+          "name": "FUN_ram_00007968"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000079ac",
+      "old_name": "FUN_ram_000079ac",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000079ac",
+          "name": "FUN_ram_000079ac"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000079da",
+      "old_name": "FUN_ram_000079da",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000079da",
+          "name": "FUN_ram_000079da"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007ab4",
+      "old_name": "FUN_ram_00007ab4",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007ab4",
+          "name": "FUN_ram_00007ab4"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007ac2",
+      "old_name": "FUN_ram_00007ac2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007ac2",
+          "name": "FUN_ram_00007ac2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007b82",
+      "old_name": "FUN_ram_00007b82",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007b82",
+          "name": "FUN_ram_00007b82"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007c92",
+      "old_name": "FUN_ram_00007c92",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007c92",
+          "name": "FUN_ram_00007c92"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007d1e",
+      "old_name": "FUN_ram_00007d1e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007d1e",
+          "name": "FUN_ram_00007d1e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007d36",
+      "old_name": "FUN_ram_00007d36",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007d36",
+          "name": "FUN_ram_00007d36"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007e72",
+      "old_name": "FUN_ram_00007e72",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007e72",
+          "name": "FUN_ram_00007e72"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007ed6",
+      "old_name": "FUN_ram_00007ed6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007ed6",
+          "name": "FUN_ram_00007ed6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007f40",
+      "old_name": "FUN_ram_00007f40",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00007f40",
+          "name": "FUN_ram_00007f40"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007f4a",
+      "old_name": "FUN_ram_00007f4a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007f4a",
+          "name": "FUN_ram_00007f4a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007f90",
+      "old_name": "FUN_ram_00007f90",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007f90",
+          "name": "FUN_ram_00007f90"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00007ffa",
+      "old_name": "FUN_ram_00007ffa",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00007ffa",
+          "name": "FUN_ram_00007ffa"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000809a",
+      "old_name": "FUN_ram_0000809a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000809a",
+          "name": "FUN_ram_0000809a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008106",
+      "old_name": "FUN_ram_00008106",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008106",
+          "name": "FUN_ram_00008106"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008160",
+      "old_name": "FUN_ram_00008160",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008160",
+          "name": "FUN_ram_00008160"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000081fe",
+      "old_name": "FUN_ram_000081fe",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000081fe",
+          "name": "FUN_ram_000081fe"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000082ae",
+      "old_name": "FUN_ram_000082ae",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000082ae",
+          "name": "FUN_ram_000082ae"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008396",
+      "old_name": "FUN_ram_00008396",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008396",
+          "name": "FUN_ram_00008396"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000083c0",
+      "old_name": "FUN_ram_000083c0",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000083c0",
+          "name": "FUN_ram_000083c0"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008402",
+      "old_name": "FUN_ram_00008402",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008402",
+          "name": "FUN_ram_00008402"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:0000869e",
+      "old_name": "FUN_ram_0000869e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000869e",
+          "name": "FUN_ram_0000869e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:000087aa",
+      "old_name": "FUN_ram_000087aa",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000087aa",
+          "name": "FUN_ram_000087aa"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008a52",
+      "old_name": "FUN_ram_00008a52",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008a52",
+          "name": "FUN_ram_00008a52"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008ad8",
+      "old_name": "FUN_ram_00008ad8",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008ad8",
+          "name": "FUN_ram_00008ad8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008b08",
+      "old_name": "FUN_ram_00008b08",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008b08",
+          "name": "FUN_ram_00008b08"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008b86",
+      "old_name": "FUN_ram_00008b86",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008b86",
+          "name": "FUN_ram_00008b86"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008bc2",
+      "old_name": "FUN_ram_00008bc2",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008bc2",
+          "name": "FUN_ram_00008bc2"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008bf6",
+      "old_name": "FUN_ram_00008bf6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008bf6",
+          "name": "FUN_ram_00008bf6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008c26",
+      "old_name": "FUN_ram_00008c26",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008c26",
+          "name": "FUN_ram_00008c26"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008c58",
+      "old_name": "FUN_ram_00008c58",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008c58",
+          "name": "FUN_ram_00008c58"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008c88",
+      "old_name": "FUN_ram_00008c88",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008c88",
+          "name": "FUN_ram_00008c88"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008cbc",
+      "old_name": "FUN_ram_00008cbc",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008cbc",
+          "name": "FUN_ram_00008cbc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008cd6",
+      "old_name": "FUN_ram_00008cd6",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00003598",
+          "name": "FUN_ram_00003598"
+        },
+        {
+          "entry": "ram:000047c6",
+          "name": "FUN_ram_000047c6"
+        },
+        {
+          "entry": "ram:00007800",
+          "name": "FUN_ram_00007800"
+        },
+        {
+          "entry": "ram:00008cd6",
+          "name": "FUN_ram_00008cd6"
+        },
+        {
+          "entry": "ram:00008cd8",
+          "name": "FUN_ram_00008cd8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008cd8",
+      "old_name": "FUN_ram_00008cd8",
+      "kind": "short_function_candidates",
+      "candidates": [
+        {
+          "entry": "ram:00003598",
+          "name": "FUN_ram_00003598"
+        },
+        {
+          "entry": "ram:000047c6",
+          "name": "FUN_ram_000047c6"
+        },
+        {
+          "entry": "ram:00007800",
+          "name": "FUN_ram_00007800"
+        },
+        {
+          "entry": "ram:00008cd6",
+          "name": "FUN_ram_00008cd6"
+        },
+        {
+          "entry": "ram:00008cd8",
+          "name": "FUN_ram_00008cd8"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008cda",
+      "old_name": "FUN_ram_00008cda",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008cda",
+          "name": "FUN_ram_00008cda"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008d0e",
+      "old_name": "FUN_ram_00008d0e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008d0e",
+          "name": "FUN_ram_00008d0e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008d1e",
+      "old_name": "FUN_ram_00008d1e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008d1e",
+          "name": "FUN_ram_00008d1e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008d2e",
+      "old_name": "FUN_ram_00008d2e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008d2e",
+          "name": "FUN_ram_00008d2e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008d3e",
+      "old_name": "FUN_ram_00008d3e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008d3e",
+          "name": "FUN_ram_00008d3e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008d4e",
+      "old_name": "FUN_ram_00008d4e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008d4e",
+          "name": "FUN_ram_00008d4e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008d5e",
+      "old_name": "FUN_ram_00008d5e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008d5e",
+          "name": "FUN_ram_00008d5e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:00008d8e",
+      "old_name": "FUN_ram_00008d8e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00008d8e",
+          "name": "FUN_ram_00008d8e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200020c6",
+      "old_name": "FUN_ram_200020c6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000010ce",
+          "name": "FUN_ram_000010ce"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002106",
+      "old_name": "FUN_ram_20002106",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000110e",
+          "name": "FUN_ram_0000110e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200021d4",
+      "old_name": "FUN_ram_200021d4",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000011dc",
+          "name": "FUN_ram_000011dc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002304",
+      "old_name": "FUN_ram_20002304",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000130c",
+          "name": "FUN_ram_0000130c"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200023fe",
+      "old_name": "FUN_ram_200023fe",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001406",
+          "name": "FUN_ram_00001406"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002572",
+      "old_name": "FUN_ram_20002572",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000157a",
+          "name": "FUN_ram_0000157a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200025ae",
+      "old_name": "FUN_ram_200025ae",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200025f4",
+      "old_name": "FUN_ram_200025f4",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000015fc",
+          "name": "FUN_ram_000015fc"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002602",
+      "old_name": "FUN_ram_20002602",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000160a",
+          "name": "FUN_ram_0000160a"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000262a",
+      "old_name": "FUN_ram_2000262a",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002644",
+      "old_name": "FUN_ram_20002644",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200026fc",
+      "old_name": "FUN_ram_200026fc",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000271a",
+      "old_name": "FUN_ram_2000271a",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002746",
+      "old_name": "FUN_ram_20002746",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002772",
+      "old_name": "FUN_ram_20002772",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000277e",
+      "old_name": "FUN_ram_2000277e",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200027fe",
+      "old_name": "FUN_ram_200027fe",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000280a",
+      "old_name": "FUN_ram_2000280a",
+      "kind": "unmatched",
+      "candidates": [],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000281a",
+      "old_name": "FUN_ram_2000281a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001822",
+          "name": "FUN_ram_00001822"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000282c",
+      "old_name": "FUN_ram_2000282c",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001834",
+          "name": "FUN_ram_00001834"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000283a",
+      "old_name": "FUN_ram_2000283a",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001842",
+          "name": "FUN_ram_00001842"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002848",
+      "old_name": "FUN_ram_20002848",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:00001850",
+          "name": "FUN_ram_00001850"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:20002856",
+      "old_name": "FUN_ram_20002856",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:0000185e",
+          "name": "FUN_ram_0000185e"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:2000289e",
+      "old_name": "FUN_ram_2000289e",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000018a6",
+          "name": "FUN_ram_000018a6"
+        }
+      ],
+      "review_required": true
+    },
+    {
+      "old_entry": "ram:200028d6",
+      "old_name": "FUN_ram_200028d6",
+      "kind": "unique_instruction_hash",
+      "candidates": [
+        {
+          "entry": "ram:000018de",
+          "name": "FUN_ram_000018de"
+        }
+      ],
+      "review_required": true
+    }
+  ]
+}

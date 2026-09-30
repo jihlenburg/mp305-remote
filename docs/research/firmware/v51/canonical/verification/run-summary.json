@@ -1,0 +1,75 @@
+{
+  "scope": "Offline research checks; not V-model or hardware verification.",
+  "system": "macOS-27.0-arm64-arm-64bit",
+  "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]",
+  "groups": [
+    {
+      "file": "emulation-results.json",
+      "passed": 344,
+      "failed": 0,
+      "sha256": "b44c52cefdef9386ddea9acdbef3336682159563c3862b92e4b672fde7141ac2"
+    },
+    {
+      "file": "reconstruction-comparison.json",
+      "passed": 700,
+      "failed": 0,
+      "sha256": "ada9316225e6e5578a27628c6f20c1ab54a30c005a8639b877be461ebf87af01"
+    },
+    {
+      "file": "control-emulation.json",
+      "passed": 18,
+      "failed": 0,
+      "sha256": "dc203d9abeae2845481600f06116686bb4ed6b5d8f873d074326e4e3e82a6e4b"
+    },
+    {
+      "file": "read-reply-comparison.json",
+      "passed": 896,
+      "failed": 0,
+      "sha256": "bc8e5169bd2e21d3584909371ac546dcf5ade0c9302b0b38aae0e82ce18f9c77"
+    },
+    {
+      "file": "extended-emulation.json",
+      "passed": 592,
+      "failed": 0,
+      "sha256": "ae36ef30f612f1e65c9a36c03f5e2658d22467b09f45f8954d65e0a3a2d7b87c"
+    },
+    {
+      "file": "ble-emulation.json",
+      "passed": 27,
+      "failed": 0,
+      "sha256": "e563b203f041ff3a24d9007e9183d221ee2a990566d3e8d77913beb71d5cab53"
+    },
+    {
+      "file": "settings-worker-emulation.json",
+      "passed": 82,
+      "failed": 0,
+      "sha256": "4c8bfaab76ff9c424845df73a44dac189b917abd45cff4107781c33a259d205f"
+    },
+    {
+      "file": "storage-emulation.json",
+      "passed": 16,
+      "failed": 0,
+      "sha256": "c272b76f495f478bb24caedb3ba7c81c19c7f11014a90cb5062ba5801669ee93"
+    },
+    {
+      "file": "rtos-emulation.json",
+      "passed": 62,
+      "failed": 0,
+      "sha256": "e322135418e59be91336ff7b00d8315f4d2582ead8a5736a666c857f53ac1e4f"
+    },
+    {
+      "file": "permission-emulation.json",
+      "passed": 34,
+      "failed": 0,
+      "sha256": "1b7d8630cbc31a852c8269ac50b92c6fb3db5aabe1f377ca88b80b20e9fbbf1c"
+    },
+    {
+      "file": "worker-comparison.json",
+      "passed": 64,
+      "failed": 0,
+      "sha256": "390197e49681cd9fd4b77751209a6045742c5947862b76301a9501959ffe248d"
+    }
+  ],
+  "passed": 2835,
+  "failed": 0
+}

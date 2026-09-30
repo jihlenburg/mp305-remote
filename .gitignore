@@ -1,0 +1,36 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.so
+*.pyd
+
+# Coverage
+lcov.info
+*.profraw
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Original manufacturer firmware and Ghidra databases stay in scratchpads.
+/docs/research/**/*.bin
+/docs/research/**/*.fwd
+/docs/research/**/*.hex
+/docs/research/**/*.elf
+/docs/research/**/*.gpr
+/docs/research/**/*.rep/

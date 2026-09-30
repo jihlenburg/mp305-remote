@@ -1,0 +1,149 @@
+1d1a	memset	memset(dst, value, len), used everywhere
+2498	GPIOA_ModeCfg	WCH GPIOA_ModeCfg(pins, mode); modes 0 floating, 1 pull-up, 2 pull-down, 3 out 5 mA, 4 out 20 mA
+253e	GPIOB_ModeCfg	WCH GPIOB_ModeCfg(pins, mode)
+25e4	GPIOPinRemap	R16_PIN_ALTERNATE set/clear; called with RB_PIN_TMR0 (TMR0 capture on PB23)
+25fe	PWMX_CycleCfg	PWM cycle selection
+268a	PWMX_ACTOUT	PWM channel duty, polarity and enable
+27b6	TMR1_TimerInit	TMR1 period; 60000 cycles = 1 ms at 60 MHz
+27cc	TMR2_TimerInit	TMR2 period; 6000000 cycles = 100 ms at 60 MHz
+279c	TMR0_CapInit	TMR0 capture mode (edge to edge)
+2812	uart0_init_115200	UART0 115200 8N1, TX only (PB7); nothing is ever transmitted
+2844	uart0_drain_rx	reads and discards UART0 RX FIFO
+289e	uart1_init_115200	UART1 115200 8N1, link to the main MCU (PA8 RX, PA9 TX)
+2914	uart1_send	blocking UART1 transmit (busy-waits while TX FIFO holds 8 bytes)
+293c	uart1_read_fifo	copies UART1 RX FIFO to a buffer, returns count
+2966	usb_hw_init	USB device controller on, DMA buffers EP0..EP3, D+ pull-up on
+29f8	usb_hw_off	USB controller off and D+ pull-up off (device detaches)
+2a5e	usb_ep1_in_arm	sets EP1 T_LEN and ACK
+2ab6	af_read_cb	AF00 service read callback: CCCD 2 bytes, AF01/AF02 20 bytes of an unwritten buffer, offset reads rejected 0x0B
+2b38	af_write_cb	AF00 service write callback: CCCD via GATTServApp_ProcessCCCWriteReq, AF01 -> app event 3, AF02 -> app event 4
+2c02	af_linkdb_cb	resets AF01/AF02 CCCDs when a link is removed
+2c6a	af_service_register	registers AF00 table (7 attributes) and the app callback 0x72a6
+2cdc	af01_notify_raw	GATT_Notification on AF01 if its CCCD has notify set, else 0x12
+2d34	af02_notify_raw	GATT_Notification on AF02 if its CCCD has notify set, else 0x12
+2d8c	db_read_cb	DB00 service read callback; app hook 0x7104 is empty
+2e28	db_write_cb	DB00 service write callback; app hook 0x6cae is empty
+2e9e	db_linkdb_cb	resets the DB01 CCCD when a link is removed
+2efc	db_service_register	registers DB00 table (4 attributes)
+2f58	devinfo_read_cb	180A read callback, WCH SDK placeholder values
+3126	devinfo_register	registers the 180A table (19 attributes)
+315c	ble_flash_read_cb	bleConfig readFlashCB -> EEPROM read
+3178	ble_flash_write_cb	bleConfig writeFlashCB -> EEPROM erase + write
+31b8	ble_temp_sample_cb	bleConfig tsCB, ADC temperature sample
+322a	hal_task_event	TMOS HAL task: LSI calibration every 0x2EE00 ticks
+32b6	ble_lib_init	checks VER_LIB == CH58x_BLE_LIB_V1.8, fills bleConfig_t, BLE_LibInit
+33d0	hal_init	registers HAL task, RTC and TMOS timer init
+359a	frame_decoder_reset	clears decoder state/count fields of a slot
+35a8	frame_encode	AA, (hi<<4|lo), len, data, sum; AA doubled; returns encoded length
+3662	frame_decode_byte	per-slot stuffed-frame decoder (USB OUT uses slot 1)
+3724	tmr1_1ms_tick	1 ms counter, sets 1/10/100/500/1000 ms flags
+3810	acc_to_mcu_queue	copies an accessory frame to slot 2 (address 0x52) and marks it pending
+384e	decoder_feed_slot	feeds one byte to the decoder of slot n
+3862	slot_rx_frame_ptr	returns slot n + 0x104 (copy of a frame received from the MCU)
+3876	decoder_reset_slot	resets the decoder of slot n
+388a	mcu_ctl_cmd	channel 3 handler: 00,10,50,52,E0,EF,F0,FC from the main MCU
+3c48	usb_partial_frame_ack	local IN reply for an incomplete USB frame: 20 -> "20 04", F4 -> "F5 00 d2 d3 d4 d5 01"
+3d0c	usb_in_queue_push	pushes an encoded frame to the 4-slot USB IN ring (accepts while count < 5)
+3d8a	mcu_to_usb_enqueue	re-encodes a frame from the MCU (dst 1) and queues it for USB IN
+3dd2	slot_forward_to_mcu	re-encodes slot n frame and sends it on UART1
+3e1a	usb_in_pump	sends the head of the USB IN ring in 62-byte pieces
+3ed6	acc_af02_notify_handle	handles a stored accessory AF02 notification; "BE FF" forgets the accessory
+3f20	acc_cmd_b8	B8: byte 1 == B0 schedules write "F0 B0" to the accessory AF02
+3f3a	acc_cmd_bc_set_addr	BC: sets the accessory BD address (6 bytes)
+3f76	acc_cmd_be_disconnect	BE: terminates the accessory link and invalidates the address
+3fac	mcu_to_ble_router	MCU reply routing: last byte 0x31 -> AF01 with 0x31 in front, else AF02 minus last byte; saves host ID after 19 00
+4074	ble_to_mcu_queue	copies a GATT write to slot 0 (address 0x62) and appends route tag 0x31 or 0x00
+40dc	af02_write_handler	AF02: blocked when mode 2; 00 local status; 18 bind; else forward with tag 0x00
+4224	af01_write_handler	AF01 (first byte already dropped): blocked when mode 2; 10/C0 local adv tail; else forward with tag 0x31
+42a4	acc_to_mcu_send	calls 0x3810 when length is non-zero
+42ac	link_state_reporter	sends BD 00/BD 01 on channel 6 and accessory BD on channel 5 when states change
+4486	acc_list_build_bb	builds "BB n {addr6 len name}" accessory list for the MCU
+45d4	acc_cmd_dispatch	channel 5 commands from the MCU: B8, BA, BC, BE
+4628	bridge_loop	main bridge scheduler (MCU->BLE/USB/acc/ctl, USB->MCU, BLE->MCU, 55 status)
+47fe	name_variant_flag	returns RAM 0x200043B7 == 0xA5 (never true in this image)
+4810	rgb_led_init	PWM4 (PA12), PWM7 (PB4), PWM10 (PB14) outputs; TMR0 capture on PB23
+48c2	pwm_set_channel	sets one LED PWM channel duty
+4916	rgb_led_set_grb	sets G/R/B PWM from a 24-bit GRB value
+4964	ws2812_rx_decode	decodes a captured 24-bit GRB pulse train (TMR0 capture)
+4ab8	update_prep_countdown	after F0 AC: USB off, write IAP flag, soft reset
+4b14	periph_init	UART1, LED, USB off, TMR1 1 ms, TMR2 100 ms
+4b9c	bridge_tick	bridge_loop, link_state_reporter, usb_in_pump
+4bb8	periodic_dispatch	1 ms, 10 ms, 100 ms flag dispatch (called from TMOS event 0x800)
+4be0	get_uptime_ms	returns RAM 0x20002FBC (ms, 100 ms resolution)
+4bec	uart1_frame_decode_byte	decoder for frames from the main MCU
+4cee	uart1_rx_route	routes decoded MCU frames by low nibble: 6 BLE, 1 USB, 5 accessory, other CH58x
+4ddc	uart1_init	PA8 RX pull-up, PA9 TX, UART1 115200, RX interrupts
+4e1a	debug_hexdump	printf hex dump (output discarded)
+4e86	usb_ep1_out_handler	feeds report bytes 2..2+n-1 (n = byte 1) to the slot 1 decoder
+4eca	usb_ep1_in_send	builds IN report [02][n][n bytes][zero pad] and arms EP1
+4f3c	usb_ep2_echo	WCH sample leftover: EP2 OUT echoed inverted
+4f66	usb_ep3_echo	WCH sample leftover: EP3 OUT echoed inverted
+4f90	usb_ep4_echo	WCH sample leftover: EP4 OUT echoed inverted
+4fba	usb_irq_handler	USB device interrupt: EP0 standard requests, EP1 in/out
+54fa	usb_product_string_from_flash	builds USB string 2 from the DataFlash 0x6E0E name override
+55c0	usb_enable	starts the USB device
+566a	usb_disable	stops the USB device and detaches
+56ce	central_passcode_cb	GAPBondMgr_PasscodeRsp with a random 6-digit code
+56fe	central_pair_state_cb	pairing state 2 (bonded), status 0 -> accessory bonded flag
+5710	acc_addr_load	loads the accessory address from DataFlash 0x6A01
+5744	central_app_init	central role parameters, bond manager, TMOS task
+5864	hid_report_map_parse	finds button and wheel byte offsets in an accessory report map
+5af0	central_task_event	central TMOS task: discovery, CCCD enable, HID notifications
+64b8	central_link_reset	clears accessory link state
+65a0	adv_report_parse	parses one advertising report of a scanned device
+685a	acc_list_add	adds a scanned HID mouse appearance device to the 5-entry list
+698c	central_event_cb	central role GAP event callback (discovery, link established/terminated)
+6c78	periph_param_update_cb	records host link interval/latency/timeout
+6cb0	periph_task_event	peripheral TMOS task: start, 1 s name/timeout housekeeping, watchdog, param update
+6f6c	af02_notify	GATT_bm_alloc + notify on AF02; sets notify-failed flag 0x20002F88
+6ff6	af01_notify	GATT_bm_alloc + notify on AF01; sets notify-failed flag 0x20002F88
+7080	periph_link_terminated	clears host link, re-enables advertising unless blocked
+7106	periph_state_cb	gapRolesCBs.pfnStateChange; BD-address name suffix, link established/terminated
+72a6	af_app_cb	AF write dispatch: event 3 -> af01 handler with first byte dropped, event 4 -> af02 handler
+72e0	periph_app_init	advertising/scan response, 500 ms interval, bond manager, services
+746c	iap_flag_write	DataFlash 0x7000 byte 0 = value (3 before update reset)
+74bc	enter_iap	disable interrupts, write IAP flag 3, soft reset
+74d2	adv_mfr_tail_load	loads the 14-byte manufacturer data tail from DataFlash 0x6E00
+7532	adv_mfr_set_from_fc	FC: 4 bytes into manufacturer data bytes 2..5, reload tail, update advert
+7568	adv_mfr_tail_store	AF01 10/C0: 14 bytes into manufacturer data bytes 6..19 and DataFlash 0x6E00 (erases the name override)
+7618	host_ids_load	reads the 5 x 16-byte host table at DataFlash 0x6F00, counts used slots
+7696	host_id_save	appends a host ID (shifts when 5 used), rewrites DataFlash 0x6F00
+773c	host_id_lookup	1 if the 16 bytes match a stored host ID
+7794	main	clock 60 MHz, GPIO, UART0, BLE lib, roles, app init, TMOS loop
+7968	printf	newlib printf; _write is a stub, so nothing is output
+79ac	putchar	newlib putchar; output discarded
+78b2	memcpy	memcpy
+8d8e	_write_stub	newlib _write stub: errno 88 (ENOSYS), returns -1
+200028d6	FLASH_EEPROM_CMD	WCH ISP ROM API in RAM: 1/2/3 code flash, 4 reset, 6 ROM info, 9/10/11 DataFlash erase/write/read (offset + 0x70000)
+20002572	sys_soft_reset	flash command 4 then RB_SOFTWARE_RESET
+8ed0	ch58x_identity	33 CC 55 AA, "MP305B", 01 00 66 00, version 01 00 00 0F (1.0.0.15), 0x1000, 0x39000
+8f4c	usb_hid_report_desc	35 bytes
+8f70	usb_config_desc	41 bytes
+8f9c	usb_device_desc	18 bytes, VID 0x28E9 PID 0x028A
+8fb0	usb_string1_manufacturer	"wch.cn"
+9304	usb_string0_langid	0x0409
+20002c40	gatt_af00_table	AF00 service attributes (7 records of 16 bytes)
+20002cbc	gatt_db00_table	DB00 service attributes (4 records)
+20002d08	gatt_180a_table	Device Information attributes (19 records)
+20002e44	usb_string2_product	RAM string descriptor, default "MP305B"
+20002e78	adv_data	31-byte advertising data
+20002e98	scan_rsp_data	31-byte scan response (complete local name, 29 chars)
+20003644	usb_in_ring	4 x 256-byte encoded frames; lengths at 0x20003A44
+20003a50	bridge_slots	4 slots x 0x218: 0 BLE->MCU, 1 USB, 2 accessory, 3 CH58x control
+20004564	uart1_rx_frame	decoded frame from the main MCU (hi, lo, len, data)
+20005130	pending_host_id	16-byte host ID from the last AF02 bind with fast flag 0
+20005160	ble_lib_heap	BLE library memory, 0x1C00 bytes
+20002f30	acc_peer_addr	accessory BD address (6 bytes) + conn handle at 0x20002F36
+20002f88	notify_failed	1 when the last AF01/AF02 notification could not be sent
+20002f89	host_iface_mode	from MCU 50: 0 any, 1 BLE host active (USB off), 2 USB host active (BLE writes dropped, no advertising)
+20002f8a	remote_enabled	from MCU 52: 1 after 52 'S', 0 after 52 other
+20002f95	mcu_frame_seen	set when a frame from the MCU was handled; triggers the 55 status frame
+20002fbc	uptime_ms	incremented by 100 every 100 ms (TMR2), returned by 10/11
+20002ff0	ble_conn_timer	+1600 per second while connected; unbound link dropped at 48000 (30 s)
+20002ff4	ble_bind_state	0 not bound, 2 bound
+20002ff8	gaprole_state	last peripheral gapRole state
+20002ffc	ble_conn_handle	host connection handle, 0xFFFE when none
+20003a48	usb_enabled	1 while the USB device is on
+20003a49	usb_in_idle	1 when EP1 IN can take a report
+20003a4a	usb_in_count	frames waiting in the USB IN ring
+200043b7	name_variant_magic	0xA5 would change name char 2 to '3'; never written

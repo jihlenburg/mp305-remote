@@ -1,0 +1,575 @@
+{
+  "scope": "Readable C versus original ARM reference-register packing and D9 replies; original display initialization with bus/delay substitutes. No hardware.",
+  "passed": 64,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "reference registers 0/0",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          255
+        ],
+        [
+          0,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/0",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          255
+        ],
+        [
+          1,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/1",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/1",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          0
+        ],
+        [
+          1,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/2",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/2",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          0
+        ],
+        [
+          1,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/3",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          4,
+          64
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/3",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          0
+        ],
+        [
+          1,
+          4,
+          64
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/10",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          1
+        ],
+        [
+          0,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/10",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          1
+        ],
+        [
+          1,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/999",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          124
+        ],
+        [
+          0,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/999",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          124
+        ],
+        [
+          1,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/1000",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          124
+        ],
+        [
+          0,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/1000",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          124
+        ],
+        [
+          1,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/2045",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          255
+        ],
+        [
+          0,
+          4,
+          128
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/2045",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          255
+        ],
+        [
+          1,
+          4,
+          128
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/2046",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          255
+        ],
+        [
+          0,
+          4,
+          128
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/2046",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          255
+        ],
+        [
+          1,
+          4,
+          128
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/2047",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          255
+        ],
+        [
+          0,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/2047",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          255
+        ],
+        [
+          1,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/2048",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          255
+        ],
+        [
+          0,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/2048",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          255
+        ],
+        [
+          1,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/3000",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          255
+        ],
+        [
+          0,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/3000",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          255
+        ],
+        [
+          1,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 0/4294967295",
+      "pass_result": true,
+      "events": [
+        [
+          0,
+          3,
+          255
+        ],
+        [
+          0,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "reference registers 1/4294967295",
+      "pass_result": true,
+      "events": [
+        [
+          1,
+          3,
+          255
+        ],
+        [
+          1,
+          4,
+          192
+        ]
+      ]
+    },
+    {
+      "case": "D9 C versus ARM 0/1/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 0/6/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 1/1/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 1/6/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 9/1/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 9/6/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 10/1/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 10/6/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 11/1/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 11/1/10",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 11/6/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 11/6/10",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 20/1/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 20/1/10",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 20/6/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 20/6/10",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/10",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/20",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/30",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/40",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/50",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/60",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/70",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/80",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/1/90",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/0",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/10",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/20",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/30",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/40",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/50",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/60",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/70",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/80",
+      "pass_result": true
+    },
+    {
+      "case": "D9 C versus ARM 100/6/90",
+      "pass_result": true
+    },
+    {
+      "case": "display initialization signature",
+      "pass_result": true
+    },
+    {
+      "case": "display initialization final commands",
+      "pass_result": true
+    }
+  ]
+}

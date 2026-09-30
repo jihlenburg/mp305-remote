@@ -1,0 +1,188 @@
+/* Address: 000297c0; name: FUN_000297c0; body bytes: 1466 */
+
+void FUN_000297c0(void)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined *puVar3;
+  undefined4 in_r3;
+  
+  DAT_1ffe03e0 = FUN_0004b384();
+  FUN_0004e84a(DAT_1ffe03e0,0xb2,0xb4);
+  FUN_0004ac0a(DAT_1ffe03e0,2,0,0x3c,in_r3);
+  FUN_0004ab24(DAT_1ffe03e0,&DAT_1fffb940,0);
+  FUN_0004e8dc(DAT_1ffe03e0,0);
+  FUN_0004e00e(DAT_1ffe03e0,0x10);
+  DAT_1ffe0408 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe03e4 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe03e8 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe03ec = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe03f0 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe03f4 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe03f8 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe03fc = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe0400 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe0404 = FUN_0003e808(DAT_1ffe03e0);
+  DAT_1ffe0414 = FUN_0003e808(DAT_1ffe03e0);
+  FUN_0004e84a(DAT_1ffe03e4,0x29);
+  FUN_0004ac0a(DAT_1ffe03e4,1,2);
+  FUN_0004ab24(DAT_1ffe03e4,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe03e4);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029bd8);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe03e8,0x29);
+  FUN_0004ac28(DAT_1ffe03e8,DAT_1ffe03e4,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe03e8,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe03e8);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029be0);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe03ec,0x29);
+  FUN_0004ac28(DAT_1ffe03ec,DAT_1ffe03e8,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe03ec,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe03ec);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029be4);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  DAT_1ffe040c = FUN_0003e808(DAT_1ffe03e0);
+  if (DAT_1fffaad7 == '\0') {
+    uVar1 = 0x29;
+  }
+  else {
+    uVar1 = 0x56;
+  }
+  FUN_0004e84a(DAT_1ffe040c,0x27,uVar1);
+  FUN_0004ac28(DAT_1ffe040c,DAT_1ffe03ec,0x13,4,0);
+  FUN_0004ab24(DAT_1ffe040c,&DAT_1fffb94c,0);
+  uVar1 = FUN_00047698(DAT_1ffe040c);
+  FUN_00047d8e(uVar1,&DAT_000824b8);
+  FUN_0004b128(uVar1);
+  FUN_0004e84a(DAT_1ffe03f0,0x29);
+  FUN_0004ac28(DAT_1ffe03f0,DAT_1ffe03e4,0xe,0,4);
+  FUN_0004ab24(DAT_1ffe03f0,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe03f0);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029bf0);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe03f4,0x29);
+  FUN_0004ac28(DAT_1ffe03f4,DAT_1ffe03f0,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe03f4,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe03f4);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029bf4);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe03f8,0x29);
+  FUN_0004ac28(DAT_1ffe03f8,DAT_1ffe03f4,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe03f8,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe03f8);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029bf8);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  DAT_1ffe0410 = FUN_0003e808(DAT_1ffe03e0);
+  FUN_0004e84a(DAT_1ffe0410,0x27,0x29);
+  FUN_0004ac28(DAT_1ffe0410,DAT_1ffe03f8,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe0410,&DAT_1fffb94c,0);
+  uVar1 = FUN_0004037c(0x180026);
+  FUN_0004e8e6(DAT_1ffe0410,uVar1,0);
+  uVar1 = FUN_0004037c(0xedccff);
+  FUN_0004e8b2(DAT_1ffe0410,uVar1,0);
+  uVar1 = FUN_00047698(DAT_1ffe0410);
+  if (DAT_1fffaadc == '\0') {
+    puVar3 = &DAT_0007bc48;
+  }
+  else {
+    puVar3 = &DAT_0007cc4c;
+  }
+  FUN_00047d8e(uVar1,puVar3);
+  FUN_0004b128(uVar1);
+  if (DAT_1fffaad7 == '\0') {
+    FUN_0004e00e(DAT_1ffe0410,1);
+  }
+  else {
+    FUN_0004aa6e();
+  }
+  FUN_0004e84a(DAT_1ffe03fc,0x29);
+  FUN_0004ac28(DAT_1ffe03fc,DAT_1ffe03f0,0xe,0,4);
+  FUN_0004ab24(DAT_1ffe03fc,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe03fc);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029c0c);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe0400,0x29);
+  FUN_0004ac28(DAT_1ffe0400,DAT_1ffe03fc,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe0400,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe0400);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029dd0);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe0404,0x29);
+  FUN_0004ac28(DAT_1ffe0404,DAT_1ffe0400,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe0404,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe0404);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029dd8);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe0408,0x29);
+  FUN_0004ac28(DAT_1ffe0408,DAT_1ffe0400,0xe,0,4);
+  FUN_0004ab24(DAT_1ffe0408,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe0408);
+  FUN_0004ab24(uVar1,&DAT_1fffb9b8,0);
+  FUN_0004eab0(uVar1,&DAT_000757e8,0);
+  FUN_00049974(uVar1,&DAT_00029ddc);
+  FUN_0004b128(uVar1);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  FUN_0004e84a(DAT_1ffe0414,0x29);
+  FUN_0004ac28(DAT_1ffe0414,DAT_1ffe0408,0x14,4,0);
+  FUN_0004ab24(DAT_1ffe0414,&DAT_1fffb94c,0);
+  uVar1 = FUN_00048d88(DAT_1ffe0414);
+  FUN_0004eab0(uVar1,&DAT_000730fc,0);
+  uVar2 = FUN_0004029c();
+  FUN_0004ea90(uVar1,uVar2,0);
+  FUN_00049974(uVar1,&DAT_00029de4);
+  FUN_0004ac0a(uVar1,9,0,0xfffffff2);
+  uVar2 = FUN_0004037c(0x999999);
+  FUN_0004ea90(uVar1,uVar2,0x80);
+  DAT_1ffe0418 = FUN_0003e808(DAT_1ffe03e0);
+  FUN_0004e84a(DAT_1ffe0418,0x27,0x56);
+  FUN_0004ac28(DAT_1ffe0418,DAT_1ffe0404,0x13,4);
+  FUN_0004ab24(DAT_1ffe0418,&DAT_1fffb94c,0);
+  uVar1 = FUN_0004037c(0x2613);
+  FUN_0004e8e6(DAT_1ffe0418,uVar1,0);
+  uVar1 = FUN_0004037c(0xffff);
+  FUN_0004e8b2(DAT_1ffe0418,uVar1,0);
+  uVar1 = FUN_00047698(DAT_1ffe0418);
+  FUN_00047d8e(uVar1,&DAT_0007b264);
+  FUN_0004b128(uVar1);
+  return;
+}
+

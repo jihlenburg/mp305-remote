@@ -1,0 +1,45 @@
+{
+  "scope": "A complete fresh import and scripted refinement reproduced these entry sets. This checks reproducibility, not semantic correctness of every function.",
+  "images": [
+    {
+      "canonical_export": "arm",
+      "fresh_export": "arm",
+      "canonical_functions": 2455,
+      "fresh_functions": 2455,
+      "only_canonical": [],
+      "only_fresh": [],
+      "same_entries": true,
+      "decompiler_completed": true
+    },
+    {
+      "canonical_export": "ble-final",
+      "fresh_export": "ble",
+      "canonical_functions": 232,
+      "fresh_functions": 232,
+      "only_canonical": [],
+      "only_fresh": [],
+      "same_entries": true,
+      "decompiler_completed": true
+    },
+    {
+      "canonical_export": "pd-tables",
+      "fresh_export": "pd",
+      "canonical_functions": 1007,
+      "fresh_functions": 1007,
+      "only_canonical": [],
+      "only_fresh": [],
+      "same_entries": true,
+      "decompiler_completed": true
+    },
+    {
+      "canonical_export": "sdk-v18",
+      "fresh_export": "sdk",
+      "canonical_functions": 1047,
+      "fresh_functions": 1047,
+      "only_canonical": [],
+      "only_fresh": [],
+      "same_entries": true,
+      "decompiler_completed": true
+    }
+  ]
+}

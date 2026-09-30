@@ -1,0 +1,93 @@
+CODE:b0a1	NMOS On\n	
+CODE:b0aa	NMOS Off\n	
+CODE:b0b4	Update PowerMode !!\n	
+CODE:b0c9	Update SinkVolt !!\n	
+CODE:b0dd	DCDC Off\n	
+CODE:b0e7	Source!!\n	
+CODE:b102	\n!!Priority_Reset!!\n	
+CODE:b117	EPR Enter !!\n	
+CODE:b125	Enter Source Mode !!\n	
+CODE:b13b	vbus dis on\n	
+CODE:b148	vbus dis off\n	
+CODE:b166	Source Update = 2 !!\n	
+CODE:b17c	Source Update = 0 !!\n	
+CODE:b192	fix:%d/%d\n	
+CODE:b19d	pps:%d-%d/%d\n	
+CODE:b1b9	epr:%d/%d\n	
+CODE:b1c4	A:%d/%d %dmV/%dmA %dmV/%dmA %dW B:%dmV %dW %d%% %dC/%d/%d\n	
+CODE:b3b8	8\nP829 v%d.%d Bat=%d-%d\n	
+CODE:b3e4	Accept	
+CODE:b3f1	EPR Mode	
+CODE:b3fa	EPR Cap	
+CODE:b402	Request	
+CODE:b40a	Vendor Defined	
+CODE:b419	EPR Request	
+CODE:b425	Hard Reset	
+CODE:b430	Extended_Contro	
+CODE:b449	VbusAttach	
+CODE:b454	VbusDetach	
+CODE:b45f	CCI Wait	
+CODE:b468	CCI Attach	
+CODE:b473	LOW Batt	
+CODE:b493	CCO_Attach	
+CODE:b49e	CC_Detach	
+CODE:b4a8	DPM_Detach	
+CODE:b4b3	DPM_Attach	
+CODE:b4d3	PsReady	
+CODE:b4db	VbusMatched	
+CODE:b4ef	ts power supply	
+CODE:b50b	Sel Volt	
+CODE:b514	ptl ts err	
+CODE:b51f	epr enter	
+CODE:b529	Update SCap	
+CODE:b535	Send PsRdy	
+CODE:b543	CC De vs=%d	
+CODE:b576	START CHECK_OCP	
+CODE:b586	PPS_TRANS_LARGE	
+CODE:b596	PPS_TRANS_SMALL	
+CODE:b5a6	VCONN Stable	
+CODE:b5b7	C,cc state\n	
+CODE:b5d7	PRL,time out\n	
+CODE:b608	Request:%d-%d\n	
+CODE:b617	Reject1:%d-%d\n	
+CODE:b626	Req:%d/%d\n	
+CODE:b636	discovery	
+CODE:b640	waitCap	
+CODE:b648	evaluate	
+CODE:b651	select	
+CODE:b658	trans	
+CODE:b65e	ready	
+CODE:b664	HardRst	
+CODE:b66c	enterEPR	
+CODE:b675	waitEPR	
+CODE:b67d	SoftRst	
+CODE:b685	src startup	
+CODE:b691	send caps	
+CODE:b69b	send caps try	
+CODE:b6a9	src ne cap	
+CODE:b6b4	src ts supply	
+CODE:b6c2	src ready	
+CODE:b6cc	snk startup	
+CODE:b6d8	EPR ENTRY	
+CODE:b6f2	VDM NAck	
+CODE:b6fb	EPR KeepAlive	
+CODE:b7c3	portEn:%d,cc=%x %d %d\n	
+CODE:b7e8	C to C: %d %d\n	
+CODE:b7f7	C to C exit\n	
+CODE:b804	\nInput is DRP !!\n	
+CODE:b816	\nrst_oemid!!\n	
+CODE:b851	PMIC:%d->%d\n	
+CODE:b85e	PD SinkPower Ok\n	
+CODE:b86f	HV Sink Ok\n	
+CODE:b87b	Phone Chg Error: PD %d/%d!\n	
+CODE:b897	TimeOut Chg!\n	
+CODE:b8a5	sink reset\n	
+CODE:b8d7	fix%d:%d/%d\n	
+CODE:b8e4	DRP=%d %dW\n	
+CODE:b906	qc select9V\n	
+CODE:b913	pol detached!\n	
+CODE:b922	pol no conn!\n	
+CODE:b95e	Accept	
+CODE:b965	Reject	
+CODE:b983	-Rx-:%02x %d %d 	
+CODE:b99c	to SRC_ATTACHED\n	

@@ -1,0 +1,42 @@
+{
+  "header": {
+    "key": 368568053,
+    "checksum": 1988755427,
+    "app_base": 65536,
+    "data_base": 0,
+    "app_size": 476160,
+    "data_size": 79488,
+    "baud": 115200,
+    "rapid_baud": 115200
+  },
+  "identity_offset": "0x6afc8",
+  "prior_plain_compared": true,
+  "prior_plain_differences": [
+    "0x6afc8",
+    "0x6afc9",
+    "0x6afca",
+    "0x6afcb"
+  ],
+  "images": {
+    "restored.bin": {
+      "size": 555648,
+      "sha256": "37048f4b73585789e3667043a1b428ce61d3029163afc9275be8b36e9e6462a4"
+    },
+    "main-arm.bin": {
+      "size": 476160,
+      "sha256": "1561e88a3f5eb63ad4b6917d39a3fd0cde26e062c9c26d4c953ea8073640cee2"
+    },
+    "companion-data.bin": {
+      "size": 79488,
+      "sha256": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd"
+    },
+    "pd-8051.bin": {
+      "size": 45056,
+      "sha256": "6ea3a7640e44c2aedf4cb054c5ee4d185203ce913a32ee1bb6829c0c39a3a10e"
+    },
+    "ble-riscv.bin": {
+      "size": 34432,
+      "sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a"
+    }
+  }
+}

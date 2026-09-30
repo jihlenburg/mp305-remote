@@ -1,0 +1,8 @@
+decoder round trip: 300 frames, 0 failures
+edge: address 0xAA frame -> 0x0
+edge: bad checksum -> 0x0 state 0
+edge: zero length frame AA 62 00 62 -> ['0x0', '0x0', '0x0', '0x0']
+edge: leading garbage then frame -> 0x1fff9df8 (6, 2, b'\xc21')
+edge: truncated frame then new frame -> 0x1fff9df8 (6, 2, b'\xc21')
+edge: len 0xAA -> 0x1fff9df8 True
+edge: single AA inside body -> ['0x0', '0x0', '0x0', '0x0', '0x0', '0x0', '0x0'] state 3

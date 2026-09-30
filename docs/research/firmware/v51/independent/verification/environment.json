@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-30",
+  "revision": "uncommitted",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "Python 3.12.2",
+  "dependencies": "capstone 5.0.7 unicorn 2.1.4",
+  "original_workspace": "/Users/jihlenburg/mp305b-fw-re",
+  "recovery_workspace": "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30",
+  "device_io": false
+}

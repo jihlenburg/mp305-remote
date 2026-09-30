@@ -1,0 +1,19 @@
+{
+  "table_address": "0x83fa8",
+  "rows": [
+    {
+      "source": "0x83fc8",
+      "destination": "0x1ffe0000",
+      "size": 2908,
+      "function": "0x11652"
+    },
+    {
+      "source": "0x84384",
+      "destination": "0x1ffe0b5c",
+      "size": 387772,
+      "function": "0x202cc"
+    }
+  ],
+  "initialized_ram_sha256": "e831601923ebee907f50d4d739ce2f0fd32be9045d36f0d0f3b5ea40085546eb",
+  "method": "Offline execution of original ARM instructions with Unicorn; no device I/O."
+}

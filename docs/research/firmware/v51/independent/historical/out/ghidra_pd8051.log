@@ -1,0 +1,104 @@
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment Homebrew (build 21.0.12.1)
+OpenJDK 64-Bit Server VM Homebrew (build 21.0.12.1, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/jihlenburg/Library/ghidra/ghidra_12.1.3_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/jihlenburg/Library/ghidra/ghidra_12.1.3_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (846 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (2252 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 211 extension points (114 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /Users/jihlenburg/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.3/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /Users/jihlenburg/mp305b-fw-re/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/jihlenburg/mp305b-fw-re/ghidra/mp305b_pd8051 (HeadlessAnalyzer)  
+INFO  Opening project: /Users/jihlenburg/mp305b-fw-re/ghidra/mp305b_pd8051 (HeadlessProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /Users/jihlenburg/mp305b-fw-re/ghidra/mp305b_pd8051 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/jihlenburg/mp305b-fw-re/bin/pd8051.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x1000") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: 8051:BE:16:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/jihlenburg/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  /pd8051.bin: file deleted (jihlenburg) (LocalFileSystem)  
+INFO  Deleted local file pd8051.bin (GhidraFileData)  
+WARN  REPORT: Removed conflicting program file from project: /pd8051.bin (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: Setup8051.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/jihlenburg/mp305b-fw-re/scripts/Setup8051.java (HeadlessAnalyzer)  
+INFO  Setup8051.java> vector 00 -> AF88 (GhidraScript)  
+INFO  Setup8051.java> vector 03 -> 67FF (GhidraScript)  
+INFO  Setup8051.java> vector 0B -> 50FB (GhidraScript)  
+INFO  Setup8051.java> vector 13 -> 4FFF (GhidraScript)  
+INFO  Setup8051.java> vector 1B -> 77B4 (GhidraScript)  
+INFO  Setup8051.java> vector 23 -> 78EE (GhidraScript)  
+INFO  Setup8051.java> vector 2B -> 97FF (GhidraScript)  
+INFO  Setup8051.java> vector 3B -> 47AA (GhidraScript)  
+INFO  Setup8051.java> vector 43 -> 75C0 (GhidraScript)  
+INFO  Setup8051.java> vector 4B -> 5C3C (GhidraScript)  
+INFO  Setup8051.java> vector 73 -> 98AC (GhidraScript)  
+INFO  Setup8051.java> vector 7B -> 98C4 (GhidraScript)  
+INFO  Setup8051.java> vector 83 -> 97FE (GhidraScript)  
+INFO  Setup8051.java> vector 8B -> 9660 (GhidraScript)  
+INFO  Setup8051.java> vector 93 -> 9D29 (GhidraScript)  
+INFO  ANALYZING all memory and code: file:///Users/jihlenburg/mp305b-fw-re/bin/pd8051.bin (HeadlessAnalyzer)  
+INFO  Packed database cache: /var/tmp/jihlenburg-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.161 secs
+    Apply Data Archives                        0.372 secs
+    Basic Constant Reference Analyzer          0.209 secs
+    Call Convention ID                         0.004 secs
+    Call-Fixup Installer                       0.004 secs
+    Create Function                            0.070 secs
+    Decompiler Switch Analysis                 1.351 secs
+    Demangler GNU                              0.040 secs
+    Disassemble Entry Points                   0.005 secs
+    Disassemble Entry Points - One Time        0.010 secs
+    Embedded Media                             0.009 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.023 secs
+    Non-Returning Functions - Discovered       0.029 secs
+    Shared Return Calls                        0.026 secs
+    Stack                                      0.120 secs
+    Subroutine References                      0.014 secs
+-----------------------------------------------------
+     Total Time   2 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///Users/jihlenburg/mp305b-fw-re/bin/pd8051.bin (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: Export.java 'pd8051'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/jihlenburg/mp305b-fw-re/scripts/Export.java (HeadlessAnalyzer)  
+INFO  Export.java> EXPORT functions=380 failed=0 (GhidraScript)  
+INFO  ANALYZING changes made by post scripts: file:///Users/jihlenburg/mp305b-fw-re/bin/pd8051.bin (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///Users/jihlenburg/mp305b-fw-re/bin/pd8051.bin (HeadlessAnalyzer)  
+INFO  /pd8051.bin: file created (jihlenburg) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /pd8051.bin (mp305b_pd8051:/pd8051.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

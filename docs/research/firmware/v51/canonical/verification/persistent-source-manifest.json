@@ -1,0 +1,17 @@
+[
+  {
+    "file": "command-map.md",
+    "sha256": "11a942e266cc702e7ea978b410ddc968eabadfaf50d86b67c9b4d68cb31915b1",
+    "bytes": 5489
+  },
+  {
+    "file": "findings.md",
+    "sha256": "66f4bfe4be74766d65e9706849b98d64e39141ec4e46bd1a0b274841455d0803",
+    "bytes": 19833
+  },
+  {
+    "file": "verification.md",
+    "sha256": "b16b5adc5fb5204397abff957de73e53da7585f1751fe6d32070be4c46b0957f",
+    "bytes": 6247
+  }
+]

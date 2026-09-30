@@ -1,0 +1,13 @@
+/* Address: CODE:5410; name: FUN_CODE_5410; body bytes: 24 */
+
+void FUN_CODE_5410(void)
+
+{
+  FUN_CODE_ae2a(0x53e);
+  DAT_EXTMEM_0541 = DAT_EXTMEM_051e;
+  DAT_EXTMEM_0542 = DAT_EXTMEM_051f;
+  DAT_EXTMEM_0543 = DAT_EXTMEM_0520;
+  DAT_EXTMEM_0544 = DAT_EXTMEM_0521;
+  return;
+}
+

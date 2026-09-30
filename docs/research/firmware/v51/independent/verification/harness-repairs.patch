@@ -1,0 +1,264 @@
+--- original/ch58x_bridge_checks.py
++++ recovered/ch58x_bridge_checks.py
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env python3
+ """Offline checks of the CH58x bridge (see notes/ch58x.md). Runs original code in Unicorn via ch58x_emu."""
+ import sys, os, struct
+-sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+ from ch58x_emu import Emu, frame
+ import ch58x_emu
+ 
+@@ -27,7 +27,7 @@
+ 
+ # ==== check t1
+ def check_t1():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     from ch58x_emu import Emu, frame
+     def hx(b): return bytes(b).hex(' ')
+     def gatt_write(e, ev, data):
+@@ -59,7 +59,7 @@
+ 
+ # ==== check t2
+ def check_t2():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     from ch58x_emu import Emu, frame
+     def hx(b): return bytes(b).hex(' ')
+     def gatt_write(e, ev, data):
+@@ -96,7 +96,7 @@
+ 
+ # ==== check t3
+ def check_t3():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     from ch58x_emu import Emu, frame
+     def hx(b): return bytes(b).hex(' ')
+     def gatt_write(e, ev, data):
+@@ -127,7 +127,7 @@
+ 
+ # ==== check t4
+ def check_t4():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     from ch58x_emu import Emu, frame
+     def hx(b): return bytes(b).hex(' ')
+     def uart_in(e, raw):
+@@ -190,7 +190,7 @@
+ 
+ # ==== check t5
+ def check_t5():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     e = Emu(); e.call(0x55c0)
+     f1 = frame(0x12, bytes([0xc4])); f2 = frame(0x12, bytes([0xc2]))
+     usb_out(e, f1 + f2); loop(e); print("two frames in one report -> UART:", hx(e.uart1_tx)); e.uart1_tx.clear()
+@@ -203,7 +203,7 @@
+ 
+ # ==== check t6
+ def check_t6():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     e = Emu()
+     e.w(0x20004c08, b"\x02")
+     e.w(0x20004be5, bytes([1,2,3,4,5,6, 7,8,9,10,11,12]))
+@@ -221,7 +221,7 @@
+ 
+ # ==== check t7
+ def check_t7():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     from ch58x_emu import Emu
+     from unicorn import UC_HOOK_MEM_WRITE, UC_HOOK_CODE
+     e = Emu()
+@@ -236,7 +236,7 @@
+ 
+ # ==== check t8
+ def check_t8():
+-    import sys, os, struct; sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++    import sys, os, struct; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+     import ch58x_emu
+     e = Emu()
+     msg = [0]
+--- original/ch58x_emu.py
++++ recovered/ch58x_emu.py
+@@ -15,10 +15,10 @@
+ from unicorn import Uc, UC_ARCH_RISCV, UC_MODE_RISCV32, UC_HOOK_CODE, UC_HOOK_MEM_WRITE
+ from unicorn.riscv_const import *
+ 
+-RE = os.path.expanduser("~/mp305b-fw-re/")
++RE = os.path.expanduser(os.environ.get("MP305_RE_WORKSPACE", "~/mp305b-fw-re")) + "/"
+ IMG = open(RE + "bin/ch58x.bin", "rb").read()
+ LIB = {}
+-for line in open(os.path.expanduser("~/mp305b/docs/research/firmware-v51/wch-sdk-api.tsv")).read().splitlines()[1:]:
++for line in open(os.path.join(os.environ.get("MP305_RE_REPO", os.path.expanduser("~/mp305b")), "docs/research/firmware-v51/wch-sdk-api.tsv")).read().splitlines()[1:]:
+     slot, _, name = line.split("\t")
+     LIB[int(slot, 16)] = name
+ STUB = 0x50000
+@@ -56,7 +56,7 @@
+         u.hook_add(UC_HOOK_MEM_WRITE, self._uw, begin=0x40003408, end=0x40003408)
+         # flash op dispatcher lives in RAM at 0x200028d6: emulate it
+         u.hook_add(UC_HOOK_CODE, self._flashop, begin=0x200028D6, end=0x200028D6)
+-        u.reg_write(UC_RISCV_REG_GP, 0x200023B8)
++        u.reg_write(UC_RISCV_REG_GP, 0x20002000)
+ 
+     # --- helpers
+     def r(self, a, n): return bytes(self.u.mem_read(a, n))
+@@ -118,6 +118,8 @@
+         u.reg_write(UC_RISCV_REG_SP, sp)
+         u.reg_write(UC_RISCV_REG_RA, RET)
+         u.emu_start(fn, RET, count=limit)
++        if u.reg_read(UC_RISCV_REG_PC) != RET:
++            raise RuntimeError(f"RV32 call {fn:#x} exhausted its budget at {u.reg_read(UC_RISCV_REG_PC):#x}")
+         return u.reg_read(A[0])
+ 
+ 
+--- original/commands_emu.py
++++ recovered/commands_emu.py
+@@ -14,7 +14,7 @@
+ import sys
+ import struct
+ 
+-sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+ from emu_app import App  # noqa: E402
+ from unicorn.arm_const import UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2, UC_ARM_REG_R3, UC_ARM_REG_LR, UC_ARM_REG_PC  # noqa: E402
+ 
+--- original/commands_vectors.py
++++ recovered/commands_vectors.py
+@@ -9,7 +9,7 @@
+ import sys
+ import struct
+ 
+-sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+ from commands_emu import HT, S, K, GATE  # noqa: E402
+ from unicorn.arm_const import UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2  # noqa: E402
+ 
+--- original/emu_app.py
++++ recovered/emu_app.py
+@@ -1,4 +1,4 @@
+-"""Unicorn harness for app.bin (HC32F4A0, linked at 0x10000).
++"""Unicorn harness for app.bin (HC32 family, linked at 0x10000).
+ 
+ Usage from Python:
+     from emu_app import App
+@@ -18,7 +18,7 @@
+ from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_MODE_MCLASS, UC_HOOK_CODE, UC_HOOK_MEM_UNMAPPED
+ from unicorn.arm_const import *
+ 
+-RE = os.path.expanduser("~/mp305b-fw-re/")
++RE = os.path.expanduser(os.environ.get("MP305_RE_WORKSPACE", "~/mp305b-fw-re")) + "/"
+ TRAP = 0x1FFF00
+ 
+ 
+@@ -90,6 +90,8 @@
+         mu.reg_write(UC_ARM_REG_SP, sp)
+         mu.reg_write(UC_ARM_REG_LR, TRAP | 1)
+         mu.emu_start(addr | 1, TRAP, count=count)
++        if mu.reg_read(UC_ARM_REG_PC) != TRAP:
++            raise RuntimeError(f"ARM call {addr:#x} exhausted its budget at {mu.reg_read(UC_ARM_REG_PC):#x}")
+         return mu.reg_read(UC_ARM_REG_R0)
+ 
+ 
+--- original/hostlink_ch58x_route_tests.py
++++ recovered/hostlink_ch58x_route_tests.py
+@@ -5,7 +5,7 @@
+ 3. MCU frame -> USB IN reports (report ID 2, count, <=62 bytes) or GATT AF01/AF02.
+ """
+ import sys
+-sys.path.insert(0, '/Users/jihlenburg/mp305b-fw-re/scripts')
++sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+ from hostlink_emu_ch58x import CH
+ from hostlink_emu_tests import encode
+ 
+@@ -39,10 +39,14 @@
+     c.call(0x4E86)
+     for _ in range(3):
+         c.call(0x4628)
++    assert uart == [frame], (label, uart, frame)
+     print('USB OUT %-16s %-24s -> UART %s' % (label, frame.hex(' '), [u.hex(' ') for u in uart]))
+ 
+ def mcu_frame(body, dst, label):
+     c = CH(); usb = []; gatt = []
++    # Binding success writes DataFlash. Model the external flash operation
++    # as successful, just as cmds() does; persistence is checked separately.
++    c.hooks[0x200028D6] = lambda ch: 0
+     c.hooks[0x2A5E] = lambda ch: None
+     buf = 0x2000A000; c.w32(0x20002F54, buf); c.w8(0x20003A49, 1)
+     c.hooks[0x6F6C] = lambda ch: gatt.append(('AF02', ch.read(ch.a(0), ch.a(1))))
+@@ -55,6 +59,12 @@
+         if c.r8(0x20003A4A):
+             c.w8(0x20003A49, 1); c.call(0x3E1A)
+             usb.append(c.read(buf + 0x40, 64))
++    if dst == 1:
++        assert all(u[0] == 2 and 0 < u[1] <= 62 for u in usb), usb
++        assert b''.join(u[2:2+u[1]] for u in usb) == w, (usb, w)
++    else:
++        expected = ('AF01', b'\x31' + body[:-1]) if body[-1] == 0x31 else ('AF02', body[:-1])
++        assert gatt == [expected], (gatt, expected)
+     print('MCU->%s wire %s' % (label, w.hex(' ')))
+     for u in usb: print('    USB IN report: ' + u[:u[1] + 2].hex(' '))
+     for g in gatt: print('    GATT %s notify: %s' % (g[0], g[1].hex(' ')))
+--- original/hostlink_emu_ch58x.py
++++ recovered/hostlink_emu_ch58x.py
+@@ -1,3 +1,4 @@
++import os
+ """Minimal Unicorn harness for the CH58x image (hostlink analysis).
+ 
+ Maps flash at 0x0 (image at 0x1000), RAM 0x20000000-0x20010000 with the
+@@ -9,7 +10,7 @@
+ from unicorn import Uc, UC_ARCH_RISCV, UC_MODE_RISCV32, UC_HOOK_CODE, UC_HOOK_MEM_UNMAPPED
+ from unicorn.riscv_const import *
+ 
+-RE = '/Users/jihlenburg/mp305b-fw-re/'
++RE = os.path.expanduser(os.environ.get("MP305_RE_WORKSPACE", "~/mp305b-fw-re")) + "/"
+ TRAP = 0x7FF00
+ LIBSTUB = 0x7E000   # stub i at LIBSTUB + 4*i
+ 
+@@ -95,4 +96,6 @@
+         mu.reg_write(UC_RISCV_REG_SP, 0x2000BFF0)
+         mu.reg_write(UC_RISCV_REG_RA, TRAP)
+         mu.emu_start(addr, TRAP, count=count)
++        if mu.reg_read(UC_RISCV_REG_PC) != TRAP:
++            raise RuntimeError(f"RV32 call {addr:#x} exhausted its budget at {mu.reg_read(UC_RISCV_REG_PC):#x}")
+         return mu.reg_read(UC_RISCV_REG_A0)
+--- original/hostlink_emu_tests.py
++++ recovered/hostlink_emu_tests.py
+@@ -3,7 +3,7 @@
+ Run: ~/mp305b-fw-re/.venv/bin/python ~/mp305b-fw-re/scripts/hostlink_emu_tests.py
+ """
+ import sys, os
+-sys.path.insert(0, os.path.expanduser('~/mp305b-fw-re/scripts'))
++sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+ from emu_app import App
+ 
+ DEC = 0x146B8        # decoder byte step (channel, byte) -> record ptr or 0
+@@ -53,6 +53,7 @@
+         if fw_encode(a, s, d, body) != encode(s, d, body):
+             bad += 1
+             print('ENC MISMATCH', s, d, body.hex())
++    assert bad == 0, f'{bad} encoder mismatches'
+     print('encoder: %d cases, %d mismatches' % (len(cases), bad))
+ 
+ def rec(a, ch):
+@@ -76,6 +77,7 @@
+         ok = r[-1] != 0 and all(x == 0 for x in r[:-1]) and rec(a, 1) == (s, d, body)
+         if not ok:
+             bad += 1; print('DEC FAIL', s, d, body.hex(), [hex(x) for x in r[-3:]])
++    assert bad == 0, f'{bad} decoder mismatches'
+     print('decoder round trip: %d frames, %d failures' % (n, bad))
+     # edge cases
+     a = App()
+--- original/power_xref.py
++++ recovered/power_xref.py
+@@ -11,7 +11,7 @@
+ import re
+ import sys
+ 
+-sys.path.insert(0, os.path.expanduser("~/mp305b-fw-re/scripts"))
++sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+ import power_dis as P  # noqa: E402
+ 
+ FUNCS = sys.argv[1]

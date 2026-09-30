@@ -1,0 +1,96 @@
+{
+  "scope": "All 15 shared C, function, reference and string export files",
+  "files": [
+    {
+      "file": "app_decomp.c",
+      "recovered_sha256": "8f61cd7e183cd301b85ffcbbf9e49326cd5202952afce3e51f752a2d97622f63",
+      "reproduced_sha256": "8f61cd7e183cd301b85ffcbbf9e49326cd5202952afce3e51f752a2d97622f63",
+      "passed": true
+    },
+    {
+      "file": "app_decomp_fixed.c",
+      "recovered_sha256": "4eecf1748226cd0ed3ece0480ca4ef728476734d8dd6639a2c9a5bc20ecfd7b1",
+      "reproduced_sha256": "4eecf1748226cd0ed3ece0480ca4ef728476734d8dd6639a2c9a5bc20ecfd7b1",
+      "passed": true
+    },
+    {
+      "file": "app_functions.tsv",
+      "recovered_sha256": "de4c74694e071341181af40c23a3238d6ffe74a417fa222b1752d51d10237144",
+      "reproduced_sha256": "de4c74694e071341181af40c23a3238d6ffe74a417fa222b1752d51d10237144",
+      "passed": true
+    },
+    {
+      "file": "app_functions_fixed.tsv",
+      "recovered_sha256": "b6cd714caaa26ff19ccdebffb527da1afa92f919f8c694b9cf9e9d60bcdc118a",
+      "reproduced_sha256": "b6cd714caaa26ff19ccdebffb527da1afa92f919f8c694b9cf9e9d60bcdc118a",
+      "passed": true
+    },
+    {
+      "file": "app_refs.tsv",
+      "recovered_sha256": "b4809ea439e688ca9c9db604b4841b5cbe49707dd38803dfddef15ca1a2bbcdc",
+      "reproduced_sha256": "b4809ea439e688ca9c9db604b4841b5cbe49707dd38803dfddef15ca1a2bbcdc",
+      "passed": true
+    },
+    {
+      "file": "app_strings.tsv",
+      "recovered_sha256": "671ddbefc47ae439306c1963ce3ee4a150dff4efaa12fbfe2fc9b577bbac73b9",
+      "reproduced_sha256": "671ddbefc47ae439306c1963ce3ee4a150dff4efaa12fbfe2fc9b577bbac73b9",
+      "passed": true
+    },
+    {
+      "file": "ch58x_decomp.c",
+      "recovered_sha256": "d162d41daa2c9a323765adb78adbc553a98e32b8d303bea878be3e0672090876",
+      "reproduced_sha256": "d162d41daa2c9a323765adb78adbc553a98e32b8d303bea878be3e0672090876",
+      "passed": true
+    },
+    {
+      "file": "ch58x_decomp_fixed.c",
+      "recovered_sha256": "e7dace4efea37531d964af7577531059eb901f6996779ded1311abc10ca000d2",
+      "reproduced_sha256": "e7dace4efea37531d964af7577531059eb901f6996779ded1311abc10ca000d2",
+      "passed": true
+    },
+    {
+      "file": "ch58x_functions.tsv",
+      "recovered_sha256": "ed24ff0e6867540ae5d13051e2ab8bbc9a40e8d87d18f1e446e07b68209e749d",
+      "reproduced_sha256": "ed24ff0e6867540ae5d13051e2ab8bbc9a40e8d87d18f1e446e07b68209e749d",
+      "passed": true
+    },
+    {
+      "file": "ch58x_refs.tsv",
+      "recovered_sha256": "30fdbd39d65fc9204c74c759c438f0e5e5d0bb4f61ccf992859c8beb329cb7e8",
+      "reproduced_sha256": "30fdbd39d65fc9204c74c759c438f0e5e5d0bb4f61ccf992859c8beb329cb7e8",
+      "passed": true
+    },
+    {
+      "file": "ch58x_strings.tsv",
+      "recovered_sha256": "cff93c0799a67726575dc9cd38ad3bd3f01b2c51ef89d27df7e3fabb04064489",
+      "reproduced_sha256": "cff93c0799a67726575dc9cd38ad3bd3f01b2c51ef89d27df7e3fabb04064489",
+      "passed": true
+    },
+    {
+      "file": "pd8051_decomp.c",
+      "recovered_sha256": "9e8335d2e95c5499c6cf1dcfa7339137d6efe2d448cb284241011b29319d6f78",
+      "reproduced_sha256": "9e8335d2e95c5499c6cf1dcfa7339137d6efe2d448cb284241011b29319d6f78",
+      "passed": true
+    },
+    {
+      "file": "pd8051_functions.tsv",
+      "recovered_sha256": "eb8ff92a0e958cd7f203abb81321c7bce323d8957eac07d57711c1446161a736",
+      "reproduced_sha256": "eb8ff92a0e958cd7f203abb81321c7bce323d8957eac07d57711c1446161a736",
+      "passed": true
+    },
+    {
+      "file": "pd8051_refs.tsv",
+      "recovered_sha256": "f2d7cece81373879f8860373d21aefbf83133cd47fc47cc85118656e16b491b9",
+      "reproduced_sha256": "f2d7cece81373879f8860373d21aefbf83133cd47fc47cc85118656e16b491b9",
+      "passed": true
+    },
+    {
+      "file": "pd8051_strings.tsv",
+      "recovered_sha256": "e32220e27733892f5c3c89f484fce5bba0bf7793c77910c7dc72ea3a9aa6c200",
+      "reproduced_sha256": "e32220e27733892f5c3c89f484fce5bba0bf7793c77910c7dc72ea3a9aa6c200",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

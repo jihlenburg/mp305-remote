@@ -1,0 +1,20 @@
+[
+  {
+    "file": "MP305.pdf",
+    "url": "https://www.isdt.co/down/pdf/MP305.pdf",
+    "bytes": 11253649,
+    "sha256": "7a1ac2cf44cb6cf02196bc3e6537c994fa42d0811bd16773fc38e86f223592a1"
+  },
+  {
+    "file": "SC8815-valid.pdf",
+    "url": "https://datasheet.lcsc.com/datasheet/pdf/166c1651342e6c0583cf5aa024478e9d.pdf",
+    "bytes": 1621238,
+    "sha256": "cf95c6bca5e5e8909dfbc1874831afbbd63f4fc13c76344b1e1c25c565dd2a25"
+  },
+  {
+    "file": "JD9853.pdf",
+    "url": "https://files.waveshare.com/wiki/common/Jd9853_datasheet.pdf",
+    "bytes": 4435586,
+    "sha256": "5e41045f897cb523f024ec45f6ccf1b8f1306c0a370daf517c63adb7d61abbe4"
+  }
+]

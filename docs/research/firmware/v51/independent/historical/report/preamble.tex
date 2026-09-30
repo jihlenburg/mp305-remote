@@ -1,0 +1,73 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{tgheros}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[a4paper,margin=22mm,top=24mm,bottom=26mm]{geometry}
+\usepackage{microtype}
+\usepackage[table]{xcolor}
+\usepackage{booktabs,longtable,array,tabularx}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.misc,fit,calc}
+\usepackage[hidelinks,bookmarksnumbered]{hyperref}
+
+% Colours
+\definecolor{ink}{HTML}{1F2933}
+\definecolor{accent}{HTML}{1B5E8A}
+\definecolor{muted}{HTML}{5B6770}
+\definecolor{okgreen}{HTML}{2E7D32}
+\definecolor{fixred}{HTML}{B23A2E}
+\definecolor{newblue}{HTML}{1565C0}
+\definecolor{openamber}{HTML}{B7791F}
+\definecolor{rowgrey}{HTML}{F3F5F7}
+\definecolor{boxbg}{HTML}{EEF4F9}
+\color{ink}
+
+% Headings in sans serif, sentence case
+\titleformat{\section}{\sffamily\Large\bfseries\color{accent}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries}{\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{2.2ex}{1.2ex}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55ex plus 0.2ex}
+\setlist{nosep,leftmargin=1.4em,topsep=0.4ex}
+\captionsetup{font={small,sf},labelfont=bf}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small\color{muted}MP305B firmware 1.6.0.51}
+\fancyhead[R]{\sffamily\small\color{muted}Independent reconstruction and cross-check}
+\fancyfoot[C]{\sffamily\small\color{muted}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+% Notation
+\newcommand{\addr}[1]{\texttt{#1}}
+\newcommand{\op}[1]{\texttt{#1}}
+\newcommand{\hexb}[1]{\texttt{#1}}
+\newcommand{\tagc}[2]{\colorbox{#1!12}{\sffamily\scriptsize\bfseries\textcolor{#1}{#2}}}
+\newcommand{\Confirmed}{\tagc{okgreen}{CONFIRMED}}
+\newcommand{\Corrected}{\tagc{fixred}{CORRECTED}}
+\newcommand{\New}{\tagc{newblue}{NEW}}
+\newcommand{\Open}{\tagc{openamber}{OPEN}}
+\newcommand{\Scope}{\tagc{muted}{OUT OF SCOPE}}
+
+% Callout box without tcolorbox
+\newsavebox{\calloutbox}
+\newenvironment{callout}[1]{\setlength{\fboxsep}{7pt}\begin{lrbox}{\calloutbox}%
+  \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}%
+  {\sffamily\bfseries\color{accent}#1}\par\smallskip}{%
+  \end{minipage}\end{lrbox}\par\smallskip\noindent\fcolorbox{accent!40}{boxbg}{\usebox{\calloutbox}}\par\smallskip}
+
+\lstset{basicstyle=\ttfamily\footnotesize,columns=fullflexible,keepspaces=true,
+  frame=single,rulecolor=\color{muted!40},backgroundcolor=\color{rowgrey},
+  xleftmargin=4pt,xrightmargin=4pt,breaklines=true}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.18}

@@ -1,0 +1,4 @@
+program=pd-8051.bin
+processor=8051:BE:16:default
+functions=1007
+decompiled=1007

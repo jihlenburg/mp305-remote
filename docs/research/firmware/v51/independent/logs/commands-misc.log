@@ -1,0 +1,58 @@
+
+#### Language, bind, ignored opcodes and companion messages
+
+| # | Setup | Type | Request | Reply | State changes | Calls |
+|---|---|---|---|---|---|---|
+| 1 | reset state | 6 | `A2 01 31` | `A3 00 31` | S+0x0:00>01, XFER+0x9:00>01, CFG+0x0:00>01, CFG+0x16:00>01, CFG+0x7C:00>02 | outReq(0), saveCfg |
+| 2 | 0x1fffa0ce=1 | 6 | `A2 00 31` | `A3 00 31` | S+0x0:00>01, XFER+0x9:00>01, CFG+0x16:01>00 | outReq(0), saveCfg |
+| 3 | 0x1fffa0ce=1 | 6 | `A2 05 31` | `A3 00 31` | S+0x0:00>01, XFER+0x9:00>01, CFG+0x16:01>00 | outReq(0), saveCfg |
+| 4 | 0x1fffa0ce=1 | 6 | `A2 01 31` | `A3 00 31` | - | - |
+| 5 | S+0x30=3 | 6 | `A2 01 31` | `A3 00 31` | S+0x0:00>01, XFER+0x9:00>01, CFG+0x0:00>01, CFG+0x7:00>03, CFG+0x16:00>01, CFG+0x7C:00>05 | chargeStop, saveCfg |
+| 6 | reset state | 6 | `18 00 08 08 08 08 08 08 08 08 08 08 08 08 08 08 08 08 00 00 00` | `none` | S+0x47:00>01, K+0x6:00>06 | - |
+| 7 | reset state | 6 | `01 00 31` | `none` | - | - |
+| 8 | reset state | 6 | `19 00 31` | `none` | - | - |
+| 9 | reset state | 6 | `C3 00 31` | `none` | - | - |
+| 10 | reset state | 6 | `C9 00 31` | `none` | - | - |
+| 11 | reset state | 6 | `DD 00 31` | `none` | - | - |
+| 12 | reset state | 6 | `DF 00 31` | `none` | - | - |
+| 13 | reset state | 6 | `E3 00 31` | `none` | - | - |
+| 14 | reset state | 6 | `E5 00 31` | `none` | - | - |
+| 15 | reset state | 6 | `E6 00 31` | `none` | - | - |
+| 16 | reset state | 6 | `E7 00 31` | `none` | - | - |
+| 17 | reset state | 6 | `E9 00 31` | `none` | - | - |
+| 18 | reset state | 6 | `EB 00 31` | `none` | - | - |
+| 19 | reset state | 6 | `ED 00 31` | `none` | - | - |
+| 20 | reset state | 6 | `EF 00 31` | `none` | - | - |
+| 21 | reset state | 6 | `F3 00 31` | `none` | - | - |
+| 22 | reset state | 6 | `F5 00 31` | `none` | - | - |
+| 23 | reset state | 6 | `F7 00 31` | `none` | - | - |
+| 24 | reset state | 6 | `F8 00 31` | `none` | - | - |
+| 25 | reset state | 6 | `F9 00 31` | `none` | - | - |
+| 26 | reset state | 6 | `FA 00 31` | `none` | - | - |
+| 27 | reset state | 6 | `FB 00 31` | `none` | - | - |
+| 28 | reset state | 6 | `FF 00 31` | `none` | - | - |
+| 29 | reset state | 6 | `50 00 31` | `none` | - | - |
+| 30 | reset state | 6 | `52 00 31` | `none` | - | - |
+| 31 | reset state | 6 | `55 00 31` | `none` | - | - |
+| 32 | reset state | 6 | `AA 00 31` | `none` | - | - |
+| 33 | reset state | 6 | `10 00 31` | `none` | - | - |
+| 34 | reset state | 6 | `11 00 31` | `none` | - | - |
+| 35 | 0x1fff954b=1 | 3 | `51 00` | `none` | CAP+0x14:00>E8, CAP+0x15:00>03 | - |
+| 36 | 0x1fff954b=1 | 3 | `51 01` | `none` | - | - |
+| 37 | 0x1fff954b=1 | 6 | `51 00 31` | `none` | - | - |
+| 38 | 0x1fff954c=1 | 3 | `53 00` | `none` | CAP+0x14:00>E8, CAP+0x15:00>03 | - |
+| 39 | 0x1fffa00e=1 | 3 | `F1 00` | `none` | UPD+0x2:01>02 | - |
+| 40 | reset state | 3 | `F1 00` | `none` | - | - |
+| 41 | reset state | 3 | `FD 03` | `none` | PWR+0x11A:00>01, GATE+0x109:00>20, CAP+0xC:00>01 | set_aa4e |
+| 42 | reset state | 3 | `FD FF` | `none` | CAP+0x10:00>01 | - |
+| 43 | reset state | 6 | `FD 03 31` | `none` | PWR+0x11A:00>01, GATE+0x109:00>20, CAP+0xC:00>01 | set_aa4e |
+| 44 | reset state | 6 | `BD 01 31` | `none` | S+0x3:00>01, K+0xD:00>02 | - |
+| 45 | S+0x3=1 | 6 | `BD 00 31` | `none` | S+0x3:01>00, K+0xD:00>02 | - |
+| 46 | reset state | 5 | `BD 01 41 42 43` | `none` | S+0x4:00>01, S+0x58:00>41, S+0x59:00>42, S+0x5A:00>43 | - |
+| 47 | S+0x4=1 | 5 | `BD 00` | `none` | S+0x4:01>00, K+0xD:00>02 | - |
+| 48 | reset state | 5 | `BE 01 31` | `none` | K+0xE:00>01 | - |
+| 49 | 0x1ffe0192=1 | 5 | `BE 00 01 31` | `none` | S+0x1D:00>01, K+0xE:01>00, K+0x2C:00>01 | - |
+| 50 | reset state | 5 | `BB 01 01 02 03 04 05 06 03 41 42 43 31` | `none` | S+0x3D:00>01 | - |
+| 51 | reset state | 3 | `E1 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 0A 0B 0C 0D` | `none` | CAP+0x8:00>0A, CAP+0x9:00>0B, CAP+0xA:00>0C, CAP+0xB:00>0D | - |
+| 52 | 0x1fff9434=1 | 3 | `E1 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 0A 0B 0C 0D` | `none` | CAP+0x0:00>0A, CAP+0x1:00>0B, CAP+0x2:00>0C, CAP+0x3:00>0D, CAP+0x4:00>0A, CAP+0x5:00>0B, CAP+0x6:00>0C, CAP+0x7:00>0D | - |
+| 53 | reset state | 6 | `E1 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 0A 0B 0C 0D 31` | `none` | - | - |

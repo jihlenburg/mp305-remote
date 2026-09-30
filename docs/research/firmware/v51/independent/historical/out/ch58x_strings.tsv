@@ -1,0 +1,38 @@
+ram:00008dea	experimental	
+ram:00008df8	Firmware Revision	
+ram:00008e0c	Hardware Revision	
+ram:00008e20	Manufacturer Name	
+ram:00008e34	Model Number	
+ram:00008e44	Serial Number	
+ram:00008e54	Software Revision	
+ram:00008e68	CH58x_BLE_LIB_V1.8	FUN_ram_000032b6
+ram:00008e9c	%d,%d,%d,%d\n	FUN_ram_00004964
+ram:00008eac	------------%d,%d\n	FUN_ram_00004964
+ram:00008ec0	GRB:(%d,%d,%d)	FUN_ram_00004916
+ram:00008f0c	Data-%x:	FUN_ram_00004e1a
+ram:00009020	TypeRspAnalysis	FUN_ram_00005af0
+ram:00009030	%02x 	FUN_ram_00005af0
+ram:00009038	ReadcentralCharHdl:%x\n	FUN_ram_00005af0
+ram:00009050	----------------Analysis------------------	FUN_ram_00005864
+ram:0000907c	------USAGE_PAGE:Generic Desktop--------	FUN_ram_00005864
+ram:000090a8	-GLOBAL_LOG_MIN:%x-\n	FUN_ram_00005864
+ram:000090c0	-GLOBAL_LOG_MAX:%x-\n	FUN_ram_00005864
+ram:000090d8	-GLOBAL_PHY_MIN:%x-\n	FUN_ram_00005864
+ram:000090f0	-GLOBAL_PHY_MAX:%x-\n	FUN_ram_00005864
+ram:00009108	-GLOBAL_REPORT_SIZE:%x-\n	FUN_ram_00005864
+ram:00009124	-GLOBAL_REPORT_ID:%x-\n	FUN_ram_00005864
+ram:0000913c	-GLOBAL_REPORT_CNT:%x-\n	FUN_ram_00005864
+ram:00009154	Collection: 	FUN_ram_00005864
+ram:00009164	End Collection	FUN_ram_00005864
+ram:00009174	Input: 	FUN_ram_00005864
+ram:0000917c	Output: 	FUN_ram_00005864
+ram:00009188	------END_COLLECTION--------	FUN_ram_00005864
+ram:000091a8	Button:%x,Wheel:%x,Num:%x\n	FUN_ram_00005864
+ram:000091c4	16-bit UUID: 0x%04X\n	FUN_ram_000065a0
+ram:000091dc	16-bit ad_type: %x\n	FUN_ram_000065a0
+ram:000091f0	Manufacturer Data Len:%d\n	FUN_ram_000065a0
+ram:0000920c	%02X 	FUN_ram_000065a0
+ram:00009280	efgEFG	FUN_ram_00008402
+ram:00009288	0123456789ABCDEF	FUN_ram_000087aa
+ram:0000929c	0123456789abcdef	
+ram:20002e9e	MP305B	FUN_ram_00006cb0

@@ -1,0 +1,23 @@
+{
+  "report_descriptor_address": "0x8f4c",
+  "report_descriptor_data_offset": "0x12f4c",
+  "report_descriptor_hex": "05010900a10185010901150025ff7508953f918285020902150025ff7508953f8182c0",
+  "configuration_address": "0x8f70",
+  "configuration_hex": "09022900010100c0320904000002030000000921110100012223000705810340000107050103400001",
+  "device_descriptor_address": "0x8f9c",
+  "device_descriptor_data_offset": "0x12f9c",
+  "device_descriptor_hex": "1201000200000040e9288a02000201020301",
+  "vid": "0x28e9",
+  "pid": "0x28a",
+  "reports": {
+    "out": {
+      "id": 1,
+      "bytes_after_id": 63
+    },
+    "in": {
+      "id": 2,
+      "bytes_after_id": 63
+    }
+  },
+  "firmware_tx_chunk_max": 62
+}

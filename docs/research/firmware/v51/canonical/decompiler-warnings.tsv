@@ -1,0 +1,736 @@
+export	address	name	warning
+arm	00010358	Reset_Handler	/* WARNING: This function may have set the stack pointer */
+arm	00010368	FUN_00010368	/* WARNING: Do nothing block with infinite loop */
+arm	0001036a	FUN_0001036a	/* WARNING: Do nothing block with infinite loop */
+arm	0001036c	FUN_0001036c	/* WARNING: Do nothing block with infinite loop */
+arm	0001036e	FUN_0001036e	/* WARNING: Do nothing block with infinite loop */
+arm	00010370	FUN_00010370	/* WARNING: Do nothing block with infinite loop */
+arm	00010374	FUN_00010374	/* WARNING: Do nothing block with infinite loop */
+arm	00010f24	FUN_00010f24	/* WARNING: Type propagation algorithm not settling */
+arm	000146d0	FUN_000146d0	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+arm	000146dc	FUN_000146dc	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+arm	00014720	FUN_00014720	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+arm	0001472c	FUN_0001472c	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+arm	000149c8	FUN_000149c8	/* WARNING: Removing unreachable block (ram,0x000658a2) */
+arm	00014e38	FUN_00014e38	/* WARNING: Removing unreachable block (ram,0x0004e6ba) */
+arm	00014e38	FUN_00014e38	/* WARNING: Removing unreachable block (ram,0x0004e6c4) */
+arm	00015060	FUN_00015060	/* WARNING: Removing unreachable block (ram,0x0004e6ba) */
+arm	00015060	FUN_00015060	/* WARNING: Removing unreachable block (ram,0x0004e6c4) */
+arm	000160b0	FUN_000160b0	/* WARNING: Do nothing block with infinite loop */
+arm	00016538	FUN_00016538	/* WARNING: Do nothing block with infinite loop */
+arm	0001814c	FUN_0001814c	/* WARNING: Do nothing block with infinite loop */
+arm	00019e0c	FUN_00019e0c	/* WARNING: Removing unreachable block (ram,0x0001f460) */
+arm	00019e0c	FUN_00019e0c	/* WARNING: Removing unreachable block (ram,0x0001f458) */
+arm	00019e0c	FUN_00019e0c	/* WARNING: Removing unreachable block (ram,0x0001f4b2) */
+arm	00019e0c	FUN_00019e0c	/* WARNING: Removing unreachable block (ram,0x0001f49e) */
+arm	00019e0c	FUN_00019e0c	/* WARNING: Removing unreachable block (ram,0x0001f4b6) */
+arm	0001b4d0	cmd_e2	/* WARNING: Removing unreachable block (ram,0x0001b52c) */
+arm	0001b634	cmd_e0_device_info	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+arm	0001d520	cmd_e8	/* WARNING: Removing unreachable block (ram,0x0001d57c) */
+arm	0001dae8	update_system_clock	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+arm	0001eef0	FUN_0001eef0	/* WARNING: Removing unreachable block (ram,0x0001efbe) */
+arm	0001eef0	FUN_0001eef0	/* WARNING: Removing unreachable block (ram,0x0001efa6) */
+arm	0001eef0	FUN_0001eef0	/* WARNING: Removing unreachable block (ram,0x0001efb2) */
+arm	0001eef0	FUN_0001eef0	/* WARNING: Removing unreachable block (ram,0x0001efca) */
+arm	0001ef40	FUN_0001ef40	/* WARNING: Removing unreachable block (ram,0x0001efbe) */
+arm	0001ef40	FUN_0001ef40	/* WARNING: Removing unreachable block (ram,0x0001efa6) */
+arm	0001ef40	FUN_0001ef40	/* WARNING: Removing unreachable block (ram,0x0001efb2) */
+arm	0001ef40	FUN_0001ef40	/* WARNING: Removing unreachable block (ram,0x0001efca) */
+arm	0001f02c	FUN_0001f02c	/* WARNING: Removing unreachable block (ram,0x0001efbe) */
+arm	0001f02c	FUN_0001f02c	/* WARNING: Removing unreachable block (ram,0x0001efa6) */
+arm	0001f02c	FUN_0001f02c	/* WARNING: Removing unreachable block (ram,0x0001efb2) */
+arm	0001f02c	FUN_0001f02c	/* WARNING: Removing unreachable block (ram,0x0001efca) */
+arm	0001feb8	FUN_0001feb8	/* WARNING: Do nothing block with infinite loop */
+arm	0002156a	FUN_0002156a	/* WARNING: Do nothing block with infinite loop */
+arm	0002156a	FUN_0002156a	/* WARNING: Do nothing block with infinite loop */
+arm	000229b4	FUN_000229b4	/* WARNING: Do nothing block with infinite loop */
+arm	00023690	FUN_00023690	/* WARNING: Do nothing block with infinite loop */
+arm	000236a0	FUN_000236a0	/* WARNING: Do nothing block with infinite loop */
+arm	000236ba	FUN_000236ba	/* WARNING: Do nothing block with infinite loop */
+arm	000236ba	FUN_000236ba	/* WARNING: Do nothing block with infinite loop */
+arm	00023730	FUN_00023730	/* WARNING: Do nothing block with infinite loop */
+arm	00023730	FUN_00023730	/* WARNING: Do nothing block with infinite loop */
+arm	00023970	FUN_00023970	/* WARNING: Could not recover jumptable at 0x0002398c. Too many branches */
+arm	00023970	FUN_00023970	/* WARNING: Treating indirect jump as call */
+arm	00024b34	FUN_00024b34	/* WARNING: Do nothing block with infinite loop */
+arm	00024b6a	FUN_00024b6a	/* WARNING: Do nothing block with infinite loop */
+arm	00024b6a	FUN_00024b6a	/* WARNING: Do nothing block with infinite loop */
+arm	00024b6a	FUN_00024b6a	/* WARNING: Do nothing block with infinite loop */
+arm	00024be0	FUN_00024be0	/* WARNING: Do nothing block with infinite loop */
+arm	00024be0	FUN_00024be0	/* WARNING: Do nothing block with infinite loop */
+arm	00024cb4	FUN_00024cb4	/* WARNING: Do nothing block with infinite loop */
+arm	00024cb4	FUN_00024cb4	/* WARNING: Do nothing block with infinite loop */
+arm	00024cea	FUN_00024cea	/* WARNING: Do nothing block with infinite loop */
+arm	00024d00	FUN_00024d00	/* WARNING: Do nothing block with infinite loop */
+arm	00024d00	FUN_00024d00	/* WARNING: Do nothing block with infinite loop */
+arm	00024d72	FUN_00024d72	/* WARNING: Do nothing block with infinite loop */
+arm	00024d72	FUN_00024d72	/* WARNING: Do nothing block with infinite loop */
+arm	00024d72	FUN_00024d72	/* WARNING: Do nothing block with infinite loop */
+arm	00025050	FUN_00025050	/* WARNING: Could not recover jumptable at 0x0002509c. Too many branches */
+arm	00025050	FUN_00025050	/* WARNING: Treating indirect jump as call */
+arm	00025dac	FUN_00025dac	/* WARNING: Type propagation algorithm not settling */
+arm	000261ec	FUN_000261ec	/* WARNING: Type propagation algorithm not settling */
+arm	00026cac	FUN_00026cac	/* WARNING: Do nothing block with infinite loop */
+arm	000270ec	FUN_000270ec	/* WARNING: Do nothing block with infinite loop */
+arm	00027ee0	FUN_00027ee0	/* WARNING: Do nothing block with infinite loop */
+arm	00028036	FUN_00028036	/* WARNING: Could not recover jumptable at 0x0002803c. Too many branches */
+arm	00028036	FUN_00028036	/* WARNING: Treating indirect jump as call */
+arm	00028036	FUN_00028036	/* WARNING: Do nothing block with infinite loop */
+arm	0002cb6c	FUN_0002cb6c	/* WARNING: Do nothing block with infinite loop */
+arm	00035c48	FUN_00035c48	/* WARNING: Do nothing block with infinite loop */
+arm	00035c9c	FUN_00035c9c	/* WARNING: Do nothing block with infinite loop */
+arm	00035c9c	FUN_00035c9c	/* WARNING: Do nothing block with infinite loop */
+arm	00035fe2	FUN_00035fe2	/* WARNING: Type propagation algorithm not settling */
+arm	00036530	FUN_00036530	/* WARNING: Do nothing block with infinite loop */
+arm	000370ac	FUN_000370ac	/* WARNING: Do nothing block with infinite loop */
+arm	000370ac	FUN_000370ac	/* WARNING: Do nothing block with infinite loop */
+arm	000372dc	FUN_000372dc	/* WARNING: Do nothing block with infinite loop */
+arm	00037610	FUN_00037610	/* WARNING: Do nothing block with infinite loop */
+arm	00037610	FUN_00037610	/* WARNING: Do nothing block with infinite loop */
+arm	00037c5c	FUN_00037c5c	/* WARNING: Do nothing block with infinite loop */
+arm	00037d0e	FUN_00037d0e	/* WARNING: Do nothing block with infinite loop */
+arm	0003924c	FUN_0003924c	/* WARNING: Do nothing block with infinite loop */
+arm	0003a318	FUN_0003a318	/* WARNING: Do nothing block with infinite loop */
+arm	0003a670	FUN_0003a670	/* WARNING: Do nothing block with infinite loop */
+arm	0003a74c	FUN_0003a74c	/* WARNING: Do nothing block with infinite loop */
+arm	0003a74c	FUN_0003a74c	/* WARNING: Do nothing block with infinite loop */
+arm	0003a74c	FUN_0003a74c	/* WARNING: Do nothing block with infinite loop */
+arm	0003a8f4	FUN_0003a8f4	/* WARNING: Do nothing block with infinite loop */
+arm	0003a8f4	FUN_0003a8f4	/* WARNING: Do nothing block with infinite loop */
+arm	0003a8f4	FUN_0003a8f4	/* WARNING: Do nothing block with infinite loop */
+arm	0003bf38	FUN_0003bf38	/* WARNING: Do nothing block with infinite loop */
+arm	0003cb6c	FUN_0003cb6c	/* WARNING: Do nothing block with infinite loop */
+arm	0003de0e	FUN_0003de0e	/* WARNING: Do nothing block with infinite loop */
+arm	0003de42	FUN_0003de42	/* WARNING: Do nothing block with infinite loop */
+arm	0003de60	FUN_0003de60	/* WARNING: Do nothing block with infinite loop */
+arm	0003ded6	FUN_0003ded6	/* WARNING: Do nothing block with infinite loop */
+arm	0003df98	FUN_0003df98	/* WARNING: Could not recover jumptable at 0x0003dfb2. Too many branches */
+arm	0003df98	FUN_0003df98	/* WARNING: Treating indirect jump as call */
+arm	0003e374	FUN_0003e374	/* WARNING: Do nothing block with infinite loop */
+arm	0003e608	FUN_0003e608	/* WARNING: Do nothing block with infinite loop */
+arm	0003f054	FUN_0003f054	/* WARNING: Do nothing block with infinite loop */
+arm	0003f054	FUN_0003f054	/* WARNING: Do nothing block with infinite loop */
+arm	0003f09e	FUN_0003f09e	/* WARNING: Do nothing block with infinite loop */
+arm	0003f09e	FUN_0003f09e	/* WARNING: Do nothing block with infinite loop */
+arm	0003f0e6	FUN_0003f0e6	/* WARNING: Do nothing block with infinite loop */
+arm	0003f130	FUN_0003f130	/* WARNING: Do nothing block with infinite loop */
+arm	0003f158	FUN_0003f158	/* WARNING: Do nothing block with infinite loop */
+arm	0003f16a	FUN_0003f16a	/* WARNING: Do nothing block with infinite loop */
+arm	0003f174	FUN_0003f174	/* WARNING: Do nothing block with infinite loop */
+arm	0003f17c	FUN_0003f17c	/* WARNING: Do nothing block with infinite loop */
+arm	0003f188	FUN_0003f188	/* WARNING: Do nothing block with infinite loop */
+arm	0003f194	FUN_0003f194	/* WARNING: Do nothing block with infinite loop */
+arm	0003f194	FUN_0003f194	/* WARNING: Do nothing block with infinite loop */
+arm	0003f1a8	FUN_0003f1a8	/* WARNING: Do nothing block with infinite loop */
+arm	0003f1b0	FUN_0003f1b0	/* WARNING: Do nothing block with infinite loop */
+arm	0003f1b0	FUN_0003f1b0	/* WARNING: Do nothing block with infinite loop */
+arm	0003f1ca	FUN_0003f1ca	/* WARNING: Do nothing block with infinite loop */
+arm	0003f486	FUN_0003f486	/* WARNING: Do nothing block with infinite loop */
+arm	0003f4be	FUN_0003f4be	/* WARNING: Do nothing block with infinite loop */
+arm	0003f4be	FUN_0003f4be	/* WARNING: Do nothing block with infinite loop */
+arm	0003f4be	FUN_0003f4be	/* WARNING: Do nothing block with infinite loop */
+arm	0003f77c	FUN_0003f77c	/* WARNING: Do nothing block with infinite loop */
+arm	0003f77c	FUN_0003f77c	/* WARNING: Do nothing block with infinite loop */
+arm	0003f91a	FUN_0003f91a	/* WARNING: Do nothing block with infinite loop */
+arm	0003f926	FUN_0003f926	/* WARNING: Do nothing block with infinite loop */
+arm	0003f960	FUN_0003f960	/* WARNING: Do nothing block with infinite loop */
+arm	0003f9a4	FUN_0003f9a4	/* WARNING: Do nothing block with infinite loop */
+arm	0003fa78	FUN_0003fa78	/* WARNING: Do nothing block with infinite loop */
+arm	0003ff88	FUN_0003ff88	/* WARNING: Do nothing block with infinite loop */
+arm	00040106	FUN_00040106	/* WARNING: Do nothing block with infinite loop */
+arm	000406b2	FUN_000406b2	/* WARNING: Do nothing block with infinite loop */
+arm	000406c0	FUN_000406c0	/* WARNING: Do nothing block with infinite loop */
+arm	000406c0	FUN_000406c0	/* WARNING: Do nothing block with infinite loop */
+arm	000406c0	FUN_000406c0	/* WARNING: Do nothing block with infinite loop */
+arm	00040b08	FUN_00040b08	/* WARNING: Do nothing block with infinite loop */
+arm	00040b08	FUN_00040b08	/* WARNING: Do nothing block with infinite loop */
+arm	00040b08	FUN_00040b08	/* WARNING: Do nothing block with infinite loop */
+arm	00040b08	FUN_00040b08	/* WARNING: Do nothing block with infinite loop */
+arm	00040b08	FUN_00040b08	/* WARNING: Do nothing block with infinite loop */
+arm	00040b08	FUN_00040b08	/* WARNING: Do nothing block with infinite loop */
+arm	000410a2	FUN_000410a2	/* WARNING: Do nothing block with infinite loop */
+arm	000410a2	FUN_000410a2	/* WARNING: Do nothing block with infinite loop */
+arm	000411a4	FUN_000411a4	/* WARNING: Could not recover jumptable at 0x000411c2. Too many branches */
+arm	000411a4	FUN_000411a4	/* WARNING: Treating indirect jump as call */
+arm	000411ca	FUN_000411ca	/* WARNING: Do nothing block with infinite loop */
+arm	0004126c	FUN_0004126c	/* WARNING: Do nothing block with infinite loop */
+arm	0004126c	FUN_0004126c	/* WARNING: Do nothing block with infinite loop */
+arm	0004137c	FUN_0004137c	/* WARNING: Do nothing block with infinite loop */
+arm	000413fe	FUN_000413fe	/* WARNING: Do nothing block with infinite loop */
+arm	000413fe	FUN_000413fe	/* WARNING: Do nothing block with infinite loop */
+arm	0004146e	FUN_0004146e	/* WARNING: Do nothing block with infinite loop */
+arm	0004146e	FUN_0004146e	/* WARNING: Do nothing block with infinite loop */
+arm	000414c8	FUN_000414c8	/* WARNING: Do nothing block with infinite loop */
+arm	00041554	FUN_00041554	/* WARNING: Do nothing block with infinite loop */
+arm	00041604	FUN_00041604	/* WARNING: Do nothing block with infinite loop */
+arm	00041788	FUN_00041788	/* WARNING: Could not recover jumptable at 0x000417a6. Too many branches */
+arm	00041788	FUN_00041788	/* WARNING: Treating indirect jump as call */
+arm	0004233c	FUN_0004233c	/* WARNING: Do nothing block with infinite loop */
+arm	00045204	FUN_00045204	/* WARNING: Do nothing block with infinite loop */
+arm	00045204	FUN_00045204	/* WARNING: Do nothing block with infinite loop */
+arm	000454e8	FUN_000454e8	/* WARNING: Do nothing block with infinite loop */
+arm	000464f2	FUN_000464f2	/* WARNING: Do nothing block with infinite loop */
+arm	000464f2	FUN_000464f2	/* WARNING: Do nothing block with infinite loop */
+arm	00046572	FUN_00046572	/* WARNING: Do nothing block with infinite loop */
+arm	0004663c	FUN_0004663c	/* WARNING: Do nothing block with infinite loop */
+arm	00046678	FUN_00046678	/* WARNING: Do nothing block with infinite loop */
+arm	00046680	FUN_00046680	/* WARNING: Do nothing block with infinite loop */
+arm	0004669c	FUN_0004669c	/* WARNING: Do nothing block with infinite loop */
+arm	000467c6	FUN_000467c6	/* WARNING: Do nothing block with infinite loop */
+arm	00046a2c	FUN_00046a2c	/* WARNING: Could not recover jumptable at 0x00046a32. Too many branches */
+arm	00046a2c	FUN_00046a2c	/* WARNING: Treating indirect jump as call */
+arm	00046a2c	FUN_00046a2c	/* WARNING: Do nothing block with infinite loop */
+arm	00046a36	FUN_00046a36	/* WARNING: Do nothing block with infinite loop */
+arm	00046a36	FUN_00046a36	/* WARNING: Do nothing block with infinite loop */
+arm	00046b72	FUN_00046b72	/* WARNING: Do nothing block with infinite loop */
+arm	00046bda	FUN_00046bda	/* WARNING: Could not recover jumptable at 0x00046be8. Too many branches */
+arm	00046bda	FUN_00046bda	/* WARNING: Treating indirect jump as call */
+arm	00046cd8	FUN_00046cd8	/* WARNING: Do nothing block with infinite loop */
+arm	00046dca	FUN_00046dca	/* WARNING: Do nothing block with infinite loop */
+arm	00046f3c	FUN_00046f3c	/* WARNING: Could not recover jumptable at 0x00046f92. Too many branches */
+arm	00046f3c	FUN_00046f3c	/* WARNING: Treating indirect jump as call */
+arm	00046faa	FUN_00046faa	/* WARNING: Do nothing block with infinite loop */
+arm	000470ce	FUN_000470ce	/* WARNING: Do nothing block with infinite loop */
+arm	00047164	FUN_00047164	/* WARNING: Do nothing block with infinite loop */
+arm	000471a4	FUN_000471a4	/* WARNING: Do nothing block with infinite loop */
+arm	000471d8	FUN_000471d8	/* WARNING: Do nothing block with infinite loop */
+arm	000471d8	FUN_000471d8	/* WARNING: Could not recover jumptable at 0x000471f8. Too many branches */
+arm	000471d8	FUN_000471d8	/* WARNING: Treating indirect jump as call */
+arm	00047298	FUN_00047298	/* WARNING: Do nothing block with infinite loop */
+arm	00047298	FUN_00047298	/* WARNING: Could not recover jumptable at 0x000472b8. Too many branches */
+arm	00047298	FUN_00047298	/* WARNING: Treating indirect jump as call */
+arm	000472ee	FUN_000472ee	/* WARNING: Do nothing block with infinite loop */
+arm	00047414	FUN_00047414	/* WARNING: Do nothing block with infinite loop */
+arm	0004743a	FUN_0004743a	/* WARNING: Do nothing block with infinite loop */
+arm	00047724	FUN_00047724	/* WARNING: Do nothing block with infinite loop */
+arm	00047d8e	FUN_00047d8e	/* WARNING: Do nothing block with infinite loop */
+arm	00047ef8	FUN_00047ef8	/* WARNING: Do nothing block with infinite loop */
+arm	000488b8	FUN_000488b8	/* WARNING: Removing unreachable block (ram,0x0004894a) */
+arm	00048958	FUN_00048958	/* WARNING: Do nothing block with infinite loop */
+arm	00048f08	FUN_00048f08	/* WARNING: Do nothing block with infinite loop */
+arm	00049080	FUN_00049080	/* WARNING: Do nothing block with infinite loop */
+arm	000491f4	FUN_000491f4	/* WARNING: Do nothing block with infinite loop */
+arm	000491f4	FUN_000491f4	/* WARNING: Do nothing block with infinite loop */
+arm	0004925c	FUN_0004925c	/* WARNING: Do nothing block with infinite loop */
+arm	00049974	FUN_00049974	/* WARNING: Do nothing block with infinite loop */
+arm	00049974	FUN_00049974	/* WARNING: Do nothing block with infinite loop */
+arm	000499de	FUN_000499de	/* WARNING: Do nothing block with infinite loop */
+arm	00049a7c	FUN_00049a7c	/* WARNING: Could not recover jumptable at 0x00049aaa. Too many branches */
+arm	00049a7c	FUN_00049a7c	/* WARNING: Treating indirect jump as call */
+arm	0004a0d8	FUN_0004a0d8	/* WARNING: Removing unreachable block (ram,0x0004a0fa) */
+arm	0004a3c4	FUN_0004a3c4	/* WARNING: Do nothing block with infinite loop */
+arm	0004a910	FUN_0004a910	/* WARNING: Do nothing block with infinite loop */
+arm	0004ab24	FUN_0004ab24	/* WARNING: Do nothing block with infinite loop */
+arm	0004ab24	FUN_0004ab24	/* WARNING: Do nothing block with infinite loop */
+arm	0004ab24	FUN_0004ab24	/* WARNING: Do nothing block with infinite loop */
+arm	0004af28	FUN_0004af28	/* WARNING: Do nothing block with infinite loop */
+arm	0004b144	FUN_0004b144	/* WARNING: Do nothing block with infinite loop */
+arm	0004b2e6	FUN_0004b2e6	/* WARNING: Could not recover jumptable at 0x0004b30a. Too many branches */
+arm	0004b2e6	FUN_0004b2e6	/* WARNING: Treating indirect jump as call */
+arm	0004b384	FUN_0004b384	/* WARNING: Do nothing block with infinite loop */
+arm	0004bb8c	FUN_0004bb8c	/* WARNING: Do nothing block with infinite loop */
+arm	0004bb8c	FUN_0004bb8c	/* WARNING: Do nothing block with infinite loop */
+arm	0004bb9e	FUN_0004bb9e	/* WARNING: Do nothing block with infinite loop */
+arm	0004bc12	FUN_0004bc12	/* WARNING: Do nothing block with infinite loop */
+arm	0004c91e	FUN_0004c91e	/* WARNING: Do nothing block with infinite loop */
+arm	0004c924	FUN_0004c924	/* WARNING: Do nothing block with infinite loop */
+arm	0004d680	FUN_0004d680	/* WARNING: Do nothing block with infinite loop */
+arm	0004dfc0	FUN_0004dfc0	/* WARNING: Do nothing block with infinite loop */
+arm	0004dfc0	FUN_0004dfc0	/* WARNING: Do nothing block with infinite loop */
+arm	0004dfd2	FUN_0004dfd2	/* WARNING: Do nothing block with infinite loop */
+arm	0004ebb0	FUN_0004ebb0	/* WARNING: Do nothing block with infinite loop */
+arm	0004f3a4	FUN_0004f3a4	/* WARNING: Do nothing block with infinite loop */
+arm	0004f3ea	FUN_0004f3ea	/* WARNING: Do nothing block with infinite loop */
+arm	0004f400	FUN_0004f400	/* WARNING: Do nothing block with infinite loop */
+arm	0004f42e	FUN_0004f42e	/* WARNING: Do nothing block with infinite loop */
+arm	0004f42e	FUN_0004f42e	/* WARNING: Do nothing block with infinite loop */
+arm	0004f42e	FUN_0004f42e	/* WARNING: Do nothing block with infinite loop */
+arm	0004f456	FUN_0004f456	/* WARNING: Do nothing block with infinite loop */
+arm	0004f456	FUN_0004f456	/* WARNING: Do nothing block with infinite loop */
+arm	0004f456	FUN_0004f456	/* WARNING: Do nothing block with infinite loop */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fa32) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fa58) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fa84) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fa9e) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004faac) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004faa6) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fa8c) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004faae) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fab4) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fab8) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004faca) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004face) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004faf2) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004fadc) */
+arm	0004f74c	FUN_0004f74c	/* WARNING: Removing unreachable block (ram,0x0004faf8) */
+arm	0004f990	FUN_0004f990	/* WARNING: Removing unreachable block (ram,0x0005ab34) */
+arm	0004f990	FUN_0004f990	/* WARNING: Removing unreachable block (ram,0x0005ab5a) */
+arm	0004f990	FUN_0004f990	/* WARNING: Removing unreachable block (ram,0x0005ab5c) */
+arm	0004fb86	FUN_0004fb86	/* WARNING: Do nothing block with infinite loop */
+arm	0004fd10	FUN_0004fd10	/* WARNING: Do nothing block with infinite loop */
+arm	00050560	FUN_00050560	/* WARNING: Do nothing block with infinite loop */
+arm	00050ef2	FUN_00050ef2	/* WARNING: Do nothing block with infinite loop */
+arm	00051b74	FUN_00051b74	/* WARNING: Do nothing block with infinite loop */
+arm	00051db8	FUN_00051db8	/* WARNING: Do nothing block with infinite loop */
+arm	00051eb8	FUN_00051eb8	/* WARNING: Do nothing block with infinite loop */
+arm	00051eb8	FUN_00051eb8	/* WARNING: Do nothing block with infinite loop */
+arm	00052128	FUN_00052128	/* WARNING: Do nothing block with infinite loop */
+arm	000524bc	FUN_000524bc	/* WARNING: Do nothing block with infinite loop */
+arm	000524bc	FUN_000524bc	/* WARNING: Do nothing block with infinite loop */
+arm	00052708	FUN_00052708	/* WARNING: Could not recover jumptable at 0x00052712. Too many branches */
+arm	00052708	FUN_00052708	/* WARNING: Treating indirect jump as call */
+arm	00052844	FUN_00052844	/* WARNING: Removing unreachable block (ram,0x000528de) */
+arm	0005285c	FUN_0005285c	/* WARNING: Do nothing block with infinite loop */
+arm	00052a58	FUN_00052a58	/* WARNING: Could not recover jumptable at 0x00052a6c. Too many branches */
+arm	00052a58	FUN_00052a58	/* WARNING: Treating indirect jump as call */
+arm	00052a74	FUN_00052a74	/* WARNING: Do nothing block with infinite loop */
+arm	00052a82	FUN_00052a82	/* WARNING: Do nothing block with infinite loop */
+arm	00052a98	FUN_00052a98	/* WARNING: Do nothing block with infinite loop */
+arm	00052aae	FUN_00052aae	/* WARNING: Do nothing block with infinite loop */
+arm	00052abe	FUN_00052abe	/* WARNING: Do nothing block with infinite loop */
+arm	00052ac6	FUN_00052ac6	/* WARNING: Do nothing block with infinite loop */
+arm	00052b98	FUN_00052b98	/* WARNING: Do nothing block with infinite loop */
+arm	00052b98	FUN_00052b98	/* WARNING: Do nothing block with infinite loop */
+arm	00052b98	FUN_00052b98	/* WARNING: Do nothing block with infinite loop */
+arm	00052c1c	FUN_00052c1c	/* WARNING: Do nothing block with infinite loop */
+arm	00052c1c	FUN_00052c1c	/* WARNING: Do nothing block with infinite loop */
+arm	000533c0	application_main	/* WARNING: Do nothing block with infinite loop */
+arm	00053730	FUN_00053730	/* WARNING: Do nothing block with infinite loop */
+arm	00053fb8	FUN_00053fb8	/* WARNING: Do nothing block with infinite loop */
+arm	00053fb8	FUN_00053fb8	/* WARNING: Do nothing block with infinite loop */
+arm	00054070	FUN_00054070	/* WARNING: Removing unreachable block (ram,0x0001cd3a) */
+arm	00059c6c	FUN_00059c6c	/* WARNING: Could not recover jumptable at 0x00059ca4. Too many branches */
+arm	00059c6c	FUN_00059c6c	/* WARNING: Treating indirect jump as call */
+arm	0005a0a4	FUN_0005a0a4	/* WARNING: Do nothing block with infinite loop */
+arm	0005b118	FUN_0005b118	/* WARNING: Do nothing block with infinite loop */
+arm	0005b118	FUN_0005b118	/* WARNING: Do nothing block with infinite loop */
+arm	0005b1e8	FUN_0005b1e8	/* WARNING: Do nothing block with infinite loop */
+arm	0005b1e8	FUN_0005b1e8	/* WARNING: Do nothing block with infinite loop */
+arm	0005b280	FUN_0005b280	/* WARNING: Do nothing block with infinite loop */
+arm	0005e210	FUN_0005e210	/* WARNING: Do nothing block with infinite loop */
+arm	00065c5c	FUN_00065c5c	/* WARNING: Do nothing block with infinite loop */
+pd-tables	CODE:101e	FUN_CODE_101e	/* WARNING: Do nothing block with infinite loop */
+pd-tables	CODE:170e	FUN_CODE_170e	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1800	FUN_CODE_1800	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1800	FUN_CODE_1800	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1d6e	FUN_CODE_1d6e	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1dc5	FUN_CODE_1dc5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1e28	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1e72	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1efd	FUN_CODE_1efd	/* WARNING: Subroutine does not return */
+pd-tables	CODE:1f43	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:2000	FUN_CODE_2000	/* WARNING: Subroutine does not return */
+pd-tables	CODE:236b	FUN_CODE_236b	/* WARNING: Subroutine does not return */
+pd-tables	CODE:25d4	FUN_CODE_25d4	/* WARNING: Could not recover jumptable at 0x25f3. Too many branches */
+pd-tables	CODE:25d4	FUN_CODE_25d4	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:2800	FUN_CODE_2800	/* WARNING: Subroutine does not return */
+pd-tables	CODE:2ed4	FUN_CODE_2ed4	/* WARNING: Subroutine does not return */
+pd-tables	CODE:33b9	FUN_CODE_33b9	/* WARNING: Subroutine does not return */
+pd-tables	CODE:33d3	FUN_CODE_33d3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:33d6	FUN_CODE_33d6	/* WARNING: Subroutine does not return */
+pd-tables	CODE:33e9	FUN_CODE_33e9	/* WARNING: Subroutine does not return */
+pd-tables	CODE:3409	FUN_CODE_3409	/* WARNING: Subroutine does not return */
+pd-tables	CODE:3471	FUN_CODE_3471	/* WARNING: Subroutine does not return */
+pd-tables	CODE:3472	FUN_CODE_3472	/* WARNING: Subroutine does not return */
+pd-tables	CODE:3478	FUN_CODE_3478	/* WARNING: Subroutine does not return */
+pd-tables	CODE:3800	FUN_CODE_3800	/* WARNING: Could not recover jumptable at 0x3821. Too many branches */
+pd-tables	CODE:3800	FUN_CODE_3800	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:3b3c	FUN_CODE_3b3c	/* WARNING: Subroutine does not return */
+pd-tables	CODE:3b3c	FUN_CODE_3b3c	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4000	FUN_CODE_4000	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4000	FUN_CODE_4000	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4153	FUN_CODE_4153	/* WARNING: Subroutine does not return */
+pd-tables	CODE:42a5	FUN_CODE_42a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4424	FUN_CODE_4424	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4427	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4528	FUN_CODE_4528	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4532	FUN_CODE_4532	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4696	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4736	FUN_CODE_4736	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4752	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4780	thunk_FUN_CODE_ad49	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4920	FUN_CODE_4920	/* WARNING: Could not recover jumptable at 0x49e4. Too many branches */
+pd-tables	CODE:4920	FUN_CODE_4920	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:4c77	FUN_CODE_4c77	/* WARNING: Subroutine does not return */
+pd-tables	CODE:4d85	FUN_CODE_4d85	/* WARNING: Subroutine does not return */
+pd-tables	CODE:53e7	FUN_CODE_53e7	/* WARNING: Subroutine does not return */
+pd-tables	CODE:53ea	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:5479	FUN_CODE_5479	/* WARNING: Subroutine does not return */
+pd-tables	CODE:5497	FUN_CODE_5497	/* WARNING: Subroutine does not return */
+pd-tables	CODE:54ca	FUN_CODE_54ca	/* WARNING: Subroutine does not return */
+pd-tables	CODE:54d0	FUN_CODE_54d0	/* WARNING: Subroutine does not return */
+pd-tables	CODE:54d6	FUN_CODE_54d6	/* WARNING: Subroutine does not return */
+pd-tables	CODE:55c0	FUN_CODE_55c0	/* WARNING: Subroutine does not return */
+pd-tables	CODE:55c0	FUN_CODE_55c0	/* WARNING: Subroutine does not return */
+pd-tables	CODE:5693	FUN_CODE_5693	/* WARNING: Subroutine does not return */
+pd-tables	CODE:578c	FUN_CODE_578c	/* WARNING: Subroutine does not return */
+pd-tables	CODE:578c	FUN_CODE_578c	/* WARNING: Subroutine does not return */
+pd-tables	CODE:59c0	FUN_CODE_59c0	/* WARNING: Could not recover jumptable at 0x5a2e. Too many branches */
+pd-tables	CODE:59c0	FUN_CODE_59c0	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:5a9d	FUN_CODE_5a9d	/* WARNING: Subroutine does not return */
+pd-tables	CODE:5e73	FUN_CODE_5e73	/* WARNING: Could not recover jumptable at 0x5e99. Too many branches */
+pd-tables	CODE:5e73	FUN_CODE_5e73	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:6000	FUN_CODE_6000	/* WARNING: Subroutine does not return */
+pd-tables	CODE:6000	FUN_CODE_6000	/* WARNING: Subroutine does not return */
+pd-tables	CODE:62a5	thunk_FUN_CODE_adf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:65d3	FUN_CODE_65d3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:65d3	FUN_CODE_65d3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:666b	FUN_CODE_666b	/* WARNING: Subroutine does not return */
+pd-tables	CODE:6800	FUN_CODE_6800	/* WARNING: Subroutine does not return */
+pd-tables	CODE:6891	FUN_CODE_6891	/* WARNING: Subroutine does not return */
+pd-tables	CODE:6c1b	FUN_CODE_6c1b	/* WARNING: Removing unreachable block (CODE,0x6c61) */
+pd-tables	CODE:7338	FUN_CODE_7338	/* WARNING: Subroutine does not return */
+pd-tables	CODE:770c	FUN_CODE_770c	/* WARNING: Subroutine does not return */
+pd-tables	CODE:79d0	FUN_CODE_79d0	/* WARNING: Subroutine does not return */
+pd-tables	CODE:7ef7	FUN_CODE_7ef7	/* WARNING: Subroutine does not return */
+pd-tables	CODE:80f9	FUN_CODE_80f9	/* WARNING: Subroutine does not return */
+pd-tables	CODE:82d6	FUN_CODE_82d6	/* WARNING: Subroutine does not return */
+pd-tables	CODE:83ef	FUN_CODE_83ef	/* WARNING: Subroutine does not return */
+pd-tables	CODE:83f1	FUN_CODE_83f1	/* WARNING: Subroutine does not return */
+pd-tables	CODE:8591	FUN_CODE_8591	/* WARNING: Subroutine does not return */
+pd-tables	CODE:86a5	FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:86a5	FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:86a5	FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:87aa	FUN_CODE_87aa	/* WARNING: Subroutine does not return */
+pd-tables	CODE:8983	FUN_CODE_8983	/* WARNING: Subroutine does not return */
+pd-tables	CODE:8ac2	FUN_CODE_8ac2	/* WARNING: Subroutine does not return */
+pd-tables	CODE:8ac2	FUN_CODE_8ac2	/* WARNING: Subroutine does not return */
+pd-tables	CODE:8b1b	FUN_CODE_8b1b	/* WARNING: Subroutine does not return */
+pd-tables	CODE:8bf3	FUN_CODE_8bf3	/* WARNING: Subroutine does not return */
+pd-tables	CODE:8e0b	FUN_CODE_8e0b	/* WARNING: Subroutine does not return */
+pd-tables	CODE:908c	FUN_CODE_908c	/* WARNING: Subroutine does not return */
+pd-tables	CODE:917b	FUN_CODE_917b	/* WARNING: Subroutine does not return */
+pd-tables	CODE:9200	FUN_CODE_9200	/* WARNING: Subroutine does not return */
+pd-tables	CODE:95d5	FUN_CODE_95d5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:96e5	FUN_CODE_96e5	/* WARNING: Do nothing block with infinite loop */
+pd-tables	CODE:9894	FUN_CODE_9894	/* WARNING: Subroutine does not return */
+pd-tables	CODE:98f4	FUN_CODE_98f4	/* WARNING: Subroutine does not return */
+pd-tables	CODE:999a	FUN_CODE_999a	/* WARNING: Subroutine does not return */
+pd-tables	CODE:99b1	FUN_CODE_99b1	/* WARNING: Subroutine does not return */
+pd-tables	CODE:9b7b	FUN_CODE_9b7b	/* WARNING: Do nothing block with infinite loop */
+pd-tables	CODE:a7cc	thunk_FUN_CODE_999a	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a7cf	thunk_FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a7cf	thunk_FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a7cf	thunk_FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a7d5	thunk_FUN_CODE_80f9	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a7db	thunk_FUN_CODE_170e	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a7ed	thunk_FUN_CODE_99b1	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a81b	thunk_FUN_CODE_99b1	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a81e	thunk_FUN_CODE_999a	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a824	thunk_FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a824	thunk_FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a824	thunk_FUN_CODE_86a5	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a827	thunk_FUN_CODE_80f9	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a830	thunk_FUN_CODE_170e	/* WARNING: Subroutine does not return */
+pd-tables	CODE:a90e	FUN_CODE_a90e	/* WARNING: Could not recover jumptable at 0xa933. Too many branches */
+pd-tables	CODE:a90e	FUN_CODE_a90e	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:ad03	FUN_CODE_ad03	/* WARNING: Subroutine does not return */
+pd-tables	CODE:ad79	FUN_CODE_ad79	/* WARNING: Could not recover jumptable at 0xad91. Too many branches */
+pd-tables	CODE:ad79	FUN_CODE_ad79	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:ad92	FUN_CODE_ad92	/* WARNING: Could not recover jumptable at 0xada8. Too many branches */
+pd-tables	CODE:ad92	FUN_CODE_ad92	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:ae33	FUN_CODE_ae33	/* WARNING: Subroutine does not return */
+pd-tables	CODE:ae53	FUN_CODE_ae53	/* WARNING: Could not recover jumptable at 0xae6d. Too many branches */
+pd-tables	CODE:ae53	FUN_CODE_ae53	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:aeaa	FUN_CODE_aeaa	/* WARNING: Could not recover jumptable at 0xaeab. Too many branches */
+pd-tables	CODE:aeaa	FUN_CODE_aeaa	/* WARNING: Treating indirect jump as call */
+pd-tables	CODE:af51	FUN_CODE_af51	/* WARNING: Could not recover jumptable at 0xaf69. Too many branches */
+pd-tables	CODE:af51	FUN_CODE_af51	/* WARNING: Treating indirect jump as call */
+ble-final	ram:00001000	image_entry	/* WARNING: Control flow encountered bad instruction data */
+ble-final	ram:00001000	image_entry	/* WARNING: This function may have set the stack pointer */
+ble-final	ram:00001000	image_entry	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00001000	image_entry	/* WARNING: Bad instruction - Truncating control flow here */
+ble-final	ram:00001c48	runtime_start	/* WARNING: Control flow encountered bad instruction data */
+ble-final	ram:00001c48	runtime_start	/* WARNING: This function may have set the stack pointer */
+ble-final	ram:00001c48	runtime_start	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00001c48	runtime_start	/* WARNING: Bad instruction - Truncating control flow here */
+ble-final	ram:00001d1a	FUN_ram_00001d1a	/* WARNING: Could not recover jumptable at 0x00001d50. Too many branches */
+ble-final	ram:00001d1a	FUN_ram_00001d1a	/* WARNING: Treating indirect jump as call */
+ble-final	ram:00001e18	FUN_ram_00001e18	/* WARNING: Removing unreachable block (ram,0x00001e40) */
+ble-final	ram:00001e18	FUN_ram_00001e18	/* WARNING: Removing unreachable block (ram,0x00001f20) */
+ble-final	ram:00001e18	FUN_ram_00001e18	/* WARNING: Removing unreachable block (ram,0x00001f14) */
+ble-final	ram:00001e18	FUN_ram_00001e18	/* WARNING: Removing unreachable block (ram,0x00001e36) */
+ble-final	ram:00001e18	FUN_ram_00001e18	/* WARNING: Removing unreachable block (ram,0x00001e6a) */
+ble-final	ram:00001fa6	FUN_ram_00001fa6	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000023e6) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000023b4) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000021c8) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000020a4) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x0000208c) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x00002044) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x00002088) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x0000209c) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000020b8) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x00002398) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000023c0) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000023fe) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x00002460) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000021e0) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x000021fa) */
+ble-final	ram:00001fbe	FUN_ram_00001fbe	/* WARNING: Removing unreachable block (ram,0x0000247a) */
+ble-final	ram:000027e2	FUN_ram_000027e2	/* WARNING: Removing unreachable block (ram,0x000027fe) */
+ble-final	ram:0000286e	FUN_ram_0000286e	/* WARNING: Removing unreachable block (ram,0x0000288a) */
+ble-final	ram:00002c6a	FUN_ram_00002c6a	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00002cdc	FUN_ram_00002cdc	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00002cdc	FUN_ram_00002cdc	/* WARNING: Could not recover jumptable at 0x00002d24. Too many branches */
+ble-final	ram:00002cdc	FUN_ram_00002cdc	/* WARNING: Treating indirect jump as call */
+ble-final	ram:00002d34	FUN_ram_00002d34	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00002d34	FUN_ram_00002d34	/* WARNING: Could not recover jumptable at 0x00002d7c. Too many branches */
+ble-final	ram:00002d34	FUN_ram_00002d34	/* WARNING: Treating indirect jump as call */
+ble-final	ram:00002dfe	FUN_ram_00002dfe	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00002efc	FUN_ram_00002efc	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00003126	FUN_ram_00003126	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00003126	FUN_ram_00003126	/* WARNING: Could not recover jumptable at 0x00003142. Too many branches */
+ble-final	ram:00003126	FUN_ram_00003126	/* WARNING: Treating indirect jump as call */
+ble-final	ram:000031b8	FUN_ram_000031b8	/* WARNING: Removing unreachable block (ram,0x00003206) */
+ble-final	ram:0000322a	FUN_ram_0000322a	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000032b6	FUN_ram_000032b6	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000032b6	FUN_ram_000032b6	/* WARNING: Do nothing block with infinite loop */
+ble-final	ram:000032b6	FUN_ram_000032b6	/* WARNING: Do nothing block with infinite loop */
+ble-final	ram:000032b6	FUN_ram_000032b6	/* WARNING: Do nothing block with infinite loop */
+ble-final	ram:000033d0	FUN_ram_000033d0	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000033d0	FUN_ram_000033d0	/* WARNING: Could not recover jumptable at 0x00003414. Too many branches */
+ble-final	ram:000033d0	FUN_ram_000033d0	/* WARNING: Treating indirect jump as call */
+ble-final	ram:0000343e	FUN_ram_0000343e	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:0000343e	FUN_ram_0000343e	/* WARNING: Could not recover jumptable at 0x000034a4. Too many branches */
+ble-final	ram:0000343e	FUN_ram_0000343e	/* WARNING: Treating indirect jump as call */
+ble-final	ram:00003724	FUN_ram_00003724	/* WARNING: Removing unreachable block (ram,0x00003770) */
+ble-final	ram:00003724	FUN_ram_00003724	/* WARNING: Removing unreachable block (ram,0x00003746) */
+ble-final	ram:00003724	FUN_ram_00003724	/* WARNING: Removing unreachable block (ram,0x0000375a) */
+ble-final	ram:00003724	FUN_ram_00003724	/* WARNING: Removing unreachable block (ram,0x00003786) */
+ble-final	ram:00003810	FUN_ram_00003810	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:0000388a	dispatch_local_uart_command	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00003f76	FUN_ram_00003f76	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00003fac	route_main_reply_to_gatt	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00004074	queue_gatt_to_main	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000040dc	handle_af02_write	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000042ac	FUN_ram_000042ac	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00004628	FUN_ram_00004628	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000054fa	FUN_ram_000054fa	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000056ce	FUN_ram_000056ce	/* WARNING: Removing unreachable block (ram,0x000056e8) */
+ble-final	ram:000056ce	FUN_ram_000056ce	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000056ce	FUN_ram_000056ce	/* WARNING: Could not recover jumptable at 0x000056fc. Too many branches */
+ble-final	ram:000056ce	FUN_ram_000056ce	/* WARNING: Treating indirect jump as call */
+ble-final	ram:00005744	FUN_ram_00005744	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00005af0	FUN_ram_00005af0	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000064b8	FUN_ram_000064b8	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000065a0	FUN_ram_000065a0	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:0000685a	FUN_ram_0000685a	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00006cb0	FUN_ram_00006cb0	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00006f6c	notify_af02	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00006ff6	notify_af01	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007080	FUN_ram_00007080	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000070e6	FUN_ram_000070e6	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007106	FUN_ram_00007106	/* WARNING: Removing unreachable block (ram,0x00007208) */
+ble-final	ram:00007106	FUN_ram_00007106	/* WARNING: Removing unreachable block (ram,0x000071ee) */
+ble-final	ram:00007106	FUN_ram_00007106	/* WARNING: Removing unreachable block (ram,0x000071de) */
+ble-final	ram:00007106	FUN_ram_00007106	/* WARNING: Removing unreachable block (ram,0x000071f2) */
+ble-final	ram:00007106	FUN_ram_00007106	/* WARNING: Removing unreachable block (ram,0x00007214) */
+ble-final	ram:00007106	FUN_ram_00007106	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000072e0	initialize_ble_application	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:000074d2	FUN_ram_000074d2	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007532	FUN_ram_00007532	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007532	FUN_ram_00007532	/* WARNING: Could not recover jumptable at 0x00007566. Too many branches */
+ble-final	ram:00007532	FUN_ram_00007532	/* WARNING: Treating indirect jump as call */
+ble-final	ram:00007568	FUN_ram_00007568	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007618	load_saved_host_ids	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007696	save_host_id	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:0000773c	find_saved_host_id	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007794	application_main	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+ble-final	ram:00007c92	FUN_ram_00007c92	/* WARNING: Removing unreachable block (ram,0x00007cbc) */
+ble-final	ram:00007d1e	FUN_ram_00007d1e	/* WARNING: Removing unreachable block (ram,0x00007d28) */
+ble-final	ram:00008402	FUN_ram_00008402	/* WARNING: Removing unreachable block (ram,0x0000865a) */
+ble-final	ram:200025ae	FUN_ram_200025ae	/* WARNING: Do nothing block with infinite loop */
+sdk-v18	ram:00040000	thunk_FUN_ram_0006ba46	/* WARNING: This function may have set the stack pointer */
+sdk-v18	ram:0004142e	FUN_ram_0004142e	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00042866	FUN_ram_00042866	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:000428a6	FUN_ram_000428a6	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:000429c2	TMOS_TimerInit	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00042bb4	tmos_snv_read	/* WARNING: Removing unreachable block (ram,0x00042c48) */
+sdk-v18	ram:00042bb4	tmos_snv_read	/* WARNING: Removing unreachable block (ram,0x00042d18) */
+sdk-v18	ram:00042e5e	FUN_ram_00042e5e	/* WARNING: Removing unreachable block (ram,0x00042eda) */
+sdk-v18	ram:00042e5e	FUN_ram_00042e5e	/* WARNING: Removing unreachable block (ram,0x00042f82) */
+sdk-v18	ram:00043eba	FUN_ram_00043eba	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00044406	FUN_ram_00044406	/* WARNING: Could not recover jumptable at 0x00044436. Too many branches */
+sdk-v18	ram:00044406	FUN_ram_00044406	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:00044a2c	FUN_ram_00044a2c	/* WARNING: Could not recover jumptable at 0x00044ab8. Too many branches */
+sdk-v18	ram:00044a2c	FUN_ram_00044a2c	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:00045118	FUN_ram_00045118	/* WARNING: Could not recover jumptable at 0x00045146. Too many branches */
+sdk-v18	ram:00045118	FUN_ram_00045118	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:0004521e	FUN_ram_0004521e	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00045266	FUN_ram_00045266	/* WARNING: Restarted to delay deadcode elimination for space: ram */
+sdk-v18	ram:0004ac56	FUN_ram_0004ac56	/* WARNING: Removing unreachable block (ram,0x0004ad92) */
+sdk-v18	ram:0004e898	FUN_ram_0004e898	/* WARNING: Could not recover jumptable at 0x0004e8aa. Too many branches */
+sdk-v18	ram:0004e898	FUN_ram_0004e898	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:0004ed8c	FUN_ram_0004ed8c	/* WARNING: Could not recover jumptable at 0x0004ee9e. Too many branches */
+sdk-v18	ram:0004ed8c	FUN_ram_0004ed8c	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:000527d8	FUN_ram_000527d8	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00052a4a	FUN_ram_00052a4a	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00052c2a	FUN_ram_00052c2a	/* WARNING: Removing unreachable block (ram,0x00052daa) */
+sdk-v18	ram:0005301a	FUN_ram_0005301a	/* WARNING: Removing unreachable block (ram,0x00053110) */
+sdk-v18	ram:0005322c	FUN_ram_0005322c	/* WARNING: Removing unreachable block (ram,0x000532a0) */
+sdk-v18	ram:0005322c	FUN_ram_0005322c	/* WARNING: Removing unreachable block (ram,0x0005342c) */
+sdk-v18	ram:0005322c	FUN_ram_0005322c	/* WARNING: Removing unreachable block (ram,0x00053388) */
+sdk-v18	ram:00053848	FUN_ram_00053848	/* WARNING: Could not recover jumptable at 0x0005388a. Too many branches */
+sdk-v18	ram:00053848	FUN_ram_00053848	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:000538d8	FUN_ram_000538d8	/* WARNING: Removing unreachable block (ram,0x00053a10) */
+sdk-v18	ram:00053ed0	FUN_ram_00053ed0	/* WARNING: Removing unreachable block (ram,0x00054346) */
+sdk-v18	ram:00053ed0	FUN_ram_00053ed0	/* WARNING: Removing unreachable block (ram,0x0005407a) */
+sdk-v18	ram:00053ed0	FUN_ram_00053ed0	/* WARNING: Removing unreachable block (ram,0x0005437a) */
+sdk-v18	ram:00053ed0	FUN_ram_00053ed0	/* WARNING: Removing unreachable block (ram,0x000544b8) */
+sdk-v18	ram:00053ed0	FUN_ram_00053ed0	/* WARNING: Removing unreachable block (ram,0x000546e4) */
+sdk-v18	ram:00053ed0	FUN_ram_00053ed0	/* WARNING: Removing unreachable block (ram,0x00054166) */
+sdk-v18	ram:0005480a	FUN_ram_0005480a	/* WARNING: Removing unreachable block (ram,0x00054b50) */
+sdk-v18	ram:0005480a	FUN_ram_0005480a	/* WARNING: Removing unreachable block (ram,0x00054c98) */
+sdk-v18	ram:0005480a	FUN_ram_0005480a	/* WARNING: Removing unreachable block (ram,0x00054ae4) */
+sdk-v18	ram:0005480a	FUN_ram_0005480a	/* WARNING: Removing unreachable block (ram,0x00054cba) */
+sdk-v18	ram:00054dfe	FUN_ram_00054dfe	/* WARNING: Removing unreachable block (ram,0x00054f52) */
+sdk-v18	ram:00055afc	FUN_ram_00055afc	/* WARNING: Removing unreachable block (ram,0x00055b22) */
+sdk-v18	ram:00055afc	FUN_ram_00055afc	/* WARNING: Removing unreachable block (ram,0x00055b14) */
+sdk-v18	ram:00056062	FUN_ram_00056062	/* WARNING: Removing unreachable block (ram,0x000560b2) */
+sdk-v18	ram:00056062	FUN_ram_00056062	/* WARNING: Removing unreachable block (ram,0x000561b0) */
+sdk-v18	ram:0005649a	FUN_ram_0005649a	/* WARNING: Removing unreachable block (ram,0x0005657e) */
+sdk-v18	ram:0005667a	FUN_ram_0005667a	/* WARNING: Removing unreachable block (ram,0x000567fe) */
+sdk-v18	ram:0005667a	FUN_ram_0005667a	/* WARNING: Removing unreachable block (ram,0x0005678c) */
+sdk-v18	ram:00056878	FUN_ram_00056878	/* WARNING: Removing unreachable block (ram,0x000568d0) */
+sdk-v18	ram:000569f0	FUN_ram_000569f0	/* WARNING: Removing unreachable block (ram,0x00056b64) */
+sdk-v18	ram:000569f0	FUN_ram_000569f0	/* WARNING: Removing unreachable block (ram,0x00056b12) */
+sdk-v18	ram:000569f0	FUN_ram_000569f0	/* WARNING: Removing unreachable block (ram,0x00056d22) */
+sdk-v18	ram:000569f0	FUN_ram_000569f0	/* WARNING: Removing unreachable block (ram,0x00056b68) */
+sdk-v18	ram:00056dec	FUN_ram_00056dec	/* WARNING: Removing unreachable block (ram,0x00057498) */
+sdk-v18	ram:00056dec	FUN_ram_00056dec	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00057e16	FUN_ram_00057e16	/* WARNING: Removing unreachable block (ram,0x00058014) */
+sdk-v18	ram:00058078	FUN_ram_00058078	/* WARNING: Removing unreachable block (ram,0x00058276) */
+sdk-v18	ram:000585c6	FUN_ram_000585c6	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00058a3a	FUN_ram_00058a3a	/* WARNING: Removing unreachable block (ram,0x00058bd6) */
+sdk-v18	ram:00058a3a	FUN_ram_00058a3a	/* WARNING: Removing unreachable block (ram,0x00058cec) */
+sdk-v18	ram:000592d2	FUN_ram_000592d2	/* WARNING: Removing unreachable block (ram,0x000594e8) */
+sdk-v18	ram:00059ee2	FUN_ram_00059ee2	/* WARNING: Removing unreachable block (ram,0x0005a452) */
+sdk-v18	ram:00059ee2	FUN_ram_00059ee2	/* WARNING: Removing unreachable block (ram,0x0005a430) */
+sdk-v18	ram:00059ee2	FUN_ram_00059ee2	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:0005a6ea	FUN_ram_0005a6ea	/* WARNING: Removing unreachable block (ram,0x0005a726) */
+sdk-v18	ram:0005a6ea	FUN_ram_0005a6ea	/* WARNING: Removing unreachable block (ram,0x0005a744) */
+sdk-v18	ram:0005a6ea	FUN_ram_0005a6ea	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:0005a804	FUN_ram_0005a804	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:0005f942	FUN_ram_0005f942	/* WARNING: Removing unreachable block (ram,0x0005fcc2) */
+sdk-v18	ram:0005fea2	FUN_ram_0005fea2	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00060500	FUN_ram_00060500	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00060654	FUN_ram_00060654	/* WARNING: Removing unreachable block (ram,0x000606a8) */
+sdk-v18	ram:00060654	FUN_ram_00060654	/* WARNING: Removing unreachable block (ram,0x000606ac) */
+sdk-v18	ram:00060654	FUN_ram_00060654	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00060daa	FUN_ram_00060daa	/* WARNING: Removing unreachable block (ram,0x000615a8) */
+sdk-v18	ram:00060daa	FUN_ram_00060daa	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00061c92	FUN_ram_00061c92	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:000626ac	FUN_ram_000626ac	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00062730	FUN_ram_00062730	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00062784	FUN_ram_00062784	/* WARNING: Removing unreachable block (ram,0x000627dc) */
+sdk-v18	ram:00062784	FUN_ram_00062784	/* WARNING: Removing unreachable block (ram,0x00062888) */
+sdk-v18	ram:00062784	FUN_ram_00062784	/* WARNING: Removing unreachable block (ram,0x00062846) */
+sdk-v18	ram:00062784	FUN_ram_00062784	/* WARNING: Removing unreachable block (ram,0x000627d8) */
+sdk-v18	ram:00062784	FUN_ram_00062784	/* WARNING: Removing unreachable block (ram,0x000627fa) */
+sdk-v18	ram:00062b78	RF_Tx	/* WARNING: Removing unreachable block (ram,0x00062d72) */
+sdk-v18	ram:00062b78	RF_Tx	/* WARNING: Removing unreachable block (ram,0x00062d68) */
+sdk-v18	ram:00062b78	RF_Tx	/* WARNING: Removing unreachable block (ram,0x00062d90) */
+sdk-v18	ram:00062ff6	FUN_ram_00062ff6	/* WARNING: Removing unreachable block (ram,0x00063056) */
+sdk-v18	ram:00062ff6	FUN_ram_00062ff6	/* WARNING: Removing unreachable block (ram,0x0006304c) */
+sdk-v18	ram:00062ff6	FUN_ram_00062ff6	/* WARNING: Removing unreachable block (ram,0x00063072) */
+sdk-v18	ram:00063824	RF_FrequencyHoppingRx	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064dda) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064d96) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064d56) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064d1e) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064cdc) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064cac) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064c74) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064c3a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064c00) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064bc0) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064b7a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064b34) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064b14) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064ad6) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064a96) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064a56) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064a12) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000649e6) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000649a0) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006495e) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006491c) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000648ec) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000648c8) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064896) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064866) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064834) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000647f4) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000647d2) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000647a2) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064770) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006473a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064704) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000646ce) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064698) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064660) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064622) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000645f4) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000645b6) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006457a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006453e) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006459a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000645d6) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064606) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064644) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006467c) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000646b4) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000646e2) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006471e) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064754) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006478a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000647b0) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000647ea) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006481a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006484e) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064874) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000648ae) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000648da) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x0006490a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064952) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064992) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x000649c0) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064a04) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064a38) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064a76) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064ab6) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064ada) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064b30) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064b68) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064ba0) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064be0) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064c1e) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064c58) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064c90) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064cc8) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064d04) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064d3a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064d76) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064d9a) */
+sdk-v18	ram:00064394	FUN_ram_00064394	/* WARNING: Removing unreachable block (ram,0x00064dee) */
+sdk-v18	ram:000653ba	API_LE_ReceiverTestCmd	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+sdk-v18	ram:0006546c	API_LE_TransmitterTestCmd	/* WARNING: Removing unreachable block (ram,0x000654f0) */
+sdk-v18	ram:00065f68	FUN_ram_00065f68	/* WARNING: Could not recover jumptable at 0x00066028. Too many branches */
+sdk-v18	ram:00065f68	FUN_ram_00065f68	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:00067198	FUN_ram_00067198	/* WARNING: Could not recover jumptable at 0x000672c8. Too many branches */
+sdk-v18	ram:00067198	FUN_ram_00067198	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:00067800	FUN_ram_00067800	/* WARNING: Could not recover jumptable at 0x00067894. Too many branches */
+sdk-v18	ram:00067800	FUN_ram_00067800	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:00069302	FUN_ram_00069302	/* WARNING: Could not recover jumptable at 0x0006933c. Too many branches */
+sdk-v18	ram:00069302	FUN_ram_00069302	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:00069c32	GAPBondMgr_PasscodeRsp	/* WARNING: Removing unreachable block (ram,0x00069c48) */
+sdk-v18	ram:0006ab2e	FUN_ram_0006ab2e	/* WARNING: Could not recover jumptable at 0x0006abf4. Too many branches */
+sdk-v18	ram:0006ab2e	FUN_ram_0006ab2e	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:0006ae24	FUN_ram_0006ae24	/* WARNING: Could not recover jumptable at 0x0006ae7e. Too many branches */
+sdk-v18	ram:0006ae24	FUN_ram_0006ae24	/* WARNING: Treating indirect jump as call */
+sdk-v18	ram:0006ba46	FUN_ram_0006ba46	/* WARNING: This function may have set the stack pointer */
+sdk-v18	ram:0006bae2	FUN_ram_0006bae2	/* WARNING: Removing unreachable block (ram,0x0006bba4) */
+sdk-v18	ram:20000996	FUN_ram_20000996	/* WARNING: Removing unreachable block (ram,0x20000b94) */
+sdk-v18	ram:20001120	FUN_ram_20001120	/* WARNING: Removing unreachable block (ram,0x20001162) */
+sdk-v18	ram:200011be	FUN_ram_200011be	/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

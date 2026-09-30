@@ -1,0 +1,198 @@
+{
+  "original_only": [
+    {
+      "ADDRESS": "0005798e",
+      "NAME": "default",
+      "NAMESPACE": "switchD_000579a4::",
+      "PRIMARY": "n",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    }
+  ],
+  "restored_only": [
+    {
+      "ADDRESS": "00010288",
+      "NAME": "application_main",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00019152",
+      "NAME": "thunk_FUN_0001d068",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0001c34c",
+      "NAME": "thunk_FUN_000658d4",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0001c350",
+      "NAME": "enter_critical",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0001c354",
+      "NAME": "exit_critical",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00023968",
+      "NAME": "thunk_FUN_0004eb0e",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0002396c",
+      "NAME": "thunk_FUN_0004eb3a",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00025046",
+      "NAME": "thunk_FUN_00046bec",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0003d6d8",
+      "NAME": "thunk_FUN_0003d6e0",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0003f922",
+      "NAME": "thunk_FUN_0004d3d8",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00046fa6",
+      "NAME": "thunk_FUN_00046bec",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0004b40a",
+      "NAME": "thunk_FUN_0004b3a0",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0004f4f0",
+      "NAME": "thunk_FUN_0004f4f4",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00050518",
+      "NAME": "thunk_FUN_0003e1c2",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0005052e",
+      "NAME": "thunk_FUN_0003e1e0",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00050532",
+      "NAME": "thunk_FUN_0003e1fc",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00050536",
+      "NAME": "thunk_FUN_0003e222",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0005053a",
+      "NAME": "thunk_FUN_0003e26c",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00050a14",
+      "NAME": "thunk_FUN_00050a1a",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "00052d08",
+      "NAME": "thunk_FUN_00052d12",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0005e7b4",
+      "NAME": "thunk_FUN_0004eb0e",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0005e7b8",
+      "NAME": "thunk_FUN_0004eb3a",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "0005e7bc",
+      "NAME": "thunk_FUN_0004eb3a",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    }
+  ]
+}

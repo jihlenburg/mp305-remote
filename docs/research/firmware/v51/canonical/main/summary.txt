@@ -1,0 +1,4 @@
+program=main-arm.bin
+processor=ARM:LE:32:Cortex
+functions=2455
+decompiled=2455

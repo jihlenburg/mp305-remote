@@ -1,0 +1,4 @@
+program=wch-sdk-rom-v1.8.bin
+processor=RISCV:LE:32:default
+functions=1047
+decompiled=1047

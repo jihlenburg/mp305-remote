@@ -1,0 +1,497 @@
+{
+  "scope": "Original ARM 0x60258 with command/data transfer and delay helpers substituted; no panel I/O.",
+  "operations": [
+    {
+      "operation": "command",
+      "value": 223
+    },
+    {
+      "operation": "data",
+      "value": 152
+    },
+    {
+      "operation": "data",
+      "value": 83
+    },
+    {
+      "operation": "command",
+      "value": 222
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "command",
+      "value": 178
+    },
+    {
+      "operation": "data",
+      "value": 32
+    },
+    {
+      "operation": "command",
+      "value": 183
+    },
+    {
+      "operation": "data",
+      "value": 1
+    },
+    {
+      "operation": "data",
+      "value": 61
+    },
+    {
+      "operation": "data",
+      "value": 1
+    },
+    {
+      "operation": "data",
+      "value": 101
+    },
+    {
+      "operation": "command",
+      "value": 187
+    },
+    {
+      "operation": "data",
+      "value": 68
+    },
+    {
+      "operation": "data",
+      "value": 47
+    },
+    {
+      "operation": "data",
+      "value": 85
+    },
+    {
+      "operation": "data",
+      "value": 115
+    },
+    {
+      "operation": "data",
+      "value": 99
+    },
+    {
+      "operation": "data",
+      "value": 240
+    },
+    {
+      "operation": "command",
+      "value": 192
+    },
+    {
+      "operation": "data",
+      "value": 36
+    },
+    {
+      "operation": "data",
+      "value": 164
+    },
+    {
+      "operation": "command",
+      "value": 193
+    },
+    {
+      "operation": "data",
+      "value": 18
+    },
+    {
+      "operation": "command",
+      "value": 195
+    },
+    {
+      "operation": "data",
+      "value": 125
+    },
+    {
+      "operation": "data",
+      "value": 4
+    },
+    {
+      "operation": "data",
+      "value": 8
+    },
+    {
+      "operation": "data",
+      "value": 8
+    },
+    {
+      "operation": "data",
+      "value": 200
+    },
+    {
+      "operation": "data",
+      "value": 110
+    },
+    {
+      "operation": "data",
+      "value": 34
+    },
+    {
+      "operation": "data",
+      "value": 119
+    },
+    {
+      "operation": "command",
+      "value": 196
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "data",
+      "value": 160
+    },
+    {
+      "operation": "data",
+      "value": 110
+    },
+    {
+      "operation": "data",
+      "value": 10
+    },
+    {
+      "operation": "data",
+      "value": 11
+    },
+    {
+      "operation": "data",
+      "value": 22
+    },
+    {
+      "operation": "data",
+      "value": 110
+    },
+    {
+      "operation": "data",
+      "value": 10
+    },
+    {
+      "operation": "data",
+      "value": 11
+    },
+    {
+      "operation": "data",
+      "value": 22
+    },
+    {
+      "operation": "data",
+      "value": 130
+    },
+    {
+      "operation": "command",
+      "value": 200
+    },
+    {
+      "operation": "data",
+      "value": 63
+    },
+    {
+      "operation": "data",
+      "value": 54
+    },
+    {
+      "operation": "data",
+      "value": 47
+    },
+    {
+      "operation": "data",
+      "value": 46
+    },
+    {
+      "operation": "data",
+      "value": 47
+    },
+    {
+      "operation": "data",
+      "value": 49
+    },
+    {
+      "operation": "data",
+      "value": 46
+    },
+    {
+      "operation": "data",
+      "value": 46
+    },
+    {
+      "operation": "data",
+      "value": 47
+    },
+    {
+      "operation": "data",
+      "value": 44
+    },
+    {
+      "operation": "data",
+      "value": 39
+    },
+    {
+      "operation": "data",
+      "value": 24
+    },
+    {
+      "operation": "data",
+      "value": 18
+    },
+    {
+      "operation": "data",
+      "value": 10
+    },
+    {
+      "operation": "data",
+      "value": 4
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "data",
+      "value": 63
+    },
+    {
+      "operation": "data",
+      "value": 54
+    },
+    {
+      "operation": "data",
+      "value": 47
+    },
+    {
+      "operation": "data",
+      "value": 46
+    },
+    {
+      "operation": "data",
+      "value": 47
+    },
+    {
+      "operation": "data",
+      "value": 49
+    },
+    {
+      "operation": "data",
+      "value": 46
+    },
+    {
+      "operation": "data",
+      "value": 46
+    },
+    {
+      "operation": "data",
+      "value": 47
+    },
+    {
+      "operation": "data",
+      "value": 44
+    },
+    {
+      "operation": "data",
+      "value": 39
+    },
+    {
+      "operation": "data",
+      "value": 24
+    },
+    {
+      "operation": "data",
+      "value": 18
+    },
+    {
+      "operation": "data",
+      "value": 10
+    },
+    {
+      "operation": "data",
+      "value": 4
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "command",
+      "value": 208
+    },
+    {
+      "operation": "data",
+      "value": 4
+    },
+    {
+      "operation": "data",
+      "value": 6
+    },
+    {
+      "operation": "data",
+      "value": 107
+    },
+    {
+      "operation": "data",
+      "value": 15
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "command",
+      "value": 230
+    },
+    {
+      "operation": "data",
+      "value": 16
+    },
+    {
+      "operation": "command",
+      "value": 222
+    },
+    {
+      "operation": "data",
+      "value": 1
+    },
+    {
+      "operation": "command",
+      "value": 183
+    },
+    {
+      "operation": "data",
+      "value": 3
+    },
+    {
+      "operation": "data",
+      "value": 19
+    },
+    {
+      "operation": "data",
+      "value": 239
+    },
+    {
+      "operation": "data",
+      "value": 57
+    },
+    {
+      "operation": "data",
+      "value": 57
+    },
+    {
+      "operation": "command",
+      "value": 193
+    },
+    {
+      "operation": "data",
+      "value": 20
+    },
+    {
+      "operation": "data",
+      "value": 21
+    },
+    {
+      "operation": "data",
+      "value": 192
+    },
+    {
+      "operation": "command",
+      "value": 194
+    },
+    {
+      "operation": "data",
+      "value": 6
+    },
+    {
+      "operation": "data",
+      "value": 58
+    },
+    {
+      "operation": "command",
+      "value": 196
+    },
+    {
+      "operation": "data",
+      "value": 114
+    },
+    {
+      "operation": "data",
+      "value": 18
+    },
+    {
+      "operation": "command",
+      "value": 190
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "command",
+      "value": 222
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "delay_ticks",
+      "value": 1
+    },
+    {
+      "operation": "command",
+      "value": 53
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "command",
+      "value": 68
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "data",
+      "value": 1
+    },
+    {
+      "operation": "command",
+      "value": 54
+    },
+    {
+      "operation": "data",
+      "value": 0
+    },
+    {
+      "operation": "command",
+      "value": 58
+    },
+    {
+      "operation": "data",
+      "value": 5
+    },
+    {
+      "operation": "command",
+      "value": 17
+    },
+    {
+      "operation": "delay_ticks",
+      "value": 120
+    },
+    {
+      "operation": "command",
+      "value": 41
+    },
+    {
+      "operation": "command",
+      "value": 44
+    }
+  ]
+}

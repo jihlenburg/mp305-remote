@@ -1,0 +1,35 @@
+{
+  "scope": "Research artifact integrity and local link/syntax audit. Does not validate firmware semantics or external URLs.",
+  "canonical_exports_checked": 4773,
+  "local_file_links_checked": 4947,
+  "captures": [
+    {
+      "file": "docs/research/captures/2026-09-29T194219-ble-readonly.jsonl",
+      "unchanged": true
+    },
+    {
+      "file": "docs/research/captures/2026-09-29T194319-ble-readonly.jsonl",
+      "unchanged": true
+    },
+    {
+      "file": "docs/research/captures/2026-09-29T193614-ble-readonly.jsonl",
+      "unchanged": true
+    },
+    {
+      "file": "docs/research/captures/2026-09-29T201428-ble-readonly.jsonl",
+      "unchanged": true
+    }
+  ],
+  "existing_files_changed": [
+    "LOGBOOK.md",
+    "TODO.md",
+    "README.md",
+    "AGENTS.md",
+    "docs/research/firmware.md",
+    "docs/research/protocol.md",
+    "docs/adr/0008-quality-standards.md",
+    "docs/adr/README.md"
+  ],
+  "concurrent_changes": "AGENTS.md, ADR-0008, docs/adr/README.md, licensing/anonymity additions and related README/LOGBOOK portions were changed separately during this analysis and preserved.",
+  "errors": []
+}

@@ -1,0 +1,18 @@
+EP pointers: ['0x20004774', '0x20004834', '0x200048b4', '0x20004934']
+host frame: aa 12 01 c4 d7
+USB OUT c4 -> UART: aa 12 01 c4 d7
+partial -> UART:   IN queue count: 00
+rest -> UART == frame: True 73
+bad cksum -> UART: 
+host addr 0x62 -> UART: aa 62 01 c2 25
+partial 0x20 -> IN reports: [] UART: 
+partial 0xF4 -> IN reports: []
+MCU frame len 118
+ IN: 02 3e aa 21 ... n=62
+ IN: 02 38 34 35 ... n=56
+reassembled == MCU frame: True
+queue count after 6 frames w/o IN: 05 last 55 frames: 
+---- partial ack check
+partial op 20 -> EP1 IN: 02 06 aa 21 02 20 04 47 00 00 00 00 00 00 00 00 UART: 
+partial op f4 -> EP1 IN: 02 0b aa 21 07 f5 00 01 02 03 04 01 28 00 00 00 UART: 
+partial op c6 -> EP1 IN: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 UART: 

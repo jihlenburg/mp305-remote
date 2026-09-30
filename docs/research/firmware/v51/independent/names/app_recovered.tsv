@@ -1,0 +1,173 @@
+30d8	cmd_f1_update_ack	cmd_f1_update_ack: inline 0xF1 type3: ack of F0, 0x1FFFA00C+2 1->2
+312e	cmd_51_ack	cmd_51_ack: inline 0x51 type3: clear 0x1FFF954B, arm 1000ms timer (ack of 0x50)
+313c	cmd_53_ack	cmd_53_ack: inline 0x53 type3: clear 0x1FFF954C (ack of 0x52)
+32c0	cmd_fd_update_progress	cmd_fd_update_progress: inline 0xFD: payload 3 sets 0x1FFF9449, bit13; 0xFF clears, bumps 0x1FFF943C
+b7f4	cmd_c8_dc_control	cmd_c8_dc_control: 0xC8 DC control + remote grant; remoteCon 2 grants USB now / pends BLE
+116a8	cmd_20_block_write	cmd_20_block_write: sub 05 write 128 B to SPI 0x100000+off, sub 06 compare byte sum
+11900	pd_companion_parse	pd_companion_parse: PD companion frames B1, 01, B7, B5, BD, E5
+11c18	pd_companion_apply	pd_companion_apply: applies PD companion reports
+11eac	pd_companion_tx	pd_companion_tx: PD companion transmit
+1227c	console_parse_line	console_cmd_parse: text console VSET/ISET/DCOUT_EN, TSET, FanCompareValue, language | console_parse_line: parse USART7 command line: VSET=/TSET=/FanCompareValue=/language=
+12400	cmd_FC_update_commit	cmd_FC_update_commit: FD, SPI header at 0 and request code in log 0x1F0000
+12690	build_bind_reply	build_19_bind_reply: 19 00/FF, 00 suffix for route 6 | build_bind_reply: builds 0x19: byte1=0 if S+0x46 else 0xFF; type6 appends 0
+127fc	ui_program_action	ui_program_action: S+0x4C 1 prev, 2 pause, 3 next
+12850	reset_worker	reboot_countdown: counts down then 0x1B71C | reset_worker: watches 0x1FFE01C4 reset-pending, calls 0x1B71C then system reset
+12adc	pd_mask_apply	pd_mask_apply: applies S+0x9C PDO enable mask
+12f34	host_dispatch_command	cmd_dispatch: command dispatcher: 4 UART mailboxes at 0x1FFF9660, opcode compare chain + TBB for DC..FE | host_dispatch_command: main host command dispatcher (USART3), picks mailbox by ready flag, calls handler, queues reply
+1304e	cmd_dispatch_tbb	cmd_dispatch_tbb: TBB over opcode-0xDC, 35 byte entries at 0x13052
+1307e	cmd_A0_language_read_inline	cmd_A0_language_read_inline: A1 + byte 0x1FFFA0CE
+130d8	cmd_F1_ack_inline	cmd_F1_ack_inline: type 3: 0x1FFFA00E 1->2 (companion ready for update reboot)
+13126	cmd_18_bind_pending	cmd_18_bind_inline: S+0x47=1, K+6=route type; 19 is deferred | cmd_18_bind_pending: inline: set S+0x47=1 pending, K+6=type; no reply
+1312e	cmd_51_ack_inline	cmd_51_ack_inline: type 3: ack of main's 50 (clears GATE+0x103)
+1313c	cmd_53_ack_inline	cmd_53_ack_inline: type 3: ack of main's 52 (clears GATE+0x104)
+131bc	cmd_dispatch_reply	cmd_dispatch_reply: common reply path: tx record, 0x15430 encode, GATE+0 pending
+131f0	cmd_D8_program_read_inline	cmd_D8_program_read_inline: finds program id, requests worker load, D9 deferred
+132c0	cmd_FD_companion_status_inline	cmd_FD_companion_status_inline: 03 companion ready, FF companion reset
+1330a	cmd_dispatch_usb_timeout	cmd_dispatch_usb_timeout: tail: USB host link (S+3=2) dropped after 8000 ms without a type-1 frame
+133bc	host_tx_service	tx_service: transmit scheduler: deferred and unsolicited frames from 0x1FFF9550 bits | host_tx_service: serialises outbound frames to CH58x; watches 0x1FFF9550 work mask; bind/remote/stream/update sends; retransmit watchdog
+13c40	cmd_e1_ch58x_info	cmd_E1_companion_identity: type 3: stores CH58x version bytes 0x11..0x14 | cmd_e1_ch58x_info: 0xE1 from CH58x (type3): copies CH58x version field (record+0x11) to 0x1FFF9434/0x1FFF942C
+13c88	cmd_11_time_sync	cmd_11_time_sync: 0x11 from CH58x: 4-byte time value -> mAh integrator 0x1FFE0160
+13d44	cmd_EE_charge_control	cmd_EE_charge_control: EF, battery type/voltage/cells/current/output/mode
+14318	program_table_load	program_table_load: loads/rebuilds program table from SPI 0x161000
+14660	cmd_bd_conn_state	cmd_BD_link_state: type 6: host link S+3; type 5: peer state and name | cmd_bd_conn_state: 0xBD: type6 sets S+3 (host link up/down), type5 sets S+4 and accessory name at S+0x58
+146b8	decode_frame_wrapper	decode_frame_wrapper: channel*0x214 base, tail-calls decoder 0x1FF38
+14b14	ui_input_event	ui_input_event: input/key event -> dialog button callbacks
+15118	cmd_F2_update_erase	cmd_F2_update_erase: F3, erase SPI range for staged app
+153b4	gpio_set_mux	gpio_set_mux: set function-select nibble for a port bitmask
+15430	encode_frame_wrapper	frame_encode: AA, (dst<<4)|src, len, body, sum with AA doubling | encode_frame_wrapper: channel*0x214+0x1FFF9BE4 then tail-calls encoder 0x1FEDC
+154ac	cmd_EA_charge_settings	cmd_EA_charge_settings: EB charge settings and last-charge summary
+1555c	cmd_EC_charge_telemetry	cmd_EC_charge_telemetry: ED charge telemetry
+15630	cmd_E4_pd_active	cmd_E4_pd_active: E5 active PD profile index + 1
+1565c	cmd_DC_program_selected	cmd_DC_program_selected: DD selected program id and step count
+15694	cmd_DE_prog_pd_telemetry	cmd_DE_prog_pd_telemetry: DF 69-byte program/PD telemetry
+158bc	cmd_C2_dc_telemetry	cmd_C2_dc_telemetry: C3 37-byte DC telemetry
+15aa0	cmd_bb_accessory_list	cmd_BB_scan_list: companion BLE scan list ingest | cmd_bb_accessory_list: 0xBB: Bluetooth Accessories scan-result list at 0x1FFF9A70, stride 0x26
+15b54	accessory_wheel_read	accessory_wheel_read: returns and clears accessory wheel delta (K+0x2C) for LVGL encoder
+15bec	cmd_D0_pd_profile_read	cmd_D0_pd_profile_read: D1 profile name, class, 7 or 9 PDO groups
+15ca0	build_D9_program_chunk	build_D9_program_chunk: D9 id + up to 10 step records from cursor K+3
+15e48	cmd_D4_program_list	cmd_D4_program_list: D5 names and step counts for ids 1..count
+15ed4	rx_work_ptr	rx_work_ptr: returns channel*0x214+0x1FFF9BE4 (decoded work record)
+15ef8	cmd_C4_settings_read	cmd_C4_settings_read: C5 settings
+15fa4	tx_stage_ptr	chan_tx_record: returns 0x1FFF9CE8 + n*0x214 | tx_stage_ptr: returns channel*0x214+0x1FFF9CE8 (transmit staging record)
+1787c	uart3_console_init	uart3_console_init: init USART3 (host, 115200, DMA2 ch1) and USART7 console
+18368	cmd_A2_language_write	cmd_A2_language_write: language 0/1, on change: output off, config save
+1855c	cmd_be_accessory_input	cmd_BE_peer_select: companion peer selection flags | cmd_be_accessory_input: 0xBE: accessory wheel/button input -> K+0x0D..0F, K+0x2C, S+0x1D/0x1E
+185ec	build_cmd_bc	build_cmd_bc: build 0xBC connect-to-accessory (6-byte MAC) to CH58x
+18680	build_cmd_ba	build_cmd_ba: build 0xBA accessory-list request to CH58x (node 2)
+1868c	accessory_key_read_a	accessory_key_read_a: accessory button A read (S+0x1D)
+188e0	pd_table_load	pd_table_load: loads/rebuilds PD table from SPI 0x160000
+1919c	accessory_key_read_b	accessory_key_read_b: accessory button B read (S+0x1E)
+1978c	fault_monitor	fault_monitor: fault word bits 0-4, 6, 8
+19a50	power_energy_time_accumulate	power_energy_time_accumulate: energy mWh and on-time ms
+19e68	power_voltage_slew_ocp	power_voltage_slew_ocp: voltage ramp and OCP timer
+19f18	power_output_update	power_output_update: output on/off, outState CV/CC detection
+19f4c	ina226_measure	ina226_measure: output voltage and current from INA226
+1a128	out_request_get	out_request_get: returns 0x1FFFAA2E
+1a134	fault_word_get	fault_word_get: returns u16 0x1FFFAA1E
+1a5fc	counters_reset_energy_time	counters_reset_energy_time: clears 0x1FFE01E4, 0x1FFFA978, 0x1FFFA980
+1ab34	power_state_machine	power_state_machine: power state 0x1FFFAA54 and output request enforcement
+1ae70	set_update_active	companion_ready_set: 0x1FFFAA4E = v | set_update_active: stores 0x1FFFAA4E (CH58x update flag) in critical section
+1aea4	dc_current_limit_set	dc_current_limit_set: 0x1FFFA944 = v (1 mA)
+1aebc	out_request_set	out_request_set: 0x1FFFAA2E = v
+1af48	power_mode_set	power_mode_set: 0x1FFFAA37 = mode
+1af64	dc_target_voltage_set	dc_target_voltage_set: 0x1FFFA940 = v (10 mV)
+1b4d0	cmd_E2_program_control	cmd_E2_program_control: E3, program action/output/mode
+1b634	cmd_E0_device_info	cmd_E0_device_info: E1 short (route 6) or long (other routes) identity
+1b71c	do_settings_reset	system_reset_to_boot: 0x1234 to 0x2005F000, NVIC reset | do_settings_reset: final reset path (0x14824 storage) then system reset via 0x1FEB8
+1b7c4	cmd_F0_update_mode	cmd_F0_update_mode: F0 AC: 0x1FFFA00C=1
+1b7f4	cmd_C8_dc_control	cmd_C8_dc_control: C9, remote control + DC setpoints/output/mode/refresh
+1bdc6	spi_flash_erase64k	spi_flash_erase64k: SPI NOR 64 KB erase (D8)
+1bdf6	spi_flash_erase4k	spi_flash_erase4k: SPI NOR 4 KB erase (20)
+1bef8	spi_flash_read	spi_flash_read: SPI NOR read (03)
+1bf3a	spi_flash_program	spi_flash_program: SPI NOR page program (02), refuses addr+len > 0x800000
+1bf9c	spi_flash_cmd	spi_flash_cmd: command byte + 24-bit address + data
+1c364	config_flash_write	config_flash_write: config record to internal flash 0xFE000 + n*0x80
+1c628	cmd_D2_pd_profile_write	cmd_D2_pd_profile_write: D3, writes PD profile, optional save flag
+1c73c	cmd_DA_program_steps	cmd_DA_program_steps: DB, 10 step records per call, completion deferred
+1c8b8	cmd_D6_program_header	cmd_D6_program_header: D7, write/delete program name and step count
+1ca60	reboot_request	reboot_request: power stage off request, reboot countdown
+1caa4	cmd_C6_settings_write	cmd_C6_settings_write: C7, sequential checks, sets S+0x48
+1cb8c	buzzer_play	buzzer_play: start tone pattern n if buzzer level S+0x54 != 0
+1d380	storage_worker	storage_worker: SPI saves/loads of PD table, program table and steps
+1d520	cmd_E8_pd_control	cmd_E8_pd_control: E9, PDO enable mask, PDO send, output/mode
+1d6fc	charger_start	charger_start: charge parameters, pre-checks, state 1
+1d858	charger_stop	charger_stop: 0x1FFFAAAC=0, 0x1FFFAA5C=0
+1d868	config_defaults	config_defaults: factory defaults of config block 0x1FFFA0B8
+1d958	config_save	config_save: copy settings to 0x1FFFA0B8, write if checksum changed
+1db94	cmd_FE_factory_reset	cmd_FE_factory_reset: FE AA 55: defaults, table reset, reboot request
+1dbe8	factory_defaults_request	factory_defaults_request: 0x1FFE01CD=1, defaults, 0x1FFE01CC=1
+1dffc	cmd_00_identity	cmd_00_identity: reply 01 91 67 01
+1e24c	uart_dma_tx_start	uart_dma_tx_start: program DMA2 src/count and enable UART TX for a queued frame
+1e284	ui_state_snapshot	state_publish: copies power/charger/PD values into S with unit scaling | ui_state_snapshot: copies S to mirror bytes each UI pass; clears S+0x42 when S+3==0; sets aa4f when S+3==2
+1e7b4	ui_service_main	ui_sync_tick: UI model sync, calls field setters | ui_service_main: lvgl UI service; popup timers, calls per-widget updaters
+1ef0c	usart1_rx_isr_cb	usart1_rx_isr_cb: USART1 (PD) RX byte -> decoder ch0 -> PD parser 0x11900
+1ef5c	usart3_rx_isr_cb	usart3_rx_isr_cb: USART3 RX byte -> decoder ch1 -> copy 260B record to mailbox by source nibble, set ready flag
+1efd4	uart_int_enable	uart_int_enable: set/clear USART CR1/CR2 interrupt bits
+1f026	uart_read_rdr	uart_read_rdr: returns halfword at uart_base+6 (RDR)
+1f250	cmd_F6_update_verify	cmd_F6_update_verify: F7, check sum, write AA55CC33 into staged identity block
+1f508	cmd_F4_update_write	cmd_F4_update_write: F5, write 128 B to SPI and add read-back words
+1f7c4	charger_nimh_check	charger_nimh_check: charge termination checks, NiMH -dV
+1fc0c	boot_mailbox_write	boot_mailbox_write: writes two halfwords at [0x1FFE01C8]
+1fc24	upd_erase_range	upd_erase_range: F2 erase (loops 65536 times for len < 0x10000)
+1fc94	upd_write_block	upd_write_block: F4 program 128 B and sum read-back
+1fe0c	upd_verify_commit	upd_verify_commit: F6 verify and write identity magic
+1feb8	system_reset	nvic_system_reset: AIRCR = 0x05FA0004 | system_reset: AIRCR SYSRESETREQ
+1fedc	encode_frame	encode_frame: AA,addr=(dst<<4|src),len,opcode,payload,cksum; doubles AA
+1ff38	decode_frame_byte	decode_frame_byte: UART frame byte state machine; nibble split, checksum, returns record ptr on complete
+1fff0	stuff_byte	stuff_byte: write byte, write again if 0xAA
+2478c	bind_allow_cb	ui_bind_allow_cb: S+0x46=1, S+0x47=0, event bit 1 | bind_allow_cb: Allow button: S+0x46=1, S+0x47=0, set 0x1FFF9550 bit1
+2483c	bind_deny_cb	ui_bind_deny_cb: S+0x46=0, S+0x47=0, event bit 1 | bind_deny_cb: Deny button: S+0x46=0, S+0x47=0, set 0x1FFF9550 bit1
+27d24	usart7_console_init	usart7_console_init: init USART7 debug/factory console at 1 Mbaud, line buffer 0x1FFF8A8C
+2840c	build_confirm_bind_dialog	build_confirm_bind_dialog: builds "Confirm Bluetooth Binding" prompt, registers allow/deny callbacks
+2f0f4	ui_program_table_fill	ui_program_table_fill: program step table (Jump/Off rows)
+53438	ui_wave_toggle	ui_wave_toggle: device waveform page timer, S+0x11
+54390	build_accessory_list_ui	build_accessory_list_ui: rebuilds Bluetooth Accessories list when S+0x3D set
+54474	ui_mode_switch	ui_mode_switch: applies requested mode S+0x31
+54688	bind_ui_service	bind_ui_service: per-pass bind UI handler; can clear S+0x46 and set bit1
+5553c	remote_ui_service	ui_remote_request: shows remote prompt when S+0x45 == 2 | remote_ui_service: per-pass remote-request UI handler; sets bit2
+56244	ui_charge_update	ui_charge_update: charge screen update and end-of-charge summary
+5735c	pd_profile_render	pd_profile_render: PD profile screen, PDO decoding
+57d54	ui_show_ch58x_version	ui_show_ch58x_version: formats CH58x version block %d.%d/%d.%d/... from 0x1FFF9430/0x1FFF9434
+58a6c	console_putc	console_putc: poll USART7 TX empty then write TDR (or to a buffer)
+58ba4	program_run_startstop	program_run_startstop: program runner start (1) or stop (0)
+58d50	program_step_timer	program_step_timer: 500 ms program step timer callback
+5934c	program_next_step	program_next_step: next step button
+59638	program_prev_step	program_prev_step: previous step button
+597c0	program_pause_toggle	program_pause_toggle: pause/resume button (S+0x20)
+5af88	remote_allow_cb	ui_remote_allow_cb: S+0x42=1, S+0x45=1, event bit 2 | remote_allow_cb: Allow Remote Control: S+0x42=1, S+0x45=1, set 0x1FFF9550 bit2 (deferred C9 00)
+5b034	remote_deny_cb	ui_remote_deny_cb: S+0x42=0, S+0x45=0, event bit 2 | remote_deny_cb: Deny Remote Control: leaves S+0x42=0 (deferred C9 01)
+5eeac	build_remote_active_dialog	build_remote_active_dialog: builds "Remote Control Active" / allow-remote dialog (string idx 0x25/0x26)
+5eeb0	remote_active_ui_cb	remote_active_ui_cb: remote-active dialog callback
+5f434	ui_remote_prompt_show	ui_remote_prompt_show: remote-control prompt
+644a4	uart1_init	uart1_init: init USART1 (PD companion, 115200, DMA2 ch0)
+1ffe0184	K_link_ctrl	K_link_ctrl: link/transmit control block K
+1ffe07bc	battery_type_names	battery_type_names: LiHv LiPo Lilon LiFe Pb NiMH/Cd
+1ffe07e0	charge_limit_table	charge_limit_table: 6 x 11 u16 per battery type
+1fff8f7c	program_xfer_buf	program_xfer_buf: program step transfer buffer 100 x 12
+1fff9448	tx_gate	tx_gate: pending reply record, flags word at +0x108
+1fff9550	evt_flags	evt_flags: event/transmit flag word (bit 2 deferred remote reply, bit 7 D9, ...)
+1fff9660	rx_mailboxes	rx_mailboxes: 4 x 0x104 decoded frame records
+1fffa00c	upd_state	upd_state: update state block (0x98 bytes)
+1fffa0b8	config_block	config_block: persistent configuration (128 bytes)
+1fffa138	pd_profile_table	pd_profile_table: names, PDO groups, class bytes, active index
+1fffa340	pd_profile_class	pd_profile_class: profile wattage per index
+1fffa34a	pd_active_index	pd_active_index: active PD profile index
+1fffa354	program_table	program_table: names, step counts, ids, selected, count
+1fffa414	program_run_steps	program_run_steps: steps of the selected program 100 x 12
+1fffa8c4	xfer_flags	xfer_flags: storage worker request flags and DA cursor (+8)
+1fffa940	dc_target_v	dc_target_v: target voltage 10 mV
+1fffa944	dc_limit_i	dc_limit_i: current limit 1 mA
+1fffa950	dc_applied_v	dc_applied_v: applied (ramped) voltage 10 mV
+1fffa964	meas_v_mV	meas_v_mV: measured output voltage mV
+1fffa968	meas_i_uA	meas_i_uA: measured output current uA
+1fffa974	meas_p_uW	meas_p_uW: output power uW
+1fffa978	energy_mWh	energy_mWh: output energy mWh
+1fffa980	out_time_ms	out_time_ms: output-on time ms
+1fffaa1e	fault_word	fault_word: fault bits reported as C3 chargeError
+1fffaa2e	out_request	out_request: output request flag
+1fffaa2f	out_on	out_on: output actually on
+1fffaa37	power_mode	power_mode: power stage mode 0..3
+1fffaa54	power_state	power_state: power state machine
+1fffaaac	charger_state	charger_state: charger state
+1fffaab0	charger_error	charger_error: charger error word
+1fffaacc	S_live_state	S_live_state: live state block S

@@ -1,0 +1,136 @@
+[
+  {
+    "image": "app",
+    "command": [
+      "/opt/homebrew/Cellar/ghidra/12.1.3/libexec/support/analyzeHeadless",
+      "ghidra",
+      "mp305b_app",
+      "-process",
+      "app.bin",
+      "-noanalysis",
+      "-scriptPath",
+      "scripts",
+      "-max-cpu",
+      "2",
+      "-postScript",
+      "power_Fix.java",
+      "exports",
+      "-postScript",
+      "ApplyNames.java",
+      "app",
+      "names-merged",
+      "-postScript",
+      "RecoveryFixups.java",
+      "-postScript",
+      "Export.java",
+      "app",
+      "exports",
+      "-postScript",
+      "ExportRefs.java",
+      "app",
+      "exports"
+    ],
+    "cwd": "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/reproduced-exports",
+    "returncode": 0,
+    "passed": true,
+    "export": [
+      [
+        "2453",
+        "0"
+      ]
+    ],
+    "java_home": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home",
+    "files": {
+      "app_decomp.c": "8f61cd7e183cd301b85ffcbbf9e49326cd5202952afce3e51f752a2d97622f63",
+      "app_functions.tsv": "de4c74694e071341181af40c23a3238d6ffe74a417fa222b1752d51d10237144",
+      "app_refs.tsv": "b4809ea439e688ca9c9db604b4841b5cbe49707dd38803dfddef15ca1a2bbcdc",
+      "app_strings.tsv": "671ddbefc47ae439306c1963ce3ee4a150dff4efaa12fbfe2fc9b577bbac73b9"
+    }
+  },
+  {
+    "image": "ch58x",
+    "command": [
+      "/opt/homebrew/Cellar/ghidra/12.1.3/libexec/support/analyzeHeadless",
+      "ghidra",
+      "mp305b_ch58x",
+      "-process",
+      "ch58x.bin",
+      "-noanalysis",
+      "-scriptPath",
+      "scripts",
+      "-max-cpu",
+      "2",
+      "-postScript",
+      "ch58x_BridgeFix.java",
+      "names-merged/wch-library.tsv",
+      "exports/ch58x_decomp_fixed.c",
+      "-postScript",
+      "ApplyNames.java",
+      "ch58x",
+      "names-merged",
+      "-postScript",
+      "Export.java",
+      "ch58x",
+      "exports",
+      "-postScript",
+      "ExportRefs.java",
+      "ch58x",
+      "exports"
+    ],
+    "cwd": "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/reproduced-exports",
+    "returncode": 0,
+    "passed": true,
+    "export": [
+      [
+        "255",
+        "0"
+      ]
+    ],
+    "java_home": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home",
+    "files": {
+      "ch58x_decomp.c": "d162d41daa2c9a323765adb78adbc553a98e32b8d303bea878be3e0672090876",
+      "ch58x_functions.tsv": "ed24ff0e6867540ae5d13051e2ab8bbc9a40e8d87d18f1e446e07b68209e749d",
+      "ch58x_refs.tsv": "30fdbd39d65fc9204c74c759c438f0e5e5d0bb4f61ccf992859c8beb329cb7e8",
+      "ch58x_strings.tsv": "cff93c0799a67726575dc9cd38ad3bd3f01b2c51ef89d27df7e3fabb04064489"
+    }
+  },
+  {
+    "image": "pd8051",
+    "command": [
+      "/opt/homebrew/Cellar/ghidra/12.1.3/libexec/support/analyzeHeadless",
+      "ghidra",
+      "mp305b_pd8051",
+      "-process",
+      "pd8051.bin",
+      "-noanalysis",
+      "-scriptPath",
+      "scripts",
+      "-max-cpu",
+      "2",
+      "-postScript",
+      "Export.java",
+      "pd8051",
+      "exports",
+      "-postScript",
+      "ExportRefs.java",
+      "pd8051",
+      "exports"
+    ],
+    "cwd": "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/reproduced-exports",
+    "returncode": 0,
+    "passed": true,
+    "export": [
+      [
+        "380",
+        "0"
+      ]
+    ],
+    "java_home": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home",
+    "files": {
+      "pd8051_decomp.c": "9e8335d2e95c5499c6cf1dcfa7339137d6efe2d448cb284241011b29319d6f78",
+      "pd8051_functions.tsv": "eb8ff92a0e958cd7f203abb81321c7bce323d8957eac07d57711c1446161a736",
+      "pd8051_refs.tsv": "f2d7cece81373879f8860373d21aefbf83133cd47fc47cc85118656e16b491b9",
+      "pd8051_strings.tsv": "e32220e27733892f5c3c89f484fce5bba0bf7793c77910c7dc72ea3a9aa6c200"
+    }
+  }
+]

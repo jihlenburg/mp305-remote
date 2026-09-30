@@ -1,0 +1,9 @@
+{
+  "source": "https://github.com/openwch/ch583/tree/1e6af6a4299de36dfdd97e5791989a3a97981847/EVT/EXAM/BLE/LIB",
+  "base": "0x40000",
+  "end_exclusive": "0x6c780",
+  "size": 182144,
+  "sha256": "49a090191005cdbcf859d3bfce0d32731d4c714baf9a7d58f896646323fc4b66",
+  "status": "Supplementary vendor v1.8 library, not present in ISDT FWD. Exact bytes installed on the unit are unverified.",
+  "api_entries": 138
+}

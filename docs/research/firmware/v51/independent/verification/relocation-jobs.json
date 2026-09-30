@@ -1,0 +1,463 @@
+{
+  "commands-c8": {
+    "job": "commands-c8",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.194,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "c8"
+    ],
+    "log": "logs/commands-c8.log",
+    "sha256": "bef9edecc7cbedb6e47f8b9729393add86a1bf3a2f36286d7611487e2a62d553"
+  },
+  "commands-c6": {
+    "job": "commands-c6",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.192,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "c6"
+    ],
+    "log": "logs/commands-c6.log",
+    "sha256": "d3d039fc59222fa19bf3598fe2d86ee4ba4d42d47dca97fb5165490423fa08ab"
+  },
+  "commands-reads": {
+    "job": "commands-reads",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.147,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "reads"
+    ],
+    "log": "logs/commands-reads.log",
+    "sha256": "bf3042962db2bfa80a51345868907b88e74b13c7d09c2e9e1e57239be7d35ac4"
+  },
+  "commands-misc": {
+    "job": "commands-misc",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.2,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "misc"
+    ],
+    "log": "logs/commands-misc.log",
+    "sha256": "4eb78c8d73e61c24e5e16d3347496ad4f0512f6423638611843134575b03903c"
+  },
+  "commands-e2": {
+    "job": "commands-e2",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.139,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "e2"
+    ],
+    "log": "logs/commands-e2.log",
+    "sha256": "b8c9b64996e78a26adbcca931e1c25161e353ce92f74bf716fa4ab6970dd409f"
+  },
+  "commands-e8": {
+    "job": "commands-e8",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.144,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "e8"
+    ],
+    "log": "logs/commands-e8.log",
+    "sha256": "7f8ea0a438c617bc0cbd046062357eda07ba37aff444d94aeeab8340bf03a2e3"
+  },
+  "commands-ee": {
+    "job": "commands-ee",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.202,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "ee"
+    ],
+    "log": "logs/commands-ee.log",
+    "sha256": "82fa489b487c012d485051242bfa7f3e08c98fae843725dd414503026d68d0f9"
+  },
+  "commands-prog": {
+    "job": "commands-prog",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.131,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "prog"
+    ],
+    "log": "logs/commands-prog.log",
+    "sha256": "72835d6b45295e6fcfb0b83b8b96811c1818db2117b44c019497c4428d68d37e"
+  },
+  "commands-pd": {
+    "job": "commands-pd",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.091,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "pd"
+    ],
+    "log": "logs/commands-pd.log",
+    "sha256": "76ff63ff8eae3183813bf77bb52ce56b258d1183a280193a6ac0ed52f2c8d7a1"
+  },
+  "commands-chreads": {
+    "job": "commands-chreads",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.14,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "chreads"
+    ],
+    "log": "logs/commands-chreads.log",
+    "sha256": "dc074ead4fda4b6c66f7c675055bce90f296d3543caea307e46542d5ffa3a22e"
+  },
+  "commands-maint": {
+    "job": "commands-maint",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 5.424,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "maint"
+    ],
+    "log": "logs/commands-maint.log",
+    "sha256": "7ebc667b634accb7fe5f7a0ce426e0f2cdb41efd27803fa69ca63c0eb9453bd1"
+  },
+  "commands-deferred": {
+    "job": "commands-deferred",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.139,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/commands_vectors.py",
+      "deferred"
+    ],
+    "log": "logs/commands-deferred.log",
+    "sha256": "341202c9177f6aa072aad2b3eabe3cf60392f171830c912fff8739fcaefb2762"
+  },
+  "bridge-t1": {
+    "job": "bridge-t1",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.083,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t1()"
+    ],
+    "log": "logs/bridge-t1.log",
+    "sha256": "0bd503d52a691eecf22ad23705d89eed2d955e58124645d32b498bcbb29a8e20"
+  },
+  "bridge-t2": {
+    "job": "bridge-t2",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.087,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t2()"
+    ],
+    "log": "logs/bridge-t2.log",
+    "sha256": "f513d9404f207acd55895a399484ada34f0db6912bbd50a948808c5a20ef0945"
+  },
+  "bridge-t3": {
+    "job": "bridge-t3",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.079,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t3()"
+    ],
+    "log": "logs/bridge-t3.log",
+    "sha256": "3a14513d50445d04b1c32d7387888e5580f13599afabc82538693549ba3a054c"
+  },
+  "bridge-t4": {
+    "job": "bridge-t4",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.081,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t4()"
+    ],
+    "log": "logs/bridge-t4.log",
+    "sha256": "00c8da6e2b23076ae539a206c49535086c42760ddc89f7553ff84d4cd3783858"
+  },
+  "bridge-t5": {
+    "job": "bridge-t5",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.085,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t5()"
+    ],
+    "log": "logs/bridge-t5.log",
+    "sha256": "ae0a287d8c4cd71abe532bae966d5e234e5b7d63860d90db9fc8b28017b96059"
+  },
+  "bridge-t6": {
+    "job": "bridge-t6",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.085,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t6()"
+    ],
+    "log": "logs/bridge-t6.log",
+    "sha256": "aac3613caa51a232a77a341c264bd4c592ff9f4c98f0f3f5319a3475981f1ba8"
+  },
+  "bridge-t7": {
+    "job": "bridge-t7",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.091,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t7()"
+    ],
+    "log": "logs/bridge-t7.log",
+    "sha256": "7ca4feb48e6d82919d43c319b7fd91dc3ee42067f9e4471351a012794aee7b4a"
+  },
+  "bridge-t8": {
+    "job": "bridge-t8",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.073,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import ch58x_bridge_checks as p; p.check_t8()"
+    ],
+    "log": "logs/bridge-t8.log",
+    "sha256": "d9f45bd94944c71edaebc77c629cc185aaa0bdb3c9ca6162e33de0a0b301dc9b"
+  },
+  "hostlink-encoder": {
+    "job": "hostlink-encoder",
+    "kind": "comparison",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.43,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_encoder()"
+    ],
+    "log": "logs/hostlink-encoder.log",
+    "sha256": "abf2459f2e6262bf27e0c6d6e0a3d07cd54eead851b466d143464e3a94685d37"
+  },
+  "hostlink-decoder": {
+    "job": "hostlink-decoder",
+    "kind": "comparison",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 1.197,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_decoder()"
+    ],
+    "log": "logs/hostlink-decoder.log",
+    "sha256": "d8a87a7ad133e0b8c5431d41eaf842afe9ec269550ee92959f9e89fb6ed159bc"
+  },
+  "hostlink-dispatch": {
+    "job": "hostlink-dispatch",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.121,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_dispatch()"
+    ],
+    "log": "logs/hostlink-dispatch.log",
+    "sha256": "610eeca4395dc074b3317407af21e993ab8c7b9464a1331d19ab142e239a7b19"
+  },
+  "hostlink-bind": {
+    "job": "hostlink-bind",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.083,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_bind()"
+    ],
+    "log": "logs/hostlink-bind.log",
+    "sha256": "09bd9e71b063aa0a96864eb9e66ad5beaa214cf982f03ecab1e09f492e8a2989"
+  },
+  "hostlink-boot_sequence": {
+    "job": "hostlink-boot_sequence",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.583,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_boot_sequence()"
+    ],
+    "log": "logs/hostlink-boot_sequence.log",
+    "sha256": "c49874be1f411f0a888d040a80ea1b79882cc176d641b0052b0804f322fc3c91"
+  },
+  "hostlink-timeouts": {
+    "job": "hostlink-timeouts",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 1.304,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_timeouts()"
+    ],
+    "log": "logs/hostlink-timeouts.log",
+    "sha256": "3226c02dd07ff0d029f8d2dfec52aec54ba33cb4020d5e59d51f13104fb3451f"
+  },
+  "hostlink-remote": {
+    "job": "hostlink-remote",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.087,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_remote()"
+    ],
+    "log": "logs/hostlink-remote.log",
+    "sha256": "aabae8ae34d535ea87d5c38fe3989b746b374fb1e4cedcedc7e26511f5887f2c"
+  },
+  "hostlink-link_drop_snapshot": {
+    "job": "hostlink-link_drop_snapshot",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.13,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_link_drop_snapshot()"
+    ],
+    "log": "logs/hostlink-link_drop_snapshot.log",
+    "sha256": "27bed16c434a8fd5262f87747007f10450d412f716eafe5876fab66fd91f6ed4"
+  },
+  "hostlink-pipelining": {
+    "job": "hostlink-pipelining",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.087,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_pipelining()"
+    ],
+    "log": "logs/hostlink-pipelining.log",
+    "sha256": "2865de85ee71c0380cda96be808a262a91e3c89ef5dc5a534aba31e31425795e"
+  },
+  "hostlink-internal_inbound": {
+    "job": "hostlink-internal_inbound",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.082,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_internal_inbound()"
+    ],
+    "log": "logs/hostlink-internal_inbound.log",
+    "sha256": "84b9dd13faa7b8f2df1777692584efb8171de04053629a5b40837dbe1dea3847"
+  },
+  "hostlink-be_from_host": {
+    "job": "hostlink-be_from_host",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.083,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_be_from_host()"
+    ],
+    "log": "logs/hostlink-be_from_host.log",
+    "sha256": "2cf1b31f53b0ddd67ba39d1afe805741d2d189527c5e1459d6689714f9e736eb"
+  },
+  "hostlink-c8_sequences": {
+    "job": "hostlink-c8_sequences",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.09,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "-c",
+      "import hostlink_emu_tests as p; p.test_c8_sequences()"
+    ],
+    "log": "logs/hostlink-c8_sequences.log",
+    "sha256": "c7ca53aefc69a2487260baa41c085c8f71a80720dc31102632982fb3df3cd20a"
+  },
+  "bridge-routes": {
+    "job": "bridge-routes",
+    "kind": "observation",
+    "status": "completed",
+    "returncode": 0,
+    "seconds": 0.148,
+    "command": [
+      "/Users/jihlenburg/mp305b-fw-re/.venv/bin/python",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/relocation-check/scripts/hostlink_ch58x_route_tests.py"
+    ],
+    "log": "logs/bridge-routes.log",
+    "sha256": "29c43d978c67f2d95da5e7f12297e63846726c8e7c4c8b424a0afb2bb1491198"
+  }
+}

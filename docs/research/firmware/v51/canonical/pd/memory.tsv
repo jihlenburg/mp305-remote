@@ -1,0 +1,10 @@
+name	start	end	initialized	writable	executable
+CODE	CODE:1000	CODE:bfff	true	false	true
+REG_BANK_1	INTMEM:00	INTMEM:07	false	true	false
+REG_BANK_2	INTMEM:08	INTMEM:0f	false	true	false
+REG_BANK_3	INTMEM:10	INTMEM:17	false	true	false
+REG_BANK_4	INTMEM:18	INTMEM:1f	false	true	false
+INTMEM	INTMEM:20	INTMEM:ff	false	true	false
+SFR	SFR:80	SFR:ff	false	true	false
+BITS	BITS:00	BITS:7f	false	true	false
+SFR-BITS	BITS:80	BITS:ff	false	true	false

@@ -1,0 +1,270 @@
+{
+  "cases": 44,
+  "passed": 44,
+  "results": [
+    {
+      "case": "input-app.bin",
+      "passed": true,
+      "actual": "'58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f'",
+      "expected": "'58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f'"
+    },
+    {
+      "case": "input-data.bin",
+      "passed": true,
+      "actual": "'6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd'",
+      "expected": "'6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd'"
+    },
+    {
+      "case": "input-ch58x.bin",
+      "passed": true,
+      "actual": "'f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a'",
+      "expected": "'f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a'"
+    },
+    {
+      "case": "input-pd8051.bin",
+      "passed": true,
+      "actual": "'6ea3a7640e44c2aedf4cb054c5ee4d185203ce913a32ee1bb6829c0c39a3a10e'",
+      "expected": "'6ea3a7640e44c2aedf4cb054c5ee4d185203ce913a32ee1bb6829c0c39a3a10e'"
+    },
+    {
+      "case": "input-ram_rw_init.bin",
+      "passed": true,
+      "actual": "'e831601923ebee907f50d4d739ce2f0fd32be9045d36f0d0f3b5ea40085546eb'",
+      "expected": "'e831601923ebee907f50d4d739ce2f0fd32be9045d36f0d0f3b5ea40085546eb'"
+    },
+    {
+      "case": "companion-split",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "scatter-return",
+      "passed": true,
+      "actual": "2031616",
+      "expected": "2031616"
+    },
+    {
+      "case": "scatter-image",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "SystemInit-VTOR",
+      "passed": true,
+      "actual": "65536",
+      "expected": "65536"
+    },
+    {
+      "case": "CH58x-startup-GP",
+      "passed": true,
+      "actual": "536879104",
+      "expected": "536879104"
+    },
+    {
+      "case": "CH58x-startup-step-end",
+      "passed": true,
+      "actual": "7248",
+      "expected": "7248"
+    },
+    {
+      "case": "decoder-state-offset",
+      "passed": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "case": "decoder-state-after-one-of-two-bytes",
+      "passed": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "case": "decoder-fill-offset",
+      "passed": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "case": "ARM-budget-exhaustion-rejected",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "RV32-budget-exhaustion-rejected",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "wavePause-0-0",
+      "passed": true,
+      "actual": "(37, 1)",
+      "expected": "(37, 1)"
+    },
+    {
+      "case": "wavePause-0-1",
+      "passed": true,
+      "actual": "(37, 1)",
+      "expected": "(37, 1)"
+    },
+    {
+      "case": "wavePause-20001000-0",
+      "passed": true,
+      "actual": "(37, 0)",
+      "expected": "(37, 0)"
+    },
+    {
+      "case": "wavePause-20001000-1",
+      "passed": true,
+      "actual": "(37, 1)",
+      "expected": "(37, 1)"
+    },
+    {
+      "case": "fault-reverse-sensor-500",
+      "passed": true,
+      "actual": "False",
+      "expected": "False"
+    },
+    {
+      "case": "fault-reverse-sensor-501",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "fault-battery-cold--19",
+      "passed": true,
+      "actual": "False",
+      "expected": "False"
+    },
+    {
+      "case": "fault-battery-cold--20",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "fault-battery-hot-57",
+      "passed": true,
+      "actual": "False",
+      "expected": "False"
+    },
+    {
+      "case": "fault-battery-hot-58",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "fault-system-hot-84",
+      "passed": true,
+      "actual": "False",
+      "expected": "False"
+    },
+    {
+      "case": "fault-system-hot-85",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "fault-overvoltage-33000",
+      "passed": true,
+      "actual": "False",
+      "expected": "False"
+    },
+    {
+      "case": "fault-overvoltage-33001",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "fault-voltage-disagreement-4999",
+      "passed": true,
+      "actual": "False",
+      "expected": "False"
+    },
+    {
+      "case": "fault-voltage-disagreement-5000",
+      "passed": true,
+      "actual": "True",
+      "expected": "True"
+    },
+    {
+      "case": "ungranted-mode-0",
+      "passed": true,
+      "actual": "b'\\xc9\\x011'",
+      "expected": "b'\\xc9\\x011'"
+    },
+    {
+      "case": "ungranted-mode-1",
+      "passed": true,
+      "actual": "b'\\xe3\\x011'",
+      "expected": "b'\\xe3\\x011'"
+    },
+    {
+      "case": "ungranted-mode-2",
+      "passed": true,
+      "actual": "b'\\xe9\\x011'",
+      "expected": "b'\\xe9\\x011'"
+    },
+    {
+      "case": "ungranted-mode-3",
+      "passed": true,
+      "actual": "b'\\xef\\x011'",
+      "expected": "b'\\xef\\x011'"
+    },
+    {
+      "case": "unbound-AF01-route",
+      "passed": true,
+      "actual": "b'\\xaab\\x02\\xc41Y'",
+      "expected": "b'\\xaab\\x02\\xc41Y'"
+    },
+    {
+      "case": "AF01-prefix-discard",
+      "passed": true,
+      "actual": "b'\\xaab\\x02\\xc41Y'",
+      "expected": "b'\\xaab\\x02\\xc41Y'"
+    },
+    {
+      "case": "two-USB-frames-overwrite",
+      "passed": true,
+      "actual": "b'\\xaa\\x12\\x01\\xc2\\xd5'",
+      "expected": "b'\\xaa\\x12\\x01\\xc2\\xd5'"
+    },
+    {
+      "case": "USB-IN-chunk-sizes",
+      "passed": true,
+      "actual": "[62, 62, 3]",
+      "expected": "[62, 62, 3]"
+    },
+    {
+      "case": "USB-IN-reassembly",
+      "passed": true,
+      "actual": "b'\\xaa!{\\xd9\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f !\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz\\xc4'",
+      "expected": "b'\\xaa!{\\xd9\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f !\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz\\xc4'"
+    },
+    {
+      "case": "host-accessory-output-event",
+      "passed": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "case": "host-accessory-output-request",
+      "passed": true,
+      "actual": "[1]",
+      "expected": "[1]"
+    },
+    {
+      "case": "reset-mailbox-and-AIRCR",
+      "passed": true,
+      "actual": "[(537260032, 4660), (3758157068, 100270084)]",
+      "expected": "[(537260032, 4660), (3758157068, 100270084)]"
+    }
+  ]
+}

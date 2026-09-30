@@ -1,0 +1,1891 @@
+MP305B V51, 2026-09-30. Research revision: uncommitted.
+
+\Needspace{10\baselineskip}
+\section{Outcome}\label{outcome}
+
+The recoverable host-interface work in
+\texttt{\textasciitilde{}/mp305b-fw-re} is complete. All 33 probe jobs
+finish with checked emulator returns. There are 657 asserted cases: 305
+encoder comparisons, 300 decoder comparisons, eight bridge-route
+scenarios and 44 targeted recovery cases. The 324 command-table rows are
+recorded observations and are counted separately.
+
+The recovered bundle contains 2453 main, 255 CH58x and 380 PD function
+exports, plus 322 named locations and preserved aliases. Different
+function entry sets prevent treating these totals as coverage or adding
+them to the existing canonical exports. Both analyses remain available.
+
+The original binary inputs, projects and notes are preserved. No
+hardware commands, commits, production implementation or V-model gate
+approval are part of this work. Complete sources, results, logs and
+regeneration commands are linked from \href{README.md}{the recovery
+record}.
+
+\Needspace{10\baselineskip}
+\section{Evidence and independence}\label{evidence-and-independence}
+
+Instruction inspection, decompiled code and original-instruction
+execution are \textbf{confirmed in code} evidence. Emulator checks use
+synthetic memory, modeled peripherals and selected external-call
+substitutes. \textbf{Inferred} meanings retain that label. Existing
+capture comparisons are evidence from older recorded hardware sessions;
+no new hardware confirmation is claimed.
+
+The recovered notes began from independent Ghidra imports. Their
+comparison sections also use the previous research and the existing WCH
+API map. They are not independent rediscoveries of every SDK symbol or
+hardware role. A firmware-to-firmware comparison is distinct from the
+project's use of ``cross-checked'' for independent derivation from
+WebLink JavaScript.
+
+The statement tables in the appendices compare the source documents as
+seen during the original independent pass. Earlier files have since been
+corrected. Recovery corrections below take precedence over the
+historical verdict wording. Full vectors and implementation notes are in
+the linked Markdown files rather than compressed into the printed
+tables.
+
+\Needspace{10\baselineskip}
+\section{Corrections verified during
+recovery}\label{corrections-verified-during-recovery}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Subject
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reviewed result
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Evidence
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Startup VTOR & SystemInit writes \texttt{0x10000} at \texttt{0x1DB8C} &
+Instructions and executed write \\
+Main decoder & State \texttt{+0x208}, fill index \texttt{+0x20C}, escape
+count \texttt{+0x213} & Instructions and stepped execution; rejects the
+independent note's proposed offset correction \\
+CH58x global pointer & \texttt{0x20002000}; AUIPC is relative to its own
+PC & First two startup instructions executed \\
+Reset path & Mailbox \texttt{0x2005F000\ =\ 0x1234}, then AIRCR reset
+request & Original instruction write trace; reset helpers marked
+non-returning \\
+AF01 prefix & First incoming byte discarded; outgoing \texttt{31} is a
+route marker & Bridge probes and asserted byte traces \\
+Waveform flag & Timer absent: 1; timer present: \texttt{S+0x11} & Four
+reply-builder cases \\
+Fault addresses & Source \texttt{0x1FFFAA1E}, published copy
+\texttt{0x1FFFAB6A} & Producer and publisher inspection \\
+Fault meanings & Software OCP/OVP paths, specific thresholds and
+hysteresis & Producer inspection and 12 boundary cases \\
+Permission scope & Four control-mode cases reject absent grant; BE
+accessory input reaches an enable request separately & Dispatcher and
+worker execution with a recorded actuator call \\
+USB reassembly & 127 stream bytes split into 62, 62 and 3; two frames in
+one OUT report lose the first in the tested path & Original bridge
+instructions \\*
+\end{longtable}
+}
+
+The BE result describes a command reaching the output request. It does
+not establish physical activation, electrical behavior, or the response
+of a real unit after its user presses Deny. The project continues to
+disconnect after denial under UR-008.
+
+\Needspace{10\baselineskip}
+\section{Completed jobs and remaining
+work}\label{completed-jobs-and-remaining-work}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Job
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Completion evidence
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Recover source material & SHA-256 snapshot of 110 original workspace
+files; original notes and projects retained \\
+Compare input images & Companion slices and initialized RAM match; main
+differs from restored image only in WebLink's four identity-magic
+bytes \\
+Main command analysis & 12 probe groups, 324 regenerated table rows,
+reviewed command and state notes \\
+Host link & 12 probe groups, including the 605 asserted framing
+comparisons \\
+CH58x bridge & Eight diagnostic groups and eight asserted scenarios in
+the routing job \\
+Additional verification & 44 asserted cases with actual and expected
+results \\
+Ghidra completion & Pending main and bridge helpers, deterministic
+naming, three corrected reset attributes, all requested decompilations
+complete \\
+PD baseline & Existing 380-function export recovered; canonical
+1007-entry table recovery retained \\
+Register-map comparison & Seven vendor SVDs rescored; exact main MCU
+still unresolved \\
+Report & Markdown, LaTeX and inspected PDF \\*
+\end{longtable}
+}
+
+The import of the pending main helper adds 143 candidate entries; the
+bridge helper adds 12 callbacks. These counts do not establish that
+every entry is a distinct source function. Main register labels retain
+the original HC32F4A0 SVD assumptions. Multiple HC32 variants match
+similar addresses; the clock-controller conflict at \texttt{0x40054000}
+remains unresolved.
+
+The original host-interface scope did not include complete PD or
+power-stage internals, bootloader execution, physical pin tracing or
+replacement firmware. Those remain on the repository research list. The
+recovered update vectors use a synthetic flash array; they are not a
+validated device-update recipe.
+
+\Needspace{10\baselineskip}
+\section{Coverage of the repository research
+documents}\label{coverage-of-the-repository-research-documents}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Document
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Recovery treatment
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+firmware.md & Detailed comparison in appendices; VTOR, D2 layout,
+companion identity and reset text corrected \\
+protocol.md & Detailed comparison in appendices; route marker, waveform
+field and fault descriptions corrected \\
+firmware-architecture.md & Host, bridge, startup and transport sections
+compared; RTOS conclusions retained \\
+firmware-command-map.md & Dispatcher routes and handlers supplemented by
+the complete command notes \\
+firmware-permissions.md & Shared control checks and accessory-input path
+added; policy retained \\
+firmware-readable.md & Existing readable-C reconstruction retained;
+recovered named decompilation is an additional view \\
+firmware-rtos.md & Existing scheduling/resource reconstruction retained;
+no new timing, stack or heap-lifetime measurement \\
+firmware-verification.md & Earlier 2835-case run and manifest retained
+as historical evidence \\
+hardware.md & Bus-role evidence retained; recovered labels do not
+identify exact silicon \\
+hardware-buses.md & Main UART routing and CH58x endpoints compared and
+expanded in host-link notes \\
+hardware-registers.md & Existing three-image access inventory retained;
+no claim to resolve every indirect access \\
+hardware-ui-and-analog.md & Fault thresholds and local waveform
+semantics supplemented; physical topology remains inferred \\
+device.md & Manufacturer specifications and rear-port distinction
+retained; no new unit inspection \\
+README.md and captures & New bundle indexed; all four immutable capture
+hashes checked \\*
+\end{longtable}
+}
+
+For documents outside host interoperability this is an explicit scope
+review, not a claim that every statement was independently re-proved.
+Canonical per-function artifacts were checked for preservation, rather
+than represented as thousands of newly analyzed documents.
+
+\Needspace{10\baselineskip}
+\section{How to read the appendices}\label{how-to-read-the-appendices}
+
+C or Confirmed means agreement with the cited code evidence. X or
+Corrected identifies a corrected earlier statement. N or New identifies
+an addition relative to the source snapshot. Inferred interpretations
+and unresolved hardware questions remain visible. The annotations refer
+to the original analysis methods described in the full command,
+host-link and CH58x notes.
+
+\Needspace{10\baselineskip}
+\section{Command and telemetry
+comparison}\label{command-and-telemetry-comparison}
+
+Full source: \href{notes/commands.md}{commands analysis}.
+
+Scope: \texttt{firmware.md} from ``Command dispatcher'' through ``Block
+write and the \texttt{0xF0} to \texttt{0xFE} commands'', and
+\texttt{protocol.md} sections 3 and 4. Addresses in \texttt{firmware.md}
+are file offsets; \texttt{+0x10000} gives the processor addresses used
+here. ``Confirmed'' means the statement was re-derived from the
+disassembly or by execution in this pass.
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md, ``Command
+dispatcher''}\label{firmware.md-command-dispatcher}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Function at \texttt{0x2F34}, watches four flag bytes, first set flag
+selects a record in \texttt{0x1FFF9660}, stride 260 & Confirmed
+(\texttt{0x12F34}, flags \texttt{0x1FFE01AC..AF}) \\
+Byte 0 is the type byte, byte 2 the length, byte 4 the opcode &
+Confirmed. New: byte 0 is the high nibble and byte 1 the low nibble of
+the frame's address byte; type 1 = USB host, 3 = CH58x system, 5 = CH58x
+BLE-central side, 6 = BLE host (section 1) \\
+A request the switch does not recognise falls through without a reply &
+Confirmed, with the full list of ignored opcodes (2.1) \\
+Most handlers write \texttt{opcode\ +\ 1}; \texttt{0x20} stores
+\texttt{0x20} & Confirmed \\
+Type 6 appends one extra byte copied from the end of the request &
+Confirmed; it is the BLE route byte (\texttt{31} AF01, \texttt{00} AF02)
+added by the CH58x \\
+\texttt{F2}, \texttt{F4}, \texttt{F6}, \texttt{FC}, \texttt{20} append
+the constant \texttt{0x31} & Confirmed \\
+Type 6 is not by itself a transport name; \texttt{BD} treats types 5 and
+6 differently & Corrected: type 6 is the BLE host route (CH58x
+\texttt{ram:0x4074} addresses every GATT write \texttt{06\ 02}); type 5
+is the CH58x's own BLE-central side \\
+Shape \texttt{(request,\ length,\ reply,\ type)} for
+\texttt{A2\ C2\ C4\ C6\ C8\ D0\ D2\ D4\ D6\ DA\ DC\ DE\ E1\ E2\ E4\ E8\ EA\ EC\ EE}
+& Confirmed at every call site \\
+Shape \texttt{(request,\ reply,\ type,\ length)} for
+\texttt{00\ 20\ E0\ F0\ F2\ F4\ F6\ FC\ FE} & Confirmed (\texttt{F2},
+\texttt{F4}, \texttt{F6} ignore the length) \\
+\texttt{BB}, \texttt{BD}, \texttt{BE} get the length in \texttt{r1} and
+no reply buffer & Confirmed; \texttt{BD} also gets the type in
+\texttt{r2} \\
+Payload byte N is request byte N+1 & Confirmed \\
+\texttt{E2} and \texttt{E8} each have a block the decompiler dropped &
+Confirmed; both blocks are written out from the disassembly in 5.18 and
+5.20 and executed \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{``Opcodes with their own
+compare''}\label{opcodes-with-their-own-compare}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Row
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{00} \texttt{0xDFFC}, \texttt{01\ 91\ 67\ 01} & Confirmed \\
+\texttt{18} inline \texttt{0x3126}, sets \texttt{S+0x47}, stores the
+type, no reply & Confirmed (type goes to \texttt{K+6}) \\
+\texttt{20} \texttt{0x16A8} block write, reply opcode \texttt{20} &
+Confirmed \\
+\texttt{51} inline \texttt{0x312E}, type 3 and payload 0, clears a flag,
+stores 1000 & Confirmed; new: it acknowledges main's \texttt{50}
+link-state message (2.3) \\
+\texttt{53} same shape, the other flag & Confirmed; acknowledges main's
+\texttt{52} \\
+\texttt{A0} inline \texttt{0x307E} & Confirmed \\
+\texttt{A2} \texttt{0x8368} & Confirmed \\
+\texttt{BB} \texttt{0x5AA0} list ingest & Confirmed; it is the CH58x's
+BLE scan list \\
+\texttt{BD} \texttt{0x4660} connection state and peer metadata &
+Confirmed; type 6 sets the host link \texttt{S+3} \\
+\texttt{BE} \texttt{0x855C} & Confirmed \\
+\texttt{C2\ C4\ C6\ C8\ D0\ D2\ D4\ D6\ DA} handlers & Confirmed \\
+\texttt{D8} inline \texttt{0x31F0} & Confirmed \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``Opcodes \texttt{0xDC} to
+\texttt{0xFE}''}{``Opcodes 0xDC to 0xFE''}}\label{opcodes-0xdc-to-0xfe}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Table branch at \texttt{0x304E} covers \texttt{DC..FE} & Confirmed
+(\texttt{TBB} at \texttt{0x1304E}, 35 entries at \texttt{0x13052}) \\
+The response opcodes in that range go to the no-reply path & Confirmed,
+plus \texttt{E6}, \texttt{E7}, \texttt{F8..FB} \\
+\texttt{DC} \texttt{0x565C} two payload bytes & Confirmed: id and step
+count of the selected slot \\
+\texttt{DE} \texttt{0x5694} 69 bytes & Confirmed \\
+\texttt{E0} \texttt{0xB634} two layouts & Confirmed; layout chosen by
+route (6 = BLE short, else long) \\
+\texttt{E1} \texttt{0x3C40} acts only for type 3, no reply & Confirmed;
+it stores the CH58x's version \\
+\texttt{E2} \texttt{0xB4D0}, \texttt{E4} \texttt{0x5630}, \texttt{E8}
+\texttt{0xD520}, \texttt{EA} \texttt{0x54AC}, \texttt{EC}
+\texttt{0x555C}, \texttt{EE} \texttt{0x3D44} & Confirmed \\
+\texttt{F0} replies \texttt{F1\ 00} only for payload \texttt{AC} &
+Confirmed \\
+\texttt{F1} inline \texttt{0x30D8}, type 3 and payload 0, no reply &
+Confirmed \\
+\texttt{F2} \texttt{F3\ 00} + status & Confirmed \\
+\texttt{F4} \texttt{F5\ 00}, four echoed bytes, status & Confirmed (the
+four bytes are the SPI address) \\
+\texttt{F6} \texttt{F7\ 00} + status & Confirmed \\
+\texttt{FC} log slot only for payload \texttt{CA} & Confirmed; the slot
+holds the update request code 1/3/7 \\
+\texttt{FD} inline \texttt{0x32C0}, payload 3 or \texttt{FF}, no reply &
+Confirmed \\
+\texttt{FE} \texttt{0xDB94}, \texttt{FF\ AA\ 55} or \texttt{FF\ 00\ 00}
+& Confirmed \\
+WebLink does not name \texttt{00\ 20\ 51\ 53\ A0\ BB\ BE\ F0..FE}; they
+are in the image & Confirmed (not re-checked against WebLink) \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0xC2} reply, handler
+\texttt{0x58BC}''}{``0xC2 reply, handler 0x58BC''}}\label{xc2-reply-handler-0x58bc}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Always writes through payload 35 and returns 37 (38-byte BLE frame with
+address) & Confirmed (emu) \\
+Field table payload 0..32 and sources & Confirmed byte for byte (emu) \\
+Payload 31: 1 if a global word is 0, otherwise \texttt{S+17} &
+Confirmed; the global is the device waveform-page timer
+\texttt{0x1FFE02A0} \\
+Payload 32: offset 76 of a second global & Confirmed:
+\texttt{0x1FFFA934\ +\ 0x4C} = \texttt{0x1FFFA980}, raw output-on time
+in ms \\
+Little-endian & Confirmed \\
+``The scale of each field is not in this copy loop'' & Resolved: section
+7.1 gives the producer and unit of every field \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0xC4} reply, handler
+\texttt{0x5EF8}''}{``0xC4 reply, handler 0x5EF8''}}\label{xc4-reply-handler-0x5ef8}
+
+Confirmed entirely (12 bytes, table, \texttt{usbLine} always present).
+New: the same builder is also sent unsolicited when \texttt{FLAGS} bit
+12 is set.
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0xC8} command, handler
+\texttt{0xB7F4}''}{``0xC8 command, handler 0xB7F4''}}\label{xc8-command-handler-0xb7f4}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{r5{[}0{]}} is the opcode; reply opcode + status; 0 applied, 1
+remote not granted, \texttt{FF} rejected; length 2 or 3 & Confirmed
+(emu) \\
+Mode not 0: \texttt{FF}, the common epilogue still runs, an existing
+request value 0 clears the grant & Confirmed. New: \texttt{rc\ =\ 0}
+then does not release the grant (the request byte is not written), so
+release must use the mode's own command \\
+\texttt{rc} above 2: \texttt{FF} & Confirmed \\
+\texttt{rc} 1 without grant: status 1, nothing applied & Confirmed \\
+\texttt{rc} 0 clears \texttt{S+66} & Confirmed (through the epilogue) \\
+\texttt{rc} 2: if \texttt{S+3\ ==\ 2} both set to 1, otherwise length 0
+& Confirmed. New: \texttt{S+3\ ==\ 2} means a USB host; over BLE the
+request waits for the front-panel prompt and is answered later by a
+deferred \texttt{C9\ 00}/\texttt{C9\ 01} (section 3) \\
+Different requested mode: output off, transfer state not 1, target below
+4, stores \texttt{S+0x31}, skips the other checks & Confirmed (emu with
+\texttt{FFFF} setpoints) \\
+Writes are sequential; a valid voltage can be stored before a bad
+current & Confirmed (emu \#8) \\
+Field table (3050, 5100, \texttt{realChange} 3 -\textgreater{}
+\texttt{S+24}, \texttt{voltageSlow} 1 -\textgreater{} \texttt{S+16},
+\texttt{currentOver} 1 -\textgreater{} \texttt{S+18}, output via
+\texttt{0xA128/\allowbreak{}0xA134/\allowbreak{}0xAEBC/\allowbreak{}0xCB8C}, model 3, refresh -\textgreater{}
+\texttt{0xA5FC}) & Confirmed. Corrections: model is only compared,
+\texttt{0xA128} is not ``called for a different model'' but used as the
+output-off guard; \texttt{0xCB8C} is the buzzer, not output control \\
+3050 = 30.50 V, 5100 = 5.100 A & Confirmed by the units of the targets
+\texttt{0x1FFFA940} (10 mV) and \texttt{0x1FFFA944} (1 mA); new: an
+output voltage of 33.001 V or more for 500 ms sets fault bit 6 \\
+Bit 2 of the word at \texttt{+264} skips the setpoint update and still
+builds a reply & Confirmed; new meaning: it is the deferred-reply mode
+set by the remote prompt callbacks, used when the transmit service calls
+the handler with \texttt{C8\ 31} \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{``State blocks''}\label{state-blocks}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Row
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{S} = \texttt{0x1FFFAACC}, the dispatcher's \texttt{fp} &
+Confirmed \\
+\texttt{0x1FFFA354} program table, ten slots & Confirmed; layout in
+6.3 \\
+\texttt{0x1FFFA138} PD profile table & Confirmed; layout in 6.4 \\
+\texttt{0x1FFFA340} PD class byte per index & Confirmed; it is the
+profile wattage \\
+\texttt{0x1FFFA8C4} program working bytes & Corrected: storage-worker
+request flags (\texttt{+0} PD save, \texttt{+1} last \texttt{D2} index,
+\texttt{+2} header save, \texttt{+3} op, \texttt{+4} steps save,
+\texttt{+5} step-save clears busy, \texttt{+6} load for \texttt{D8},
+\texttt{+7} slot, \texttt{+8} \texttt{DA} cursor, \texttt{+9} table
+re-save check) \\
+\texttt{0x1FFF8F7C} step records, stride 12 & Confirmed; transfer buffer
+of 100 records \\
+\texttt{0x1FFE0184} slot structure \texttt{K} & Confirmed; it is the
+link/transmit control block (1, 2.3, 5.12) \\
+\texttt{0x1FFF9660} four records, stride 260 & Confirmed \\
+\texttt{0x1FFFA0B8} language byte at \texttt{+0x16} & Confirmed; the
+block is the persistent configuration \\
+\texttt{0x1FFF9448} remote-control gate word at \texttt{+0x108} &
+Corrected: \texttt{0x1FFF9550} is the general event/transmit flag word
+(section 8); only bit 2 concerns remote control \\
+\texttt{0x1FFE07E0} charge limit table, stride \texttt{0x16} &
+Confirmed \\
+\texttt{0x1FFFA00C} block used by \texttt{20}, \texttt{F0}, \texttt{FC}
+& Confirmed; also \texttt{F2}, \texttt{F4}, \texttt{F6} (update
+state) \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0xE0} reply, handler
+\texttt{0xB634}''}{``0xE0 reply, handler 0xB634''}}\label{xe0-reply-handler-0xb634}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Reply byte 0 is the constant \texttt{E1} & Confirmed \\
+``Nothing in this function says which transport a type belongs to'' &
+Corrected by the route analysis: type 6 = BLE, type 1 = USB host
+(section 1) \\
+Type 6 returns 18 bytes: \texttt{01\ 06\ 00\ 33},
+\texttt{MP305B\ 00\ 00}, \texttt{02\ 00\ 02\ 00}, request's last byte &
+Confirmed (emu) \\
+Other types return 31 bytes with the listed fields & Confirmed (emu for
+types 1, 3, 5); no suffix in this layout \\
+The handler reads the word at absolute \texttt{0x1C} and copies 8 bytes
+from it + \texttt{0x0C} & Confirmed \\
+The app's vector word is \texttt{0x0007AFC8}, \texttt{+0x0C} gives
+hardware revision then version; the 8 bytes are not in \texttt{app.bin}
+& Confirmed. New (inferred): the bootloader's vector 7 points to its
+identity block the same way (the update verifier \texttt{0x1FE0C} relies
+on vector 7 of an image), so the 8 bytes are the bootloader's hardware
+revision and bootloader version \\
+``WebLink's USB field names do not line up with either layout'' &
+Corrected: the long layout is exactly serial 8 (the model string),
+hardware 4, bootloader 4, application 4, name 10 \\
+Bluetooth captures match the type 6 order with \texttt{01\ 06\ 00\ 28} &
+Consistent with the short layout (not re-checked against the
+captures) \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0xC6} command, handler
+\texttt{0xCAA4}''}{``0xC6 command, handler 0xCAA4''}}\label{xc6-command-handler-0xcaa4}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Reply \texttt{0} or \texttt{FF}, length 2 or 3; first failing check
+stops later stores; output byte not read & Confirmed (emu at every
+bound) \\
+Check/store table rows 0..11 & Confirmed, including
+\texttt{screenDirection} validated but not stored \\
+Payload 9, 10 not in \texttt{C4}; \texttt{usbLine} at 11; WebLink's view
+& Confirmed for the image side \\
+Settings worker \texttt{0x128A4} and the normalisation tables & Not
+re-checked in this pass (settings area) \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0x18}
+bind''}{``0x18 bind''}}\label{x18-bind}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{S+0x47\ =\ 1}, type at \texttt{K+6}, no-reply path & Confirmed
+(emu) \\
+\texttt{19} built at \texttt{0x2690}, called from \texttt{0x3836};
+\texttt{0} if \texttt{S+0x46\ !=\ 0} else \texttt{FF}; zero byte for
+caller type 6 & Confirmed (\texttt{0x12690}, from the transmit service
+\texttt{0x133BC}; emu) \\
+\texttt{0x1478C} and \texttt{0x1483C} set/clear \texttt{S+0x46},
+\texttt{S+0x47}, bit 1; which front-panel action calls which is open &
+Resolved: processor \texttt{0x2478C} and \texttt{0x2483C} are the allow
+and deny button callbacks of the bind prompt (buttons
+\texttt{0x1FFE06C0} and \texttt{0x1FFE06C4}, registered in
+\texttt{0x21A50}) \\
+After \texttt{0x2690} returns, \texttt{0x3836} clears bit 1 & Confirmed;
+it also clears \texttt{S+0x46} and \texttt{S+0x47} \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``Language, \texttt{0xA0} and
+\texttt{0xA2}''}{``Language, 0xA0 and 0xA2''}}\label{language-0xa0-and-0xa2}
+
+Confirmed. Clarification: all \texttt{A2} side effects (store, output
+off or charger stop, configuration save, \texttt{S+0\ =\ 1}) happen only
+when the value changes (emu).
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0x00}, handler
+\texttt{0xDFFC}''}{``0x00, handler 0xDFFC''}}\label{x00-handler-0xdffc}
+
+Confirmed.
+
+\Needspace{10\baselineskip}
+\subsection{``Remote-control tail''}\label{remote-control-tail}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{C8}, \texttt{E2}, \texttt{E8}, \texttt{EE} share one skeleton &
+Confirmed \\
+Bit 2 skips the body and still builds a reply & Confirmed
+(deferred-reply mode) \\
+\texttt{rc} must be below 3; mode 0/1/2/3 or \texttt{FF} & Confirmed \\
+\texttt{rc} 2 stores \texttt{S+0x45}; with \texttt{S+3\ ==\ 2} both set;
+else length 0 & Confirmed \\
+\texttt{rc} 0 clears \texttt{S+0x42} & Confirmed, only in the matching
+mode \\
+\texttt{rc} 1 requires the grant or status 1 & Confirmed \\
+\texttt{E2} and \texttt{E8} are where Ghidra dropped a block &
+Confirmed \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{``Program table''}\label{program-table}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Ten slots, ids at \texttt{+0xAA}, per-slot flag at \texttt{+0xA0}, count
+at \texttt{+0xB5}, selected at \texttt{+0xB4}, 16-byte record per slot &
+Confirmed. The ``flag'' is the step count and the 16-byte record is the
+program name \\
+\texttt{D4} reply: count, then for ids 1..count the slot's 16 bytes and
+flag; variable length & Confirmed; new: ids not contiguous from 1 are
+omitted \\
+\texttt{DC} & Confirmed \\
+\texttt{D8}: \texttt{r3\ =\ 0} at \texttt{0x2FB0}, scan from slot 0,
+\texttt{K+4}, \texttt{0x1FFFA8C4+6}, \texttt{K+5} & Confirmed; also
+\texttt{K+3\ =\ 0}. New: an unknown id produces no \texttt{D9} at all \\
+Worker \texttt{0x1D380} reads \texttt{0x4B0} bytes from
+\texttt{0x162000\ +\ slot*0x1000} into \texttt{0x1FFF8F7C}, sets bit 7;
+service \texttt{0x133BC} calls \texttt{0x15CA0}; \texttt{D9}, id, up to
+ten 12-byte records, cursor \texttt{0x1FFE0187}; route suffix for type
+6; full chunks 122 bytes; bit 7 cleared at the step count & Confirmed
+(emu with 3 and 12 steps). New: the destination and suffix come from
+\texttt{S+3}, not from the route of the \texttt{D8} \\
+\texttt{D6}: id 1..10, find or allocate, increments the count, copies 16
+bytes and a flag, two further bytes, second == 1 deletes and renumbers;
+\texttt{0}/\texttt{FF}; dispatcher clears \texttt{+8} and calls
+\texttt{0xAEBC(0)} & Confirmed. New: the first of the two bytes is the
+save flag, the second the operation (0 write, 1 delete, 2 write with
+steps to follow), see 5.11 \\
+\texttt{DA}: id 1..9, looked up, up to ten steps of three words, 30500,
+5100 unless the third is 0, third at most 99990 & Confirmed (emu at each
+bound). New: exactly ten records are read every call, an id without a
+slot is \texttt{FF}, the cursor only resets on \texttt{D6} \\
+5100 = 5.100 A; 30500 reads as 30.500 V if a step is 1 mV & Confirmed:
+the runner divides the first word by 10 before setting the 10 mV target,
+and the UI prints it as mV \\
+``99990 is the constant only'' & Resolved: the third word is the step
+duration in seconds \\
+Accepted steps at \texttt{0x1FFF8F7C}, stride 12; filling the count
+returns 0 & Confirmed; the deferred \texttt{DB\ 00} follows the flash
+write \\
+A rejected value sets \texttt{FF} and 2 at \texttt{S+0x4B}; the
+dispatcher writes 1 afterwards & Confirmed. New consequence: the busy
+flag stays 1 until a later successful save \\
+\texttt{DE} table rows 0..64 & Confirmed byte for byte (emu). Names and
+units in 5.15 \\
+\texttt{E2} layout offsets 0..3, mode change guard, action to
+\texttt{S+0x4C}, enabling needs steps and no faults, output off clears
+\texttt{S+0x4C}, sets \texttt{S+6}, calls \texttt{0xCB8C(1)}; disabling
+can call \texttt{0xAEBC(0)}; success sets \texttt{S+0x49}; status
+0/1/\texttt{FF} & Confirmed (emu). New: action 1 previous step, 2
+pause/resume, 3 next step; \texttt{S+6} starts the program runner;
+\texttt{0xCB8C} is a beep \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{``PD profiles''}\label{pd-profiles}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{D0}: echoes payload 0, index = byte - 1, class
+\texttt{\textless{}\ 0x65} -\textgreater{} 7 groups else 9, 16 bytes,
+class, count, groups from \texttt{+0xA0\ +\ index*0x24} & Confirmed
+(emu); no index check \\
+\texttt{D2}: index below 10 or \texttt{FF}, 16 bytes, class, a count, up
+to 9 groups, groups past the count masked \texttt{0xFFF8}, dispatcher
+writes 1 at \texttt{S+0x4B} & Confirmed, with one correction: a
+\textbf{save byte follows the count} before the groups
+(\texttt{D2,\ id,\ name{[}16{]},\ class,\ count,\ save,\ groups}). New:
+the dispatcher also requests the output off; without the save byte the
+busy flag stays set \\
+\texttt{E4}: \texttt{0x1FFFA138+0x212} plus 1 & Confirmed; also sent
+unsolicited (bit 10) \\
+\texttt{E8}: offsets 0..5, mode-change path, enable requires no faults,
+sets selector, \texttt{S+0x2A}, \texttt{S+0x2C}; disable can call
+\texttt{0xAEBC(0)}; dirty flag & Confirmed (emu). New: \texttt{S+0x9C}
+and \texttt{0x1FFF9BB9} are stored before any check; \texttt{S+0x9C} is
+a PDO enable mask; the output is switched on only after the PD companion
+acknowledges (5.20) \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{``Charge''}\label{charge}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{EA} returns \texttt{0x15}/\texttt{0x16}, table & Confirmed;
+names in 5.21 \\
+\texttt{EC} returns \texttt{0x1F}/\texttt{0x20}, table, payload 26 low
+half ORed with \texttt{S+0x9E}, 28 high half & Confirmed; names in
+5.22 \\
+\texttt{EE} payload offsets, type below 6, voltage between table entries
+0 and 10, cells limits 7/9/13, type 5 not stored, current below 5001,
+output bit with \texttt{S+0x4B} & Confirmed (emu at every bound) \\
+Output 1 calls \texttt{0xA134} and \texttt{0xD6FC} when
+\texttt{S+0x7B\ ==\ 0} and \texttt{S+0x9E\ ==\ 0}; output 0 calls
+\texttt{0xD858} when \texttt{S+0x7B\ !=\ 0}; both call
+\texttt{0xCB8C(1)} & Confirmed, except that the beep only happens when
+the charger is actually started or stopped (emu) \\
+Mapping each numeric type to a chemistry needs a UI trace & Resolved: 0
+LiHv, 1 LiPo, 2 Lilon (Li-ion), 3 LiFe, 4 Pb, 5 NiMH/Cd; for type 5 the
+u16 is the -dV threshold in mV \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{``Connection state and list
+ingest''}\label{connection-state-and-list-ingest}
+
+\texttt{BD}, \texttt{BE}, \texttt{BB} statements: confirmed (emu).
+Additions: \texttt{BD} from type 6 is the CH58x reporting whether a BLE
+host is bound (\texttt{BD\ 01}/\texttt{BD\ 00}); \texttt{BE} selector 0
+also copies pending flags to \texttt{S+0x1D}/\texttt{S+0x1E}.
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0x51}, \texttt{0x53},
+\texttt{0xF1} and
+\texttt{0xFD}''}{``0x51, 0x53, 0xF1 and 0xFD''}}\label{x51-0x53-0xf1-and-0xfd}
+
+Confirmed. Additions: the meanings in 2.3 and 5.25; \texttt{FD\ 03} also
+sets \texttt{0x1FFF9438\ =\ 1}; \texttt{F1} completes the pre-update
+handshake.
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``\texttt{0xE1}
+received''}{``0xE1 received''}}\label{xe1-received}
+
+Confirmed; the four bytes are the CH58x's application version (bytes
+17..20 of the long \texttt{E1} layout).
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{``Block write and the \texttt{0xF0} to
+\texttt{0xFE}
+commands''}{``Block write and the 0xF0 to 0xFE commands''}}\label{block-write-and-the-0xf0-to-0xfe-commands}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{20} subcommand 5: offset at 5..8, length at 9..12, data at
+\texttt{0x1D}; offset 0 erases \texttt{0x100000..0x130000} via
+\texttt{0xBDC6} and clears the checksum; length must be \texttt{0x80}
+and \texttt{offset\ +\ 0x1000\ \textless{}\ 0x44000}; counter
+\texttt{+0x0C} += \texttt{0x80}; write, read back, add each byte; reply
+opcode, subcommand, offset, status, length 7 & Confirmed (emu) \\
+Subcommand 6 compares the word at \texttt{0x0D..0x10}; match echoes 6,
+mismatch \texttt{0x86} and clears the counter; bytes 2..5 checksum, byte
+6 zero & Confirmed (emu) \\
+Type 6 appends \texttt{0x31} & Confirmed. New: any other subcommand
+returns the single byte \texttt{31} for type 6 \\
+\texttt{0xBDC6} sends \texttt{0xD8} to \texttt{0xBF9C} between
+\texttt{0xF420(6,4)} and \texttt{0xF3CC} & Confirmed: 64 KB sector erase
+(\texttt{06} write enable, \texttt{D8}, \texttt{04} write disable) \\
+\texttt{F0}: byte \texttt{AC}, sets \texttt{0x1FFFA00C\ =\ 1},
+\texttt{F1\ 00} & Confirmed \\
+\texttt{F2}: clears \texttt{0x98} bytes, first byte 1, \texttt{0xFC24},
+status & Confirmed. New: \texttt{0x1FC24} erases block 0 and the target
+range, and loops 65536 times for a length below \texttt{0x10000} \\
+\texttt{F4}: \texttt{0xFC94}, \texttt{F5\ 00} + request bytes 2..5 +
+status & Confirmed. New: it programs 128 bytes and sums the read-back
+words \\
+\texttt{F6}: \texttt{0xFE0C}, failure erases \texttt{0xF0000} &
+Confirmed. New: success writes the identity magic \texttt{AA55CC33} into
+the staged image \\
+\texttt{FC}: byte \texttt{CA}, walks \texttt{0x1F0000} in 16 blocks of
+\texttt{0x100}, status 1, 3 or 7 from the counter, four records through
+\texttt{0xBF3A}, \texttt{FD\ 00} & Confirmed; the four records are the
+update header at SPI 0 (length, sum, count, magic), written only when
+\texttt{0x1FFFA010\ !=\ 0} \\
+\texttt{FE}: \texttt{AA\ 55} -\textgreater{} \texttt{0xDBE8},
+\texttt{0xCA60(200)}; \texttt{0xDBE8} sets \texttt{0x1FFE01CC} bytes,
+calls \texttt{0xD868}; no reset register; not a bootloader entry &
+Corrected: \texttt{FE\ AA\ 55} is a factory reset followed by a reboot.
+\texttt{0xCA60(200)} starts a countdown in \texttt{0x12850}, which ends
+in \texttt{0x1B71C}: \texttt{0x1234} written to \texttt{0x2005F000} and
+\texttt{AIRCR\ =\ 0x05FA0004} \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md section 3, ``Opcode
+matrix''}\label{protocol.md-section-3-opcode-matrix}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Response = request + 1, except \texttt{20}; \texttt{D8} and \texttt{18}
+answered by deferred \texttt{D9} and \texttt{19} & Confirmed. New:
+\texttt{C9}/\texttt{E3}/\texttt{E9}/\texttt{EF} (remote prompt),
+\texttt{DB} (after the last \texttt{DA} chunk) are also deferred, and
+\texttt{C5}, \texttt{DD}, \texttt{E5}, \texttt{EB} can arrive
+unsolicited (section 8) \\
+Matrix rows \texttt{E0}, \texttt{18}, \texttt{C2}, \texttt{C4},
+\texttt{C6}, \texttt{C8}, \texttt{D0}..\texttt{EE}, \texttt{A2} &
+Confirmed. Refinements: \texttt{BD} is the CH58x's link report, not a
+host command; \texttt{DE} serves modes 1 and 2 as listed; \texttt{E2}
+``run/pause/step'' is action 1 previous, 2 pause/resume, 3 next plus
+output start/stop \\
+\texttt{18} ``BLE (AF02)'' & The main firmware accepts \texttt{18} on
+any route; the CH58x forwards it from AF02 \\
+\texttt{0x18} sets a flag; \texttt{0x12690} emits \texttt{19} after a UI
+decision & Confirmed \\
+The switch also accepts \texttt{00\ 20\ 51\ 53\ A0\ BB\ BE\ F0..FE} &
+Confirmed \\
+Unrecognised requests get no reply & Confirmed \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{protocol.md 4.1, \texttt{C2} -\textgreater{}
+\texttt{C3}}{protocol.md 4.1, C2 -\textgreater{} C3}}\label{protocol.md-4.1-c2---c3}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Row
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Handler \texttt{0x58BC}, 37 bytes & Confirmed \\
+\texttt{outState} 1 CV, 2 CC & Confirmed; 0 = output off (confirmed in
+code), 3 = output held above the setpoint (inferred) \\
+\texttt{batteryState} internal enum & Refined: 0 on battery, 1 external
+input charging, 2 charge held (7.1) \\
+\texttt{percentage} 0..100 \% & Confirmed as the battery state-of-charge
+byte \\
+\texttt{voltage} 10 mV & Confirmed in code (INA226 mV / 10); reads 0
+with the output off below 0.501 V \\
+\texttt{setVoltage} 10 mV, \texttt{current} 1 mA, \texttt{setCurrent} 1
+mA & Confirmed in code; current reads 0 with the output off \\
+\texttt{workingTime} s & Confirmed in code (calibrated ms counter /
+1000) \\
+\texttt{energy} 0.1 Wh & Confirmed in code (mWh / 100, rounded) \\
+\texttt{power} 10 mW & Confirmed in code (µW / 10000, rounded) \\
+\texttt{currentOver}: setting, 0 CC, 1 OCP & Confirmed: 1 trips fault
+bit 5 after the OCP delay \\
+\texttt{realChange} bit 0 voltage, bit 1 current live updates &
+Confirmed in code: the bits select live knob editing per field
+(\texttt{0x5A270}, \texttt{0x57064}); while the output is on, any
+nonzero value also sets the UI refresh period to 100 ms instead of 200
+ms (\texttt{0x1E284}) \\
+\texttt{voltageSlow} step or ramp at the settings' ramp rate &
+Confirmed: ramp of \texttt{slopeSteps} mV per 100 ms, also at switch-on
+from 0 V \\
+\texttt{output} 0/1 & Confirmed; it is the actual power-stage state, not
+the request \\
+\texttt{model} 0..3 & Confirmed \\
+\texttt{voltageBoard}, \texttt{currentBoard} UI keypad input flags &
+Consistent: persisted UI entry-mode flags, default 1 (inferred) \\
+\texttt{temperature} °C & Refined: signed int8, the companion's first
+temperature, which the firmware uses for the battery protections \\
+\texttt{chargeError} bitmask, see 4.5 & Confirmed; producer and every
+bit in 7.2 \\
+\texttt{wavePause} waveform streaming active flag & Corrected: 1 if the
+device waveform page timer pointer is zero, otherwise S+0x11. The reply
+field alone does not identify host streaming \\
+\texttt{waveTime} timestamp in ms & Refined: raw output-on time in ms,
+the uncalibrated counter behind \texttt{workingTime}, reset by refresh
+and mode change \\
+\texttt{outState} 0 probably ``neither, output off'' (inferred) &
+Confirmed in code \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{protocol.md 4.2, \texttt{C8} -\textgreater{}
+\texttt{C9}}{protocol.md 4.2, C8 -\textgreater{} C9}}\label{protocol.md-4.2-c8---c9}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+WebLink sends \texttt{rc\ =\ 2} then full \texttt{rc\ =\ 1} frames &
+Consistent with the handler \\
+Payload 11 bytes, field table & Confirmed \\
+\texttt{refresh} 1 = reset cumulative counters & Confirmed: energy and
+time (\texttt{0x1A5FC}) \\
+\texttt{model} target mode (0 = DC) & Confirmed; 1..3 request a mode
+change while the output is off \\
+Status 0, 1, \texttt{FF} & Confirmed; the deferred reply uses 0
+(allowed) and 1 (denied) \\
+3050 / 5100 limits, \texttt{FF} in other modes, epilogue can change
+grant state, no rollback, \texttt{rc\ \textgreater{}\ 2} rejected,
+\texttt{rc\ =\ 1} needs the grant & Confirmed (emu) \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{protocol.md 4.3,
+\texttt{C4}/\texttt{C6}}{protocol.md 4.3, C4/C6}}\label{protocol.md-4.3-c4c6}
+
+Byte layouts and the \texttt{C6} check table: confirmed (emu). The
+discrete lists and units are WebLink's; this pass adds that slope is
+used as mV per 100 ms by the ramp (\texttt{0x19E68}) and the OCP delay
+as milliseconds (\texttt{0x19E68} compares it with a millisecond
+counter).
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{protocol.md 4.4, \texttt{E0} -\textgreater{}
+\texttt{E1}}{protocol.md 4.4, E0 -\textgreater{} E1}}\label{protocol.md-4.4-e0---e1}
+
+Confirmed, with the corrections above: layout chosen by route (6 BLE
+short, others long); the long layout matches WebLink's USB field list;
+its bytes 8..15 (payload offsets) are inferred to be the bootloader's
+hardware revision and version.
+
+\Needspace{10\baselineskip}
+\subsection{\texorpdfstring{protocol.md 4.5,
+\texttt{chargeError}}{protocol.md 4.5, chargeError}}\label{protocol.md-4.5-chargeerror}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Bit
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 \texttt{OUTPUT\_REVERSED} & Consistent: ADC1 channel 3 above 0.5 V
+(sensor meaning inferred) \\
+1 \texttt{LOW\_BATTERY} & Confirmed in code \\
+2 \texttt{BATTERY\_LOW\_TEMP} & Confirmed: below -19 °C \\
+3 \texttt{BATTERY\_OVERHEAT} & Confirmed: above 57 °C \\
+4 \texttt{SYSTEM\_OVERHEAT} & Confirmed: other sensors at or above 85
+°C \\
+5 \texttt{DC\_OUT\_OCP} & Refined: software OCP after the OCP delay with
+\texttt{currentOver\ =\ 1}, not a hardware trip \\
+6 \texttt{DC\_OUT\_OVP} & Confirmed: 33.001 V or more for 500 ms \\
+7 \texttt{DIC\_INIT\_ERROR} & Confirmed: power-stage start-up failure \\
+8 \texttt{DC\_OUT\_VOL\_FAIL} & Confirmed: INA226 and ADC voltage
+disagree by 5 V or more in CV \\
+9..15 charger faults & Corrected: the reviewed producers set only bits
+0..8 in \texttt{S+0x9E} (the \texttt{C3} field). The separate charger
+word contributes bits 10 and 11 to \texttt{EC}; indirect writes remain
+outside this absence claim \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 4.6}\label{protocol.md-4.6}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verdict
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{18}/\texttt{19} behaviour & Confirmed \\
+\texttt{A0}/\texttt{A2} behaviour & Confirmed \\
+\texttt{DA} limits & Confirmed; the third word is seconds \\
+PD profile is 16 bytes, a class byte and 7 or 9 groups; \texttt{E4} is
+index + 1 & Confirmed; the 16 bytes are the name, the class is the
+wattage \\
+\texttt{EA} 20 payload bytes, \texttt{EC} 30, \texttt{DE} 68 &
+Confirmed \\
+\texttt{20} is a block write replying \texttt{20}; \texttt{FE} not a
+bootloader entry & Confirmed for \texttt{20}; \texttt{FE\ AA\ 55} is
+corrected to factory reset plus reboot \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\section{Host-link comparison}\label{host-link-comparison}
+
+Full source: \href{notes/hostlink.md}{hostlink analysis}.
+
+Statements are grouped by source file. C = confirmed, X = corrected, N =
+new.
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 1.1 to 2.2
+(framing)}\label{protocol.md-1.1-to-2.2-framing}
+
+\begin{itemize}
+\tightlist
+\item
+  1.1 ``USB VID 0x28E9, PID 0x028A, report ID 1 OUT / report ID 2 IN, 63
+  data bytes, 62/61-byte chunking'': \textbf{C} (CH58x descriptors and
+  \texttt{0x3E1A} 62-byte queue; the 61-byte figure is WebLink
+  host-side).
+\item
+  1.1 ``WebLink de-stuffs \texttt{AA\ AA\ -\textgreater{}\ AA}; firmware
+  doubles \texttt{AA} throughout the framed body, single leading
+  delimiter'': \textbf{C} (encoder \texttt{0x1FEDC}, emu round-trip).
+\item
+  2.1 ``TX \texttt{{[}cnt{]}\ AA\ 12\ plen\ cmd\ ...\ cksum}, RX addr
+  byte, opcode index 4/1/0'': \textbf{C} for the byte order. \textbf{N}:
+  the \texttt{12}/\texttt{31} etc are
+  \texttt{(source\textless{}\textless{}4)\textbar{}dest} nibbles, not a
+  fixed device address; the MCU-side address is computed by nibble swap.
+\item
+  2.1 ``BLE AF01 replies carry address byte 0x31'': \textbf{X
+  (clarified)}. \texttt{0x31} is the CH58x AF01 route marker, appended
+  by the CH58x on AF01 writes, echoed by type-6 handlers, and moved to
+  the front by the CH58x reply router \texttt{0x3FAC}. It is not a bus
+  address and the main MCU never emits it as a frame address.
+\item
+  2.2 ``checksum = sum of addr, plen, cmd+payload; \texttt{AA} doubled;
+  single leading \texttt{AA}; parser splits first body byte into
+  nibbles, does not compare with 0x12'': \textbf{C} (emu, disasm
+  \texttt{0x1FF38}/\texttt{0x1FEDC}).
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``Command
+dispatcher''}\label{firmware.md-command-dispatcher-1}
+
+\begin{itemize}
+\tightlist
+\item
+  ``\texttt{0x2F34} watches four flag bytes, first set selects a record
+  at \texttt{0x1FFF9660} stride 260, byte 0 type, byte 2 length, byte 4
+  opcode'': \textbf{C} (the four flags are \texttt{0x1FFE01AC..AF};
+  addresses given here).
+\item
+  ``two call shapes; \texttt{0xBB/\allowbreak{}0xBD/\allowbreak{}0xBE} no reply buffer'':
+  \textbf{C} (disasm of the call sites).
+\item
+  ``type 6 appends one byte copied from the end of the request;
+  \texttt{0xF2/\allowbreak{}0xF4/\allowbreak{}0xF6/\allowbreak{}0xFC/\allowbreak{}0x20} append constant \texttt{0x31}'':
+  \textbf{C}, and \textbf{N}: the appended byte is the CH58x route
+  marker (\texttt{0x31} AF01 / \texttt{0x00} AF02), which is why the
+  constant \texttt{0x31} is used where the reply always targets AF01.
+\item
+  ``type byte 6 is not a transport name; \texttt{0xBD} treats 5 and 6 as
+  different'': \textbf{C} and explained: type = source nibble; 6 = BLE
+  host, 5 = accessory link, 1 = USB, 3 = CH58x internal.
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``Frame
+parser''}\label{firmware.md-frame-parser}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Outbound stuffing \texttt{0xFFF0}, inbound \texttt{0xFF38},
+  \texttt{AA} counter, state table branch, states 1-4 as described,
+  checksum coverage'': \textbf{C} (all re-derived by disasm and
+  confirmed by emu round-trip and edge cases).
+\item
+  \textbf{C (offsets, corrected during recovery)}: firmware.md is
+  correct: main state is at \texttt{+0x208}, the fill index at
+  \texttt{+0x20C}, and the \texttt{AA} counter at \texttt{+0x213}. The
+  earlier independent note's proposed correction was rejected after
+  instruction inspection and stepped execution.
+\item
+  ``\texttt{0xFF38} is a file offset; absolute \texttt{0x1FF38}'':
+  \textbf{C} (function at \texttt{0x1FF38}; the wrapper \texttt{0x146B8}
+  tail-calls it).
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``0x18 bind''}\label{firmware.md-0x18-bind}
+
+\begin{itemize}
+\tightlist
+\item
+  ``\texttt{0x18} inline \texttt{0x3126} sets \texttt{S+0x47}, stores
+  type at \texttt{K+6}, no reply'': \textbf{C} (absolute
+  \texttt{0x13126}).
+\item
+  ``\texttt{0x19} built at \texttt{0x2690} from \texttt{0x3836}; byte1 =
+  0 if \texttt{S+0x46!=0} else \texttt{0xFF}; len 2 or 3 (type 6 appends
+  0)'': \textbf{C} (absolute \texttt{0x12690}, emu-confirmed
+  \texttt{19\ 00\ 00} / \texttt{19\ FF\ 00}).
+\item
+  ``\texttt{0x1478C} sets \texttt{S+0x46=1},\texttt{S+0x47=0}, bit 1 of
+  \texttt{0x1FFF9448+0x108}; \texttt{0x1483C} clears both, sets same
+  bit; which button calls which is open'': \textbf{X}. These are
+  \textbf{file offsets}: the real functions are \texttt{0x2478C} (Allow,
+  sets \texttt{S+0x46=1}) and \texttt{0x2483C} (Deny, clears
+  \texttt{S+0x46}), both setting bit 1 of \texttt{0x1FFF9550}.
+  firmware.md's ``\texttt{0x1483C}'' should be \texttt{0x2483C} (= file
+  offset \texttt{0x1483C}). The button binding is now resolved:
+  \texttt{0x2840C} builds the confirm-bind dialog and registers
+  \texttt{0x2478C} on child \texttt{0x1FFE06C0} (Allow) and
+  \texttt{0x2483C} on \texttt{0x1FFE06C4} (Deny) via \texttt{0x21A50}.
+\item
+  ``after \texttt{0x2690} returns \texttt{0x3836} clears bit 1'':
+  \textbf{C}.
+\item
+  \textbf{N}: bind timeout auto-dismisses the dialog and yields
+  \texttt{19\ FF}; the main MCU never stores host IDs (remembering is
+  CH58x-only); USB \texttt{0x18} is answered the same way.
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``Stream and list ingest'' / ``Connection state
+and list
+ingest''}\label{firmware.md-stream-and-list-ingest-connection-state-and-list-ingest}
+
+\begin{itemize}
+\tightlist
+\item
+  ``\texttt{0xBD} \texttt{0x4660} type 6 stores request byte 1 at
+  \texttt{S+3}, clears \texttt{K+2} and u16 at \texttt{K+0x12} when 0;
+  type 5 stores byte 1 at \texttt{S+4}, copies \texttt{len-2} bytes to
+  \texttt{S+0x58}'': \textbf{C} (absolute \texttt{0x14660}). \textbf{N}:
+  \texttt{S+3} is the host link state (\texttt{BD\ 01} up /
+  \texttt{BD\ 00} down) and \texttt{S+0x58} is the accessory name.
+\item
+  ``\texttt{0xBE} \texttt{0x855C} selectors 0/1/2/4, wheel
+  \texttt{K+0x2C}'': \textbf{C} (absolute \texttt{0x1855C}); \textbf{N}:
+  this is Bluetooth-accessory input (wheel + buttons) routed into the
+  LVGL keypad reader; also injectable by a BLE host on AF01.
+\item
+  ``\texttt{0xBB} \texttt{0x5AA0} clears \texttt{0xC4} bytes at
+  \texttt{0x1FFF9A70}, count, stride \texttt{0x26}, sum, sets
+  \texttt{S+0x3D}'': \textbf{C} (absolute \texttt{0x15AA0}); \textbf{N}:
+  it is the ``Bluetooth Accessories'' scan-result list.
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``0x51, 0x53, 0xF1 and
+0xFD''}\label{firmware.md-0x51-0x53-0xf1-and-0xfd}
+
+\begin{itemize}
+\tightlist
+\item
+  ``\texttt{0x51}/\texttt{0x53} type 3, payload 0, store 0 at
+  \texttt{0x1FFF9448+0x103/\allowbreak{}0x104}, load 1000 at \texttt{0x1FFF9440}'':
+  \textbf{C}. \textbf{N}: they are the acks of the MCU's own
+  \texttt{0x50}/\texttt{0x52} companion commands.
+\item
+  ``\texttt{0xF1} inline \texttt{0x30D8} type 3, requires
+  \texttt{0x1FFFA00C+2\ ==\ 1}, stores 2'': \textbf{C}; \textbf{N}: ack
+  of \texttt{F0\ AC} update-prepare.
+\item
+  ``\texttt{0xFD} inline \texttt{0x32C0}, payload 3 or \texttt{0xFF}; 3
+  sets \texttt{0x1FFF9449}, calls \texttt{0xAE70(1)}, ORs
+  \texttt{0x2000} (bit 13, request the CH58x identity with \texttt{E0});
+  \texttt{0xFF} clears \texttt{0x1FFF9449} and bumps
+  \texttt{0x1FFF943C}'': \textbf{C} (absolute \texttt{0x132C0});
+  \textbf{N}: \texttt{FD} carries CH58x update progress. Note
+  \textbf{N}: \texttt{FD\ 03} also arrives during boot from node 3 and
+  marks the companion initialised (\texttt{0x1FFF9449\ =\ 1}); a
+  \texttt{FD\ 03} from node 1 (USB) is accepted too (emu).
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``0xE1
+received''}\label{firmware.md-0xe1-received}
+
+\begin{itemize}
+\tightlist
+\item
+  ``\texttt{0x3C40} acts only when type is 3; if byte 8 of
+  \texttt{0x1FFF942C} is 0 sets \texttt{K+0=1} and copies 4 bytes from
+  record+0x11 to bytes 8..11, else to 0..3 and 4..7; meaning not
+  named'': \textbf{C} (absolute \texttt{0x13C40}). \textbf{X/N}: the 4
+  bytes are the \textbf{CH58x version/identity field}
+  (\texttt{01\ 00\ 00\ 0f} on the emulated reply), copied to
+  \texttt{0x1FFF9434..37} then \texttt{0x1FFF942C..33}, and shown by the
+  sys-info UI \texttt{0x57D54}. It is not a BLE MAC (the MAC stays
+  inside the CH58x).
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 1.3 (bind
+table)}\label{protocol.md-1.3-bind-table}
+
+\begin{itemize}
+\tightlist
+\item
+  ``device shows allow/deny prompt every connection; reply on button
+  press'': \textbf{C} (prompt \texttt{0x2840C}, callbacks
+  \texttt{0x2478C}/\texttt{0x2483C}).
+\item
+  ``\texttt{19\ 00} allowed, \texttt{19\ FF} denied'': \textbf{C} (emu).
+\item
+  ``device does not remember an allowed host with WebLink's frame'':
+  \textbf{C} in code: the main MCU stores nothing, and the CH58x only
+  stores a host ID after a \texttt{19\ 00} with the frame's last byte
+  zeroed (CH58x side); WebLink's frame path goes through the prompt, not
+  the remember path.
+\item
+  ``after deny, \texttt{0xC4}/\texttt{0xC2}/\texttt{0xE0} still
+  answered; binding does not protect reading'': \textbf{C} (dispatcher
+  has no bind gate; emu \texttt{test\_dispatch} answers reads regardless
+  of \texttt{S+0x46}).
+\item
+  ``how long the device waits before giving up, and what it replies'':
+  \textbf{answered (code)}: the popup auto-dismisses (tens of seconds)
+  and the deferred \texttt{0x12690} then replies \texttt{19\ FF}.
+\item
+  ``whether USB shows the prompt'': \textbf{answered (code)}: USB
+  \texttt{0x18} is dispatched and answered identically; the prompt UI
+  would appear, but USB control is gated by the remote grant (granted
+  without a prompt), not by bind.
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware-architecture.md ``Framing and bridge
+routing''}\label{firmware-architecture.md-framing-and-bridge-routing}
+
+\begin{itemize}
+\tightlist
+\item
+  ``decoded slot: source nibble, dest nibble, length, unused, opcode,
+  payload; addr = (source\textless\textless4)\textbar(dest\&15); wire =
+  AA addr len opcode payload cksum; AA doubled incl addr/len/cksum;
+  leading AA single; addr 0xAA cannot be received; zero length fails;
+  checksum change rejected'': \textbf{C} (all re-derived independently
+  by disasm + emu here).
+\item
+  ``type-6 suffix is an internal bridge route byte, AF01=31 AF02=00,
+  removed before notification; update handlers use fixed 31'':
+  \textbf{C} (CH58x \texttt{0x4074}/\texttt{0x3FAC}, and MCU type-6
+  append; emu both sides).
+\item
+  encoder \texttt{0x15430}, body \texttt{0x1FEDC}, stuffing
+  \texttt{0x1FFF0}, decoder wrapper \texttt{0x146B8}: \textbf{C} (all
+  confirmed).
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{hardware-buses.md ``Main processor
+UARTs''}\label{hardware-buses.md-main-processor-uarts}
+
+\begin{itemize}
+\tightlist
+\item
+  ``\texttt{0x4001CC00} init \texttt{0x644A4} 115200, RX
+  \texttt{0x1EF0C} decoder ch0 parser \texttt{0x11900}, P3.9/P3.8 mux
+  0x20/0x21 -\textgreater{} PD companion'': \textbf{C}.
+\item
+  ``\texttt{0x4001D400} init \texttt{0x1787C} 115200, RX
+  \texttt{0x1EF5C} decoder ch1, P2.0/P2.1 mux 0x20/0x21 -\textgreater{}
+  BLE/USB bridge, four mailboxes stride 260 at \texttt{0x1FFF9660},
+  sources 6/1/5/3'': \textbf{C} (this is the hostlink UART).
+\item
+  ``\texttt{0x40021000} 1000000 baud, RX \texttt{0x1F048} text-line
+  buffer, CR terminator, buffer \texttt{0x1FFF8A8C} 512 bytes,
+  status/len/cursor \texttt{0x1FFE0148/\allowbreak{}14A/\allowbreak{}14C}, console/factory'':
+  \textbf{C}, and \textbf{N}: full command set documented (section 1);
+  consumed by \texttt{0x1227C} in Time\_task; not reachable from the
+  host link.
+\item
+  ``source 3 opcode \texttt{0x55} handshake path and opcode
+  \texttt{0x11} reaches \texttt{0x13C88}'': \textbf{C} (\texttt{0x55}
+  ack in \texttt{0x133BC}; \texttt{0x11} -\textgreater{}
+  \texttt{0x13C88} time sync in the RX callback fast path).
+\item
+  ``DMA base \texttt{0x40053400} channels 0/1; selectors
+  \texttt{0x12C/\allowbreak{}D/\allowbreak{}F} and \texttt{0x14C/\allowbreak{}D/\allowbreak{}F}; NVIC priority arg 15'':
+  \textbf{C}.
+\item
+  \textbf{N}: RX is per-byte interrupt (RI), DMA is transmit only.
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{firmware-permissions.md / firmware.md
+remote-control}\label{firmware-permissions.md-firmware.md-remote-control}
+
+\begin{itemize}
+\tightlist
+\item
+  ``bind decision \texttt{S+0x46} and remote grant \texttt{S+0x42} are
+  separate; decline callback clears \texttt{S+0x46}/\texttt{S+0x47} but
+  not \texttt{S+0x42}'': \textbf{C}.
+\item
+  ``reads answered after denial'': \textbf{C}.
+\item
+  ``C8 remoteCon 2 grants immediately for connection type 2, pends for
+  type 1/0'': \textbf{C} and refined: \textbf{type 2 = USB} (grants at
+  once, no prompt); \textbf{type 1 = Bluetooth host} (pends for the
+  Allow dialog); type 0 = no link (dropped). emu-confirmed.
+\item
+  \textbf{N (answers TBD-005/TBD-012)}: on link drop
+  \texttt{S+3\ -\textgreater{}\ 0}, the UI pass \texttt{0x1E284} clears
+  the remote grant \texttt{S+0x42}; the output enable
+  \texttt{0x1FFFAA2E} is not touched, so the output stays on. There is a
+  keepalive (\texttt{0x55}) and a retransmit-then-give-up watchdog
+  (about 50 tries / 5 s) plus an 8 s USB-silence timeout that clear
+  \texttt{S+3}.
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\subsection{New, not in docs/research}\label{new-not-in-docsresearch}
+
+\begin{itemize}
+\tightlist
+\item
+  The complete \texttt{0x1FFF9550} work-mask bit map (section 6).
+\item
+  The node numbering (1/2/3/5/6) and its exact meaning per source.
+\item
+  The internal MCU\textless-\textgreater CH58x message table with
+  \texttt{E0/\allowbreak{}FC/\allowbreak{}50/\allowbreak{}52/\allowbreak{}10/\allowbreak{}F0/\allowbreak{}55} outbound and
+  \texttt{55/\allowbreak{}51/\allowbreak{}53/\allowbreak{}F1/\allowbreak{}FD/\allowbreak{}E1/\allowbreak{}11/\allowbreak{}BD/\allowbreak{}BB/\allowbreak{}BE} inbound, all emu-verified.
+\item
+  The USART7 console command set and that it can switch the output on
+  with no bind/grant.
+\item
+  The \texttt{E1}-received 4 bytes identified as the CH58x version
+  field.
+\item
+  The transmit service \texttt{0x133BC} as the single point that
+  serialises all outbound frames, with one outstanding frame gated by
+  \texttt{K+0}.
+\end{itemize}
+
+\Needspace{10\baselineskip}
+\section{CH58x comparison}\label{ch58x-comparison}
+
+Full source: \href{notes/ch58x.md}{ch58x analysis}.
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 1.1 USB HID}\label{protocol.md-1.1-usb-hid}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+VID \texttt{0x28E9}, PID \texttt{0x028A}, bcdDevice 2.00, string indexes
+1, 2, 3 & Confirmed {[}A{]}. New: index 3 (serial) is not served; the
+request stalls \\
+Strings \texttt{wch.cn} and \texttt{MP305B} & Confirmed. New: the
+product string is RAM and is replaced by the 8-byte name from DataFlash
+\texttt{0x6E0E} (cut at the first space) when USB is enabled \\
+WebLink filters on usagePage 1, usage 4 & The descriptor's top-level
+usage is 0 (\texttt{09\ 00}). With this image the WebLink filter would
+not match. Needs a USB check (TBD-013) \\
+WebLink checks the product name contains MP305B/MP305A/MP3010B &
+Consistent; the name comes from the MCU's \texttt{FC} (MP305B on
+1.6.0.51) \\
+EP1 OUT/IN interrupt 64 bytes 1 ms, HID 1.11, report descriptor 35
+bytes, 100 mA & Confirmed {[}A{]}. New: attributes \texttt{0xC0} (self
+powered) \\
+Report ID 1 OUT 63 bytes, report ID 2 IN 63 bytes & Confirmed {[}A{]} \\
+Outgoing chunking, stride 61, first report
+\texttt{{[}60,\ F{[}1..60{]}{]}} & Compatible, not required: the
+firmware accepts any count 1..62 per report and does not check the
+report ID \\
+Frames of 63 bytes or fewer in one report & Corrected detail: at most 62
+stream bytes fit in one report after the count byte \\
+5 ms delay after each report & Not needed by the CH58x (it reassembles
+across reports); but a new frame must not start before the previous one
+was forwarded (about 1.25 ms), and frames must not share a report
+{[}E{]} \\
+Firmware doubles \texttt{0xAA} in the framed body; de-stuff in pairs &
+Confirmed for USB IN {[}E{]}. New: the CH58x also de-stuffs and checks
+the checksum of OUT frames, then re-encodes them; bad frames are dropped
+silently \\
+Multi-report replies arrive with a leading chunk count byte & Corrected:
+the byte after the report ID is the number of valid stream bytes in that
+report (1..62), in every report \\
+WebLink does not verify checksum or address & WebLink behaviour; the
+CH58x has already verified the checksum of every IN frame it forwards \\
+A USB connection has not been observed & Still true; all USB statements
+here are {[}D{]}/{[}E{]} \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 1.2 Bluetooth
+LE}\label{protocol.md-1.2-bluetooth-le}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Local name prefix \texttt{0000MP30} & Confirmed and explained: template
+\texttt{0030MP305B}, index 2 patched to
+\texttt{\textquotesingle{}0\textquotesingle{}} every second unless RAM
+\texttt{0x200043B7\ ==\ 0xA5} (no writer setting it to \texttt{0xA5} was
+identified) \\
+WebLink trims the first four characters & WebLink behaviour; the four
+characters are constant \texttt{0000} \\
+Service UUID \texttt{AF00} in the advert & Confirmed: incomplete 16-bit
+UUID list \texttt{03\ 02\ 00\ AF} \\
+Manufacturer data company \texttt{0xABBA}, prefix \texttt{affa0135} &
+Confirmed. New: \texttt{AF\ FA} fixed; \texttt{01\ 35\ 02\ 00} set by
+the MCU's \texttt{FC}; last 14 bytes set by AF01 \texttt{10}/\texttt{C0}
+and persistent \\
+AF01 read, write, notify: commands and telemetry & Confirmed properties
+\texttt{0x1A}. New: reads return 20 zero bytes; first byte of every
+write is discarded \\
+AF02 read, write, notify: bind and hardware info & Confirmed properties.
+Corrected: \texttt{E0} on AF02 is forwarded to the main MCU like any
+other opcode; AF02 has two local opcodes: \texttt{00} (link status and
+BD address) and \texttt{18} with fast flag \\
+\texttt{FEE0}/\texttt{FEE1} bootloader OTA service only & Consistent:
+not present in this application image \\
+GATT table: 180A 2A23..2A2A and 2A50, AF00, DB00/DB01 & Confirmed
+{[}D{]}; handle spacing in the capture fits the registration order 180A,
+AF00, DB00 \\
+DB00 purpose unknown & New: DB01 does nothing (empty hooks, never
+notifies) \\
+180A holds vendor placeholders & Confirmed: exact values listed above \\
+Negotiated MTU 247 on macOS & Consistent: 247 is the maximum this
+configuration allows (BufMaxLen 251) \\
+Device not seen while connected (inferred) & Confirmed in code: one host
+link, advertising re-enabled only on disconnect, a second central is
+dropped \\
+Advertisements several seconds apart; scan at least 10 s & Advertising
+interval is 500 ms {[}D{]}; advertising is off until the MCU enables it
+after boot, while a host is connected, while a USB host is active, and
+when remote is disabled. The long gaps seen on macOS are not explained
+by the interval {[}I: scanner duty cycle{]} \\
+Notifications must be enabled on AF01 and AF02 before commands &
+Confirmed in effect: a reply to a characteristic whose CCCD is off is
+dropped and the MCU retransmits it for about 5 s. CCCDs reset on every
+disconnect \\
+BLE frames unpadded, un-stuffed, no length or checksum & Confirmed: the
+CH58x adds and removes the UART framing \\
+Single writes/notifications without chunking & Confirmed: no
+fragmentation in either direction \\
+MTU \textgreater= 126 needed for full-size frames & Not a CH58x limit;
+the need follows from the longest MCU reply plus 3 (plus 1 on AF01) \\
+Replies on AF01 carry the address byte \texttt{0x31} & Corrected:
+\texttt{0x31} is the route tag the CH58x appended to the request and
+moves to the front; it is constant, not an address \\
+Writes with response work on AF01 and AF02 & Consistent;
+write-without-response is not declared \\
+Round trip 120 to 135 ms & The CH58x adds about 1.25 ms per direction
+plus UART time (a 41-byte frame takes 3.6 ms at 115200) {[}I{]}; most of
+the time is elsewhere \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 1.3 Bind
+handshake}\label{protocol.md-1.3-bind-handshake}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+WebLink writes the bind frame to AF02 after enabling notifications &
+Consistent \\
+Field boundaries (class byte, 16-byte ID, fastBinding, status) inferred
+& Corrected by firmware: the CH58x takes bytes 1..16 as the ID and the
+last byte of the write as the fast flag; other bytes are ignored. In
+WebLink's frame the ID is \texttt{00\ 08*14\ 00} and the fast flag is
+0 \\
+Prompt at every connection; reply after a button press & Consistent:
+fast flag 0 always forwards to the MCU \\
+\texttt{19\ 00} allowed, \texttt{19\ FF} denied & Confirmed; the fast
+path produces the same two replies \\
+Device does not remember an allowed host with the WebLink frame &
+Explained: after \texttt{19\ 00} the ID is stored, but with fast flag 0
+the stored IDs are never consulted \\
+After a deny, reads are still answered & Consistent: the CH58x forwards
+all writes regardless of bind state. New: an unbound link is terminated
+about 30 s after connecting \\
+Whether fastBinding = 1 lets the device remember a host & Firmware: yes,
+if the same 16 bytes were allowed once before (up to 5 IDs); an unknown
+ID with fast flag set gets \texttt{19\ FF} without a prompt \\
+Whether USB shows the prompt & The CH58x has no bind logic for USB; any
+USB behaviour is the MCU's \\
+How long the device waits for a button press & CH58x side: the link is
+dropped 30 s after connection unless bound; the MCU's own prompt timeout
+is not in this image \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 2 Frame
+encoding}\label{protocol.md-2-frame-encoding}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+HID TX \texttt{{[}cnt{]}\ AA\ 12\ plen\ cmd\ payload\ cksum} & Confirmed
+(report ID 1 precedes cnt on the wire) \\
+HID RX \texttt{{[}cnt{]}\ AA\ addr\ plen\ cmd\ payload\ cksum} &
+Confirmed; addr is \texttt{0x21} {[}M{]} \\
+BLE AF01 TX \texttt{12\ cmd\ payload} & Confirmed; the \texttt{12} is
+discarded, any value works \\
+BLE AF01 RX \texttt{addr\ cmd\ payload} & Corrected: the first byte is
+the route tag \texttt{31} \\
+BLE AF02 TX/RX without address & Confirmed \\
+Checksum 8-bit additive; stuffing on HID only & Confirmed \\
+Checksum = sum of bytes 2..N-1 & Confirmed (address + length + data)
+{[}E{]} \\
+If the checksum equals \texttt{0xAA} another \texttt{0xAA} is appended &
+Confirmed {[}A: \texttt{0x35A8}{]} \\
+Target address \texttt{0x12} is the device address & Corrected:
+\texttt{0x12} means source 1 (USB), destination 2 (MCU); the MCU replies
+to the source nibble \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{protocol.md 3 and 4 (related
+entries)}\label{protocol.md-3-and-4-related-entries}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{0xBD} ``RealTime\_DATA'': connection state and peer metadata &
+Confirmed and explained: \texttt{BD\ 00}/\texttt{BD\ 01} from the CH58x
+on channel 6 (bind state); \texttt{BD\ k\ name} on channel 5
+(accessory) \\
+E0 type 6: 17 bytes, final byte is the route suffix removed before
+notification & Confirmed {[}E{]}: \texttt{e1\ ...\ 00} on AF02,
+\texttt{31\ e1\ ...} on AF01 \\
+Which chip each \texttt{E1} version belongs to is inferred & Resolved:
+both host-visible versions come from the main image (application
+1.6.0.x, hardware 2.0.2.0). The CH58x version is 1.0.0.15 and is only
+reported to the MCU \\
+No release on disconnect; what happens is unknown & New: after a bound
+host disconnects the CH58x sends \texttt{BD\ 00}; the MCU sets
+connection type 0 (and clears state per firmware.md). An unbound host
+disconnecting produces no message \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``USB device'' and firmware-architecture.md
+USB/GATT/binding}\label{firmware.md-usb-device-and-firmware-architecture.md-usbgattbinding}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Report descriptor at \texttt{data.bin\ +\ 0x12F4C}, configuration
+\texttt{+0x12F70}, device \texttt{+0x12F9C} & Confirmed (processor
+\texttt{0x8F4C}, \texttt{0x8F70}, \texttt{0x8F9C}) \\
+Device and configuration fields & Confirmed \\
+Report descriptor content & Confirmed; exact bytes given above \\
+Queue service \texttt{0x3E1A} limits chunks to 62; \texttt{0x4ECA} sends
+report ID 2, count, bytes & Confirmed {[}E{]} \\
+Receive \texttt{0x4E86} takes the count from byte 1 and feeds from byte
+2 & Confirmed {[}E{]}; the count is not bounded \\
+AF/DB characteristics properties \texttt{0x1A}, handles assigned at
+runtime & Confirmed \\
+Initialized name \texttt{0030MP305B}, prefix rewrite unresolved &
+Resolved (see 1.2) \\
+AF02 write \texttt{0x40DC}, AF01 write \texttt{0x4224}, forwarder
+\texttt{0x4074} appends \texttt{31}/\texttt{00}, router \texttt{0x3FAC}
+& Confirmed {[}E{]}. Addition: the AF01 first byte is dropped in the
+callback \texttt{0x72A6}, before \texttt{0x4224} \\
+Nonzero final byte selects a lookup; reply
+\texttt{19\ 00}/\texttt{19\ FF} & Confirmed {[}E{]} \\
+Save only when guard \texttt{0x20002F88} is zero & Confirmed; the guard
+is ``last notification failed'' \\
+Five 16-byte IDs at \texttt{0x6F00}, oldest shifted out & Confirmed
+{[}E{]} \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md ``Companion image
+strings''}\label{firmware.md-companion-image-strings}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{CH58x\_BLE\_LIB\_V1.8} at slice offset \texttt{0x7E68} &
+Confirmed (processor \texttt{0x8E68}); the image refuses to run with
+another library version \\
+\texttt{0030MP305B} at slice offset \texttt{0x8572} & Confirmed
+(\texttt{.data} source of \texttt{0x20002E9A}); it is a template,
+rewritten at run time \\
+Load address \texttt{0x1000} & Confirmed \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{firmware.md other sections that describe the CH58x's
+messages}\label{firmware.md-other-sections-that-describe-the-ch58xs-messages}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Statement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{0x51}, \texttt{0x53}, \texttt{0xF1} act only for type 3 and
+request byte 1 = 0 & Consistent: the CH58x replies \texttt{51\ 00},
+\texttt{53\ 00}, \texttt{F1\ 00} \\
+\texttt{0xFD} with byte 3 or \texttt{0xFF} & This CH58x only ever sends
+\texttt{FD\ 03} \\
+\texttt{0xE1} received (type 3) copies four bytes from offset
+\texttt{0x11} & Confirmed: they are the CH58x version
+\texttt{01\ 00\ 00\ 0F} \\
+\texttt{0xBB} records of stride \texttt{0x26} (6 + tail) & Consistent
+with \texttt{BB} list: 6-byte address, length, name up to 31 \\
+\texttt{0xBE}: byte 1 = 1, 2, 4; byte at length-2 = 1 or \texttt{0xFF} &
+Confirmed: button bits and wheel byte of an accessory report (9-byte
+frame, wheel at offset 7) \\*
+\end{longtable}
+}
+
+\Needspace{10\baselineskip}
+\subsection{Captures}\label{captures}
+
+All four captures (\texttt{2026-09-29T193614}, \texttt{194219},
+\texttt{194319}, \texttt{201428}) re-decoded with the firmware model:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Item
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Decoding
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Agrees
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Name \texttt{0000MP305B\ \ S\ \ \ \ \ \ \ \ \ \ \ \ \ E!K} &
+\texttt{0000} + FC name \texttt{MP305B} + two FC padding spaces +
+\texttt{S} (remote enabled, BLE not blocked) + template spaces +
+BD-address suffix \texttt{E!K} (v mod 94 = 36, (v/94) mod 94 = 0,
+(v/8836) mod 94 = 42) & Yes. The spaces at 10..11 prove the DataFlash
+name override was present \\
+Manufacturer data \texttt{affa0135\ 02\ 00} + 14 zero bytes (LOGBOOK) &
+fixed \texttt{AF\ FA}, MCU \texttt{FC} bytes \texttt{01\ 35\ 02\ 00},
+empty host tail & Yes \\
+GATT handles 15..31, 34, 37, 41 & 180A, AF00 (3 attributes per
+characteristic), DB00 & Yes \\
+MTU 247 & library maximum for BufMaxLen 251 & Yes \\
+AF02 TX \texttt{18\ 00\ 08*14\ 00\ 00\ 00} & ID \texttt{00\ 08*14\ 00},
+fast flag 0: forwarded as \texttt{AA\ 62\ 14\ 18\ ...\ 00\ FE}, prompt &
+Yes \\
+AF02 RX \texttt{19\ 00} (3.0 to 7.7 s later) & MCU reply
+\texttt{19\ 00\ 00}, tag stripped; ID saved to \texttt{0x6F00};
+\texttt{BD\ 01} to MCU; MCU then detaches USB (\texttt{50\ 01}) & Yes \\
+AF02 RX \texttt{19\ ff} (194319) & deny; nothing saved; bind state stays
+0, so the link would be dropped 30 s after connecting; the capture ends
+before that & Yes \\
+AF02 TX \texttt{e0}, RX \texttt{e1\ 01\ 06\ 00\ 28\ ...\ 02\ 00\ 02\ 00}
+(17 bytes) & forwarded with tag \texttt{00}; MCU type-6 layout; tag
+stripped & Yes \\
+AF01 TX \texttt{12\ c4}, RX
+\texttt{31\ c5\ 5a\ 02\ 00\ 00\ 01\ f4\ 01\ 32\ 00\ 00\ 00} &
+\texttt{12} dropped, \texttt{c4\ 31} forwarded; reply routed by tag
+\texttt{31} & Yes \\
+AF01 TX \texttt{12\ c2}, RX 38 bytes starting \texttt{31\ c3} & same
+path; 37 bytes from the MCU plus the tag & Yes \\
+AF01 TX \texttt{12\ e0}, RX \texttt{31\ e1\ ...} (18 bytes) & same path
+& Yes \\
+Reads answered after deny & CH58x forwards regardless of bind & Yes \\*
+\end{longtable}
+}

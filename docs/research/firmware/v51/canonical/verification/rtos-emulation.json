@@ -1,0 +1,314 @@
+{
+  "scope": "Original ARM kernel primitives, recovered initial RAM and synthetic Cortex register memory. No real task execution, interrupt delivery, elapsed-time simulation or hardware. SysTick test uses a synthetic 200 MHz clock variable.",
+  "passed": 62,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "heap initial free bytes",
+      "pass_result": true,
+      "value": 20464
+    },
+    {
+      "case": "heap allocate 1",
+      "pass_result": true,
+      "address": "0x1ffe0e98",
+      "free": 20448
+    },
+    {
+      "case": "heap allocate 8",
+      "pass_result": true,
+      "address": "0x1ffe0ea8",
+      "free": 20424
+    },
+    {
+      "case": "heap allocate 80",
+      "pass_result": true,
+      "address": "0x1ffe0ec0",
+      "free": 20328
+    },
+    {
+      "case": "heap allocate 512",
+      "pass_result": true,
+      "address": "0x1ffe0f20",
+      "free": 19800
+    },
+    {
+      "case": "heap allocate 2048",
+      "pass_result": true,
+      "address": "0x1ffe1130",
+      "free": 17736
+    },
+    {
+      "case": "heap allocate 4096",
+      "pass_result": true,
+      "address": "0x1ffe1940",
+      "free": 13624
+    },
+    {
+      "case": "heap coalesces all freed blocks",
+      "pass_result": true,
+      "free": 20464
+    },
+    {
+      "case": "heap rejects size 0",
+      "pass_result": true
+    },
+    {
+      "case": "heap rejects size 20480",
+      "pass_result": true
+    },
+    {
+      "case": "heap rejects size 4294967295",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 128 priority 1",
+      "pass_result": true,
+      "tcb": "0x1ffe10a8",
+      "stack": "0x1ffe0e98",
+      "priority": 1,
+      "free": 19840
+    },
+    {
+      "case": "task fill depth 128 priority 1",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 1024 priority 0",
+      "pass_result": true,
+      "tcb": "0x1ffe1ea8",
+      "stack": "0x1ffe0e98",
+      "priority": 0,
+      "free": 16256
+    },
+    {
+      "case": "task fill depth 1024 priority 0",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 512 priority 3",
+      "pass_result": true,
+      "tcb": "0x1ffe16a8",
+      "stack": "0x1ffe0e98",
+      "priority": 3,
+      "free": 18304
+    },
+    {
+      "case": "task fill depth 512 priority 3",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 512 priority 2",
+      "pass_result": true,
+      "tcb": "0x1ffe16a8",
+      "stack": "0x1ffe0e98",
+      "priority": 2,
+      "free": 18304
+    },
+    {
+      "case": "task fill depth 512 priority 2",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 512 priority 4",
+      "pass_result": true,
+      "tcb": "0x1ffe16a8",
+      "stack": "0x1ffe0e98",
+      "priority": 4,
+      "free": 18304
+    },
+    {
+      "case": "task fill depth 512 priority 4",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 130 priority 0",
+      "pass_result": true,
+      "tcb": "0x1ffe10b0",
+      "stack": "0x1ffe0e98",
+      "priority": 0,
+      "free": 19832
+    },
+    {
+      "case": "task fill depth 130 priority 0",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 260 priority 2",
+      "pass_result": true,
+      "tcb": "0x1ffe12b8",
+      "stack": "0x1ffe0e98",
+      "priority": 2,
+      "free": 19312
+    },
+    {
+      "case": "task fill depth 260 priority 2",
+      "pass_result": true
+    },
+    {
+      "case": "task depth 128 priority 9",
+      "pass_result": true,
+      "tcb": "0x1ffe10a8",
+      "stack": "0x1ffe0e98",
+      "priority": 4,
+      "free": 19840
+    },
+    {
+      "case": "task fill depth 128 priority 9",
+      "pass_result": true
+    },
+    {
+      "case": "SysTick setup 1000 Hz formula",
+      "pass_result": true,
+      "reload": 199999,
+      "clock_input": 200000000
+    },
+    {
+      "case": "queue object shape",
+      "pass_result": true,
+      "queue": "0x1ffe0e98"
+    },
+    {
+      "case": "queue send 0",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 1",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 2",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 3",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 4",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 5",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 6",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 7",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 8",
+      "pass_result": true
+    },
+    {
+      "case": "queue send 9",
+      "pass_result": true
+    },
+    {
+      "case": "queue full rejects zero-wait send",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 0",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 1",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 2",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 3",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 4",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 5",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 6",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 7",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 8",
+      "pass_result": true
+    },
+    {
+      "case": "queue FIFO receive 9",
+      "pass_result": true
+    },
+    {
+      "case": "empty queue rejects zero-wait receive",
+      "pass_result": true
+    },
+    {
+      "case": "mutex initially available",
+      "pass_result": true,
+      "mutex": "0x1ffe1108"
+    },
+    {
+      "case": "mutex take records owner",
+      "pass_result": true
+    },
+    {
+      "case": "normal mutex second take fails without wait",
+      "pass_result": true
+    },
+    {
+      "case": "mutex give clears owner",
+      "pass_result": true
+    },
+    {
+      "case": "event group starts empty",
+      "pass_result": true,
+      "event_group": "0x1ffe0e98"
+    },
+    {
+      "case": "event wait 3/3/1/0",
+      "pass_result": true,
+      "returned": 3,
+      "remaining": 0
+    },
+    {
+      "case": "event wait 1/3/1/1",
+      "pass_result": true,
+      "returned": 1,
+      "remaining": 1
+    },
+    {
+      "case": "event wait 3/3/0/1",
+      "pass_result": true,
+      "returned": 3,
+      "remaining": 3
+    },
+    {
+      "case": "event wait 5/3/1/0",
+      "pass_result": true,
+      "returned": 5,
+      "remaining": 4
+    },
+    {
+      "case": "equal priority rotates",
+      "pass_result": true
+    },
+    {
+      "case": "highest ready priority wins",
+      "pass_result": true
+    }
+  ]
+}

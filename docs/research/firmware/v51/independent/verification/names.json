@@ -1,0 +1,3976 @@
+[
+  {
+    "image": "app",
+    "address": "0x30d8",
+    "primary": "cmd_f1_update_ack",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_f1_update_ack",
+        "comment": "inline 0xF1 type3: ack of F0, 0x1FFFA00C+2 1->2"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x312e",
+    "primary": "cmd_51_ack",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_51_ack",
+        "comment": "inline 0x51 type3: clear 0x1FFF954B, arm 1000ms timer (ack of 0x50)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x313c",
+    "primary": "cmd_53_ack",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_53_ack",
+        "comment": "inline 0x53 type3: clear 0x1FFF954C (ack of 0x52)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x32c0",
+    "primary": "cmd_fd_update_progress",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_fd_update_progress",
+        "comment": "inline 0xFD: payload 3 sets 0x1FFF9449, bit13; 0xFF clears, bumps 0x1FFF943C"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0xb7f4",
+    "primary": "cmd_c8_dc_control",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_c8_dc_control",
+        "comment": "0xC8 DC control + remote grant; remoteCon 2 grants USB now / pends BLE"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x116a8",
+    "primary": "cmd_20_block_write",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_20_block_write",
+        "comment": "sub 05 write 128 B to SPI 0x100000+off, sub 06 compare byte sum"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x11900",
+    "primary": "pd_companion_parse",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_companion_parse",
+        "comment": "PD companion frames B1, 01, B7, B5, BD, E5"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x11c18",
+    "primary": "pd_companion_apply",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_companion_apply",
+        "comment": "applies PD companion reports"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x11eac",
+    "primary": "pd_companion_tx",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_companion_tx",
+        "comment": "PD companion transmit"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1227c",
+    "primary": "console_parse_line",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "console_cmd_parse",
+        "comment": "text console VSET/ISET/DCOUT_EN, TSET, FanCompareValue, language"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "console_parse_line",
+        "comment": "parse USART7 command line: VSET=/TSET=/FanCompareValue=/language="
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x12400",
+    "primary": "cmd_FC_update_commit",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_FC_update_commit",
+        "comment": "FD, SPI header at 0 and request code in log 0x1F0000"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x12690",
+    "primary": "build_bind_reply",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "build_19_bind_reply",
+        "comment": "19 00/FF, 00 suffix for route 6"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "build_bind_reply",
+        "comment": "builds 0x19: byte1=0 if S+0x46 else 0xFF; type6 appends 0"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x127fc",
+    "primary": "ui_program_action",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_program_action",
+        "comment": "S+0x4C 1 prev, 2 pause, 3 next"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x12850",
+    "primary": "reset_worker",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "reboot_countdown",
+        "comment": "counts down then 0x1B71C"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "reset_worker",
+        "comment": "watches 0x1FFE01C4 reset-pending, calls 0x1B71C then system reset"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x12adc",
+    "primary": "pd_mask_apply",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_mask_apply",
+        "comment": "applies S+0x9C PDO enable mask"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x12f34",
+    "primary": "host_dispatch_command",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_dispatch",
+        "comment": "command dispatcher: 4 UART mailboxes at 0x1FFF9660, opcode compare chain + TBB for DC..FE"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "host_dispatch_command",
+        "comment": "main host command dispatcher (USART3), picks mailbox by ready flag, calls handler, queues reply"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1304e",
+    "primary": "cmd_dispatch_tbb",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_dispatch_tbb",
+        "comment": "TBB over opcode-0xDC, 35 byte entries at 0x13052"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1307e",
+    "primary": "cmd_A0_language_read_inline",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_A0_language_read_inline",
+        "comment": "A1 + byte 0x1FFFA0CE"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x130d8",
+    "primary": "cmd_F1_ack_inline",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_F1_ack_inline",
+        "comment": "type 3: 0x1FFFA00E 1->2 (companion ready for update reboot)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x13126",
+    "primary": "cmd_18_bind_pending",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_18_bind_inline",
+        "comment": "S+0x47=1, K+6=route type; 19 is deferred"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_18_bind_pending",
+        "comment": "inline: set S+0x47=1 pending, K+6=type; no reply"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1312e",
+    "primary": "cmd_51_ack_inline",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_51_ack_inline",
+        "comment": "type 3: ack of main's 50 (clears GATE+0x103)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1313c",
+    "primary": "cmd_53_ack_inline",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_53_ack_inline",
+        "comment": "type 3: ack of main's 52 (clears GATE+0x104)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x131bc",
+    "primary": "cmd_dispatch_reply",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_dispatch_reply",
+        "comment": "common reply path: tx record, 0x15430 encode, GATE+0 pending"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x131f0",
+    "primary": "cmd_D8_program_read_inline",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_D8_program_read_inline",
+        "comment": "finds program id, requests worker load, D9 deferred"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x132c0",
+    "primary": "cmd_FD_companion_status_inline",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_FD_companion_status_inline",
+        "comment": "03 companion ready, FF companion reset"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1330a",
+    "primary": "cmd_dispatch_usb_timeout",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_dispatch_usb_timeout",
+        "comment": "tail: USB host link (S+3=2) dropped after 8000 ms without a type-1 frame"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x133bc",
+    "primary": "host_tx_service",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "tx_service",
+        "comment": "transmit scheduler: deferred and unsolicited frames from 0x1FFF9550 bits"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "host_tx_service",
+        "comment": "serialises outbound frames to CH58x; watches 0x1FFF9550 work mask; bind/remote/stream/update sends; retransmit watchdog"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x13c40",
+    "primary": "cmd_e1_ch58x_info",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_E1_companion_identity",
+        "comment": "type 3: stores CH58x version bytes 0x11..0x14"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_e1_ch58x_info",
+        "comment": "0xE1 from CH58x (type3): copies CH58x version field (record+0x11) to 0x1FFF9434/0x1FFF942C"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x13c88",
+    "primary": "cmd_11_time_sync",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_11_time_sync",
+        "comment": "0x11 from CH58x: 4-byte time value -> mAh integrator 0x1FFE0160"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x13d44",
+    "primary": "cmd_EE_charge_control",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_EE_charge_control",
+        "comment": "EF, battery type/voltage/cells/current/output/mode"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x14318",
+    "primary": "program_table_load",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_table_load",
+        "comment": "loads/rebuilds program table from SPI 0x161000"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x14660",
+    "primary": "cmd_bd_conn_state",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_BD_link_state",
+        "comment": "type 6: host link S+3; type 5: peer state and name"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_bd_conn_state",
+        "comment": "0xBD: type6 sets S+3 (host link up/down), type5 sets S+4 and accessory name at S+0x58"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x146b8",
+    "primary": "decode_frame_wrapper",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "decode_frame_wrapper",
+        "comment": "channel*0x214 base, tail-calls decoder 0x1FF38"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x14b14",
+    "primary": "ui_input_event",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "ui_input_event",
+        "comment": "input/key event -> dialog button callbacks"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15118",
+    "primary": "cmd_F2_update_erase",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_F2_update_erase",
+        "comment": "F3, erase SPI range for staged app"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x153b4",
+    "primary": "gpio_set_mux",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "gpio_set_mux",
+        "comment": "set function-select nibble for a port bitmask"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15430",
+    "primary": "encode_frame_wrapper",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "frame_encode",
+        "comment": "AA, (dst<<4)|src, len, body, sum with AA doubling"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "encode_frame_wrapper",
+        "comment": "channel*0x214+0x1FFF9BE4 then tail-calls encoder 0x1FEDC"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x154ac",
+    "primary": "cmd_EA_charge_settings",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_EA_charge_settings",
+        "comment": "EB charge settings and last-charge summary"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1555c",
+    "primary": "cmd_EC_charge_telemetry",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_EC_charge_telemetry",
+        "comment": "ED charge telemetry"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15630",
+    "primary": "cmd_E4_pd_active",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_E4_pd_active",
+        "comment": "E5 active PD profile index + 1"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1565c",
+    "primary": "cmd_DC_program_selected",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_DC_program_selected",
+        "comment": "DD selected program id and step count"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15694",
+    "primary": "cmd_DE_prog_pd_telemetry",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_DE_prog_pd_telemetry",
+        "comment": "DF 69-byte program/PD telemetry"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x158bc",
+    "primary": "cmd_C2_dc_telemetry",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_C2_dc_telemetry",
+        "comment": "C3 37-byte DC telemetry"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15aa0",
+    "primary": "cmd_bb_accessory_list",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_BB_scan_list",
+        "comment": "companion BLE scan list ingest"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_bb_accessory_list",
+        "comment": "0xBB: Bluetooth Accessories scan-result list at 0x1FFF9A70, stride 0x26"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15b54",
+    "primary": "accessory_wheel_read",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "accessory_wheel_read",
+        "comment": "returns and clears accessory wheel delta (K+0x2C) for LVGL encoder"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15bec",
+    "primary": "cmd_D0_pd_profile_read",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_D0_pd_profile_read",
+        "comment": "D1 profile name, class, 7 or 9 PDO groups"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15ca0",
+    "primary": "build_D9_program_chunk",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "build_D9_program_chunk",
+        "comment": "D9 id + up to 10 step records from cursor K+3"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15e48",
+    "primary": "cmd_D4_program_list",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_D4_program_list",
+        "comment": "D5 names and step counts for ids 1..count"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15ed4",
+    "primary": "rx_work_ptr",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "rx_work_ptr",
+        "comment": "returns channel*0x214+0x1FFF9BE4 (decoded work record)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15ef8",
+    "primary": "cmd_C4_settings_read",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_C4_settings_read",
+        "comment": "C5 settings"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x15fa4",
+    "primary": "tx_stage_ptr",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "chan_tx_record",
+        "comment": "returns 0x1FFF9CE8 + n*0x214"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "tx_stage_ptr",
+        "comment": "returns channel*0x214+0x1FFF9CE8 (transmit staging record)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1787c",
+    "primary": "uart3_console_init",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "uart3_console_init",
+        "comment": "init USART3 (host, 115200, DMA2 ch1) and USART7 console"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x18368",
+    "primary": "cmd_A2_language_write",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_A2_language_write",
+        "comment": "language 0/1, on change: output off, config save"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1855c",
+    "primary": "cmd_be_accessory_input",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_BE_peer_select",
+        "comment": "companion peer selection flags"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "cmd_be_accessory_input",
+        "comment": "0xBE: accessory wheel/button input -> K+0x0D..0F, K+0x2C, S+0x1D/0x1E"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x185ec",
+    "primary": "build_cmd_bc",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "build_cmd_bc",
+        "comment": "build 0xBC connect-to-accessory (6-byte MAC) to CH58x"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x18680",
+    "primary": "build_cmd_ba",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "build_cmd_ba",
+        "comment": "build 0xBA accessory-list request to CH58x (node 2)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1868c",
+    "primary": "accessory_key_read_a",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "accessory_key_read_a",
+        "comment": "accessory button A read (S+0x1D)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x188e0",
+    "primary": "pd_table_load",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_table_load",
+        "comment": "loads/rebuilds PD table from SPI 0x160000"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1919c",
+    "primary": "accessory_key_read_b",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "accessory_key_read_b",
+        "comment": "accessory button B read (S+0x1E)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1978c",
+    "primary": "fault_monitor",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "fault_monitor",
+        "comment": "fault word bits 0-4, 6, 8"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x19a50",
+    "primary": "power_energy_time_accumulate",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "power_energy_time_accumulate",
+        "comment": "energy mWh and on-time ms"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x19e68",
+    "primary": "power_voltage_slew_ocp",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "power_voltage_slew_ocp",
+        "comment": "voltage ramp and OCP timer"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x19f18",
+    "primary": "power_output_update",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "power_output_update",
+        "comment": "output on/off, outState CV/CC detection"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x19f4c",
+    "primary": "ina226_measure",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ina226_measure",
+        "comment": "output voltage and current from INA226"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1a128",
+    "primary": "out_request_get",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "out_request_get",
+        "comment": "returns 0x1FFFAA2E"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1a134",
+    "primary": "fault_word_get",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "fault_word_get",
+        "comment": "returns u16 0x1FFFAA1E"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1a5fc",
+    "primary": "counters_reset_energy_time",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "counters_reset_energy_time",
+        "comment": "clears 0x1FFE01E4, 0x1FFFA978, 0x1FFFA980"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ab34",
+    "primary": "power_state_machine",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "power_state_machine",
+        "comment": "power state 0x1FFFAA54 and output request enforcement"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ae70",
+    "primary": "set_update_active",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "companion_ready_set",
+        "comment": "0x1FFFAA4E = v"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "set_update_active",
+        "comment": "stores 0x1FFFAA4E (CH58x update flag) in critical section"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1aea4",
+    "primary": "dc_current_limit_set",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "dc_current_limit_set",
+        "comment": "0x1FFFA944 = v (1 mA)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1aebc",
+    "primary": "out_request_set",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "out_request_set",
+        "comment": "0x1FFFAA2E = v"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1af48",
+    "primary": "power_mode_set",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "power_mode_set",
+        "comment": "0x1FFFAA37 = mode"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1af64",
+    "primary": "dc_target_voltage_set",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "dc_target_voltage_set",
+        "comment": "0x1FFFA940 = v (10 mV)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1b4d0",
+    "primary": "cmd_E2_program_control",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_E2_program_control",
+        "comment": "E3, program action/output/mode"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1b634",
+    "primary": "cmd_E0_device_info",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_E0_device_info",
+        "comment": "E1 short (route 6) or long (other routes) identity"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1b71c",
+    "primary": "do_settings_reset",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "system_reset_to_boot",
+        "comment": "0x1234 to 0x2005F000, NVIC reset"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "do_settings_reset",
+        "comment": "final reset path (0x14824 storage) then system reset via 0x1FEB8"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1b7c4",
+    "primary": "cmd_F0_update_mode",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_F0_update_mode",
+        "comment": "F0 AC: 0x1FFFA00C=1"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1b7f4",
+    "primary": "cmd_C8_dc_control",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_C8_dc_control",
+        "comment": "C9, remote control + DC setpoints/output/mode/refresh"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1bdc6",
+    "primary": "spi_flash_erase64k",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "spi_flash_erase64k",
+        "comment": "SPI NOR 64 KB erase (D8)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1bdf6",
+    "primary": "spi_flash_erase4k",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "spi_flash_erase4k",
+        "comment": "SPI NOR 4 KB erase (20)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1bef8",
+    "primary": "spi_flash_read",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "spi_flash_read",
+        "comment": "SPI NOR read (03)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1bf3a",
+    "primary": "spi_flash_program",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "spi_flash_program",
+        "comment": "SPI NOR page program (02), refuses addr+len > 0x800000"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1bf9c",
+    "primary": "spi_flash_cmd",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "spi_flash_cmd",
+        "comment": "command byte + 24-bit address + data"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1c364",
+    "primary": "config_flash_write",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "config_flash_write",
+        "comment": "config record to internal flash 0xFE000 + n*0x80"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1c628",
+    "primary": "cmd_D2_pd_profile_write",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_D2_pd_profile_write",
+        "comment": "D3, writes PD profile, optional save flag"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1c73c",
+    "primary": "cmd_DA_program_steps",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_DA_program_steps",
+        "comment": "DB, 10 step records per call, completion deferred"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1c8b8",
+    "primary": "cmd_D6_program_header",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_D6_program_header",
+        "comment": "D7, write/delete program name and step count"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ca60",
+    "primary": "reboot_request",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "reboot_request",
+        "comment": "power stage off request, reboot countdown"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1caa4",
+    "primary": "cmd_C6_settings_write",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_C6_settings_write",
+        "comment": "C7, sequential checks, sets S+0x48"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1cb8c",
+    "primary": "buzzer_play",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "buzzer_play",
+        "comment": "start tone pattern n if buzzer level S+0x54 != 0"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1d380",
+    "primary": "storage_worker",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "storage_worker",
+        "comment": "SPI saves/loads of PD table, program table and steps"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1d520",
+    "primary": "cmd_E8_pd_control",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_E8_pd_control",
+        "comment": "E9, PDO enable mask, PDO send, output/mode"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1d6fc",
+    "primary": "charger_start",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "charger_start",
+        "comment": "charge parameters, pre-checks, state 1"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1d858",
+    "primary": "charger_stop",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "charger_stop",
+        "comment": "0x1FFFAAAC=0, 0x1FFFAA5C=0"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1d868",
+    "primary": "config_defaults",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "config_defaults",
+        "comment": "factory defaults of config block 0x1FFFA0B8"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1d958",
+    "primary": "config_save",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "config_save",
+        "comment": "copy settings to 0x1FFFA0B8, write if checksum changed"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1db94",
+    "primary": "cmd_FE_factory_reset",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_FE_factory_reset",
+        "comment": "FE AA 55: defaults, table reset, reboot request"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1dbe8",
+    "primary": "factory_defaults_request",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "factory_defaults_request",
+        "comment": "0x1FFE01CD=1, defaults, 0x1FFE01CC=1"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1dffc",
+    "primary": "cmd_00_identity",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_00_identity",
+        "comment": "reply 01 91 67 01"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1e24c",
+    "primary": "uart_dma_tx_start",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "uart_dma_tx_start",
+        "comment": "program DMA2 src/count and enable UART TX for a queued frame"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1e284",
+    "primary": "ui_state_snapshot",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "state_publish",
+        "comment": "copies power/charger/PD values into S with unit scaling"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "ui_state_snapshot",
+        "comment": "copies S to mirror bytes each UI pass; clears S+0x42 when S+3==0; sets aa4f when S+3==2"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1e7b4",
+    "primary": "ui_service_main",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_sync_tick",
+        "comment": "UI model sync, calls field setters"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "ui_service_main",
+        "comment": "lvgl UI service; popup timers, calls per-widget updaters"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ef0c",
+    "primary": "usart1_rx_isr_cb",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "usart1_rx_isr_cb",
+        "comment": "USART1 (PD) RX byte -> decoder ch0 -> PD parser 0x11900"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ef5c",
+    "primary": "usart3_rx_isr_cb",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "usart3_rx_isr_cb",
+        "comment": "USART3 RX byte -> decoder ch1 -> copy 260B record to mailbox by source nibble, set ready flag"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1efd4",
+    "primary": "uart_int_enable",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "uart_int_enable",
+        "comment": "set/clear USART CR1/CR2 interrupt bits"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1f026",
+    "primary": "uart_read_rdr",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "uart_read_rdr",
+        "comment": "returns halfword at uart_base+6 (RDR)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1f250",
+    "primary": "cmd_F6_update_verify",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_F6_update_verify",
+        "comment": "F7, check sum, write AA55CC33 into staged identity block"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1f508",
+    "primary": "cmd_F4_update_write",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "cmd_F4_update_write",
+        "comment": "F5, write 128 B to SPI and add read-back words"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1f7c4",
+    "primary": "charger_nimh_check",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "charger_nimh_check",
+        "comment": "charge termination checks, NiMH -dV"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fc0c",
+    "primary": "boot_mailbox_write",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "boot_mailbox_write",
+        "comment": "writes two halfwords at [0x1FFE01C8]"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fc24",
+    "primary": "upd_erase_range",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "upd_erase_range",
+        "comment": "F2 erase (loops 65536 times for len < 0x10000)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fc94",
+    "primary": "upd_write_block",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "upd_write_block",
+        "comment": "F4 program 128 B and sum read-back"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fe0c",
+    "primary": "upd_verify_commit",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "upd_verify_commit",
+        "comment": "F6 verify and write identity magic"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1feb8",
+    "primary": "system_reset",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "nvic_system_reset",
+        "comment": "AIRCR = 0x05FA0004"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "system_reset",
+        "comment": "AIRCR SYSRESETREQ"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fedc",
+    "primary": "encode_frame",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "encode_frame",
+        "comment": "AA,addr=(dst<<4|src),len,opcode,payload,cksum; doubles AA"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ff38",
+    "primary": "decode_frame_byte",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "decode_frame_byte",
+        "comment": "UART frame byte state machine; nibble split, checksum, returns record ptr on complete"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fff0",
+    "primary": "stuff_byte",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "stuff_byte",
+        "comment": "write byte, write again if 0xAA"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x2478c",
+    "primary": "bind_allow_cb",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_bind_allow_cb",
+        "comment": "S+0x46=1, S+0x47=0, event bit 1"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "bind_allow_cb",
+        "comment": "Allow button: S+0x46=1, S+0x47=0, set 0x1FFF9550 bit1"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x2483c",
+    "primary": "bind_deny_cb",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_bind_deny_cb",
+        "comment": "S+0x46=0, S+0x47=0, event bit 1"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "bind_deny_cb",
+        "comment": "Deny button: S+0x46=0, S+0x47=0, set 0x1FFF9550 bit1"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x27d24",
+    "primary": "usart7_console_init",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "usart7_console_init",
+        "comment": "init USART7 debug/factory console at 1 Mbaud, line buffer 0x1FFF8A8C"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x2840c",
+    "primary": "build_confirm_bind_dialog",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "build_confirm_bind_dialog",
+        "comment": "builds \"Confirm Bluetooth Binding\" prompt, registers allow/deny callbacks"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x2f0f4",
+    "primary": "ui_program_table_fill",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_program_table_fill",
+        "comment": "program step table (Jump/Off rows)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x53438",
+    "primary": "ui_wave_toggle",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_wave_toggle",
+        "comment": "device waveform page timer, S+0x11"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x54390",
+    "primary": "build_accessory_list_ui",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "build_accessory_list_ui",
+        "comment": "rebuilds Bluetooth Accessories list when S+0x3D set"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x54474",
+    "primary": "ui_mode_switch",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_mode_switch",
+        "comment": "applies requested mode S+0x31"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x54688",
+    "primary": "bind_ui_service",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "bind_ui_service",
+        "comment": "per-pass bind UI handler; can clear S+0x46 and set bit1"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5553c",
+    "primary": "remote_ui_service",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_remote_request",
+        "comment": "shows remote prompt when S+0x45 == 2"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "remote_ui_service",
+        "comment": "per-pass remote-request UI handler; sets bit2"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x56244",
+    "primary": "ui_charge_update",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_charge_update",
+        "comment": "charge screen update and end-of-charge summary"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5735c",
+    "primary": "pd_profile_render",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_profile_render",
+        "comment": "PD profile screen, PDO decoding"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x57d54",
+    "primary": "ui_show_ch58x_version",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "ui_show_ch58x_version",
+        "comment": "formats CH58x version block %d.%d/%d.%d/... from 0x1FFF9430/0x1FFF9434"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x58a6c",
+    "primary": "console_putc",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "console_putc",
+        "comment": "poll USART7 TX empty then write TDR (or to a buffer)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x58ba4",
+    "primary": "program_run_startstop",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_run_startstop",
+        "comment": "program runner start (1) or stop (0)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x58d50",
+    "primary": "program_step_timer",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_step_timer",
+        "comment": "500 ms program step timer callback"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5934c",
+    "primary": "program_next_step",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_next_step",
+        "comment": "next step button"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x59638",
+    "primary": "program_prev_step",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_prev_step",
+        "comment": "previous step button"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x597c0",
+    "primary": "program_pause_toggle",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_pause_toggle",
+        "comment": "pause/resume button (S+0x20)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5af88",
+    "primary": "remote_allow_cb",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_remote_allow_cb",
+        "comment": "S+0x42=1, S+0x45=1, event bit 2"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "remote_allow_cb",
+        "comment": "Allow Remote Control: S+0x42=1, S+0x45=1, set 0x1FFF9550 bit2 (deferred C9 00)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5b034",
+    "primary": "remote_deny_cb",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_remote_deny_cb",
+        "comment": "S+0x42=0, S+0x45=0, event bit 2"
+      },
+      {
+        "source": "app_hostlink.tsv",
+        "name": "remote_deny_cb",
+        "comment": "Deny Remote Control: leaves S+0x42=0 (deferred C9 01)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5eeac",
+    "primary": "build_remote_active_dialog",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "build_remote_active_dialog",
+        "comment": "builds \"Remote Control Active\" / allow-remote dialog (string idx 0x25/0x26)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5eeb0",
+    "primary": "remote_active_ui_cb",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "remote_active_ui_cb",
+        "comment": "remote-active dialog callback"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x5f434",
+    "primary": "ui_remote_prompt_show",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "ui_remote_prompt_show",
+        "comment": "remote-control prompt"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x644a4",
+    "primary": "uart1_init",
+    "aliases": [
+      {
+        "source": "app_hostlink.tsv",
+        "name": "uart1_init",
+        "comment": "init USART1 (PD companion, 115200, DMA2 ch0)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ffe0184",
+    "primary": "K_link_ctrl",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "K_link_ctrl",
+        "comment": "link/transmit control block K"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ffe07bc",
+    "primary": "battery_type_names",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "battery_type_names",
+        "comment": "LiHv LiPo Lilon LiFe Pb NiMH/Cd"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1ffe07e0",
+    "primary": "charge_limit_table",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "charge_limit_table",
+        "comment": "6 x 11 u16 per battery type"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fff8f7c",
+    "primary": "program_xfer_buf",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_xfer_buf",
+        "comment": "program step transfer buffer 100 x 12"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fff9448",
+    "primary": "tx_gate",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "tx_gate",
+        "comment": "pending reply record, flags word at +0x108"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fff9550",
+    "primary": "evt_flags",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "evt_flags",
+        "comment": "event/transmit flag word (bit 2 deferred remote reply, bit 7 D9, ...)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fff9660",
+    "primary": "rx_mailboxes",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "rx_mailboxes",
+        "comment": "4 x 0x104 decoded frame records"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa00c",
+    "primary": "upd_state",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "upd_state",
+        "comment": "update state block (0x98 bytes)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa0b8",
+    "primary": "config_block",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "config_block",
+        "comment": "persistent configuration (128 bytes)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa138",
+    "primary": "pd_profile_table",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_profile_table",
+        "comment": "names, PDO groups, class bytes, active index"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa340",
+    "primary": "pd_profile_class",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_profile_class",
+        "comment": "profile wattage per index"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa34a",
+    "primary": "pd_active_index",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "pd_active_index",
+        "comment": "active PD profile index"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa354",
+    "primary": "program_table",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_table",
+        "comment": "names, step counts, ids, selected, count"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa414",
+    "primary": "program_run_steps",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "program_run_steps",
+        "comment": "steps of the selected program 100 x 12"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa8c4",
+    "primary": "xfer_flags",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "xfer_flags",
+        "comment": "storage worker request flags and DA cursor (+8)"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa940",
+    "primary": "dc_target_v",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "dc_target_v",
+        "comment": "target voltage 10 mV"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa944",
+    "primary": "dc_limit_i",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "dc_limit_i",
+        "comment": "current limit 1 mA"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa950",
+    "primary": "dc_applied_v",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "dc_applied_v",
+        "comment": "applied (ramped) voltage 10 mV"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa964",
+    "primary": "meas_v_mV",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "meas_v_mV",
+        "comment": "measured output voltage mV"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa968",
+    "primary": "meas_i_uA",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "meas_i_uA",
+        "comment": "measured output current uA"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa974",
+    "primary": "meas_p_uW",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "meas_p_uW",
+        "comment": "output power uW"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa978",
+    "primary": "energy_mWh",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "energy_mWh",
+        "comment": "output energy mWh"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffa980",
+    "primary": "out_time_ms",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "out_time_ms",
+        "comment": "output-on time ms"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaa1e",
+    "primary": "fault_word",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "fault_word",
+        "comment": "fault bits reported as C3 chargeError"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaa2e",
+    "primary": "out_request",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "out_request",
+        "comment": "output request flag"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaa2f",
+    "primary": "out_on",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "out_on",
+        "comment": "output actually on"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaa37",
+    "primary": "power_mode",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "power_mode",
+        "comment": "power stage mode 0..3"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaa54",
+    "primary": "power_state",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "power_state",
+        "comment": "power state machine"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaaac",
+    "primary": "charger_state",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "charger_state",
+        "comment": "charger state"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaab0",
+    "primary": "charger_error",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "charger_error",
+        "comment": "charger error word"
+      }
+    ]
+  },
+  {
+    "image": "app",
+    "address": "0x1fffaacc",
+    "primary": "S_live_state",
+    "aliases": [
+      {
+        "source": "app_commands.tsv",
+        "name": "S_live_state",
+        "comment": "live state block S"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x1d1a",
+    "primary": "memset",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "memset",
+        "comment": "memset(dst, value, len), used everywhere"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2498",
+    "primary": "GPIOA_ModeCfg",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "GPIOA_ModeCfg",
+        "comment": "WCH GPIOA_ModeCfg(pins, mode); modes 0 floating, 1 pull-up, 2 pull-down, 3 out 5 mA, 4 out 20 mA"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x253e",
+    "primary": "GPIOB_ModeCfg",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "GPIOB_ModeCfg",
+        "comment": "WCH GPIOB_ModeCfg(pins, mode)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x25e4",
+    "primary": "GPIOPinRemap",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "GPIOPinRemap",
+        "comment": "R16_PIN_ALTERNATE set/clear; called with RB_PIN_TMR0 (TMR0 capture on PB23)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x25fe",
+    "primary": "PWMX_CycleCfg",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "PWMX_CycleCfg",
+        "comment": "PWM cycle selection"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x268a",
+    "primary": "PWMX_ACTOUT",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "PWMX_ACTOUT",
+        "comment": "PWM channel duty, polarity and enable"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x279c",
+    "primary": "TMR0_CapInit",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "TMR0_CapInit",
+        "comment": "TMR0 capture mode (edge to edge)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x27b6",
+    "primary": "TMR1_TimerInit",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "TMR1_TimerInit",
+        "comment": "TMR1 period; 60000 cycles = 1 ms at 60 MHz"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x27cc",
+    "primary": "TMR2_TimerInit",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "TMR2_TimerInit",
+        "comment": "TMR2 period; 6000000 cycles = 100 ms at 60 MHz"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2812",
+    "primary": "uart0_init_115200",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart0_init_115200",
+        "comment": "UART0 115200 8N1, TX only (PB7); nothing is ever transmitted"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2844",
+    "primary": "uart0_drain_rx",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart0_drain_rx",
+        "comment": "reads and discards UART0 RX FIFO"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x289e",
+    "primary": "uart1_init_115200",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart1_init_115200",
+        "comment": "UART1 115200 8N1, link to the main MCU (PA8 RX, PA9 TX)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2914",
+    "primary": "uart1_send",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart1_send",
+        "comment": "blocking UART1 transmit (busy-waits while TX FIFO holds 8 bytes)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x293c",
+    "primary": "uart1_read_fifo",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart1_read_fifo",
+        "comment": "copies UART1 RX FIFO to a buffer, returns count"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2966",
+    "primary": "usb_hw_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_hw_init",
+        "comment": "USB device controller on, DMA buffers EP0..EP3, D+ pull-up on"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x29f8",
+    "primary": "usb_hw_off",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_hw_off",
+        "comment": "USB controller off and D+ pull-up off (device detaches)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2a5e",
+    "primary": "usb_ep1_in_arm",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_ep1_in_arm",
+        "comment": "sets EP1 T_LEN and ACK"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2ab6",
+    "primary": "af_read_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af_read_cb",
+        "comment": "AF00 service read callback: CCCD 2 bytes, AF01/AF02 20 bytes of an unwritten buffer, offset reads rejected 0x0B"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2b38",
+    "primary": "af_write_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af_write_cb",
+        "comment": "AF00 service write callback: CCCD via GATTServApp_ProcessCCCWriteReq, AF01 -> app event 3, AF02 -> app event 4"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2c02",
+    "primary": "af_linkdb_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af_linkdb_cb",
+        "comment": "resets AF01/AF02 CCCDs when a link is removed"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2c6a",
+    "primary": "af_service_register",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af_service_register",
+        "comment": "registers AF00 table (7 attributes) and the app callback 0x72a6"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2cdc",
+    "primary": "af01_notify_raw",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af01_notify_raw",
+        "comment": "GATT_Notification on AF01 if its CCCD has notify set, else 0x12"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2d34",
+    "primary": "af02_notify_raw",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af02_notify_raw",
+        "comment": "GATT_Notification on AF02 if its CCCD has notify set, else 0x12"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2d8c",
+    "primary": "db_read_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "db_read_cb",
+        "comment": "DB00 service read callback; app hook 0x7104 is empty"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2e28",
+    "primary": "db_write_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "db_write_cb",
+        "comment": "DB00 service write callback; app hook 0x6cae is empty"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2e9e",
+    "primary": "db_linkdb_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "db_linkdb_cb",
+        "comment": "resets the DB01 CCCD when a link is removed"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2efc",
+    "primary": "db_service_register",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "db_service_register",
+        "comment": "registers DB00 table (4 attributes)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x2f58",
+    "primary": "devinfo_read_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "devinfo_read_cb",
+        "comment": "180A read callback, WCH SDK placeholder values"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3126",
+    "primary": "devinfo_register",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "devinfo_register",
+        "comment": "registers the 180A table (19 attributes)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x315c",
+    "primary": "ble_flash_read_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_flash_read_cb",
+        "comment": "bleConfig readFlashCB -> EEPROM read"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3178",
+    "primary": "ble_flash_write_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_flash_write_cb",
+        "comment": "bleConfig writeFlashCB -> EEPROM erase + write"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x31b8",
+    "primary": "ble_temp_sample_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_temp_sample_cb",
+        "comment": "bleConfig tsCB, ADC temperature sample"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x322a",
+    "primary": "hal_task_event",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "hal_task_event",
+        "comment": "TMOS HAL task: LSI calibration every 0x2EE00 ticks"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x32b6",
+    "primary": "ble_lib_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_lib_init",
+        "comment": "checks VER_LIB == CH58x_BLE_LIB_V1.8, fills bleConfig_t, BLE_LibInit"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x33d0",
+    "primary": "hal_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "hal_init",
+        "comment": "registers HAL task, RTC and TMOS timer init"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x359a",
+    "primary": "frame_decoder_reset",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "frame_decoder_reset",
+        "comment": "clears decoder state/count fields of a slot"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x35a8",
+    "primary": "frame_encode",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "frame_encode",
+        "comment": "AA, (hi<<4|lo), len, data, sum; AA doubled; returns encoded length"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3662",
+    "primary": "frame_decode_byte",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "frame_decode_byte",
+        "comment": "per-slot stuffed-frame decoder (USB OUT uses slot 1)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3724",
+    "primary": "tmr1_1ms_tick",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "tmr1_1ms_tick",
+        "comment": "1 ms counter, sets 1/10/100/500/1000 ms flags"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3810",
+    "primary": "acc_to_mcu_queue",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_to_mcu_queue",
+        "comment": "copies an accessory frame to slot 2 (address 0x52) and marks it pending"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x384e",
+    "primary": "decoder_feed_slot",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "decoder_feed_slot",
+        "comment": "feeds one byte to the decoder of slot n"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3862",
+    "primary": "slot_rx_frame_ptr",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "slot_rx_frame_ptr",
+        "comment": "returns slot n + 0x104 (copy of a frame received from the MCU)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3876",
+    "primary": "decoder_reset_slot",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "decoder_reset_slot",
+        "comment": "resets the decoder of slot n"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x388a",
+    "primary": "mcu_ctl_cmd",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "mcu_ctl_cmd",
+        "comment": "channel 3 handler: 00,10,50,52,E0,EF,F0,FC from the main MCU"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3c48",
+    "primary": "usb_partial_frame_ack",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_partial_frame_ack",
+        "comment": "local IN reply for an incomplete USB frame: 20 -> \"20 04\", F4 -> \"F5 00 d2 d3 d4 d5 01\""
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3d0c",
+    "primary": "usb_in_queue_push",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_in_queue_push",
+        "comment": "pushes an encoded frame to the 4-slot USB IN ring (accepts while count < 5)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3d8a",
+    "primary": "mcu_to_usb_enqueue",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "mcu_to_usb_enqueue",
+        "comment": "re-encodes a frame from the MCU (dst 1) and queues it for USB IN"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3dd2",
+    "primary": "slot_forward_to_mcu",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "slot_forward_to_mcu",
+        "comment": "re-encodes slot n frame and sends it on UART1"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3e1a",
+    "primary": "usb_in_pump",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_in_pump",
+        "comment": "sends the head of the USB IN ring in 62-byte pieces"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3ed6",
+    "primary": "acc_af02_notify_handle",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_af02_notify_handle",
+        "comment": "handles a stored accessory AF02 notification; \"BE FF\" forgets the accessory"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3f20",
+    "primary": "acc_cmd_b8",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_cmd_b8",
+        "comment": "B8: byte 1 == B0 schedules write \"F0 B0\" to the accessory AF02"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3f3a",
+    "primary": "acc_cmd_bc_set_addr",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_cmd_bc_set_addr",
+        "comment": "BC: sets the accessory BD address (6 bytes)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3f76",
+    "primary": "acc_cmd_be_disconnect",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_cmd_be_disconnect",
+        "comment": "BE: terminates the accessory link and invalidates the address"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x3fac",
+    "primary": "mcu_to_ble_router",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "mcu_to_ble_router",
+        "comment": "MCU reply routing: last byte 0x31 -> AF01 with 0x31 in front, else AF02 minus last byte; saves host ID after 19 00"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4074",
+    "primary": "ble_to_mcu_queue",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_to_mcu_queue",
+        "comment": "copies a GATT write to slot 0 (address 0x62) and appends route tag 0x31 or 0x00"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x40dc",
+    "primary": "af02_write_handler",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af02_write_handler",
+        "comment": "AF02: blocked when mode 2; 00 local status; 18 bind; else forward with tag 0x00"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4224",
+    "primary": "af01_write_handler",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af01_write_handler",
+        "comment": "AF01 (first byte already dropped): blocked when mode 2; 10/C0 local adv tail; else forward with tag 0x31"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x42a4",
+    "primary": "acc_to_mcu_send",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_to_mcu_send",
+        "comment": "calls 0x3810 when length is non-zero"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x42ac",
+    "primary": "link_state_reporter",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "link_state_reporter",
+        "comment": "sends BD 00/BD 01 on channel 6 and accessory BD on channel 5 when states change"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4486",
+    "primary": "acc_list_build_bb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_list_build_bb",
+        "comment": "builds \"BB n {addr6 len name}\" accessory list for the MCU"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x45d4",
+    "primary": "acc_cmd_dispatch",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_cmd_dispatch",
+        "comment": "channel 5 commands from the MCU: B8, BA, BC, BE"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4628",
+    "primary": "bridge_loop",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "bridge_loop",
+        "comment": "main bridge scheduler (MCU->BLE/USB/acc/ctl, USB->MCU, BLE->MCU, 55 status)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x47fe",
+    "primary": "name_variant_flag",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "name_variant_flag",
+        "comment": "returns RAM 0x200043B7 == 0xA5 (never true in this image)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4810",
+    "primary": "rgb_led_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "rgb_led_init",
+        "comment": "PWM4 (PA12), PWM7 (PB4), PWM10 (PB14) outputs; TMR0 capture on PB23"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x48c2",
+    "primary": "pwm_set_channel",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "pwm_set_channel",
+        "comment": "sets one LED PWM channel duty"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4916",
+    "primary": "rgb_led_set_grb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "rgb_led_set_grb",
+        "comment": "sets G/R/B PWM from a 24-bit GRB value"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4964",
+    "primary": "ws2812_rx_decode",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ws2812_rx_decode",
+        "comment": "decodes a captured 24-bit GRB pulse train (TMR0 capture)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4ab8",
+    "primary": "update_prep_countdown",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "update_prep_countdown",
+        "comment": "after F0 AC: USB off, write IAP flag, soft reset"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4b14",
+    "primary": "periph_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "periph_init",
+        "comment": "UART1, LED, USB off, TMR1 1 ms, TMR2 100 ms"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4b9c",
+    "primary": "bridge_tick",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "bridge_tick",
+        "comment": "bridge_loop, link_state_reporter, usb_in_pump"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4bb8",
+    "primary": "periodic_dispatch",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "periodic_dispatch",
+        "comment": "1 ms, 10 ms, 100 ms flag dispatch (called from TMOS event 0x800)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4be0",
+    "primary": "get_uptime_ms",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "get_uptime_ms",
+        "comment": "returns RAM 0x20002FBC (ms, 100 ms resolution)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4bec",
+    "primary": "uart1_frame_decode_byte",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart1_frame_decode_byte",
+        "comment": "decoder for frames from the main MCU"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4cee",
+    "primary": "uart1_rx_route",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart1_rx_route",
+        "comment": "routes decoded MCU frames by low nibble: 6 BLE, 1 USB, 5 accessory, other CH58x"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4ddc",
+    "primary": "uart1_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart1_init",
+        "comment": "PA8 RX pull-up, PA9 TX, UART1 115200, RX interrupts"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4e1a",
+    "primary": "debug_hexdump",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "debug_hexdump",
+        "comment": "printf hex dump (output discarded)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4e86",
+    "primary": "usb_ep1_out_handler",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_ep1_out_handler",
+        "comment": "feeds report bytes 2..2+n-1 (n = byte 1) to the slot 1 decoder"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4eca",
+    "primary": "usb_ep1_in_send",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_ep1_in_send",
+        "comment": "builds IN report [02][n][n bytes][zero pad] and arms EP1"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4f3c",
+    "primary": "usb_ep2_echo",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_ep2_echo",
+        "comment": "WCH sample leftover: EP2 OUT echoed inverted"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4f66",
+    "primary": "usb_ep3_echo",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_ep3_echo",
+        "comment": "WCH sample leftover: EP3 OUT echoed inverted"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4f90",
+    "primary": "usb_ep4_echo",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_ep4_echo",
+        "comment": "WCH sample leftover: EP4 OUT echoed inverted"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x4fba",
+    "primary": "usb_irq_handler",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_irq_handler",
+        "comment": "USB device interrupt: EP0 standard requests, EP1 in/out"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x54fa",
+    "primary": "usb_product_string_from_flash",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_product_string_from_flash",
+        "comment": "builds USB string 2 from the DataFlash 0x6E0E name override"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x55c0",
+    "primary": "usb_enable",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_enable",
+        "comment": "starts the USB device"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x566a",
+    "primary": "usb_disable",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_disable",
+        "comment": "stops the USB device and detaches"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x56ce",
+    "primary": "central_passcode_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "central_passcode_cb",
+        "comment": "GAPBondMgr_PasscodeRsp with a random 6-digit code"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x56fe",
+    "primary": "central_pair_state_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "central_pair_state_cb",
+        "comment": "pairing state 2 (bonded), status 0 -> accessory bonded flag"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x5710",
+    "primary": "acc_addr_load",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_addr_load",
+        "comment": "loads the accessory address from DataFlash 0x6A01"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x5744",
+    "primary": "central_app_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "central_app_init",
+        "comment": "central role parameters, bond manager, TMOS task"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x5864",
+    "primary": "hid_report_map_parse",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "hid_report_map_parse",
+        "comment": "finds button and wheel byte offsets in an accessory report map"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x5af0",
+    "primary": "central_task_event",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "central_task_event",
+        "comment": "central TMOS task: discovery, CCCD enable, HID notifications"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x64b8",
+    "primary": "central_link_reset",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "central_link_reset",
+        "comment": "clears accessory link state"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x65a0",
+    "primary": "adv_report_parse",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "adv_report_parse",
+        "comment": "parses one advertising report of a scanned device"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x685a",
+    "primary": "acc_list_add",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_list_add",
+        "comment": "adds a scanned HID mouse appearance device to the 5-entry list"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x698c",
+    "primary": "central_event_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "central_event_cb",
+        "comment": "central role GAP event callback (discovery, link established/terminated)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x6c78",
+    "primary": "periph_param_update_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "periph_param_update_cb",
+        "comment": "records host link interval/latency/timeout"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x6cb0",
+    "primary": "periph_task_event",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "periph_task_event",
+        "comment": "peripheral TMOS task: start, 1 s name/timeout housekeeping, watchdog, param update"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x6f6c",
+    "primary": "af02_notify",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af02_notify",
+        "comment": "GATT_bm_alloc + notify on AF02; sets notify-failed flag 0x20002F88"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x6ff6",
+    "primary": "af01_notify",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af01_notify",
+        "comment": "GATT_bm_alloc + notify on AF01; sets notify-failed flag 0x20002F88"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7080",
+    "primary": "periph_link_terminated",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "periph_link_terminated",
+        "comment": "clears host link, re-enables advertising unless blocked"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7106",
+    "primary": "periph_state_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "periph_state_cb",
+        "comment": "gapRolesCBs.pfnStateChange; BD-address name suffix, link established/terminated"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x72a6",
+    "primary": "af_app_cb",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "af_app_cb",
+        "comment": "AF write dispatch: event 3 -> af01 handler with first byte dropped, event 4 -> af02 handler"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x72e0",
+    "primary": "periph_app_init",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "periph_app_init",
+        "comment": "advertising/scan response, 500 ms interval, bond manager, services"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x746c",
+    "primary": "iap_flag_write",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "iap_flag_write",
+        "comment": "DataFlash 0x7000 byte 0 = value (3 before update reset)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x74bc",
+    "primary": "enter_iap",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "enter_iap",
+        "comment": "disable interrupts, write IAP flag 3, soft reset"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x74d2",
+    "primary": "adv_mfr_tail_load",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "adv_mfr_tail_load",
+        "comment": "loads the 14-byte manufacturer data tail from DataFlash 0x6E00"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7532",
+    "primary": "adv_mfr_set_from_fc",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "adv_mfr_set_from_fc",
+        "comment": "FC: 4 bytes into manufacturer data bytes 2..5, reload tail, update advert"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7568",
+    "primary": "adv_mfr_tail_store",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "adv_mfr_tail_store",
+        "comment": "AF01 10/C0: 14 bytes into manufacturer data bytes 6..19 and DataFlash 0x6E00 (erases the name override)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7618",
+    "primary": "host_ids_load",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "host_ids_load",
+        "comment": "reads the 5 x 16-byte host table at DataFlash 0x6F00, counts used slots"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7696",
+    "primary": "host_id_save",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "host_id_save",
+        "comment": "appends a host ID (shifts when 5 used), rewrites DataFlash 0x6F00"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x773c",
+    "primary": "host_id_lookup",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "host_id_lookup",
+        "comment": "1 if the 16 bytes match a stored host ID"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7794",
+    "primary": "main",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "main",
+        "comment": "clock 60 MHz, GPIO, UART0, BLE lib, roles, app init, TMOS loop"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x78b2",
+    "primary": "memcpy",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "memcpy",
+        "comment": "memcpy"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x7968",
+    "primary": "printf",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "printf",
+        "comment": "newlib printf; _write is a stub, so nothing is output"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x79ac",
+    "primary": "putchar",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "putchar",
+        "comment": "newlib putchar; output discarded"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x8d8e",
+    "primary": "_write_stub",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "_write_stub",
+        "comment": "newlib _write stub: errno 88 (ENOSYS), returns -1"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x8ed0",
+    "primary": "ch58x_identity",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ch58x_identity",
+        "comment": "33 CC 55 AA, \"MP305B\", 01 00 66 00, version 01 00 00 0F (1.0.0.15), 0x1000, 0x39000"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x8f4c",
+    "primary": "usb_hid_report_desc",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_hid_report_desc",
+        "comment": "35 bytes"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x8f70",
+    "primary": "usb_config_desc",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_config_desc",
+        "comment": "41 bytes"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x8f9c",
+    "primary": "usb_device_desc",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_device_desc",
+        "comment": "18 bytes, VID 0x28E9 PID 0x028A"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x8fb0",
+    "primary": "usb_string1_manufacturer",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_string1_manufacturer",
+        "comment": "\"wch.cn\""
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x9304",
+    "primary": "usb_string0_langid",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_string0_langid",
+        "comment": "0x0409"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002572",
+    "primary": "sys_soft_reset",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "sys_soft_reset",
+        "comment": "flash command 4 then RB_SOFTWARE_RESET"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x200028d6",
+    "primary": "FLASH_EEPROM_CMD",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "FLASH_EEPROM_CMD",
+        "comment": "WCH ISP ROM API in RAM: 1/2/3 code flash, 4 reset, 6 ROM info, 9/10/11 DataFlash erase/write/read (offset + 0x70000)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002c40",
+    "primary": "gatt_af00_table",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "gatt_af00_table",
+        "comment": "AF00 service attributes (7 records of 16 bytes)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002cbc",
+    "primary": "gatt_db00_table",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "gatt_db00_table",
+        "comment": "DB00 service attributes (4 records)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002d08",
+    "primary": "gatt_180a_table",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "gatt_180a_table",
+        "comment": "Device Information attributes (19 records)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002e44",
+    "primary": "usb_string2_product",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_string2_product",
+        "comment": "RAM string descriptor, default \"MP305B\""
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002e78",
+    "primary": "adv_data",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "adv_data",
+        "comment": "31-byte advertising data"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002e98",
+    "primary": "scan_rsp_data",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "scan_rsp_data",
+        "comment": "31-byte scan response (complete local name, 29 chars)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002f30",
+    "primary": "acc_peer_addr",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "acc_peer_addr",
+        "comment": "accessory BD address (6 bytes) + conn handle at 0x20002F36"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002f88",
+    "primary": "notify_failed",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "notify_failed",
+        "comment": "1 when the last AF01/AF02 notification could not be sent"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002f89",
+    "primary": "host_iface_mode",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "host_iface_mode",
+        "comment": "from MCU 50: 0 any, 1 BLE host active (USB off), 2 USB host active (BLE writes dropped, no advertising)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002f8a",
+    "primary": "remote_enabled",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "remote_enabled",
+        "comment": "from MCU 52: 1 after 52 'S', 0 after 52 other"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002f95",
+    "primary": "mcu_frame_seen",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "mcu_frame_seen",
+        "comment": "set when a frame from the MCU was handled; triggers the 55 status frame"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002fbc",
+    "primary": "uptime_ms",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uptime_ms",
+        "comment": "incremented by 100 every 100 ms (TMR2), returned by 10/11"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002ff0",
+    "primary": "ble_conn_timer",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_conn_timer",
+        "comment": "+1600 per second while connected; unbound link dropped at 48000 (30 s)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002ff4",
+    "primary": "ble_bind_state",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_bind_state",
+        "comment": "0 not bound, 2 bound"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002ff8",
+    "primary": "gaprole_state",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "gaprole_state",
+        "comment": "last peripheral gapRole state"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20002ffc",
+    "primary": "ble_conn_handle",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_conn_handle",
+        "comment": "host connection handle, 0xFFFE when none"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20003644",
+    "primary": "usb_in_ring",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_in_ring",
+        "comment": "4 x 256-byte encoded frames; lengths at 0x20003A44"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20003a48",
+    "primary": "usb_enabled",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_enabled",
+        "comment": "1 while the USB device is on"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20003a49",
+    "primary": "usb_in_idle",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_in_idle",
+        "comment": "1 when EP1 IN can take a report"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20003a4a",
+    "primary": "usb_in_count",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "usb_in_count",
+        "comment": "frames waiting in the USB IN ring"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20003a50",
+    "primary": "bridge_slots",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "bridge_slots",
+        "comment": "4 slots x 0x218: 0 BLE->MCU, 1 USB, 2 accessory, 3 CH58x control"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x200043b7",
+    "primary": "name_variant_magic",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "name_variant_magic",
+        "comment": "0xA5 would change name char 2 to '3'; never written"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20004564",
+    "primary": "uart1_rx_frame",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "uart1_rx_frame",
+        "comment": "decoded frame from the main MCU (hi, lo, len, data)"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20005130",
+    "primary": "pending_host_id",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "pending_host_id",
+        "comment": "16-byte host ID from the last AF02 bind with fast flag 0"
+      }
+    ]
+  },
+  {
+    "image": "ch58x",
+    "address": "0x20005160",
+    "primary": "ble_lib_heap",
+    "aliases": [
+      {
+        "source": "ch58x_bridge.tsv",
+        "name": "ble_lib_heap",
+        "comment": "BLE library memory, 0x1C00 bytes"
+      }
+    ]
+  }
+]

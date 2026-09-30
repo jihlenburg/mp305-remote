@@ -1,0 +1,405 @@
+{
+  "original_only": [],
+  "restored_only": [
+    {
+      "ADDRESS": "CODE:1003",
+      "NAME": "thunk_FUN_CODE_67ff",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:100b",
+      "NAME": "thunk_FUN_CODE_50fb",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:1013",
+      "NAME": "thunk_FUN_CODE_4fff",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:101b",
+      "NAME": "thunk_FUN_CODE_77b4",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:1023",
+      "NAME": "thunk_FUN_CODE_78ee",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:102b",
+      "NAME": "thunk_FUN_CODE_97ff",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:103b",
+      "NAME": "thunk_FUN_CODE_47aa",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:1043",
+      "NAME": "thunk_FUN_CODE_75c0",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:104b",
+      "NAME": "thunk_FUN_CODE_5c3c",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:1e28",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:1e72",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:1f43",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:1ffd",
+      "NAME": "thunk_FUN_CODE_996c",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:4427",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:4696",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:4752",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:4780",
+      "NAME": "thunk_FUN_CODE_ad49",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:53ea",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:62a5",
+      "NAME": "thunk_FUN_CODE_adf3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "USER_DEFINED",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7c6",
+      "NAME": "thunk_FUN_CODE_8832",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7c9",
+      "NAME": "thunk_FUN_CODE_9bcb",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7cc",
+      "NAME": "thunk_FUN_CODE_999a",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7cf",
+      "NAME": "thunk_FUN_CODE_86a5",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7d5",
+      "NAME": "thunk_FUN_CODE_80f9",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7d8",
+      "NAME": "thunk_FUN_CODE_a00f",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7db",
+      "NAME": "thunk_FUN_CODE_170e",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7de",
+      "NAME": "thunk_FUN_CODE_7bca",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7e1",
+      "NAME": "thunk_FUN_CODE_90f3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7e4",
+      "NAME": "thunk_FUN_CODE_a557",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7e7",
+      "NAME": "thunk_FUN_CODE_a560",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7ea",
+      "NAME": "thunk_FUN_CODE_9b27",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a7ed",
+      "NAME": "thunk_FUN_CODE_99b1",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a800",
+      "NAME": "thunk_FUN_CODE_a19f",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a803",
+      "NAME": "thunk_FUN_CODE_102e",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a806",
+      "NAME": "thunk_FUN_CODE_103e",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a809",
+      "NAME": "thunk_FUN_CODE_1046",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a80c",
+      "NAME": "thunk_FUN_CODE_7bca",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a815",
+      "NAME": "thunk_FUN_CODE_90f3",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a818",
+      "NAME": "thunk_FUN_CODE_9b27",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a81b",
+      "NAME": "thunk_FUN_CODE_99b1",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a81e",
+      "NAME": "thunk_FUN_CODE_999a",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a824",
+      "NAME": "thunk_FUN_CODE_86a5",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a827",
+      "NAME": "thunk_FUN_CODE_80f9",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a82a",
+      "NAME": "thunk_FUN_CODE_9bcb",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a82d",
+      "NAME": "thunk_FUN_CODE_a00f",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a830",
+      "NAME": "thunk_FUN_CODE_170e",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a833",
+      "NAME": "thunk_FUN_CODE_9281",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a836",
+      "NAME": "thunk_FUN_CODE_a45d",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a839",
+      "NAME": "thunk_FUN_CODE_a0f5",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    },
+    {
+      "ADDRESS": "CODE:a88e",
+      "NAME": "thunk_FUN_CODE_a862",
+      "NAMESPACE": "",
+      "PRIMARY": "y",
+      "SOURCE_TYPE": "ANALYSIS",
+      "TYPE": "global"
+    }
+  ]
+}

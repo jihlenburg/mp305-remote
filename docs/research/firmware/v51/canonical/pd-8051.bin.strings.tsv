@@ -1,0 +1,149 @@
+0000148b	%%X&%]'%g(%q)%l*%{+%v-%
+000014a6	X%NY%S[%
+000014c4	f%?j%Dk%
+00002616	4dsp)
+000029d2	`da2x
+000029f0	z@Ea2x
+00002a10	v<a2x
+00002a5b	9;)::
+00002a73	D;)E;)G;)X:
+00003964	J3`jA
+00003974	J"`ZA
+00003984	J3`JA
+00003bda	L. L1!LA#LI$LD%L>&L
+0000421c	RY!Rh#Rz*R\/R
+00007045	p6t</
+0000a0a1	NMOS On
+0000a0aa	NMOS Off
+0000a0b4	Update PowerMode !!
+0000a0c9	Update SinkVolt !!
+0000a0dd	DCDC Off
+0000a0e7	Source!!
+0000a0f1	Sink!!
+0000a0f9	DCDC On
+0000a103	!!Priority_Reset!!
+0000a117	EPR Enter !!
+0000a125	Enter Source Mode !!
+0000a13b	vbus dis on
+0000a148	vbus dis off
+0000a156	OCT!!
+0000a15d	vbus=%d
+0000a166	Source Update = 2 !!
+0000a17c	Source Update = 0 !!
+0000a192	fix:%d/%d
+0000a19d	pps:%d-%d/%d
+0000a1ab	AVS:%d-%d-%x
+0000a1b9	epr:%d/%d
+0000a1c4	A:%d/%d %dmV/%dmA %dmV/%dmA %dW B:%dmV %dW %d%% %dC/%d/%d
+0000a279	;p8b5
+0000a287	)['Q%c#
+0000a3ba	P829 v%d.%d Bat=%d-%d
+0000a3d5	GoodCRC
+0000a3dd	SrcCap
+0000a3e4	Accept
+0000a3eb	PSRdy
+0000a3f1	EPR Mode
+0000a3fa	EPR Cap
+0000a402	Request
+0000a40a	Vendor Defined
+0000a419	EPR Request
+0000a425	Hard Reset
+0000a430	Extended_Contro
+0000a449	VbusAttach
+0000a454	VbusDetach
+0000a45f	CCI Wait
+0000a468	CCI Attach
+0000a473	LOW Batt
+0000a47c	Safe5V
+0000a483	Safe0V
+0000a48a	CCO_Wait
+0000a493	CCO_Attach
+0000a49e	CC_Detach
+0000a4a8	DPM_Detach
+0000a4b3	DPM_Attach
+0000a4be	 v=%d
+0000a4d3	PsReady
+0000a4db	VbusMatched
+0000a4e7	ReqV PD
+0000a4ef	ts power supply
+0000a503	SendCRC
+0000a50b	Sel Volt
+0000a514	ptl ts err
+0000a51f	epr enter
+0000a529	Update SCap
+0000a535	Send PsRdy
+0000a543	CC De vs=%d
+0000a54f	DCD T
+0000a555	BC PWD
+0000a55c	TxSCap
+0000a563	SRC_TS
+0000a56a	BC DPM DBNC
+0000a576	START CHECK_OCP
+0000a586	PPS_TRANS_LARGE
+0000a596	PPS_TRANS_SMALL
+0000a5a6	VCONN Stable
+0000a5b7	C,cc state
+0000a5c9	BC,%d,cct=%d
+0000a5d7	PRL,time out
+0000a5e5	PRL,%d
+0000a5ed	%d,%d
+0000a5f4	EprSrc!!
+0000a5fe	SprSrc!!
+0000a608	Request:%d-%d
+0000a617	Reject1:%d-%d
+0000a626	Req:%d/%d
+0000a636	discovery
+0000a640	waitCap
+0000a648	evaluate
+0000a651	select
+0000a658	trans
+0000a65e	ready
+0000a664	HardRst
+0000a66c	enterEPR
+0000a675	waitEPR
+0000a67d	SoftRst
+0000a685	src startup
+0000a691	send caps
+0000a69b	send caps try
+0000a6a9	src ne cap
+0000a6b4	src ts supply
+0000a6c2	src ready
+0000a6cc	snk startup
+0000a6d8	EPR ENTRY
+0000a6e2	VDM Req
+0000a6ea	VDM Ack
+0000a6f2	VDM NAck
+0000a6fb	EPR KeepAlive
+0000a756	#:4#(
+0000a7b9	vc:%d/%d
+0000a7c3	portEn:%d,cc=%x %d %d
+0000a7da	cct=1
+0000a7e1	cct=0
+0000a7e8	C to C: %d %d
+0000a7f7	C to C exit
+0000a805	Input is DRP !!
+0000a817	rst_oemid!!
+0000a851	PMIC:%d->%d
+0000a85e	PD SinkPower Ok
+0000a86f	HV Sink Ok
+0000a87b	Phone Chg Error: PD %d/%d!
+0000a897	TimeOut Chg!
+0000a8a5	sink reset
+0000a8b1	pdo=%d-%d
+0000a8bc	0=%d/%d
+0000a8c5	1=%d/%d
+0000a8ce	7=%d/%d
+0000a8d7	fix%d:%d/%d
+0000a8e4	DRP=%d %dW
+0000a906	qc select9V
+0000a913	pol detached!
+0000a922	pol no conn!
+0000a957	MsgTx:
+0000a95e	Accept
+0000a965	Reject
+0000a96c	PS RDY
+0000a973	Msg:%d
+0000a97c	(null)
+0000a983	-Rx-:%02x %d %d 
+0000a99c	to SRC_ATTACHED
+0000a9b1	qc=%d

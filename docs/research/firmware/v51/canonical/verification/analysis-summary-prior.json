@@ -1,0 +1,78 @@
+{
+  "caution": "Function discovery includes heuristics. A completed decompilation can contain errors, bad instruction paths, incomplete switch recovery and incorrect inferred types. Instruction classification is not a semantic coverage measurement. SDK is supplementary, not part of the ISDT update.",
+  "images": [
+    {
+      "image": "main ARM",
+      "export_directory": "exports/arm",
+      "discovered_functions": 2455,
+      "decompiler_completed": 2455,
+      "functions_with_decompiler_warnings": 203,
+      "functions_with_halt_baddata": 0,
+      "listed_instructions_in_flash": 129445,
+      "bytes_classified_as_flash_instructions": 335078,
+      "listed_instructions_in_other_mappings": 0,
+      "flash_size": 476160
+    },
+    {
+      "image": "PD 8051",
+      "export_directory": "exports/pd-tables",
+      "discovered_functions": 1007,
+      "decompiler_completed": 1007,
+      "functions_with_decompiler_warnings": 102,
+      "functions_with_halt_baddata": 0,
+      "listed_instructions_in_flash": 19082,
+      "bytes_classified_as_flash_instructions": 34470,
+      "listed_instructions_in_other_mappings": 0,
+      "flash_size": 45056
+    },
+    {
+      "image": "BLE RISC-V",
+      "export_directory": "exports/ble-final",
+      "discovered_functions": 232,
+      "decompiler_completed": 232,
+      "functions_with_decompiler_warnings": 53,
+      "functions_with_halt_baddata": 2,
+      "listed_instructions_in_flash": 10128,
+      "bytes_classified_as_flash_instructions": 30548,
+      "listed_instructions_in_other_mappings": 974,
+      "flash_size": 34432
+    },
+    {
+      "image": "Supplementary WCH SDK",
+      "export_directory": "exports/sdk-v18",
+      "discovered_functions": 1047,
+      "decompiler_completed": 1047,
+      "functions_with_decompiler_warnings": 68,
+      "functions_with_halt_baddata": 0,
+      "listed_instructions_in_flash": 60008,
+      "bytes_classified_as_flash_instructions": 177456,
+      "listed_instructions_in_other_mappings": 1589,
+      "flash_size": 182144
+    }
+  ],
+  "actual_image_functions": 3694,
+  "offline_experiments": [
+    {
+      "file": "exports/emulation-results.json",
+      "passed": 344,
+      "failed": 0
+    },
+    {
+      "file": "exports/reconstruction-comparison.json",
+      "passed": 700,
+      "failed": 0
+    },
+    {
+      "file": "exports/control-emulation.json",
+      "passed": 18,
+      "failed": 0
+    },
+    {
+      "file": "exports/read-reply-comparison.json",
+      "passed": 896,
+      "failed": 0
+    }
+  ],
+  "offline_cases_passed": 1958,
+  "offline_cases_failed": 0
+}

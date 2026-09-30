@@ -1,0 +1,7 @@
+bind: after 0x18 S+0x47=1 K+6=6 bits=0x0
+  allow: S+0x46=1 S+0x47=0 bits=0x2
+  tx: [('26', '19 00 00')] bits=0x0 S+0x46=0 K+0=0
+bind: after 0x18 S+0x47=1 K+6=6 bits=0x0
+  deny: S+0x46=0 S+0x47=0 bits=0x2
+  tx: [('26', '19 ff 00')] bits=0x0 S+0x46=0 K+0=0
+USB bind allow tx: [('21', '19 00')] K+6=1

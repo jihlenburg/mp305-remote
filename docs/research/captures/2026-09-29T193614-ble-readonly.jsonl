@@ -1,0 +1,50 @@
+{"kind": "meta", "date": "2026-09-29T19:35:56+02:00", "platform": "macOS-27.0-arm64-arm-64bit", "python": "3.12.2", "bleak": "unknown", "script": "spikes/ble_readonly/spike.py", "name": "0000MP305B  S             E!K", "address": "72DE66A3-7C9B-58A3-A45B-CF098194D568", "mtu": 247, "gatt": [{"service": "0000180a-0000-1000-8000-00805f9b34fb", "characteristics": [{"uuid": "00002a23-0000-1000-8000-00805f9b34fb", "handle": 15, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a24-0000-1000-8000-00805f9b34fb", "handle": 17, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a25-0000-1000-8000-00805f9b34fb", "handle": 19, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a26-0000-1000-8000-00805f9b34fb", "handle": 21, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a27-0000-1000-8000-00805f9b34fb", "handle": 23, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a28-0000-1000-8000-00805f9b34fb", "handle": 25, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a29-0000-1000-8000-00805f9b34fb", "handle": 27, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a2a-0000-1000-8000-00805f9b34fb", "handle": 29, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a50-0000-1000-8000-00805f9b34fb", "handle": 31, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}]}, {"service": "0000af00-0000-1000-8000-00805f9b34fb", "characteristics": [{"uuid": "0000af01-0000-1000-8000-00805f9b34fb", "handle": 34, "properties": ["notify", "write", "read"], "max_write_without_response": 244, "descriptors": ["00002902-0000-1000-8000-00805f9b34fb"]}, {"uuid": "0000af02-0000-1000-8000-00805f9b34fb", "handle": 37, "properties": ["notify", "write", "read"], "max_write_without_response": 244, "descriptors": ["00002902-0000-1000-8000-00805f9b34fb"]}]}, {"service": "0000db00-0000-1000-8000-00805f9b34fb", "characteristics": [{"uuid": "0000db01-0000-1000-8000-00805f9b34fb", "handle": 41, "properties": ["notify", "write", "read"], "max_write_without_response": 244, "descriptors": ["00002902-0000-1000-8000-00805f9b34fb"]}]}], "write_with_response": {"af01": true, "af02": true}}
+{"t": 4.2561, "dir": "TX", "char": "af02", "hex": "18 00 08 08 08 08 08 08 08 08 08 08 08 08 08 08 00 00 00", "len": 19, "note": "bind"}
+{"t": 11.9845, "dir": "RX", "char": "af02", "hex": "19 00", "len": 2}
+{"t": 12.486, "dir": "TX", "char": "af02", "hex": "e0", "len": 1, "note": "module info"}
+{"t": 12.6162, "dir": "RX", "char": "af02", "hex": "e1 01 06 00 28 4d 50 33 30 35 42 00 00 02 00 02 00", "len": 17}
+{"t": 12.6165, "dir": "TX", "char": "af01", "hex": "12 c4", "len": 2, "note": "settings read"}
+{"t": 12.7497, "dir": "RX", "char": "af01", "hex": "31 c5 5a 02 00 00 01 f4 01 32 00 00 00", "len": 13}
+{"t": 12.7499, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 1"}
+{"t": 12.8857, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 12.9876, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 2"}
+{"t": 13.1098, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 13.2116, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 3"}
+{"t": 13.3417, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 13.4433, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 4"}
+{"t": 13.5603, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 13.6618, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 5"}
+{"t": 13.786, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 13.8887, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 6"}
+{"t": 14.016, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 14.1178, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 7"}
+{"t": 14.2359, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 14.3376, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 8"}
+{"t": 14.4599, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 14.5632, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 9"}
+{"t": 14.6852, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 14.7865, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 10"}
+{"t": 14.9113, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 15.0121, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 11"}
+{"t": 15.18, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 15.2808, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 12"}
+{"t": 15.404, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 15.515, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 13"}
+{"t": 15.6302, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 15.7315, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 14"}
+{"t": 15.8583, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 15.96, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 15"}
+{"t": 16.0801, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 16.1815, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 16"}
+{"t": 16.3054, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 16.4076, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 17"}
+{"t": 16.5377, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 16.6401, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 18"}
+{"t": 16.7545, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 16.8563, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 19"}
+{"t": 16.9822, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 17.0853, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 20"}
+{"t": 17.2068, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 17.3091, "dir": "TX", "char": "af01", "hex": "12 e0", "len": 2, "note": "probe: E0 over AF01"}
+{"t": 17.4292, "dir": "RX", "char": "af01", "hex": "31 e1 01 06 00 28 4d 50 33 30 35 42 00 00 02 00 02 00", "len": 18}
+{"kind": "results", "bind_reply": "19 00", "module_e1": {"frame_len": 17, "ble_hw": "1.6", "ble_sw": "0.40", "deviceId_hex": "4d50333035420000", "deviceId_ascii": "MP305B\u0000\u0000", "hw_version": "2.0.2.0"}, "c5": {"frame_len": 13, "addr": "0x31", "chargeLimit_pct": 90, "volume": 2, "screenOff": 0, "autoOff_min": 0, "screenDirection": 1, "rampStep_mV_per_100ms": 500, "ocpDelay_ms": 50, "usbLineComp_mV": 0}, "c3_count": 20, "c3_first": {"frame_len": 38, "addr": "0x31", "outState(1=CV,2=CC)": 0, "batteryState": 0, "battery_pct": 90, "V": 0.0, "setV": 13.0, "A": 0.0, "setA": 1.0, "time_s": 1, "energy_raw": 0, "W": 0.0, "currentOver(0=CC,1=OCP)": 0, "realChange": 3, "voltageSlow": 0, "output": 0, "model": 0, "voltageBoard": 0, "currentBoard": 1, "temp_C": 26, "chargeError": 0, "wavePause": 1, "waveTime_ms": 1600}, "c3_lengths": [38], "main_e1_over_af01": "31 e1 01 06 00 28 4d 50 33 30 35 42 00 00 02 00 02 00"}

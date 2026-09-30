@@ -1,0 +1,2721 @@
+{
+  "scope": "Offline emulation of original main-image instructions. No hardware accessed. E0 uses synthetic missing bootloader identity bytes 10 20 30 40 50 60 70 80 at address 0x800c, with pointer 0x8000 at 0x1c.",
+  "image_sha256": "1561e88a3f5eb63ad4b6917d39a3fd0cde26e062c9c26d4c953ea8073640cee2",
+  "cases": [
+    {
+      "name": "C6 valid settings",
+      "pass": true,
+      "details": {
+        "reply": "c700",
+        "state": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005a01000000020f0001010000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c8002c0100000000000000000000900100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "name": "C6 direction validated but unchanged",
+      "pass": true,
+      "details": {
+        "requested_direction": 1,
+        "stored_direction": 0
+      }
+    },
+    {
+      "name": "C6 partial update on later invalid value",
+      "pass": true,
+      "details": {
+        "reply": "c7ff",
+        "limit": 90,
+        "volume": 0,
+        "dirty": 0
+      }
+    },
+    {
+      "name": "C6 limit=0",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 limit=79",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 limit=80",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 limit=100",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 limit=101",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 limit=255",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 volume=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 volume=3",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 volume=4",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 volume=255",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 screen_off=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 screen_off=1",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 screen_off=2",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 shutdown=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 shutdown=30",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 shutdown=31",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 shutdown=255",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 direction=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 direction=1",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 direction=2",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 slope=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 slope=1000",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 slope=1001",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 slope=65535",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 ocp=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 ocp=1000",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 ocp=1001",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 ocp=65535",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 flag53=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 flag53=1",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 flag53=2",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 flag54=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 flag54=1",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 flag54=2",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 usb_line=0",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 usb_line=1000",
+      "pass": true,
+      "details": {
+        "reply": "c700"
+      }
+    },
+    {
+      "name": "C6 usb_line=1001",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 usb_line=65535",
+      "pass": true,
+      "details": {
+        "reply": "c7ff"
+      }
+    },
+    {
+      "name": "C6 type 6 route suffix",
+      "pass": true,
+      "details": {
+        "reply": "c7005a"
+      }
+    },
+    {
+      "name": "E0 type 1 layout",
+      "pass": true,
+      "details": {
+        "reply": "e14d503330354200001020304050607080010600334d503330354200000000"
+      }
+    },
+    {
+      "name": "E0 type 6 layout",
+      "pass": true,
+      "details": {
+        "reply": "e1010600334d50333035420000020002005a"
+      }
+    },
+    {
+      "name": "frame encoder 0",
+      "pass": true,
+      "details": {
+        "payload_bytes": 24,
+        "stuffed_bytes": 43
+      }
+    },
+    {
+      "name": "frame encoder 1",
+      "pass": true,
+      "details": {
+        "payload_bytes": 39,
+        "stuffed_bytes": 64
+      }
+    },
+    {
+      "name": "frame encoder 2",
+      "pass": true,
+      "details": {
+        "payload_bytes": 83,
+        "stuffed_bytes": 125
+      }
+    },
+    {
+      "name": "frame encoder 3",
+      "pass": true,
+      "details": {
+        "payload_bytes": 65,
+        "stuffed_bytes": 106
+      }
+    },
+    {
+      "name": "frame encoder 4",
+      "pass": true,
+      "details": {
+        "payload_bytes": 60,
+        "stuffed_bytes": 97
+      }
+    },
+    {
+      "name": "frame encoder 5",
+      "pass": true,
+      "details": {
+        "payload_bytes": 109,
+        "stuffed_bytes": 164
+      }
+    },
+    {
+      "name": "frame encoder 6",
+      "pass": true,
+      "details": {
+        "payload_bytes": 73,
+        "stuffed_bytes": 118
+      }
+    },
+    {
+      "name": "frame encoder 7",
+      "pass": true,
+      "details": {
+        "payload_bytes": 98,
+        "stuffed_bytes": 153
+      }
+    },
+    {
+      "name": "frame encoder 8",
+      "pass": true,
+      "details": {
+        "payload_bytes": 88,
+        "stuffed_bytes": 132
+      }
+    },
+    {
+      "name": "frame encoder 9",
+      "pass": true,
+      "details": {
+        "payload_bytes": 80,
+        "stuffed_bytes": 126
+      }
+    },
+    {
+      "name": "frame encoder 10",
+      "pass": true,
+      "details": {
+        "payload_bytes": 71,
+        "stuffed_bytes": 114
+      }
+    },
+    {
+      "name": "frame encoder 11",
+      "pass": true,
+      "details": {
+        "payload_bytes": 6,
+        "stuffed_bytes": 11
+      }
+    },
+    {
+      "name": "frame encoder 12",
+      "pass": true,
+      "details": {
+        "payload_bytes": 72,
+        "stuffed_bytes": 116
+      }
+    },
+    {
+      "name": "frame encoder 13",
+      "pass": true,
+      "details": {
+        "payload_bytes": 49,
+        "stuffed_bytes": 78
+      }
+    },
+    {
+      "name": "frame encoder 14",
+      "pass": true,
+      "details": {
+        "payload_bytes": 43,
+        "stuffed_bytes": 70
+      }
+    },
+    {
+      "name": "frame encoder 15",
+      "pass": true,
+      "details": {
+        "payload_bytes": 8,
+        "stuffed_bytes": 17
+      }
+    },
+    {
+      "name": "frame encoder 16",
+      "pass": true,
+      "details": {
+        "payload_bytes": 31,
+        "stuffed_bytes": 54
+      }
+    },
+    {
+      "name": "frame encoder 17",
+      "pass": true,
+      "details": {
+        "payload_bytes": 71,
+        "stuffed_bytes": 113
+      }
+    },
+    {
+      "name": "frame encoder 18",
+      "pass": true,
+      "details": {
+        "payload_bytes": 8,
+        "stuffed_bytes": 14
+      }
+    },
+    {
+      "name": "frame encoder 19",
+      "pass": true,
+      "details": {
+        "payload_bytes": 8,
+        "stuffed_bytes": 16
+      }
+    },
+    {
+      "name": "frame encoder 20",
+      "pass": true,
+      "details": {
+        "payload_bytes": 83,
+        "stuffed_bytes": 125
+      }
+    },
+    {
+      "name": "frame encoder 21",
+      "pass": true,
+      "details": {
+        "payload_bytes": 77,
+        "stuffed_bytes": 116
+      }
+    },
+    {
+      "name": "frame encoder 22",
+      "pass": true,
+      "details": {
+        "payload_bytes": 72,
+        "stuffed_bytes": 112
+      }
+    },
+    {
+      "name": "frame encoder 23",
+      "pass": true,
+      "details": {
+        "payload_bytes": 14,
+        "stuffed_bytes": 27
+      }
+    },
+    {
+      "name": "frame encoder 24",
+      "pass": true,
+      "details": {
+        "payload_bytes": 32,
+        "stuffed_bytes": 48
+      }
+    },
+    {
+      "name": "frame encoder 25",
+      "pass": true,
+      "details": {
+        "payload_bytes": 83,
+        "stuffed_bytes": 128
+      }
+    },
+    {
+      "name": "frame encoder 26",
+      "pass": true,
+      "details": {
+        "payload_bytes": 76,
+        "stuffed_bytes": 116
+      }
+    },
+    {
+      "name": "frame encoder 27",
+      "pass": true,
+      "details": {
+        "payload_bytes": 24,
+        "stuffed_bytes": 37
+      }
+    },
+    {
+      "name": "frame encoder 28",
+      "pass": true,
+      "details": {
+        "payload_bytes": 78,
+        "stuffed_bytes": 123
+      }
+    },
+    {
+      "name": "frame encoder 29",
+      "pass": true,
+      "details": {
+        "payload_bytes": 64,
+        "stuffed_bytes": 98
+      }
+    },
+    {
+      "name": "frame encoder 30",
+      "pass": true,
+      "details": {
+        "payload_bytes": 23,
+        "stuffed_bytes": 43
+      }
+    },
+    {
+      "name": "frame encoder 31",
+      "pass": true,
+      "details": {
+        "payload_bytes": 15,
+        "stuffed_bytes": 25
+      }
+    },
+    {
+      "name": "frame encoder 32",
+      "pass": true,
+      "details": {
+        "payload_bytes": 53,
+        "stuffed_bytes": 85
+      }
+    },
+    {
+      "name": "frame encoder 33",
+      "pass": true,
+      "details": {
+        "payload_bytes": 47,
+        "stuffed_bytes": 75
+      }
+    },
+    {
+      "name": "frame encoder 34",
+      "pass": true,
+      "details": {
+        "payload_bytes": 73,
+        "stuffed_bytes": 111
+      }
+    },
+    {
+      "name": "frame encoder 35",
+      "pass": true,
+      "details": {
+        "payload_bytes": 17,
+        "stuffed_bytes": 26
+      }
+    },
+    {
+      "name": "frame encoder 36",
+      "pass": true,
+      "details": {
+        "payload_bytes": 72,
+        "stuffed_bytes": 109
+      }
+    },
+    {
+      "name": "frame encoder 37",
+      "pass": true,
+      "details": {
+        "payload_bytes": 118,
+        "stuffed_bytes": 187
+      }
+    },
+    {
+      "name": "frame encoder 38",
+      "pass": true,
+      "details": {
+        "payload_bytes": 46,
+        "stuffed_bytes": 73
+      }
+    },
+    {
+      "name": "frame encoder 39",
+      "pass": true,
+      "details": {
+        "payload_bytes": 45,
+        "stuffed_bytes": 66
+      }
+    },
+    {
+      "name": "frame encoder 40",
+      "pass": true,
+      "details": {
+        "payload_bytes": 91,
+        "stuffed_bytes": 141
+      }
+    },
+    {
+      "name": "frame encoder 41",
+      "pass": true,
+      "details": {
+        "payload_bytes": 116,
+        "stuffed_bytes": 181
+      }
+    },
+    {
+      "name": "frame encoder 42",
+      "pass": true,
+      "details": {
+        "payload_bytes": 102,
+        "stuffed_bytes": 156
+      }
+    },
+    {
+      "name": "frame encoder 43",
+      "pass": true,
+      "details": {
+        "payload_bytes": 55,
+        "stuffed_bytes": 94
+      }
+    },
+    {
+      "name": "frame encoder 44",
+      "pass": true,
+      "details": {
+        "payload_bytes": 2,
+        "stuffed_bytes": 7
+      }
+    },
+    {
+      "name": "frame encoder 45",
+      "pass": true,
+      "details": {
+        "payload_bytes": 78,
+        "stuffed_bytes": 121
+      }
+    },
+    {
+      "name": "frame encoder 46",
+      "pass": true,
+      "details": {
+        "payload_bytes": 74,
+        "stuffed_bytes": 119
+      }
+    },
+    {
+      "name": "frame encoder 47",
+      "pass": true,
+      "details": {
+        "payload_bytes": 6,
+        "stuffed_bytes": 11
+      }
+    },
+    {
+      "name": "frame encoder 48",
+      "pass": true,
+      "details": {
+        "payload_bytes": 98,
+        "stuffed_bytes": 148
+      }
+    },
+    {
+      "name": "frame encoder 49",
+      "pass": true,
+      "details": {
+        "payload_bytes": 101,
+        "stuffed_bytes": 163
+      }
+    },
+    {
+      "name": "frame encoder 50",
+      "pass": true,
+      "details": {
+        "payload_bytes": 120,
+        "stuffed_bytes": 181
+      }
+    },
+    {
+      "name": "frame encoder 51",
+      "pass": true,
+      "details": {
+        "payload_bytes": 75,
+        "stuffed_bytes": 119
+      }
+    },
+    {
+      "name": "frame encoder 52",
+      "pass": true,
+      "details": {
+        "payload_bytes": 18,
+        "stuffed_bytes": 31
+      }
+    },
+    {
+      "name": "frame encoder 53",
+      "pass": true,
+      "details": {
+        "payload_bytes": 59,
+        "stuffed_bytes": 96
+      }
+    },
+    {
+      "name": "frame encoder 54",
+      "pass": true,
+      "details": {
+        "payload_bytes": 64,
+        "stuffed_bytes": 101
+      }
+    },
+    {
+      "name": "frame encoder 55",
+      "pass": true,
+      "details": {
+        "payload_bytes": 23,
+        "stuffed_bytes": 38
+      }
+    },
+    {
+      "name": "frame encoder 56",
+      "pass": true,
+      "details": {
+        "payload_bytes": 26,
+        "stuffed_bytes": 44
+      }
+    },
+    {
+      "name": "frame encoder 57",
+      "pass": true,
+      "details": {
+        "payload_bytes": 29,
+        "stuffed_bytes": 51
+      }
+    },
+    {
+      "name": "frame encoder 58",
+      "pass": true,
+      "details": {
+        "payload_bytes": 66,
+        "stuffed_bytes": 100
+      }
+    },
+    {
+      "name": "frame encoder 59",
+      "pass": true,
+      "details": {
+        "payload_bytes": 18,
+        "stuffed_bytes": 31
+      }
+    },
+    {
+      "name": "frame encoder 60",
+      "pass": true,
+      "details": {
+        "payload_bytes": 19,
+        "stuffed_bytes": 31
+      }
+    },
+    {
+      "name": "frame encoder 61",
+      "pass": true,
+      "details": {
+        "payload_bytes": 8,
+        "stuffed_bytes": 15
+      }
+    },
+    {
+      "name": "frame encoder 62",
+      "pass": true,
+      "details": {
+        "payload_bytes": 12,
+        "stuffed_bytes": 20
+      }
+    },
+    {
+      "name": "frame encoder 63",
+      "pass": true,
+      "details": {
+        "payload_bytes": 18,
+        "stuffed_bytes": 32
+      }
+    },
+    {
+      "name": "frame encoder 64",
+      "pass": true,
+      "details": {
+        "payload_bytes": 27,
+        "stuffed_bytes": 43
+      }
+    },
+    {
+      "name": "frame encoder 65",
+      "pass": true,
+      "details": {
+        "payload_bytes": 12,
+        "stuffed_bytes": 22
+      }
+    },
+    {
+      "name": "frame encoder 66",
+      "pass": true,
+      "details": {
+        "payload_bytes": 49,
+        "stuffed_bytes": 74
+      }
+    },
+    {
+      "name": "frame encoder 67",
+      "pass": true,
+      "details": {
+        "payload_bytes": 72,
+        "stuffed_bytes": 108
+      }
+    },
+    {
+      "name": "frame encoder 68",
+      "pass": true,
+      "details": {
+        "payload_bytes": 77,
+        "stuffed_bytes": 121
+      }
+    },
+    {
+      "name": "frame encoder 69",
+      "pass": true,
+      "details": {
+        "payload_bytes": 122,
+        "stuffed_bytes": 190
+      }
+    },
+    {
+      "name": "frame encoder 70",
+      "pass": true,
+      "details": {
+        "payload_bytes": 60,
+        "stuffed_bytes": 95
+      }
+    },
+    {
+      "name": "frame encoder 71",
+      "pass": true,
+      "details": {
+        "payload_bytes": 28,
+        "stuffed_bytes": 43
+      }
+    },
+    {
+      "name": "frame encoder 72",
+      "pass": true,
+      "details": {
+        "payload_bytes": 68,
+        "stuffed_bytes": 97
+      }
+    },
+    {
+      "name": "frame encoder 73",
+      "pass": true,
+      "details": {
+        "payload_bytes": 85,
+        "stuffed_bytes": 135
+      }
+    },
+    {
+      "name": "frame encoder 74",
+      "pass": true,
+      "details": {
+        "payload_bytes": 13,
+        "stuffed_bytes": 26
+      }
+    },
+    {
+      "name": "frame encoder 75",
+      "pass": true,
+      "details": {
+        "payload_bytes": 9,
+        "stuffed_bytes": 19
+      }
+    },
+    {
+      "name": "frame encoder 76",
+      "pass": true,
+      "details": {
+        "payload_bytes": 109,
+        "stuffed_bytes": 165
+      }
+    },
+    {
+      "name": "frame encoder 77",
+      "pass": true,
+      "details": {
+        "payload_bytes": 61,
+        "stuffed_bytes": 89
+      }
+    },
+    {
+      "name": "frame encoder 78",
+      "pass": true,
+      "details": {
+        "payload_bytes": 32,
+        "stuffed_bytes": 53
+      }
+    },
+    {
+      "name": "frame encoder 79",
+      "pass": true,
+      "details": {
+        "payload_bytes": 64,
+        "stuffed_bytes": 100
+      }
+    },
+    {
+      "name": "frame encoder 80",
+      "pass": true,
+      "details": {
+        "payload_bytes": 35,
+        "stuffed_bytes": 54
+      }
+    },
+    {
+      "name": "frame encoder 81",
+      "pass": true,
+      "details": {
+        "payload_bytes": 122,
+        "stuffed_bytes": 193
+      }
+    },
+    {
+      "name": "frame encoder 82",
+      "pass": true,
+      "details": {
+        "payload_bytes": 77,
+        "stuffed_bytes": 117
+      }
+    },
+    {
+      "name": "frame encoder 83",
+      "pass": true,
+      "details": {
+        "payload_bytes": 52,
+        "stuffed_bytes": 84
+      }
+    },
+    {
+      "name": "frame encoder 84",
+      "pass": true,
+      "details": {
+        "payload_bytes": 38,
+        "stuffed_bytes": 62
+      }
+    },
+    {
+      "name": "frame encoder 85",
+      "pass": true,
+      "details": {
+        "payload_bytes": 57,
+        "stuffed_bytes": 91
+      }
+    },
+    {
+      "name": "frame encoder 86",
+      "pass": true,
+      "details": {
+        "payload_bytes": 47,
+        "stuffed_bytes": 77
+      }
+    },
+    {
+      "name": "frame encoder 87",
+      "pass": true,
+      "details": {
+        "payload_bytes": 46,
+        "stuffed_bytes": 72
+      }
+    },
+    {
+      "name": "frame encoder 88",
+      "pass": true,
+      "details": {
+        "payload_bytes": 2,
+        "stuffed_bytes": 7
+      }
+    },
+    {
+      "name": "frame encoder 89",
+      "pass": true,
+      "details": {
+        "payload_bytes": 106,
+        "stuffed_bytes": 159
+      }
+    },
+    {
+      "name": "frame encoder 90",
+      "pass": true,
+      "details": {
+        "payload_bytes": 27,
+        "stuffed_bytes": 41
+      }
+    },
+    {
+      "name": "frame encoder 91",
+      "pass": true,
+      "details": {
+        "payload_bytes": 77,
+        "stuffed_bytes": 108
+      }
+    },
+    {
+      "name": "frame encoder 92",
+      "pass": true,
+      "details": {
+        "payload_bytes": 73,
+        "stuffed_bytes": 112
+      }
+    },
+    {
+      "name": "frame encoder 93",
+      "pass": true,
+      "details": {
+        "payload_bytes": 72,
+        "stuffed_bytes": 107
+      }
+    },
+    {
+      "name": "frame encoder 94",
+      "pass": true,
+      "details": {
+        "payload_bytes": 66,
+        "stuffed_bytes": 99
+      }
+    },
+    {
+      "name": "frame encoder 95",
+      "pass": true,
+      "details": {
+        "payload_bytes": 98,
+        "stuffed_bytes": 147
+      }
+    },
+    {
+      "name": "frame encoder 96",
+      "pass": true,
+      "details": {
+        "payload_bytes": 21,
+        "stuffed_bytes": 32
+      }
+    },
+    {
+      "name": "frame encoder 97",
+      "pass": true,
+      "details": {
+        "payload_bytes": 31,
+        "stuffed_bytes": 53
+      }
+    },
+    {
+      "name": "frame encoder 98",
+      "pass": true,
+      "details": {
+        "payload_bytes": 103,
+        "stuffed_bytes": 163
+      }
+    },
+    {
+      "name": "frame encoder 99",
+      "pass": true,
+      "details": {
+        "payload_bytes": 101,
+        "stuffed_bytes": 162
+      }
+    },
+    {
+      "name": "frame encoder 100",
+      "pass": true,
+      "details": {
+        "payload_bytes": 32,
+        "stuffed_bytes": 56
+      }
+    },
+    {
+      "name": "frame encoder 101",
+      "pass": true,
+      "details": {
+        "payload_bytes": 112,
+        "stuffed_bytes": 172
+      }
+    },
+    {
+      "name": "frame encoder 102",
+      "pass": true,
+      "details": {
+        "payload_bytes": 81,
+        "stuffed_bytes": 131
+      }
+    },
+    {
+      "name": "frame encoder 103",
+      "pass": true,
+      "details": {
+        "payload_bytes": 103,
+        "stuffed_bytes": 154
+      }
+    },
+    {
+      "name": "frame encoder 104",
+      "pass": true,
+      "details": {
+        "payload_bytes": 38,
+        "stuffed_bytes": 59
+      }
+    },
+    {
+      "name": "frame encoder 105",
+      "pass": true,
+      "details": {
+        "payload_bytes": 108,
+        "stuffed_bytes": 173
+      }
+    },
+    {
+      "name": "frame encoder 106",
+      "pass": true,
+      "details": {
+        "payload_bytes": 65,
+        "stuffed_bytes": 97
+      }
+    },
+    {
+      "name": "frame encoder 107",
+      "pass": true,
+      "details": {
+        "payload_bytes": 41,
+        "stuffed_bytes": 68
+      }
+    },
+    {
+      "name": "frame encoder 108",
+      "pass": true,
+      "details": {
+        "payload_bytes": 84,
+        "stuffed_bytes": 123
+      }
+    },
+    {
+      "name": "frame encoder 109",
+      "pass": true,
+      "details": {
+        "payload_bytes": 120,
+        "stuffed_bytes": 182
+      }
+    },
+    {
+      "name": "frame encoder 110",
+      "pass": true,
+      "details": {
+        "payload_bytes": 23,
+        "stuffed_bytes": 40
+      }
+    },
+    {
+      "name": "frame encoder 111",
+      "pass": true,
+      "details": {
+        "payload_bytes": 93,
+        "stuffed_bytes": 138
+      }
+    },
+    {
+      "name": "frame encoder 112",
+      "pass": true,
+      "details": {
+        "payload_bytes": 79,
+        "stuffed_bytes": 125
+      }
+    },
+    {
+      "name": "frame encoder 113",
+      "pass": true,
+      "details": {
+        "payload_bytes": 98,
+        "stuffed_bytes": 150
+      }
+    },
+    {
+      "name": "frame encoder 114",
+      "pass": true,
+      "details": {
+        "payload_bytes": 76,
+        "stuffed_bytes": 122
+      }
+    },
+    {
+      "name": "frame encoder 115",
+      "pass": true,
+      "details": {
+        "payload_bytes": 102,
+        "stuffed_bytes": 153
+      }
+    },
+    {
+      "name": "frame encoder 116",
+      "pass": true,
+      "details": {
+        "payload_bytes": 1,
+        "stuffed_bytes": 5
+      }
+    },
+    {
+      "name": "frame encoder 117",
+      "pass": true,
+      "details": {
+        "payload_bytes": 37,
+        "stuffed_bytes": 56
+      }
+    },
+    {
+      "name": "frame encoder 118",
+      "pass": true,
+      "details": {
+        "payload_bytes": 88,
+        "stuffed_bytes": 139
+      }
+    },
+    {
+      "name": "frame encoder 119",
+      "pass": true,
+      "details": {
+        "payload_bytes": 106,
+        "stuffed_bytes": 169
+      }
+    },
+    {
+      "name": "frame encoder 120",
+      "pass": true,
+      "details": {
+        "payload_bytes": 111,
+        "stuffed_bytes": 169
+      }
+    },
+    {
+      "name": "frame encoder 121",
+      "pass": true,
+      "details": {
+        "payload_bytes": 90,
+        "stuffed_bytes": 137
+      }
+    },
+    {
+      "name": "frame encoder 122",
+      "pass": true,
+      "details": {
+        "payload_bytes": 103,
+        "stuffed_bytes": 155
+      }
+    },
+    {
+      "name": "frame encoder 123",
+      "pass": true,
+      "details": {
+        "payload_bytes": 122,
+        "stuffed_bytes": 191
+      }
+    },
+    {
+      "name": "frame encoder 124",
+      "pass": true,
+      "details": {
+        "payload_bytes": 72,
+        "stuffed_bytes": 115
+      }
+    },
+    {
+      "name": "frame encoder 125",
+      "pass": true,
+      "details": {
+        "payload_bytes": 66,
+        "stuffed_bytes": 108
+      }
+    },
+    {
+      "name": "frame encoder 126",
+      "pass": true,
+      "details": {
+        "payload_bytes": 101,
+        "stuffed_bytes": 157
+      }
+    },
+    {
+      "name": "frame encoder 127",
+      "pass": true,
+      "details": {
+        "payload_bytes": 109,
+        "stuffed_bytes": 161
+      }
+    },
+    {
+      "name": "frame encoder 128",
+      "pass": true,
+      "details": {
+        "payload_bytes": 61,
+        "stuffed_bytes": 93
+      }
+    },
+    {
+      "name": "frame encoder 129",
+      "pass": true,
+      "details": {
+        "payload_bytes": 62,
+        "stuffed_bytes": 99
+      }
+    },
+    {
+      "name": "frame encoder 130",
+      "pass": true,
+      "details": {
+        "payload_bytes": 118,
+        "stuffed_bytes": 179
+      }
+    },
+    {
+      "name": "frame encoder 131",
+      "pass": true,
+      "details": {
+        "payload_bytes": 89,
+        "stuffed_bytes": 131
+      }
+    },
+    {
+      "name": "frame encoder 132",
+      "pass": true,
+      "details": {
+        "payload_bytes": 76,
+        "stuffed_bytes": 121
+      }
+    },
+    {
+      "name": "frame encoder 133",
+      "pass": true,
+      "details": {
+        "payload_bytes": 111,
+        "stuffed_bytes": 172
+      }
+    },
+    {
+      "name": "frame encoder 134",
+      "pass": true,
+      "details": {
+        "payload_bytes": 16,
+        "stuffed_bytes": 30
+      }
+    },
+    {
+      "name": "frame encoder 135",
+      "pass": true,
+      "details": {
+        "payload_bytes": 28,
+        "stuffed_bytes": 49
+      }
+    },
+    {
+      "name": "frame encoder 136",
+      "pass": true,
+      "details": {
+        "payload_bytes": 114,
+        "stuffed_bytes": 168
+      }
+    },
+    {
+      "name": "frame encoder 137",
+      "pass": true,
+      "details": {
+        "payload_bytes": 32,
+        "stuffed_bytes": 54
+      }
+    },
+    {
+      "name": "frame encoder 138",
+      "pass": true,
+      "details": {
+        "payload_bytes": 86,
+        "stuffed_bytes": 137
+      }
+    },
+    {
+      "name": "frame encoder 139",
+      "pass": true,
+      "details": {
+        "payload_bytes": 10,
+        "stuffed_bytes": 21
+      }
+    },
+    {
+      "name": "frame encoder 140",
+      "pass": true,
+      "details": {
+        "payload_bytes": 57,
+        "stuffed_bytes": 90
+      }
+    },
+    {
+      "name": "frame encoder 141",
+      "pass": true,
+      "details": {
+        "payload_bytes": 96,
+        "stuffed_bytes": 144
+      }
+    },
+    {
+      "name": "frame encoder 142",
+      "pass": true,
+      "details": {
+        "payload_bytes": 88,
+        "stuffed_bytes": 131
+      }
+    },
+    {
+      "name": "frame encoder 143",
+      "pass": true,
+      "details": {
+        "payload_bytes": 88,
+        "stuffed_bytes": 135
+      }
+    },
+    {
+      "name": "frame encoder 144",
+      "pass": true,
+      "details": {
+        "payload_bytes": 15,
+        "stuffed_bytes": 27
+      }
+    },
+    {
+      "name": "frame encoder 145",
+      "pass": true,
+      "details": {
+        "payload_bytes": 40,
+        "stuffed_bytes": 60
+      }
+    },
+    {
+      "name": "frame encoder 146",
+      "pass": true,
+      "details": {
+        "payload_bytes": 39,
+        "stuffed_bytes": 63
+      }
+    },
+    {
+      "name": "frame encoder 147",
+      "pass": true,
+      "details": {
+        "payload_bytes": 71,
+        "stuffed_bytes": 105
+      }
+    },
+    {
+      "name": "frame encoder 148",
+      "pass": true,
+      "details": {
+        "payload_bytes": 15,
+        "stuffed_bytes": 24
+      }
+    },
+    {
+      "name": "frame encoder 149",
+      "pass": true,
+      "details": {
+        "payload_bytes": 95,
+        "stuffed_bytes": 148
+      }
+    },
+    {
+      "name": "frame encoder 150",
+      "pass": true,
+      "details": {
+        "payload_bytes": 79,
+        "stuffed_bytes": 124
+      }
+    },
+    {
+      "name": "frame encoder 151",
+      "pass": true,
+      "details": {
+        "payload_bytes": 103,
+        "stuffed_bytes": 164
+      }
+    },
+    {
+      "name": "frame encoder 152",
+      "pass": true,
+      "details": {
+        "payload_bytes": 8,
+        "stuffed_bytes": 15
+      }
+    },
+    {
+      "name": "frame encoder 153",
+      "pass": true,
+      "details": {
+        "payload_bytes": 36,
+        "stuffed_bytes": 57
+      }
+    },
+    {
+      "name": "frame encoder 154",
+      "pass": true,
+      "details": {
+        "payload_bytes": 113,
+        "stuffed_bytes": 176
+      }
+    },
+    {
+      "name": "frame encoder 155",
+      "pass": true,
+      "details": {
+        "payload_bytes": 76,
+        "stuffed_bytes": 117
+      }
+    },
+    {
+      "name": "frame encoder 156",
+      "pass": true,
+      "details": {
+        "payload_bytes": 81,
+        "stuffed_bytes": 135
+      }
+    },
+    {
+      "name": "frame encoder 157",
+      "pass": true,
+      "details": {
+        "payload_bytes": 24,
+        "stuffed_bytes": 42
+      }
+    },
+    {
+      "name": "frame encoder 158",
+      "pass": true,
+      "details": {
+        "payload_bytes": 6,
+        "stuffed_bytes": 12
+      }
+    },
+    {
+      "name": "frame encoder 159",
+      "pass": true,
+      "details": {
+        "payload_bytes": 54,
+        "stuffed_bytes": 84
+      }
+    },
+    {
+      "name": "frame encoder 160",
+      "pass": true,
+      "details": {
+        "payload_bytes": 111,
+        "stuffed_bytes": 160
+      }
+    },
+    {
+      "name": "frame encoder 161",
+      "pass": true,
+      "details": {
+        "payload_bytes": 78,
+        "stuffed_bytes": 114
+      }
+    },
+    {
+      "name": "frame encoder 162",
+      "pass": true,
+      "details": {
+        "payload_bytes": 46,
+        "stuffed_bytes": 76
+      }
+    },
+    {
+      "name": "frame encoder 163",
+      "pass": true,
+      "details": {
+        "payload_bytes": 19,
+        "stuffed_bytes": 36
+      }
+    },
+    {
+      "name": "frame encoder 164",
+      "pass": true,
+      "details": {
+        "payload_bytes": 115,
+        "stuffed_bytes": 179
+      }
+    },
+    {
+      "name": "frame encoder 165",
+      "pass": true,
+      "details": {
+        "payload_bytes": 101,
+        "stuffed_bytes": 154
+      }
+    },
+    {
+      "name": "frame encoder 166",
+      "pass": true,
+      "details": {
+        "payload_bytes": 47,
+        "stuffed_bytes": 76
+      }
+    },
+    {
+      "name": "frame encoder 167",
+      "pass": true,
+      "details": {
+        "payload_bytes": 1,
+        "stuffed_bytes": 5
+      }
+    },
+    {
+      "name": "frame encoder 168",
+      "pass": true,
+      "details": {
+        "payload_bytes": 58,
+        "stuffed_bytes": 86
+      }
+    },
+    {
+      "name": "frame encoder 169",
+      "pass": true,
+      "details": {
+        "payload_bytes": 5,
+        "stuffed_bytes": 11
+      }
+    },
+    {
+      "name": "frame encoder 170",
+      "pass": true,
+      "details": {
+        "payload_bytes": 81,
+        "stuffed_bytes": 126
+      }
+    },
+    {
+      "name": "frame encoder 171",
+      "pass": true,
+      "details": {
+        "payload_bytes": 63,
+        "stuffed_bytes": 107
+      }
+    },
+    {
+      "name": "frame encoder 172",
+      "pass": true,
+      "details": {
+        "payload_bytes": 25,
+        "stuffed_bytes": 41
+      }
+    },
+    {
+      "name": "frame encoder 173",
+      "pass": true,
+      "details": {
+        "payload_bytes": 74,
+        "stuffed_bytes": 114
+      }
+    },
+    {
+      "name": "frame encoder 174",
+      "pass": true,
+      "details": {
+        "payload_bytes": 92,
+        "stuffed_bytes": 139
+      }
+    },
+    {
+      "name": "frame encoder 175",
+      "pass": true,
+      "details": {
+        "payload_bytes": 81,
+        "stuffed_bytes": 123
+      }
+    },
+    {
+      "name": "frame encoder 176",
+      "pass": true,
+      "details": {
+        "payload_bytes": 44,
+        "stuffed_bytes": 69
+      }
+    },
+    {
+      "name": "frame encoder 177",
+      "pass": true,
+      "details": {
+        "payload_bytes": 57,
+        "stuffed_bytes": 89
+      }
+    },
+    {
+      "name": "frame encoder 178",
+      "pass": true,
+      "details": {
+        "payload_bytes": 123,
+        "stuffed_bytes": 192
+      }
+    },
+    {
+      "name": "frame encoder 179",
+      "pass": true,
+      "details": {
+        "payload_bytes": 7,
+        "stuffed_bytes": 13
+      }
+    },
+    {
+      "name": "frame encoder 180",
+      "pass": true,
+      "details": {
+        "payload_bytes": 78,
+        "stuffed_bytes": 121
+      }
+    },
+    {
+      "name": "frame encoder 181",
+      "pass": true,
+      "details": {
+        "payload_bytes": 9,
+        "stuffed_bytes": 17
+      }
+    },
+    {
+      "name": "frame encoder 182",
+      "pass": true,
+      "details": {
+        "payload_bytes": 7,
+        "stuffed_bytes": 16
+      }
+    },
+    {
+      "name": "frame encoder 183",
+      "pass": true,
+      "details": {
+        "payload_bytes": 76,
+        "stuffed_bytes": 114
+      }
+    },
+    {
+      "name": "frame encoder 184",
+      "pass": true,
+      "details": {
+        "payload_bytes": 122,
+        "stuffed_bytes": 187
+      }
+    },
+    {
+      "name": "frame encoder 185",
+      "pass": true,
+      "details": {
+        "payload_bytes": 69,
+        "stuffed_bytes": 105
+      }
+    },
+    {
+      "name": "frame encoder 186",
+      "pass": true,
+      "details": {
+        "payload_bytes": 71,
+        "stuffed_bytes": 113
+      }
+    },
+    {
+      "name": "frame encoder 187",
+      "pass": true,
+      "details": {
+        "payload_bytes": 122,
+        "stuffed_bytes": 182
+      }
+    },
+    {
+      "name": "frame encoder 188",
+      "pass": true,
+      "details": {
+        "payload_bytes": 42,
+        "stuffed_bytes": 68
+      }
+    },
+    {
+      "name": "frame encoder 189",
+      "pass": true,
+      "details": {
+        "payload_bytes": 112,
+        "stuffed_bytes": 175
+      }
+    },
+    {
+      "name": "frame encoder 190",
+      "pass": true,
+      "details": {
+        "payload_bytes": 20,
+        "stuffed_bytes": 33
+      }
+    },
+    {
+      "name": "frame encoder 191",
+      "pass": true,
+      "details": {
+        "payload_bytes": 10,
+        "stuffed_bytes": 20
+      }
+    },
+    {
+      "name": "frame encoder 192",
+      "pass": true,
+      "details": {
+        "payload_bytes": 64,
+        "stuffed_bytes": 100
+      }
+    },
+    {
+      "name": "frame encoder 193",
+      "pass": true,
+      "details": {
+        "payload_bytes": 69,
+        "stuffed_bytes": 97
+      }
+    },
+    {
+      "name": "frame encoder 194",
+      "pass": true,
+      "details": {
+        "payload_bytes": 64,
+        "stuffed_bytes": 98
+      }
+    },
+    {
+      "name": "frame encoder 195",
+      "pass": true,
+      "details": {
+        "payload_bytes": 112,
+        "stuffed_bytes": 164
+      }
+    },
+    {
+      "name": "frame encoder 196",
+      "pass": true,
+      "details": {
+        "payload_bytes": 71,
+        "stuffed_bytes": 110
+      }
+    },
+    {
+      "name": "frame encoder 197",
+      "pass": true,
+      "details": {
+        "payload_bytes": 115,
+        "stuffed_bytes": 182
+      }
+    },
+    {
+      "name": "frame encoder 198",
+      "pass": true,
+      "details": {
+        "payload_bytes": 59,
+        "stuffed_bytes": 95
+      }
+    },
+    {
+      "name": "frame encoder 199",
+      "pass": true,
+      "details": {
+        "payload_bytes": 10,
+        "stuffed_bytes": 22
+      }
+    },
+    {
+      "name": "frame encoder 200",
+      "pass": true,
+      "details": {
+        "payload_bytes": 94,
+        "stuffed_bytes": 150
+      }
+    },
+    {
+      "name": "frame encoder 201",
+      "pass": true,
+      "details": {
+        "payload_bytes": 97,
+        "stuffed_bytes": 149
+      }
+    },
+    {
+      "name": "frame encoder 202",
+      "pass": true,
+      "details": {
+        "payload_bytes": 75,
+        "stuffed_bytes": 110
+      }
+    },
+    {
+      "name": "frame encoder 203",
+      "pass": true,
+      "details": {
+        "payload_bytes": 122,
+        "stuffed_bytes": 182
+      }
+    },
+    {
+      "name": "frame encoder 204",
+      "pass": true,
+      "details": {
+        "payload_bytes": 84,
+        "stuffed_bytes": 130
+      }
+    },
+    {
+      "name": "frame encoder 205",
+      "pass": true,
+      "details": {
+        "payload_bytes": 7,
+        "stuffed_bytes": 15
+      }
+    },
+    {
+      "name": "frame encoder 206",
+      "pass": true,
+      "details": {
+        "payload_bytes": 118,
+        "stuffed_bytes": 175
+      }
+    },
+    {
+      "name": "frame encoder 207",
+      "pass": true,
+      "details": {
+        "payload_bytes": 116,
+        "stuffed_bytes": 177
+      }
+    },
+    {
+      "name": "frame encoder 208",
+      "pass": true,
+      "details": {
+        "payload_bytes": 32,
+        "stuffed_bytes": 51
+      }
+    },
+    {
+      "name": "frame encoder 209",
+      "pass": true,
+      "details": {
+        "payload_bytes": 58,
+        "stuffed_bytes": 95
+      }
+    },
+    {
+      "name": "frame encoder 210",
+      "pass": true,
+      "details": {
+        "payload_bytes": 12,
+        "stuffed_bytes": 23
+      }
+    },
+    {
+      "name": "frame encoder 211",
+      "pass": true,
+      "details": {
+        "payload_bytes": 26,
+        "stuffed_bytes": 45
+      }
+    },
+    {
+      "name": "frame encoder 212",
+      "pass": true,
+      "details": {
+        "payload_bytes": 60,
+        "stuffed_bytes": 82
+      }
+    },
+    {
+      "name": "frame encoder 213",
+      "pass": true,
+      "details": {
+        "payload_bytes": 52,
+        "stuffed_bytes": 85
+      }
+    },
+    {
+      "name": "frame encoder 214",
+      "pass": true,
+      "details": {
+        "payload_bytes": 89,
+        "stuffed_bytes": 135
+      }
+    },
+    {
+      "name": "frame encoder 215",
+      "pass": true,
+      "details": {
+        "payload_bytes": 53,
+        "stuffed_bytes": 83
+      }
+    },
+    {
+      "name": "frame encoder 216",
+      "pass": true,
+      "details": {
+        "payload_bytes": 110,
+        "stuffed_bytes": 164
+      }
+    },
+    {
+      "name": "frame encoder 217",
+      "pass": true,
+      "details": {
+        "payload_bytes": 69,
+        "stuffed_bytes": 104
+      }
+    },
+    {
+      "name": "frame encoder 218",
+      "pass": true,
+      "details": {
+        "payload_bytes": 87,
+        "stuffed_bytes": 134
+      }
+    },
+    {
+      "name": "frame encoder 219",
+      "pass": true,
+      "details": {
+        "payload_bytes": 40,
+        "stuffed_bytes": 67
+      }
+    },
+    {
+      "name": "frame encoder 220",
+      "pass": true,
+      "details": {
+        "payload_bytes": 108,
+        "stuffed_bytes": 168
+      }
+    },
+    {
+      "name": "frame encoder 221",
+      "pass": true,
+      "details": {
+        "payload_bytes": 34,
+        "stuffed_bytes": 52
+      }
+    },
+    {
+      "name": "frame encoder 222",
+      "pass": true,
+      "details": {
+        "payload_bytes": 33,
+        "stuffed_bytes": 55
+      }
+    },
+    {
+      "name": "frame encoder 223",
+      "pass": true,
+      "details": {
+        "payload_bytes": 51,
+        "stuffed_bytes": 83
+      }
+    },
+    {
+      "name": "frame encoder 224",
+      "pass": true,
+      "details": {
+        "payload_bytes": 17,
+        "stuffed_bytes": 33
+      }
+    },
+    {
+      "name": "frame encoder 225",
+      "pass": true,
+      "details": {
+        "payload_bytes": 25,
+        "stuffed_bytes": 46
+      }
+    },
+    {
+      "name": "frame encoder 226",
+      "pass": true,
+      "details": {
+        "payload_bytes": 28,
+        "stuffed_bytes": 48
+      }
+    },
+    {
+      "name": "frame encoder 227",
+      "pass": true,
+      "details": {
+        "payload_bytes": 5,
+        "stuffed_bytes": 11
+      }
+    },
+    {
+      "name": "frame encoder 228",
+      "pass": true,
+      "details": {
+        "payload_bytes": 46,
+        "stuffed_bytes": 75
+      }
+    },
+    {
+      "name": "frame encoder 229",
+      "pass": true,
+      "details": {
+        "payload_bytes": 121,
+        "stuffed_bytes": 183
+      }
+    },
+    {
+      "name": "frame encoder 230",
+      "pass": true,
+      "details": {
+        "payload_bytes": 15,
+        "stuffed_bytes": 25
+      }
+    },
+    {
+      "name": "frame encoder 231",
+      "pass": true,
+      "details": {
+        "payload_bytes": 38,
+        "stuffed_bytes": 62
+      }
+    },
+    {
+      "name": "frame encoder 232",
+      "pass": true,
+      "details": {
+        "payload_bytes": 94,
+        "stuffed_bytes": 142
+      }
+    },
+    {
+      "name": "frame encoder 233",
+      "pass": true,
+      "details": {
+        "payload_bytes": 6,
+        "stuffed_bytes": 13
+      }
+    },
+    {
+      "name": "frame encoder 234",
+      "pass": true,
+      "details": {
+        "payload_bytes": 123,
+        "stuffed_bytes": 194
+      }
+    },
+    {
+      "name": "frame encoder 235",
+      "pass": true,
+      "details": {
+        "payload_bytes": 26,
+        "stuffed_bytes": 46
+      }
+    },
+    {
+      "name": "frame encoder 236",
+      "pass": true,
+      "details": {
+        "payload_bytes": 71,
+        "stuffed_bytes": 104
+      }
+    },
+    {
+      "name": "frame encoder 237",
+      "pass": true,
+      "details": {
+        "payload_bytes": 60,
+        "stuffed_bytes": 98
+      }
+    },
+    {
+      "name": "frame encoder 238",
+      "pass": true,
+      "details": {
+        "payload_bytes": 39,
+        "stuffed_bytes": 64
+      }
+    },
+    {
+      "name": "frame encoder 239",
+      "pass": true,
+      "details": {
+        "payload_bytes": 41,
+        "stuffed_bytes": 62
+      }
+    },
+    {
+      "name": "frame encoder 240",
+      "pass": true,
+      "details": {
+        "payload_bytes": 61,
+        "stuffed_bytes": 93
+      }
+    },
+    {
+      "name": "frame encoder 241",
+      "pass": true,
+      "details": {
+        "payload_bytes": 55,
+        "stuffed_bytes": 90
+      }
+    },
+    {
+      "name": "frame encoder 242",
+      "pass": true,
+      "details": {
+        "payload_bytes": 39,
+        "stuffed_bytes": 60
+      }
+    },
+    {
+      "name": "frame encoder 243",
+      "pass": true,
+      "details": {
+        "payload_bytes": 31,
+        "stuffed_bytes": 47
+      }
+    },
+    {
+      "name": "frame encoder 244",
+      "pass": true,
+      "details": {
+        "payload_bytes": 44,
+        "stuffed_bytes": 71
+      }
+    },
+    {
+      "name": "frame encoder 245",
+      "pass": true,
+      "details": {
+        "payload_bytes": 7,
+        "stuffed_bytes": 13
+      }
+    },
+    {
+      "name": "frame encoder 246",
+      "pass": true,
+      "details": {
+        "payload_bytes": 37,
+        "stuffed_bytes": 57
+      }
+    },
+    {
+      "name": "frame encoder 247",
+      "pass": true,
+      "details": {
+        "payload_bytes": 74,
+        "stuffed_bytes": 114
+      }
+    },
+    {
+      "name": "frame encoder 248",
+      "pass": true,
+      "details": {
+        "payload_bytes": 94,
+        "stuffed_bytes": 144
+      }
+    },
+    {
+      "name": "frame encoder 249",
+      "pass": true,
+      "details": {
+        "payload_bytes": 96,
+        "stuffed_bytes": 161
+      }
+    },
+    {
+      "name": "frame encoder 250",
+      "pass": true,
+      "details": {
+        "payload_bytes": 47,
+        "stuffed_bytes": 73
+      }
+    },
+    {
+      "name": "frame encoder 251",
+      "pass": true,
+      "details": {
+        "payload_bytes": 123,
+        "stuffed_bytes": 187
+      }
+    },
+    {
+      "name": "frame encoder 252",
+      "pass": true,
+      "details": {
+        "payload_bytes": 40,
+        "stuffed_bytes": 62
+      }
+    },
+    {
+      "name": "frame encoder 253",
+      "pass": true,
+      "details": {
+        "payload_bytes": 106,
+        "stuffed_bytes": 164
+      }
+    },
+    {
+      "name": "frame encoder 254",
+      "pass": true,
+      "details": {
+        "payload_bytes": 30,
+        "stuffed_bytes": 51
+      }
+    },
+    {
+      "name": "frame encoder 255",
+      "pass": true,
+      "details": {
+        "payload_bytes": 5,
+        "stuffed_bytes": 13
+      }
+    },
+    {
+      "name": "frame encoder 256",
+      "pass": true,
+      "details": {
+        "payload_bytes": 70,
+        "stuffed_bytes": 120
+      }
+    },
+    {
+      "name": "frame encoder 257",
+      "pass": true,
+      "details": {
+        "payload_bytes": 120,
+        "stuffed_bytes": 192
+      }
+    },
+    {
+      "name": "frame encoder 258",
+      "pass": true,
+      "details": {
+        "payload_bytes": 43,
+        "stuffed_bytes": 66
+      }
+    },
+    {
+      "name": "frame encoder 259",
+      "pass": true,
+      "details": {
+        "payload_bytes": 91,
+        "stuffed_bytes": 134
+      }
+    },
+    {
+      "name": "frame encoder 260",
+      "pass": true,
+      "details": {
+        "payload_bytes": 59,
+        "stuffed_bytes": 99
+      }
+    },
+    {
+      "name": "frame encoder 261",
+      "pass": true,
+      "details": {
+        "payload_bytes": 45,
+        "stuffed_bytes": 72
+      }
+    },
+    {
+      "name": "frame encoder 262",
+      "pass": true,
+      "details": {
+        "payload_bytes": 80,
+        "stuffed_bytes": 120
+      }
+    },
+    {
+      "name": "frame encoder 263",
+      "pass": true,
+      "details": {
+        "payload_bytes": 108,
+        "stuffed_bytes": 163
+      }
+    },
+    {
+      "name": "frame encoder 264",
+      "pass": true,
+      "details": {
+        "payload_bytes": 4,
+        "stuffed_bytes": 11
+      }
+    },
+    {
+      "name": "frame encoder 265",
+      "pass": true,
+      "details": {
+        "payload_bytes": 95,
+        "stuffed_bytes": 148
+      }
+    },
+    {
+      "name": "frame encoder 266",
+      "pass": true,
+      "details": {
+        "payload_bytes": 122,
+        "stuffed_bytes": 175
+      }
+    },
+    {
+      "name": "frame encoder 267",
+      "pass": true,
+      "details": {
+        "payload_bytes": 41,
+        "stuffed_bytes": 62
+      }
+    },
+    {
+      "name": "frame encoder 268",
+      "pass": true,
+      "details": {
+        "payload_bytes": 115,
+        "stuffed_bytes": 184
+      }
+    },
+    {
+      "name": "frame encoder 269",
+      "pass": true,
+      "details": {
+        "payload_bytes": 39,
+        "stuffed_bytes": 62
+      }
+    },
+    {
+      "name": "frame encoder 270",
+      "pass": true,
+      "details": {
+        "payload_bytes": 74,
+        "stuffed_bytes": 116
+      }
+    },
+    {
+      "name": "frame encoder 271",
+      "pass": true,
+      "details": {
+        "payload_bytes": 30,
+        "stuffed_bytes": 49
+      }
+    },
+    {
+      "name": "frame encoder 272",
+      "pass": true,
+      "details": {
+        "payload_bytes": 79,
+        "stuffed_bytes": 123
+      }
+    },
+    {
+      "name": "frame encoder 273",
+      "pass": true,
+      "details": {
+        "payload_bytes": 80,
+        "stuffed_bytes": 116
+      }
+    },
+    {
+      "name": "frame encoder 274",
+      "pass": true,
+      "details": {
+        "payload_bytes": 112,
+        "stuffed_bytes": 173
+      }
+    },
+    {
+      "name": "frame encoder 275",
+      "pass": true,
+      "details": {
+        "payload_bytes": 67,
+        "stuffed_bytes": 107
+      }
+    },
+    {
+      "name": "frame encoder 276",
+      "pass": true,
+      "details": {
+        "payload_bytes": 48,
+        "stuffed_bytes": 75
+      }
+    },
+    {
+      "name": "frame encoder 277",
+      "pass": true,
+      "details": {
+        "payload_bytes": 86,
+        "stuffed_bytes": 134
+      }
+    },
+    {
+      "name": "frame encoder 278",
+      "pass": true,
+      "details": {
+        "payload_bytes": 54,
+        "stuffed_bytes": 89
+      }
+    },
+    {
+      "name": "frame encoder 279",
+      "pass": true,
+      "details": {
+        "payload_bytes": 77,
+        "stuffed_bytes": 120
+      }
+    },
+    {
+      "name": "frame encoder 280",
+      "pass": true,
+      "details": {
+        "payload_bytes": 45,
+        "stuffed_bytes": 72
+      }
+    },
+    {
+      "name": "frame encoder 281",
+      "pass": true,
+      "details": {
+        "payload_bytes": 83,
+        "stuffed_bytes": 129
+      }
+    },
+    {
+      "name": "frame encoder 282",
+      "pass": true,
+      "details": {
+        "payload_bytes": 25,
+        "stuffed_bytes": 44
+      }
+    },
+    {
+      "name": "frame encoder 283",
+      "pass": true,
+      "details": {
+        "payload_bytes": 36,
+        "stuffed_bytes": 56
+      }
+    },
+    {
+      "name": "frame encoder 284",
+      "pass": true,
+      "details": {
+        "payload_bytes": 92,
+        "stuffed_bytes": 144
+      }
+    },
+    {
+      "name": "frame encoder 285",
+      "pass": true,
+      "details": {
+        "payload_bytes": 16,
+        "stuffed_bytes": 27
+      }
+    },
+    {
+      "name": "frame encoder 286",
+      "pass": true,
+      "details": {
+        "payload_bytes": 69,
+        "stuffed_bytes": 104
+      }
+    },
+    {
+      "name": "frame encoder 287",
+      "pass": true,
+      "details": {
+        "payload_bytes": 67,
+        "stuffed_bytes": 107
+      }
+    },
+    {
+      "name": "frame encoder 288",
+      "pass": true,
+      "details": {
+        "payload_bytes": 100,
+        "stuffed_bytes": 152
+      }
+    },
+    {
+      "name": "frame encoder 289",
+      "pass": true,
+      "details": {
+        "payload_bytes": 57,
+        "stuffed_bytes": 87
+      }
+    },
+    {
+      "name": "frame encoder 290",
+      "pass": true,
+      "details": {
+        "payload_bytes": 17,
+        "stuffed_bytes": 27
+      }
+    },
+    {
+      "name": "frame encoder 291",
+      "pass": true,
+      "details": {
+        "payload_bytes": 66,
+        "stuffed_bytes": 101
+      }
+    },
+    {
+      "name": "frame encoder 292",
+      "pass": true,
+      "details": {
+        "payload_bytes": 13,
+        "stuffed_bytes": 25
+      }
+    },
+    {
+      "name": "frame encoder 293",
+      "pass": true,
+      "details": {
+        "payload_bytes": 39,
+        "stuffed_bytes": 61
+      }
+    },
+    {
+      "name": "frame encoder 294",
+      "pass": true,
+      "details": {
+        "payload_bytes": 53,
+        "stuffed_bytes": 84
+      }
+    },
+    {
+      "name": "frame encoder 295",
+      "pass": true,
+      "details": {
+        "payload_bytes": 76,
+        "stuffed_bytes": 115
+      }
+    },
+    {
+      "name": "frame encoder 296",
+      "pass": true,
+      "details": {
+        "payload_bytes": 79,
+        "stuffed_bytes": 127
+      }
+    },
+    {
+      "name": "frame encoder 297",
+      "pass": true,
+      "details": {
+        "payload_bytes": 109,
+        "stuffed_bytes": 167
+      }
+    },
+    {
+      "name": "frame encoder 298",
+      "pass": true,
+      "details": {
+        "payload_bytes": 20,
+        "stuffed_bytes": 33
+      }
+    },
+    {
+      "name": "frame encoder 299",
+      "pass": true,
+      "details": {
+        "payload_bytes": 119,
+        "stuffed_bytes": 181
+      }
+    }
+  ],
+  "passed": 344,
+  "failed": 0
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "file": "RECONSTRUCTION_REPORT.md",
+    "sha256": "5dc43c275a0689d1d7c97438c753f4e44f482d7f3be32072094ef10107f61335",
+    "bytes": 9229
+  },
+  {
+    "file": "SetupAndAnalyze.java",
+    "sha256": "76d0f8775851515d2c851cf07927177d136ccf282feb26403aa4a9a9e20dba93",
+    "bytes": 981
+  },
+  {
+    "file": "decompile_all.py",
+    "sha256": "ec52974b9731eb1769a42b38b792319266a2f3dfa41fda473e700fd27bf76978",
+    "bytes": 2399
+  },
+  {
+    "file": "decompile_aux_chips.py",
+    "sha256": "c9e27cdbfe5bf654b7341eae1c1914ff3596a77c16692e09ea193348355e1859",
+    "bytes": 2676
+  },
+  {
+    "file": "decrypt_verbatim.js",
+    "sha256": "f59c959f59c25775b57cc573b642f5b2741d88e1548c7703e3f36793c06c843c",
+    "bytes": 6073
+  }
+]

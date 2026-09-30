@@ -1,0 +1,20 @@
+kind	address	name	evidence
+function	000035a8	encode_transport_frame	Confirmed in code: AA stuffing and additive checksum.
+function	00003662	decode_transport_byte	Confirmed in code: stateful AA-stuffed stream decoder.
+function	0000388a	dispatch_local_uart_command	Handles companion-local identity, advertising and update commands.
+function	00003e1a	usb_tx_queue_service	Splits outgoing frames into chunks of at most 62 bytes.
+function	00004074	queue_gatt_to_main	Copies payload, appends 0x31 for route 0 or zero otherwise, creates type 6 internal frame.
+function	000040dc	handle_af02_write	Handles 18 bind and 00 status locally, forwards other requests to main. Last request byte selects fast lookup.
+function	00004224	handle_af01_write	Handles C0/10 local settings; forwards other application commands.
+function	00004bec	decode_main_uart_byte	AA-stuffed UART parser and checksum validation.
+function	00004cee	route_main_uart_frame	Routes completed internal frames by destination type 6,1,5 or fallback.
+function	00004e86	usb_receive_report	Reads length at HID byte 1 and feeds bytes starting at byte 2 into stream decoder.
+function	00004eca	usb_send_report	Writes report ID 2 at byte 0, chunk length at byte 1, data at byte 2, sends 64 bytes.
+function	00004fba	usb_interrupt_handler	USB endpoint events and descriptor/control transfers.
+function	00006f6c	notify_af02	Notification path using CCCD at 0x20003014 and AF02 handle at 0x20002c9a.
+function	00006ff6	notify_af01	Notification path using CCCD at 0x20003224 and AF01 handle at 0x20002c6a.
+function	00007618	load_saved_host_ids	Reads 80 bytes at nonvolatile offset 0x6f00 and counts non-ff 16-byte slots.
+function	00007696	save_host_id	Appends a 16-byte ID, shifts when five slots are filled, erases and writes offset 0x6f00.
+function	0000773c	find_saved_host_id	Compares 16 input bytes with stored host IDs. Uses SDK tmos_memcmp boolean semantics.
+function	000072e0	initialize_ble_application	Registers BLE task, services, advertising and scan response data.
+function	00003fac	route_main_reply_to_gatt	Routes trailing 0x31 to AF01 with prefix 0x31; otherwise AF02. Saves host after successful bind reply notification.

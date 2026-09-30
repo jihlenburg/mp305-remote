@@ -1,0 +1,13 @@
+Recovered 2908 initialized RAM bytes; zeroed BSS ends at 0x2003f618
+344 checks passed
+700 differential and frame cases passed
+18 control cases passed
+896 read-reply comparisons passed
+592 extended cases passed
+27 BLE bridge cases passed
+82 settings worker cases passed
+16 storage cases passed
+62 RTOS cases passed
+34 permission cases passed
+64 worker comparison cases passed
+2835 offline checks passed

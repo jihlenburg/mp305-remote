@@ -1,0 +1,19 @@
+/* Address: CODE:aed0; name: FUN_CODE_aed0; body bytes: 45 */
+
+/* Inferred entry from 10 raw LCALL encodings. Review control flow before relying on semantics. */
+
+char FUN_CODE_aed0(byte param_1,byte param_2,byte param_3,byte param_4)
+
+{
+  byte bVar1;
+  byte bVar2;
+  
+  bVar2 = (byte)((ushort)param_1 * (ushort)param_3);
+  bVar1 = (byte)((ushort)param_4 * (ushort)param_1 >> 8);
+  return ((char)((ushort)param_1 * (ushort)param_3 >> 8) - ((CARRY1(bVar1,bVar2) << 7) >> 7)) -
+         ((CARRY1((byte)((ushort)param_2 * (ushort)param_3 >> 8),
+                  (bVar1 + bVar2) -
+                  ((CARRY1((byte)((ushort)param_2 * (ushort)param_3),
+                           (byte)((ushort)param_4 * (ushort)param_1)) << 7) >> 7)) << 7) >> 7);
+}
+

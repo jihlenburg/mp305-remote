@@ -1,0 +1,4 @@
+program=ble-riscv.bin
+processor=RISCV:LE:32:default
+functions=232
+decompiled=232

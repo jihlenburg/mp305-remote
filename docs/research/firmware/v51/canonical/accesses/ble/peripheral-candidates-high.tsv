@@ -1,0 +1,253 @@
+phase	function	instruction	disassembly	op_index	direction	space	bytes	address_expression	resolved_address	value_expression
+decompiler	ram:000010ce	ram:000010e4	sb a4,-0x7fa(a5)	21	write	ram	1	ram:40001806	0x40001806	0x4
+decompiler	ram:000010ce	ram:000010fc	sw a4,-0x2f0(a5)	39	write	ram	4	ram:e000ed10	0xe000ed10	INT_AND(mem[ram:e000ed10],0xfffffff3)
+decompiler	ram:0000110e	ram:00001124	sb a4,-0x7fa(a5)	21	write	ram	1	ram:40001806	0x40001806	0x4
+decompiler	ram:0000110e	ram:00001142	bltu a5,a3,0x0000114c	44	read	ram	2	ram:40001038	0x40001038	
+decompiler	ram:0000110e	ram:00001164	sb zero,0x24(a5)	68	write	ram	1	ram:40001024	0x40001024	0x0
+decompiler	ram:0000110e	ram:00001174	sb a4,0x2e(a5)	81	write	ram	1	ram:4000102e	0x4000102e	MULTIEQUAL(mem[ram:4000102e],INT_OR(INT_AND(mem[ram:4000102e],0xfc),0x1))
+decompiler	ram:0000110e	ram:00001178	sb a1,0x4e(a5)	84	write	ram	1	ram:4000104e	0x4000104e	INT_OR(mem[ram:4000104e],0x3)
+decompiler	ram:0000110e	ram:000011ae	sw a1,-0x2f0(a4)	124	write	ram	4	ram:e000ed10	0xe000ed10	INT_OR(INT_AND(mem[ram:e000ed10],0xfffffff7),0x4)
+decompiler	ram:0000110e	ram:000011ce	sb a4,0x4b(a5)	148	write	ram	1	ram:4000104b	0x4000104b	INT_AND(mem[ram:4000104b],0xdf)
+decompiler	ram:0000110e	ram:000011d2	sb zero,0x40(a5)	151	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:000011dc	ram:00001214	bltu a5,a3,0x0000121e	51	read	ram	2	ram:40001038	0x40001038	
+decompiler	ram:000011dc	ram:00001236	sb zero,0x24(a5)	75	write	ram	1	ram:40001024	0x40001024	0x0
+decompiler	ram:000011dc	ram:0000127c	sb a3,0x40(a5)	130	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:000011dc	ram:000012fa	sb a4,0x4b(a5)	226	write	ram	1	ram:4000104b	0x4000104b	INT_AND(mem[ram:4000104b],0xdf)
+decompiler	ram:000011dc	ram:000012fe	sb zero,0x40(a5)	229	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:0000130c	ram:0000133e	bltu a3,a2,0x00001348	50	read	ram	2	ram:40001038	0x40001038	
+decompiler	ram:0000130c	ram:00001360	sb zero,0x24(s0)	74	write	ram	1	ram:40001024	0x40001024	0x0
+decompiler	ram:0000130c	ram:00001378	sb zero,0x40(s0)	93	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:0000130c	ram:000013ae	sb s1,0x40(s0)	132	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:0000130c	ram:000013f0	sb a5,0x46(s0)	186	write	ram	1	ram:40001046	0x40001046	INT_OR(mem[ram:40001046],0x1)
+decompiler	ram:0000130c	ram:000013f4	sb zero,0x40(s0)	189	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:00001406	ram:000014ca	sb a4,0x4b(a5)	149	write	ram	1	ram:4000104b	0x4000104b	INT_OR(INT_AND(mem[ram:4000104b],0xdf),0x80)
+decompiler	ram:00001406	ram:000014ce	sb zero,0x40(a5)	152	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:0000157a	ram:000015a8	sb a4,0x46(a5)	39	write	ram	1	ram:40001046	0x40001046	INT_OR(mem[ram:40001046],0x1)
+decompiler	ram:0000157a	ram:000015ac	sb zero,0x40(a5)	42	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:000018de	ram:00001904	sw a4,0x180(a5)	47	write	ram	4	ram:e000e180	0xe000e180	0xffffffff
+decompiler	ram:000018de	ram:00001908	sw a4,0x184(a5)	50	write	ram	4	ram:e000e184	0xe000e184	0xffffffff
+decompiler	ram:000018de	ram:0000191c	sb a4,0x40(a5)	62	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:000018de	ram:00001964	sb a4,-0x7fa(s0)	109	write	ram	1	ram:40001806	0x40001806	0x4
+decompiler	ram:000018de	ram:000019d6	sb a4,0x40(a5)	158	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:000018de	ram:000019e0	sb a4,0x44(a5)	167	write	ram	1	ram:40001044	0x40001044	INT_AND(mem[ram:40001044],0x10)
+decompiler	ram:000018de	ram:000019ea	sw s5,0x100(a5)	175	write	ram	4	ram:e000e100	0xe000e100	COPY(mem[ram:e000e000])
+decompiler	ram:000018de	ram:000019ee	sw s4,0x104(a5)	178	write	ram	4	ram:e000e104	0xe000e104	COPY(mem[ram:e000e004])
+decompiler	ram:000018de	ram:00001aa0	bne a4,a5,0x00001afe	327	read	ram	1	ram:40001041	0x40001041	
+decompiler	ram:000018de	ram:00001ae0	blt a4,zero,0x00001adc	368	read	ram	1	ram:40001806	0x40001806	
+decompiler	ram:000018de	ram:00001ae4	sb s3,-0x7fa(s0)	372	write	ram	1	ram:40001806	0x40001806	0x15
+decompiler	ram:000018de	ram:00001b4c	bne a3,a4,0x000019a0	419	read	ram	4	ram:40001800	0x40001800	
+decompiler	ram:000018de	ram:00001b90	sw a5,0x0(s2)	498	read	ram	4	ram:40001800	0x40001800	
+decompiler	ram:000018de	ram:00001ba6	sh a5,0x4(s2)	1206	read	ram	4	ram:40001800	0x40001800	
+decompiler	ram:000018de	ram:00001bac	sw a5,0x4(s2)	516	read	ram	4	ram:40001800	0x40001800	
+decompiler	ram:00001dc2	ram:00001dce	sb a4,0x57(a5)	10	write	ram	1	ram:40001057	0x40001057	INT_AND(mem[ram:40001057],0xfe)
+decompiler	ram:00001dc2	ram:00001dd6	sb a4,0x5b(a5)	15	write	ram	1	ram:4000105b	0x4000105b	0x80
+decompiler	ram:00001dc2	ram:00001ddc	sb a4,0x58(a5)	20	write	ram	1	ram:40001058	0x40001058	0xf
+decompiler	ram:00001dc2	ram:00001de4	sb a4,0x59(a5)	25	write	ram	1	ram:40001059	0x40001059	0x35
+decompiler	ram:00001dea	ram:00001e0e	sb a4,0x4e(a5)	27	write	ram	1	ram:4000104e	0x4000104e	INT_OR(INT_AND(mem[ram:4000104e],0xfc),INT_AND((register, 0x2028, 1),0x3))
+decompiler	ram:00001dea	ram:00001e12	sb zero,0x40(a5)	30	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:00001e18	ram:00001efc	c.sw a4,0x0(a1)	169	write	ram	4	ram:40001034	0x40001034	INT_OR(INT_MULT(INT_ADD(INT_ADD(INT_MULT((register, 0x2038, 4),0x1e),INT_RIGHT((register, 0x203c, 4),0x1)),INT_MULT(INT_REM((register, 0x2034, 4),0x18),0x708)),0x10000),INT_LEFT(INT_AND((register, 0x203c, 4),0x1),0xf))
+decompiler	ram:00001e18	ram:00001f06	sb a4,0x31(a5)	178	write	ram	1	ram:40001031	0x40001031	INT_OR(mem[ram:40001031],0xc0)
+decompiler	ram:00001e18	ram:00001f0a	sb zero,0x40(a5)	181	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:00001fa6	ram:00001fb8	c.lwsp a0,0xc(sp)	20	read	ram	4	ram:40001038	0x40001038	
+decompiler	ram:00001fbe	ram:000020be	c.swsp a5,0x18(sp)	1680	read	ram	2	ram:40001050	0x40001050	
+decompiler	ram:00001fbe	ram:00002102	lbu a4,0x53(s0)	1677	read	ram	1	ram:40001053	0x40001053	
+decompiler	ram:00001fbe	ram:0000210c	c.beqz a4,0x00002102	1679	read	ram	2	ram:40001050	0x40001050	
+decompiler	ram:00001fbe	ram:0000214e	lbu a5,0x53(s0)	1439	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:00001fbe	ram:00002186	lbu a5,0x52(s0)	392	read	ram	1	ram:40001052	0x40001052	
+decompiler	ram:00001fbe	ram:000021d0	lhu a4,0x2c(s0)	450	read	ram	2	ram:4000102c	0x4000102c	
+decompiler	ram:00001fbe	ram:00002252	lbu a3,0x53(a5)	505	read	ram	1	ram:40001053	0x40001053	
+decompiler	ram:00001fbe	ram:0000231c	lbu a4,0x53(a5)	1434	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:00001fbe	ram:0000234a	sh a5,0x50(a4)	694	write	ram	2	ram:40001050	0x40001050	INT_OR(mem[ram:40001050],0x4000)
+decompiler	ram:00001fbe	ram:0000237a	sb a4,0x0(a3)	729	write	ram	1	ram:40001053	0x40001053	INT_AND(mem[ram:40001053],0xdf)
+decompiler	ram:00001fbe	ram:00002382	lbu a4,0x52(a5)	737	read	ram	1	ram:40001052	0x40001052	
+decompiler	ram:00001fbe	ram:0000240e	sb a3,0x40(a4)	842	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:00001fbe	ram:00002418	lhu a3,0x2c(a4)	852	read	ram	2	ram:4000102c	0x4000102c	
+decompiler	ram:00001fbe	ram:00002426	sh a5,0x2c(a4)	866	write	ram	2	ram:4000102c	0x4000102c	SUBPIECE(INT_RIGHT(INT_MULT(INT_ADD(INT_MULT((register, 0x203c, 4),0x20),INT_ZEXT(mem[ram:4000102c])),0x10000),0x10),0x0)
+decompiler	ram:00002498	ram:000024e6	sw a3,0xb4(a5)	73	write	ram	4	ram:400010b4	0x400010b4	INT_AND(mem[ram:400010b4],INT_NEGATE((register, 0x2028, 4)))
+decompiler	ram:00002498	ram:000024f0	sw a0,0xb0(a5)	80	write	ram	4	ram:400010b0	0x400010b0	INT_OR((register, 0x2028, 4),mem[ram:400010b0])
+decompiler	ram:00002498	ram:000024fa	sw a4,0xa0(a5)	87	write	ram	4	ram:400010a0	0x400010a0	INT_AND(INT_NEGATE((register, 0x2028, 4)),mem[ram:400010a0])
+decompiler	ram:0000253e	ram:0000258c	sw a3,0xd4(a5)	73	write	ram	4	ram:400010d4	0x400010d4	INT_AND(mem[ram:400010d4],INT_NEGATE((register, 0x2028, 4)))
+decompiler	ram:0000253e	ram:00002596	sw a0,0xd0(a5)	80	write	ram	4	ram:400010d0	0x400010d0	INT_OR((register, 0x2028, 4),mem[ram:400010d0])
+decompiler	ram:0000253e	ram:000025a0	sw a4,0xc0(a5)	87	write	ram	4	ram:400010c0	0x400010c0	INT_AND(INT_NEGATE((register, 0x2028, 4)),mem[ram:400010c0])
+decompiler	ram:000025e4	ram:000025f0	sh a1,0x18(a5)	11	write	ram	2	ram:40001018	0x40001018	MULTIEQUAL(INT_OR((register, 0x202c, 2),mem[ram:40001018]),INT_AND(INT_NEGATE((register, 0x202c, 2)),mem[ram:40001018]))
+decompiler	ram:0000268a	ram:0000269a	sb a0,0x0(a5)	12	write	ram	1	ram:40005000	0x40005000	MULTIEQUAL(INT_AND(INT_NEGATE(SUBPIECE((register, 0x2028, 4),0x0)),mem[ram:40005000]),INT_OR(SUBPIECE((register, 0x2028, 4),0x0),mem[ram:40005000]))
+decompiler	ram:000026e8	ram:000026ec	lhu a0,0x8(a5)	5	read	ram	2	ram:40001008	0x40001008	
+decompiler	ram:0000272a	ram:0000273c	sw a5,0x180(a4)	20	write	ram	4	ram:e000e180	0xe000e180	0xffffffff
+decompiler	ram:0000272a	ram:00002740	sw a5,0x184(a4)	23	write	ram	4	ram:e000e184	0xe000e184	0xffffffff
+decompiler	ram:00002746	ram:0000274e	sw a4,0x100(a5)	6	write	ram	4	ram:e000e100	0xe000e100	INT_LEFT((register, 0x2028, 4),0x8)
+decompiler	ram:00002746	ram:00002754	sw a0,0x104(a5)	11	write	ram	4	ram:e000e104	0xe000e104	INT_RIGHT((register, 0x2028, 4),0x18)
+decompiler	ram:00002764	ram:00002792	sb a4,0x46(a5)	32	write	ram	1	ram:40001046	0x40001046	MULTIEQUAL(INT_OR(mem[ram:40001046],0x2),INT_AND(mem[ram:40001046],0xfd))
+decompiler	ram:00002764	ram:00002796	sb zero,0x40(a5)	35	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:0000279c	ram:000027b0	sb a0,0x0(a5)	15	write	ram	1	ram:40002000	0x40002000	INT_OR(INT_LEFT((register, 0x2028, 1),0x6),0x5)
+decompiler	ram:000027b6	ram:000027ba	sw a0,0x40c(a5)	4	write	ram	4	ram:4000240c	0x4000240c	(register, 0x2028, 4)
+decompiler	ram:000027b6	ram:000027c6	sb a4,0x400(a5)	14	write	ram	1	ram:40002400	0x40002400	0x4
+decompiler	ram:000027cc	ram:000027d0	sw a0,-0x7f4(a5)	4	write	ram	4	ram:4000280c	0x4000280c	(register, 0x2028, 4)
+decompiler	ram:000027cc	ram:000027dc	sb a4,-0x800(a5)	14	write	ram	1	ram:40002800	0x40002800	0x4
+decompiler	ram:000027e2	ram:0000280a	sh a5,0xc(a4)	44	write	ram	2	ram:4000300c	0x4000300c	SUBPIECE(INT_DIV(INT_ADD(MULTIEQUAL(0xffffffff,INT_DIV((register, 0x203c, 4),(register, 0x2028, 4))),0x5),0xa),0x0)
+decompiler	ram:00002812	ram:00002826	sb a4,0x2(a5)	19	write	ram	1	ram:40003002	0x40003002	0x87
+decompiler	ram:00002812	ram:0000282c	sb a4,0x3(a5)	24	write	ram	1	ram:40003003	0x40003003	0x3
+decompiler	ram:00002812	ram:00002834	sb a4,0x1(a5)	29	write	ram	1	ram:40003001	0x40003001	0x40
+decompiler	ram:00002812	ram:0000283a	sb a4,0xe(a5)	34	write	ram	1	ram:4000300e	0x4000300e	0x1
+decompiler	ram:00002844	ram:00002858	c.bnez a4,0x0000285e	14	read	ram	1	ram:4000300a	0x4000300a	
+decompiler	ram:00002844	ram:00002868	sb a2,0x0(a4)	27	read	ram	1	ram:40003008	0x40003008	
+decompiler	ram:0000286e	ram:00002896	sh a5,0x40c(a4)	44	write	ram	2	ram:4000340c	0x4000340c	SUBPIECE(INT_DIV(INT_ADD(MULTIEQUAL(0xffffffff,INT_DIV((register, 0x203c, 4),(register, 0x2028, 4))),0x5),0xa),0x0)
+decompiler	ram:0000289e	ram:000028b2	sb a4,0x402(a5)	19	write	ram	1	ram:40003402	0x40003402	0x87
+decompiler	ram:0000289e	ram:000028b8	sb a4,0x403(a5)	24	write	ram	1	ram:40003403	0x40003403	0x3
+decompiler	ram:0000289e	ram:000028c0	sb a4,0x401(a5)	29	write	ram	1	ram:40003401	0x40003401	0x40
+decompiler	ram:0000289e	ram:000028c6	sb a4,0x40e(a5)	34	write	ram	1	ram:4000340e	0x4000340e	0x1
+decompiler	ram:000028d0	ram:000028e4	sb a5,0x402(a4)	15	write	ram	1	ram:40003402	0x40003402	INT_OR(INT_AND(mem[ram:40003402],0x3f),INT_LEFT((register, 0x2028, 1),0x6))
+decompiler	ram:000028ea	ram:000028f6	sb a1,0x401(a5)	11	write	ram	1	ram:40003401	0x40003401	INT_OR((register, 0x202c, 1),mem[ram:40003401])
+decompiler	ram:000028ea	ram:00002902	sb a4,0x400(a5)	20	write	ram	1	ram:40003400	0x40003400	INT_OR(mem[ram:40003400],0x8)
+decompiler	ram:000028ea	ram:0000290e	sb a1,0x401(a5)	26	write	ram	1	ram:40003401	0x40003401	INT_AND(INT_NEGATE((register, 0x202c, 1)),mem[ram:40003401])
+decompiler	ram:00002914	ram:00002926	beq a4,a2,0x0000291e	13	read	ram	1	ram:4000340b	0x4000340b	
+decompiler	ram:0000293c	ram:00002950	c.bnez a4,0x00002956	14	read	ram	1	ram:4000340a	0x4000340a	
+decompiler	ram:0000293c	ram:00002960	sb a2,0x0(a4)	27	read	ram	1	ram:40003408	0x40003408	
+decompiler	ram:00002966	ram:0000296e	sb zero,0x8(a5)	7	write	ram	1	ram:40008008	0x40008008	0x0
+decompiler	ram:00002966	ram:00002976	sb a4,0xc(a5)	12	write	ram	1	ram:4000800c	0x4000800c	0xcc
+decompiler	ram:00002966	ram:0000297a	sb a4,0xd(a5)	15	write	ram	1	ram:4000800d	0x4000800d	0xcc
+decompiler	ram:00002966	ram:00002986	sh a4,0x10(a5)	24	write	ram	2	ram:40008010	0x40008010	mem[ram:20002f50]
+decompiler	ram:00002966	ram:00002992	sh a4,0x14(a5)	33	write	ram	2	ram:40008014	0x40008014	mem[ram:20002f54]
+decompiler	ram:00002966	ram:0000299e	sh a4,0x18(a5)	42	write	ram	2	ram:40008018	0x40008018	mem[ram:20002f58]
+decompiler	ram:00002966	ram:000029aa	sh a4,0x1c(a5)	51	write	ram	2	ram:4000801c	0x4000801c	mem[ram:20002f5c]
+decompiler	ram:00002966	ram:000029b0	sb a3,0x22(a5)	56	write	ram	1	ram:40008022	0x40008022	0x2
+decompiler	ram:00002966	ram:000029b6	sb a4,0x26(a5)	61	write	ram	1	ram:40008026	0x40008026	0x12
+decompiler	ram:00002966	ram:000029ba	sb a4,0x2a(a5)	64	write	ram	1	ram:4000802a	0x4000802a	0x12
+decompiler	ram:00002966	ram:000029be	sb a4,0x2e(a5)	67	write	ram	1	ram:4000802e	0x4000802e	0x12
+decompiler	ram:00002966	ram:000029c2	sb a3,0x32(a5)	70	write	ram	1	ram:40008032	0x40008032	0x2
+decompiler	ram:00002966	ram:000029c6	sb zero,0x3(a5)	73	write	ram	1	ram:40008003	0x40008003	0x0
+decompiler	ram:00002966	ram:000029ce	sb a4,0x0(a5)	78	write	ram	1	ram:40008000	0x40008000	0x29
+decompiler	ram:00002966	ram:000029de	sh a4,0x1a(a3)	89	write	ram	2	ram:4000101a	0x4000101a	INT_OR(mem[ram:4000101a],0xc0)
+decompiler	ram:00002966	ram:000029e4	sb a4,0x6(a5)	94	write	ram	1	ram:40008006	0x40008006	0xff
+decompiler	ram:00002966	ram:000029ec	sb a4,0x1(a5)	99	write	ram	1	ram:40008001	0x40008001	0x81
+decompiler	ram:00002966	ram:000029f2	sb a4,0x2(a5)	104	write	ram	1	ram:40008002	0x40008002	0x7
+decompiler	ram:000029f8	ram:00002a08	sb a4,0xc(a5)	12	write	ram	1	ram:4000800c	0x4000800c	INT_AND(mem[ram:4000800c],0x33)
+decompiler	ram:000029f8	ram:00002a14	sb a4,0xd(a5)	21	write	ram	1	ram:4000800d	0x4000800d	INT_AND(mem[ram:4000800d],0x33)
+decompiler	ram:000029f8	ram:00002a2c	sb a4,0x0(a5)	39	write	ram	1	ram:40008000	0x40008000	INT_OR(INT_AND(mem[ram:40008000],0xd6),0x4)
+decompiler	ram:000029f8	ram:00002a40	sh a4,0x1a(a3)	56	write	ram	2	ram:4000101a	0x4000101a	INT_AND(mem[ram:4000101a],0xff3f)
+decompiler	ram:000029f8	ram:00002a4c	sb a4,0x1(a5)	65	write	ram	1	ram:40008001	0x40008001	INT_AND(mem[ram:40008001],0x7e)
+decompiler	ram:000029f8	ram:00002a58	sb a4,0x2(a5)	74	write	ram	1	ram:40008002	0x40008002	INT_AND(mem[ram:40008002],0xf8)
+decompiler	ram:00002a5e	ram:00002a62	sb a0,0x24(a5)	4	write	ram	1	ram:40008024	0x40008024	(register, 0x2028, 1)
+decompiler	ram:00002a5e	ram:00002a6e	sb a4,0x26(a5)	13	write	ram	1	ram:40008026	0x40008026	INT_AND(mem[ram:40008026],0xfc)
+decompiler	ram:00002a74	ram:00002a78	sb a0,0x28(a5)	4	write	ram	1	ram:40008028	0x40008028	(register, 0x2028, 1)
+decompiler	ram:00002a74	ram:00002a84	sb a4,0x2a(a5)	13	write	ram	1	ram:4000802a	0x4000802a	INT_AND(mem[ram:4000802a],0xfc)
+decompiler	ram:00002a8a	ram:00002a8e	sb a0,0x2c(a5)	4	write	ram	1	ram:4000802c	0x4000802c	(register, 0x2028, 1)
+decompiler	ram:00002a8a	ram:00002a9a	sb a4,0x2e(a5)	13	write	ram	1	ram:4000802e	0x4000802e	INT_AND(mem[ram:4000802e],0xfc)
+decompiler	ram:00002aa0	ram:00002aa4	sb a0,0x30(a5)	4	write	ram	1	ram:40008030	0x40008030	(register, 0x2028, 1)
+decompiler	ram:00002aa0	ram:00002ab0	sb a4,0x32(a5)	13	write	ram	1	ram:40008032	0x40008032	INT_AND(mem[ram:40008032],0xfc)
+decompiler	ram:000032b6	ram:000032da	c.sw a4,0x10(a3)	33	write	ram	4	ram:e000f010	0xe000f010	0xfffffffe
+decompiler	ram:000032b6	ram:000032de	c.sw a5,0x14(a3)	38	write	ram	4	ram:e000f014	0xe000f014	0xffffffff
+decompiler	ram:000032b6	ram:000032e6	sw a4,0x100(a5)	47	write	ram	4	ram:e000e100	0xe000e100	0x1000
+decompiler	ram:000032b6	ram:000032ee	c.sw a2,0x0(a3)	52	write	ram	4	ram:e000f000	0xe000f000	0x2f
+decompiler	ram:000032b6	ram:000032f0	sw a4,0x180(a5)	55	write	ram	4	ram:e000e180	0xe000e180	0x1000
+decompiler	ram:00003416	ram:0000342e	c.sw a0,0x34(a5)	18	write	ram	4	ram:40001034	0x40001034	(register, 0x2028, 4)
+decompiler	ram:00003416	ram:00003430	sb zero,0x40(a5)	21	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:0000343e	ram:0000347e	sb zero,0x40(a5)	51	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:0000354a	ram:0000356a	sb a4,0xe(a5)	24	write	ram	1	ram:4000100e	0x4000100e	INT_OR(mem[ram:4000100e],0x8)
+decompiler	ram:0000354a	ram:00003582	sb a4,0x31(a5)	43	write	ram	1	ram:40001031	0x40001031	INT_OR(mem[ram:40001031],0x20)
+decompiler	ram:0000354a	ram:00003586	sb zero,0x40(a5)	46	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:0000354a	ram:00003592	sw a4,0x100(a5)	53	write	ram	4	ram:e000e100	0xe000e100	0x10000000
+decompiler	ram:00004810	ram:0000484c	sb a4,0x3(a5)	56	write	ram	1	ram:40005003	0x40005003	0xf0
+decompiler	ram:00004810	ram:0000489c	c.sw s0,0xc(a5)	113	write	ram	4	ram:4000200c	0x4000200c	0x0
+decompiler	ram:00004810	ram:000048a6	sb a4,0x2(a5)	122	write	ram	1	ram:40002002	0x40002002	INT_OR(mem[ram:40002002],0x2)
+decompiler	ram:00004810	ram:000048ae	sb zero,0x410(a5)	127	write	ram	1	ram:e000e410	0xe000e410	0x0
+decompiler	ram:00004810	ram:000048b8	sw a4,0x100(a5)	140	write	ram	4	ram:e000e100	0xe000e100	0x10000
+decompiler	ram:000048c2	ram:000048d2	j 0x0000268a	78	write	ram	1	ram:40005004	0x40005004	mem[ram:40005004]
+decompiler	ram:000048c2	ram:000048d2	j 0x0000268a	78	read	ram	1	ram:40005004	0x40005004	
+decompiler	ram:000048c2	ram:000048d2	j 0x0000268a	83	write	ram	1	ram:40005007	0x40005007	mem[ram:40005007]
+decompiler	ram:000048c2	ram:000048d2	j 0x0000268a	83	read	ram	1	ram:40005007	0x40005007	
+decompiler	ram:000048c2	ram:000048d2	j 0x0000268a	88	write	ram	1	ram:4000500a	0x4000500a	mem[ram:4000500a]
+decompiler	ram:000048c2	ram:000048d2	j 0x0000268a	88	read	ram	1	ram:4000500a	0x4000500a	
+decompiler	ram:000048c2	ram:000048ee	sb zero,0x4(a5)	29	write	ram	1	ram:40005004	0x40005004	0x0
+decompiler	ram:000048c2	ram:000048fe	sb zero,0x7(a5)	39	write	ram	1	ram:40005007	0x40005007	0x0
+decompiler	ram:000048c2	ram:00004910	sb zero,0xa(a5)	49	write	ram	1	ram:4000500a	0x4000500a	0x0
+decompiler	ram:00004b14	ram:00004b5c	sw a5,0x100(s1)	57	write	ram	4	ram:e000e100	0xe000e100	0x1000000
+decompiler	ram:00004b14	ram:00004b7c	sb a5,-0x7fe(s0)	79	write	ram	1	ram:40002802	0x40002802	INT_OR(mem[ram:40002802],0x1)
+decompiler	ram:00004b14	ram:00004b88	sw a5,0x100(s1)	90	write	ram	4	ram:e000e100	0xe000e100	0x2000000
+decompiler	ram:00004dd8	ram:00002926	beq a4,a2,0x0000291e	14	read	ram	1	ram:4000340b	0x4000340b	
+decompiler	ram:00004ddc	ram:00004e10	sw a4,0x100(a5)	38	write	ram	4	ram:e000e100	0xe000e100	0x8000000
+decompiler	ram:00004e18	ram:00004e10	sw a4,0x100(a5)	39	write	ram	4	ram:e000e100	0xe000e100	0x8000000
+decompiler	ram:00004fba	ram:0000501a	sb a4,0x6(a5)	74	write	ram	1	ram:40008006	0x40008006	0x2
+decompiler	ram:00004fba	ram:0000502a	bge a5,zero,0x000052ec	2069	read	ram	1	ram:40008007	0x40008007	
+decompiler	ram:00004fba	ram:00005032	sb a5,0x22(a4)	91	write	ram	1	ram:40008022	0x40008022	0xc2
+decompiler	ram:00004fba	ram:00005188	sb zero,0x20(a5)	365	write	ram	1	ram:40008020	0x40008020	0x0
+decompiler	ram:00004fba	ram:00005498	sb zero,0x3(a5)	469	write	ram	1	ram:40008003	0x40008003	0x0
+decompiler	ram:00004fba	ram:0000549e	sb a4,0x22(a5)	474	write	ram	1	ram:40008022	0x40008022	0x2
+decompiler	ram:00004fba	ram:000054a4	sb a4,0x26(a5)	479	write	ram	1	ram:40008026	0x40008026	0x12
+decompiler	ram:00004fba	ram:000054a8	sb a4,0x2a(a5)	482	write	ram	1	ram:4000802a	0x4000802a	0x12
+decompiler	ram:00004fba	ram:000054ac	sb a4,0x2e(a5)	485	write	ram	1	ram:4000802e	0x4000802e	0x12
+decompiler	ram:000055c0	ram:00005660	sw a4,0x100(a5)	111	write	ram	4	ram:e000e100	0xe000e100	0x400000
+decompiler	ram:0000566a	ram:00005676	sw a4,0x180(a5)	11	write	ram	4	ram:e000e180	0xe000e180	0x400000
+decompiler	ram:00006cb0	ram:00006ce0	c.lwsp ra,0x1c(sp)	1491	write	ram	1	ram:40001043	0x40001043	mem[ram:40001043]
+decompiler	ram:00006cb0	ram:00006ce0	c.lwsp ra,0x1c(sp)	1491	read	ram	1	ram:40001043	0x40001043	
+decompiler	ram:00006cb0	ram:00006ee8	sb zero,0x43(a5)	419	write	ram	1	ram:40001043	0x40001043	0x0
+decompiler	ram:200020c6	ram:200020dc	sb a4,-0x7fa(a5)	21	write	ram	1	ram:40001806	0x40001806	0x4
+decompiler	ram:200020c6	ram:200020f4	sw a4,-0x2f0(a5)	39	write	ram	4	ram:e000ed10	0xe000ed10	INT_AND(mem[ram:e000ed10],0xfffffff3)
+decompiler	ram:20002106	ram:2000211c	sb a4,-0x7fa(a5)	21	write	ram	1	ram:40001806	0x40001806	0x4
+decompiler	ram:20002106	ram:2000213a	bltu a5,a3,0x20002144	44	read	ram	2	ram:40001038	0x40001038	
+decompiler	ram:20002106	ram:2000215c	sb zero,0x24(a5)	68	write	ram	1	ram:40001024	0x40001024	0x0
+decompiler	ram:20002106	ram:2000216c	sb a4,0x2e(a5)	81	write	ram	1	ram:4000102e	0x4000102e	MULTIEQUAL(mem[ram:4000102e],INT_OR(INT_AND(mem[ram:4000102e],0xfc),0x1))
+decompiler	ram:20002106	ram:20002170	sb a1,0x4e(a5)	84	write	ram	1	ram:4000104e	0x4000104e	INT_OR(mem[ram:4000104e],0x3)
+decompiler	ram:20002106	ram:200021a6	sw a1,-0x2f0(a4)	124	write	ram	4	ram:e000ed10	0xe000ed10	INT_OR(INT_AND(mem[ram:e000ed10],0xfffffff7),0x4)
+decompiler	ram:20002106	ram:200021c6	sb a4,0x4b(a5)	148	write	ram	1	ram:4000104b	0x4000104b	INT_AND(mem[ram:4000104b],0xdf)
+decompiler	ram:20002106	ram:200021ca	sb zero,0x40(a5)	151	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:200021d4	ram:2000220c	bltu a5,a3,0x20002216	51	read	ram	2	ram:40001038	0x40001038	
+decompiler	ram:200021d4	ram:2000222e	sb zero,0x24(a5)	75	write	ram	1	ram:40001024	0x40001024	0x0
+decompiler	ram:200021d4	ram:20002274	sb a3,0x40(a5)	130	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:200021d4	ram:200022f2	sb a4,0x4b(a5)	226	write	ram	1	ram:4000104b	0x4000104b	INT_AND(mem[ram:4000104b],0xdf)
+decompiler	ram:200021d4	ram:200022f6	sb zero,0x40(a5)	229	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:20002304	ram:20002336	bltu a3,a2,0x20002340	50	read	ram	2	ram:40001038	0x40001038	
+decompiler	ram:20002304	ram:20002358	sb zero,0x24(s0)	74	write	ram	1	ram:40001024	0x40001024	0x0
+decompiler	ram:20002304	ram:20002370	sb zero,0x40(s0)	93	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:20002304	ram:200023a6	sb s1,0x40(s0)	132	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:20002304	ram:200023e8	sb a5,0x46(s0)	186	write	ram	1	ram:40001046	0x40001046	INT_OR(mem[ram:40001046],0x1)
+decompiler	ram:20002304	ram:200023ec	sb zero,0x40(s0)	189	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:200023fe	ram:200024c2	sb a4,0x4b(a5)	149	write	ram	1	ram:4000104b	0x4000104b	INT_OR(INT_AND(mem[ram:4000104b],0xdf),0x80)
+decompiler	ram:200023fe	ram:200024c6	sb zero,0x40(a5)	152	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:20002572	ram:200025a0	sb a4,0x46(a5)	39	write	ram	1	ram:40001046	0x40001046	INT_OR(mem[ram:40001046],0x1)
+decompiler	ram:20002572	ram:200025a4	sb zero,0x40(a5)	42	write	ram	1	ram:40001040	0x40001040	0x0
+decompiler	ram:2000262a	ram:20002632	sb a4,0x30(a5)	6	write	ram	1	ram:40001030	0x40001030	0x30
+decompiler	ram:2000262a	ram:20002640	mret	19	write	ram	1	ram:40001030	0x40001030	0x30
+decompiler	ram:2000262a	ram:20002640	mret	19	read	ram	1	ram:40001030	0x40001030	
+decompiler	ram:20002644	ram:2000265a	sb a4,0x6(a5)	19	write	ram	1	ram:40002006	0x40002006	0x1
+decompiler	ram:20002644	ram:20002674	c.beqz a5,0x200026c2	242	read	ram	1	ram:40002007	0x40002007	
+decompiler	ram:20002644	ram:200026b2	sb a4,0x6(a5)	75	write	ram	1	ram:40002006	0x40002006	0x2
+decompiler	ram:20002644	ram:200026c2	mret	213	write	ram	1	ram:40002002	0x40002002	mem[ram:40002002]
+decompiler	ram:20002644	ram:200026c2	mret	213	read	ram	1	ram:40002002	0x40002002	
+decompiler	ram:20002644	ram:200026c2	mret	218	write	ram	1	ram:40002006	0x40002006	mem[ram:40002006]
+decompiler	ram:20002644	ram:200026c2	mret	218	read	ram	1	ram:40002006	0x40002006	
+decompiler	ram:20002644	ram:200026c2	mret	223	write	ram	1	ram:40002007	0x40002007	mem[ram:40002007]
+decompiler	ram:20002644	ram:200026c2	mret	223	read	ram	1	ram:40002007	0x40002007	
+decompiler	ram:20002644	ram:200026c2	mret	227	write	ram	4	ram:40002010	0x40002010	mem[ram:40002010]
+decompiler	ram:20002644	ram:200026c2	mret	227	read	ram	4	ram:40002010	0x40002010	
+decompiler	ram:20002644	ram:200026f6	sw t1,0x0(a4)	124	read	ram	4	ram:40002010	0x40002010	
+decompiler	ram:200026fc	ram:2000270a	sb a5,0x406(a4)	14	write	ram	1	ram:40002406	0x40002406	0x1
+decompiler	ram:200026fc	ram:20002716	mret	45	write	ram	1	ram:40002406	0x40002406	mem[ram:40002406]
+decompiler	ram:200026fc	ram:20002716	mret	45	read	ram	1	ram:40002406	0x40002406	
+decompiler	ram:2000271a	ram:20002728	sb a5,-0x7fa(a4)	14	write	ram	1	ram:40002806	0x40002806	0x1
+decompiler	ram:2000271a	ram:20002742	mret	46	write	ram	1	ram:40002806	0x40002806	mem[ram:40002806]
+decompiler	ram:2000271a	ram:20002742	mret	46	read	ram	1	ram:40002806	0x40002806	
+decompiler	ram:20002746	ram:2000276a	mret	44	write	ram	1	ram:40003004	0x40003004	mem[ram:40003004]
+decompiler	ram:20002746	ram:2000276a	mret	44	read	ram	1	ram:40003004	0x40003004	
+decompiler	ram:20002746	ram:2000276e	mret	45	write	ram	1	ram:40003004	0x40003004	mem[ram:40003004]
+decompiler	ram:20002746	ram:2000276e	mret	45	read	ram	1	ram:40003004	0x40003004	
+decompiler	ram:20002772	ram:2000277a	mret	9	write	ram	1	ram:40003c04	0x40003c04	mem[ram:40003c04]
+decompiler	ram:20002772	ram:2000277a	mret	9	read	ram	1	ram:40003c04	0x40003c04	
+decompiler	ram:2000277e	ram:200027f6	mret	152	write	ram	1	ram:40003404	0x40003404	mem[ram:40003404]
+decompiler	ram:2000277e	ram:200027f6	mret	152	read	ram	1	ram:40003404	0x40003404	
+decompiler	ram:2000277e	ram:200027fa	mret	153	write	ram	1	ram:40003404	0x40003404	mem[ram:40003404]
+decompiler	ram:2000277e	ram:200027fa	mret	153	read	ram	1	ram:40003404	0x40003404	
+decompiler	ram:200028d6	ram:200028fc	sw a4,0x180(a5)	47	write	ram	4	ram:e000e180	0xe000e180	0xffffffff
+decompiler	ram:200028d6	ram:20002900	sw a4,0x184(a5)	50	write	ram	4	ram:e000e184	0xe000e184	0xffffffff
+decompiler	ram:200028d6	ram:20002914	sb a4,0x40(a5)	62	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:200028d6	ram:2000295c	sb a4,-0x7fa(s0)	109	write	ram	1	ram:40001806	0x40001806	0x4
+decompiler	ram:200028d6	ram:200029ce	sb a4,0x40(a5)	158	write	ram	1	ram:40001040	0x40001040	0xa8
+decompiler	ram:200028d6	ram:200029d8	sb a4,0x44(a5)	167	write	ram	1	ram:40001044	0x40001044	INT_AND(mem[ram:40001044],0x10)
+decompiler	ram:200028d6	ram:200029e2	sw s5,0x100(a5)	175	write	ram	4	ram:e000e100	0xe000e100	COPY(mem[ram:e000e000])
+decompiler	ram:200028d6	ram:200029e6	sw s4,0x104(a5)	178	write	ram	4	ram:e000e104	0xe000e104	COPY(mem[ram:e000e004])
+decompiler	ram:200028d6	ram:20002a98	bne a4,a5,0x20002af6	327	read	ram	1	ram:40001041	0x40001041	
+decompiler	ram:200028d6	ram:20002ad8	blt a4,zero,0x20002ad4	368	read	ram	1	ram:40001806	0x40001806	
+decompiler	ram:200028d6	ram:20002adc	sb s3,-0x7fa(s0)	372	write	ram	1	ram:40001806	0x40001806	0x15
+decompiler	ram:200028d6	ram:20002b44	bne a3,a4,0x20002998	419	read	ram	4	ram:40001800	0x40001800	
+decompiler	ram:200028d6	ram:20002b88	sw a5,0x0(s2)	498	read	ram	4	ram:40001800	0x40001800	
+decompiler	ram:200028d6	ram:20002b9e	sh a5,0x4(s2)	1206	read	ram	4	ram:40001800	0x40001800	
+decompiler	ram:200028d6	ram:20002ba4	sw a5,0x4(s2)	516	read	ram	4	ram:40001800	0x40001800	

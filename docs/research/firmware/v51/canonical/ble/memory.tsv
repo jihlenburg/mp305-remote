@@ -1,0 +1,9 @@
+name	start	end	initialized	writable	executable
+ram	ram:00001000	ram:0000967f	true	false	true
+SRAM_reserved	ram:20000000	ram:20001fff	false	true	false
+RAM_code_and_vectors	ram:20002000	ram:20002c3f	true	true	true
+RAM_data	ram:20002c40	ram:20002f4f	true	true	false
+BSS_and_stack	ram:20002f50	ram:2000ffff	false	true	false
+peripherals	ram:40000000	ram:4000ffff	false	true	false
+system	ram:e000e000	ram:e000ffff	false	true	false
+csr	csreg:0000	csreg:0fff.3	false	true	false

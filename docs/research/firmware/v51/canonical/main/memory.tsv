@@ -1,0 +1,7 @@
+name	start	end	initialized	writable	executable
+ram	00010000	000843ff	true	false	true
+initialized_data	1ffe0000	1ffe0b5b	true	true	false
+BSS_lower	1ffe0b5c	1ffeffff	false	true	false
+SRAM	1fff0000	2003ffff	false	true	false
+peripherals	40000000	401fffff	false	true	false
+cortex_system	e0000000	e00fffff	false	true	false

@@ -1,0 +1,179 @@
+{
+  "passed": 16,
+  "failed": 0,
+  "cases": [
+    {
+      "claim": "same source MP305B-V51.fwd",
+      "pass": true,
+      "detail": {
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/inputs/MP305B-V51.fwd": "4991311993065586c2c8004bcef060945492751eda98c4d537a6eb19306170f9",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/MP305B-V51.fwd": "4991311993065586c2c8004bcef060945492751eda98c4d537a6eb19306170f9",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/sources/tmp-scratchpad/MP305B-V51.fwd": "4991311993065586c2c8004bcef060945492751eda98c4d537a6eb19306170f9",
+        "/Users/jihlenburg/.local/share/mp305b/fw/MP305B-V51.fwd": "4991311993065586c2c8004bcef060945492751eda98c4d537a6eb19306170f9"
+      }
+    },
+    {
+      "claim": "same source MP305B-V51.plain.bin",
+      "pass": true,
+      "detail": {
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/inputs/MP305B-V51.plain.bin": "9ab27e1c06c88660875db8d1b2c37981c42e86264952ed562e863629cb656b39",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/MP305B-V51.plain.bin": "9ab27e1c06c88660875db8d1b2c37981c42e86264952ed562e863629cb656b39",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/sources/tmp-scratchpad/MP305B-V51.plain.bin": "9ab27e1c06c88660875db8d1b2c37981c42e86264952ed562e863629cb656b39",
+        "/Users/jihlenburg/.local/share/mp305b/fw/MP305B-V51.plain.bin": "9ab27e1c06c88660875db8d1b2c37981c42e86264952ed562e863629cb656b39"
+      }
+    },
+    {
+      "claim": "same source app.bin",
+      "pass": true,
+      "detail": {
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/inputs/app.bin": "58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/app.bin": "58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/sources/tmp-scratchpad/app.bin": "58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f",
+        "/Users/jihlenburg/.local/share/mp305b/fw/app.bin": "58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f"
+      }
+    },
+    {
+      "claim": "same source data.bin",
+      "pass": true,
+      "detail": {
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/inputs/data.bin": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/data.bin": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd",
+        "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-30-merge/sources/tmp-scratchpad/data.bin": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd",
+        "/Users/jihlenburg/.local/share/mp305b/fw/data.bin": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd"
+      }
+    },
+    {
+      "claim": "main identity-only mutation",
+      "pass": true,
+      "detail": {
+        "restored": "33cc55aa",
+        "WebLink_plain": "ffffffff"
+      }
+    },
+    {
+      "claim": "8051 extraction",
+      "pass": true,
+      "detail": {
+        "extracted_bytes": 43520,
+        "block_with_padding_bytes": 45056,
+        "padding_zero_bytes": 1530
+      }
+    },
+    {
+      "claim": "8051 reset mapping",
+      "pass": true,
+      "detail": {
+        "reset_jump_address": "0xaf88",
+        "base": "0x1000",
+        "target_file_offset": "0x9f88",
+        "startup_bytes": "78ffe4f6d8fd9000007ff07e"
+      }
+    },
+    {
+      "claim": "BLE extraction",
+      "pass": true,
+      "detail": {
+        "bytes": 34432,
+        "sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a"
+      }
+    },
+    {
+      "claim": "BLE entry jump",
+      "pass": true,
+      "detail": {
+        "instructions": [
+          [
+            "0x1000",
+            "j",
+            "0xc48"
+          ]
+        ],
+        "absolute_target": "0x1c48",
+        "note": "Capstone prints the JAL relative displacement."
+      }
+    },
+    {
+      "claim": "ARM vectors",
+      "pass": true,
+      "detail": {
+        "sp": "0x2003f618",
+        "reset_instructions": [
+          [
+            "0x10358",
+            "ldr",
+            "r0, [pc, #0x20]"
+          ],
+          [
+            "0x1035a",
+            "movw",
+            "r1, #0x1ff"
+          ],
+          [
+            "0x1035e",
+            "str",
+            "r1, [r0]"
+          ],
+          [
+            "0x10360",
+            "ldr",
+            "r0, [pc, #0x1c]"
+          ],
+          [
+            "0x10362",
+            "blx",
+            "r0"
+          ],
+          [
+            "0x10364",
+            "ldr",
+            "r0, [pc, #0x1c]"
+          ],
+          [
+            "0x10366",
+            "bx",
+            "r0"
+          ]
+        ]
+      }
+    },
+    {
+      "claim": "USB descriptor locations",
+      "pass": true,
+      "detail": {
+        "report": "05010900a10185010901150025ff7508953f918285020902150025ff7508953f8182c0",
+        "configuration": "09022900010100c0320904000002030000000921110100012223000705810340000107050103400001",
+        "device": "1201000200000040e9288a02000201020301"
+      }
+    },
+    {
+      "claim": "USB identity",
+      "pass": true,
+      "detail": {
+        "VID": "0x28e9",
+        "PID": "0x028a"
+      }
+    },
+    {
+      "claim": "literal at 0xa3ba",
+      "pass": true,
+      "detail": "P829 v%d.%d Bat=%d-%d"
+    },
+    {
+      "claim": "literal at 0x12e68",
+      "pass": true,
+      "detail": "CH58x_BLE_LIB_V1.8"
+    },
+    {
+      "claim": "literal at 0x13572",
+      "pass": true,
+      "detail": "0030MP305B"
+    },
+    {
+      "claim": "HC32 F460 clock and flash reference bases",
+      "pass": true,
+      "detail": {
+        "status": "Supplementary vendor header, not an exact MCU identification."
+      }
+    }
+  ]
+}

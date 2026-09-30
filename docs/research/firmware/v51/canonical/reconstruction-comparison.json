@@ -1,0 +1,3807 @@
+{
+  "scope": "Selected reconstructed C functions versus original ARM instructions. Each case uses fresh synthetic RAM. No physical device or peripheral execution.",
+  "passed": 700,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "C6 C versus ARM 0",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 1",
+      "pass": true,
+      "reply": "c70024"
+    },
+    {
+      "case": "C6 C versus ARM 2",
+      "pass": true,
+      "reply": "c7ffe2"
+    },
+    {
+      "case": "C6 C versus ARM 3",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 4",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 5",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 6",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 7",
+      "pass": true,
+      "reply": "c7ff90"
+    },
+    {
+      "case": "C6 C versus ARM 8",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 9",
+      "pass": true,
+      "reply": "c7ff98"
+    },
+    {
+      "case": "C6 C versus ARM 10",
+      "pass": true,
+      "reply": "c7ffbc"
+    },
+    {
+      "case": "C6 C versus ARM 11",
+      "pass": true,
+      "reply": "c7ff72"
+    },
+    {
+      "case": "C6 C versus ARM 12",
+      "pass": true,
+      "reply": "c7ff33"
+    },
+    {
+      "case": "C6 C versus ARM 13",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 14",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 15",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 16",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 17",
+      "pass": true,
+      "reply": "c7ff6e"
+    },
+    {
+      "case": "C6 C versus ARM 18",
+      "pass": true,
+      "reply": "c7ff64"
+    },
+    {
+      "case": "C6 C versus ARM 19",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 20",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 21",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 22",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 23",
+      "pass": true,
+      "reply": "c7ff03"
+    },
+    {
+      "case": "C6 C versus ARM 24",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 25",
+      "pass": true,
+      "reply": "c7ffa4"
+    },
+    {
+      "case": "C6 C versus ARM 26",
+      "pass": true,
+      "reply": "c70082"
+    },
+    {
+      "case": "C6 C versus ARM 27",
+      "pass": true,
+      "reply": "c70008"
+    },
+    {
+      "case": "C6 C versus ARM 28",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 29",
+      "pass": true,
+      "reply": "c7ff79"
+    },
+    {
+      "case": "C6 C versus ARM 30",
+      "pass": true,
+      "reply": "c7ff88"
+    },
+    {
+      "case": "C6 C versus ARM 31",
+      "pass": true,
+      "reply": "c7ff1f"
+    },
+    {
+      "case": "C6 C versus ARM 32",
+      "pass": true,
+      "reply": "c7ffaf"
+    },
+    {
+      "case": "C6 C versus ARM 33",
+      "pass": true,
+      "reply": "c7ff44"
+    },
+    {
+      "case": "C6 C versus ARM 34",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 35",
+      "pass": true,
+      "reply": "c70057"
+    },
+    {
+      "case": "C6 C versus ARM 36",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 37",
+      "pass": true,
+      "reply": "c70076"
+    },
+    {
+      "case": "C6 C versus ARM 38",
+      "pass": true,
+      "reply": "c70067"
+    },
+    {
+      "case": "C6 C versus ARM 39",
+      "pass": true,
+      "reply": "c70041"
+    },
+    {
+      "case": "C6 C versus ARM 40",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 41",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 42",
+      "pass": true,
+      "reply": "c7ffb6"
+    },
+    {
+      "case": "C6 C versus ARM 43",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 44",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 45",
+      "pass": true,
+      "reply": "c7003a"
+    },
+    {
+      "case": "C6 C versus ARM 46",
+      "pass": true,
+      "reply": "c7fffa"
+    },
+    {
+      "case": "C6 C versus ARM 47",
+      "pass": true,
+      "reply": "c70000"
+    },
+    {
+      "case": "C6 C versus ARM 48",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 49",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 50",
+      "pass": true,
+      "reply": "c7ff0b"
+    },
+    {
+      "case": "C6 C versus ARM 51",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 52",
+      "pass": true,
+      "reply": "c700ea"
+    },
+    {
+      "case": "C6 C versus ARM 53",
+      "pass": true,
+      "reply": "c7ff53"
+    },
+    {
+      "case": "C6 C versus ARM 54",
+      "pass": true,
+      "reply": "c7ff93"
+    },
+    {
+      "case": "C6 C versus ARM 55",
+      "pass": true,
+      "reply": "c7ff9f"
+    },
+    {
+      "case": "C6 C versus ARM 56",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 57",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 58",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 59",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 60",
+      "pass": true,
+      "reply": "c7ff82"
+    },
+    {
+      "case": "C6 C versus ARM 61",
+      "pass": true,
+      "reply": "c7ff21"
+    },
+    {
+      "case": "C6 C versus ARM 62",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 63",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 64",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 65",
+      "pass": true,
+      "reply": "c7ff0c"
+    },
+    {
+      "case": "C6 C versus ARM 66",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 67",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 68",
+      "pass": true,
+      "reply": "c7ffdf"
+    },
+    {
+      "case": "C6 C versus ARM 69",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 70",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 71",
+      "pass": true,
+      "reply": "c7ff24"
+    },
+    {
+      "case": "C6 C versus ARM 72",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 73",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 74",
+      "pass": true,
+      "reply": "c70094"
+    },
+    {
+      "case": "C6 C versus ARM 75",
+      "pass": true,
+      "reply": "c7ff1f"
+    },
+    {
+      "case": "C6 C versus ARM 76",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 77",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 78",
+      "pass": true,
+      "reply": "c7ff6c"
+    },
+    {
+      "case": "C6 C versus ARM 79",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 80",
+      "pass": true,
+      "reply": "c7ff92"
+    },
+    {
+      "case": "C6 C versus ARM 81",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 82",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 83",
+      "pass": true,
+      "reply": "c7003d"
+    },
+    {
+      "case": "C6 C versus ARM 84",
+      "pass": true,
+      "reply": "c7ff47"
+    },
+    {
+      "case": "C6 C versus ARM 85",
+      "pass": true,
+      "reply": "c7ff0d"
+    },
+    {
+      "case": "C6 C versus ARM 86",
+      "pass": true,
+      "reply": "c700fa"
+    },
+    {
+      "case": "C6 C versus ARM 87",
+      "pass": true,
+      "reply": "c7ffb5"
+    },
+    {
+      "case": "C6 C versus ARM 88",
+      "pass": true,
+      "reply": "c7fff0"
+    },
+    {
+      "case": "C6 C versus ARM 89",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 90",
+      "pass": true,
+      "reply": "c7ffbd"
+    },
+    {
+      "case": "C6 C versus ARM 91",
+      "pass": true,
+      "reply": "c70011"
+    },
+    {
+      "case": "C6 C versus ARM 92",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 93",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 94",
+      "pass": true,
+      "reply": "c700ca"
+    },
+    {
+      "case": "C6 C versus ARM 95",
+      "pass": true,
+      "reply": "c7ff4c"
+    },
+    {
+      "case": "C6 C versus ARM 96",
+      "pass": true,
+      "reply": "c7002c"
+    },
+    {
+      "case": "C6 C versus ARM 97",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 98",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 99",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 100",
+      "pass": true,
+      "reply": "c7ff83"
+    },
+    {
+      "case": "C6 C versus ARM 101",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 102",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 103",
+      "pass": true,
+      "reply": "c7ffe7"
+    },
+    {
+      "case": "C6 C versus ARM 104",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 105",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 106",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 107",
+      "pass": true,
+      "reply": "c7005b"
+    },
+    {
+      "case": "C6 C versus ARM 108",
+      "pass": true,
+      "reply": "c70068"
+    },
+    {
+      "case": "C6 C versus ARM 109",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 110",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 111",
+      "pass": true,
+      "reply": "c7ff75"
+    },
+    {
+      "case": "C6 C versus ARM 112",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 113",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 114",
+      "pass": true,
+      "reply": "c7000b"
+    },
+    {
+      "case": "C6 C versus ARM 115",
+      "pass": true,
+      "reply": "c7008b"
+    },
+    {
+      "case": "C6 C versus ARM 116",
+      "pass": true,
+      "reply": "c700a9"
+    },
+    {
+      "case": "C6 C versus ARM 117",
+      "pass": true,
+      "reply": "c7ff9b"
+    },
+    {
+      "case": "C6 C versus ARM 118",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 119",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 120",
+      "pass": true,
+      "reply": "c7ffce"
+    },
+    {
+      "case": "C6 C versus ARM 121",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 122",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 123",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 124",
+      "pass": true,
+      "reply": "c700b8"
+    },
+    {
+      "case": "C6 C versus ARM 125",
+      "pass": true,
+      "reply": "c7001c"
+    },
+    {
+      "case": "C6 C versus ARM 126",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 127",
+      "pass": true,
+      "reply": "c7ffb9"
+    },
+    {
+      "case": "C6 C versus ARM 128",
+      "pass": true,
+      "reply": "c7ff1b"
+    },
+    {
+      "case": "C6 C versus ARM 129",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 130",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 131",
+      "pass": true,
+      "reply": "c7ffd3"
+    },
+    {
+      "case": "C6 C versus ARM 132",
+      "pass": true,
+      "reply": "c7ffbb"
+    },
+    {
+      "case": "C6 C versus ARM 133",
+      "pass": true,
+      "reply": "c7ffb4"
+    },
+    {
+      "case": "C6 C versus ARM 134",
+      "pass": true,
+      "reply": "c7003f"
+    },
+    {
+      "case": "C6 C versus ARM 135",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 136",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 137",
+      "pass": true,
+      "reply": "c70067"
+    },
+    {
+      "case": "C6 C versus ARM 138",
+      "pass": true,
+      "reply": "c7ff5c"
+    },
+    {
+      "case": "C6 C versus ARM 139",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 140",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 141",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 142",
+      "pass": true,
+      "reply": "c7ffb0"
+    },
+    {
+      "case": "C6 C versus ARM 143",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 144",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 145",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 146",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 147",
+      "pass": true,
+      "reply": "c7ff84"
+    },
+    {
+      "case": "C6 C versus ARM 148",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 149",
+      "pass": true,
+      "reply": "c7ff27"
+    },
+    {
+      "case": "C6 C versus ARM 150",
+      "pass": true,
+      "reply": "c7ff45"
+    },
+    {
+      "case": "C6 C versus ARM 151",
+      "pass": true,
+      "reply": "c7ff72"
+    },
+    {
+      "case": "C6 C versus ARM 152",
+      "pass": true,
+      "reply": "c7ffea"
+    },
+    {
+      "case": "C6 C versus ARM 153",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 154",
+      "pass": true,
+      "reply": "c7ff87"
+    },
+    {
+      "case": "C6 C versus ARM 155",
+      "pass": true,
+      "reply": "c7fff6"
+    },
+    {
+      "case": "C6 C versus ARM 156",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 157",
+      "pass": true,
+      "reply": "c700d8"
+    },
+    {
+      "case": "C6 C versus ARM 158",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 159",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 160",
+      "pass": true,
+      "reply": "c70032"
+    },
+    {
+      "case": "C6 C versus ARM 161",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 162",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 163",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 164",
+      "pass": true,
+      "reply": "c7ffe6"
+    },
+    {
+      "case": "C6 C versus ARM 165",
+      "pass": true,
+      "reply": "c7ff3b"
+    },
+    {
+      "case": "C6 C versus ARM 166",
+      "pass": true,
+      "reply": "c7ff9c"
+    },
+    {
+      "case": "C6 C versus ARM 167",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 168",
+      "pass": true,
+      "reply": "c70064"
+    },
+    {
+      "case": "C6 C versus ARM 169",
+      "pass": true,
+      "reply": "c70085"
+    },
+    {
+      "case": "C6 C versus ARM 170",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 171",
+      "pass": true,
+      "reply": "c7ff32"
+    },
+    {
+      "case": "C6 C versus ARM 172",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 173",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 174",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 175",
+      "pass": true,
+      "reply": "c7ffba"
+    },
+    {
+      "case": "C6 C versus ARM 176",
+      "pass": true,
+      "reply": "c7ff57"
+    },
+    {
+      "case": "C6 C versus ARM 177",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 178",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 179",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 180",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 181",
+      "pass": true,
+      "reply": "c7ff7c"
+    },
+    {
+      "case": "C6 C versus ARM 182",
+      "pass": true,
+      "reply": "c7ff23"
+    },
+    {
+      "case": "C6 C versus ARM 183",
+      "pass": true,
+      "reply": "c7ff51"
+    },
+    {
+      "case": "C6 C versus ARM 184",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 185",
+      "pass": true,
+      "reply": "c7ff4f"
+    },
+    {
+      "case": "C6 C versus ARM 186",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 187",
+      "pass": true,
+      "reply": "c7ff5a"
+    },
+    {
+      "case": "C6 C versus ARM 188",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 189",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 190",
+      "pass": true,
+      "reply": "c7006b"
+    },
+    {
+      "case": "C6 C versus ARM 191",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 192",
+      "pass": true,
+      "reply": "c7ffa7"
+    },
+    {
+      "case": "C6 C versus ARM 193",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 194",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 195",
+      "pass": true,
+      "reply": "c700e5"
+    },
+    {
+      "case": "C6 C versus ARM 196",
+      "pass": true,
+      "reply": "c7ff00"
+    },
+    {
+      "case": "C6 C versus ARM 197",
+      "pass": true,
+      "reply": "c7fffc"
+    },
+    {
+      "case": "C6 C versus ARM 198",
+      "pass": true,
+      "reply": "c70092"
+    },
+    {
+      "case": "C6 C versus ARM 199",
+      "pass": true,
+      "reply": "c7fff7"
+    },
+    {
+      "case": "C6 C versus ARM 200",
+      "pass": true,
+      "reply": "c7ff86"
+    },
+    {
+      "case": "C6 C versus ARM 201",
+      "pass": true,
+      "reply": "c70009"
+    },
+    {
+      "case": "C6 C versus ARM 202",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 203",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 204",
+      "pass": true,
+      "reply": "c700c5"
+    },
+    {
+      "case": "C6 C versus ARM 205",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 206",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 207",
+      "pass": true,
+      "reply": "c7ffe6"
+    },
+    {
+      "case": "C6 C versus ARM 208",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 209",
+      "pass": true,
+      "reply": "c7ff5f"
+    },
+    {
+      "case": "C6 C versus ARM 210",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 211",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 212",
+      "pass": true,
+      "reply": "c700c4"
+    },
+    {
+      "case": "C6 C versus ARM 213",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 214",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 215",
+      "pass": true,
+      "reply": "c70095"
+    },
+    {
+      "case": "C6 C versus ARM 216",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 217",
+      "pass": true,
+      "reply": "c7ffe5"
+    },
+    {
+      "case": "C6 C versus ARM 218",
+      "pass": true,
+      "reply": "c7fffc"
+    },
+    {
+      "case": "C6 C versus ARM 219",
+      "pass": true,
+      "reply": "c7ffb3"
+    },
+    {
+      "case": "C6 C versus ARM 220",
+      "pass": true,
+      "reply": "c7ff88"
+    },
+    {
+      "case": "C6 C versus ARM 221",
+      "pass": true,
+      "reply": "c7ffc0"
+    },
+    {
+      "case": "C6 C versus ARM 222",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 223",
+      "pass": true,
+      "reply": "c70011"
+    },
+    {
+      "case": "C6 C versus ARM 224",
+      "pass": true,
+      "reply": "c7ff7d"
+    },
+    {
+      "case": "C6 C versus ARM 225",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 226",
+      "pass": true,
+      "reply": "c7fffd"
+    },
+    {
+      "case": "C6 C versus ARM 227",
+      "pass": true,
+      "reply": "c70081"
+    },
+    {
+      "case": "C6 C versus ARM 228",
+      "pass": true,
+      "reply": "c7ff96"
+    },
+    {
+      "case": "C6 C versus ARM 229",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 230",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 231",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 232",
+      "pass": true,
+      "reply": "c7ff1b"
+    },
+    {
+      "case": "C6 C versus ARM 233",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 234",
+      "pass": true,
+      "reply": "c7ffa1"
+    },
+    {
+      "case": "C6 C versus ARM 235",
+      "pass": true,
+      "reply": "c7ff45"
+    },
+    {
+      "case": "C6 C versus ARM 236",
+      "pass": true,
+      "reply": "c7ffd6"
+    },
+    {
+      "case": "C6 C versus ARM 237",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 238",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 239",
+      "pass": true,
+      "reply": "c700c8"
+    },
+    {
+      "case": "C6 C versus ARM 240",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 241",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 242",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 243",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 244",
+      "pass": true,
+      "reply": "c7ff03"
+    },
+    {
+      "case": "C6 C versus ARM 245",
+      "pass": true,
+      "reply": "c7006b"
+    },
+    {
+      "case": "C6 C versus ARM 246",
+      "pass": true,
+      "reply": "c70069"
+    },
+    {
+      "case": "C6 C versus ARM 247",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 248",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 249",
+      "pass": true,
+      "reply": "c70002"
+    },
+    {
+      "case": "C6 C versus ARM 250",
+      "pass": true,
+      "reply": "c7ffe4"
+    },
+    {
+      "case": "C6 C versus ARM 251",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 252",
+      "pass": true,
+      "reply": "c7ff3b"
+    },
+    {
+      "case": "C6 C versus ARM 253",
+      "pass": true,
+      "reply": "c700ae"
+    },
+    {
+      "case": "C6 C versus ARM 254",
+      "pass": true,
+      "reply": "c70033"
+    },
+    {
+      "case": "C6 C versus ARM 255",
+      "pass": true,
+      "reply": "c7ff35"
+    },
+    {
+      "case": "C6 C versus ARM 256",
+      "pass": true,
+      "reply": "c70061"
+    },
+    {
+      "case": "C6 C versus ARM 257",
+      "pass": true,
+      "reply": "c7ffc0"
+    },
+    {
+      "case": "C6 C versus ARM 258",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 259",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 260",
+      "pass": true,
+      "reply": "c7ff0f"
+    },
+    {
+      "case": "C6 C versus ARM 261",
+      "pass": true,
+      "reply": "c7ffc6"
+    },
+    {
+      "case": "C6 C versus ARM 262",
+      "pass": true,
+      "reply": "c7ff04"
+    },
+    {
+      "case": "C6 C versus ARM 263",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 264",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 265",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 266",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 267",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 268",
+      "pass": true,
+      "reply": "c7ff5a"
+    },
+    {
+      "case": "C6 C versus ARM 269",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 270",
+      "pass": true,
+      "reply": "c7ff7f"
+    },
+    {
+      "case": "C6 C versus ARM 271",
+      "pass": true,
+      "reply": "c7005d"
+    },
+    {
+      "case": "C6 C versus ARM 272",
+      "pass": true,
+      "reply": "c7ff82"
+    },
+    {
+      "case": "C6 C versus ARM 273",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 274",
+      "pass": true,
+      "reply": "c70064"
+    },
+    {
+      "case": "C6 C versus ARM 275",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 276",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 277",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 278",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 279",
+      "pass": true,
+      "reply": "c7ff24"
+    },
+    {
+      "case": "C6 C versus ARM 280",
+      "pass": true,
+      "reply": "c70064"
+    },
+    {
+      "case": "C6 C versus ARM 281",
+      "pass": true,
+      "reply": "c7ffc7"
+    },
+    {
+      "case": "C6 C versus ARM 282",
+      "pass": true,
+      "reply": "c700b1"
+    },
+    {
+      "case": "C6 C versus ARM 283",
+      "pass": true,
+      "reply": "c70007"
+    },
+    {
+      "case": "C6 C versus ARM 284",
+      "pass": true,
+      "reply": "c7ff41"
+    },
+    {
+      "case": "C6 C versus ARM 285",
+      "pass": true,
+      "reply": "c7ff11"
+    },
+    {
+      "case": "C6 C versus ARM 286",
+      "pass": true,
+      "reply": "c700e3"
+    },
+    {
+      "case": "C6 C versus ARM 287",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 288",
+      "pass": true,
+      "reply": "c7ff02"
+    },
+    {
+      "case": "C6 C versus ARM 289",
+      "pass": true,
+      "reply": "c7ff90"
+    },
+    {
+      "case": "C6 C versus ARM 290",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 291",
+      "pass": true,
+      "reply": "c7ff9f"
+    },
+    {
+      "case": "C6 C versus ARM 292",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 293",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 294",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 295",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 296",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 297",
+      "pass": true,
+      "reply": "c70099"
+    },
+    {
+      "case": "C6 C versus ARM 298",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 299",
+      "pass": true,
+      "reply": "c7ff9e"
+    },
+    {
+      "case": "C6 C versus ARM 300",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 301",
+      "pass": true,
+      "reply": "c7ff05"
+    },
+    {
+      "case": "C6 C versus ARM 302",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 303",
+      "pass": true,
+      "reply": "c7ff73"
+    },
+    {
+      "case": "C6 C versus ARM 304",
+      "pass": true,
+      "reply": "c7ff22"
+    },
+    {
+      "case": "C6 C versus ARM 305",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 306",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 307",
+      "pass": true,
+      "reply": "c7004d"
+    },
+    {
+      "case": "C6 C versus ARM 308",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 309",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 310",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 311",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 312",
+      "pass": true,
+      "reply": "c7ff13"
+    },
+    {
+      "case": "C6 C versus ARM 313",
+      "pass": true,
+      "reply": "c70020"
+    },
+    {
+      "case": "C6 C versus ARM 314",
+      "pass": true,
+      "reply": "c700fa"
+    },
+    {
+      "case": "C6 C versus ARM 315",
+      "pass": true,
+      "reply": "c7ff49"
+    },
+    {
+      "case": "C6 C versus ARM 316",
+      "pass": true,
+      "reply": "c7ffb1"
+    },
+    {
+      "case": "C6 C versus ARM 317",
+      "pass": true,
+      "reply": "c7ffa3"
+    },
+    {
+      "case": "C6 C versus ARM 318",
+      "pass": true,
+      "reply": "c7ff7d"
+    },
+    {
+      "case": "C6 C versus ARM 319",
+      "pass": true,
+      "reply": "c7ff6d"
+    },
+    {
+      "case": "C6 C versus ARM 320",
+      "pass": true,
+      "reply": "c700e0"
+    },
+    {
+      "case": "C6 C versus ARM 321",
+      "pass": true,
+      "reply": "c7ff0c"
+    },
+    {
+      "case": "C6 C versus ARM 322",
+      "pass": true,
+      "reply": "c70080"
+    },
+    {
+      "case": "C6 C versus ARM 323",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 324",
+      "pass": true,
+      "reply": "c700a7"
+    },
+    {
+      "case": "C6 C versus ARM 325",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 326",
+      "pass": true,
+      "reply": "c7ffa2"
+    },
+    {
+      "case": "C6 C versus ARM 327",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 328",
+      "pass": true,
+      "reply": "c7ffe3"
+    },
+    {
+      "case": "C6 C versus ARM 329",
+      "pass": true,
+      "reply": "c70071"
+    },
+    {
+      "case": "C6 C versus ARM 330",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 331",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 332",
+      "pass": true,
+      "reply": "c700e2"
+    },
+    {
+      "case": "C6 C versus ARM 333",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 334",
+      "pass": true,
+      "reply": "c7ff71"
+    },
+    {
+      "case": "C6 C versus ARM 335",
+      "pass": true,
+      "reply": "c7ff62"
+    },
+    {
+      "case": "C6 C versus ARM 336",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 337",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 338",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 339",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 340",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 341",
+      "pass": true,
+      "reply": "c7ff54"
+    },
+    {
+      "case": "C6 C versus ARM 342",
+      "pass": true,
+      "reply": "c7ffde"
+    },
+    {
+      "case": "C6 C versus ARM 343",
+      "pass": true,
+      "reply": "c7ff56"
+    },
+    {
+      "case": "C6 C versus ARM 344",
+      "pass": true,
+      "reply": "c7fffe"
+    },
+    {
+      "case": "C6 C versus ARM 345",
+      "pass": true,
+      "reply": "c7ff50"
+    },
+    {
+      "case": "C6 C versus ARM 346",
+      "pass": true,
+      "reply": "c7ff1a"
+    },
+    {
+      "case": "C6 C versus ARM 347",
+      "pass": true,
+      "reply": "c70005"
+    },
+    {
+      "case": "C6 C versus ARM 348",
+      "pass": true,
+      "reply": "c7ff0e"
+    },
+    {
+      "case": "C6 C versus ARM 349",
+      "pass": true,
+      "reply": "c7ffa9"
+    },
+    {
+      "case": "C6 C versus ARM 350",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 351",
+      "pass": true,
+      "reply": "c7ff69"
+    },
+    {
+      "case": "C6 C versus ARM 352",
+      "pass": true,
+      "reply": "c700a3"
+    },
+    {
+      "case": "C6 C versus ARM 353",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 354",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 355",
+      "pass": true,
+      "reply": "c7fff2"
+    },
+    {
+      "case": "C6 C versus ARM 356",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 357",
+      "pass": true,
+      "reply": "c700a0"
+    },
+    {
+      "case": "C6 C versus ARM 358",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 359",
+      "pass": true,
+      "reply": "c7fff1"
+    },
+    {
+      "case": "C6 C versus ARM 360",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 361",
+      "pass": true,
+      "reply": "c7ffa0"
+    },
+    {
+      "case": "C6 C versus ARM 362",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 363",
+      "pass": true,
+      "reply": "c7ffda"
+    },
+    {
+      "case": "C6 C versus ARM 364",
+      "pass": true,
+      "reply": "c700a3"
+    },
+    {
+      "case": "C6 C versus ARM 365",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 366",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 367",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 368",
+      "pass": true,
+      "reply": "c7ff10"
+    },
+    {
+      "case": "C6 C versus ARM 369",
+      "pass": true,
+      "reply": "c7ff38"
+    },
+    {
+      "case": "C6 C versus ARM 370",
+      "pass": true,
+      "reply": "c7ff6a"
+    },
+    {
+      "case": "C6 C versus ARM 371",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 372",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 373",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 374",
+      "pass": true,
+      "reply": "c7ff33"
+    },
+    {
+      "case": "C6 C versus ARM 375",
+      "pass": true,
+      "reply": "c700a3"
+    },
+    {
+      "case": "C6 C versus ARM 376",
+      "pass": true,
+      "reply": "c7ff2f"
+    },
+    {
+      "case": "C6 C versus ARM 377",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 378",
+      "pass": true,
+      "reply": "c7ffa4"
+    },
+    {
+      "case": "C6 C versus ARM 379",
+      "pass": true,
+      "reply": "c7ff64"
+    },
+    {
+      "case": "C6 C versus ARM 380",
+      "pass": true,
+      "reply": "c7ffca"
+    },
+    {
+      "case": "C6 C versus ARM 381",
+      "pass": true,
+      "reply": "c70000"
+    },
+    {
+      "case": "C6 C versus ARM 382",
+      "pass": true,
+      "reply": "c700e5"
+    },
+    {
+      "case": "C6 C versus ARM 383",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 384",
+      "pass": true,
+      "reply": "c7fff6"
+    },
+    {
+      "case": "C6 C versus ARM 385",
+      "pass": true,
+      "reply": "c7ffb9"
+    },
+    {
+      "case": "C6 C versus ARM 386",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 387",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 388",
+      "pass": true,
+      "reply": "c7ff7f"
+    },
+    {
+      "case": "C6 C versus ARM 389",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 390",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 391",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 392",
+      "pass": true,
+      "reply": "c7ff"
+    },
+    {
+      "case": "C6 C versus ARM 393",
+      "pass": true,
+      "reply": "c7ffa1"
+    },
+    {
+      "case": "C6 C versus ARM 394",
+      "pass": true,
+      "reply": "c700"
+    },
+    {
+      "case": "C6 C versus ARM 395",
+      "pass": true,
+      "reply": "c7ff73"
+    },
+    {
+      "case": "C6 C versus ARM 396",
+      "pass": true,
+      "reply": "c7ffb5"
+    },
+    {
+      "case": "C6 C versus ARM 397",
+      "pass": true,
+      "reply": "c7ff9e"
+    },
+    {
+      "case": "C6 C versus ARM 398",
+      "pass": true,
+      "reply": "c7ff74"
+    },
+    {
+      "case": "C6 C versus ARM 399",
+      "pass": true,
+      "reply": "c700d9"
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 0",
+      "pass": true,
+      "payload_length": 31,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 1",
+      "pass": true,
+      "payload_length": 48,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 2",
+      "pass": true,
+      "payload_length": 75,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 3",
+      "pass": true,
+      "payload_length": 93,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 4",
+      "pass": true,
+      "payload_length": 39,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 5",
+      "pass": true,
+      "payload_length": 70,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 6",
+      "pass": true,
+      "payload_length": 87,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 7",
+      "pass": true,
+      "payload_length": 54,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 8",
+      "pass": true,
+      "payload_length": 39,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 9",
+      "pass": true,
+      "payload_length": 96,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 10",
+      "pass": true,
+      "payload_length": 85,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 11",
+      "pass": true,
+      "payload_length": 101,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 12",
+      "pass": true,
+      "payload_length": 32,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 13",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 14",
+      "pass": true,
+      "payload_length": 26,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 15",
+      "pass": true,
+      "payload_length": 15,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 16",
+      "pass": true,
+      "payload_length": 37,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 17",
+      "pass": true,
+      "payload_length": 94,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 18",
+      "pass": true,
+      "payload_length": 50,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 19",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 20",
+      "pass": true,
+      "payload_length": 76,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 21",
+      "pass": true,
+      "payload_length": 43,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 22",
+      "pass": true,
+      "payload_length": 113,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 23",
+      "pass": true,
+      "payload_length": 38,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 24",
+      "pass": true,
+      "payload_length": 110,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 25",
+      "pass": true,
+      "payload_length": 110,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 26",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 27",
+      "pass": true,
+      "payload_length": 71,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 28",
+      "pass": true,
+      "payload_length": 1,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 29",
+      "pass": true,
+      "payload_length": 12,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 30",
+      "pass": true,
+      "payload_length": 47,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 31",
+      "pass": true,
+      "payload_length": 23,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 32",
+      "pass": true,
+      "payload_length": 82,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 33",
+      "pass": true,
+      "payload_length": 100,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 34",
+      "pass": true,
+      "payload_length": 39,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 35",
+      "pass": true,
+      "payload_length": 9,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 36",
+      "pass": true,
+      "payload_length": 17,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 37",
+      "pass": true,
+      "payload_length": 121,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 38",
+      "pass": true,
+      "payload_length": 80,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 39",
+      "pass": true,
+      "payload_length": 79,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 40",
+      "pass": true,
+      "payload_length": 72,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 41",
+      "pass": true,
+      "payload_length": 82,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 42",
+      "pass": true,
+      "payload_length": 118,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 43",
+      "pass": true,
+      "payload_length": 114,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 44",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 45",
+      "pass": true,
+      "payload_length": 5,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 46",
+      "pass": true,
+      "payload_length": 12,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 47",
+      "pass": true,
+      "payload_length": 39,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 48",
+      "pass": true,
+      "payload_length": 98,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 49",
+      "pass": true,
+      "payload_length": 42,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 50",
+      "pass": true,
+      "payload_length": 17,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 51",
+      "pass": true,
+      "payload_length": 7,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 52",
+      "pass": true,
+      "payload_length": 6,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 53",
+      "pass": true,
+      "payload_length": 94,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 54",
+      "pass": true,
+      "payload_length": 98,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 55",
+      "pass": true,
+      "payload_length": 15,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 56",
+      "pass": true,
+      "payload_length": 55,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 57",
+      "pass": true,
+      "payload_length": 36,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 58",
+      "pass": true,
+      "payload_length": 5,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 59",
+      "pass": true,
+      "payload_length": 111,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 60",
+      "pass": true,
+      "payload_length": 32,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 61",
+      "pass": true,
+      "payload_length": 83,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 62",
+      "pass": true,
+      "payload_length": 43,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 63",
+      "pass": true,
+      "payload_length": 62,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 64",
+      "pass": true,
+      "payload_length": 120,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 65",
+      "pass": true,
+      "payload_length": 49,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 66",
+      "pass": true,
+      "payload_length": 120,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 67",
+      "pass": true,
+      "payload_length": 25,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 68",
+      "pass": true,
+      "payload_length": 115,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 69",
+      "pass": true,
+      "payload_length": 22,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 70",
+      "pass": true,
+      "payload_length": 85,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 71",
+      "pass": true,
+      "payload_length": 86,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 72",
+      "pass": true,
+      "payload_length": 23,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 73",
+      "pass": true,
+      "payload_length": 115,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 74",
+      "pass": true,
+      "payload_length": 63,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 75",
+      "pass": true,
+      "payload_length": 10,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 76",
+      "pass": true,
+      "payload_length": 119,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 77",
+      "pass": true,
+      "payload_length": 75,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 78",
+      "pass": true,
+      "payload_length": 14,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 79",
+      "pass": true,
+      "payload_length": 96,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 80",
+      "pass": true,
+      "payload_length": 50,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 81",
+      "pass": true,
+      "payload_length": 104,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 82",
+      "pass": true,
+      "payload_length": 75,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 83",
+      "pass": true,
+      "payload_length": 32,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 84",
+      "pass": true,
+      "payload_length": 31,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 85",
+      "pass": true,
+      "payload_length": 15,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 86",
+      "pass": true,
+      "payload_length": 121,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 87",
+      "pass": true,
+      "payload_length": 123,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 88",
+      "pass": true,
+      "payload_length": 77,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 89",
+      "pass": true,
+      "payload_length": 102,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 90",
+      "pass": true,
+      "payload_length": 112,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 91",
+      "pass": true,
+      "payload_length": 1,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 92",
+      "pass": true,
+      "payload_length": 79,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 93",
+      "pass": true,
+      "payload_length": 23,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 94",
+      "pass": true,
+      "payload_length": 115,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 95",
+      "pass": true,
+      "payload_length": 19,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 96",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 97",
+      "pass": true,
+      "payload_length": 16,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 98",
+      "pass": true,
+      "payload_length": 6,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 99",
+      "pass": true,
+      "payload_length": 101,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 100",
+      "pass": true,
+      "payload_length": 55,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 101",
+      "pass": true,
+      "payload_length": 84,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 102",
+      "pass": true,
+      "payload_length": 46,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 103",
+      "pass": true,
+      "payload_length": 93,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 104",
+      "pass": true,
+      "payload_length": 53,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 105",
+      "pass": true,
+      "payload_length": 95,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 106",
+      "pass": true,
+      "payload_length": 72,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 107",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 108",
+      "pass": true,
+      "payload_length": 13,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 109",
+      "pass": true,
+      "payload_length": 17,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 110",
+      "pass": true,
+      "payload_length": 57,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 111",
+      "pass": true,
+      "payload_length": 71,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 112",
+      "pass": true,
+      "payload_length": 50,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 113",
+      "pass": true,
+      "payload_length": 112,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 114",
+      "pass": true,
+      "payload_length": 13,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 115",
+      "pass": true,
+      "payload_length": 49,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 116",
+      "pass": true,
+      "payload_length": 86,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 117",
+      "pass": true,
+      "payload_length": 53,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 118",
+      "pass": true,
+      "payload_length": 89,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 119",
+      "pass": true,
+      "payload_length": 63,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 120",
+      "pass": true,
+      "payload_length": 74,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 121",
+      "pass": true,
+      "payload_length": 51,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 122",
+      "pass": true,
+      "payload_length": 110,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 123",
+      "pass": true,
+      "payload_length": 34,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 124",
+      "pass": true,
+      "payload_length": 23,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 125",
+      "pass": true,
+      "payload_length": 33,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 126",
+      "pass": true,
+      "payload_length": 23,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 127",
+      "pass": true,
+      "payload_length": 53,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 128",
+      "pass": true,
+      "payload_length": 74,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 129",
+      "pass": true,
+      "payload_length": 97,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 130",
+      "pass": true,
+      "payload_length": 46,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 131",
+      "pass": true,
+      "payload_length": 54,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 132",
+      "pass": true,
+      "payload_length": 98,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 133",
+      "pass": true,
+      "payload_length": 36,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 134",
+      "pass": true,
+      "payload_length": 35,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 135",
+      "pass": true,
+      "payload_length": 18,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 136",
+      "pass": true,
+      "payload_length": 100,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 137",
+      "pass": true,
+      "payload_length": 108,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 138",
+      "pass": true,
+      "payload_length": 87,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 139",
+      "pass": true,
+      "payload_length": 80,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 140",
+      "pass": true,
+      "payload_length": 52,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 141",
+      "pass": true,
+      "payload_length": 119,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 142",
+      "pass": true,
+      "payload_length": 59,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 143",
+      "pass": true,
+      "payload_length": 35,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 144",
+      "pass": true,
+      "payload_length": 123,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 145",
+      "pass": true,
+      "payload_length": 86,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 146",
+      "pass": true,
+      "payload_length": 105,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 147",
+      "pass": true,
+      "payload_length": 59,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 148",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 149",
+      "pass": true,
+      "payload_length": 117,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 150",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 151",
+      "pass": true,
+      "payload_length": 89,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 152",
+      "pass": true,
+      "payload_length": 42,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 153",
+      "pass": true,
+      "payload_length": 29,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 154",
+      "pass": true,
+      "payload_length": 87,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 155",
+      "pass": true,
+      "payload_length": 100,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 156",
+      "pass": true,
+      "payload_length": 61,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 157",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 158",
+      "pass": true,
+      "payload_length": 79,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 159",
+      "pass": true,
+      "payload_length": 121,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 160",
+      "pass": true,
+      "payload_length": 104,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 161",
+      "pass": true,
+      "payload_length": 28,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 162",
+      "pass": true,
+      "payload_length": 107,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 163",
+      "pass": true,
+      "payload_length": 39,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 164",
+      "pass": true,
+      "payload_length": 80,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 165",
+      "pass": true,
+      "payload_length": 102,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 166",
+      "pass": true,
+      "payload_length": 87,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 167",
+      "pass": true,
+      "payload_length": 92,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 168",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 169",
+      "pass": true,
+      "payload_length": 65,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 170",
+      "pass": true,
+      "payload_length": 93,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 171",
+      "pass": true,
+      "payload_length": 1,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 172",
+      "pass": true,
+      "payload_length": 20,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 173",
+      "pass": true,
+      "payload_length": 116,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 174",
+      "pass": true,
+      "payload_length": 37,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 175",
+      "pass": true,
+      "payload_length": 11,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 176",
+      "pass": true,
+      "payload_length": 95,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 177",
+      "pass": true,
+      "payload_length": 34,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 178",
+      "pass": true,
+      "payload_length": 71,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 179",
+      "pass": true,
+      "payload_length": 7,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 180",
+      "pass": true,
+      "payload_length": 82,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 181",
+      "pass": true,
+      "payload_length": 35,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 182",
+      "pass": true,
+      "payload_length": 86,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 183",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 184",
+      "pass": true,
+      "payload_length": 114,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 185",
+      "pass": true,
+      "payload_length": 122,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 186",
+      "pass": true,
+      "payload_length": 8,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 187",
+      "pass": true,
+      "payload_length": 4,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 188",
+      "pass": true,
+      "payload_length": 106,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 189",
+      "pass": true,
+      "payload_length": 87,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 190",
+      "pass": true,
+      "payload_length": 5,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 191",
+      "pass": true,
+      "payload_length": 65,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 192",
+      "pass": true,
+      "payload_length": 26,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 193",
+      "pass": true,
+      "payload_length": 20,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 194",
+      "pass": true,
+      "payload_length": 115,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 195",
+      "pass": true,
+      "payload_length": 8,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 196",
+      "pass": true,
+      "payload_length": 59,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 197",
+      "pass": true,
+      "payload_length": 94,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 198",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 199",
+      "pass": true,
+      "payload_length": 13,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 200",
+      "pass": true,
+      "payload_length": 63,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 201",
+      "pass": true,
+      "payload_length": 80,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 202",
+      "pass": true,
+      "payload_length": 55,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 203",
+      "pass": true,
+      "payload_length": 61,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 204",
+      "pass": true,
+      "payload_length": 83,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 205",
+      "pass": true,
+      "payload_length": 24,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 206",
+      "pass": true,
+      "payload_length": 59,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 207",
+      "pass": true,
+      "payload_length": 34,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 208",
+      "pass": true,
+      "payload_length": 43,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 209",
+      "pass": true,
+      "payload_length": 12,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 210",
+      "pass": true,
+      "payload_length": 62,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 211",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 212",
+      "pass": true,
+      "payload_length": 21,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 213",
+      "pass": true,
+      "payload_length": 32,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 214",
+      "pass": true,
+      "payload_length": 35,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 215",
+      "pass": true,
+      "payload_length": 9,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 216",
+      "pass": true,
+      "payload_length": 21,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 217",
+      "pass": true,
+      "payload_length": 26,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 218",
+      "pass": true,
+      "payload_length": 42,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 219",
+      "pass": true,
+      "payload_length": 92,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 220",
+      "pass": true,
+      "payload_length": 50,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 221",
+      "pass": true,
+      "payload_length": 46,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 222",
+      "pass": true,
+      "payload_length": 112,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 223",
+      "pass": true,
+      "payload_length": 36,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 224",
+      "pass": true,
+      "payload_length": 59,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 225",
+      "pass": true,
+      "payload_length": 27,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 226",
+      "pass": true,
+      "payload_length": 4,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 227",
+      "pass": true,
+      "payload_length": 115,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 228",
+      "pass": true,
+      "payload_length": 58,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 229",
+      "pass": true,
+      "payload_length": 52,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 230",
+      "pass": true,
+      "payload_length": 70,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 231",
+      "pass": true,
+      "payload_length": 54,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 232",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 233",
+      "pass": true,
+      "payload_length": 122,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 234",
+      "pass": true,
+      "payload_length": 43,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 235",
+      "pass": true,
+      "payload_length": 46,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 236",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 237",
+      "pass": true,
+      "payload_length": 120,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 238",
+      "pass": true,
+      "payload_length": 58,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 239",
+      "pass": true,
+      "payload_length": 91,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 240",
+      "pass": true,
+      "payload_length": 85,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 241",
+      "pass": true,
+      "payload_length": 89,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 242",
+      "pass": true,
+      "payload_length": 89,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 243",
+      "pass": true,
+      "payload_length": 28,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 244",
+      "pass": true,
+      "payload_length": 59,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 245",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 246",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 247",
+      "pass": true,
+      "payload_length": 8,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 248",
+      "pass": true,
+      "payload_length": 77,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 249",
+      "pass": true,
+      "payload_length": 79,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 250",
+      "pass": true,
+      "payload_length": 90,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 251",
+      "pass": true,
+      "payload_length": 117,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 252",
+      "pass": true,
+      "payload_length": 122,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 253",
+      "pass": true,
+      "payload_length": 119,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 254",
+      "pass": true,
+      "payload_length": 60,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 255",
+      "pass": true,
+      "payload_length": 116,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 256",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 257",
+      "pass": true,
+      "payload_length": 110,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 258",
+      "pass": true,
+      "payload_length": 15,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 259",
+      "pass": true,
+      "payload_length": 65,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 260",
+      "pass": true,
+      "payload_length": 27,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 261",
+      "pass": true,
+      "payload_length": 8,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 262",
+      "pass": true,
+      "payload_length": 106,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 263",
+      "pass": true,
+      "payload_length": 6,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 264",
+      "pass": true,
+      "payload_length": 55,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 265",
+      "pass": true,
+      "payload_length": 110,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 266",
+      "pass": true,
+      "payload_length": 54,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 267",
+      "pass": true,
+      "payload_length": 111,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 268",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 269",
+      "pass": true,
+      "payload_length": 10,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 270",
+      "pass": true,
+      "payload_length": 63,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 271",
+      "pass": true,
+      "payload_length": 24,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 272",
+      "pass": true,
+      "payload_length": 78,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 273",
+      "pass": true,
+      "payload_length": 99,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 274",
+      "pass": true,
+      "payload_length": 41,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 275",
+      "pass": true,
+      "payload_length": 105,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 276",
+      "pass": true,
+      "payload_length": 68,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 277",
+      "pass": true,
+      "payload_length": 32,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 278",
+      "pass": true,
+      "payload_length": 77,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 279",
+      "pass": true,
+      "payload_length": 89,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 280",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 281",
+      "pass": true,
+      "payload_length": 40,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 282",
+      "pass": true,
+      "payload_length": 39,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 283",
+      "pass": true,
+      "payload_length": 51,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 284",
+      "pass": true,
+      "payload_length": 85,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 285",
+      "pass": true,
+      "payload_length": 92,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 286",
+      "pass": true,
+      "payload_length": 26,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 287",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 288",
+      "pass": true,
+      "payload_length": 73,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 289",
+      "pass": true,
+      "payload_length": 97,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 290",
+      "pass": true,
+      "payload_length": 88,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 291",
+      "pass": true,
+      "payload_length": 78,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 292",
+      "pass": true,
+      "payload_length": 32,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 293",
+      "pass": true,
+      "payload_length": 107,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 294",
+      "pass": true,
+      "payload_length": 95,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 295",
+      "pass": true,
+      "payload_length": 32,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 296",
+      "pass": true,
+      "payload_length": 7,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 297",
+      "pass": true,
+      "payload_length": 107,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 298",
+      "pass": true,
+      "payload_length": 39,
+      "bad_checksum_rejected": true
+    },
+    {
+      "case": "encoder C versus ARM and decoder roundtrip 299",
+      "pass": true,
+      "payload_length": 5,
+      "bad_checksum_rejected": true
+    }
+  ]
+}

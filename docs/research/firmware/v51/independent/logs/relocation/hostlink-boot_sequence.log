@@ -1,0 +1,16 @@
+after E1: 0x9434..37 = 01 00 00 0f K+0 = 1
+after FD 03: 9449=1 bits=0x2000
+after 2nd E1: 0x942c..33 = 01 00 00 0f 01 00 00 0f
+  t=  501 ms  addr 23  e0
+  t= 1701 ms  addr 23  fc 2a 4d 50 33 30 35 42 20 20 01 35 02 00
+  t= 2202 ms  addr 23  fc 2a 4d 50 33 30 35 42 20 20 01 35 02 00
+  t= 2410 ms  addr 23  e0
+  t= 2420 ms  addr 23  50 01
+  t= 2430 ms  addr 23  52 53
+  t= 2431 ms  addr 23  10
+  t=12431 ms  addr 23  10
+  e0     count   2 first   501 last  2410
+  fc 2a  count   2 first  1701 last  2202
+  50 01  count   1 first  2420 last  2420
+  52 53  count   1 first  2430 last  2430
+  10     count   2 first  2431 last 12431

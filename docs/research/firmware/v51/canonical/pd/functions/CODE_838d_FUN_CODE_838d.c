@@ -1,0 +1,20 @@
+/* Address: CODE:838d; name: FUN_CODE_838d; body bytes: 58 */
+
+void FUN_CODE_838d(void)
+
+{
+  DAT_EXTMEM_2013 = 0xb9;
+  DAT_EXTMEM_2012 = 0x11;
+  DAT_EXTMEM_203a = 0;
+  DAT_EXTMEM_203b = 0;
+  DAT_EXTMEM_2038 = 0;
+  DAT_EXTMEM_2039 = 0;
+  DAT_EXTMEM_231e = 0x7a;
+  DAT_EXTMEM_231f = 0x3d;
+  DAT_EXTMEM_2309 = 0x10;
+  DAT_EXTMEM_241e = 0x7a;
+  DAT_EXTMEM_241f = 0x3d;
+  DAT_EXTMEM_2409 = 0x10;
+  return;
+}
+

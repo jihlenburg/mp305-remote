@@ -1,0 +1,173 @@
+{
+  "scope": "Original RV32 application instructions. SDK boolean memcmp/memset/memcpy, flash storage, GATT notification and USB sender explicitly substituted. No radio, physical flash or USB execution.",
+  "passed": 27,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "GATT to main route 0",
+      "pass_result": true
+    },
+    {
+      "case": "GATT to main route 1",
+      "pass_result": true
+    },
+    {
+      "case": "GATT to main route 2",
+      "pass_result": true
+    },
+    {
+      "case": "main reply route 49",
+      "pass_result": true,
+      "events": [
+        {
+          "target": "0x6ff6",
+          "bytes": "31c300",
+          "length": 3
+        }
+      ]
+    },
+    {
+      "case": "main reply route 0",
+      "pass_result": true,
+      "events": [
+        {
+          "target": "0x6f6c",
+          "bytes": "c300",
+          "length": 2
+        }
+      ]
+    },
+    {
+      "case": "save host 1",
+      "pass_result": true,
+      "stored": "01010101010101010101010101010101ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "save host 2",
+      "pass_result": true,
+      "stored": "0101010101010101010101010101010102020202020202020202020202020202ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "save host 3",
+      "pass_result": true,
+      "stored": "010101010101010101010101010101010202020202020202020202020202020203030303030303030303030303030303ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "save host 4",
+      "pass_result": true,
+      "stored": "01010101010101010101010101010101020202020202020202020202020202020303030303030303030303030303030304040404040404040404040404040404ffffffffffffffffffffffffffffffff"
+    },
+    {
+      "case": "save host 5",
+      "pass_result": true,
+      "stored": "0101010101010101010101010101010102020202020202020202020202020202030303030303030303030303030303030404040404040404040404040404040405050505050505050505050505050505"
+    },
+    {
+      "case": "save host 6",
+      "pass_result": true,
+      "stored": "0202020202020202020202020202020203030303030303030303030303030303040404040404040404040404040404040505050505050505050505050505050506060606060606060606060606060606"
+    },
+    {
+      "case": "save host 7",
+      "pass_result": true,
+      "stored": "0303030303030303030303030303030304040404040404040404040404040404050505050505050505050505050505050606060606060606060606060606060607070707070707070707070707070707"
+    },
+    {
+      "case": "find host 1",
+      "pass_result": true,
+      "found": 0
+    },
+    {
+      "case": "find host 2",
+      "pass_result": true,
+      "found": 0
+    },
+    {
+      "case": "find host 3",
+      "pass_result": true,
+      "found": 1
+    },
+    {
+      "case": "find host 4",
+      "pass_result": true,
+      "found": 1
+    },
+    {
+      "case": "find host 5",
+      "pass_result": true,
+      "found": 1
+    },
+    {
+      "case": "find host 6",
+      "pass_result": true,
+      "found": 1
+    },
+    {
+      "case": "find host 7",
+      "pass_result": true,
+      "found": 1
+    },
+    {
+      "case": "find host 8",
+      "pass_result": true,
+      "found": 0
+    },
+    {
+      "case": "USB queue length 1",
+      "pass_result": true,
+      "chunks": [
+        1
+      ]
+    },
+    {
+      "case": "USB queue length 61",
+      "pass_result": true,
+      "chunks": [
+        61
+      ]
+    },
+    {
+      "case": "USB queue length 62",
+      "pass_result": true,
+      "chunks": [
+        62
+      ]
+    },
+    {
+      "case": "USB queue length 63",
+      "pass_result": true,
+      "chunks": [
+        62,
+        1
+      ]
+    },
+    {
+      "case": "USB queue length 124",
+      "pass_result": true,
+      "chunks": [
+        62,
+        62
+      ]
+    },
+    {
+      "case": "USB queue length 125",
+      "pass_result": true,
+      "chunks": [
+        62,
+        62,
+        1
+      ]
+    },
+    {
+      "case": "USB queue length 255",
+      "pass_result": true,
+      "chunks": [
+        62,
+        62,
+        62,
+        62,
+        7
+      ]
+    }
+  ]
+}

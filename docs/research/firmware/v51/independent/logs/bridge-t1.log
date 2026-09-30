@@ -1,0 +1,8 @@
+AF01 12 c4 -> UART: aa 62 02 c4 31 59
+AF02 e0 -> UART: aa 62 02 e0 00 44
+AF02 bind -> UART: aa 62 14 18 00 08 08 08 08 08 08 08 08 08 08 08 08 08 08 00 00 00 00 fe
+pending host id @0x20005130: 00 08 08 08 08 08 08 08 08 08 08 08 08 08 08 00
+AF02 00 -> notify: [(0, '01 00 00 00 00 00 00 a1 a2 a3 a4 a5 a6')] UART: 
+AF01 10 -> notify: [(0, '31 c1 00')] UART: 
+adv data: 02 01 06 03 02 00 af 17 ff ba ab af fa 01 35 02 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e
+flash 0x6e00: 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e ff ff ff ff ff ff ff ff

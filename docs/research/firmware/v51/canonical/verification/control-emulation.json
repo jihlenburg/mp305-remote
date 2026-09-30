@@ -1,0 +1,151 @@
+{
+  "scope": "Original ARM C8 instructions, synthetic RAM and Cortex system registers. No hardware.",
+  "passed": 18,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "valid control",
+      "reply": "c900",
+      "voltage_requested_raw": 500,
+      "current_requested_raw": 100,
+      "grant": 1,
+      "requested_mode": 0
+    },
+    {
+      "case": "not granted",
+      "reply": "c901",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "wrong active mode 1",
+      "reply": "c9ff",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "wrong active mode 2",
+      "reply": "c9ff",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "wrong active mode 3",
+      "reply": "c9ff",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "invalid remote selector",
+      "reply": "c9ff",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "release remote",
+      "reply": "c900",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "request remote over connection type 2",
+      "reply": "c900",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 1,
+      "requested_mode": 0
+    },
+    {
+      "case": "request remote pending on connection type 1",
+      "reply": "",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "request remote pending without connection",
+      "reply": "",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 0,
+      "requested_mode": 0
+    },
+    {
+      "case": "maximum voltage",
+      "reply": "c900",
+      "voltage_requested_raw": 3050,
+      "current_requested_raw": 100,
+      "grant": 1,
+      "requested_mode": 0
+    },
+    {
+      "case": "above maximum voltage",
+      "reply": "c9ff",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 1,
+      "requested_mode": 0
+    },
+    {
+      "case": "maximum current",
+      "reply": "c900",
+      "voltage_requested_raw": 500,
+      "current_requested_raw": 5100,
+      "grant": 1,
+      "requested_mode": 0
+    },
+    {
+      "case": "later invalid current preserves changed voltage",
+      "reply": "c9ff",
+      "voltage_requested_raw": 1234,
+      "current_requested_raw": 0,
+      "grant": 1,
+      "requested_mode": 0
+    },
+    {
+      "case": "mode switch to 1 skips voltage/current",
+      "reply": "c900",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 1,
+      "requested_mode": 1
+    },
+    {
+      "case": "mode switch to 2 skips voltage/current",
+      "reply": "c900",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 1,
+      "requested_mode": 2
+    },
+    {
+      "case": "mode switch to 3 skips voltage/current",
+      "reply": "c900",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 1,
+      "requested_mode": 3
+    },
+    {
+      "case": "invalid requested mode",
+      "reply": "c9ff",
+      "voltage_requested_raw": 0,
+      "current_requested_raw": 0,
+      "grant": 1,
+      "requested_mode": 0
+    }
+  ]
+}

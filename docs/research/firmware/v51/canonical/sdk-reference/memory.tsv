@@ -1,0 +1,9 @@
+name	start	end	initialized	writable	executable
+ram	ram:00040000	ram:0006c77f	true	false	true
+SDK_vectors	ram:20000000	ram:2000000f	false	true	false
+SDK_RAM_startup	ram:20000010	ram:2000003f	true	true	true
+SDK_RAM_code	ram:20000040	ram:200018b7	true	true	true
+SDK_RAM_data	ram:200018b8	ram:200019cf	true	true	false
+SDK_BSS	ram:200019d0	ram:2000ffff	false	true	false
+peripherals	ram:40000000	ram:4001ffff	false	true	false
+csr	csreg:0000	csreg:0fff.3	false	true	false

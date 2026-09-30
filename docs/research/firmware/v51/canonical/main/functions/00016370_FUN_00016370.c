@@ -1,0 +1,13 @@
+/* Address: 00016370; name: FUN_00016370; body bytes: 48 */
+
+void FUN_00016370(void)
+
+{
+  FUN_00016834(&DAT_4004e400,1);
+  FUN_00016988(&DAT_4004e400,1);
+  FUN_00016ad2(&DAT_4004e400,1);
+  FUN_00016ad2(&DAT_4004e400,0);
+  FUN_0001691e(&DAT_4004e400);
+  return;
+}
+

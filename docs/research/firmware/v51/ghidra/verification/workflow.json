@@ -1,0 +1,132 @@
+{
+  "wrong_input_rejected": {
+    "command": [
+      "python3",
+      "spikes/firmware_workflow/scripts/restore_analysis.py",
+      "--snapshot",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/snapshots/ghidra/recovered-main",
+      "--scratch",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/rejected-input",
+      "--input",
+      "/Users/jihlenburg/mp305b-fw-re/bin/ch58x.bin"
+    ],
+    "returncode": 2,
+    "passed": true,
+    "message": "usage: restore_analysis.py [-h] --snapshot SNAPSHOT --scratch SCRATCH\n                           --input INPUT [--ghidra GHIDRA]\nrestore_analysis.py: error: Missing input hashes: 58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f, e831601923ebee907f50d4d739ce2f0fd32be9045d36f0d0f3b5ea40085546eb\n"
+  },
+  "checksum_corruption_rejected": {
+    "command": [
+      "python3",
+      "spikes/firmware_workflow/scripts/stage_release.py",
+      "--firmware",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/corrupt-container.fwd",
+      "--scratch",
+      "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/rejected-container",
+      "--release",
+      "reject-check"
+    ],
+    "returncode": 2,
+    "passed": true,
+    "message": "usage: stage_release.py [-h] --firmware FIRMWARE --scratch SCRATCH\n                        --release RELEASE [--pd-size PD_SIZE]\n                        [--companion-base COMPANION_BASE]\nstage_release.py: error: Restored checksum mismatch\n"
+  },
+  "staging": {
+    "passed": true,
+    "release": {
+      "schema": 1,
+      "release": "v51-workflow-check",
+      "container_sha256": "4991311993065586c2c8004bcef060945492751eda98c4d537a6eb19306170f9",
+      "header": {
+        "key": 368568053,
+        "checksum": 1988755427,
+        "app_base": 65536,
+        "data_base": 0,
+        "app_size": 476160,
+        "data_size": 79488,
+        "baud": 115200,
+        "rapid_baud": 115200
+      },
+      "main_stack_pointer": "0x2003f618",
+      "main_reset": "0x10359",
+      "companion_split_candidates": [
+        "0xb000"
+      ],
+      "selected_pd_size": 45056,
+      "images": {
+        "main-arm.bin": {
+          "file": "inputs/main-arm.bin",
+          "bytes": 476160,
+          "sha256": "1561e88a3f5eb63ad4b6917d39a3fd0cde26e062c9c26d4c953ea8073640cee2",
+          "processor": "ARM:LE:32:Cortex",
+          "load_address": "0x10000",
+          "mapping_evidence": "container base and in-range Thumb reset vector"
+        },
+        "companion-data.bin": {
+          "file": "inputs/companion-data.bin",
+          "bytes": 79488,
+          "sha256": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd"
+        },
+        "pd-8051.bin": {
+          "file": "inputs/pd-8051.bin",
+          "bytes": 45056,
+          "sha256": "6ea3a7640e44c2aedf4cb054c5ee4d185203ce913a32ee1bb6829c0c39a3a10e",
+          "processor": "8051:BE:16:default",
+          "load_address": "0x1000",
+          "mapping_evidence": "explicit configured candidate; verify interrupt prologues"
+        },
+        "ble-riscv.bin": {
+          "file": "inputs/ble-riscv.bin",
+          "bytes": 34432,
+          "sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+          "processor": "RISCV:LE:32:default",
+          "load_address": "0x1000",
+          "mapping_evidence": "explicit configured candidate; verify startup and RAM copies"
+        }
+      },
+      "next_steps": [
+        "Inspect identity and companion candidates",
+        "Import fresh programs with import_release.py",
+        "Discover RAM copies and scatter loading",
+        "Export analysis and compare fingerprints",
+        "Port address-specific probes only after review"
+      ]
+    }
+  },
+  "fresh_import": {
+    "passed": true,
+    "results": [
+      {
+        "image": "ble-riscv.bin",
+        "command": [
+          "/opt/homebrew/Cellar/ghidra/12.1.3/libexec/support/analyzeHeadless",
+          "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/workflow-smoke/projects",
+          "ble-riscv",
+          "-import",
+          "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/workflow-smoke/inputs/ble-riscv.bin",
+          "-processor",
+          "RISCV:LE:32:default",
+          "-loader",
+          "BinaryLoader",
+          "-loader-baseAddr",
+          "0x1000",
+          "-max-cpu",
+          "2",
+          "-scriptPath",
+          "/Users/jihlenburg/mp305b/spikes/firmware_workflow/scripts",
+          "-postScript",
+          "ExportAnalysis.java",
+          "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/workflow-smoke/exports/ble-riscv",
+          "/Users/jihlenburg/mp305b-fw-re/recovery-2026-09-30/workflow-smoke/inputs/ble-riscv.bin"
+        ],
+        "passed": true
+      }
+    ]
+  },
+  "comparison": {
+    "passed": true,
+    "counts": {
+      "short_function_candidates": 14,
+      "unique_instruction_hash": 203,
+      "unmatched": 15
+    }
+  }
+}

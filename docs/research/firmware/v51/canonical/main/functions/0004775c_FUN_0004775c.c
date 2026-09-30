@@ -1,0 +1,17 @@
+/* Address: 0004775c; name: FUN_0004775c; body bytes: 46 */
+
+bool FUN_0004775c(undefined4 param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  undefined1 auStack_58 [12];
+  undefined4 local_4c;
+  undefined1 local_48;
+  
+  FUN_0004a5f2(auStack_58,0x4c);
+  local_4c = param_1;
+  local_48 = FUN_00047ecc(param_1);
+  iVar1 = FUN_00038ff0(auStack_58,param_2);
+  return iVar1 != 0;
+}
+

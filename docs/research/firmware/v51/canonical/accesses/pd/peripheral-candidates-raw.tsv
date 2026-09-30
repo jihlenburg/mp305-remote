@@ -1,0 +1,149 @@
+phase	function	instruction	disassembly	op_index	direction	space	bytes	address_expression	resolved_address	value_expression
+instruction	CODE:10a6	CODE:10a8	ANL 0xb9,A	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:10a6	CODE:10a8	ANL 0xb9,A	1	write	SFR	1	SFR:b9	0xb9	(unique, 0x5900, 1)
+instruction	CODE:27b2	CODE:27fd	ORL 0xc2,A	0	write	SFR	1	SFR:c2	0xc2	mem[SFR:c2]
+instruction	CODE:27b2	CODE:27fd	ORL 0xc2,A	0	read	SFR	1	SFR:c2	0xc2	
+instruction	CODE:3724	CODE:37e9	MOV 0xa3,A	0	write	SFR	1	SFR:a3	0xa3	(register, 0xb, 1)
+instruction	CODE:3724	CODE:37f3	MOV 0xa3,#0x2e	0	write	SFR	1	SFR:a3	0xa3	0x2e
+instruction	CODE:3724	CODE:37fb	MOV 0xa3,A	0	write	SFR	1	SFR:a3	0xa3	(register, 0xb, 1)
+instruction	unassigned	CODE:393e	MOV R5,0xf3	0	read	SFR	1	SFR:f3	0xf3	
+instruction	CODE:50fb	CODE:51d8	CLR 0xb9	0	write	BITS	1	BITS:b9	0xb9	0x0
+instruction	CODE:5c3c	CODE:5c60	JNB 0xc7,0x5c8b	0	read	BITS	1	BITS:c7	0xc7	
+instruction	CODE:5c3c	CODE:5c89	CLR 0xc7	0	write	BITS	1	BITS:c7	0xc7	0x0
+instruction	CODE:5c3c	CODE:5c8b	JNB 0xc6,0x5c90	0	read	BITS	1	BITS:c6	0xc6	
+instruction	CODE:5c3c	CODE:5c8e	CLR 0xc6	0	write	BITS	1	BITS:c6	0xc6	0x0
+instruction	CODE:5c3c	CODE:5c90	JNB 0xc5,0x5cb5	0	read	BITS	1	BITS:c5	0xc5	
+instruction	CODE:5c3c	CODE:5ca7	ORL 0xd7,#0x10	0	write	SFR	1	SFR:d7	0xd7	mem[SFR:d7]
+instruction	CODE:5c3c	CODE:5ca7	ORL 0xd7,#0x10	0	read	SFR	1	SFR:d7	0xd7	
+instruction	CODE:5c3c	CODE:5caa	MOV R7,0xc7	0	read	SFR	1	SFR:c7	0xc7	
+instruction	CODE:5c3c	CODE:5cb3	MOV @R0,0xc7	0	read	SFR	1	SFR:c7	0xc7	
+instruction	CODE:5c3c	CODE:5cb5	MOV A,0xd7	0	read	SFR	1	SFR:d7	0xd7	
+instruction	CODE:5c3c	CODE:5cd0	ANL 0xd7,#0xe7	0	read	SFR	1	SFR:d7	0xd7	
+instruction	CODE:5c3c	CODE:5cd0	ANL 0xd7,#0xe7	1	write	SFR	1	SFR:d7	0xd7	(unique, 0x5b00, 1)
+instruction	CODE:5c3c	CODE:5cd3	MOV A,0xc0	0	read	SFR	1	SFR:c0	0xc0	
+instruction	CODE:5c3c	CODE:5cdc	MOV 0xc3,#0xfb	0	write	SFR	1	SFR:c3	0xc3	0xfb
+instruction	CODE:5db7	CODE:5db7	ANL 0xc9,#0xfb	0	read	SFR	1	SFR:c9	0xc9	
+instruction	CODE:5db7	CODE:5db7	ANL 0xc9,#0xfb	1	write	SFR	1	SFR:c9	0xc9	(unique, 0x5b00, 1)
+instruction	CODE:5db7	CODE:5dbf	ORL 0xc9,#0x4	0	write	SFR	1	SFR:c9	0xc9	mem[SFR:c9]
+instruction	CODE:5db7	CODE:5dbf	ORL 0xc9,#0x4	0	read	SFR	1	SFR:c9	0xc9	
+instruction	CODE:5db7	CODE:5dd2	ORL 0xc9,#0x4	0	write	SFR	1	SFR:c9	0xc9	mem[SFR:c9]
+instruction	CODE:5db7	CODE:5dd2	ORL 0xc9,#0x4	0	read	SFR	1	SFR:c9	0xc9	
+instruction	CODE:678e	CODE:67f9	ANL 0xc3,A	0	read	SFR	1	SFR:c3	0xc3	
+instruction	CODE:678e	CODE:67f9	ANL 0xc3,A	1	write	SFR	1	SFR:c3	0xc3	(unique, 0x5900, 1)
+instruction	CODE:678e	CODE:67fc	ORL 0xc1,A	0	write	SFR	1	SFR:c1	0xc1	mem[SFR:c1]
+instruction	CODE:678e	CODE:67fc	ORL 0xc1,A	0	read	SFR	1	SFR:c1	0xc1	
+instruction	CODE:6f27	CODE:6f83	MOV 0xa3,#0x5a	0	write	SFR	1	SFR:a3	0xa3	0x5a
+instruction	CODE:6ffc	CODE:6ffd	ORL 0xb9,A	0	write	SFR	1	SFR:b9	0xb9	mem[SFR:b9]
+instruction	CODE:6ffc	CODE:6ffd	ORL 0xb9,A	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:72d3	CODE:7306	JB 0x80,0x7309	0	read	BITS	1	BITS:80	0x80	
+instruction	CODE:7568	CODE:7593	MOV 0xc6,#0x6	0	write	SFR	1	SFR:c6	0xc6	0x6
+instruction	CODE:7568	CODE:7596	MOV 0xce,#0xee	0	write	SFR	1	SFR:ce	0xce	0xee
+instruction	CODE:7568	CODE:7599	MOV 0xd6,#0x3	0	write	SFR	1	SFR:d6	0xd6	0x3
+instruction	CODE:7568	CODE:75a8	MOV 0xe6,A	0	write	SFR	1	SFR:e6	0xe6	(register, 0xb, 1)
+instruction	CODE:7568	CODE:75af	MOV 0xcf,A	0	write	SFR	1	SFR:cf	0xcf	(register, 0xb, 1)
+instruction	CODE:7568	CODE:75b4	MOV 0xd7,#0x4	0	write	SFR	1	SFR:d7	0xd7	0x4
+instruction	CODE:76ec	CODE:76f4	MOV 0xc7,A	0	write	SFR	1	SFR:c7	0xc7	(register, 0xb, 1)
+instruction	CODE:77b4	CODE:77d1	MOV 0xb8,#0xf7	0	write	SFR	1	SFR:b8	0xb8	0xf7
+instruction	CODE:78ee	CODE:790b	MOV 0xb8,#0xef	0	write	SFR	1	SFR:b8	0xb8	0xef
+instruction	CODE:793a	CODE:793c	MOV 0xa3,#0x5a	0	write	SFR	1	SFR:a3	0xa3	0x5a
+instruction	CODE:793a	CODE:793f	MOV 0x85,#0x10	0	write	SFR	1	SFR:85	0x85	0x10
+instruction	CODE:793a	CODE:7943	MOV 0xa3,A	0	write	SFR	1	SFR:a3	0xa3	(register, 0xb, 1)
+instruction	CODE:7aaa	CODE:7ab9	MOV 0x80,A	0	write	SFR	1	SFR:80	0x80	(register, 0xb, 1)
+instruction	CODE:7aaa	CODE:7acb	MOV 0xc8,#0x80	0	write	SFR	1	SFR:c8	0xc8	0x80
+instruction	CODE:7aaa	CODE:7adf	MOV 0xf8,A	0	write	SFR	1	SFR:f8	0xf8	(register, 0xb, 1)
+instruction	CODE:7aaa	CODE:7ae3	SETB 0xcf	0	write	BITS	1	BITS:cf	0xcf	0x1
+instruction	CODE:7aaa	CODE:7ae5	SETB 0xcd	0	write	BITS	1	BITS:cd	0xcd	0x1
+instruction	CODE:7aaa	CODE:7ae7	CLR 0x85	0	write	BITS	1	BITS:85	0x85	0x0
+instruction	CODE:7aaa	CODE:7ae9	CLR 0xc8	0	write	BITS	1	BITS:c8	0xc8	0x0
+instruction	CODE:7c14	CODE:7c1b	CLR 0xf9	0	write	BITS	1	BITS:f9	0xf9	0x0
+instruction	CODE:7d25	CODE:7d25	ANL 0xb9,#0xf9	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:7d25	CODE:7d25	ANL 0xb9,#0xf9	1	write	SFR	1	SFR:b9	0xb9	(unique, 0x5b00, 1)
+instruction	CODE:7d25	CODE:7d65	ORL 0xb9,#0x6	0	write	SFR	1	SFR:b9	0xb9	mem[SFR:b9]
+instruction	CODE:7d25	CODE:7d65	ORL 0xb9,#0x6	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:8800	CODE:8807	MOV A,0xb9	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:8800	CODE:880d	ANL 0xb9,#0x7f	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:8800	CODE:880d	ANL 0xb9,#0x7f	1	write	SFR	1	SFR:b9	0xb9	(unique, 0x5b00, 1)
+instruction	CODE:8800	CODE:882f	ORL 0xb9,A	0	write	SFR	1	SFR:b9	0xb9	mem[SFR:b9]
+instruction	CODE:8800	CODE:882f	ORL 0xb9,A	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:89b2	CODE:89c0	ANL 0xb9,#0x7f	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:89b2	CODE:89c0	ANL 0xb9,#0x7f	1	write	SFR	1	SFR:b9	0xb9	(unique, 0x5b00, 1)
+instruction	CODE:89b2	CODE:89c8	ORL 0xb9,#0x80	0	write	SFR	1	SFR:b9	0xb9	mem[SFR:b9]
+instruction	CODE:89b2	CODE:89c8	ORL 0xb9,#0x80	0	read	SFR	1	SFR:b9	0xb9	
+instruction	CODE:8b9d	CODE:8b9d	MOV 0xa3,#0x5a	0	write	SFR	1	SFR:a3	0xa3	0x5a
+instruction	CODE:8b9d	CODE:8baf	MOV 0xa3,#0xce	0	write	SFR	1	SFR:a3	0xa3	0xce
+instruction	CODE:8b9d	CODE:8bb5	MOV 0xbd,#0xff	0	write	SFR	1	SFR:bd	0xbd	0xff
+instruction	CODE:8b9d	CODE:8bb8	MOV 0xbe,#0xff	0	write	SFR	1	SFR:be	0xbe	0xff
+instruction	CODE:8b9d	CODE:8bbb	MOV 0xbf,#0xff	0	write	SFR	1	SFR:bf	0xbf	0xff
+instruction	CODE:8b9d	CODE:8bbf	MOV 0xa3,A	0	write	SFR	1	SFR:a3	0xa3	(register, 0xb, 1)
+instruction	CODE:8b9d	CODE:8bc1	MOV 0xb8,A	0	write	SFR	1	SFR:b8	0xb8	(register, 0xb, 1)
+instruction	CODE:8b9d	CODE:8bc3	MOV 0xc3,A	0	write	SFR	1	SFR:c3	0xc3	(register, 0xb, 1)
+instruction	CODE:8b9d	CODE:8bc5	MOV 0xcb,A	0	write	SFR	1	SFR:cb	0xcb	(register, 0xb, 1)
+instruction	CODE:9436	CODE:943d	MOV 0x85,CY	0	write	BITS	1	BITS:85	0x85	(register, 0x48, 1)
+instruction	CODE:9436	CODE:9449	MOV 0xc8,CY	0	write	BITS	1	BITS:c8	0xc8	(register, 0x48, 1)
+instruction	CODE:94ae	CODE:94ae	MOV 0xb1,R7	0	write	SFR	1	SFR:b1	0xb1	(register, 0x7, 1)
+instruction	CODE:94ae	CODE:94b2	MOV 0xb5,CY	0	write	BITS	1	BITS:b5	0xb5	(register, 0x48, 1)
+instruction	CODE:94ae	CODE:94b4	SETB 0xb6	0	write	BITS	1	BITS:b6	0xb6	0x1
+instruction	CODE:94ae	CODE:94b6	JNB 0xb4,0x94b6	0	read	BITS	1	BITS:b4	0xb4	
+instruction	CODE:94ae	CODE:94b9	MOV A,0xb3	0	read	SFR	1	SFR:b3	0xb3	
+instruction	CODE:94ae	CODE:94c2	MOV A,0xb2	0	read	SFR	1	SFR:b2	0xb2	
+instruction	CODE:94ae	CODE:94c9	CLR 0xb6	0	write	BITS	1	BITS:b6	0xb6	0x0
+instruction	CODE:95f2	CODE:95f2	CLR 0xa0	0	write	BITS	1	BITS:a0	0xa0	0x0
+instruction	CODE:95f2	CODE:95f4	MOV 0xa3,#0x5a	0	write	SFR	1	SFR:a3	0xa3	0x5a
+instruction	CODE:9924	CODE:9924	ANL 0xc1,#0xfb	0	read	SFR	1	SFR:c1	0xc1	
+instruction	CODE:9924	CODE:9924	ANL 0xc1,#0xfb	1	write	SFR	1	SFR:c1	0xc1	(unique, 0x5b00, 1)
+instruction	CODE:9924	CODE:9933	MOV 0xc6,A	0	write	SFR	1	SFR:c6	0xc6	(register, 0xb, 1)
+instruction	CODE:9924	CODE:9935	MOV 0xce,A	0	write	SFR	1	SFR:ce	0xce	(register, 0xb, 1)
+instruction	CODE:9924	CODE:9937	MOV 0xd6,A	0	write	SFR	1	SFR:d6	0xd6	(register, 0xb, 1)
+instruction	CODE:9924	CODE:9939	MOV 0xd7,A	0	write	SFR	1	SFR:d7	0xd7	(register, 0xb, 1)
+instruction	CODE:9a4f	CODE:9a61	MOV 0xf4,#0xff	0	write	SFR	1	SFR:f4	0xf4	0xff
+instruction	CODE:9b66	CODE:9b6b	MOV 0xce,A	0	write	SFR	1	SFR:ce	0xce	(register, 0xb, 1)
+instruction	CODE:9b66	CODE:9b6d	SETB 0xc3	0	write	BITS	1	BITS:c3	0xc3	0x1
+instruction	CODE:9b66	CODE:9b72	MOV A,0xc7	0	read	SFR	1	SFR:c7	0xc7	
+instruction	CODE:9bdf	CODE:9be0	MOV 0x86,A	0	write	SFR	1	SFR:86	0x86	(register, 0xb, 1)
+instruction	CODE:9bdf	CODE:9be6	MOV 0xa4,#0x1	0	write	SFR	1	SFR:a4	0xa4	0x1
+instruction	CODE:9bdf	CODE:9bec	MOV A,0xbc	0	read	SFR	1	SFR:bc	0xbc	
+instruction	CODE:9bdf	CODE:9bf0	MOV 0xbc,A	0	write	SFR	1	SFR:bc	0xbc	(register, 0xb, 1)
+instruction	CODE:9f69	CODE:9f76	MOV 0xf4,A	0	write	SFR	1	SFR:f4	0xf4	(register, 0xb, 1)
+instruction	CODE:a1db	CODE:a1dc	MOV 0xa8,A	0	write	SFR	1	SFR:a8	0xa8	(register, 0xb, 1)
+instruction	CODE:a1db	CODE:a1de	MOV 0xaa,#0x3e	0	write	SFR	1	SFR:aa	0xaa	0x3e
+instruction	CODE:a1db	CODE:a1e1	MOV 0xa9,#0x80	0	write	SFR	1	SFR:a9	0xa9	0x80
+instruction	CODE:a1db	CODE:a1e4	SETB 0xa8	0	write	BITS	1	BITS:a8	0xa8	0x1
+instruction	CODE:a20b	CODE:a212	MOV 0xdf,R6	0	write	SFR	1	SFR:df	0xdf	(register, 0x6, 1)
+instruction	CODE:a20b	CODE:a214	MOV 0xde,A	0	write	SFR	1	SFR:de	0xde	(register, 0xb, 1)
+instruction	CODE:a377	CODE:a37f	ANL 0xc1,A	0	read	SFR	1	SFR:c1	0xc1	
+instruction	CODE:a377	CODE:a37f	ANL 0xc1,A	1	write	SFR	1	SFR:c1	0xc1	(unique, 0x5900, 1)
+instruction	CODE:a449	CODE:a449	MOV 0xce,#0xee	0	write	SFR	1	SFR:ce	0xce	0xee
+instruction	CODE:a449	CODE:a44c	ORL 0xc2,#0x4	0	write	SFR	1	SFR:c2	0xc2	mem[SFR:c2]
+instruction	CODE:a449	CODE:a44c	ORL 0xc2,#0x4	0	read	SFR	1	SFR:c2	0xc2	
+instruction	CODE:a449	CODE:a44f	ORL 0xc1,#0x4	0	write	SFR	1	SFR:c1	0xc1	mem[SFR:c1]
+instruction	CODE:a449	CODE:a44f	ORL 0xc1,#0x4	0	read	SFR	1	SFR:c1	0xc1	
+instruction	CODE:a569	CODE:a56a	MOV 0xa8,A	0	write	SFR	1	SFR:a8	0xa8	(register, 0xb, 1)
+instruction	CODE:a569	CODE:a56c	SETB 0xa8	0	write	BITS	1	BITS:a8	0xa8	0x1
+instruction	CODE:a569	CODE:a56e	ORL 0xc9,#0x4	0	write	SFR	1	SFR:c9	0xc9	mem[SFR:c9]
+instruction	CODE:a569	CODE:a56e	ORL 0xc9,#0x4	0	read	SFR	1	SFR:c9	0xc9	
+instruction	CODE:a67e	CODE:a67e	CLR 0xb7	0	write	BITS	1	BITS:b7	0xb7	0x0
+instruction	CODE:a67e	CODE:a680	SETB 0xb2	0	write	BITS	1	BITS:b2	0xb2	0x1
+instruction	CODE:a67e	CODE:a682	CLR 0xb5	0	write	BITS	1	BITS:b5	0xb5	0x0
+instruction	CODE:a685	CODE:a685	MOV 0xa1,#0xff	0	write	SFR	1	SFR:a1	0xa1	0xff
+instruction	CODE:a685	CODE:a688	MOV 0xa0,#0xf2	0	write	SFR	1	SFR:a0	0xa0	0xf2
+instruction	CODE:a7b8	CODE:a7b8	ORL 0xa0,#0x4	0	write	SFR	1	SFR:a0	0xa0	mem[SFR:a0]
+instruction	CODE:a7b8	CODE:a7b8	ORL 0xa0,#0x4	0	read	SFR	1	SFR:a0	0xa0	
+instruction	CODE:a7bc	CODE:a7bc	ORL 0xa0,#0x1	0	write	SFR	1	SFR:a0	0xa0	mem[SFR:a0]
+instruction	CODE:a7bc	CODE:a7bc	ORL 0xa0,#0x1	0	read	SFR	1	SFR:a0	0xa0	
+instruction	CODE:a9e2	CODE:aa17	JB 0xd2,0xaa36	0	read	BITS	1	BITS:d2	0xd2	
+instruction	CODE:aa37	CODE:aa37	CLR 0xd5	0	write	BITS	1	BITS:d5	0xd5	0x0
+instruction	CODE:aa37	CODE:aa3d	CPL 0xd5	0	write	BITS	1	BITS:d5	0xd5	mem[BITS:d5]
+instruction	CODE:aa37	CODE:aa3d	CPL 0xd5	0	read	BITS	1	BITS:d5	0xd5	
+instruction	CODE:aa37	CODE:aa4a	CPL 0xd5	0	write	BITS	1	BITS:d5	0xd5	mem[BITS:d5]
+instruction	CODE:aa37	CODE:aa4a	CPL 0xd5	0	read	BITS	1	BITS:d5	0xd5	
+instruction	CODE:aa37	CODE:aa62	JNB 0xd5,0xaa6c	0	read	BITS	1	BITS:d5	0xd5	
+instruction	CODE:ac2d	CODE:ac53	JBC 0xd7,0xac59	0	read	BITS	1	BITS:d7	0xd7	
+instruction	CODE:ac2d	CODE:ac53	JBC 0xd7,0xac59	2	write	BITS	1	BITS:d7	0xd7	0x0
+instruction	CODE:ac2d	CODE:ac74	JBC 0xd7,0xac7c	0	read	BITS	1	BITS:d7	0xd7	
+instruction	CODE:ac2d	CODE:ac74	JBC 0xd7,0xac7c	2	write	BITS	1	BITS:d7	0xd7	0x0
+instruction	CODE:ac2d	CODE:ac9e	JBC 0xd7,0xaca8	0	read	BITS	1	BITS:d7	0xd7	
+instruction	CODE:ac2d	CODE:ac9e	JBC 0xd7,0xaca8	2	write	BITS	1	BITS:d7	0xd7	0x0
+instruction	CODE:aeac	CODE:aebf	JBC 0xaf,0xaec8	0	read	BITS	1	BITS:af	0xaf	
+instruction	CODE:aeac	CODE:aebf	JBC 0xaf,0xaec8	2	write	BITS	1	BITS:af	0xaf	0x0
+instruction	CODE:aeac	CODE:aecd	SETB 0xaf	0	write	BITS	1	BITS:af	0xaf	0x1
+instruction	CODE:af88	CODE:af9c	MOV 0x81,#0xd2	0	write	SFR	1	SFR:81	0x81	0xd2

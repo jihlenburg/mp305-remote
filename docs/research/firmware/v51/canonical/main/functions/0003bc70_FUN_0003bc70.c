@@ -1,0 +1,18 @@
+/* Address: 0003bc70; name: FUN_0003bc70; body bytes: 20 */
+
+void FUN_0003bc70(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 uStack_10;
+  undefined4 local_c;
+  undefined4 uStack_8;
+  undefined4 uStack_4;
+  
+  uStack_10 = param_1;
+  local_c = param_2;
+  uStack_8 = param_3;
+  uStack_4 = param_4;
+  FUN_00058970(&uStack_10,param_2,&uStack_8);
+  return;
+}
+

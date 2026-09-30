@@ -1,0 +1,52 @@
+[
+  {
+    "workspace": "app.bin",
+    "canonical": "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/main-arm.bin",
+    "sha256": "58bb8c3a1d0d37c1996306598d32591098e9fd38ded275831be9453120cd891f",
+    "canonical_sha256": "1561e88a3f5eb63ad4b6917d39a3fd0cde26e062c9c26d4c953ea8073640cee2",
+    "bytes": 476160,
+    "differences": [
+      "0x6afc8",
+      "0x6afc9",
+      "0x6afca",
+      "0x6afcb"
+    ],
+    "passed": true
+  },
+  {
+    "workspace": "data.bin",
+    "canonical": "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/companion-data.bin",
+    "sha256": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd",
+    "canonical_sha256": "6ba172918737c3073fa166c876a42819dc7ee9a83c1273549c65a0e13b99fdfd",
+    "bytes": 79488,
+    "differences": [],
+    "passed": true
+  },
+  {
+    "workspace": "pd8051.bin",
+    "canonical": "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/pd-8051.bin",
+    "sha256": "6ea3a7640e44c2aedf4cb054c5ee4d185203ce913a32ee1bb6829c0c39a3a10e",
+    "canonical_sha256": "6ea3a7640e44c2aedf4cb054c5ee4d185203ce913a32ee1bb6829c0c39a3a10e",
+    "bytes": 45056,
+    "differences": [],
+    "passed": true
+  },
+  {
+    "workspace": "ch58x.bin",
+    "canonical": "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/ble-riscv.bin",
+    "sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+    "canonical_sha256": "f0e052057de8cb3ff0b2f7182692b755dc3ef89046d8d2aa3ea33fee8df4865a",
+    "bytes": 34432,
+    "differences": [],
+    "passed": true
+  },
+  {
+    "workspace": "ram_rw_init.bin",
+    "canonical": "/Users/jihlenburg/mp305b-firmware-scratch/2026-09-29/inputs/main-initialized-ram.bin",
+    "sha256": "e831601923ebee907f50d4d739ce2f0fd32be9045d36f0d0f3b5ea40085546eb",
+    "canonical_sha256": "e831601923ebee907f50d4d739ce2f0fd32be9045d36f0d0f3b5ea40085546eb",
+    "bytes": 2908,
+    "differences": [],
+    "passed": true
+  }
+]

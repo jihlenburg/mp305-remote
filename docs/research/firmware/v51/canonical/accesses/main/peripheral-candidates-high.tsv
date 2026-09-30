@@ -1,0 +1,233 @@
+phase	function	instruction	disassembly	op_index	direction	space	bytes	address_expression	resolved_address	value_expression
+decompiler	000102b8	000102ba	ldr r0,[r0,#0x0]	2	read	ram	4	0xe000ed08	0xe000ed08	
+decompiler	000102b8	000102e4	ldr r1,[r0,#0x0]	35	read	ram	4	0xe000ed88	0xe000ed88	
+decompiler	000102b8	000102ea	str r1,[r0,#0x0]	45	write	ram	4	0xe000ed88	0xe000ed88	INT_OR(LOAD(0x1a1,0xe000ed88),0xf00000)
+decompiler	000102e0	000102e4	ldr r1,[r0,#0x0]	2	read	ram	4	0xe000ed88	0xe000ed88	
+decompiler	000102e0	000102ea	str r1,[r0,#0x0]	12	write	ram	4	0xe000ed88	0xe000ed88	INT_OR(LOAD(0x1a1,0xe000ed88),0xf00000)
+decompiler	00010358	0001035e	str r1,[r0,#0x0]	5	write	ram	4	0x40050810	0x40050810	0x1ff
+decompiler	000125c0	0001225c	strb r1,[r0,#0x0]	107	write	ram	1	0x40040000	0x40040000	0x0
+decompiler	00012cec	00012cee	ldr r2,[r2,#0x20]	2	read	ram	4	0x40054020	0x40054020	
+decompiler	00012d10	00012d12	ldr r2,[r2,#0x20]	2	read	ram	4	0x40054020	0x40054020	
+decompiler	00012d10	0001c0a2	ldr r0,[r4,#0x4]	73	read	ram	4	0x4001c804	0x4001c804	
+decompiler	00012d10	0001c0d6	ldr r2,[r4,#0xc]	170	read	ram	4	0x4001c80c	0x4001c80c	
+decompiler	00012d10	0001c0de	ldr r2,[r4,#0x18]	178	read	ram	4	0x4001c818	0x4001c818	
+decompiler	00012d10	0001c118	str r2,[r4,#0x0]	367	write	ram	4	0x4001c800	0x4001c800	MULTIEQUAL(INT_ZEXT(LOAD(0x1a1,CAST(INT_ADD((register, 0x20, 4),(stack, 0xffffffffffffffc0, 4))))),INT_ZEXT(LOAD(0x1a1,CAST(INT_ADD((register, 0x20, 4),(unique, 0x12b800, 4))))),LOAD(0x1a1,CAST(INT_ADD((register, 0x20, 4),INT_MULT((stack, 0xffffffffffffffc0, 4),0x4)))))
+decompiler	00012d10	0001c140	ldr r1,[r4,#0x4]	222	read	ram	4	0x4001c804	0x4001c804	
+decompiler	00012d54	0001c5b2	strh r0,[r5,#0x0]	477	write	ram	2	0x4003a400	0x4003a400	0x0
+decompiler	00012d54	0001c5b8	ldrb r1,[r0,#0x0]	489	read	ram	1	0x4003a480	0x4003a480	
+decompiler	00012d54	0001c5be	strb r1,[r0,#0x0]	500	write	ram	1	0x4003a480	0x4003a480	INT_OR(LOAD(0x1a1,0x4003a480),0x1)
+decompiler	00012e00	00012e02	ldrb r1,[r0,#0x0]	2	read	ram	1	0x4003a480	0x4003a480	
+decompiler	00012e00	00012e08	strb r1,[r0,#0x0]	12	write	ram	1	0x4003a480	0x4003a480	INT_AND(LOAD(0x1a1,0x4003a480),0xfe)
+decompiler	00013a78	00013a7a	ldrb.w r1,[r1,#0x3c]	2	read	ram	1	0x4005403c	0x4005403c	
+decompiler	00013ae8	00013a9c	ldr.w r0,[r4,#0x100]	74	read	ram	4	0x40054100	0x40054100	
+decompiler	00013ae8	00013aae	ldrb.w r1,[r4,#0x26]	162	read	ram	1	0x40054026	0x40054026	
+decompiler	00013ae8	00013abc	strb.w r1,[r4,#0x2a]	187	write	ram	1	0x4005402a	0x4005402a	0x1
+decompiler	00013ae8	00013ad2	strb.w r0,[r4,#0x2a]	122	write	ram	1	0x4005402a	0x4005402a	0x0
+decompiler	00013ae8	00013aec	ldr.w r2,[r1,#0x100]	4	read	ram	4	0x40054100	0x40054100	
+decompiler	00013ae8	00013afe	str.w r2,[r1,#0x100]	32	write	ram	4	0x40054100	0x40054100	INT_OR(INT_AND(LOAD(0x1a1,0x40054100),0xffffff7f),INT_LEFT(INT_ZEXT(INT_RIGHT(CAST((unique, 0x14b000, 1)),0x7)),0x7))
+decompiler	00013ae8	00013b04	str.w r2,[r1,#0x100]	36	write	ram	4	0x40054100	0x40054100	LOAD(0x1a1,CAST(PTRADD((register, 0x20, 4),0x4,0x1)))
+decompiler	00013ba0	00013b68	ldr.w r0,[r4,#0x100]	42	read	ram	4	0x40054100	0x40054100	
+decompiler	00013ba0	00013b7c	strb.w r1,[r4,#0x2e]	136	write	ram	1	0x4005402e	0x4005402e	0x1
+decompiler	00013ba0	00013b8c	strb.w r0,[r4,#0x2e]	90	write	ram	1	0x4005402e	0x4005402e	0x0
+decompiler	00013ba0	00013ba6	str.w r1,[r2,#0x104]	6	write	ram	4	0x40054104	0x40054104	LOAD(0x1a1,CAST(PTRADD((register, 0x20, 4),0x4,0x1)))
+decompiler	00013bf8	00013bfc	strh r0,[r1,#0x10]	5	write	ram	2	0x40054010	0x40054010	INT_ZEXT((register, 0x20, 1))
+decompiler	00014258	000142ba	str r1,[r0,#0x0]	103	write	ram	4	0x40041000	0x40041000	INT_OR(MULTIEQUAL(COPY(INT_ZEXT(LOAD(0x1a1,(unique, 0x13fb00, 4)))),0xfff),INT_LEFT(MULTIEQUAL(COPY(INT_ZEXT((unique, 0x14b400, 2))),0xfff),0x10))
+decompiler	000144bc	000144c0	ldr r1,[r1,#0x20]	8	read	ram	4	0x40054020	0x40054020	
+decompiler	000144fc	00014500	ldr r1,[r1,#0x20]	8	read	ram	4	0x40054020	0x40054020	
+decompiler	000146d0	000146d2	str.w r0,[r1,#0x34c]	2	write	ram	4	0x4220834c	0x4220834c	(register, 0x20, 4)
+decompiler	000146dc	000146de	str.w r0,[r1,#0x344]	2	write	ram	4	0x42208344	0x42208344	(register, 0x20, 4)
+decompiler	000146e8	000146ee	ldr r1,[r0,#0x0]	13	read	ram	4	0x4001041c	0x4001041c	
+decompiler	000146e8	000146fe	str r1,[r0,#0x0]	41	write	ram	4	0x40010404	0x40010404	0x1234567
+decompiler	0001470c	0001470e	ldr r1,[r1,#0x0]	2	read	ram	4	0x40010420	0x40010420	
+decompiler	00014720	00014722	str.w r0,[r1,#0x340]	2	write	ram	4	0x42208340	0x42208340	(register, 0x20, 4)
+decompiler	0001472c	0001472e	str.w r0,[r1,#0x348]	2	write	ram	4	0x42208348	0x42208348	(register, 0x20, 4)
+decompiler	00014738	00014754	str.w r0,[r10,#0x0]	56	write	ram	4	0x40010424	0x40010424	0x13f
+decompiler	00014738	0001475c	ldr r1,[r0,#0x0]	68	read	ram	4	0x40010418	0x40010418	
+decompiler	00014738	00014762	ldr r1,[r0,#0x0]	76	read	ram	4	0x40010418	0x40010418	
+decompiler	00014738	00014768	str r1,[r0,#0x0]	85	write	ram	4	0x40010418	0x40010418	INT_AND(LOAD(0x1a1,0x40010418),0xfff0ffff)
+decompiler	00014738	0001476c	ldr r1,[r0,#0x0]	96	read	ram	4	0x4001041c	0x4001041c	
+decompiler	00014738	00014774	str r1,[r0,#0x0]	113	write	ram	4	0x4001041c	0x4001041c	INT_ADD(INT_AND(LOAD(0x1a1,0x4001041c),0xfffffff8),0x1)
+decompiler	00014738	0001477e	ldr r0,[r0,#0x20]	373	read	ram	4	0x40054020	0x40054020	
+decompiler	00014738	000147a8	str.w r0,[r10,#0x0]	472	write	ram	4	0x40010424	0x40010424	0x10
+decompiler	00014738	000147c8	ldr r0,[r0,#0x20]	184	read	ram	4	0x40054020	0x40054020	
+decompiler	00014738	000147f2	str.w r0,[r10,#0x0]	283	write	ram	4	0x40010424	0x40010424	0x10
+decompiler	00014738	000147fa	ldr r1,[r0,#0x0]	295	read	ram	4	0x4001041c	0x4001041c	
+decompiler	00014738	00014800	str r1,[r0,#0x0]	303	write	ram	4	0x4001041c	0x4001041c	INT_AND(LOAD(0x1a1,0x4001041c),0xfffffff8)
+decompiler	00014738	00014804	ldr r1,[r0,#0x0]	314	read	ram	4	0x40010418	0x40010418	
+decompiler	00014738	00014810	str r1,[r0,#0x0]	334	write	ram	4	0x40010418	0x40010418	INT_OR(INT_AND(LOAD(0x1a1,0x40010418),0xfff0ffff),INT_AND(LOAD(0x1a1,0x40010418),0xf0000))
+decompiler	00014878	00014886	str r0,[r7,#0x0]	25	write	ram	4	0x40010424	0x40010424	0x13f
+decompiler	00014878	00014890	ldr.w r2,[r8,#0x0]	35	read	ram	4	0x40010418	0x40010418	
+decompiler	00014878	00014898	ldr.w r2,[r8,#0x0]	43	read	ram	4	0x40010418	0x40010418	
+decompiler	00014878	000148a0	str.w r2,[r8,#0x0]	52	write	ram	4	0x40010418	0x40010418	INT_AND(LOAD(0x1a1,0x40010418),0xfff0ffff)
+decompiler	00014878	000148a8	ldr r0,[r4,#0x0]	61	read	ram	4	0x4001041c	0x4001041c	
+decompiler	00014878	000148b0	str r0,[r4,#0x0]	78	write	ram	4	0x4001041c	0x4001041c	INT_ADD(INT_AND(LOAD(0x1a1,0x4001041c),0xfffffff8),0x4)
+decompiler	00014878	000148b6	ldr r0,[r0,#0x20]	83	read	ram	4	0x40054020	0x40054020	
+decompiler	00014878	000148d6	str r0,[r7,#0x0]	165	write	ram	4	0x40010424	0x40010424	0x10
+decompiler	00014878	000148d8	ldr r0,[r4,#0x0]	167	read	ram	4	0x4001041c	0x4001041c	
+decompiler	00014878	000148de	str r0,[r4,#0x0]	175	write	ram	4	0x4001041c	0x4001041c	INT_AND(LOAD(0x1a1,0x4001041c),0xfffffff8)
+decompiler	00014878	000148e0	ldr.w r1,[r8,#0x0]	177	read	ram	4	0x40010418	0x40010418	
+decompiler	00014878	000148ee	str.w r1,[r8,#0x0]	197	write	ram	4	0x40010418	0x40010418	INT_OR(INT_AND(LOAD(0x1a1,0x40010418),0xfff0ffff),INT_AND(LOAD(0x1a1,0x40010418),0xf0000))
+decompiler	00014904	0001490a	ldr r3,[r1,#0x0]	17	read	ram	4	0x40010418	0x40010418	
+decompiler	00014904	00014910	str r3,[r1,#0x0]	29	write	ram	4	0x40010418	0x40010418	INT_OR(INT_AND(LOAD(0x1a1,0x40010418),0xfffffff0),INT_AND((register, 0x20, 4),0xf))
+decompiler	00014904	0001491e	ldr r6,[r4,#0x20]	77	read	ram	4	0x40054020	0x40054020	
+decompiler	00014904	00014938	ldr r6,[r1,#0x0]	39	read	ram	4	0x40010418	0x40010418	
+decompiler	000149a8	000149aa	str r0,[r1,#0x58]	2	write	ram	4	0x40051058	0x40051058	(register, 0x20, 4)
+decompiler	000149b4	000149b6	ldr r1,[r1,#0x54]	2	read	ram	4	0x40051054	0x40051054	
+decompiler	000149e4	00014a20	str.w lr,[r12,#0x0]	97	write	ram	4	0x40051000	0x40051000	LOAD(0x1a1,PTRADD((register, 0x24, 4),0x4,0x4))
+decompiler	0001515c	00015160	ldr r1,[r2,#0x0]	11	read	ram	4	0x40048000	0x40048000	
+decompiler	0001515c	00015166	str r1,[r2,#0x0]	20	write	ram	4	0x40048000	0x40048000	MULTIEQUAL(INT_OR(LOAD(0x1a1,0x40048000),(register, 0x20, 4)),INT_AND(LOAD(0x1a1,0x40048000),INT_NEGATE((register, 0x20, 4))))
+decompiler	00015174	00015178	ldr r1,[r2,#0x4]	11	read	ram	4	0x40048004	0x40048004	
+decompiler	00015174	0001517e	str r1,[r2,#0x4]	20	write	ram	4	0x40048004	0x40048004	MULTIEQUAL(INT_OR(LOAD(0x1a1,0x40048004),(register, 0x20, 4)),INT_AND(LOAD(0x1a1,0x40048004),INT_NEGATE((register, 0x20, 4))))
+decompiler	0001518c	00015190	ldr r1,[r2,#0x8]	11	read	ram	4	0x40048008	0x40048008	
+decompiler	0001518c	00015196	str r1,[r2,#0x8]	20	write	ram	4	0x40048008	0x40048008	MULTIEQUAL(INT_OR(LOAD(0x1a1,0x40048008),(register, 0x20, 4)),INT_AND(LOAD(0x1a1,0x40048008),INT_NEGATE((register, 0x20, 4))))
+decompiler	000151a4	000151a8	ldr r1,[r2,#0xc]	11	read	ram	4	0x4004800c	0x4004800c	
+decompiler	000151a4	000151ae	str r1,[r2,#0xc]	20	write	ram	4	0x4004800c	0x4004800c	MULTIEQUAL(INT_OR(LOAD(0x1a1,0x4004800c),(register, 0x20, 4)),INT_AND(LOAD(0x1a1,0x4004800c),INT_NEGATE((register, 0x20, 4))))
+decompiler	00015398	000153a0	ldrh r1,[r2,#0x0]	16	read	ram	2	0x40053bf4	0x40053bf4	
+decompiler	00015398	000153a6	strh r1,[r2,#0x0]	28	write	ram	2	0x40053bf4	0x40053bf4	MULTIEQUAL(INT_AND(LOAD(0x1a1,0x40053bf4),INT_NEGATE(INT_AND((register, 0x20, 2),0x1f))),INT_OR(LOAD(0x1a1,0x40053bf4),INT_AND((register, 0x20, 2),0x1f)))
+decompiler	000153f4	000153f6	ldrh r2,[r1,#0x0]	2	read	ram	2	0x40053bf8	0x40053bf8	
+decompiler	000153f4	00015402	strh r2,[r1,#0x0]	24	write	ram	2	0x40053bf8	0x40053bf8	INT_OR(INT_AND(LOAD(0x1a1,0x40053bf8),0x8fff),INT_AND((register, 0x20, 2),0x7000))
+decompiler	000160cc	0001619e	str r0,[r1,#0x0]	272	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	000161c0	000161e4	ldr r0,[r0,#0x20]	69	read	ram	4	0x40054020	0x40054020	
+decompiler	00016360	00016c08	strb.w r1,[r0,#0x24]	16	write	ram	1	0x4004e424	0x4004e424	INT_OR((register, 0x24, 1),INT_LEFT((register, 0x20, 1),0x1))
+decompiler	000165a8	00016914	ldr r1,[r0,#0x0]	131	read	ram	4	0x4004e400	0x4004e400	
+decompiler	000165a8	0001691a	str r1,[r0,#0x0]	140	write	ram	4	0x4004e400	0x4004e400	INT_OR(LOAD(0x1a1,0x4004e400),0x80)
+decompiler	000165a8	00016c08	strb.w r1,[r0,#0x24]	238	write	ram	1	0x4004e424	0x4004e424	CALL(0x429a690b69ca4905,LOAD(0x1a1,0x1fff8f44))
+decompiler	00016650	00016c08	strb.w r1,[r0,#0x24]	50	write	ram	1	0x4004e424	0x4004e424	CALL(0x429a690b69ca4905,LOAD(0x1a1,0x1fff8f44))
+decompiler	000166ec	00016700	ldr r3,[r3,#0x20]	39	read	ram	4	0x40054020	0x40054020	
+decompiler	00016af8	00016914	ldr r1,[r0,#0x0]	130	read	ram	4	0x4004e000	0x4004e000	
+decompiler	00016af8	0001691a	str r1,[r0,#0x0]	139	write	ram	4	0x4004e000	0x4004e000	INT_OR(LOAD(0x1a1,0x4004e000),0x80)
+decompiler	00016af8	00016c08	strb.w r1,[r0,#0x24]	292	write	ram	1	0x4004e024	0x4004e024	LOAD(0x1a1,CAST(INT_ADD(LOAD(0x1a1,CAST((unique, 0x140900, 4))),LOAD(0x1a1,CAST((unique, 0x140900, 4))))))
+decompiler	00016bb8	00016c08	strb.w r1,[r0,#0x24]	72	write	ram	1	0x4004e024	0x4004e024	LOAD(0x1a1,CAST(INT_ADD(LOAD(0x1a1,CAST((unique, 0x10000030, 4))),LOAD(0x1a1,CAST((unique, 0x1000002c, 4))))))
+decompiler	000181f8	000182b4	str.w r1,[r0,#0x80]	232	write	ram	4	0x40053080	0x40053080	0x1fffa8ce
+decompiler	000181f8	000182bc	ldr r2,[r1,#0x0]	244	read	ram	4	0x40053088	0x40053088	
+decompiler	000181f8	000182c4	str r2,[r1,#0x0]	256	write	ram	4	0x40053088	0x40053088	INT_OR(INT_AND(LOAD(0x1a1,0x40053088),0xffff),0x320000)
+decompiler	000182f0	000182fa	str r2,[r1,#0x0]	22	write	ram	4	0x40010400	0x40010400	0x123
+decompiler	000182f0	00018300	str r2,[r1,#0x0]	27	write	ram	4	0x40010400	0x40010400	0x3210
+decompiler	000182f0	0001830a	str r1,[r2,#0x10]	48	write	ram	4	0x40048010	0x40048010	0xa5a50001
+decompiler	000182f0	00018316	strh r1,[r2,#0x0]	72	write	ram	2	0x40053bfc	0x40053bfc	0xa501
+decompiler	000182f0	0001831e	ldrh.w r2,[r1,#0x3fe]	92	read	ram	2	0x400543fe	0x400543fe	
+decompiler	000182f0	00018328	strh.w r2,[r1,#0x3fe]	104	write	ram	2	0x400543fe	0x400543fe	INT_OR(LOAD(0x1a1,0x400543fe),0xa508)
+decompiler	000182f0	00018330	ldrh.w r3,[r1,#0x3fe]	123	read	ram	2	0x400543fe	0x400543fe	
+decompiler	000182f0	0001833a	strh.w r3,[r1,#0x3fe]	135	write	ram	2	0x400543fe	0x400543fe	INT_OR(LOAD(0x1a1,0x400543fe),0xa503)
+decompiler	000182f0	00018346	str r0,[r1,#0x0]	160	write	ram	4	0x40050804	0x40050804	0x77
+decompiler	000182f0	0001834c	str r0,[r1,#0x0]	172	write	ram	4	0x4005080c	0x4005080c	0x77
+decompiler	0001854c	00016c08	strb.w r1,[r0,#0x24]	16	write	ram	1	0x4004e024	0x4004e024	INT_OR((register, 0x24, 1),INT_LEFT((register, 0x20, 1),0x1))
+decompiler	0001b700	0001b702	ldr r1,[r0,#0x0]	2	read	ram	4	0x4004ccfc	0x4004ccfc	
+decompiler	0001b700	0001b708	str r1,[r0,#0x0]	12	write	ram	4	0x4004ccfc	0x4004ccfc	INT_OR(LOAD(0x1a1,0x4004ccfc),0x80000000)
+decompiler	0001b71c	00014838	ldr r0,[r0,#0x20]	87	read	ram	4	0x40054020	0x40054020	
+decompiler	0001b740	00014838	ldr r0,[r0,#0x20]	37	read	ram	4	0x40054020	0x40054020	
+decompiler	0001c2fc	0001c328	ldr.w r3,[lr,#0x0]	154	read	ram	4	0x40050800	0x40050800	
+decompiler	0001c2fc	0001c332	str.w r7,[lr,#0x0]	172	write	ram	4	0x40050800	0x40050800	INT_OR(INT_AND(INT_OR(INT_LEFT((register, 0x24, 4),INT_AND((register, 0x30, 4),0xff)),INT_LEFT((register, 0x28, 4),INT_AND((register, 0x2c, 4),0xff))),INT_OR(INT_LEFT(0x7,INT_AND((register, 0x30, 4),0xff)),INT_LEFT(0x7,INT_AND((register, 0x2c, 4),0xff)))),INT_AND(LOAD(0x1a1,0x40050800),INT_NEGATE(INT_OR(INT_LEFT(0x7,(unique, 0x155100, 4)),INT_LEFT(0x7,(unique, 0x155100, 4))))))
+decompiler	0001c34c	000658f8	str r0,[r1,#0x0]	54	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	0001c350	00065738	ldr r0,[r0,#0x0]	39	read	ram	4	0xe000ed04	0xe000ed04	
+decompiler	0001cc38	0001cc42	ldr r0,[r4,#0x0]	26	read	ram	4	0x40048000	0x40048000	
+decompiler	0001cc38	0001cc48	ldr r0,[r4,#0x4]	35	read	ram	4	0x40048004	0x40048004	
+decompiler	0001cc38	0001cc4c	ldr r0,[r4,#0x8]	39	read	ram	4	0x40048008	0x40048008	
+decompiler	0001cc38	0001cc50	ldr r0,[r4,#0xc]	43	read	ram	4	0x4004800c	0x4004800c	
+decompiler	0001cc38	0001cc56	ldrb.w r0,[r5,#0x26]	48	read	ram	1	0x40054026	0x40054026	
+decompiler	0001cc38	0001cc66	str r0,[r4,#0x0]	73	write	ram	4	0x40048000	0x40048000	0xfffffa0e
+decompiler	0001cc38	0001cc6a	str r0,[r4,#0x4]	90	write	ram	4	0x40048004	0x40048004	INT_SRIGHT(0xfffffa0e,0xb)
+decompiler	0001cc38	0001cc6c	str r0,[r4,#0x8]	92	write	ram	4	0x40048008	0x40048008	INT_SRIGHT(0xfffffa0e,0xb)
+decompiler	0001cc38	0001cc6e	str r0,[r4,#0xc]	94	write	ram	4	0x4004800c	0x4004800c	INT_SRIGHT(0xfffffa0e,0xb)
+decompiler	0001cc38	0001cc76	ldr r0,[r5,#0x20]	105	read	ram	4	0x40054020	0x40054020	
+decompiler	0001cc38	0001cc80	str r0,[r5,#0x20]	122	write	ram	4	0x40054020	0x40054020	INT_OR(INT_AND(LOAD(0x1a1,CAST(INT_ADD((unique, 0x10000072, 4),0x20))),INT_NEGATE((register, 0x20, 4))),INT_AND((register, 0x24, 4),(register, 0x20, 4)))
+decompiler	0001cc38	0001cc8e	str r0,[r4,#0x0]	146	write	ram	4	0x40048000	0x40048000	LOAD(0x1a1,0x40048000)
+decompiler	0001cc38	0001cc92	str r0,[r4,#0x4]	150	write	ram	4	0x40048004	0x40048004	LOAD(0x1a1,0x40048004)
+decompiler	0001cc38	0001cc96	str r0,[r4,#0x8]	154	write	ram	4	0x40048008	0x40048008	LOAD(0x1a1,0x40048008)
+decompiler	0001cc38	0001cc9a	str r0,[r4,#0xc]	158	write	ram	4	0x4004800c	0x4004800c	LOAD(0x1a1,0x4004800c)
+decompiler	0001ccb8	0001ccc2	ldr r0,[r4,#0x0]	30	read	ram	4	0x40048000	0x40048000	
+decompiler	0001ccb8	0001ccc6	ldr r0,[r4,#0x4]	34	read	ram	4	0x40048004	0x40048004	
+decompiler	0001ccb8	0001ccca	ldr r0,[r4,#0x8]	38	read	ram	4	0x40048008	0x40048008	
+decompiler	0001ccb8	0001ccce	ldr r0,[r4,#0xc]	42	read	ram	4	0x4004800c	0x4004800c	
+decompiler	0001ccb8	0001ccd4	ldrb.w r0,[r7,#0x26]	47	read	ram	1	0x40054026	0x40054026	
+decompiler	0001ccb8	0001cce8	str r0,[r4,#0x0]	83	write	ram	4	0x40048000	0x40048000	0xfffffa0e
+decompiler	0001ccb8	0001ccec	str r0,[r4,#0x4]	100	write	ram	4	0x40048004	0x40048004	INT_SRIGHT(0xfffffa0e,0xb)
+decompiler	0001ccb8	0001ccee	str r0,[r4,#0x8]	102	write	ram	4	0x40048008	0x40048008	INT_SRIGHT(0xfffffa0e,0xb)
+decompiler	0001ccb8	0001ccf0	str r0,[r4,#0xc]	104	write	ram	4	0x4004800c	0x4004800c	INT_SRIGHT(0xfffffa0e,0xb)
+decompiler	0001ccb8	0001ccf8	strb.w r6,[r7,#0x26]	116	write	ram	1	0x40054026	0x40054026	SUBPIECE((register, 0x20, 4),0x0)
+decompiler	0001ccb8	0001cd08	str r0,[r4,#0x0]	140	write	ram	4	0x40048000	0x40048000	LOAD(0x1a1,0x40048000)
+decompiler	0001ccb8	0001cd0c	str r0,[r4,#0x4]	144	write	ram	4	0x40048004	0x40048004	LOAD(0x1a1,0x40048004)
+decompiler	0001ccb8	0001cd10	str r0,[r4,#0x8]	148	write	ram	4	0x40048008	0x40048008	LOAD(0x1a1,0x40048008)
+decompiler	0001ccb8	0001cd14	str r0,[r4,#0xc]	152	write	ram	4	0x4004800c	0x4004800c	LOAD(0x1a1,0x4004800c)
+decompiler	0001ce68	00014250	strh.w r2,[r0,r1,lsl #0x1]	18	write	ram	2	0x40041002	0x40041002	(register, 0x20, 2)
+decompiler	0001ce80	00014250	strh.w r2,[r0,r1,lsl #0x1]	18	write	ram	2	0x40041000	0x40041000	(register, 0x20, 2)
+decompiler	0001d9fc	0001da18	str r0,[r1,#0x0]	31	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	0001dae8	0001daec	ldr r0,[r0,#0x0]	10	read	ram	4	0x40010684	0x40010684	
+decompiler	0001dae8	0001dafe	ldrb.w r2,[r1,#0x26]	35	read	ram	1	0x40054026	0x40054026	
+decompiler	0001db74	0001db78	ldr r1,[r0,#0x0]	6	read	ram	4	0xe000ed88	0xe000ed88	
+decompiler	0001db74	0001db7e	str r1,[r0,#0x0]	16	write	ram	4	0xe000ed88	0xe000ed88	INT_OR(LOAD(0x1a1,0xe000ed88),0xf00000)
+decompiler	0001db74	0001db8c	str r0,[r1,#0x0]	38	write	ram	4	0xe000ed08	0xe000ed08	0x10000
+decompiler	0001dda0	0001ddce	str r2,[r0,#0x14]	58	write	ram	4	0x40024014	0x40024014	0x10000
+decompiler	0001eef0	0001ef96	ldr r2,[r0,#0xc]	34	read	ram	4	0x4001cc0c	0x4001cc0c	
+decompiler	0001eef0	0001efa0	str r2,[r0,#0xc]	51	write	ram	4	0x4001cc0c	0x4001cc0c	INT_OR(LOAD(0x1a1,0x4001cc0c),0xb0000)
+decompiler	0001ef40	0001ef96	ldr r2,[r0,#0xc]	34	read	ram	4	0x4001d40c	0x4001d40c	
+decompiler	0001ef40	0001efa0	str r2,[r0,#0xc]	51	write	ram	4	0x4001d40c	0x4001d40c	INT_OR(LOAD(0x1a1,0x4001d40c),0xb0000)
+decompiler	0001f004	0001f006	ldr r0,[r0,#0x20]	2	read	ram	4	0x40054020	0x40054020	
+decompiler	0001f02c	0001ef96	ldr r2,[r0,#0xc]	34	read	ram	4	0x4002100c	0x4002100c	
+decompiler	0001f02c	0001efa0	str r2,[r0,#0xc]	51	write	ram	4	0x4002100c	0x4002100c	INT_OR(LOAD(0x1a1,0x4002100c),0xb0000)
+decompiler	0001f37c	0001f382	str r1,[r0,#0x8]	5	write	ram	4	0x40049008	0x40049008	0x123
+decompiler	0001f37c	0001f388	str r1,[r0,#0x8]	10	write	ram	4	0x40049008	0x40049008	0x3210
+decompiler	0001f390	0001f3ae	ldr r3,[r0,#0x0]	51	read	ram	4	0x40049000	0x40049000	
+decompiler	0001f390	0001f3b8	str r1,[r0,#0x0]	69	write	ram	4	0x40049000	0x40049000	INT_OR(INT_AND(INT_OR(INT_OR(INT_OR((register, 0x24, 4),(register, 0x2c, 4)),INT_OR((register, 0x2c, 4),(register, 0x30, 4))),LOAD(0x1a1,PTRADD((register, 0x20, 4),0x4,0x4))),0x80010ff3),INT_AND(LOAD(0x1a1,0x40049000),INT_NEGATE(0x80010ff3)))
+decompiler	0001feb8	0001febe	ldr r1,[r0,#0x0]	3	read	ram	4	0xe000ed0c	0xe000ed0c	
+decompiler	0001feb8	0001fec8	str r1,[r0,#0x0]	17	write	ram	4	0xe000ed0c	0xe000ed0c	INT_OR(INT_AND(LOAD(0x1a1,0xe000ed0c),0x700),0x5fa0004)
+decompiler	0003c24c	0003c258	str r2,[r0,#0x40]	22	write	ram	4	0x40053040	0x40053040	(register, 0x20, 4)
+decompiler	0003c24c	0003c25e	ldr r3,[r2,#0x0]	34	read	ram	4	0x40053048	0x40053048	
+decompiler	0003c24c	0003c264	str r1,[r2,#0x0]	48	write	ram	4	0x40053048	0x40053048	INT_OR(INT_AND(LOAD(0x1a1,0x40053048),0xffff),INT_LEFT((register, 0x24, 4),0x10))
+decompiler	0003c24c	0003c270	ldr r0,[r4,#0x4]	65	read	ram	4	0x4001c004	0x4001c004	
+decompiler	0003c24c	0003c276	str r0,[r4,#0x4]	74	write	ram	4	0x4001c004	0x4001c004	INT_OR(LOAD(0x1a1,0x4001c004),0x40)
+decompiler	0003c24c	0003c284	ldr r0,[r4,#0x14]	99	read	ram	4	0x4001c014	0x4001c014	
+decompiler	0003c24c	0003c28c	ldr r0,[r4,#0x4]	120	read	ram	4	0x4001c004	0x4001c004	
+decompiler	0003c24c	0003c292	str r0,[r4,#0x4]	128	write	ram	4	0x4001c004	0x4001c004	INT_AND(LOAD(0x1a1,0x4001c004),0xffffffbf)
+decompiler	0003c2a4	0003c2b6	ldr r0,[r4,#0x18]	34	read	ram	4	0x4001c018	0x4001c018	
+decompiler	0003c2a4	0003c2bc	str r0,[r4,#0x18]	43	write	ram	4	0x4001c018	0x4001c018	INT_AND(LOAD(0x1a1,0x4001c018),0xfffff0ff)
+decompiler	0003c2a4	0003c2be	ldr r0,[r4,#0x18]	45	read	ram	4	0x4001c018	0x4001c018	
+decompiler	0003c2a4	0003c2c4	str r0,[r4,#0x18]	55	write	ram	4	0x4001c018	0x4001c018	INT_OR(LOAD(0x1a1,0x4001c018),0xc00)
+decompiler	0003c2a4	0003c2c8	ldr r0,[r5,#0x0]	58	read	ram	4	0x4005305c	0x4005305c	
+decompiler	0003c2a4	0003c2d2	str r0,[r5,#0x0]	75	write	ram	4	0x4005305c	0x4005305c	INT_OR(INT_AND(LOAD(0x1a1,0x4005305c),0xfffffcff),0x100)
+decompiler	0003c2a4	0003c2e6	str.w r8,[r0,#0x40]	110	write	ram	4	0x40053040	0x40053040	(register, 0x20, 4)
+decompiler	0003c2a4	0003c2ee	ldr r2,[r1,#0x0]	122	read	ram	4	0x40053048	0x40053048	
+decompiler	0003c2a4	0003c2f4	str r2,[r1,#0x0]	136	write	ram	4	0x40053048	0x40053048	INT_OR(INT_AND(LOAD(0x1a1,0x40053048),0xffff),INT_LEFT(MULTIEQUAL(0xffff,INT_AND((register, 0x24, 4),0xffff)),0x10))
+decompiler	0003c2a4	0003c2fe	ldr r0,[r4,#0x4]	152	read	ram	4	0x4001c004	0x4001c004	
+decompiler	0003c2a4	0003c304	str r0,[r4,#0x4]	161	write	ram	4	0x4001c004	0x4001c004	INT_OR(LOAD(0x1a1,0x4001c004),0x40)
+decompiler	0003c2a4	0003c31a	ldr r0,[r4,#0x14]	187	read	ram	4	0x4001c014	0x4001c014	
+decompiler	0003c2a4	0003c322	ldr r0,[r4,#0x4]	208	read	ram	4	0x4001c004	0x4001c004	
+decompiler	0003c2a4	0003c328	str r0,[r4,#0x4]	216	write	ram	4	0x4001c004	0x4001c004	INT_AND(LOAD(0x1a1,0x4001c004),0xffffffbf)
+decompiler	0003c2a4	0003c32a	ldr r0,[r4,#0x18]	218	read	ram	4	0x4001c018	0x4001c018	
+decompiler	0003c2a4	0003c330	str r0,[r4,#0x18]	227	write	ram	4	0x4001c018	0x4001c018	INT_AND(LOAD(0x1a1,0x4001c018),0xfffff0ff)
+decompiler	0003c2a4	0003c332	ldr r0,[r4,#0x18]	229	read	ram	4	0x4001c018	0x4001c018	
+decompiler	0003c2a4	0003c338	str r0,[r4,#0x18]	239	write	ram	4	0x4001c018	0x4001c018	INT_OR(LOAD(0x1a1,0x4001c018),0x400)
+decompiler	0003c2a4	0003c33a	ldr r0,[r5,#0x0]	241	read	ram	4	0x4005305c	0x4005305c	
+decompiler	0003c2a4	0003c340	str r0,[r5,#0x0]	250	write	ram	4	0x4005305c	0x4005305c	INT_AND(LOAD(0x1a1,0x4005305c),0xfffffcff)
+decompiler	0003c410	0003c424	strh r0,[r1,#0x0]	39	write	ram	2	0x40026c48	0x40026c48	0x0
+decompiler	00058a6c	0001f1ee	strh r1,[r0,#0x4]	84	write	ram	2	0x40021004	0x40021004	INT_ZEXT((register, 0x24, 1))
+decompiler	000598bc	00059990	str r0,[r1,#0x0]	216	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00059ae8	00059b2c	str.w r8,[r9,#0x0]	45	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00059d90	00059dd0	str r0,[r1,#0x0]	106	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00063370	0006337e	ldr r0,[r0,#0x20]	30	read	ram	4	0x40054020	0x40054020	
+decompiler	0006571c	00065738	ldr r0,[r0,#0x0]	38	read	ram	4	0xe000ed04	0xe000ed04	
+decompiler	0006579c	000657a4	str r1,[r0,#0x18]	13	write	ram	4	e000e018	0xe000e018	0x0
+decompiler	0006579c	000657b4	str r1,[r0,#0x14]	37	write	ram	4	e000e014	0xe000e014	INT_SUB(INT_DIV(LOAD(0x1a1,0x2003a60c),0x3e8),0x1)
+decompiler	0006579c	000657b8	str r1,[r0,#0x10]	44	write	ram	4	e000e010	0xe000e010	0x7
+decompiler	000657c0	000657d4	ldr r0,[r0,#0x0]	33	read	ram	4	0xe000ed0c	0xe000ed0c	
+decompiler	000658d4	000658f8	str r0,[r1,#0x0]	53	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	0006590c	00065992	str r0,[r1,#0x0]	221	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00066554	000665c4	str r0,[r1,#0x0]	260	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00066608	00066612	ldrb r0,[r1,#0x0]	17	read	ram	1	0xe000e400	0xe000e400	
+decompiler	00066608	00066618	strb r0,[r1,#0x0]	28	write	ram	1	0xe000e400	0xe000e400	0xff
+decompiler	00066608	0006661a	ldrb r0,[r1,#0x0]	30	read	ram	1	0xe000e400	0xe000e400	
+decompiler	00066608	0006665a	strb r0,[r1,#0x0]	108	write	ram	1	0xe000e400	0xe000e400	LOAD(0x1a1,0xe000e400)
+decompiler	00066608	00066660	ldr r1,[r0,#0x0]	120	read	ram	4	0xe000ed20	0xe000ed20	
+decompiler	00066608	00066666	str r1,[r0,#0x0]	130	write	ram	4	0xe000ed20	0xe000ed20	INT_OR(LOAD(0x1a1,0xe000ed20),0xf00000)
+decompiler	00066608	00066668	ldr r1,[r0,#0x0]	132	read	ram	4	0xe000ed20	0xe000ed20	
+decompiler	00066608	0006666e	str r1,[r0,#0x0]	142	write	ram	4	0xe000ed20	0xe000ed20	INT_OR(LOAD(0x1a1,0xe000ed20),0xf0000000)
+decompiler	00066608	0006667e	ldr r1,[r0,#0x0]	160	read	ram	4	0xe000ef34	0xe000ef34	
+decompiler	00066608	00066684	str r1,[r0,#0x0]	170	write	ram	4	0xe000ef34	0xe000ef34	INT_OR(LOAD(0x1a1,0xe000ef34),0xc0000000)
+decompiler	0006670c	00066786	str r0,[r1,#0x0]	193	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	000667a0	000667ee	str r5,[r6,#0x0]	301	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	000667a0	0006687a	str r5,[r6,#0x0]	243	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	0006691c	0006695a	str.w r7,[r8,#0x0]	88	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	0006691c	000669f2	str.w r7,[r8,#0x0]	271	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00066a10	00066a50	str.w r7,[r8,#0x0]	88	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00066a10	00066b0c	str.w r7,[r8,#0x0]	329	write	ram	4	0xe000ed04	0xe000ed04	0x10000000
+decompiler	00066f6c	0006706e	str r0,[r1,#0x0]	160	write	ram	4	0xe000ed04	0xe000ed04	0x10000000

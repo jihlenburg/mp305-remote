@@ -1,0 +1,48 @@
+{"kind": "meta", "date": "2026-09-29T19:43:08+02:00", "platform": "macOS-27.0-arm64-arm-64bit", "python": "3.12.2", "bleak": "unknown", "script": "spikes/ble_readonly/spike.py", "name": "0000MP305B  S             E!K", "address": "72DE66A3-7C9B-58A3-A45B-CF098194D568", "mtu": 247, "gatt": [{"service": "0000180a-0000-1000-8000-00805f9b34fb", "characteristics": [{"uuid": "00002a23-0000-1000-8000-00805f9b34fb", "handle": 15, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a24-0000-1000-8000-00805f9b34fb", "handle": 17, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a25-0000-1000-8000-00805f9b34fb", "handle": 19, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a26-0000-1000-8000-00805f9b34fb", "handle": 21, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a27-0000-1000-8000-00805f9b34fb", "handle": 23, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a28-0000-1000-8000-00805f9b34fb", "handle": 25, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a29-0000-1000-8000-00805f9b34fb", "handle": 27, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a2a-0000-1000-8000-00805f9b34fb", "handle": 29, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}, {"uuid": "00002a50-0000-1000-8000-00805f9b34fb", "handle": 31, "properties": ["read"], "max_write_without_response": 244, "descriptors": []}]}, {"service": "0000af00-0000-1000-8000-00805f9b34fb", "characteristics": [{"uuid": "0000af01-0000-1000-8000-00805f9b34fb", "handle": 34, "properties": ["notify", "read", "write"], "max_write_without_response": 244, "descriptors": ["00002902-0000-1000-8000-00805f9b34fb"]}, {"uuid": "0000af02-0000-1000-8000-00805f9b34fb", "handle": 37, "properties": ["notify", "read", "write"], "max_write_without_response": 244, "descriptors": ["00002902-0000-1000-8000-00805f9b34fb"]}]}, {"service": "0000db00-0000-1000-8000-00805f9b34fb", "characteristics": [{"uuid": "0000db01-0000-1000-8000-00805f9b34fb", "handle": 41, "properties": ["notify", "read", "write"], "max_write_without_response": 244, "descriptors": ["00002902-0000-1000-8000-00805f9b34fb"]}]}], "write_with_response": {"af01": true, "af02": true}}
+{"t": 4.0172, "dir": "TX", "char": "af02", "hex": "18 00 08 08 08 08 08 08 08 08 08 08 08 08 08 08 00 00 00", "len": 19, "note": "bind"}
+{"t": 6.3612, "dir": "RX", "char": "af02", "hex": "19 ff", "len": 2}
+{"t": 6.3616, "dir": "TX", "char": "af01", "hex": "12 c4", "len": 2, "note": "settings read"}
+{"t": 6.4961, "dir": "RX", "char": "af01", "hex": "31 c5 5a 02 00 00 01 f4 01 32 00 00 00", "len": 13}
+{"t": 6.4965, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 1"}
+{"t": 6.6306, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 6.7322, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 2"}
+{"t": 6.8555, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 6.957, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 3"}
+{"t": 7.081, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 7.1824, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 4"}
+{"t": 7.3051, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 7.4065, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 5"}
+{"t": 7.5299, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 7.6315, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 6"}
+{"t": 7.7562, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 7.8576, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 7"}
+{"t": 7.9802, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 8.0815, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 8"}
+{"t": 8.2052, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 8.3079, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 9"}
+{"t": 8.4298, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 8.5315, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 10"}
+{"t": 8.6554, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 8.757, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 11"}
+{"t": 8.8803, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 8.9817, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 12"}
+{"t": 9.1061, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 9.208, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 13"}
+{"t": 9.3301, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 9.4314, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 14"}
+{"t": 9.5548, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 9.6562, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 15"}
+{"t": 9.7813, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 9.8831, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 16"}
+{"t": 10.0048, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 10.1062, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 17"}
+{"t": 10.2298, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 10.3311, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 18"}
+{"t": 10.501, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 10.603, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 19"}
+{"t": 10.7256, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 10.8275, "dir": "TX", "char": "af01", "hex": "12 c2", "len": 2, "note": "live poll 20"}
+{"t": 10.9499, "dir": "RX", "char": "af01", "hex": "31 c3 00 00 5a 00 00 14 05 00 00 e8 03 01 00 00 00 00 00 00 00 00 00 00 03 00 00 00 00 01 1a 00 00 01 40 06 00 00", "len": 38}
+{"t": 11.0513, "dir": "TX", "char": "af01", "hex": "12 e0", "len": 2, "note": "probe: E0 over AF01"}
+{"t": 11.1745, "dir": "RX", "char": "af01", "hex": "31 e1 01 06 00 28 4d 50 33 30 35 42 00 00 02 00 02 00", "len": 18}
+{"kind": "results", "bind_reply": "19 ff", "c5": {"frame_len": 13, "addr": "0x31", "chargeLimit_pct": 90, "volume": 2, "screenOff": 0, "autoOff_min": 0, "screenDirection": 1, "rampStep_mV_per_100ms": 500, "ocpDelay_ms": 50, "usbLineComp_mV": 0}, "c3_count": 20, "c3_first": {"frame_len": 38, "addr": "0x31", "outState(1=CV,2=CC)": 0, "batteryState": 0, "battery_pct": 90, "V": 0.0, "setV": 13.0, "A": 0.0, "setA": 1.0, "time_s": 1, "energy_raw": 0, "W": 0.0, "currentOver(0=CC,1=OCP)": 0, "realChange": 3, "voltageSlow": 0, "output": 0, "model": 0, "voltageBoard": 0, "currentBoard": 1, "temp_C": 26, "chargeError": 0, "wavePause": 1, "waveTime_ms": 1600}, "c3_lengths": [38], "main_e1_over_af01": "31 e1 01 06 00 28 4d 50 33 30 35 42 00 00 02 00 02 00"}

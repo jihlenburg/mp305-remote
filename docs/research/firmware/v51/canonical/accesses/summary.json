@@ -1,0 +1,64 @@
+{
+  "scope": "Decoded static instructions, not execution counts or full semantic coverage. High-pcode records are address-resolution candidates. Parameter-dependent accesses remain unresolved. PD XDATA >=0x1000 may include RAM and hardware; SFR includes CPU registers.",
+  "images": {
+    "main": {
+      "raw": {
+        "records": 54975,
+        "unresolved": 50413,
+        "candidate_records": 0,
+        "instructions": 37034
+      },
+      "high": {
+        "records": 41349,
+        "unresolved": 12392,
+        "candidate_records": 232,
+        "instructions": 22360
+      },
+      "decompiler_functions": 2455,
+      "decompiler_incomplete": 0,
+      "distinct_candidate_addresses": 75
+    },
+    "ble": {
+      "raw": {
+        "records": 3517,
+        "unresolved": 3500,
+        "candidate_records": 0,
+        "instructions": 3516
+      },
+      "high": {
+        "records": 1692,
+        "unresolved": 672,
+        "candidate_records": 252,
+        "instructions": 1309
+      },
+      "decompiler_functions": 232,
+      "decompiler_incomplete": 0,
+      "distinct_candidate_addresses": 102
+    },
+    "pd": {
+      "raw": {
+        "records": 10445,
+        "unresolved": 9759,
+        "candidate_records": 148,
+        "instructions": 6865
+      },
+      "high": {
+        "records": 7717,
+        "unresolved": 772,
+        "candidate_records": 375,
+        "instructions": 2673
+      },
+      "decompiler_functions": 1007,
+      "decompiler_incomplete": 0,
+      "distinct_candidate_addresses": 103
+    }
+  },
+  "source_hashes": {
+    "main/memory-accesses-raw.tsv": "975a30412f51612632f0cee146ce9acd8ef93b7db1216e1a208c8b500d56ffee",
+    "main/memory-accesses-high.tsv": "f7df597ae5f1f421fa873de2eb45a6f5180849e23029dddfa2679ea061a9738f",
+    "ble/memory-accesses-raw.tsv": "e2bdf66495d59088a9c4f6e815c3aa368db913a221167e69400e84bb73ecee39",
+    "ble/memory-accesses-high.tsv": "8ecea8233d1e25ee8bfbb05e30b49005a011e758683557faae0db7f96035fd56",
+    "pd/memory-accesses-raw.tsv": "296603bf0fce9c41e13e57af55aecc15d79ed5d02f14ef72293f88c62619e009",
+    "pd/memory-accesses-high.tsv": "770b229402b394f91cffd2e76d9dd93f3c1951cc936e9d7422b541081300cc6e"
+  }
+}

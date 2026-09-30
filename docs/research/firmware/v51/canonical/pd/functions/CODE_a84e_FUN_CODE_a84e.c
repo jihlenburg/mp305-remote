@@ -1,0 +1,21 @@
+/* Address: CODE:a84e; name: FUN_CODE_a84e; body bytes: 12 */
+
+undefined1
+FUN_CODE_a84e(undefined1 param_1,undefined1 *param_2,undefined1 param_3,undefined1 param_4,
+             char param_5)
+
+{
+  undefined1 uVar1;
+  undefined1 *puVar2;
+  
+  puVar2 = (undefined1 *)CONCAT11(param_3,param_1);
+  do {
+    uVar1 = *param_2;
+    param_2 = param_2 + '\x01';
+    *puVar2 = uVar1;
+    puVar2 = puVar2 + 1;
+    param_5 = param_5 + -1;
+  } while (param_5 != '\0');
+  return param_4;
+}
+

@@ -1,0 +1,24 @@
+/* Address: CODE:a94d; name: FUN_CODE_a94d; body bytes: 45 */
+
+undefined1 FUN_CODE_a94d(undefined2 param_1,byte param_2,char param_3,char param_4)
+
+{
+  char cVar1;
+  byte bVar2;
+  
+  bVar2 = (byte)param_1;
+  cVar1 = (char)((ushort)param_1 >> 8);
+  if (param_4 == '\x01') {
+    return *(undefined1 *)
+            CONCAT11(cVar1 + (param_3 - ((CARRY1(bVar2,param_2) << 7) >> 7)),bVar2 + param_2);
+  }
+  if (param_4 == '\0') {
+    return *(undefined1 *)(param_2 + bVar2);
+  }
+  if (param_4 == -2) {
+    return *(undefined1 *)(ushort)(param_2 + bVar2);
+  }
+  return *(undefined1 *)
+          CONCAT11(cVar1 + (param_3 - ((CARRY1(bVar2,param_2) << 7) >> 7)),bVar2 + param_2);
+}
+
