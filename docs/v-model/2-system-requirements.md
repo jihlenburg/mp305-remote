@@ -4,6 +4,11 @@ Status: draft
 
 This draft refines revision 2 of
 [1-user-requirements.md](1-user-requirements.md), which has not passed G1.
+Revision 8 of that document (2026-09-30) rewrote the requirements from the
+device firmware findings; this draft has not been redone yet and is
+superseded where it conflicts with
+[docs/research/device-model.md](../research/device-model.md) (TODO.md,
+"Requirements rewrite from the firmware findings").
 It was written ahead of G1 (LOGBOOK 2026-09-29). It is
 not put up for G2 until G1 has passed, and any change to the URs at G1 flows
 into it first.

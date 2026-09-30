@@ -35,10 +35,14 @@ Open and finished work, grouped by V-model phase. The process is described in
 
 - [x] Write docs/research/device-model.md, the device as a host sees it,
       from the firmware findings (2026-09-30)
-- [ ] Rewrite 1-user-requirements.md section 2 and the TBD table against
-      the device model; keep the hazards and the 2026-09-29 decisions;
-      change TBD-009 to USB on all three OSes via Parallels and Bluetooth on
-      Linux and Windows with a USB dongle in the VM
+- [x] Rewrite 1-user-requirements.md against the device model, keeping
+      the hazards and the 2026-09-29 decisions (revision 8, 2026-09-30):
+      UR-032 to UR-036 added, TBD-017 and TBD-018 added, TBD-009 revised
+      for Parallels
+- [ ] TBD-017 (user decision at G1): automatic reconnect to a remembered
+      supply, and the transport the bench-safety note recommends
+- [ ] TBD-018: read-only Bluetooth spike that records the unsolicited
+      `0xC5` when a setting is changed on the front panel
 - [ ] Rewrite 2-system-requirements.md and 7-system-tests.md against the
       device model
 - [ ] Rewrite 8-acceptance-tests.md coverage table per OS and transport

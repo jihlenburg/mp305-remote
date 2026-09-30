@@ -1123,3 +1123,23 @@ Written docs/research/device-model.md as the drawing board: the device as
 a host sees it, every statement with its evidence label and the firmware
 note it was read from. The BLE work continues from there with the
 requirements rewrite.
+
+### User requirements rewritten from the firmware findings
+
+1-user-requirements.md revision 8. The hazards keep their IDs with causes
+rewritten from device-model.md; H-009 now also covers the factory reset
+and stored settings. Surviving requirements keep their IDs. Rewritten:
+UR-002 (the three trailing name characters identify a unit), UR-004 (mode
+shown before control), UR-008 (prompt only for an unrecognised host, 30 s
+bound), UR-010, UR-016 (denied or lost remote control as its own case),
+UR-024 (output stays, grant released), UR-026, UR-027, UR-031. Added:
+UR-032 (stable host ID so the supply remembers the host), UR-033 (no
+changes to stored settings, tables or the Bluetooth chip), UR-034
+(unsolicited and deferred frames), UR-035 (USB keepalive), UR-036
+(remote-control confirmation over Bluetooth). TBD-002 to TBD-008 and
+TBD-016 carry their code answers with the hardware check still open;
+TBD-009 revised for Parallels; TBD-017 (automatic reconnect, user decision
+at G1) and TBD-018 (unsolicited frames never captured) added. The
+decisions of 2026-09-29 are unchanged. 2-system-requirements.md carries a
+note that it lags revision 8 until it is redone. traceability.md lists the
+new URs without ATs yet.

@@ -54,6 +54,11 @@ generates this file.
 | UR-029 | Library: host-driven ramp helper | user | AT-029 | draft |
 | UR-030 | Unclean-exit warning | H-004, user | AT-030 | draft |
 | UR-031 | Bench-safety note in the docs | H-004, user | AT-031 | draft |
+| UR-032 | Remembered host: stable host ID at bind | H-006, user | AT to be written | draft |
+| UR-033 | No changes to stored settings, tables or chip configuration | H-009, user | AT to be written | draft |
+| UR-034 | Unsolicited and deferred frames handled | H-001, H-003, H-005 | AT to be written | draft |
+| UR-035 | USB keepalive | H-004 | AT to be written | draft |
+| UR-036 | Remote-control confirmation over Bluetooth | H-006 | AT to be written | draft |
 
 ## 3. System requirements
 
@@ -118,3 +123,4 @@ The SR rows cover the level 2 draft, which is not up for approval before G1.
 | 3 | 2026-09-29 | Matched UR revision 4, SR revision 3; hazard rows list the draft SRs | not yet approved |
 | 4 | 2026-09-29 | TBD-015 mitigations: UR-030, UR-031, SR-046, SR-047 and their tests; H-004 row updated. | not yet approved |
 | 5 | 2026-09-29 | UR-022 and AT-022 withdrawn. H-006, SR-006, SR-007 and SR-010 parents updated. | not yet approved |
+| 6 | 2026-09-30 | UR revision 8: UR-032 to UR-036 added; their ATs and the SR columns wait for the rewrite of 2-system-requirements.md and 8-acceptance-tests.md. | not yet approved |
