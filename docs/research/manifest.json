@@ -3,8 +3,8 @@
   "scope": "Current research files except this manifest; historical snapshots keep their own hashes",
   "files": {
     "README.md": {
-      "bytes": 6434,
-      "sha256": "dee721e7634f8349b65cf4fc793e97a66b0cdb4fcf2720947c6b1d01c1b1abc0"
+      "bytes": 6665,
+      "sha256": "ffba2e1dfff93048597601eb3a1ab238ed0a5c82c880cbde262a9c87cd8222ac"
     },
     "captures/2026-09-29T193614-ble-readonly.jsonl": {
       "bytes": 9639,
@@ -45,6 +45,10 @@
     "device/ui-and-analog.md": {
       "bytes": 7643,
       "sha256": "9ad2e7b18839a612ccb2b07ac0479359cec373c72051ba1c56cbbd48aa417781"
+    },
+    "device-model.md": {
+      "bytes": 19300,
+      "sha256": "72e582aaad056f172338ea056a5f11a2659fa67c535bfb23147ca513310b3f31"
     },
     "firmware/README.md": {
       "bytes": 1105,

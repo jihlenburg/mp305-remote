@@ -42,6 +42,7 @@ this repository. Interoperability information gathered from those files is.
 | Area | Contents |
 |---|---|
 | [Device](device/README.md) | Identity, board hypotheses, buses, registers, UI and analog paths |
+| [Device model](device-model.md) | The device as a host sees it: identification, transports, bind, remote control, link loss, reply discipline, modes, telemetry units and timings. The starting point for the requirements rewrite |
 | [Protocol](protocol.md) | Framing, commands, payloads, units and recorded transport behavior |
 | [Firmware](firmware/README.md) | Architecture, RTOS, command map, permissions, readable reconstructions and verification |
 | [Firmware source narrative](firmware.md) | V51 image restoration and instruction-level evidence for the host protocol |

@@ -1106,3 +1106,20 @@ public GitHub repository at https://github.com/jihlenburg/mp305-remote, with
 the initial commit `139cb10` pushed to `main`. GitHub lists the license as
 "Other" because the Commons Clause addition does not match its GPL-3.0
 template; README.md states the terms.
+
+### Requirements go back to the drawing board
+
+The user decided to make docs/research the main source for the
+requirements and to redo the user and system requirements from the
+firmware findings, keeping the hazards, the decisions of 2026-09-29 and the
+ADRs. Reason: the drafts were written against WebLink's model of the
+device, and the firmware shows a different device in identification, bind
+and reconnect, remote control, link discipline and link loss. The user also
+decided to prepare Linux and Windows coverage with Parallels: USB HID by
+passing the supply through to a VM, Bluetooth with a USB Bluetooth dongle
+assigned to the VM. This changes TBD-009 from "Mac only".
+
+Written docs/research/device-model.md as the drawing board: the device as
+a host sees it, every statement with its evidence label and the firmware
+note it was read from. The BLE work continues from there with the
+requirements rewrite.

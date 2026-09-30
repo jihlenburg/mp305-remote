@@ -31,6 +31,19 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Record when and how ISDT was asked for documentation
 - [ ] Initial commit (waiting for user permission)
 
+## Requirements rewrite from the firmware findings
+
+- [x] Write docs/research/device-model.md, the device as a host sees it,
+      from the firmware findings (2026-09-30)
+- [ ] Rewrite 1-user-requirements.md section 2 and the TBD table against
+      the device model; keep the hazards and the 2026-09-29 decisions;
+      change TBD-009 to USB on all three OSes via Parallels and Bluetooth on
+      Linux and Windows with a USB dongle in the VM
+- [ ] Rewrite 2-system-requirements.md and 7-system-tests.md against the
+      device model
+- [ ] Rewrite 8-acceptance-tests.md coverage table per OS and transport
+- [ ] G1 and G2 with the user
+
 ## Research
 
 - [x] Refactor docs/research by topic, index the versioned evidence and retain
