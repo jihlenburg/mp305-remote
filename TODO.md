@@ -67,8 +67,14 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Transport DD rev 4 (2026-10-01): `ble` and `hid` crate-private,
       `AnyTransport` opaque, UT-TRANS-007 compile_fail doctests; 96.1 %
       line coverage, record run 2 in the file above
-- [ ] G4 per module: DD files for link, session, discovery, store, csv,
-      then mp305-py and mp305-app
+- [ ] G4 link: DD draft rev 1 written 2026-10-01
+      (docs/v-model/4-detailed-design/link.md, 19 items, 26 UT entries,
+      3 open decisions in its section 7); independent review started
+      2026-10-01; then the G4 quiz
+- [ ] G4 per module: DD files for session, discovery, store, csv, then
+      mp305-py and mp305-app
+- [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents
+      (user's instruction); the session keeps DD, review, gates, records
 
 ## Research
 

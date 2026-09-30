@@ -1387,3 +1387,30 @@ pass, 6 doctests; line coverage of `mp305-core` 96.09 % with the ADR-0013
 exclusion, down from 96.44 % because the two new crate-private constructors
 are reachable only with a device (record, run 2:
 docs/v-model/records/2026-10-01-unit-transport.md).
+
+### Link design review
+
+An independent review of docs/v-model/4-detailed-design/link.md revision 1
+returned 23 findings, two of them blockers: the urgent output-off was
+chosen before the `0xC8` block was checked, so it skipped the block by
+candidate order; and the 4 s loss bound did not hold, because queued
+requests from `session` go before the poll and, uncounted, delay the three
+poll timeouts without limit. The other main ones: the send step ran once
+per loop turn and could stall after a deferred write; the timer arm could
+fire on every turn while a request was in flight; a reply and its deadline
+in the same instant had no defined outcome; a fast bind could take a
+prompt bind's `0x19`; an expired remote-control expectation did not set
+the block; a request cancelled by its caller was still written; the
+handle's async `request` could not be used with `close(self)` or in a
+`select!`; replies carried no arrival stamp; only the poll was paced;
+closing the guard before reporting the loss could delay the report; the
+task tests assumed helpers the `Stub` and the crate's test items do not
+offer from `tests/`. Revision 2 resolves all of them (its revision row
+lists the changes) and adopts the reviewer's recommendation on the three
+open decisions: a bad frame is dropped and counted, every immediate
+timeout counts toward the loss rule, and the block applies to the
+output-off. The second of these changes AR-022, SR-028 and IT-022, and
+the first changes DD-TRANS-004; DD-TRANS-001's sentence about `link`'s
+shape changes too. All five are marked changed with the proposed wording,
+approval pending at G4 link. IT-020 and the transport DD's `Stub`
+description got editorial notes.
