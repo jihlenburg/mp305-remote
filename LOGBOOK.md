@@ -1286,3 +1286,13 @@ assembly, no `reply_opcode`, no route per opcode. Revision 2 resolves
 them. SR-007 (revision 12), IT-011 and IT-026 (revision 3) and ST-008
 (revision 9) are marked changed for the one-zero-byte bind frame, approval
 pending. The traceability matrix regenerates with no defects.
+
+### G4 protocol approved
+
+The user approved the bind-frame change (SR-007 revision 12, IT-011 and
+IT-026 revision 3, ST-008 revision 9: one zero byte between the host ID
+and the fast flag, the captured WebLink length) and
+docs/v-model/4-detailed-design/protocol.md revision 2 (gate G4 for the
+protocol module). The approved documents are in commit `52db370`, tagged
+`g4-protocol-approved`. Implementation of the protocol module may start,
+written from the DD, test first, with the 95 % coverage target.
