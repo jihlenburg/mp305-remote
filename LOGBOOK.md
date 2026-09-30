@@ -1307,7 +1307,7 @@ events), `policy`, `units`, `timing`, plus the crate-wide `Error` variants
 the module needs. Verification: fmt, clippy `-D warnings` on all targets,
 docs, 47 unit tests and 3 `compile_fail` doctests pass, line coverage
 97.62 % against the 95 % target, traceability without defects. The record
-is docs/v-model/records/2026-09-30-unit-protocol.md. Two test-only
+is docs/v-model/records/2026-09-30-unit-protocol.md (commit `899c352`). Two test-only
 deviations from the DD are recorded there (the property tests live in the
 crate because `Frame::new` is crate-private; `for_tests` constructors under
 `cfg(test)`); the DD carries an editorial revision for the test path.

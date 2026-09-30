@@ -4,7 +4,7 @@ Date: 2026-09-30. Level: unit (UT-PROTO). Scope: `mp305-core`, module
 `protocol`, implemented from docs/v-model/4-detailed-design/protocol.md
 revision 2 (tag `g4-protocol-approved`).
 
-Commit: uncommitted at the time of the run. Diff summary: new files
+Commit: `899c352` (the run was made on the tree that this commit holds). Diff summary: new files
 `Cargo.toml`, `crates/mp305-core/**`, `crates/mp305-app/**`,
 `crates/mp305-py/**` (workspace skeleton and the protocol module), this
 record, TODO.md, LOGBOOK.md, AGENTS.md (commands). The commit hash is added
