@@ -131,7 +131,7 @@ cannot run without a device; each is one line.
 
 Date: 2026-10-01. Scope: the change approved as DD revision 4 (DD-TRANS-001,
 DD-TRANS-012, DD-TRANS-022; UT-TRANS-006 reworded, UT-TRANS-007 added,
-UT-TRANS-011 and UT-TRANS-021 checklists reworded). Commit: `uncommitted`.
+UT-TRANS-011 and UT-TRANS-021 checklists reworded). Commit: `4659c57` (the run was made on the tree that this commit holds).
 Diff summary: `crates/mp305-core/src/transport/mod.rs` (`ble` and `hid`
 crate-private, `AnyTransport` an opaque struct around a private enum with
 `pub(crate)` constructors and `From<Mock>`, three `compile_fail,E0603`
