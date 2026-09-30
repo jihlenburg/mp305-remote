@@ -1214,3 +1214,13 @@ The user approved docs/v-model/README.md as the process baseline,
 findings (TBD-002 to TBD-008, TBD-011 to TBD-013, TBD-016, TBD-018) and
 TBD-014 (minimum OS versions). Next: G2 (2-system-requirements.md
 revision 9 and 7-system-tests.md revision 6).
+
+### G2 approved
+
+The user settled TBD-014 (macOS 13, Ubuntu 22.04 with manylinux_2_35,
+Windows 10 22H2), confirmed the poll pacing of SR-013 and the reconnection
+retry of SR-055, and approved 2-system-requirements.md revision 10 and
+7-system-tests.md revision 7 (gate G2). The approved documents are in
+commit `878381e`, tagged `g2-approved`. Open at this level: the hardware
+checks TBD-010 to TBD-013. Next: G3, the architecture and the integration
+test specification.
