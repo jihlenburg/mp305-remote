@@ -1296,3 +1296,19 @@ docs/v-model/4-detailed-design/protocol.md revision 2 (gate G4 for the
 protocol module). The approved documents are in commit `52db370`, tagged
 `g4-protocol-approved`. Implementation of the protocol module may start,
 written from the DD, test first, with the 95 % coverage target.
+
+### Protocol module implemented
+
+First production code. The Cargo workspace (`mp305-core`, `mp305-app`,
+`mp305-py`, `spikes` excluded) with the lints of AR-004, and the `protocol`
+module of `mp305-core` written test first from the approved DD: `frame`,
+`error`, `ble`, `hid`, `ops` (bind, info, telemetry, control, settings,
+events), `policy`, `units`, `timing`, plus the crate-wide `Error` variants
+the module needs. Verification: fmt, clippy `-D warnings` on all targets,
+docs, 47 unit tests and 3 `compile_fail` doctests pass, line coverage
+97.62 % against the 95 % target, traceability without defects. The record
+is docs/v-model/records/2026-09-30-unit-protocol.md. Two test-only
+deviations from the DD are recorded there (the property tests live in the
+crate because `Frame::new` is crate-private; `for_tests` constructors under
+`cfg(test)`); the DD carries an editorial revision for the test path.
+`cargo llvm-cov` uses the Homebrew LLVM tools (AGENTS.md, Commands).

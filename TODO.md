@@ -56,9 +56,10 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] G3 approved 2026-09-30 (AR rev 2, IT rev 2); TBD-021 and TBD-022
       settled
 - [x] G4 protocol approved 2026-09-30 (docs/v-model/4-detailed-design/protocol.md rev 2)
-- [ ] Implement the protocol module from its DD, test first, 95 % coverage,
-      with the workspace skeleton (AR-001, AR-004) and the traceability
-      tags
+- [x] Implement the protocol module from its DD, test first (2026-09-30):
+      47 unit tests, 3 doctests, 97.6 % line coverage, verification record
+      docs/v-model/records/2026-09-30-unit-protocol.md; workspace skeleton
+      with the lints of AR-004
 - [ ] G4 per module: DD files for transport, link, session, discovery,
       store, csv, then mp305-py and mp305-app
 

@@ -310,19 +310,23 @@ version belongs to is inferred.
 
 ## Commands
 
-The workspace does not exist yet. Once it does, the expected commands are:
+The Cargo workspace exists since 2026-09-30 (the Python package follows
+with its module). The commands are:
 
 ```sh
 python3 scripts/check_traceability.py --check
 cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
-cargo llvm-cov --workspace
+LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace
 uv run maturin develop -m crates/mp305-py/Cargo.toml
 uv run --no-sync pytest
 uv run --no-sync ruff check
 uv run --no-sync mypy python/mp305
 ```
+
+The Homebrew Rust toolchain has no `llvm-tools`, so `cargo llvm-cov` takes
+the Homebrew LLVM tools through the two environment variables.
 
 `--no-sync` stops uv from reinstalling a cached older build of the extension
 over the one `maturin develop` just built. Without it, the Python tests can
