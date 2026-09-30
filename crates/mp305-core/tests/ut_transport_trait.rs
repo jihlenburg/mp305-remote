@@ -59,7 +59,7 @@ async fn stub_mock_and_any_transport_implement_the_trait() {
     );
     assert_eq!(exercise(mock).await, (0xC3, "ble m".to_string()));
 
-    let any = AnyTransport::Mock(Mock::new(
+    let any = AnyTransport::from(Mock::new(
         Kind::Ble,
         "a",
         Script {

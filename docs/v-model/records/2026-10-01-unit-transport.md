@@ -86,7 +86,7 @@ cannot run without a device; each is one line.
 | `DeviceDisconnected` for this peripheral ends the task | reader task | present; the end of either stream too |
 | Write with response | `write_frame` | present |
 | Route refusal (`Route::Hid`) | `characteristic`, `write_frame` | present |
-| Constructor crate-private; only `Guarded::connect_ble` builds a `Ble` | `connect` is `pub(crate)` | present (see deviations) |
+| Constructor crate-private; only `Guarded::connect_ble` builds a `Ble` | `connect` is `pub(crate)` | present (see deviations; run 2 adds the module visibility) |
 | `Drop` aborts the reader and disconnects best effort | `impl Drop` | present |
 | Wire logging | `write_frame`, reader task | present |
 | No MTU request | whole file | present |
@@ -104,7 +104,7 @@ cannot run without a device; each is one line.
 | Stop flag checked every iteration; set on `close` and `Drop` | `io_loop`, `shut_down`, `impl Drop` | present |
 | Join inside `spawn_blocking` | `shut_down` | present |
 | Route refusal (`Route::Ble`) | `write_frame` | present |
-| Constructor crate-private; only `Guarded::open_hid` builds a `Hid` | `open` is `pub(crate)` | present (see deviations) |
+| Constructor crate-private; only `Guarded::open_hid` builds a `Hid` | `open` is `pub(crate)` | present (see deviations; run 2 adds the module visibility) |
 | Wire logging per report | `io_loop` | present |
 | Timestamps through the runtime handle | `io_loop` (`runtime.enter()`) | present |
 | Exclusion comments | module doc and every function | present |
@@ -117,10 +117,62 @@ cannot run without a device; each is one line.
   `Guarded`) is met the way the review offered as the alternative: the
   constructors `Ble::connect` and `Hid::open` are `pub(crate)`, and
   `Guarded::connect_ble` and `Guarded::open_hid` are the only public ways
-  to obtain them. The DD carries an editorial revision for this wording.
+  to obtain them. The DD carried an editorial revision 3 for this wording;
+  the user then chose a structural fix, DD revision 4, verified in run 2
+  below.
 - The mock stamps deliveries with their scheduled time (request time plus
   `after`, or creation plus the injection offset) instead of reading the
   clock when its task wakes, because a coarse clock advance in a test wakes
   several timers at once and would stamp them late. The script times are
   offsets by design, so the stamps are what the DD describes.
 - `AnyTransport` has its `Mock` variant under the `mock` feature only.
+
+## Run 2: DD revision 4 (the visibility rule)
+
+Date: 2026-10-01. Scope: the change approved as DD revision 4 (DD-TRANS-001,
+DD-TRANS-012, DD-TRANS-022; UT-TRANS-006 reworded, UT-TRANS-007 added,
+UT-TRANS-011 and UT-TRANS-021 checklists reworded). Commit: `uncommitted`.
+Diff summary: `crates/mp305-core/src/transport/mod.rs` (`ble` and `hid`
+crate-private, `AnyTransport` an opaque struct around a private enum with
+`pub(crate)` constructors and `From<Mock>`, three `compile_fail,E0603`
+doctests), `guarded.rs` (the two constructors), `ble.rs` and `hid.rs` (one
+doc sentence each), `tests/ut_transport_trait.rs` (`AnyTransport::from`),
+the DD, `traceability.md`, this record, TODO.md, LOGBOOK.md. Same OS and
+toolchain as run 1. The commands are those of run 1.
+
+Red step: with the `ble` module made public again, the first doctest of
+UT-TRANS-007 fails (`compile fail ... FAILED`); restored, all pass.
+
+| Gate | Result |
+|---|---|
+| `cargo fmt --all --check` | pass |
+| `cargo clippy --workspace --all-targets -- -D warnings` | pass |
+| `cargo test --workspace` | pass: 58 in-crate, 3 + 1 external, 6 doctests |
+| `cargo doc --workspace --no-deps` with `-D warnings` | pass |
+| `check_traceability.py --check` | no defects, matrix current |
+
+Line coverage of `mp305-core` with the ADR-0013 exclusion:
+
+| File | Lines |
+|---|---|
+| transport/guarded.rs | 90.43% |
+| transport/mod.rs | 60.00% |
+| all other files | as in run 1 |
+| TOTAL | 96.09% |
+
+TOTAL fell from 96.44 % to 96.09 %: the two crate-private constructors
+`AnyTransport::ble` and `AnyTransport::hid` are reachable only from
+`Guarded::connect_ble` and `Guarded::open_hid`, which need a device, and
+join the delegation arms for the excluded glue as uncovered lines. The
+component stays above its 85 % target.
+
+| UT | Result | Test |
+|---|---|---|
+| UT-TRANS-006 | pass | `tests/ut_transport_trait.rs` (`AnyTransport::from(Mock)`) |
+| UT-TRANS-007 | pass | three `compile_fail,E0603` doctests on `AnyTransport` in `transport/mod.rs` |
+| UT-TRANS-011 | pass (inspection) | `ble.rs`: module `pub(crate)` in `mod.rs`, `connect` `pub(crate)`, no public function returns a `Ble` (`rg` over `crates/mp305-core/src` for `-> .*Ble` finds only `connect`) |
+| UT-TRANS-021 | pass (inspection) | `hid.rs`: module `pub(crate)` in `mod.rs`, `open` `pub(crate)`, no public function returns a `Hid` (same search for `Hid`) |
+| all others | pass, unchanged | as in run 1 |
+
+Deviations from the design in this run: none. The deviation of run 1 on
+`pub(crate)` trait methods is closed by revision 4.

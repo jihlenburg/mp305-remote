@@ -39,7 +39,8 @@ struct Job {
     done: oneshot::Sender<Result<(), Error>>,
 }
 
-/// A supply over USB HID.
+/// A supply over USB HID. The module is crate-private: a `Hid` exists
+/// only inside a `Guarded` (DD-TRANS-022).
 pub struct Hid {
     /// Kind and HID path.
     description: Description,

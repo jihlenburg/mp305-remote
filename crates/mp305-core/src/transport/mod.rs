@@ -2,13 +2,13 @@
 //! path to a supply goes through, the Bluetooth LE and USB HID
 //! implementations, and the scripted mock for tests.
 //!
-//! Implements: DD-TRANS-001 (module tree).
+//! Implements: DD-TRANS-001 (module tree, `AnyTransport`).
 
-pub mod ble;
+pub(crate) mod ble;
 pub mod ble_route;
 pub mod description;
 pub mod guarded;
-pub mod hid;
+pub(crate) mod hid;
 pub mod hid_report;
 #[cfg(any(test, feature = "mock"))]
 pub mod mock;
@@ -62,8 +62,37 @@ pub trait Transport: Send + Sync + 'static {
 }
 
 /// One concrete type over every transport, for the products.
+///
+/// It is opaque: the products obtain one through
+/// [`guarded::Guarded::connect_ble`] or [`guarded::Guarded::open_hid`] and
+/// never see the transport inside. The `ble` and `hid` modules are
+/// crate-private, so a `Ble` or a `Hid` can be neither named nor obtained
+/// outside this crate, and the unguarded `Transport::send` of a real
+/// transport stays out of reach (SR-006). Under the `mock` feature,
+/// `From<Mock>` wraps the scripted mock.
+///
+/// The three examples below must not compile (Test: UT-TRANS-007).
+///
+/// ```compile_fail,E0603
+/// use mp305_core::transport::ble::Ble;
+/// ```
+///
+/// ```compile_fail,E0603
+/// use mp305_core::transport::hid::Hid;
+/// ```
+///
+/// ```compile_fail,E0603
+/// fn unwrap(t: mp305_core::transport::AnyTransport) {
+///     let mp305_core::transport::AnyTransport(inner) = t;
+/// }
+/// ```
+pub struct AnyTransport(Inner);
+
+/// The transport inside an [`AnyTransport`]. Private, so that no code
+/// outside this crate can reach the wrapped transport.
+// The glue types are much larger than the mock; boxing them buys nothing.
 #[allow(clippy::large_enum_variant)]
-pub enum AnyTransport {
+enum Inner {
     /// Bluetooth LE.
     Ble(ble::Ble),
     /// USB HID.
@@ -73,40 +102,59 @@ pub enum AnyTransport {
     Mock(mock::Mock),
 }
 
+impl AnyTransport {
+    /// Wraps a Bluetooth transport. Only `Guarded::connect_ble` calls it.
+    pub(crate) fn ble(transport: ble::Ble) -> Self {
+        Self(Inner::Ble(transport))
+    }
+
+    /// Wraps a HID transport. Only `Guarded::open_hid` calls it.
+    pub(crate) fn hid(transport: hid::Hid) -> Self {
+        Self(Inner::Hid(transport))
+    }
+}
+
+#[cfg(any(test, feature = "mock"))]
+impl From<mock::Mock> for AnyTransport {
+    fn from(mock: mock::Mock) -> Self {
+        Self(Inner::Mock(mock))
+    }
+}
+
 impl Transport for AnyTransport {
     async fn send(&self, frame: &Frame, route: Route) -> Result<(), Error> {
-        match self {
-            AnyTransport::Ble(t) => t.send(frame, route).await,
-            AnyTransport::Hid(t) => t.send(frame, route).await,
+        match &self.0 {
+            Inner::Ble(t) => t.send(frame, route).await,
+            Inner::Hid(t) => t.send(frame, route).await,
             #[cfg(any(test, feature = "mock"))]
-            AnyTransport::Mock(t) => t.send(frame, route).await,
+            Inner::Mock(t) => t.send(frame, route).await,
         }
     }
 
     fn incoming(&mut self) -> &mut mpsc::UnboundedReceiver<RawIncoming> {
-        match self {
-            AnyTransport::Ble(t) => t.incoming(),
-            AnyTransport::Hid(t) => t.incoming(),
+        match &mut self.0 {
+            Inner::Ble(t) => t.incoming(),
+            Inner::Hid(t) => t.incoming(),
             #[cfg(any(test, feature = "mock"))]
-            AnyTransport::Mock(t) => t.incoming(),
+            Inner::Mock(t) => t.incoming(),
         }
     }
 
     async fn close(&self) -> Result<(), Error> {
-        match self {
-            AnyTransport::Ble(t) => t.close().await,
-            AnyTransport::Hid(t) => t.close().await,
+        match &self.0 {
+            Inner::Ble(t) => t.close().await,
+            Inner::Hid(t) => t.close().await,
             #[cfg(any(test, feature = "mock"))]
-            AnyTransport::Mock(t) => t.close().await,
+            Inner::Mock(t) => t.close().await,
         }
     }
 
     fn description(&self) -> &Description {
-        match self {
-            AnyTransport::Ble(t) => t.description(),
-            AnyTransport::Hid(t) => t.description(),
+        match &self.0 {
+            Inner::Ble(t) => t.description(),
+            Inner::Hid(t) => t.description(),
             #[cfg(any(test, feature = "mock"))]
-            AnyTransport::Mock(t) => t.description(),
+            Inner::Mock(t) => t.description(),
         }
     }
 }

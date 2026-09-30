@@ -85,7 +85,7 @@ impl Guarded<AnyTransport> {
         adapter: &btleplug::platform::Adapter,
         os_id: &btleplug::platform::PeripheralId,
     ) -> Result<Self, Error> {
-        Ok(Self::new(AnyTransport::Ble(
+        Ok(Self::new(AnyTransport::ble(
             ble::Ble::connect(adapter, os_id).await?,
         )))
     }
@@ -97,7 +97,7 @@ impl Guarded<AnyTransport> {
     /// [`Error::Transport`] when the device cannot be opened or no Tokio
     /// runtime is current.
     pub fn open_hid(api: &hidapi::HidApi, path: &std::ffi::CStr) -> Result<Self, Error> {
-        Ok(Self::new(AnyTransport::Hid(hid::Hid::open(api, path)?)))
+        Ok(Self::new(AnyTransport::hid(hid::Hid::open(api, path)?)))
     }
 }
 

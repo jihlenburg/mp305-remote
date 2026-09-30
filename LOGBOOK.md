@@ -1363,3 +1363,27 @@ docs/v-model/records/2026-10-01-unit-transport.md (commit `47f6996`), which also
 deviations (crate-private constructors instead of `pub(crate)` trait
 methods, scheduled-time stamps in the mock). The DD carries an editorial
 revision 3 for the constructor wording.
+
+### Transport DD revision 4: the visibility rule made structural
+
+The transport record's first deviation (DD-TRANS-012 and DD-TRANS-022 asked
+for `pub(crate)` trait methods, which Rust cannot express) was put to the
+user with three options: keep revision 3 as editorial, reword the DD to the
+crate-private constructors the code already had, or make the rule one the
+compiler enforces. The user chose the structural fix. Revision 3 is
+retracted as mislabelled: the replaced sentence was a design statement with
+its own rationale, so its replacement was a change, not editorial.
+
+Revision 4, approved by the user in chat on 2026-10-01: the `ble` and
+`hid` modules are crate-private, so `Ble` and `Hid` cannot be named outside
+`mp305-core`; `AnyTransport` is an opaque struct around a private enum with
+crate-private constructors and `From<Mock>` under the `mock` feature, so a
+product cannot take the transport out of a `Guarded`. UT-TRANS-007 (three
+`compile_fail` doctests pinned to E0603) is the test of the rule;
+UT-TRANS-006, UT-TRANS-011 and UT-TRANS-021 were reworded. Impact: the
+public API loses the `transport::ble` and `transport::hid` modules and the
+variants of `AnyTransport`; no AR item changes. Verification: all gates
+pass, 6 doctests; line coverage of `mp305-core` 96.09 % with the ADR-0013
+exclusion, down from 96.44 % because the two new crate-private constructors
+are reachable only with a device (record, run 2:
+docs/v-model/records/2026-10-01-unit-transport.md).

@@ -64,6 +64,9 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Implement the transport module from its DD, test first (2026-10-01):
       65 tests, 96.4 % line coverage with the ADR-0013 exclusion, record
       docs/v-model/records/2026-10-01-unit-transport.md
+- [x] Transport DD rev 4 (2026-10-01): `ble` and `hid` crate-private,
+      `AnyTransport` opaque, UT-TRANS-007 compile_fail doctests; 96.1 %
+      line coverage, record run 2 in the file above
 - [ ] G4 per module: DD files for link, session, discovery, store, csv,
       then mp305-py and mp305-app
 

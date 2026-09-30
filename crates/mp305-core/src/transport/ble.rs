@@ -31,7 +31,8 @@ use crate::transport::{RawIncoming, Transport};
 /// route tag, plus the 3-byte ATT header).
 pub const MIN_MTU: u16 = 74;
 
-/// A connected supply over Bluetooth LE.
+/// A connected supply over Bluetooth LE. The module is crate-private:
+/// a `Ble` exists only inside a `Guarded` (DD-TRANS-012).
 pub struct Ble {
     /// Kind and OS identifier.
     description: Description,
