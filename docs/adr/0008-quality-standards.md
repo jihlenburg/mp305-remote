@@ -39,6 +39,13 @@ principles of **IEC 61508-3** (Software requirements):
     disconnection, timeout, or fault.
   - Heartbeat / keep-alive mechanisms detect communication link loss and trigger
     safe shutdown.
+    Editorial note (2026-09-30, TBD-022): the two bullets above describe the
+    intent, not what this device allows. The supply keeps its output as it
+    was when the link drops and only releases remote control, and after a
+    link loss nothing can be sent (docs/research/device-model.md 4.4). The
+    mitigations are SR-028 (report at once, send nothing), the USB keepalive
+    (SR-051), the unclean-exit warning (UR-030) and the bench-safety note
+    (UR-031).
   - Input parameters are validated and clamped against strict physical limits
     (0 to 30 V, 0 to 5 A) at all API boundaries.
 

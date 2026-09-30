@@ -1224,3 +1224,37 @@ retry of SR-055, and approved 2-system-requirements.md revision 10 and
 commit `878381e`, tagged `g2-approved`. Open at this level: the hardware
 checks TBD-010 to TBD-013. Next: G3, the architecture and the integration
 test specification.
+
+### Architecture drafted for G3
+
+Drafted docs/v-model/3-architecture.md (AR-001 to AR-052) from the chat
+draft of 2026-09-29 and device-model.md: one Rust core with the modules
+protocol, transport (ble, hid, mock), link, session, discovery and store;
+the products on top; the link, bind and remote-control state machines; the
+event dispatcher for unsolicited and deferred frames; the reconnect policy;
+the opcode allowlist; one error taxonomy and one constants module for the
+device's timings. docs/v-model/6-integration-tests.md (IT-001 to IT-052)
+gives one mock-transport test per AR item. scripts/check_traceability.py
+now covers levels 3 and 6 and reports no defects. An independent review
+pass is running before the gate.
+
+### Architecture review
+
+An independent review of 3-architecture.md revision 1 and
+6-integration-tests.md revision 1 returned 58 findings. The substantive
+ones: a deferred `0xC9` (the Bluetooth remote-control prompt, up to 70 s)
+would have occupied the single in-flight request slot and stopped the poll
+and the loss detection; the allowlist, the one-write rule and the frame
+log were "enforced by the trait", which nothing enforces; HID undoubling
+was assigned to both `protocol` and `transport::hid`; SR-029, SR-030,
+SR-038, SR-043, SR-047 and half of SR-046 had no AR; `btleplug` cannot
+request an MTU; `forbid(unsafe_code)` cannot be re-allowed in `mp305-py`;
+the re-read after a failed or timed-out `0xC8` was missing; no injectable
+clock for the 30 s, 70 s and 10 min bounds. Revision 2 of both documents
+resolves them: a `Guarded` wrapper around every transport, pure framing
+and classification functions, immediate and deferred request kinds with an
+urgent queue, the poll and keepalive in `link` on the Tokio clock, a
+`Ready` state, the re-read rule, the busy inference order, the marker
+refresh, packaging and csv items, and two new open points for the user:
+TBD-021 (SR-007's MTU wording) and TBD-022 (an editorial note in
+ADR-0008). The traceability matrix regenerates with no defects.

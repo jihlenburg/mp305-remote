@@ -43,7 +43,8 @@ Using the software for personal, research, or internal business operations (e.g.
 testing DUTs in a lab) is permitted; commercial sale of the software, charging
 for distribution, or selling derivative products is strictly prohibited.
 
-Current phase: architecture (level 3). G1 and G2 passed on 2026-09-30.
+Current phase: detailed design (level 4, per module). G1 to G3 passed on
+2026-09-30.
 There is no production code yet.
 See [TODO.md](TODO.md) for where things stand.
 
@@ -203,7 +204,7 @@ A test's level comes from the ID it verifies, not from its directory:
 | Level | Verifies | Where |
 |---|---|---|
 | Unit (UT) | DD | `#[cfg(test)] mod tests` next to the code, or `crates/*/tests/ut_*.rs` |
-| Integration (IT) | AR | `crates/*/tests/it_*.rs` |
+| Integration (IT) | AR | `crates/*/tests/it_*.rs`, Python: `tests/integration/` |
 | System (ST) | SR | `tests/system/` (pytest, usually HIL) |
 | Acceptance (AT) | UR | numbered manual steps in `docs/v-model/8-acceptance-tests.md`, automated parts in `tests/acceptance/` |
 
@@ -350,7 +351,7 @@ docs/
     captures/     raw hardware captures, never edited
 crates/           (planned) mp305-core, mp305-app, mp305-py
 python/mp305/     (planned) Python package
-tests/            (planned) system/ and acceptance/ tests
+tests/            (planned) integration/ (Python), system/ and acceptance/ tests
 spikes/           throwaway experiments, outside the Cargo workspace
 scripts/          repository tooling (traceability check)
 ```

@@ -10,7 +10,7 @@ Open and finished work, grouped by V-model phase. The process is described in
 |---|---|---|
 | G1 | User requirements + acceptance test spec | approved 2026-09-30 (UR rev 9, AT rev 9, tag g1-approved) |
 | G2 | System requirements + system test spec | approved 2026-09-30 (SR rev 10, ST rev 7, tag g2-approved) |
-| G3 | Architecture + integration test spec | not started (a draft architecture was agreed in chat, "yes, looks right"; that is input for 3-architecture.md, not a gate approval; see LOGBOOK 2026-09-29, "Corrections, second round") |
+| G3 | Architecture + integration test spec | approved 2026-09-30 (AR rev 2, IT rev 2, tag g3-approved) |
 | G4 | Detailed design + unit test spec, per module | not started |
 
 ## Project setup
@@ -53,8 +53,10 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Traceability generator scripts/check_traceability.py; the matrix is
       generated from now on (2026-09-30)
 - [x] G1 and G2 with the user (2026-09-30, tags g1-approved and g2-approved)
-- [ ] G3: docs/v-model/3-architecture.md and the integration test
-      specification, against the device model and the approved SRs
+- [x] G3 approved 2026-09-30 (AR rev 2, IT rev 2); TBD-021 and TBD-022
+      settled
+- [ ] G4 per module: DD files for protocol, transport, link, session,
+      discovery, store, csv, then mp305-py and mp305-app
 
 ## Research
 
