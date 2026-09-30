@@ -1312,3 +1312,24 @@ deviations from the DD are recorded there (the property tests live in the
 crate because `Frame::new` is crate-private; `for_tests` constructors under
 `cfg(test)`); the DD carries an editorial revision for the test path.
 `cargo llvm-cov` uses the Homebrew LLVM tools (AGENTS.md, Commands).
+
+### Transport design review
+
+An independent review of docs/v-model/4-detailed-design/transport.md
+revision 1 returned 47 findings. The main ones: `btleplug` 0.13 does expose
+the negotiated MTU (`Peripheral::mtu`), so the design reads it and fails a
+connection below 74; its notification stream never ends on a disconnect,
+the adapter's `DeviceDisconnected` event does; the notification stream is a
+broadcast that drops on lag and must be taken before `subscribe`;
+`hidapi`'s `HidDevice` is `Send` but not `Sync`, so one thread owns it and
+writes arrive as jobs; a send cancelled by a timeout could overlap the next
+write unless the permit travels with a spawned task; the concrete
+transports' `send` must be `pub(crate)` or the allowlist can be bypassed;
+`unpack_in` must require the report ID rather than guess; the mock needed
+routes, repeats, timed errors, a stop time and a factory for reconnection;
+the coverage exclusion for vendor glue is a new class that ADR-0008 does
+not sanction. Revision 2 resolves them. ADR-0013 (coverage exclusion for
+vendor glue) is proposed. AR-017 (revision 3) and IT-017 (revision 4) are
+marked changed: keeping a frame's reports together is the transport's job,
+waiting for the reply is `link`'s. Both wait for the user's approval with
+the transport gate.

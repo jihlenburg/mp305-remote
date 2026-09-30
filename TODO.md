@@ -11,7 +11,7 @@ Open and finished work, grouped by V-model phase. The process is described in
 | G1 | User requirements + acceptance test spec | approved 2026-09-30 (UR rev 9, AT rev 9, tag g1-approved) |
 | G2 | System requirements + system test spec | approved 2026-09-30 (SR rev 10, ST rev 7, tag g2-approved) |
 | G3 | Architecture + integration test spec | approved 2026-09-30 (AR rev 2, IT rev 2, tag g3-approved) |
-| G4 | Detailed design + unit test spec, per module | protocol approved 2026-09-30 (DD rev 2, tag g4-protocol-approved); other modules not started |
+| G4 | Detailed design + unit test spec, per module | protocol and transport approved 2026-09-30 (tags g4-protocol-approved, g4-transport-approved); other modules not started |
 
 ## Project setup
 
@@ -60,8 +60,10 @@ Open and finished work, grouped by V-model phase. The process is described in
       47 unit tests, 3 doctests, 97.6 % line coverage, verification record
       docs/v-model/records/2026-09-30-unit-protocol.md; workspace skeleton
       with the lints of AR-004
-- [ ] G4 per module: DD files for transport, link, session, discovery,
-      store, csv, then mp305-py and mp305-app
+- [x] G4 transport approved 2026-09-30 (DD rev 2); ADR-0013 accepted
+- [ ] Implement the transport module from its DD, test first
+- [ ] G4 per module: DD files for link, session, discovery, store, csv,
+      then mp305-py and mp305-app
 
 ## Research
 

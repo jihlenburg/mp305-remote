@@ -1,0 +1,120 @@
+# DD: transport module of `mp305-core`
+
+Status: approved (G4 transport, user, 2026-09-30)
+
+Refines AR-015, AR-016, AR-017 and AR-018 of
+[3-architecture.md](../3-architecture.md) (approved at G3). Device facts
+cite [docs/research/device-model.md](../../research/device-model.md) with
+their evidence labels (code, hardware, inferred). The module moves frames
+between `link` and a supply and enforces, in one place, the rules every path
+to a device must obey: the opcode allowlist, one write in flight, arrival
+timestamps, and the frame log. It knows nothing about opcode meanings,
+binding or remote control. Coverage target 85 % (ADR-0008, "rest of
+`mp305-core`"); the two vendor-glue files are proposed for exclusion in
+section 6 under ADR-0013 (accepted 2026-09-30). Revision 2
+resolves the independent review of revision 1 (LOGBOOK, "Transport design
+review").
+
+Rust module tree: `mp305_core::transport` with the submodules `guarded`,
+`description`, `ble` (glue), `ble_route` (pure), `hid` (glue), `hid_report`
+(pure), and `mock` (compiled under `cfg(any(test, feature = "mock"))`; the
+`mock` feature is what the integration tests and the Python test constructor
+enable). Dependencies: `tokio` (rt, sync, time, macros; `test-util` as a dev
+dependency), `log`, `futures`, `btleplug` 0.13, `hidapi` 2.6, `uuid`. Every
+source file starts with `//! Implements: DD-TRANS-nnn, ...`. The Refines
+column names only this module's AR items. Tests outside the crate build
+frames through the request builders of `protocol::ops`, since `Frame::new`
+is crate-private.
+
+## 1. The trait and the guard
+
+| ID | Design item | Refines | Status | Rationale |
+|---|---|---|---|---|
+| DD-TRANS-001 | `Transport: Send + Sync + 'static` has four members: `fn send(&self, frame: &Frame, route: Route) -> impl Future<Output = Result<(), Error>> + Send`; `fn incoming(&mut self) -> &mut mpsc::UnboundedReceiver<RawIncoming>` where `RawIncoming { route: Route, at: Instant, item: Result<Frame, Reason> }` and `Instant` is `tokio::time::Instant`; `fn close(&self) -> impl Future<Output = Result<(), Error>> + Send`; `fn description(&self) -> &Description`. The channel is unbounded, so a producer never blocks on the consumer. A transport delivers each decoded frame, or the reason it could not decode one, in arrival order, stamped by the producer at receipt (DD-TRANS-026). The trait is not object safe; `link` is generic (`Link<T: Transport>`), and the products hold `AnyTransport { Ble(Ble), Hid(Hid), Mock(Mock) }`, an enum that implements `Transport` by delegation. Implementations: `ble::Ble`, `hid::Hid`, `mock::Mock`. | AR-015 | approved | Return-position `impl Future + Send` avoids the `async_fn_in_trait` lint and gives `link` the `Send` bound it needs to run in a spawned task; the enum gives the app and the Python crate one concrete type. |
+| DD-TRANS-002 | `Description { kind: Kind, identifier: String }` with `Kind { Ble, Hid }` and `Display` as `ble <identifier>` or `hid <identifier>`. The mock takes its identifier at construction. | AR-015 | approved | The identifier is the OS identifier or the HID path the discovery reported (AR-032). |
+| DD-TRANS-003 | `Guarded<T: Transport>` is the only type `link` constructs (`Guarded::new(inner: T)`, holding `Arc<T>`). `send` first calls `protocol::policy::check(frame)` and returns `Error::Protocol(Reason::NotAllowed or BadLength)` before touching the inner transport; on a `Kind::Ble` transport it also requires `route == Route::Ble(ops::route(frame.opcode()))`, else `Error::Transport`; then it takes the single `OwnedSemaphorePermit` (a `tokio::sync::Semaphore` with one permit), logs the frame, and runs the inner `send` in a spawned task that owns the permit, awaiting its `JoinHandle`. A `send` future dropped by a timeout leaves the task running and the permit held until the write completes, so two writes can never overlap. `recv(&mut self) -> Option<Incoming>` with `Incoming { route, at, item: Item }` and `Item { Frame(Frame), Error(Reason), LinkClosed }`: it takes the next `RawIncoming`, logs it, counts a parse error (`errors()`) and logs it at WARN, and passes it on so that `link` can act on it (SR-016). | AR-015, AR-012, AR-018 | approved | device-model.md 6 (code): the bridge holds one frame per direction, and 2.1 and 2.2: a second Bluetooth write within about 1.25 ms replaces the first, and interleaved HID reports are forwarded corrupted with a valid checksum. One wrapper means the mock-tested path is the shipped path (IT-012, IT-015, IT-018). |
+| DD-TRANS-004 | A transport signals a lost link (OS disconnect, reader thread ended, device error) by dropping its sender, so `incoming().recv()` returns `None`. `Guarded::recv` turns that into one `Item::LinkClosed` and then `None`. This is what AR-022 calls an OS disconnect; a failed `send` or an `Item::Error` is what it calls a transport error. A `LinkClosed` after the caller's own `close` is expected and not a loss. | AR-015, AR-016, AR-017 | approved | One signal for every way a link ends keeps `link` simple. |
+| DD-TRANS-005 | The frame log, all under `log::trace!(target: "mp305_core::frames", ...)`: `Guarded` logs `tx <route> +<ms> <hex>` and `rx <route> +<ms> <hex>` with the opcode and payload as `Frame`'s `Debug` prints them and `+<ms>` the milliseconds since the `Guarded` was created; a parse error as `rx <route> +<ms> error: <reason>` at WARN; a failed send as `tx <route> +<ms> failed: <error>` at WARN. Each transport and the mock log the on-air bytes as `wire tx <route> <hex as written>` and `wire rx <route> <hex as received>` (one line per notification, per report, or per mock delivery). | AR-018 | approved | The system tests read the on-air shape from this log (ST-006, ST-039, ST-040). `log::Record` carries no timestamp, so the offset is in the message. |
+
+## 2. Bluetooth (`ble`, `ble_route`)
+
+| ID | Design item | Refines | Status | Rationale |
+|---|---|---|---|---|
+| DD-TRANS-010 | `Ble::connect(adapter: &Adapter, os_id: &PeripheralId) -> Result<Ble, Error>`: obtains `adapter.events()` first; finds the peripheral by id among `adapter.peripherals()` (`Error::Transport { message: "peripheral not found" }` otherwise); obtains `peripheral.notifications()` before connecting; calls `connect`, then `discover_services`; reads `peripheral.mtu()` and fails with `Error::Transport { message: "ATT MTU <n> below 74" }` when it is below 74, logging the value under the frames target; finds the characteristics `0000af01-0000-1000-8000-00805f9b34fb` and `0000af02-...` (`Error::Transport` when either is missing); calls `subscribe` on AF01, then AF02, on every connection; then starts the reader task. It requests no MTU: `btleplug` has no request, the OS negotiates. | AR-016 | approved | device-model.md 2.1 (code; MTU 247 hardware): the longest reply is 70 bytes plus the tag, so 74 carries it. SR-007 as changed at G3: verify, do not request. TBD-019 covers the per-OS behaviour. |
+| DD-TRANS-011 | The reader task `select!`s on the notification stream and the adapter event stream. Each `ValueNotification` is mapped by `ble_route::route_of(uuid) -> Option<BleRoute>` (a notification from another characteristic is logged and dropped), decoded with `protocol::ble::decode(value, route)`, stamped, and sent as `RawIncoming { route: Route::Ble(route), at, item }` with `send` on the unbounded channel; every notification is one frame, never joined or split. A `CentralEvent::DeviceDisconnected(id)` for this peripheral, or the end of either stream, ends the task and drops the sender (DD-TRANS-004). | AR-016 | approved | device-model.md 2.1 (code): one MCU frame is one notification. `btleplug`'s notification stream is a broadcast subscription that does not end on disconnect on any backend; the adapter's `DeviceDisconnected` event is the signal on macOS, Windows and BlueZ. Taking the stream before `subscribe` avoids losing early notifications, and the unbounded channel avoids the broadcast's lag drop. |
+| DD-TRANS-012 | `send` encodes with `protocol::ble::encode(frame, route)`, logs the wire bytes, and calls `write(characteristic, bytes, WriteType::WithResponse)`; a `Route::Hid` on a `Ble` is `Error::Transport`. `close(&self)` unsubscribes both characteristics and disconnects, ignoring errors on a link already lost, and aborts the reader task. `impl Drop for Ble` aborts the reader task and spawns a best-effort `disconnect` when a runtime is available. `btleplug::Error` maps to `Error::Transport { message }`. The concrete `send` and `close` are `pub(crate)`: only `Guarded` reaches them. | AR-016 | approved | device-model.md 2.1 (code, hardware): write with response, one request at a time (the guard). A `pub(crate)` send is what makes the allowlist unbypassable from the products (SR-006). |
+
+## 3. USB HID (`hid`, `hid_report`)
+
+| ID | Design item | Refines | Status | Rationale |
+|---|---|---|---|---|
+| DD-TRANS-020 | `Hid::open(api: &HidApi, path: &CStr) -> Result<Hid, Error>` opens the device with `api.open_path` (the discovery's `HidApi` context is reused) and moves the `HidDevice` into one I/O thread that owns it, since `HidDevice` is `Send` but not `Sync`. The thread loops: drain write jobs from a `std::sync::mpsc` receiver, each job being `{ reports: Vec<[u8; 65]>, done: oneshot::Sender<Result<(), Error>> }` written in order with `HidDevice::write` (a short write fails the job with `Error::Transport`); then `read_timeout(&mut [u8; 65], 10)`: `Ok(0)` is a timeout, `Ok(n)` is one input report handed to `hid_report::unpack_in` and its stream bytes to one `protocol::hid::Decoder` kept across reports, every decoder result stamped and sent as `RawIncoming { route: Route::Hid, at, item }`; `Err` ends the thread. A stop flag, checked every iteration, ends the thread on `close` or `Drop`; the thread drops the device on exit. `hidapi::HidError` maps to `Error::Transport { message }`. | AR-017 | approved | device-model.md 2.2 (code): the bridge reassembles frames across reports and holds one frame per direction. One owning thread makes every report of a frame go out in order without interleaving, whatever happens to the calling future. |
+| DD-TRANS-021 | `hid_report::pack_out(payload: &[u8]) -> Result<[u8; 65], Reason>` builds `[0x01, n, payload..., 0...]` with the report ID at index 0 and `n` the payload length, and rejects an empty payload or one above 62 with `Reason::BadLength`. `hid_report::unpack_in(report: &[u8]) -> Result<&[u8], Reason>` requires `0x02` at index 0 (`Reason::BadPrefix` otherwise), reads `n` from index 1, and returns the `n` bytes from index 2, rejecting `n` above 62 or beyond the buffer with `Reason::BadLength`. | AR-017 | approved | device-model.md 2.2 (code): `n` is the number of valid stream bytes in that report. `hidapi` puts the report ID at index 0 of a read buffer on every platform for a device with numbered reports, and takes it at index 0 of a write buffer; whether each OS honours that is TBD-020, verified by ST-040, not guessed by the code. `Reason::BadPrefix` is reused for "the report does not start with the expected ID"; its doc is generalised (editorial). |
+| DD-TRANS-022 | `send` calls `protocol::hid::encode(frame)`, packs each report payload with `pack_out`, logs each report's wire bytes, and submits all reports of the frame as one job to the I/O thread, awaiting its `oneshot`. A frame therefore never shares a report with another frame and never interleaves with another frame. A `Route::Ble` on a `Hid` is `Error::Transport`. `close(&self)` sets the stop flag and joins the thread inside `spawn_blocking`. The concrete `send` and `close` are `pub(crate)`. Not sending the next frame before the reply to the previous one arrived is `link`'s rule (AR-020), because opcodes the device ignores get no reply at all (device-model.md 6) and only `link` has the timeout; AR-017 and IT-017 were changed to that wording and approved on 2026-09-30. | AR-017 | approved | device-model.md 2.2 (code): one frame per report sequence. |
+
+## 4. The mock (`mock`)
+
+| ID | Design item | Refines | Status | Rationale |
+|---|---|---|---|---|
+| DD-TRANS-030 | `Mock::new(kind: Kind, identifier: &str, script: Script) -> Mock` implements `Transport`. Times in the script are offsets from the mock's creation on the Tokio clock. `Script { replies: Vec<Reply>, injections: Vec<Injection>, send_errors: Vec<SendError>, stop_replying_at: Option<Duration>, close_at: Option<Duration> }`. `Reply { request: u8, after: Duration, route: Route, deliveries: Vec<Vec<u8>>, repeat: Option<usize> }`: on a request with that opcode the mock waits `after`, then delivers each element as one on-air unit (a notification value on a Ble mock, the `n` stream bytes of one input report on a Hid mock), decoded through the real `protocol::ble::decode` or one `protocol::hid::Decoder` kept across deliveries; `repeat` is how many requests the reply serves (`None` forever); replies for one opcode are used in order. `Injection { at: Duration, route: Route, delivery: Vec<u8> }` is delivered at that time regardless of requests. `SendError { opcode: u8, from: Duration }` makes `send` of that opcode fail with `Error::Transport` from that time on. After `stop_replying_at` no reply is delivered; at `close_at` the mock drops its sender. A `send` with a route that does not match the mock's kind fails with `Error::Transport`, as the real transports do. | AR-015 | approved | IT-020 to IT-030 and the unit tests of `link` and `session` are written against this script; decoding through the real code is what makes a mock test meaningful. |
+| DD-TRANS-031 | `Mock::sent(&self) -> Vec<Sent>` with `Sent { at: Instant, route: Route, frame: Frame, wire: Vec<u8> }` records every accepted `send` in order, `wire` being the `ble::encode` output or the concatenated report payloads. | AR-015 | approved | The integration and system tests check what was sent and when. |
+| DD-TRANS-032 | `MockFactory` is a `FnMut() -> Mock + Send` that `session` calls once per connection attempt, so that a reconnection (AR-029) gets a fresh mock with its own script; `Script::default()` is a mock that answers nothing. | AR-015 | approved | IT-029 and the Python `_from_mock` constructor need one mock per connection. |
+
+## 5. Errors and timestamps
+
+| ID | Design item | Refines | Status | Rationale |
+|---|---|---|---|---|
+| DD-TRANS-040 | `Error::Transport { message: String }` is added to the crate `Error` (AR-050), carrying the vendor library's error text or the transport's own reason. `Error::NotFound` belongs to discovery and is not defined here. | AR-015 | approved | AR-050. |
+| DD-TRANS-026 | Arrival timestamps are taken by the producer at receipt: the Bluetooth reader task and the mock use `tokio::time::Instant::now()`; the HID I/O thread, which runs outside the runtime, calls `tokio::time::Instant::now()` through a runtime handle captured at `open` (`Handle::current().enter()`), so tests on a paused clock see consistent times. `Guarded` copies `at` unchanged. | AR-015 | approved | A frame that arrives while `link` awaits a send must not be stamped late (SR-014: the timestamp is taken when the reply arrived). |
+
+## 6. Coverage exclusion (ADR-0013)
+
+`crates/mp305-core/src/transport/ble.rs` and
+`crates/mp305-core/src/transport/hid.rs` hold only glue over `btleplug` and
+`hidapi` that a device exercises; their pure parts live in `ble_route.rs`
+and `hid_report.rs` and are unit tested. The proposal is to exclude the two
+glue files from the coverage measurement
+(`--ignore-filename-regex 'transport/(ble|hid)\.rs'`) and to verify them by
+inspection (IT-016, IT-017) and by the system tests on hardware (ST-008,
+ST-039, ST-040). Every function in an excluded file carries a comment
+citing this section and the covering test. ADR-0008 sanctioned exclusion
+only for GUI drawing code; ADR-0013, accepted by the user on 2026-09-30,
+adds this class with the rule that nothing testable may live in an
+excluded file.
+
+## 7. Unit test specification
+
+Tests live in `crates/mp305-core/src/transport/**` under `#[cfg(test)]` and
+in `crates/mp305-core/tests/ut_transport_*.rs` (which enable the `mock`
+feature and build frames through `protocol::ops`). Each test names its UT
+ID. Tests run on a paused Tokio clock (`#[tokio::test(start_paused = true)]`,
+`tokio` with `test-util`). `Stub` is a test double under the `mock` feature
+that implements `Transport` with a channel the test feeds, a configurable
+send delay, and a `Vec` that records sends with their clock times. Log
+capture uses one static `log::Log` installed once per test binary that
+collects records by target.
+
+| UT | Verifies | Input | Expected result | Test |
+|---|---|---|---|---|
+| UT-TRANS-001 | DD-TRANS-002 | `Description { kind: Ble, identifier: "72DE66A3" }` and `{ Hid, "/dev/hidraw3" }` displayed; the mock's description. | `ble 72DE66A3`, `hid /dev/hidraw3`; the mock reports the identifier it was given. | `crates/mp305-core/src/transport/description.rs` |
+| UT-TRANS-002 | DD-TRANS-003 | `Guarded<Stub>` (Ble): send `telemetry::request()` on AF01, a frame of opcode `0xC6` (built through the stub's test helper) on AF01, a `0xC8` with a 10-byte payload, and `bind::request(..)` on AF01. | The first reaches the stub; the second fails with `NotAllowed(0xC6)`, the third with `BadLength { 11, 10 }`, the fourth with `Error::Transport` (route), none reaching the stub. | `crates/mp305-core/src/transport/guarded.rs` |
+| UT-TRANS-003 | DD-TRANS-003 | `Guarded<Stub>` whose stub delays each send by 100 ms on the clock: start two sends concurrently; then start a send wrapped in a 10 ms `timeout`, let it be cancelled, and start another send. | The second send starts only after the first returned (stub times 0 and 100 ms); the cancelled send's write still completes and the next send starts only after it (times t and t + 100 ms). | `crates/mp305-core/src/transport/guarded.rs` |
+| UT-TRANS-004 | DD-TRANS-003, DD-TRANS-005 | Send one `0xC2`, then feed the stub's channel a `0xC3` at clock 0 and `Err(Reason::Short { 36, 35 })` at 50 ms; make one send fail; capture the log. | Two `Incoming` items, `at` 0 and 50 ms, the second `Item::Error`; `errors()` is 1; the log under `mp305_core::frames` has one `tx` line, two `rx` lines with `+<ms>` and hex, one WARN `rx ... error:` line and one WARN `tx ... failed:` line. | `crates/mp305-core/src/transport/guarded.rs` |
+| UT-TRANS-005 | DD-TRANS-004 | Drop the stub's sender while `Guarded` waits in `recv`. | One `Incoming` with `Item::LinkClosed`, then `None`. | `crates/mp305-core/src/transport/guarded.rs` |
+| UT-TRANS-006 | DD-TRANS-001 | A generic `async fn exercise<T: Transport>(t: T)` that sends one frame, reads one incoming item, reads the description and closes, called with `Stub` and with `Mock`; `AnyTransport` wrapping a `Mock`. | Compiles and runs for all three; the item order and the description match what each double was given. | `crates/mp305-core/tests/ut_transport_trait.rs` |
+| UT-TRANS-010 | DD-TRANS-011 | `ble_route::route_of` with the AF01 uuid, the AF02 uuid, and `2A23`. | `Some(Af01)`, `Some(Af02)`, `None`. | `crates/mp305-core/src/transport/ble_route.rs` |
+| UT-TRANS-011 | DD-TRANS-010, DD-TRANS-012 | Inspect `ble.rs` for: events stream taken first, notifications stream taken before connect, connect then discover, `mtu()` read and the 74 threshold, both characteristics found and subscribed in order, `select!` on both streams, `DeviceDisconnected` ending the task, write with response, the route refusal, `pub(crate)` send and close, the `Drop` impl, wire logging, no MTU request, the exclusion comments naming section 6 and the covering tests. | Present as designed. | inspection, record `unit-transport` |
+| UT-TRANS-020 | DD-TRANS-021 | `pack_out(&[0xAA, 0x12, 0x01, 0xC4, 0xD7])`; `pack_out` of 62 bytes; `pack_out` of 0 and of 63 bytes; `unpack_in(&[0x02, 0x03, 0xAA, 0x21, 0x01, 0, 0])`; `unpack_in(&[0x03, 0x03, 0xAA, 0x21, 0x01])`; `unpack_in(&[0x02, 0, 0])`; `unpack_in(&[0x02, 63, ...64 bytes])`; `unpack_in(&[0x02, 5, 1, 2])`. | `[0x01, 5, AA 12 01 C4 D7, 0...]` (65 bytes); `[0x01, 62, ...]`; `BadLength { 1, 0 }` and `BadLength { 62, 63 }`; `[AA 21 01]`; `BadPrefix`; `[]` (n = 0 is empty, not an error); `BadLength { 62, 63 }`; `BadLength { 5, 2 }`. | `crates/mp305-core/src/transport/hid_report.rs` |
+| UT-TRANS-021 | DD-TRANS-020, DD-TRANS-022 | Inspect `hid.rs` for: `open_path` on the given context, the single owning I/O thread, jobs written in order and acknowledged by `oneshot`, `read_timeout` with `Ok(0)` as a timeout, one `Decoder` across reports, the stop flag on `close` and `Drop`, the join inside `spawn_blocking`, the route refusal, `pub(crate)` send and close, wire logging per report, the exclusion comments. | Present as designed. | inspection, record `unit-transport` |
+| UT-TRANS-030 | DD-TRANS-030 | `Mock` (Ble, "m1") with a reply for `0xC2` after 200 ms delivering the capture `0xC3` notification on AF01 with `repeat: Some(1)`, an injection of the capture `0xC5` on AF01 at 300 ms, a `SendError` for `0xE0` from 0; send `0xC2` at 0, `0xE0` at 10 ms, `0xC2` at 350 ms; run the clock to 400 ms. | `send(0xE0)` fails with `Error::Transport`; incoming holds the `0xC3` (decoded through the real decoder, route AF01) at 200 ms and the `0xC5` at 300 ms; the second `0xC2` gets no reply; a `send` on `Route::Hid` fails. | `crates/mp305-core/tests/ut_transport_mock.rs` |
+| UT-TRANS-031 | DD-TRANS-030 | `Mock` (Hid, "m2") with a reply for `0xC2` delivering a 41-byte reply stream as two deliveries of 30 and 11 bytes, `repeat: None`; `stop_replying_at` 2 s; `close_at` 3 s; send `0xC2` at 0, 1 s and 2.5 s. | The `0xC3` arrives at 0 and 1 s, decoded through one `protocol::hid::Decoder`; nothing after 2 s; at 3 s `recv` yields `None`. | `crates/mp305-core/tests/ut_transport_mock.rs` |
+| UT-TRANS-032 | DD-TRANS-031, DD-TRANS-032 | Send three frames through `Mock` at 0, 100 and 250 ms; call a `MockFactory` twice. | `sent()` lists them in order with those clock times and `wire` equal to `ble::encode` of each; the factory yields two distinct mocks. | `crates/mp305-core/tests/ut_transport_mock.rs` |
+| UT-TRANS-040 | DD-TRANS-040 | `Display` of `Error::Transport { message: "x" }`. | `transport: x`. | `crates/mp305-core/src/error.rs` |
+| UT-TRANS-041 | DD-TRANS-026 | On a paused clock, feed the stub at 0 and 50 ms while `Guarded` awaits a 200 ms send; read both items afterwards. | `at` is 0 and 50 ms, not 200 ms. | `crates/mp305-core/src/transport/guarded.rs` |
+
+## 8. Revisions
+
+| Rev | Date | Change | Approved by |
+|---|---|---|---|
+| 1 | 2026-09-30 | First draft for G4 of the transport module | not yet approved |
+| 2 | 2026-09-30 | Independent review resolved: `mtu()` read with the 74 threshold; disconnects from the adapter event stream; notifications taken before connect on an unbounded channel; one owning HID I/O thread with write jobs; cancellation-safe sends through a spawned task holding the permit; `pub(crate)` sends on the concrete transports and a route check in the guard; `Drop` impls; wire logging and `+<ms>` offsets; producer-side timestamps; `unpack_in` requires the report ID; `pack_out` returns a `Result`; the mock gains routes, repeats, timed send errors, stop and close times, a factory and an identifier; `AnyTransport`; `Error::NotFound` left to discovery; coverage exclusion put to the user as ADR-0013; AR-017 and IT-017 marked changed for the "wait for the reply" wording; evidence labels added. | user, 2026-09-30 (G4 transport) |

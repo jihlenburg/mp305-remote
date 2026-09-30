@@ -23,11 +23,12 @@ Status values: `Proposed` (waiting for the user's approval), `Accepted`,
 | [0004](0004-transports-ble-and-hid.md) | Support Bluetooth LE and USB HID, Bluetooth first | Accepted |
 | [0005](0005-egui-desktop-app.md) | egui for the desktop app | Accepted |
 | [0006](0006-python-via-pyo3.md) | Python library through PyO3 bindings | Accepted |
-| [0007](0007-synchronous-python-api.md) | Synchronous Python API | Proposed |
+| [0007](0007-synchronous-python-api.md) | Synchronous Python API | Accepted |
 | [0008](0008-quality-standards.md) | Quality standards, IEC 61508 functional safety and MISRA-aligned guidelines | Accepted |
 | [0010](0010-decompile-firmware-for-interoperability.md) | Decompile device firmware for interoperability | Accepted |
 | [0011](0011-licensing-gplv3-with-commons-clause.md) | License under GNU GPLv3 with Commons Clause | Accepted |
 | [0012](0012-agent-anonymity-and-ownership.md) | Agent anonymity and ownership | Accepted |
+| [0013](0013-coverage-exclusion-vendor-glue.md) | Coverage exclusion for vendor-library glue in the transports | Accepted |
 
 ## Template
 

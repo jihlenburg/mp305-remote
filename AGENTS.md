@@ -318,7 +318,7 @@ python3 scripts/check_traceability.py --check
 cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
-LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace
+LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace --ignore-filename-regex 'transport/(ble|hid)\.rs'
 uv run maturin develop -m crates/mp305-py/Cargo.toml
 uv run --no-sync pytest
 uv run --no-sync ruff check
@@ -339,9 +339,9 @@ MP305_HIL=1 MP305_HIL_DEVICE=<id> cargo test --workspace -- --ignored hil_
 MP305_HIL=1 MP305_HIL_DEVICE=<id> uv run --no-sync pytest -m hil
 ```
 
-Update this section when the real commands differ. Add the exact
-`--ignore-filename-regex` pattern for `ui/` modules to the `cargo llvm-cov`
-line once the layout exists.
+Update this section when the real commands differ. The `--ignore-filename-regex` pattern covers the vendor glue of the
+transports (ADR-0013); the `ui/` pattern is added once the app layout
+exists.
 
 ## Repository layout
 
