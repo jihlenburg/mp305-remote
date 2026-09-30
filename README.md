@@ -3,6 +3,9 @@
 Remote control for the ISDT MP305B portable bench power supply
 (0 to 30 V, 0 to 5 A, 150 W), over Bluetooth LE or USB.
 
+Repository: <https://github.com/jihlenburg/mp305-remote>. The name leaves
+room for the MP305A later.
+
 > Status: design phase. Nothing is ready to install yet. The project follows
 > a V-model process, and the user requirements are being written now. See
 > [TODO.md](TODO.md) and [LOGBOOK.md](LOGBOOK.md) for progress.

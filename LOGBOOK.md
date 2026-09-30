@@ -1098,3 +1098,11 @@ device I/O.
 
 Item 2 of the earlier list (VTOR) had already been corrected in firmware.md
 by the bundle merge, so nothing was changed there.
+
+### Repository published
+
+The user chose the name `mp305-remote` and had the repository created as a
+public GitHub repository at https://github.com/jihlenburg/mp305-remote, with
+the initial commit `139cb10` pushed to `main`. GitHub lists the license as
+"Other" because the Commons Clause addition does not match its GPL-3.0
+template; README.md states the terms.
