@@ -1333,3 +1333,13 @@ vendor glue) is proposed. AR-017 (revision 3) and IT-017 (revision 4) are
 marked changed: keeping a frame's reports together is the transport's job,
 waiting for the reply is `link`'s. Both wait for the user's approval with
 the transport gate.
+
+### G4 transport approved
+
+The user accepted ADR-0013 (coverage exclusion for the vendor glue of the
+transports), approved the AR-017 (revision 3) and IT-017 (revision 4)
+change, and approved docs/v-model/4-detailed-design/transport.md
+revision 2 (gate G4 for the transport module). The approved documents are
+in commit `cb5ea3b`, tagged `g4-transport-approved`. AGENTS.md carries the
+coverage exclusion pattern. Implementation of the transport module may
+start.
