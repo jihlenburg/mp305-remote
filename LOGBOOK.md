@@ -1258,3 +1258,13 @@ urgent queue, the poll and keepalive in `link` on the Tokio clock, a
 refresh, packaging and csv items, and two new open points for the user:
 TBD-021 (SR-007's MTU wording) and TBD-022 (an editorial note in
 ADR-0008). The traceability matrix regenerates with no defects.
+
+### G3 approved
+
+The user settled TBD-021 (SR-007 changed to verify the negotiated MTU,
+approved under the change procedure as revision 11) and TBD-022 (editorial
+note in ADR-0008), and approved 3-architecture.md revision 2 and
+6-integration-tests.md revision 2 (gate G3). The approved documents are in
+commit `ae4af88`, tagged `g3-approved`. Open at this level: TBD-019 and
+TBD-020, both settled by the OS runs. Next: G4 per module, starting with
+the protocol module's detailed design.
