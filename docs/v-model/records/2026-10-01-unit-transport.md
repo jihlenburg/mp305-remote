@@ -4,8 +4,7 @@ Date: 2026-10-01. Level: unit (UT-TRANS). Scope: `mp305-core`, module
 `transport`, implemented from docs/v-model/4-detailed-design/transport.md
 revision 2 (tag `g4-transport-approved`).
 
-Commit: uncommitted at the time of the run; the hash is added once the user
-permits the commit. Diff summary: new files under
+Commit: `47f6996` (the run was made on the tree that this commit holds). Diff summary: new files under
 `crates/mp305-core/src/transport/` (`mod.rs`, `description.rs`,
 `guarded.rs`, `ble.rs`, `ble_route.rs`, `hid.rs`, `hid_report.rs`,
 `mock.rs`, `stub.rs`, `test_log.rs`), `crates/mp305-core/tests/
