@@ -1268,3 +1268,21 @@ note in ADR-0008), and approved 3-architecture.md revision 2 and
 commit `ae4af88`, tagged `g3-approved`. Open at this level: TBD-019 and
 TBD-020, both settled by the OS runs. Next: G4 per module, starting with
 the protocol module's detailed design.
+
+### Protocol design review
+
+An independent review of docs/v-model/4-detailed-design/protocol.md
+revision 1 returned 35 findings. The main ones: the bind payload was
+specified with two zero bytes (19 bytes) following SR-007, while the
+captured WebLink frame carries one zero byte between the 16-byte host ID
+and the fast flag (18 bytes); `Frame::new` was public and `policy::check`
+looked at the opcode only, so a short frame was constructible; the HID
+decoder differed from the device's parser for a doubled `AA` outside a
+frame and judged the address too early; `Command::from_reading` copied
+fields without bounds and set `model` 0 from a non-DC reading, which would
+request a mode change; rejected setpoints used the wrong error variant;
+1.005 V did not round to 101 in binary floating point; no `Reading`
+assembly, no `reply_opcode`, no route per opcode. Revision 2 resolves
+them. SR-007 (revision 12), IT-011 and IT-026 (revision 3) and ST-008
+(revision 9) are marked changed for the one-zero-byte bind frame, approval
+pending. The traceability matrix regenerates with no defects.

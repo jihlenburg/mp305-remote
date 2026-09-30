@@ -94,6 +94,13 @@ def build():
     urs = table(DOCS["ur"], "UR")
     srs = table(DOCS["sr"], "SR")
     ars = table(DOCS["ar"], "AR") if DOCS["ar"].exists() else {}
+    dds, uts = {}, {}
+    for f in sorted((VM / "4-detailed-design").glob("*.md")):
+        for header, cells in rows(f):
+            if cells and re.fullmatch(r"DD-[A-Z]+-\d{3}", cells[0]):
+                dds[cells[0]] = dict(zip(header, cells), _file=f.name)
+            if cells and re.fullmatch(r"UT-[A-Z]+-\d{3}", cells[0]):
+                uts[cells[0]] = dict(zip(header, cells), _file=f.name)
     its = table(DOCS["it"], "IT") if DOCS["it"].exists() else {}
     sts = table(DOCS["st"], "ST")
     ats = table(DOCS["at"], "AT")
@@ -112,6 +119,10 @@ def build():
     for it, r in its.items():
         for ar in ids(r.get("Verifies", ""), "AR"):
             it_for.setdefault(ar, []).append(it)
+    ut_for = {}
+    for ut, r in uts.items():
+        for m in re.finditer(r"DD-[A-Z]+-\d{3}", r.get("Verifies", "")):
+            ut_for.setdefault(m.group(0), []).append(ut)
 
     lines = [
         "# Traceability matrix",
@@ -174,20 +185,30 @@ def build():
                 defects.append(f"{ar} names unknown parent {parent}")
         lines.append(f"| {ar} | {r.get('Parent or source', '')} | {', '.join(v) or 'none'} | {r.get('Status', '')} |")
 
-    lines += ["", "## 5. Test specifications", "", "| Test | Verifies | Implemented by |", "|---|---|---|"]
-    known = set(urs) | set(srs) | set(ars)
-    for t, r in list(ats.items()) + list(sts.items()) + list(its.items()):
+    lines += ["", "## 5. Design items", "", "| DD | Module file | Refines | Verified by | Status |", "|---|---|---|---|---|"]
+    for dd, r in dds.items():
+        v = ut_for.get(dd, [])
+        if not v:
+            defects.append(f"{dd} has no unit test")
+        for parent in ids(r.get("Refines", ""), "AR"):
+            if parent not in ars:
+                defects.append(f"{dd} refines unknown item {parent}")
+        lines.append(f"| {dd} | {r['_file']} | {r.get('Refines', '')} | {', '.join(v) or 'none'} | {r.get('Status', 'see file')} |")
+
+    lines += ["", "## 6. Test specifications", "", "| Test | Verifies | Implemented by |", "|---|---|---|"]
+    known = set(urs) | set(srs) | set(ars) | set(dds)
+    for t, r in list(ats.items()) + list(sts.items()) + list(its.items()) + list(uts.items()):
         impl = ", ".join(sorted(tags.get(t, []))) or "no code yet"
-        for x in ids(r.get("Verifies", ""), "UR") + ids(r.get("Verifies", ""), "SR") + ids(r.get("Verifies", ""), "AR"):
+        for x in ids(r.get("Verifies", ""), "UR") + ids(r.get("Verifies", ""), "SR") + ids(r.get("Verifies", ""), "AR") + re.findall(r"DD-[A-Z]+-\d{3}", r.get("Verifies", "")):
             if x not in known:
                 defects.append(f"{t} verifies unknown item {x}")
         lines.append(f"| {t} | {r.get('Verifies', '')} | {impl} |")
-    specs = set(ats) | set(sts) | set(its)
+    specs = set(ats) | set(sts) | set(its) | set(uts)
     for tag in tags:
         if tag not in specs:
             defects.append(f"code names test {tag}, which has no specification entry")
 
-    lines += ["", "## 6. Defects", ""]
+    lines += ["", "## 7. Defects", ""]
     lines += [f"- {d}" for d in defects] if defects else ["None."]
     return "\n".join(lines) + "\n", defects
 

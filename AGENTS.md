@@ -43,9 +43,9 @@ Using the software for personal, research, or internal business operations (e.g.
 testing DUTs in a lab) is permitted; commercial sale of the software, charging
 for distribution, or selling derivative products is strictly prohibited.
 
-Current phase: detailed design (level 4, per module). G1 to G3 passed on
-2026-09-30.
-There is no production code yet.
+Current phase: detailed design and implementation, per module. G1 to G3
+passed on 2026-09-30; the protocol module passed G4 on 2026-09-30 and is
+the first module to be implemented.
 See [TODO.md](TODO.md) for where things stand.
 
 ## Agent anonymity and ownership
