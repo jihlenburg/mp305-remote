@@ -97,7 +97,13 @@ host active (`S+3`; hostlink 6, commands 1). A host must model it as below.
 4. Flag non-zero: the CH58x answers from its stored IDs without a prompt
    (section 3). A host that was allowed once, using a stable host-specific
    ID, reconnects without a person at the supply (code; not yet tested on
-   hardware, TBD-006).
+   hardware, TBD-006). Checked on 2026-09-30 by running the original CH58x
+   code across two sessions with only the DataFlash carried over: the first
+   bind is forwarded, the MCU's `19 00` stores the ID, and in the new
+   session the same ID with the flag gets `19 00` and `BD 01` locally,
+   another ID gets `19 FF`, the same ID without the flag is forwarded
+   again, and after six allowed hosts the oldest is gone
+   (`spikes/firmware_reconstruct/scripts/ur032_remembered_host.py`).
 5. A link that is not bound is terminated by the CH58x about 30 s after
    connecting (code, ch58x "Connection handling"; TBD-008). The main MCU's
    prompt also closes on its own after tens of seconds and then replies

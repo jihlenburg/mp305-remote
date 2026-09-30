@@ -1143,3 +1143,20 @@ at G1) and TBD-018 (unsolicited frames never captured) added. The
 decisions of 2026-09-29 are unchanged. 2-system-requirements.md carries a
 note that it lags revision 8 until it is redone. traceability.md lists the
 new URs without ATs yet.
+
+### UR-032 checked against the CH58x code
+
+The user asked for the remembered-host requirement (UR-032) to be verified
+against the device firmware. Ran the original CH58x code of the 1.6.0.51
+update in Unicorn across two sessions with only the DataFlash carried over
+(`spikes/firmware_reconstruct/scripts/ur032_remembered_host.py`, workspace
+`~/mp305b-fw-re`). Result: a first bind with the fast flag 0 is forwarded
+to the main MCU; after the MCU's `19 00` the CH58x stores the 16-byte host
+ID at DataFlash `0x6F00`, notifies `19 00` and reports `BD 01`. In the new
+session the same ID with a non-zero flag is answered `19 00` by the CH58x
+itself with `BD 01` to the MCU and nothing forwarded; another ID gets
+`19 FF` and `BD 00`; the same ID with flag 0 is forwarded again. Five IDs
+are kept and the oldest is dropped. The BLE library, DataFlash and
+notification calls are stubbed, and the unit at the bench runs 1.6.0.40
+with an unknown CH58x version, so the hardware spike for TBD-006 stays
+open. device-model.md 4.1 records the check. No device I/O.
