@@ -84,7 +84,7 @@ async fn a_loss_fails_everything_once_and_keeps_the_events_open() {
     rig.until(T0 + ms(3_000)).await;
     assert_eq!(rig.sent().len(), sent);
     assert_eq!(rig.session.link_state(), LinkState::Lost);
-    assert_eq!(rig.session.ready().await, Err(session_error));
+    assert_eq!(rig.session.ready().await, Err(session_error.clone()));
     let non_readings: Vec<SessionEvent> =
         events.non_readings().into_iter().map(|(_, e)| e).collect();
     assert_eq!(
@@ -96,7 +96,9 @@ async fn a_loss_fails_everything_once_and_keeps_the_events_open() {
     );
     // The events stay open until the close.
     assert!(!events.ended());
-    assert_eq!(rig.session.close(true).await, Ok(()));
+    // A `close(true)` after a loss in `Ready` could not switch the output
+    // off: it reports the loss (DD-SESS-053, revision 5).
+    assert_eq!(rig.session.close(true).await, Err(session_error));
     sleep_until(rig.start + T0 + ms(3_100)).await;
     assert!(events.ended());
 }
@@ -700,4 +702,50 @@ async fn a_loss_during_an_attempt_waits_for_the_next_tick() {
     assert_eq!(losses, 1, "{non_readings:?}");
     assert!(non_readings.contains(&SessionEvent::Reconnected));
     assert_eq!(rig.session.link_state(), LinkState::Ready);
+}
+
+/// The link states the session published and the events it emitted, in
+/// order, from entry `from` on (the test watch on the shared state).
+fn trace_from(rig: &Rig, from: usize) -> Vec<String> {
+    crate::session::lock(&rig.session.shared.trace)
+        .iter()
+        .skip(from)
+        .cloned()
+        .collect()
+}
+
+/// Test: UT-SESS-065
+#[tokio::test(start_paused = true)]
+async fn with_reconnection_the_state_goes_from_ready_to_reconnecting_directly() {
+    let ble = Kind::Ble;
+    for (id, reconnect) in [("UT-SESS-065-on", true), ("UT-SESS-065-off", false)] {
+        let mut first = script(ble, vec![]);
+        first.close_at = Some(T0 + ms(1_000));
+        let (connector, _) = scripted_connector(vec![mock_attempt(id, first), no_adapter()]);
+        let options = if reconnect { reconnecting() } else { options() };
+        let rig = start_with(id, connector, MemoryMarkers::new(), options);
+        rig.session.ready().await.unwrap();
+        let from = crate::session::lock(&rig.session.shared.trace).len();
+        rig.until(T0 + ms(2_000)).await;
+        let trace = trace_from(&rig, from);
+        let states: Vec<&String> = trace.iter().filter(|t| t.starts_with("state ")).collect();
+        let lost_event = trace
+            .iter()
+            .position(|t| t.starts_with("event LinkLost"))
+            .unwrap();
+        if reconnect {
+            assert_eq!(states, vec!["state reconnecting"], "{trace:?}");
+            let shown = trace
+                .iter()
+                .position(|t| t == "state reconnecting")
+                .unwrap();
+            assert!(shown < lost_event, "{trace:?}");
+            assert_eq!(rig.session.link_state(), LinkState::Reconnecting);
+        } else {
+            assert_eq!(states, vec!["state lost"], "{trace:?}");
+            let shown = trace.iter().position(|t| t == "state lost").unwrap();
+            assert!(shown < lost_event, "{trace:?}");
+            assert_eq!(rig.session.link_state(), LinkState::Lost);
+        }
+    }
 }

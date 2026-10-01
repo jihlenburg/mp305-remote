@@ -321,3 +321,51 @@ async fn a_bluetooth_timeout_is_logged_with_the_usb_host_hint() {
         assert_eq!(after, before + usize::from(hinted), "{id}");
     }
 }
+
+/// Test: UT-SESS-064
+#[tokio::test(start_paused = true)]
+async fn a_dropped_next_takes_no_event() {
+    use futures::FutureExt;
+    let ble = Kind::Ble;
+    let mut script = script(ble, vec![]);
+    script.injections = vec![inject(ble, T0 + ms(1_000), 0xC5, &fixtures::C5_SETTINGS)];
+    let mut rig = start("UT-SESS-064-next", ble, script);
+    rig.session.ready().await.unwrap();
+    rig.drain();
+    // Polled once while nothing is queued, then dropped.
+    assert!(rig.events.next().now_or_never().is_none());
+    rig.until(T0 + ms(1_001)).await;
+    let expected =
+        settings::parse(&Frame::new(0xC5, fixtures::C5_SETTINGS.to_vec()).unwrap()).unwrap();
+    assert_eq!(
+        rig.events.next().await,
+        Some(SessionEvent::SettingsChanged(expected))
+    );
+}
+
+/// Test: UT-SESS-046
+#[tokio::test(start_paused = true)]
+async fn the_give_up_texts_are_logged_at_warn() {
+    let log = test_log::install();
+    let ble = Kind::Ble;
+    let mut first = script(ble, vec![]);
+    first.close_at = Some(Duration::from_secs(1));
+    let mut script = Some(first);
+    let connector = MockConnector::new(move || match script.take() {
+        Some(first) => Ok(Mock::new(ble, "UT-SESS-046-give-up", first)),
+        None => Err(Error::Transport {
+            message: "no adapter".to_string(),
+        }),
+    });
+    let rig = start_with(
+        "UT-SESS-046-give-up",
+        connector,
+        MemoryMarkers::new(),
+        crate::session::Options::new(true, limits()).with_wall_origin(wall0()),
+    );
+    rig.session.ready().await.unwrap();
+    rig.until(Duration::from_secs(9)).await;
+    rig.session.set_reconnect(false);
+    rig.until(Duration::from_secs(20)).await;
+    assert!(logged(&log, Level::Warn, texts::GAVE_UP_SWITCHED_OFF));
+}

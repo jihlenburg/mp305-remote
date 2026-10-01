@@ -410,6 +410,11 @@ pub(crate) struct Shared {
     /// The result of the close, once the task finished it; later calls of
     /// `close` get it (DD-SESS-053).
     pub(crate) close_result: Mutex<Option<Result<(), Error>>>,
+    /// Test support: every link state the task published and every event it
+    /// emitted on the unbounded channel, in order (a watch on the shared
+    /// state for UT-SESS-065).
+    #[cfg(test)]
+    pub(crate) trace: Mutex<Vec<String>>,
 }
 
 /// Locks `mutex`, recovering the data of a poisoned lock.
@@ -516,6 +521,8 @@ impl Session {
             generation: AtomicU64::new(1),
             dropped_readings: AtomicU64::new(0),
             close_result: Mutex::new(None),
+            #[cfg(test)]
+            trace: Mutex::new(Vec::new()),
         });
         let task = runtime.spawn(task::run(task::Setup {
             connector,

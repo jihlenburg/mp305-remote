@@ -827,15 +827,20 @@ async fn a_call_dropped_before_the_task_took_it_sends_nothing() {
 async fn a_call_dropped_after_its_write_completes() {
     let log = test_log::install();
     let ble = Kind::Ble;
+    // The voltage reaches the supply: from 520 ms on the readings show it.
     let rig = granted(
         "UT-SESS-029-2",
         vec![
             c9_once(ble, 0x00, ms(100), ms(0)),
             reply(ble, 0xC8, ms(300), &[0x00]),
+            reply(ble, 0xC2, ms(130), &fixtures::C3_CAPTURE),
+            c3_from(ble, &fixtures::c3_with(0, 0, 0, 100, 1000), ms(520)),
         ],
         vec![],
     )
     .await;
+    let mut rig = rig;
+    let events = rig.record();
     let t1 = rig.now();
     rig.reading_after(t1 + ms(100)).await;
     let called = rig.now();
@@ -843,30 +848,51 @@ async fn a_call_dropped_after_its_write_completes() {
     assert!(dropped.is_err());
     let left = rig.now();
     assert_eq!(left, called + ms(100));
-    rig.until(rig.now() + ms(500)).await;
-    // The `0xC8` was already written when the caller left, so the supply
-    // gets it (its `0xC9` comes 300 ms later).
+    // One `0xC8` is on the wire: it was already written when the caller
+    // left (its `0xC9` comes 300 ms after it).
+    rig.until(left + ms(10)).await;
     let c8s = rig.c8s_after(t1);
     assert_eq!(c8s.len(), 1);
     assert_eq!(c8s[0].0, called);
     assert_eq!(setpoints(&c8s[0].1), (100, 1000));
-    // The entry's "0xC9 handled, expected recorded" cannot hold together
-    // with UT-SESS-053: the session cannot tell a written `0xC8` from one
-    // still queued in the link (DD-LINK-002), and a queued one must not be
-    // written once its caller left. The session drops the step when the
-    // caller leaves and treats the command as DD-SESS-035 (b) says (reported
-    // as a contradiction): the cancellation is logged, the setpoints are
-    // unknown and the settle time moves by the reply bound and the settle
-    // time, so the next command builds on a reading taken after that.
+    // The step was dropped with its caller: the `0xC9` is not handled.
     assert!(logged(
         &log,
         Level::Debug,
         "cancelled: SetVoltage(1.0), the caller is gone"
     ));
     assert!(!logged(&log, Level::Debug, "command SetVoltage(1.0)"));
+    // The session resynchronises: the next command waits for a reading
+    // after the drop and then the settle time.
     assert_eq!(rig.session.set_current_limit(0.1).await, Ok(()));
-    let next = rig.c8s_after(left)[0].0;
-    assert!(last_c2_before(&rig, next) >= left + ms(1_100), "{next:?}");
+    let first_after = events
+        .reading_times()
+        .into_iter()
+        .find(|t| *t > left)
+        .unwrap();
+    let next = rig.c8s_after(left + ms(1))[0].0;
+    assert!(
+        last_c2_before(&rig, next) >= first_after + ms(100),
+        "{next:?} {first_after:?}"
+    );
+    // The setpoints were unknown: a settled reading showing the voltage is
+    // reported against the reading the command was built from, since no
+    // `expected` was recorded for the dropped call.
+    assert_eq!(
+        setpoint_changes(
+            &events
+                .non_readings()
+                .into_iter()
+                .map(|(_, e)| e)
+                .collect::<Vec<_>>()
+        ),
+        vec![SessionEvent::SetpointsChanged {
+            set_volts: 1.0,
+            set_amps: 1.0,
+            expected_volts: 13.0,
+            expected_amps: 1.0,
+        }]
+    );
 }
 
 /// Test: UT-SESS-029
@@ -1897,25 +1923,89 @@ async fn a_command_after_a_0xc9_waits_for_the_settle_time() {
 /// Test: UT-SESS-056
 #[tokio::test(start_paused = true)]
 async fn an_output_off_right_after_accepted_setpoints_keeps_them() {
-    // The default script keeps reporting 1300 and 1000.
-    let rig = granted("UT-SESS-056", vec![], vec![]).await;
+    let ble = Kind::Ble;
+    // Granted at 380 ms. The voltage `0xC8` is written at 740 ms (`0xC9` at
+    // 840 ms), the current `0xC8` at 1200 ms (`0xC9` at 1300 ms); the script
+    // reports each accepted setpoint from 100 ms after its `0xC9`.
+    let rig = granted(
+        "UT-SESS-056",
+        vec![
+            reply(ble, 0xC2, ms(130), &fixtures::C3_CAPTURE),
+            c3_from(ble, &fixtures::c3_with(0, 0, 0, 170, 1000), ms(940)),
+            c3_from(ble, &fixtures::c3_with(0, 0, 0, 170, 100), ms(1_400)),
+        ],
+        vec![],
+    )
+    .await;
     let t1 = rig.now();
     assert_eq!(rig.session.set_voltage(1.7).await, Ok(()));
     assert_eq!(rig.session.set_current_limit(0.1).await, Ok(()));
     assert_eq!(rig.session.output_off().await, Ok(()));
     let c8s = rig.c8s_after(t1);
     assert_eq!(shape(&c8s), vec![(1, 0), (1, 0), (1, 0)]);
-    let current = setpoints(&c8s[1].1);
-    // The current command copied the voltage from its fresh reading, which
-    // still says 1300 on this script.
-    assert_eq!(current, (1300, 100));
-    // The output-off frame takes both setpoints from `accepted`, the last
-    // accepted `0xC8` (the current command's), not from the reading
-    // (1300, 1000) it was built from. The entry expects (170, 100) here,
-    // which contradicts `accepted` as DD-SESS-033 and the terms define it
-    // ("the pair of setpoints of the last 0xC8 the supply accepted");
-    // reported.
-    assert_eq!(setpoints(&c8s[2].1), current);
+    assert_eq!((c8s[0].0, c8s[1].0), (ms(740), ms(1_200)));
+    assert_eq!(setpoints(&c8s[1].1), (170, 100));
+    // The latest reading (1200 ms) still says 1.000 A; the frame takes both
+    // setpoints from `accepted`.
+    assert_eq!(setpoints(&c8s[2].1), (170, 100));
+}
+
+/// Test: UT-SESS-056
+#[tokio::test(start_paused = true)]
+async fn an_output_off_within_the_settle_time_of_an_accepted_command_uses_it() {
+    let hid = Kind::Hid;
+    // USB, replies after 2 ms: ready at 4 ms, granted at 6 ms, the link
+    // polls at 104, 206, ... 410 ms (replies 2 ms later). The voltage `0xC8`
+    // at 511 ms is accepted at T = 513 ms; the link's own poll, due at
+    // 512 ms, goes right after it and is answered at T + 2 ms with 1300.
+    let script = script(
+        hid,
+        vec![
+            usb_fast(0xE0, &fixtures::E1_USB),
+            usb_fast(0xC8, &[0x00]),
+            usb_fast(0xC2, &fixtures::C3_CAPTURE),
+        ],
+    );
+    let rig = start("UT-SESS-056-usb", hid, script);
+    rig.session.ready().await.unwrap();
+    rig.session.request_remote_control().await.unwrap();
+    let voltage = rig.call_at(ms(511), |s| async move { s.set_voltage(1.7).await });
+    let (accepted_at, result) = voltage.await.unwrap();
+    assert_eq!(result, Ok(()));
+    assert_eq!(accepted_at, ms(513));
+    let off = rig.call_at(ms(533), |s| async move { s.output_off().await });
+    assert_eq!(off.await.unwrap().1, Ok(()));
+    let latest = last_c2_before(&rig, ms(533));
+    assert_eq!(latest, ms(513));
+    let c8s = rig.c8s_after(ms(533));
+    // The reading (515 ms) arrived after the `0xC9` but within its settle
+    // time: the frame carries 170 from `accepted`.
+    assert_eq!(shape(&c8s), vec![(1, 0)]);
+    assert_eq!(setpoints(&c8s[0].1), (170, 1000));
+}
+
+/// Test: UT-SESS-056
+#[tokio::test(start_paused = true)]
+async fn a_release_does_not_replace_accepted() {
+    let ble = Kind::Ble;
+    let mut d = driven("UT-SESS-056-release", ble, script(ble, vec![]));
+    d.until_ready().await;
+    let mut rx = d.command(CommandKind::Request);
+    assert_eq!(d.drive(&mut rx).await.1, Ok(()));
+    let mut rx = d.command(CommandKind::SetVoltage(1.7));
+    assert_eq!(d.drive(&mut rx).await.1, Ok(()));
+    assert_eq!(d.task.accepted_setpoints(), Some((170, 1000)));
+    let mut rx = d.command(CommandKind::Release);
+    assert_eq!(d.drive(&mut rx).await.1, Ok(()));
+    // The release carried the reading's (1300, 1000); it applies no field.
+    assert_eq!(setpoints(&d.c8s().last().unwrap().1), (1300, 1000));
+    assert_eq!(d.task.accepted_setpoints(), Some((170, 1000)));
+    let mut off = d.output_off();
+    assert_eq!(d.drive(&mut off).await.1, Ok(()));
+    assert_eq!(
+        shape(&d.c8s()),
+        vec![(2, 0), (1, 0), (0, 0), (2, 0), (1, 0)]
+    );
 }
 
 /// Test: UT-SESS-056
@@ -1946,7 +2036,8 @@ async fn an_output_off_after_a_settled_front_panel_change_respects_it() {
             .set_voltage,
         500
     );
-    assert!(r > t1 + ms(100));
+    // It arrived at least 200 ms after the last accepted `0xC9`.
+    assert!(r >= t1 + ms(200), "{r:?} {t1:?}");
     assert_eq!(rig.session.output_off().await, Ok(()));
     let c8s = rig.c8s_after(t1);
     assert_eq!(c8s.len(), 1);
@@ -1990,4 +2081,146 @@ async fn a_rejected_usb_request_marks_the_setpoints_unknown() {
             expected_amps: 1.0,
         }]
     );
+}
+
+/// Test: UT-SESS-061
+#[tokio::test(start_paused = true)]
+async fn after_a_timed_out_output_off_a_command_waits_for_a_reading_after_the_late_0xc9() {
+    let log = test_log::install();
+    let hid = Kind::Hid;
+    let on = fixtures::c3_with(1, 0, 0, 1300, 1000);
+    let off = fixtures::c3_with(0, 0, 0, 1300, 1000);
+    // USB, replies after 2 ms, the output on. The output-off `0xC8` at
+    // 450 ms gets no `0xC9` within 500 ms (it times out at 950 ms); the
+    // next `0xC2` (the link's, at 950 ms) is answered at 952 ms with the
+    // output still on; the late `0xC9 00` arrives 50 ms after that reading
+    // (1002 ms) and the output reads off from 20 ms after it (1022 ms).
+    let script = script(
+        hid,
+        vec![
+            usb_fast(0xE0, &fixtures::E1_USB),
+            usb_fast(0xC8, &[0x00]),
+            Reply {
+                repeat: Some(1),
+                from: ms(400),
+                ..reply(hid, 0xC8, ms(552), &[0x00])
+            },
+            usb_fast(0xC2, &on),
+            Reply {
+                from: ms(1_022),
+                ..usb_fast(0xC2, &off)
+            },
+        ],
+    );
+    let rig = start("UT-SESS-061-1", hid, script);
+    rig.session.ready().await.unwrap();
+    rig.session.request_remote_control().await.unwrap();
+    let off_call = rig.call_at(ms(450), |s| async move { s.output_off().await });
+    let voltage = rig.call_at(ms(951), |s| async move { s.set_voltage(1.0).await });
+    assert_eq!(
+        off_call.await.unwrap(),
+        (
+            ms(950),
+            Err(Error::Timeout {
+                opcode: 0xC8,
+                after: ms(500)
+            })
+        )
+    );
+    assert_eq!(voltage.await.unwrap().1, Ok(()));
+    assert!(logged(&log, Level::Warn, "late reply 0xc9"));
+    let c8s = rig.c8s_after(ms(450));
+    assert_eq!(shape(&c8s), vec![(1, 0), (1, 0)], "{c8s:?}");
+    // The voltage frame was built from a reading that arrived at least
+    // 100 ms after the late `0xC9` (1002 ms): its `0xC2` went out at or
+    // after 1102 ms, and it carries `output` 0.
+    let late = ms(1_002);
+    assert!(
+        last_c2_before(&rig, c8s[1].0) + ms(2) >= late + ms(100),
+        "{c8s:?}"
+    );
+    assert_eq!(setpoints(&c8s[1].1), (100, 1000));
+    // From the output-off on, no `0xC8` carries `output` 1.
+    assert!(!rig.c8s_after(ms(450)).iter().any(|(_, p)| output(p) == 1));
+}
+
+/// Test: UT-SESS-061
+#[tokio::test(start_paused = true)]
+async fn after_a_timed_out_command_the_next_waits_for_a_reading_and_the_settle_time() {
+    // Granted at 380 ms; the voltage `0xC8` at 510 ms gets no `0xC9` and
+    // times out at 1510 ms; the link's next `0xC2` goes at 1510 ms and its
+    // reading arrives at R = 1640 ms. A command issued right after R waits
+    // until R + 100 ms.
+    let rig = granted(
+        "UT-SESS-061-3",
+        vec![c9_ok(Kind::Ble), c8_unanswered(ms(500))],
+        vec![],
+    )
+    .await;
+    let r0 = rig.reading_after(T0 + ms(200)).await;
+    let voltage = rig.call_at(r0, |s| async move { s.set_voltage(1.0).await });
+    let (timed_out, result) = voltage.await.unwrap();
+    assert_eq!(
+        result,
+        Err(Error::Timeout {
+            opcode: 0xC8,
+            after: Duration::from_secs(1)
+        })
+    );
+    let r = rig.reading_after(timed_out).await;
+    assert!(r > timed_out);
+    let called = rig.now();
+    assert_eq!(rig.session.set_current_limit(0.1).await, Ok(()));
+    let next = rig.c8s_after(called)[0].0;
+    assert!(last_c2_before(&rig, next) >= r + ms(100), "{next:?} {r:?}");
+}
+
+/// Test: UT-SESS-063
+#[tokio::test(start_paused = true)]
+async fn an_output_off_outside_dc_mode_requests_nothing() {
+    let ble = Kind::Ble;
+    let pd = fixtures::c3_with(0, 2, 0, 1300, 1000);
+    let mut rig = start(
+        "UT-SESS-063",
+        ble,
+        script(ble, vec![reply(ble, 0xC2, ms(130), &pd)]),
+    );
+    rig.session.ready().await.unwrap();
+    assert_eq!(rig.session.remote_state(), RemoteState::None);
+    rig.drain();
+    assert_eq!(
+        rig.session.output_off().await,
+        Err(Error::Mode { live_mode: 2 })
+    );
+    rig.until(T0 + ms(2_000)).await;
+    assert!(rig.c8s_after(ms(0)).is_empty());
+    assert!(!prompted(&rig.drain_non_readings()));
+    assert_eq!(rig.session.remote_state(), RemoteState::None);
+}
+
+/// Test: UT-SESS-064
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn calls_are_taken_in_the_order_of_their_first_poll() {
+    use futures::FutureExt;
+    let rig = granted("UT-SESS-064-order", vec![], vec![]).await;
+    let t1 = rig.now();
+    let session = Arc::clone(&rig.session);
+    let mut on = Box::pin(session.output_on());
+    let mut voltage = Box::pin(session.set_voltage(1.0));
+    let mut off = Box::pin(session.output_off());
+    assert!(on.as_mut().now_or_never().is_none());
+    assert!(voltage.as_mut().now_or_never().is_none());
+    assert!(off.as_mut().now_or_never().is_none());
+    let (on, voltage, off) = tokio::join!(on, voltage, off);
+    assert_eq!(off, Ok(()));
+    // The output-off cancels the two before it or follows them.
+    for result in [on, voltage] {
+        assert!(
+            matches!(result, Ok(()) | Err(Error::Cancelled { .. })),
+            "{result:?}"
+        );
+    }
+    let c8s = rig.c8s_after(t1);
+    let (_, last) = c8s.last().unwrap();
+    assert_eq!((remote_con(last), output(last)), (1, 0), "{c8s:?}");
 }

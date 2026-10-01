@@ -1729,3 +1729,23 @@ of `mp305-core` fell from 95.5 % to 95.1 % because the two fixture
 functions have no caller yet; the session tests switch to them with the
 session revision 5 implementation. The record is
 docs/v-model/records/2026-10-01-unit-core-additions.md.
+
+### Session DD revision 5 implemented
+
+Revision 5 of the session DD implemented test first by the delegated
+agent that had built revision 4: resynchronisation in place of the fixed
+wait (DD-SESS-036), a late `0xC9` moving the settle time, the output-off
+with its mode check first and the overlay inside the settle time of the
+accepted command, the close rules (the output-off also with an unknown
+output state or after a failed decision poll, `LinkLost` from a
+`close(true)` on a lost link), `accepted` only from frames that apply
+their fields, and the loss and the reconnect decision as one state
+update. Three items needed no code change (DD-SESS-003, DD-SESS-004,
+DD-SESS-062); tests now hold them. The production diff was read in the
+main session, which added one defensive condition. Verification in the
+main session: all gates pass, 289 tests in three runs; line coverage
+90.3 % of `session/task.rs`, 95.3 % of `mp305-core`. Open, for the user:
+the input of UT-SESS-044 (5), the release built from the latest reading
+when its own poll fails, and an output-off whose mode check fails while a
+remote request is open. The record is
+docs/v-model/records/2026-10-01-unit-session-rev5.md.

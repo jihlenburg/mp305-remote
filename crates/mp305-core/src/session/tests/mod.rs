@@ -28,7 +28,7 @@ use tokio::time::{sleep_until, Instant};
 
 use crate::error::Error;
 use crate::protocol::ble::{BleRoute, Route};
-use crate::protocol::fixtures;
+use crate::protocol::fixtures::{self, on_air, reply_route};
 use crate::protocol::ops::bind::HostId;
 use crate::protocol::units::Limits;
 use crate::session::doubles::{MemoryMarkers, MockConnector};
@@ -52,43 +52,6 @@ fn wall0() -> SystemTime {
 /// Milliseconds as a duration.
 fn ms(n: u64) -> Duration {
     Duration::from_millis(n)
-}
-
-/// The route a reply with `opcode` arrives on. The supply answers on the
-/// characteristic the request was written to (device-model.md 2.1), and
-/// the session writes only the bind on AF02 (`ops::route`): so `0x19` on
-/// AF02 and everything else, `0xE1` included, on AF01 over Bluetooth; the
-/// report path over USB. (The capture `2026-09-29T193614-ble-readonly.jsonl`
-/// shows the `0xE1` on AF02 because that spike wrote its `0xE0` there.)
-fn reply_route(kind: Kind, opcode: u8) -> Route {
-    match kind {
-        Kind::Ble if opcode == 0x19 => Route::Ble(BleRoute::Af02),
-        Kind::Ble => Route::Ble(BleRoute::Af01),
-        Kind::Hid => Route::Hid,
-    }
-}
-
-/// The on-air unit of a frame from the supply: the AF01 tag and the
-/// opcode, the bare opcode on AF02, or a HID reply stream (address `0x21`,
-/// `AA` doubled).
-fn on_air(kind: Kind, opcode: u8, payload: &[u8]) -> Vec<u8> {
-    match reply_route(kind, opcode) {
-        Route::Ble(BleRoute::Af01) => [&[0x31, opcode][..], payload].concat(),
-        Route::Ble(BleRoute::Af02) => [&[opcode][..], payload].concat(),
-        Route::Hid => {
-            let length = u8::try_from(payload.len() + 1).unwrap();
-            let body = [&[opcode][..], payload].concat();
-            let sum = crate::protocol::hid::checksum(0x21, length, &body);
-            let mut out = vec![0xAA];
-            for byte in [0x21, length].into_iter().chain(body).chain([sum]) {
-                out.push(byte);
-                if byte == 0xAA {
-                    out.push(0xAA);
-                }
-            }
-            out
-        }
-    }
 }
 
 /// A reply to `request` with `payload` under the reply opcode, `after`
@@ -523,6 +486,7 @@ fn driven(id: &str, kind: Kind, script: Script) -> Driven {
         generation: AtomicU64::new(1),
         dropped_readings: AtomicU64::new(0),
         close_result: std::sync::Mutex::new(None),
+        trace: std::sync::Mutex::new(Vec::new()),
     });
     let start = Instant::now();
     let task = Task::started(Setup {

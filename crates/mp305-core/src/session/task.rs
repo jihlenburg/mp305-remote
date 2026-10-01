@@ -68,10 +68,6 @@ const SUPERSEDED_IN_PROGRESS: &str = "superseded by an output-off; it may have b
 /// (DD-SESS-053).
 const CLOSE_RUNNING: &str = "a close without output-off is already running";
 
-/// How far a cancelled command whose `0xC8` may have been written moves the
-/// settle time: its reply bound plus the settle time (DD-SESS-035 (b)).
-const CANCEL_SETTLE: Duration = timing::REPLY.saturating_add(timing::SETTLE);
-
 /// The answer channel of a call.
 type Reply = oneshot::Sender<Result<(), Error>>;
 
@@ -244,6 +240,8 @@ struct ControlOp {
 /// Why an output-off polls.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum OffNeed {
+    /// For its start: the mode check and what the remote state asks for.
+    Start,
     /// For the remote request it makes first.
     Request,
     /// For its own `0xC8`.
@@ -267,6 +265,10 @@ struct OffOp {
     in_close: bool,
     /// When it began, on the Tokio clock.
     started_at: Instant,
+    /// It ended with `Error::Mode` while a remote request was open: it only
+    /// waits for that request, so that its outcome is applied to the state
+    /// (DD-SESS-003), and sends nothing.
+    only_await: bool,
 }
 
 /// Where a close is (DD-SESS-053).
@@ -386,6 +388,15 @@ pub(super) struct Task {
     /// The settle time: a reading is fresh only if it arrived at or after
     /// it (DD-SESS-031, the terms of the session DD).
     settle_until: Option<Instant>,
+    /// Resynchronising (DD-SESS-036): a `0xC8` timed out or a possibly
+    /// written one was dropped; no reading is fresh until one more reading
+    /// arrived, whose arrival plus `timing::SETTLE` becomes `settle_until`.
+    resync: bool,
+    /// The output state is unknown since a resynchronisation began, until a
+    /// fresh reading arrived (DD-SESS-036).
+    output_unknown: bool,
+    /// The session reached `Ready` at least once (DD-SESS-053).
+    was_ready: bool,
     /// The last accepted `0xC8` of this connection.
     accepted: Option<Accepted>,
     /// The raw setpoints the user set and the supply accepted.
@@ -425,9 +436,10 @@ pub(super) struct Task {
     close_started_at: Option<Instant>,
     /// The close is to switch the output off.
     close_output_off: bool,
-    /// The close cancelled a command or an output-off whose `0xC8` may have
-    /// been written (DD-SESS-053 (a)).
-    close_cancelled_write: bool,
+    /// The output state was unknown when the close started (after its own
+    /// cancellations in (a)): its output-off goes out whatever the reading
+    /// shows (DD-SESS-036, DD-SESS-053 (b)).
+    close_output_unknown: bool,
     /// The close could not confirm the output off: its output-off failed,
     /// it was skipped outside DC mode with the output on, the reading for
     /// the decision could not be taken, or the link was lost (DD-SESS-053
@@ -531,6 +543,9 @@ impl Task {
             reading: None,
             prev_faults: None,
             settle_until: None,
+            resync: false,
+            output_unknown: false,
+            was_ready: false,
             accepted: None,
             expected: (None, None),
             compare_next: None,
@@ -550,7 +565,7 @@ impl Task {
             close_error: None,
             close_started_at: None,
             close_output_off: false,
-            close_cancelled_write: false,
+            close_output_unknown: false,
             close_unconfirmed: false,
             finished: false,
         }
@@ -666,6 +681,8 @@ impl Task {
 
     /// Sends an event on the unbounded channel.
     fn emit(&self, event: SessionEvent) {
+        #[cfg(test)]
+        lock(&self.shared.trace).push(format!("event {event:?}"));
         if let Some(events) = &self.events {
             // A product that dropped its receiver gets nothing more.
             let _ = events.send(event);
@@ -675,18 +692,37 @@ impl Task {
     /// Feeds the link state machine, logs a change and updates the
     /// snapshot.
     fn link_input(&mut self, input: LinkInput) {
+        if let Some(new) = self.link_apply(input) {
+            self.publish_link_state(new);
+        }
+    }
+
+    /// Feeds the link state machine and logs a change, without updating the
+    /// snapshot; the new state, or `None` for a pair outside the table.
+    fn link_apply(&mut self, input: LinkInput) -> Option<LinkState> {
         let old = self.link_state.state;
         match self.link_state.apply(input) {
             Ok(new) => {
                 if new != old {
                     log::info!(target: LOG_TARGET, "link {old} -> {new}");
                 }
-                lock(&self.shared.snapshot).link_state = new;
+                Some(new)
             }
             Err(state) => {
                 log::debug!(target: LOG_TARGET, "link {state}: {input:?} ignored");
+                None
             }
         }
+    }
+
+    /// Copies `state` into the snapshot the queries read.
+    fn publish_link_state(&self, state: LinkState) {
+        let mut snapshot = lock(&self.shared.snapshot);
+        #[cfg(test)]
+        if snapshot.link_state != state {
+            lock(&self.shared.trace).push(format!("state {state}"));
+        }
+        snapshot.link_state = state;
     }
 
     /// Feeds the remote-control state machine; a change is logged, emitted
@@ -730,14 +766,21 @@ impl Task {
     /// A command or an output-off whose `0xC8` may have been written was
     /// cancelled: its effect is unknown, so the setpoints are compared with
     /// the next settled reading (`built_from` being the reading it was built
-    /// from) and the settle time moves to now plus the reply bound and the
-    /// settle time, by which a written frame is answered (DD-SESS-035 (b)).
+    /// from) and the session resynchronises (DD-SESS-035 (b), DD-SESS-036).
     fn cancel_possibly_written(&mut self, built_from: Option<RawReading>) {
         self.setpoints_unknown(built_from);
-        self.settle_until = Some(later(
-            self.settle_until,
-            after(Instant::now(), CANCEL_SETTLE),
-        ));
+        self.resynchronise();
+    }
+
+    /// Resynchronisation (DD-SESS-036): the supply may still apply a `0xC8`
+    /// that timed out or was dropped. No reading is fresh until one more
+    /// reading arrived (the link writes no request before the old frame was
+    /// answered or timed out, so that reading was requested after it), and
+    /// the output state is unknown until a fresh reading arrived.
+    fn resynchronise(&mut self) {
+        log::debug!(target: LOG_TARGET, "resynchronising: a 0xc8 may still be applied");
+        self.resync = true;
+        self.output_unknown = true;
     }
 
     /// Calls `f` on the marker store and logs a failure at WARN.
@@ -779,21 +822,30 @@ impl Task {
             DeviceEvent::Device(other) => {
                 log::debug!(target: LOG_TARGET, "ignored device frame {other:?}");
             }
-            DeviceEvent::LateReply { frame, .. } => {
+            DeviceEvent::LateReply { frame, at } => {
                 log::warn!(
                     target: LOG_TARGET,
                     "late reply 0x{:02x} status {:?} ignored",
                     frame.opcode(),
                     frame.payload().first()
                 );
+                // A late `0xC9` belongs to a `0xC8` the supply has just
+                // handled: it moves the settle time like any `0xC9`
+                // (DD-SESS-034).
+                if frame.opcode() == control::REPLY {
+                    self.note_c9(at);
+                }
             }
             DeviceEvent::LinkLost { reason } => self.on_link_gone(&reason),
         }
     }
 
-    /// A reading from the link (DD-SESS-040, DD-SESS-042). The comparison
-    /// after a failed command runs on the first reading that arrived at or
-    /// after the settle time, so that it sees the command's effect.
+    /// A reading from the link (DD-SESS-040, DD-SESS-042). The first reading
+    /// of a resynchronisation ends it and sets the settle time from its
+    /// arrival (DD-SESS-036); a reading at or after the settle time is fresh
+    /// and makes the output state known again. The comparison after a
+    /// failed command runs on the first fresh reading, so that it sees the
+    /// command's effect.
     fn on_reading(&mut self, raw: RawReading, at: Instant) {
         let timed = TimedReading {
             at,
@@ -825,8 +877,15 @@ impl Task {
                 reading: timed,
             });
         }
-        let settled = self.settle_until.is_none_or(|until| at >= until);
+        let settled = if self.resync {
+            self.resync = false;
+            self.settle_until = Some(later(self.settle_until, after(at, timing::SETTLE)));
+            false
+        } else {
+            self.settle_until.is_none_or(|until| at >= until)
+        };
         if settled {
+            self.output_unknown = false;
             if let Some(built_from) = self.compare_next.take() {
                 if let Some((sv, sc, ev, ec)) = setpoints_differ(&raw, self.expected, &built_from) {
                     self.emit(SessionEvent::SetpointsChanged {
@@ -872,14 +931,19 @@ impl Task {
 
     /// The reading the latest reading cannot be: waits until the settle
     /// time if it is still ahead (a `Sleep` step tagged [`Then::Settle`]),
-    /// else starts the poll at once (tagged [`Then::Poll`]). `poll first:
-    /// <why>` is logged.
+    /// else starts the poll at once (tagged [`Then::Poll`]); while the
+    /// session resynchronises the poll goes at once, since its reply is the
+    /// reading that ends the resynchronisation. `poll first: <why>` is
+    /// logged.
     fn need_reading(&mut self, why: &str) -> Result<(), Error> {
         if self.link.is_none() {
             return Err(self.lost_error());
         }
         let now = Instant::now();
-        match self.settle_until.filter(|until| *until > now) {
+        match self
+            .settle_until
+            .filter(|until| !self.resync && *until > now)
+        {
             Some(until) => {
                 log::debug!(
                     target: LOG_TARGET,
@@ -896,13 +960,33 @@ impl Task {
         }
     }
 
-    /// The reading of a polled `0xC2`: fresh by construction, since it was
-    /// requested after the settle time.
-    fn polled_reading(&self, done: Done) -> Result<RawReading, Error> {
-        match done {
-            Done::Request(Ok(Outcome::Reply { frame, .. })) => {
-                telemetry::parse(&frame).map_err(Error::Protocol)
+    /// After a wait for the settle time (tagged `settle`): waits again if
+    /// the settle time moved further (a late `0xC9`, DD-SESS-034), else
+    /// starts the poll (tagged `poll`); while the session resynchronises
+    /// the poll goes at once.
+    fn settle_then_poll(&mut self, settle: Then, poll: Then) -> Result<(), Error> {
+        if self.link.is_none() {
+            return Err(self.lost_error());
+        }
+        let now = Instant::now();
+        match self
+            .settle_until
+            .filter(|until| !self.resync && *until > now)
+        {
+            Some(until) => {
+                self.step = Some(Step::Sleep(Box::pin(sleep_until(until)), settle));
+                Ok(())
             }
+            None => self.start_poll(poll),
+        }
+    }
+
+    /// The reading of a polled `0xC2` with its arrival stamp.
+    fn polled_reading(&self, done: Done) -> Result<(RawReading, Instant), Error> {
+        match done {
+            Done::Request(Ok(Outcome::Reply { frame, at })) => telemetry::parse(&frame)
+                .map(|raw| (raw, at))
+                .map_err(Error::Protocol),
             Done::Request(Err(error)) => {
                 self.note_error(&error);
                 Err(error)
@@ -911,8 +995,20 @@ impl Task {
         }
     }
 
+    /// Whether a reading that arrived at `at` is fresh now: no
+    /// resynchronisation is pending and it arrived at or after the settle
+    /// time, at most `timing::REPLY` ago. A polled reading is normally
+    /// fresh by construction; it is not when a resynchronisation or a late
+    /// `0xC9` moved the settle time past it.
+    fn fresh_at(&self, at: Instant) -> bool {
+        !self.resync && freshness(Some(at), self.settle_until, Instant::now()) == Freshness::Fresh
+    }
+
     /// The latest reading if it is fresh (DD-SESS-031), else why not.
     fn fresh_reading(&self) -> Result<RawReading, &'static str> {
+        if self.resync {
+            return Err("resynchronising after a 0xc8 that may have been applied");
+        }
         let at = self.reading.map(|(_, at)| at);
         match freshness(at, self.settle_until, Instant::now()) {
             Freshness::Fresh => self.reading.map(|(raw, _)| raw).ok_or("no reading"),
@@ -1130,6 +1226,7 @@ impl Task {
         if let Some(link) = &self.link {
             link.set_polling(true);
         }
+        self.was_ready = true;
         self.link_input(LinkInput::Ready);
         let info = self.info.clone();
         if let Some(info) = &info {
@@ -1273,7 +1370,16 @@ impl Task {
             }
             _ => {}
         }
-        self.link_input(LinkInput::Lost);
+        // The loss and the reconnect decision update the shared state as
+        // one step: with reconnection the queries see `Reconnecting`
+        // directly, never `Lost` in between (DD-SESS-050).
+        let reconnect = self.shared.reconnect.load(Ordering::SeqCst);
+        if reconnect {
+            self.link_apply(LinkInput::Lost);
+            self.link_input(LinkInput::RetryScheduled);
+        } else {
+            self.link_input(LinkInput::Lost);
+        }
         self.remote_input(RemoteInput::LinkLost);
         while let Ok(command) = self.commands.try_recv() {
             let _ = command.reply.send(Err(session_error.clone()));
@@ -1283,18 +1389,19 @@ impl Task {
         }
         self.setpoints_unknown(None);
         self.new_generation();
-        self.set_ready(ReadyState::Failed(session_error));
-        self.emit(SessionEvent::LinkLost { text });
-        if self.shared.reconnect.load(Ordering::SeqCst) {
+        if reconnect {
             let now = Instant::now();
-            self.link_input(LinkInput::RetryScheduled);
             self.set_ready(ReadyState::Pending);
             self.reconnect = Some(Reconnect {
                 loss_at: now,
                 attempts: 0,
             });
             self.tick = Some(after(now, timing::RECONNECT_RETRY));
+        } else {
+            self.set_ready(ReadyState::Failed(session_error));
         }
+        // After the state update.
+        self.emit(SessionEvent::LinkLost { text });
     }
 
     /// The reconnect timer fired (DD-SESS-051).
@@ -1576,13 +1683,16 @@ impl Task {
                 if Self::caller_gone(&op) {
                     return;
                 }
-                match self.start_poll(Then::Poll) {
+                match self.settle_then_poll(Then::Settle, Then::Poll) {
                     Ok(()) => self.op = Some(Op::Control(op)),
                     Err(error) => self.finish_control(op, Err(error)),
                 }
             }
             Then::Poll => match self.polled_reading(done) {
-                Ok(reading) => self.control_checks(op, reading),
+                // A reading that a resynchronisation or a late `0xC9` made
+                // stale is not used: wait and poll again.
+                Ok((reading, at)) if self.fresh_at(at) => self.control_checks(op, reading),
+                Ok(_) => self.control_reading(op),
                 Err(error) => self.finish_control(op, Err(error)),
             },
             Then::RemoteRequest | Then::RemoteWait => {
@@ -1621,7 +1731,9 @@ impl Task {
             Done::Request(Err(error)) => {
                 self.note_error(&error);
                 if matches!(error, Error::Timeout { .. }) {
+                    // The supply may still apply it (DD-SESS-036).
                     self.setpoints_unknown(op.reading);
+                    self.resynchronise();
                 }
                 return Err(error);
             }
@@ -1639,7 +1751,15 @@ impl Task {
                     CommandKind::Release => self.remote_input(RemoteInput::Released),
                     CommandKind::OutputOn | CommandKind::Request => {}
                 }
-                if let Some((voltage, current)) = op.sent {
+                // Only a `0xC8` with `remoteCon` 1 applies its fields; a
+                // release applies none (DD-SESS-033).
+                let applies = matches!(
+                    op.kind,
+                    CommandKind::SetVoltage(..)
+                        | CommandKind::SetCurrent(..)
+                        | CommandKind::OutputOn
+                );
+                if let (true, Some((voltage, current))) = (applies, op.sent) {
                     self.accepted = Some(Accepted {
                         voltage,
                         current,
@@ -1850,16 +1970,45 @@ impl Task {
         self.start_off(OffOp {
             reply: Some(reply),
             retried: false,
-            need: OffNeed::Command,
+            need: OffNeed::Start,
             built: None,
             in_close: false,
             started_at: Instant::now(),
+            only_await: false,
         });
     }
 
-    /// The remote state decides: the open request awaited, a request
-    /// first, or straight to the reading.
+    /// The start of an output-off (DD-SESS-035): the latest reading whatever
+    /// its age (a poll only if there is none) and the mode check, with
+    /// nothing sent; then what the remote state asks for: the open request
+    /// awaited, a request first, or straight to the frame.
     fn start_off(&mut self, op: OffOp) {
+        let Some((mut op, raw, _)) = self.off_latest(op, OffNeed::Start) else {
+            return;
+        };
+        if raw.model != 0 {
+            let error = Error::Mode {
+                live_mode: raw.model,
+            };
+            // A close has awaited any open request before its output-off
+            // (DD-SESS-053 (b)), so it never takes the first branch; should
+            // it ever get here, the error must reach `end_off`, which keeps
+            // the marker, and must not be dropped with the caller's reply.
+            if self.remote_step_open() && !op.in_close {
+                // The caller gets the error now; the open request is still
+                // awaited, so that its outcome reaches the state
+                // (DD-SESS-003), and nothing is sent after it.
+                log::debug!(target: LOG_TARGET, "output-off: {error}");
+                if let Some(reply) = op.reply.take() {
+                    let _ = reply.send(Err(error));
+                }
+                op.only_await = true;
+                self.op = Some(Op::Off(op));
+            } else {
+                self.end_off(op, Err(error));
+            }
+            return;
+        }
         if self.remote_step_open() {
             // The request a cancelled command made is the output-off's: its
             // outcome brings the usual events and the grant.
@@ -1890,7 +2039,8 @@ impl Task {
         None
     }
 
-    /// The request for control an output-off makes first (SR-022).
+    /// The request for control an output-off makes first (SR-022), built
+    /// from the latest reading.
     fn off_request(&mut self, op: OffOp) {
         let Some((op, reading, _)) = self.off_latest(op, OffNeed::Request) else {
             return;
@@ -1902,13 +2052,13 @@ impl Task {
     }
 
     /// `raw`, which arrived at `at`, with the setpoints of `accepted` laid
-    /// over it when it arrived before the settle time and `accepted` is
-    /// newer than it (DD-SESS-035): an output-off right after an accepted
-    /// setpoint keeps that setpoint.
+    /// over it when it arrived before the `accepted` record's time plus
+    /// `timing::SETTLE`, so that it may not show that command yet
+    /// (DD-SESS-035): an output-off right after an accepted setpoint keeps
+    /// that setpoint.
     fn with_accepted(&self, raw: RawReading, at: Instant) -> RawReading {
-        let before_settle = self.settle_until.is_some_and(|until| at < until);
         match self.accepted {
-            Some(accepted) if before_settle && accepted.at > at => RawReading {
+            Some(accepted) if at < after(accepted.at, timing::SETTLE) => RawReading {
                 set_voltage: accepted.voltage,
                 set_current: accepted.current,
                 ..raw
@@ -1955,6 +2105,7 @@ impl Task {
         match then {
             Then::Poll => match self.polled_reading(done) {
                 Ok(_) => match op.need {
+                    OffNeed::Start => self.start_off(op),
                     OffNeed::Request => self.off_request(op),
                     OffNeed::Command => self.off_reading(op),
                 },
@@ -1964,35 +2115,47 @@ impl Task {
                 let reading = self.reading.map(|(raw, _)| raw);
                 match self.remote_done(then, done, reading.as_ref()) {
                     RemoteStep::Waiting => self.op = Some(Op::Off(op)),
+                    // Answered with `Mode` already: nothing is sent.
+                    RemoteStep::Granted | RemoteStep::Failed(_) if op.only_await => {
+                        self.end_off(op, Ok(()));
+                    }
                     RemoteStep::Granted => self.off_reading(op),
                     RemoteStep::Failed(error) => self.end_off(op, Err(error)),
                 }
             }
             Then::OffCommand => self.off_answered(op, done),
-            Then::OffSettle => self.off_poll(op),
-            Then::OffPoll => {
-                match self.polled_reading(done) {
-                    // The event path may have cleared it on this very
-                    // reading already.
-                    Ok(reading) if reading.output == 0 => {
+            Then::OffSettle => self.off_follow_up(op),
+            Then::OffPoll => match self.polled_reading(done) {
+                Ok((reading, at)) if self.fresh_at(at) => {
+                    if reading.output == 0 {
+                        // The event path may have cleared it on this very
+                        // reading already.
                         if !self.cleared_since(op.started_at) {
                             self.clear_marker();
                         }
+                        if op.in_close {
+                            // A reading after the output-off shows it off.
+                            self.close_unconfirmed = false;
+                        }
                     }
-                    Ok(_) => {}
-                    Err(error) => {
-                        log::debug!(target: LOG_TARGET, "reading after the output-off: {error}");
-                    }
+                    self.end_off(op, Ok(()));
                 }
-                self.end_off(op, Ok(()));
-            }
+                // Not fresh (a resynchronisation or a late `0xC9`): wait
+                // and poll again.
+                Ok(_) => self.off_follow_up(op),
+                Err(error) => {
+                    log::debug!(target: LOG_TARGET, "reading after the output-off: {error}");
+                    self.end_off(op, Ok(()));
+                }
+            },
             other => self.end_off(op, Err(unexpected(other))),
         }
     }
 
     /// The `0xC9` outcome of the output-off's `0xC8` is known: a status 1
     /// re-takes control once; otherwise the caller is answered now, and the
-    /// reading after the settle time follows.
+    /// reading after the settle time follows. A timeout resynchronises
+    /// (DD-SESS-036).
     fn off_answered(&mut self, mut op: OffOp, done: Done) {
         let result = match done {
             Done::Request(Ok(Outcome::Reply { frame, at })) => {
@@ -2035,6 +2198,9 @@ impl Task {
             }
             Done::Request(Err(error)) => {
                 self.note_error(&error);
+                if matches!(error, Error::Timeout { .. }) {
+                    self.resynchronise();
+                }
                 Err(error)
             }
             _ => Err(unexpected(Then::OffCommand)),
@@ -2058,20 +2224,15 @@ impl Task {
             self.end_off(op, Ok(()));
             return;
         }
-        let now = Instant::now();
-        match self.settle_until.filter(|until| *until > now) {
-            Some(until) => {
-                self.step = Some(Step::Sleep(Box::pin(sleep_until(until)), Then::OffSettle));
-                self.op = Some(Op::Off(op));
-            }
-            None => self.off_poll(op),
-        }
+        self.off_follow_up(op);
     }
 
-    /// The reading after the output-off, at the settle time.
-    fn off_poll(&mut self, op: OffOp) {
+    /// The reading after the output-off: a fresh one, waited for until the
+    /// settle time (or polled for at once while the session
+    /// resynchronises).
+    fn off_follow_up(&mut self, op: OffOp) {
         log::debug!(target: LOG_TARGET, "reading after the output-off");
-        match self.start_poll(Then::OffPoll) {
+        match self.settle_then_poll(Then::OffSettle, Then::OffPoll) {
             Ok(()) => self.op = Some(Op::Off(op)),
             Err(error) => {
                 log::debug!(target: LOG_TARGET, "reading after the output-off: {error}");
@@ -2138,9 +2299,7 @@ impl Task {
         match self.op.take() {
             Some(Op::Control(op)) => {
                 let _ = op.reply.send(Err(closed_error()));
-                if self.drop_cancelled_step(op.reading) {
-                    self.close_cancelled_write = true;
-                }
+                self.drop_cancelled_step(op.reading);
             }
             Some(Op::Off(op)) => {
                 // An output-off already answered at its `0xC9` keeps that
@@ -2148,14 +2307,26 @@ impl Task {
                 if let Some(reply) = op.reply {
                     let _ = reply.send(Err(closed_error()));
                 }
-                if self.drop_cancelled_step(op.built) {
-                    self.close_cancelled_write = true;
-                }
+                self.drop_cancelled_step(op.built);
             }
             Some(Op::Connect(_)) => self.step = None,
             Some(Op::Close(_)) | None => {}
         }
+        // A cancellation in (a), or one before the close, leaves the output
+        // state unknown: the output-off then goes out whatever the reading
+        // shows (DD-SESS-036).
+        self.close_output_unknown = self.output_unknown;
         if !self.close_from_ready || self.link.is_none() {
+            // After a connection that had been ready, a lost link means the
+            // output could not be switched off (DD-SESS-053).
+            let lost = matches!(
+                self.link_state.state,
+                LinkState::Lost | LinkState::Reconnecting
+            );
+            if output_off && self.was_ready && lost {
+                let error = self.lost_error();
+                self.close_failed(error);
+            }
             self.step = None;
             self.close_link();
             return;
@@ -2191,15 +2362,26 @@ impl Task {
         }
     }
 
-    /// The reading the close needed in `phase` could not be taken: the
-    /// close goes on to the link's close; without the reading for the
-    /// output-off decision the output cannot be confirmed off.
+    /// The reading the close needed in `phase` could not be taken. While
+    /// the link is still up the close goes on with the latest reading
+    /// whatever its age: for the decision, the output-off is then sent in
+    /// DC mode whatever that reading shows (DD-SESS-053 (b)); for the
+    /// release, it is built from it. Without the decision's fresh reading
+    /// the output cannot be confirmed off unless a later reading shows it.
     fn close_reading_failed(&mut self, phase: ClosePhase, error: Error) {
+        let link_up = self.link.is_some() && !matches!(error, Error::LinkLost { .. });
         if phase == ClosePhase::OffReading {
             self.close_unconfirmed = true;
         }
         self.close_failed(error);
-        self.close_link();
+        let latest = self.reading.map(|(raw, _)| raw);
+        match (link_up, latest, phase) {
+            (true, Some(reading), ClosePhase::OffReading) => self.close_off_decide(reading, true),
+            (true, Some(reading), ClosePhase::ReleaseReading) => {
+                self.close_release_send(reading);
+            }
+            _ => self.close_link(),
+        }
     }
 
     /// The output-off of the close, when asked for: decided on a fresh
@@ -2210,31 +2392,33 @@ impl Task {
             return;
         }
         match self.fresh_reading() {
-            Ok(reading) => self.close_off_decide(reading),
+            Ok(reading) => self.close_off_decide(reading, false),
             Err(why) => self.close_need(ClosePhase::OffReading, why),
         }
     }
 
-    /// Switches the output off if the fresh `reading` shows DC mode and
-    /// either the output on or a command cancelled in (a) whose `0xC8` may
-    /// have been written; outside DC mode the output-off and the release are
-    /// skipped with a WARN log.
-    fn close_off_decide(&mut self, reading: RawReading) {
+    /// Switches the output off if `reading` shows DC mode and the output on,
+    /// or the output state is unknown (DD-SESS-036), or `no_fresh` (the
+    /// fresh reading could not be obtained and `reading` is the latest one
+    /// whatever its age); outside DC mode the output-off and the release
+    /// are skipped with a WARN log.
+    fn close_off_decide(&mut self, reading: RawReading, no_fresh: bool) {
         if reading.model != 0 {
-            if reading.output != 0 {
+            if reading.output != 0 || no_fresh {
                 self.close_unconfirmed = true;
             }
             self.close_not_dc(reading.model);
             return;
         }
-        if reading.output != 0 || self.close_cancelled_write {
+        if reading.output != 0 || no_fresh || self.close_output_unknown {
             self.start_off(OffOp {
                 reply: None,
                 retried: false,
-                need: OffNeed::Command,
+                need: OffNeed::Start,
                 built: None,
                 in_close: true,
                 started_at: Instant::now(),
+                only_await: false,
             });
         } else {
             self.close_release();
@@ -2312,17 +2496,21 @@ impl Task {
                 }
             }
             (phase @ (ClosePhase::OffReading | ClosePhase::ReleaseReading), Then::Settle) => {
-                match self.start_poll(Then::Poll) {
+                match self.settle_then_poll(Then::Settle, Then::Poll) {
                     Ok(()) => self.op = Some(Op::Close(op)),
                     Err(error) => self.close_reading_failed(phase, error),
                 }
             }
             (ClosePhase::OffReading, _) => match self.polled_reading(done) {
-                Ok(reading) => self.close_off_decide(reading),
+                Ok((reading, at)) if self.fresh_at(at) => self.close_off_decide(reading, false),
+                // Not fresh (a resynchronisation or a late `0xC9`): wait and
+                // poll again.
+                Ok(_) => self.close_off(),
                 Err(error) => self.close_reading_failed(ClosePhase::OffReading, error),
             },
             (ClosePhase::ReleaseReading, _) => match self.polled_reading(done) {
-                Ok(reading) => self.close_release_send(reading),
+                Ok((reading, at)) if self.fresh_at(at) => self.close_release_send(reading),
+                Ok(_) => self.close_release(),
                 Err(error) => self.close_reading_failed(ClosePhase::ReleaseReading, error),
             },
             (ClosePhase::Release, _) => {
@@ -2337,6 +2525,9 @@ impl Task {
                     }
                     Done::Request(Err(error)) => {
                         self.note_error(&error);
+                        if matches!(error, Error::Timeout { .. }) {
+                            self.resynchronise();
+                        }
                         self.close_failed(error);
                     }
                     _ => self.close_failed(unexpected(then)),
@@ -2427,6 +2618,11 @@ impl Task {
         let turn = poll_fn(|cx| poll_step(step, op, cx)).await;
         self.handle(turn);
         self.refresh_counters();
+    }
+
+    /// The setpoints of `accepted`, for assertions.
+    pub(super) fn accepted_setpoints(&self) -> Option<(u16, u16)> {
+        self.accepted.map(|a| (a.voltage, a.current))
     }
 
     /// What the operation in progress is, for assertions.

@@ -134,10 +134,13 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Session DD rev 5 approved 2026-10-01 (the four gaps of the final
       review, two test entries restated, UT-SESS-061 to 065 added, the
       session changes the product designs need)
-- [ ] Implement session DD rev 5, by an Opus 5.5 agent (started
-      2026-10-01), with the session tests switched to
-      `fixtures::reply_route` and `on_air`; then a new unit verification
-      record for the session
+- [x] Session DD rev 5 implemented 2026-10-01 (289 tests, record
+      docs/v-model/records/2026-10-01-unit-session-rev5.md); the session
+      tests use `fixtures::reply_route` and `on_air`
+- [ ] Session DD: put to the user UT-SESS-044 (5) ("never `Ready`"), the
+      release built from the latest reading when its poll fails
+      (DD-SESS-053 (b)), and an output-off whose mode check fails while a
+      remote request is open (DD-SESS-035)
 - [ ] TBD-023: measure on hardware how long after a 0xC9 the 0xC3 shows
       the new setpoints and output state (bench session, user)
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents

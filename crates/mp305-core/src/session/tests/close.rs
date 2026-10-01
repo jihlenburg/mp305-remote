@@ -134,33 +134,27 @@ async fn close_in_denied_logs_the_release_status() {
 
 /// Test: UT-SESS-044
 #[tokio::test(start_paused = true)]
-async fn close_after_a_loss_sends_nothing_and_keeps_the_marker() {
+async fn close_in_lost_sends_nothing_and_releases_the_identifier() {
+    // `Lost` without ever having been ready: the info request gets no
+    // reply, so the connect flow ends with its `Timeout`. (A `close(true)`
+    // in `Lost` after a connection that had been ready returns `LinkLost`
+    // instead, DD-SESS-053 revision 5: UT-SESS-062.)
     let id = "UT-SESS-044-5";
     let ble = Kind::Ble;
-    let mut script = script(ble, vec![reply(ble, 0xC2, ms(130), &output_on())]);
-    script.close_at = Some(ms(1_500));
-    let rig = start(id, ble, script);
-    rig.session.ready().await.unwrap();
-    rig.session.request_remote_control().await.unwrap();
-    rig.until(Duration::from_secs(2)).await;
+    let mut quiet = script(ble, vec![]);
+    quiet.replies.retain(|r| r.request != 0xE0);
+    let rig = start(id, ble, quiet);
+    assert!(rig.session.ready().await.is_err());
+    tokio::time::sleep(ms(1)).await;
     assert_eq!(rig.session.link_state(), LinkState::Lost);
-    // A marker was written while the output was on; the loss leaves it.
-    assert!(rig
-        .markers
-        .calls()
-        .iter()
-        .any(|(_, c)| matches!(c, MarkerCall::Set(_))));
-    let calls = rig.markers.calls().len();
     let sent = rig.sent().len();
     assert_eq!(rig.session.close(true).await, Ok(()));
     assert_eq!(rig.sent().len(), sent);
-    // No `Clear` on the loss or on the close in `Lost` (DD-SESS-042,
-    // DD-SESS-053).
-    assert!(!rig.markers.calls()[..calls]
+    assert!(!rig
+        .markers
+        .calls()
         .iter()
         .any(|(_, c)| *c == MarkerCall::Clear));
-    assert_eq!(rig.markers.calls().len(), calls);
-    assert!(marker_present(&rig, id));
     let again = start(
         id,
         Kind::Ble,
@@ -201,12 +195,19 @@ async fn close_during_a_command_fails_it_and_closes() {
     // then the release with `output` 0.
     assert_eq!(shape(&c8s), vec![(1, 0), (1, 0), (0, 0)]);
     assert_eq!(setpoints(&c8s[0].1), (100, 1000));
-    // The close is done before the voltage's late `0xC9` could arrive, so
-    // the release was answered by its own `0xC9`.
-    assert!(closed_at < written + ms(2_000), "{closed_at:?}");
-    // The decision waited for the reply bound and the settle time after the
-    // cancellation, and was taken on a reading polled after it.
-    assert!(c8s[1].0 >= r + ms(50) + ms(1_100));
+    // The voltage's late `0xC9` (2 s after its write) could not answer the
+    // release: either the close was done before it, or the release went out
+    // after it (it then came in as a late reply).
+    let late = written + ms(2_000);
+    assert!(closed_at < late || c8s[2].0 > late, "{closed_at:?} {c8s:?}");
+    // The cancellation resynchronised the session: the voltage `0xC8` timed
+    // out in the link 1 s after its write, the next reading arrived 130 ms
+    // later, and the decision was taken on a reading from at least the
+    // settle time after that one.
+    assert!(
+        c8s[1].0 >= written + ms(1_000) + ms(130) + ms(100),
+        "{c8s:?}"
+    );
     assert_eq!(rig.mock(0).closes(), 1);
 }
 
@@ -704,44 +705,11 @@ async fn a_close_with_output_off_during_one_without_is_refused() {
 /// Test: UT-SESS-044
 #[tokio::test(start_paused = true)]
 async fn a_close_returns_the_first_error_and_still_disconnects() {
-    let id = "UT-SESS-044-errors";
     let ble = Kind::Ble;
-    // `close(true)` whose decision poll gets no reply: the output cannot be
-    // confirmed off, so the `Timeout` is returned, no release is built from
-    // a reading the close does not have, the link is closed and the
-    // marker stays.
-    let rig = granted(
-        id,
-        vec![
-            reply(ble, 0xC2, ms(130), &output_on()),
-            Reply {
-                request: 0xC2,
-                deliveries: Vec::new(),
-                from: T0 + ms(800),
-                ..Reply::default()
-            },
-        ],
-        vec![],
-    )
-    .await;
-    rig.until(T0 + ms(800)).await;
-    assert!(marker_present(&rig, id));
-    // The latest reading is fresh: wait until it is not.
-    rig.until(T0 + ms(2_000)).await;
-    let t1 = rig.now();
-    assert_eq!(
-        rig.session.close(true).await,
-        Err(Error::Timeout {
-            opcode: 0xC2,
-            after: Duration::from_secs(1)
-        })
-    );
-    assert!(rig.c8s_after(t1).is_empty());
-    assert_eq!(rig.session.link_state(), LinkState::Closed);
-    assert!(marker_present(&rig, id));
     // `close(false)` whose release gets no `0xC9`: the `Timeout` is the
     // close's result, the link is still closed, the marker cleared (the
-    // user chose to leave the output as it is).
+    // user chose to leave the output as it is). (A failing decision poll is
+    // UT-SESS-062.)
     let id = "UT-SESS-044-release";
     let rig = granted(
         id,
@@ -764,4 +732,122 @@ async fn a_close_returns_the_first_error_and_still_disconnects() {
     );
     assert_eq!(rig.mock(0).closes(), 1);
     assert!(!marker_present(&rig, id));
+}
+
+/// Test: UT-SESS-061
+#[tokio::test(start_paused = true)]
+async fn a_close_after_a_timed_out_output_on_switches_off_whatever_the_reading_shows() {
+    let ble = Kind::Ble;
+    // Granted at 380 ms; the output-on `0xC8` at 510 ms gets no `0xC9` and
+    // times out at 1510 ms; the supply reports the output on from 1810 ms.
+    let rig = granted(
+        "UT-SESS-061-2",
+        vec![
+            c9_ok(ble),
+            c8_unanswered(ms(500)),
+            reply(ble, 0xC2, ms(130), &fixtures::C3_CAPTURE),
+            c3_from(ble, &output_on(), ms(1_810)),
+        ],
+        vec![],
+    )
+    .await;
+    let r = rig.reading_after(T0 + ms(200)).await;
+    let on = rig.call_at(r, |s| async move { s.output_on().await });
+    let (timed_out, result) = on.await.unwrap();
+    assert!(matches!(result, Err(Error::Timeout { opcode: 0xC8, .. })));
+    let close = rig.call_at(timed_out, |s| async move { s.close(true).await });
+    let (closed_at, result) = close.await.unwrap();
+    assert_eq!(result, Ok(()));
+    let c8s = rig.c8s_after(r);
+    assert_eq!(shape(&c8s), vec![(1, 1), (1, 0), (0, 0)], "{c8s:?}");
+    // The close's reading (requested before 1810 ms) shows the output off;
+    // the output state was unknown, so the output-off went out anyway.
+    let decision = rig
+        .sent()
+        .iter()
+        .filter(|(t, op, _)| *op == 0xC2 && *t < c8s[1].0)
+        .map(|(t, _, _)| *t)
+        .max()
+        .unwrap();
+    assert!(decision < ms(1_810), "{decision:?}");
+    // `Ok` only after that output-off was accepted (100 ms after its write).
+    assert!(closed_at >= c8s[1].0 + ms(100));
+}
+
+/// Test: UT-SESS-062
+#[tokio::test(start_paused = true)]
+async fn a_failed_decision_poll_still_switches_off_from_the_latest_reading() {
+    let id = "UT-SESS-062-1";
+    let ble = Kind::Ble;
+    // Granted at 380 ms, the output on. The close right after the grant
+    // finds the reading stale, waits for the settle time and polls; that
+    // one `0xC2` gets no reply (one timeout, the link stays up).
+    let rig = granted(
+        id,
+        vec![
+            reply(ble, 0xC2, ms(130), &output_on()),
+            Reply {
+                request: 0xC2,
+                deliveries: Vec::new(),
+                repeat: Some(1),
+                from: ms(400),
+                ..Reply::default()
+            },
+        ],
+        vec![],
+    )
+    .await;
+    let t1 = rig.now();
+    let present = rig.markers.present(id).unwrap();
+    assert_eq!(
+        rig.session.close(true).await,
+        Err(Error::Timeout {
+            opcode: 0xC2,
+            after: Duration::from_secs(1)
+        })
+    );
+    let c8s = rig.c8s_after(t1);
+    // The output-off from the latest reading (the capture's setpoints),
+    // then the release.
+    assert_eq!(shape(&c8s), vec![(1, 0), (0, 0)], "{c8s:?}");
+    assert_eq!(setpoints(&c8s[0].1), (1300, 1000));
+    assert_eq!(rig.mock(0).closes(), 1);
+    // The marker was written while the output was on (none at the grant);
+    // no later reading showed the output off, so it stays.
+    assert!(present.is_none());
+    assert!(marker_present(&rig, id));
+}
+
+/// Test: UT-SESS-062
+#[tokio::test(start_paused = true)]
+async fn a_close_after_a_loss_in_ready_reports_the_loss_with_output_off() {
+    let ble = Kind::Ble;
+    for (id, output_off) in [("UT-SESS-062-2-true", true), ("UT-SESS-062-2-false", false)] {
+        let mut script = script(ble, vec![reply(ble, 0xC2, ms(130), &output_on())]);
+        script.close_at = Some(ms(1_500));
+        let rig = start(id, ble, script);
+        rig.session.ready().await.unwrap();
+        rig.session.request_remote_control().await.unwrap();
+        rig.until(Duration::from_secs(2)).await;
+        assert_eq!(rig.session.link_state(), LinkState::Lost);
+        assert!(marker_present(&rig, id));
+        let sent = rig.sent().len();
+        let result = rig.session.close(output_off).await;
+        if output_off {
+            assert_eq!(
+                result,
+                Err(Error::LinkLost {
+                    text: crate::session::texts::link_lost(
+                        &crate::link::LossReason::Disconnected,
+                        ble
+                    )
+                })
+            );
+        } else {
+            assert_eq!(result, Ok(()));
+        }
+        assert_eq!(rig.sent().len(), sent);
+        assert_eq!(rig.mock(0).closes(), 1);
+        assert!(marker_present(&rig, id), "{id}");
+    }
 }
