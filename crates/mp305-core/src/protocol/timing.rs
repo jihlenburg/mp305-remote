@@ -42,6 +42,9 @@ pub const FIND: Duration = Duration::from_secs(4);
 /// The bound on the OS connect, which has no timeout of its own (the
 /// discovery DD, DD-DISC-011).
 pub const CONNECT: Duration = Duration::from_secs(10);
+/// The longest a blocking Python call waits before it checks for Ctrl-C
+/// again (AR-003, the Python wait slice).
+pub const WAIT_SLICE: Duration = Duration::from_millis(100);
 
 #[cfg(test)]
 mod tests {
@@ -64,12 +67,13 @@ mod tests {
 
     /// Test: UT-PROTO-060
     #[test]
-    fn the_bounds_added_by_ar_014_revision_7_have_their_values() {
+    fn the_later_bounds_have_their_values() {
         assert_eq!(SETTLE, Duration::from_millis(100));
         assert_eq!(SCAN_DEFAULT, Duration::from_secs(10));
         assert_eq!(SCAN_MIN, Duration::from_secs(1));
         assert_eq!(SCAN_MAX, Duration::from_secs(60));
         assert_eq!(FIND, Duration::from_secs(4));
         assert_eq!(CONNECT, Duration::from_secs(10));
+        assert_eq!(WAIT_SLICE, Duration::from_millis(100));
     }
 }

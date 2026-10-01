@@ -360,18 +360,24 @@ mod tests {
         let mut unknown = capture();
         unknown.out_state = 7;
         let half_ms = UNIX_EPOCH + Duration::new(1_790_848_800, 250_500_000);
+        let mut cv = capture();
+        cv.out_state = 1;
+        let mut held_above = capture();
+        held_above.out_state = 3;
         for reading in [
             timed(&capture(), wall_ms(TEN_MS + 12_250)),
             timed(&capture(), wall_ms(TEN_MS - 1_000)),
             timed(&cc_on, wall_ms(TEN_MS + 1_000)),
             timed(&unknown, wall_ms(TEN_MS + 2_000)),
             timed(&capture(), half_ms),
+            timed(&cv, wall_ms(TEN_MS + 3_000)),
+            timed(&held_above, wall_ms(TEN_MS + 4_000)),
         ] {
             writer.write(&reading).unwrap();
         }
-        assert_eq!(writer.rows(), 5);
+        assert_eq!(writer.rows(), 7);
         let rows = rows_of(&sink.text());
-        assert_eq!(rows.len(), 5);
+        assert_eq!(rows.len(), 7);
         assert_eq!(rows[0][0], "2026-10-01T10:00:12.250Z");
         assert_eq!(rows[0][1], "12.250");
         assert_eq!(rows[1][0], "2026-10-01T09:59:59.000Z");
@@ -383,6 +389,8 @@ mod tests {
         );
         assert!(rows[4][0].ends_with(".250Z"), "{}", rows[4][0]);
         assert_eq!(rows[4][1], "0.250");
+        assert_eq!(rows[5][8], "cv");
+        assert_eq!(rows[6][8], "held_above");
     }
 
     /// The `voltage_V,current_A,power_W` columns of the row of `raw`.

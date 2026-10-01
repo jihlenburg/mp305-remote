@@ -9,7 +9,7 @@ use crate::protocol::frame::Frame;
 /// The placeholder the bridge discards from every AF01 write.
 const AF01_PLACEHOLDER: u8 = 0x12;
 /// The route tag the bridge prepends to every AF01 notification.
-const AF01_TAG: u8 = 0x31;
+pub(crate) const AF01_TAG: u8 = 0x31;
 
 /// The two characteristics of the `AF00` service.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

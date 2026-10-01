@@ -7,7 +7,7 @@ use core::fmt;
 
 use crate::protocol::error::Reason;
 use crate::protocol::frame::Frame;
-use crate::protocol::ops::{expect_reply, u16_at, u32_at, u8_at};
+use crate::protocol::ops::{expect_len, expect_opcode, u16_at, u32_at, u8_at};
 use crate::protocol::units;
 
 /// The telemetry request opcode.
@@ -98,13 +98,27 @@ pub fn request() -> Frame {
     Frame::empty(REQUEST)
 }
 
-/// Parses a `0xC3` reply.
+/// Parses a `0xC3` reply: checks the opcode, then decodes the payload with
+/// [`parse_payload`].
 ///
 /// # Errors
 ///
 /// [`Reason::WrongOpcode`] or a length error.
 pub fn parse(frame: &Frame) -> Result<RawReading, Reason> {
-    let p = expect_reply(frame, REPLY, LEN)?;
+    expect_opcode(frame, REPLY)?;
+    parse_payload(frame.payload())
+}
+
+/// Decodes the payload of a `0xC3` reply (without the opcode) into the raw
+/// fields of the table on [`RawReading`]: the length check and the field
+/// decode of [`parse`], without its opcode check.
+///
+/// # Errors
+///
+/// [`Reason::Short`] for fewer than 36 bytes, [`Reason::BadLength`] for
+/// more.
+pub fn parse_payload(payload: &[u8]) -> Result<RawReading, Reason> {
+    let p = expect_len(payload, LEN)?;
     let mut raw = [0u8; LEN];
     raw.copy_from_slice(p);
     // The byte reinterpreted as a two's-complement signed value.
@@ -437,6 +451,26 @@ pub(crate) mod tests {
                 expected: 0xC3,
                 got: 0xC5
             }
+        );
+    }
+
+    /// Test: UT-PROTO-024
+    #[test]
+    fn parse_payload_decodes_the_bytes_as_parse_does_and_checks_the_length() {
+        assert_eq!(parse_payload(&C3_PAYLOAD), Ok(capture_reading()));
+        assert_eq!(
+            parse_payload(&[0; 35]),
+            Err(Reason::Short {
+                needed: 36,
+                got: 35
+            })
+        );
+        assert_eq!(
+            parse_payload(&[0; 37]),
+            Err(Reason::BadLength {
+                expected: 36,
+                got: 37
+            })
         );
     }
 

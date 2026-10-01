@@ -20,20 +20,40 @@ use crate::protocol::frame::Frame;
 ///
 /// [`Reason::WrongOpcode`], [`Reason::Short`] or [`Reason::BadLength`].
 pub(crate) fn expect_reply(frame: &Frame, expected: u8, len: usize) -> Result<&[u8], Reason> {
-    if frame.opcode() != expected {
-        return Err(Reason::WrongOpcode {
+    expect_opcode(frame, expected)?;
+    expect_len(frame.payload(), len)
+}
+
+/// Checks that `frame` carries the opcode `expected`.
+///
+/// # Errors
+///
+/// [`Reason::WrongOpcode`].
+pub(crate) fn expect_opcode(frame: &Frame, expected: u8) -> Result<(), Reason> {
+    if frame.opcode() == expected {
+        Ok(())
+    } else {
+        Err(Reason::WrongOpcode {
             expected,
             got: frame.opcode(),
-        });
+        })
     }
-    let got = frame.payload().len();
+}
+
+/// Checks that `payload` has exactly `len` bytes and returns it.
+///
+/// # Errors
+///
+/// [`Reason::Short`] or [`Reason::BadLength`].
+pub(crate) fn expect_len(payload: &[u8], len: usize) -> Result<&[u8], Reason> {
+    let got = payload.len();
     if got < len {
         return Err(Reason::Short { needed: len, got });
     }
     if got > len {
         return Err(Reason::BadLength { expected: len, got });
     }
-    Ok(frame.payload())
+    Ok(payload)
 }
 
 /// Reads the little-endian `u16` at `offset`. The callers have checked the

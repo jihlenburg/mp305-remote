@@ -308,8 +308,12 @@ impl Markers for Store {
     /// is `None`. A file that cannot be read, or whose content is not a
     /// marker of `identifier`, is logged at WARN and is `None`; a corrupt
     /// one is also removed, while a file of another identifier whose name
-    /// collided is left alone.
+    /// collided is left alone. An identifier that cannot be stored
+    /// ([`names::storable`]) has no marker: `None`, and no file is touched.
     fn present(&self, identifier: &str) -> Result<Option<SystemTime>, Error> {
+        if names::storable(identifier).is_err() {
+            return Ok(None);
+        }
         let (path, _) = self.marker_path(identifier);
         let content = match fs::read(&path) {
             Ok(content) => content,
@@ -344,8 +348,14 @@ impl Markers for Store {
 
     /// Writes the marker for `identifier` in one step: `at` in whole
     /// seconds since the Unix epoch (a time before the epoch as 0) and the
-    /// identifier. Creates the directories if needed.
+    /// identifier. Creates the directories if needed. An identifier that
+    /// cannot be stored ([`names::storable`]) is [`Error::Store`]
+    /// `marker identifier <identifier, Debug form> cannot be stored:
+    /// <reason>`, and nothing is written.
     fn set(&self, identifier: &str, at: SystemTime) -> Result<(), Error> {
+        names::storable(identifier).map_err(|reason| Error::Store {
+            message: format!("marker identifier {identifier:?} cannot be stored: {reason}"),
+        })?;
         let seconds = at.duration_since(UNIX_EPOCH).map_or(0, |d| d.as_secs());
         let markers = self.dir.join(MARKERS_DIR);
         fs::create_dir_all(&markers).map_err(|e| io_error(&markers, &e))?;
@@ -357,7 +367,12 @@ impl Markers for Store {
     }
 
     /// Removes the marker for `identifier`; a missing one is not an error.
+    /// An identifier that cannot be stored ([`names::storable`]) has no
+    /// marker: `Ok`, and no file is touched.
     fn clear(&self, identifier: &str) -> Result<(), Error> {
+        if names::storable(identifier).is_err() {
+            return Ok(());
+        }
         let (path, name) = self.marker_path(identifier);
         match fs::remove_file(&path) {
             Ok(()) => {
@@ -688,6 +703,40 @@ mod tests {
         let unreadable = format!("marker ignored {}: unreadable", path.display());
         assert_eq!(count(&log, Level::Warn, &unreadable), 1);
         assert!(path.is_dir());
+    }
+
+    /// Test: UT-STORE-011
+    #[test]
+    fn identifiers_that_cannot_be_stored_have_no_marker() {
+        let dir = tempfile::tempdir().unwrap();
+        let store = Store::new(dir.path());
+        let cases = [
+            ("", "\"\"", "empty"),
+            (" a", "\" a\"", "surrounding whitespace"),
+            ("a\nb", "\"a\\nb\"", "line break"),
+        ];
+        for (identifier, debug, reason) in cases {
+            match store.set(identifier, at(AT)) {
+                Err(Error::Store { message }) => assert_eq!(
+                    message,
+                    format!("marker identifier {debug} cannot be stored: {reason}")
+                ),
+                other => panic!("{identifier:?}: expected Error::Store, got {other:?}"),
+            }
+        }
+        assert_eq!(entries(dir.path()), Vec::<String>::new());
+        for (identifier, _, _) in cases {
+            assert_eq!(store.present(identifier).unwrap(), None, "{identifier:?}");
+            store.clear(identifier).unwrap();
+        }
+        assert_eq!(entries(dir.path()), Vec::<String>::new());
+
+        // Neither `present` nor `clear` touches a file: a marker that would
+        // otherwise read back as valid is neither read nor removed.
+        let planted = write_marker(dir.path(), " a", b"1790848800\n a\n");
+        assert_eq!(store.present(" a").unwrap(), None);
+        store.clear(" a").unwrap();
+        assert_eq!(fs::read(&planted).unwrap(), b"1790848800\n a\n");
     }
 
     /// Test: UT-STORE-008

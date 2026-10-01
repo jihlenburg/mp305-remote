@@ -107,16 +107,15 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Store DD rev 3 and csv DD rev 3 approved 2026-10-01: UT-STORE-005
       and 010 amended, identifiers that cannot be stored are refused
       (DD-STORE-004, UT-STORE-011), UT-CSV-003 gains `cv` and `held_above`
-- [ ] Implement store DD rev 3 (`names::storable`, UT-STORE-011) and the
-      two csv cases, with the core additions of the py DD, by one Opus 5.5
-      agent (started 2026-10-01)
+- [x] Store DD rev 3, the two csv cases and the core additions of the py
+      DD implemented 2026-10-01 (277 tests, record
+      docs/v-model/records/2026-10-01-unit-core-additions.md)
+- [ ] UT-STORE-011: add the planted-marker step that the test already
+      makes (needs approval)
 - [x] G4 py approved 2026-10-01 (py DD rev 2, 35 items, 28 UT entries,
       18 decisions, tag g4-py-approved); ADR-0015 accepted; AR-003, AR-014,
       AR-015, SR-036, ST-046, IT-003, IT-014, DD-PROTO-025, DD-PROTO-060
       and UT-PROTO-024 changed and approved with it
-- [ ] Implement the core additions of the py DD by an Opus 5.5 agent:
-      `fixtures::reply_route` and `on_air`, `telemetry::parse_payload`,
-      `timing::WAIT_SLICE`; workspace `[profile.release] strip = "none"`
 - [ ] Implement `mp305-py` and the `mp305` package from the py DD, test
       first, by an Opus 5.5 agent, with `.github/workflows/wheels.yml`
       (manual dispatch and version tags only); then the unit verification
@@ -136,7 +135,9 @@ Open and finished work, grouped by V-model phase. The process is described in
       review, two test entries restated, UT-SESS-061 to 065 added, the
       session changes the product designs need)
 - [ ] Implement session DD rev 5, by an Opus 5.5 agent (started
-      2026-10-01); then a new unit verification record for the session
+      2026-10-01), with the session tests switched to
+      `fixtures::reply_route` and `on_air`; then a new unit verification
+      record for the session
 - [ ] TBD-023: measure on hardware how long after a 0xC9 the 0xC3 shows
       the new setpoints and output state (bench session, user)
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents

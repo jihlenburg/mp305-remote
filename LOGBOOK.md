@@ -1714,3 +1714,18 @@ unreadable-marker case and UT-STORE-010 the two cases of the `create_new`
 fallback, which the tests already cover. Csv DD revision 3: UT-CSV-003
 gains the `cv` and `held_above` spellings of the mode column. The code
 for the identifier rule and the two csv cases follows.
+
+### Core additions implemented
+
+The changes approved today outside the session module implemented test
+first by a delegated agent: the store's identifier rule
+(`names::storable`, DD-STORE-004, UT-STORE-011), the `cv` and `held_above`
+rows of UT-CSV-003, `telemetry::parse_payload` (DD-PROTO-025),
+`timing::WAIT_SLICE` (DD-PROTO-060), the test support functions
+`fixtures::reply_route` and `fixtures::on_air`, and the workspace release
+profile `strip = "none"` (ADR-0015). Verification in the main session: all
+gates pass, 277 tests; line coverage 95.1 % of `mp305-core`. The coverage
+of `mp305-core` fell from 95.5 % to 95.1 % because the two fixture
+functions have no caller yet; the session tests switch to them with the
+session revision 5 implementation. The record is
+docs/v-model/records/2026-10-01-unit-core-additions.md.

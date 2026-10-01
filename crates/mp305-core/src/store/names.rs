@@ -1,11 +1,11 @@
-//! Implements: DD-STORE-005.
+//! Implements: DD-STORE-004 (`storable`), DD-STORE-005.
 //!
-//! The mapping from a supply identifier to the file name of its marker. A
-//! Bluetooth identifier is a UUID, but a HID path on Windows can be 200
-//! characters long and hold characters no file system accepts, so the name
-//! is a short readable prefix plus a hash of the whole identifier. The hash
-//! constants are part of the on-disk format: changing them would orphan the
-//! markers already written.
+//! The mapping from a supply identifier to the file name of its marker, and
+//! the rule for which identifiers a marker can hold. A Bluetooth identifier
+//! is a UUID, but a HID path on Windows can be 200 characters long and hold
+//! characters no file system accepts, so the name is a short readable prefix
+//! plus a hash of the whole identifier. The hash constants are part of the
+//! on-disk format: changing them would orphan the markers already written.
 
 /// The FNV-1a 64 offset basis, pinned as part of the on-disk format.
 const FNV_OFFSET: u64 = 0xcbf2_9ce4_8422_2325;
@@ -43,6 +43,37 @@ pub fn marker_name(identifier: &str) -> String {
     name.push('-');
     name.push_str(&format!("{:016x}", fnv1a(identifier.as_bytes())));
     name
+}
+
+/// Whether a marker file can give `identifier` back unchanged (DD-STORE-004).
+/// The file holds the identifier as one line and is read back after
+/// `trim_ascii`, so an identifier that is empty, holds a line break or has
+/// ASCII whitespace at its start or end cannot be stored. Whitespace inside
+/// the identifier is kept.
+///
+/// ```
+/// use mp305_core::store::names::storable;
+///
+/// assert_eq!(storable("/dev/hidraw3"), Ok(()));
+/// assert_eq!(storable("a\r"), Err("line break"));
+/// ```
+///
+/// # Errors
+///
+/// The reason, checked in this order: `empty`, `line break` (`\n` or
+/// `\r`, so a trailing one is reported as a line break), `surrounding
+/// whitespace`.
+pub fn storable(identifier: &str) -> Result<(), &'static str> {
+    if identifier.is_empty() {
+        return Err("empty");
+    }
+    if identifier.contains(['\n', '\r']) {
+        return Err("line break");
+    }
+    if identifier.trim_ascii() != identifier {
+        return Err("surrounding whitespace");
+    }
+    Ok(())
 }
 
 /// The 64-bit FNV-1a hash of `bytes`. `^` and `wrapping_mul` are the
@@ -104,5 +135,19 @@ mod tests {
         for id in ["a", "b", uuid, hid, long.as_str(), "é!"] {
             assert_eq!(marker_name(id), marker_name(id));
         }
+    }
+
+    /// Test: UT-STORE-011
+    #[test]
+    fn storable_accepts_what_a_marker_gives_back_and_names_the_reason_otherwise() {
+        assert_eq!(storable("72de66a3-1b2c-4d5e-8f90-abcdef123456"), Ok(()));
+        assert_eq!(storable("/dev/hidraw3"), Ok(()));
+        assert_eq!(storable(""), Err("empty"));
+        assert_eq!(storable(" a"), Err("surrounding whitespace"));
+        assert_eq!(storable("a "), Err("surrounding whitespace"));
+        assert_eq!(storable("a\tb"), Ok(()));
+        assert_eq!(storable("a\nb"), Err("line break"));
+        assert_eq!(storable("a\r"), Err("line break"));
+        assert_eq!(storable("\n"), Err("line break"));
     }
 }

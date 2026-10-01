@@ -1,13 +1,17 @@
 //! Implements: nothing; shared test fixtures named in the protocol DD's module tree
 //!
-//! Payloads from the hardware captures and a builder for `0xC3` variants,
-//! shared by the unit tests of the modules above `protocol` and by the
-//! integration tests. Compiled for tests and the `mock` feature only. The
-//! protocol module's own fixture tests keep their frames inline with their
-//! capture citations (protocol DD section 8); the tests below hold this
-//! copy equal to theirs.
+//! Payloads from the hardware captures, a builder for `0xC3` variants, and
+//! the route and on-air bytes of a frame from the supply, shared by the unit
+//! tests of the modules above `protocol`, by the integration tests and by the
+//! mock bridge of `mp305-py`. Compiled for tests and the `mock` feature
+//! only. The protocol module's own fixture tests keep their frames inline
+//! with their capture citations (protocol DD section 8); the tests below
+//! hold this copy equal to theirs.
 
-use crate::protocol::ops::telemetry;
+use crate::protocol::ble::{self, BleRoute, Route};
+use crate::protocol::hid;
+use crate::protocol::ops::{bind, telemetry};
+use crate::transport::description::Kind;
 
 /// The payload of the first `0xC3` of
 /// `2026-09-29T193614-ble-readonly.jsonl` (t = 12.8857, AF01): DC mode,
@@ -80,6 +84,74 @@ pub fn c3_with(
     put(&mut payload, SET_VOLTAGE, &set_voltage.to_le_bytes());
     put(&mut payload, SET_CURRENT, &set_current.to_le_bytes());
     payload
+}
+
+/// The route a frame from the supply with `opcode` arrives on. The supply
+/// answers on the characteristic the request was written to
+/// (device-model.md 2.1), and only the bind is written to AF02
+/// (`ops::route`): so over Bluetooth the bind reply `0x19` arrives on AF02
+/// and every other reply, `0xE1` included, on AF01; over USB everything
+/// arrives on the report path. (The capture
+/// `2026-09-29T193614-ble-readonly.jsonl` shows an `0xE1` on AF02 because
+/// that spike wrote its `0xE0` there.)
+#[must_use]
+pub fn reply_route(kind: Kind, opcode: u8) -> Route {
+    match kind {
+        Kind::Ble if opcode == bind::REPLY => Route::Ble(BleRoute::Af02),
+        Kind::Ble => Route::Ble(BleRoute::Af01),
+        Kind::Hid => Route::Hid,
+    }
+}
+
+/// The on-air bytes of a frame from the supply with `opcode` and `payload`,
+/// on the route [`reply_route`] gives:
+///
+/// | Route | Bytes |
+/// |---|---|
+/// | AF01 | `31 op payload` |
+/// | AF02 | `op payload` |
+/// | USB | `AA 21 len op payload sum`, every `AA` after the first doubled |
+///
+/// Over USB `len` counts the opcode and the payload, and `sum` is
+/// [`hid::checksum`] over the address, `len`, the opcode and the payload
+/// (device-model.md 2.2). A real frame carries at most 254 payload bytes;
+/// for a longer payload `len` saturates at 255 and the stream is not a
+/// valid frame.
+#[must_use]
+pub fn on_air(kind: Kind, opcode: u8, payload: &[u8]) -> Vec<u8> {
+    let mut body = Vec::with_capacity(payload.len().saturating_add(2));
+    match reply_route(kind, opcode) {
+        Route::Ble(BleRoute::Af01) => {
+            body.push(ble::AF01_TAG);
+            body.push(opcode);
+            body.extend_from_slice(payload);
+            body
+        }
+        Route::Ble(BleRoute::Af02) => {
+            body.push(opcode);
+            body.extend_from_slice(payload);
+            body
+        }
+        Route::Hid => {
+            let length = u8::try_from(payload.len().saturating_add(1)).unwrap_or(u8::MAX);
+            body.push(opcode);
+            body.extend_from_slice(payload);
+            let sum = hid::checksum(hid::REPLY_ADDRESS, length, &body);
+            let mut stream = Vec::with_capacity(body.len().saturating_mul(2).saturating_add(8));
+            stream.push(hid::START);
+            for byte in [hid::REPLY_ADDRESS, length]
+                .into_iter()
+                .chain(body)
+                .chain([sum])
+            {
+                stream.push(byte);
+                if byte == hid::START {
+                    stream.push(hid::START);
+                }
+            }
+            stream
+        }
+    }
 }
 
 #[cfg(test)]
