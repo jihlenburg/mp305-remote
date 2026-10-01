@@ -1,9 +1,10 @@
 //! The crate-wide error type.
 //!
 //! Implements: AR-050 (the variants the protocol module needs; the others
-//! follow with their modules).
+//! follow with their modules), DD-TRANS-040, DD-LINK-050.
 
 use core::fmt;
+use core::time::Duration;
 
 use crate::protocol::error::Reason;
 
@@ -34,6 +35,42 @@ pub enum Error {
         /// What went wrong.
         message: String,
     },
+    /// No reply arrived for a request within its bound: `timing::REPLY` or
+    /// `timing::OUTPUT_OFF_ACK` for an immediate request, the bind or the
+    /// remote-prompt bound for a deferred one.
+    Timeout {
+        /// The request opcode.
+        opcode: u8,
+        /// The bound that passed.
+        after: Duration,
+    },
+    /// The link ended before the request completed, or had already ended.
+    LinkLost {
+        /// Why the link ended.
+        text: String,
+    },
+}
+
+/// Writes a duration as `<n> ms` below 1 s and as `<n> s` with one decimal
+/// from 1 s on (DD-LINK-050).
+pub(crate) fn fmt_duration(f: &mut fmt::Formatter<'_>, d: Duration) -> fmt::Result {
+    if d < Duration::from_secs(1) {
+        write!(f, "{} ms", d.as_millis())
+    } else {
+        write!(f, "{:.1} s", d.as_secs_f64())
+    }
+}
+
+/// A duration as [`fmt_duration`] writes it.
+pub(crate) fn duration_text(d: Duration) -> String {
+    /// Adapter so that `fmt_duration` can write into a `String`.
+    struct Text(Duration);
+    impl fmt::Display for Text {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            fmt_duration(f, self.0)
+        }
+    }
+    Text(d).to_string()
 }
 
 impl fmt::Display for Error {
@@ -47,6 +84,11 @@ impl fmt::Display for Error {
                 write!(f, "the supply is not in DC mode (mode {live_mode})")
             }
             Error::Transport { message } => write!(f, "transport: {message}"),
+            Error::Timeout { opcode, after } => {
+                write!(f, "no reply to 0x{opcode:02x} within ")?;
+                fmt_duration(f, *after)
+            }
+            Error::LinkLost { text } => write!(f, "link lost: {text}"),
         }
     }
 }
@@ -95,6 +137,32 @@ mod tests {
         assert_eq!(
             Error::Mode { live_mode: 2 }.to_string(),
             "the supply is not in DC mode (mode 2)"
+        );
+    }
+
+    /// Test: UT-LINK-026
+    #[test]
+    fn display_of_timeout_and_link_lost() {
+        use core::time::Duration;
+        let timeout = |opcode, after| Error::Timeout { opcode, after }.to_string();
+        assert_eq!(
+            timeout(0xC2, Duration::from_secs(1)),
+            "no reply to 0xc2 within 1.0 s"
+        );
+        assert_eq!(
+            timeout(0xC8, Duration::from_millis(500)),
+            "no reply to 0xc8 within 500 ms"
+        );
+        assert_eq!(
+            timeout(0x18, Duration::from_secs(30)),
+            "no reply to 0x18 within 30.0 s"
+        );
+        assert_eq!(
+            Error::LinkLost {
+                text: "x".to_string()
+            }
+            .to_string(),
+            "link lost: x"
         );
     }
 }

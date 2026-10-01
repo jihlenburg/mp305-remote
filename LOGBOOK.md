@@ -1425,3 +1425,21 @@ rule), to DD-TRANS-004 (a frame that fails to decode is dropped and
 counted; the link goes on) and to DD-TRANS-001 (only the link task is
 generic). The user also asked on 2026-10-01 that implementation work be
 delegated to Opus 5.5 agents from now on; the link module is the first.
+
+### Link module implemented
+
+The `link` module of `mp305-core` written test first from the approved DD
+by a delegated Opus 5.5 agent, as the user asked on 2026-10-01: the `Link`
+handle with synchronous enqueueing and `'static` request futures, `Pending`
+for deferred requests, the pure `class` (classes, eligibility, dispatch) and
+`queue`, the task loop with its biased select, the poll, the USB keepalive,
+the loss rule and close, `Error::Timeout` and `Error::LinkLost`. The agent
+reported four gaps in the design it had to fill (a missing wake-up for a
+paced `0xC2` with polling off, the poll while a queue head waits, the
+late-reply counter for an unawaited expectation, the length refusal in
+`output_off`); they are recorded as revision 3 of the DD, which the user approved on 2026-10-01 together with the commit.
+Verification in the main session: fmt, clippy `-D warnings`, docs, 99
+in-crate tests (41 new), 4 external tests and 6 doctests pass; line
+coverage 96.4 % of `mp305-core` with the ADR-0013 exclusion; `task.rs`
+inspected against DD-LINK-020; traceability without defects. The record is
+docs/v-model/records/2026-10-01-unit-link.md.

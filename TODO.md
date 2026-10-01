@@ -70,8 +70,13 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] G4 link approved 2026-10-01 (DD rev 2, 20 items, 29 UT entries,
       tag g4-link-approved); AR-022, SR-028, IT-022, DD-TRANS-001 and
       DD-TRANS-004 changed and approved with it
-- [ ] Implement the link module from its DD, test first, by an Opus 5.5
-      agent (started 2026-10-01); then the unit verification record
+- [x] Implement the link module from its DD, test first, by an Opus 5.5
+      agent (2026-10-01): 41 tests, 96.4 % line coverage, record
+      docs/v-model/records/2026-10-01-unit-link.md
+- [x] Link DD rev 3 (four implementation gaps) approved 2026-10-01
+- [ ] IT-020, IT-021, IT-022 (link integration tests in
+      crates/mp305-core/tests/it_link_*.rs) once the mock's sends can be
+      observed from tests (frame log or a shared record)
 - [ ] G4 per module: DD files for session, discovery, store, csv, then
       mp305-py and mp305-app
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents

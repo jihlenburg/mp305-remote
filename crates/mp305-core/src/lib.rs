@@ -17,5 +17,6 @@
 )]
 
 pub mod error;
+pub mod link;
 pub mod protocol;
 pub mod transport;
