@@ -121,19 +121,20 @@ pub fn parse(frame: &Frame) -> Result<Info, Reason> {
 }
 
 #[cfg(test)]
-mod tests {
+pub(crate) mod tests {
     use super::*;
     use crate::protocol::error::Reason;
     use crate::protocol::frame::Frame;
 
-    /// 2026-09-29T193614-ble-readonly.jsonl, the `0xE1` reply on AF02 (17 bytes on air).
-    const E1_BLE: [u8; 16] = [
+    /// 2026-09-29T193614-ble-readonly.jsonl, the `0xE1` reply on AF02 (17 bytes on air,
+    /// t = 12.6162).
+    pub(crate) const E1_BLE: [u8; 16] = [
         0x01, 0x06, 0x00, 0x28, 0x4D, 0x50, 0x33, 0x30, 0x35, 0x42, 0x00, 0x00, 0x02, 0x00, 0x02,
         0x00,
     ];
 
     /// The 30-byte USB layout of protocol.md 4.4, constructed (never captured, TBD-010).
-    fn e1_usb() -> Vec<u8> {
+    pub(crate) fn e1_usb() -> Vec<u8> {
         let mut p = b"MP305B\0\0".to_vec();
         p.extend_from_slice(&[1, 2, 3, 4, 5, 6, 7, 8]);
         p.extend_from_slice(&[0x01, 0x06, 0x00, 0x33]);

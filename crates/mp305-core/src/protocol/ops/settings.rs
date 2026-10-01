@@ -66,25 +66,20 @@ pub fn parse(frame: &Frame) -> Result<Settings, Reason> {
 }
 
 #[cfg(test)]
-mod tests {
+pub(crate) mod tests {
     use super::*;
     use crate::protocol::error::Reason;
     use crate::protocol::frame::Frame;
 
+    /// 2026-09-29T193614-ble-readonly.jsonl, the `0xC5` reply (t = 12.7497).
+    pub(crate) const C5_PAYLOAD: [u8; 11] = [
+        0x5A, 0x02, 0x00, 0x00, 0x01, 0xF4, 0x01, 0x32, 0x00, 0x00, 0x00,
+    ];
+
     /// Test: UT-PROTO-030
     #[test]
     fn parse_reads_the_capture() {
-        // 2026-09-29T193614-ble-readonly.jsonl, the `0xC5` reply.
-        let s = parse(
-            &Frame::new(
-                0xC5,
-                vec![
-                    0x5A, 0x02, 0x00, 0x00, 0x01, 0xF4, 0x01, 0x32, 0x00, 0x00, 0x00,
-                ],
-            )
-            .unwrap(),
-        )
-        .unwrap();
+        let s = parse(&Frame::new(0xC5, C5_PAYLOAD.to_vec()).unwrap()).unwrap();
         assert_eq!(s.charge_limit, 90);
         assert_eq!(s.volume, 2);
         assert_eq!(s.screen_off, 0);

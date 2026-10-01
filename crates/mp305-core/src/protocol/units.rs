@@ -38,10 +38,17 @@ pub struct RawVoltage(u16);
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct RawCurrent(u16);
 
+/// The scale of a raw voltage: raw 10 mV steps per volt.
+pub(crate) const VOLT_SCALE: f64 = 100.0;
+/// The scale of a raw current: raw 1 mA steps per ampere.
+pub(crate) const AMP_SCALE: f64 = 1000.0;
+
 /// Scales `value` by `scale`, rounds to six decimals first and then to the
 /// nearest integer with halves away from zero. The pre-rounding removes
-/// binary-float artefacts such as `1.005 * 100 = 100.49999999999999`.
-fn to_raw(value: f64, scale: f64) -> f64 {
+/// binary-float artefacts such as `1.005 * 100 = 100.49999999999999`. The
+/// session uses it to hold a copied raw setpoint against a user limit
+/// through the same path as a value the user names.
+pub(crate) fn to_raw(value: f64, scale: f64) -> f64 {
     ((value * scale * 1e6).round() / 1e6).round()
 }
 
@@ -55,7 +62,12 @@ fn validate(
     user_max: Option<f64>,
 ) -> Result<u16, Error> {
     let supply_max_si = f64::from(supply_max) / scale;
-    let range = |max: f64| Error::SetpointRange { field, value, max };
+    let range = |max: f64| Error::SetpointRange {
+        field,
+        value,
+        min: 0.0,
+        max,
+    };
     if !value.is_finite() || value < 0.0 {
         return Err(range(supply_max_si));
     }
@@ -84,7 +96,7 @@ impl RawVoltage {
         validate(
             "voltage",
             volts,
-            100.0,
+            VOLT_SCALE,
             SUPPLY_MAX_RAW_VOLTAGE,
             limits.max_volts,
         )
@@ -115,7 +127,7 @@ impl RawCurrent {
         validate(
             "current",
             amps,
-            1000.0,
+            AMP_SCALE,
             SUPPLY_MAX_RAW_CURRENT,
             limits.max_amps,
         )
@@ -138,13 +150,13 @@ impl RawCurrent {
 /// Volts from a raw 10 mV value.
 #[must_use]
 pub fn volts(raw: u16) -> f64 {
-    f64::from(raw) / 100.0
+    f64::from(raw) / VOLT_SCALE
 }
 
 /// Amperes from a raw 1 mA value.
 #[must_use]
 pub fn amps(raw: u16) -> f64 {
-    f64::from(raw) / 1000.0
+    f64::from(raw) / AMP_SCALE
 }
 
 /// Watts from a raw 10 mW value.

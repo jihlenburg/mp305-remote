@@ -5,6 +5,8 @@
 
 pub mod ble;
 pub mod error;
+#[cfg(any(test, feature = "mock"))]
+pub mod fixtures;
 pub mod frame;
 pub mod hid;
 pub mod ops;

@@ -102,8 +102,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Session implementation reviewed adversarially 2026-10-01 (32
       confirmed findings); session DD rev 4 approved 2026-10-01 (settle
       100 ms; SR-019, SR-022, SR-024, AR-014, AR-025 changed; TBD-023)
-- [ ] Session: fix the confirmed defects and implement DD rev 4 (Opus 5.5
-      agent, started 2026-10-01); then gates, record, commit
+- [x] Session implemented from DD rev 4 (2026-10-01): 232 tests, 95.3 %
+      line coverage, record docs/v-model/records/2026-10-01-unit-session.md
+- [ ] Session DD rev 5: the four gaps of the final review, the two test
+      entries to restate, the session changes the product designs need;
+      then approval and implementation
 - [ ] TBD-023: measure on hardware how long after a 0xC9 the 0xC3 shows
       the new setpoints and output state (bench session, user)
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents

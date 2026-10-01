@@ -53,6 +53,7 @@ async fn ble_mock_replies_injects_and_fails_as_scripted() {
             route: AF01,
             deliveries: vec![C3_NOTIFICATION.to_vec()],
             repeat: Some(1),
+            ..Reply::default()
         }],
         injections: vec![Injection {
             at: Duration::from_millis(300),
@@ -105,6 +106,7 @@ async fn hid_mock_decodes_across_reports_stops_and_closes() {
             route: Route::Hid,
             deliveries: vec![stream[..30].to_vec(), stream[30..].to_vec()],
             repeat: None,
+            ..Reply::default()
         }],
         stop_replying_at: Some(Duration::from_secs(2)),
         close_at: Some(Duration::from_secs(3)),
@@ -161,4 +163,92 @@ async fn mock_records_sends_and_the_factory_yields_fresh_mocks() {
     let b = factory();
     assert!(!core::ptr::eq(&a, &b));
     assert_eq!(a.description().identifier, "f");
+}
+
+/// A reply to `0xC2` on AF01 at once, delivering an `0xC3` whose one payload
+/// byte is `tag`, eligible from `from`, serving `repeat` requests.
+fn tagged_c3(tag: u8, from: Duration, repeat: Option<usize>) -> Reply {
+    Reply {
+        request: 0xC2,
+        after: Duration::ZERO,
+        route: AF01,
+        deliveries: vec![vec![0x31, 0xC3, tag]],
+        repeat,
+        from,
+    }
+}
+
+/// Sends a `0xC2` and returns the tag of the `0xC3` that answers it.
+async fn answer_tag(mock: &mut Mock) -> u8 {
+    mock.send(&telemetry::request(), AF01).await.unwrap();
+    let incoming = mock.incoming().recv().await.unwrap();
+    let frame = incoming.item.unwrap();
+    assert_eq!(frame.opcode(), 0xC3);
+    frame.payload()[0]
+}
+
+/// Test: UT-TRANS-033
+#[tokio::test(start_paused = true)]
+async fn the_reply_with_the_latest_eligible_from_answers() {
+    let second = Duration::from_secs(1);
+    let script = Script {
+        replies: vec![
+            tagged_c3(0xA, Duration::ZERO, None),
+            tagged_c3(0xB, second, Some(1)),
+            tagged_c3(0xC, second, None),
+        ],
+        ..Script::default()
+    };
+    let start = Instant::now();
+    let mut mock = Mock::new(Kind::Ble, "m4", script.clone());
+    let mut tags = Vec::new();
+    for at in [500, 1_200, 1_400, 2_000] {
+        tokio::time::sleep_until(start + Duration::from_millis(at)).await;
+        tags.push(answer_tag(&mut mock).await);
+    }
+    assert_eq!(tags, vec![0xA, 0xB, 0xC, 0xC]);
+    // `from` counts from each mock's own creation.
+    tokio::time::sleep_until(start + Duration::from_secs(3)).await;
+    let mut later = Mock::new(Kind::Ble, "m5", script);
+    sleep(Duration::from_millis(500)).await;
+    assert_eq!(answer_tag(&mut later).await, 0xA);
+}
+
+/// Test: UT-TRANS-034
+#[tokio::test(start_paused = true)]
+async fn the_handle_sees_sends_and_closes_after_the_mock_moved_into_a_guard() {
+    use mp305_core::transport::guarded::Guarded;
+    use mp305_core::transport::AnyTransport;
+    let start = Instant::now();
+    let mock = Mock::new(Kind::Ble, "m6", Script::default());
+    let handle = mock.handle();
+    let guard = Guarded::new(AnyTransport::from(mock));
+    // A twin that stays outside a guard and gets the same sends at the same
+    // times: its `sent()` is what the moved mock's would have been.
+    let twin = Mock::new(Kind::Ble, "m7", Script::default());
+    guard.send(&telemetry::request(), AF01).await.unwrap();
+    twin.send(&telemetry::request(), AF01).await.unwrap();
+    sleep(Duration::from_millis(100)).await;
+    guard.send(&info::request(), AF01).await.unwrap();
+    twin.send(&info::request(), AF01).await.unwrap();
+    let seen = handle.sent();
+    let expected = twin.sent();
+    assert_eq!(seen.len(), 2);
+    assert_eq!(expected.len(), 2);
+    for (s, e) in seen.iter().zip(&expected) {
+        assert_eq!(
+            (s.at, s.route, &s.frame, &s.wire),
+            (e.at, e.route, &e.frame, &e.wire)
+        );
+    }
+    assert_eq!(
+        seen.iter().map(|s| s.at - start).collect::<Vec<_>>(),
+        vec![Duration::ZERO, Duration::from_millis(100)]
+    );
+    assert_eq!(seen[0].wire, vec![0x12, 0xC2]);
+    assert_eq!(seen[1].wire, vec![0x12, 0xE0]);
+    assert_eq!(handle.closes(), 0);
+    guard.close().await.unwrap();
+    guard.close().await.unwrap();
+    assert_eq!(handle.closes(), 2);
 }

@@ -26,6 +26,22 @@ pub const LINK_LOSS_REPORT: Duration = Duration::from_secs(4);
 pub const RECONNECT_RETRY: Duration = Duration::from_secs(5);
 /// Reconnection gives up after 10 min (SR-055).
 pub const RECONNECT_GIVE_UP: Duration = Duration::from_secs(600);
+/// A reading is trusted only from 100 ms after the last `0xC9`, since the
+/// supply publishes a command's setpoints and output flag into `0xC3` on a
+/// later pass of its UI task (SR-019; the real lag is TBD-023).
+pub const SETTLE: Duration = Duration::from_millis(100);
+/// A scan runs 10 s unless the user sets another time (SR-002).
+pub const SCAN_DEFAULT: Duration = Duration::from_secs(10);
+/// The shortest scan time the user can set (SR-002).
+pub const SCAN_MIN: Duration = Duration::from_secs(1);
+/// The longest scan time the user can set (SR-002).
+pub const SCAN_MAX: Duration = Duration::from_secs(60);
+/// The scan for one known identifier before a connect gives up (the
+/// discovery DD, DD-DISC-011).
+pub const FIND: Duration = Duration::from_secs(4);
+/// The bound on the OS connect, which has no timeout of its own (the
+/// discovery DD, DD-DISC-011).
+pub const CONNECT: Duration = Duration::from_secs(10);
 
 #[cfg(test)]
 mod tests {
@@ -44,5 +60,16 @@ mod tests {
         assert_eq!(LINK_LOSS_REPORT, Duration::from_secs(4));
         assert_eq!(RECONNECT_RETRY, Duration::from_secs(5));
         assert_eq!(RECONNECT_GIVE_UP, Duration::from_secs(600));
+    }
+
+    /// Test: UT-PROTO-060
+    #[test]
+    fn the_bounds_added_by_ar_014_revision_7_have_their_values() {
+        assert_eq!(SETTLE, Duration::from_millis(100));
+        assert_eq!(SCAN_DEFAULT, Duration::from_secs(10));
+        assert_eq!(SCAN_MIN, Duration::from_secs(1));
+        assert_eq!(SCAN_MAX, Duration::from_secs(60));
+        assert_eq!(FIND, Duration::from_secs(4));
+        assert_eq!(CONNECT, Duration::from_secs(10));
     }
 }

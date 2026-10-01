@@ -1572,3 +1572,29 @@ changes still go to the user first. The same kind of review ran on the
 drafts of the Python library design (71 confirmed findings) and the
 desktop app design (80 confirmed, ten of them blockers around the window
 close path leaving the output on); both drafts are being revised.
+
+### Session module implemented
+
+The `session` module of `mp305-core` implemented test first by delegated
+Opus 5.5 agents from DD revision 4, with the approved changes outside the
+module (`SetpointRange.min`, `Display` for `Kind`, six timing constants,
+the mock's reply time windows and handle, the shared fixtures).
+Verification in the main session: fmt, clippy `-D warnings`, docs, 232
+tests (220 in-crate, 6 external, 6 doctests) pass; line coverage 95.3 %
+of `mp305-core`, 91.1 % of `session/task.rs`; traceability without
+defects. One independent reviewer read the final code and judged it fit
+to commit as the implementation of revision 4; it found four further
+gaps (the overlay inside the settle window, a timed-out `0xC8` applied
+late, the output-off skipped after a failed decision poll in a close, a
+`close(true)` on a lost link returning `Ok`), which go into revision 5.
+Two unit test entries (UT-SESS-029 case 2, UT-SESS-056 part 1)
+contradicted the design items they verify; the tests follow the design
+items and the entries are to be restated in revision 5. The record is
+docs/v-model/records/2026-10-01-unit-session.md.
+
+Working rules agreed with the user on 2026-10-01 after three review
+workflows had used about 23 million subagent tokens: designs are written
+in the main session, coding goes to Opus agents, mechanical checks to
+Sonnet, with one independent review per design or safety-relevant module
+on Opus; one reviewer per artifact, findings deduplicated before any
+verification, no multi-round fan-outs.

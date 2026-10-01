@@ -48,6 +48,7 @@ async fn stub_mock_and_any_transport_implement_the_trait() {
         route: AF01,
         deliveries: vec![vec![0x31, 0xC3, 0x00]],
         repeat: None,
+        ..Reply::default()
     };
     let mock = Mock::new(
         Kind::Ble,

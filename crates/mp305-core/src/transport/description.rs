@@ -23,13 +23,18 @@ pub struct Description {
     pub identifier: String,
 }
 
-impl fmt::Display for Description {
+impl fmt::Display for Kind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let kind = match self.kind {
+        f.write_str(match self {
             Kind::Ble => "ble",
             Kind::Hid => "hid",
-        };
-        write!(f, "{kind} {}", self.identifier)
+        })
+    }
+}
+
+impl fmt::Display for Description {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{} {}", self.kind, self.identifier)
     }
 }
 
@@ -50,5 +55,7 @@ mod tests {
         };
         assert_eq!(ble.to_string(), "ble 72DE66A3");
         assert_eq!(hid.to_string(), "hid /dev/hidraw3");
+        assert_eq!(Kind::Ble.to_string(), "ble");
+        assert_eq!(Kind::Hid.to_string(), "hid");
     }
 }
