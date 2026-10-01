@@ -486,10 +486,12 @@ version = "0.1.0"
 dependencies = [
  "btleplug",
  "futures",
+ "getrandom 0.4.3",
  "hidapi",
  "log",
  "mp305-core",
  "proptest",
+ "tempfile",
  "tokio",
  "uuid",
 ]

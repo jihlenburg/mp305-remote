@@ -1609,3 +1609,17 @@ gates pass, 241 tests; line coverage 100 % and 99.1 % of the two files,
 95.8 % of `mp305-core`. Open: UT-CSV-003 is to gain the `cv` and
 `held_above` cases. The record is
 docs/v-model/records/2026-10-01-unit-csv.md.
+
+### Store module implemented
+
+The `store` module of `mp305-core` implemented test first by a delegated
+agent from store DD revision 2: the host ID file with create-if-absent
+through a hard link (and a `create_new` fallback), atomic writes with
+per-process temp names and `sync_all`, the marker files holding the time
+and the identifier, the `session::Markers` impl, and the file name mapping
+with the pinned FNV-1a constants. Verification in the main session: all
+gates pass, 259 tests; line coverage 94.8 % to 100 % of the three files,
+95.7 % of `mp305-core`. Open: two tests go beyond their entries'
+inputs, and identifiers with surrounding whitespace or a line break
+cannot round-trip (the DD is to say what happens). The record is
+docs/v-model/records/2026-10-01-unit-store.md.

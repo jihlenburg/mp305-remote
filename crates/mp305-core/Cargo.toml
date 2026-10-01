@@ -17,6 +17,7 @@ mock = []
 [dependencies]
 btleplug = "0.13"
 futures = "0.3"
+getrandom = "0.4"
 hidapi = "2.6"
 log = "0.4"
 tokio = { version = "1", features = ["rt", "rt-multi-thread", "sync", "time", "macros"] }
@@ -25,4 +26,5 @@ uuid = "1"
 [dev-dependencies]
 mp305-core = { path = ".", features = ["mock"] }
 proptest = "1"
+tempfile = "3"
 tokio = { version = "1", features = ["test-util"] }

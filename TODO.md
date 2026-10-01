@@ -93,8 +93,12 @@ Open and finished work, grouped by V-model phase. The process is described in
       (DD-TRANS-002), the five timing constants (AR-014)
 - [x] csv and civil implemented 2026-10-01 (7 tests, record
       docs/v-model/records/2026-10-01-unit-csv.md)
-- [ ] Implement store and discovery from their DDs, test first, by Opus
-      5.5 agents in worktrees (started 2026-10-01); then the records
+- [x] store implemented 2026-10-01 (17 tests, record
+      docs/v-model/records/2026-10-01-unit-store.md)
+- [ ] Implement discovery from its DD, test first, by an Opus 5.5 agent in
+      a worktree (started 2026-10-01); then the record
+- [ ] Store DD: amend UT-STORE-005 and 010, state the handling of
+      identifiers that cannot round-trip (needs approval)
 - [ ] UT-CSV-003: add the `cv` and `held_above` cases (needs approval)
 - [ ] G4 py: DD draft rev 1 written 2026-10-01
       (docs/v-model/4-detailed-design/py.md, 27 items, 20 UT entries,
