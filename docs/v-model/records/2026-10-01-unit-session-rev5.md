@@ -6,7 +6,7 @@ revision 5 (approved by the user on 2026-10-01) on top of the
 implementation of revision 4
 (docs/v-model/records/2026-10-01-unit-session.md).
 
-Commit: uncommitted. Diff summary: `crates/mp305-core/src/session/task.rs`
+Commit: `91a3495` (the run was made on the tree that this commit holds). Diff summary: `crates/mp305-core/src/session/task.rs`
 (resynchronisation, the late `0xC9`, the output-off start and overlay, the
 close rules, the loss and reconnect decision as one state update),
 `session/mod.rs` (a test-only trace of published states and events),
