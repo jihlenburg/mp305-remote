@@ -1522,3 +1522,20 @@ was requested. ADR-0014 (the coverage exclusion extended to the discovery
 glue) is proposed for the G4 discovery gate, together with changes to
 AR-032, IT-032, AR-014, DD-PROTO-051, DD-TRANS-002 and SR-001 and the
 store's two dependencies.
+
+### G4 store, csv and discovery approved
+
+The user approved the store, csv and discovery module designs on
+2026-10-01 (revision 2 of each; commit `a26c3fe`, tags `g4-store-approved`,
+`g4-csv-approved`, `g4-discovery-approved`), with their decisions:
+`getrandom` 0.4 and `tempfile` for the store; the Python CSV helper
+formatting rows through the native function, the lowercase `mode`
+spelling with `;` between faults, and the shared `civil` module; for
+discovery ADR-0014 (accepted), `SetpointRange.min` (DD-PROTO-051), the
+`Found` shape and classifier signatures (AR-032, IT-032), five timing
+constants (AR-014, IT-014), the name layout rule with the veto (SR-001),
+and a `Display` for `Kind` (DD-TRANS-002). The discovery re-check had
+found three more majors (a deprecated `hidapi` call that can panic, a
+timed-out OS connect left pending, the veto contradicting its rationale),
+resolved before the gate. Every module of `mp305-core` now has an
+approved design.
