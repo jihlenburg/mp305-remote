@@ -118,9 +118,12 @@ Open and finished work, grouped by V-model phase. The process is described in
       first, by an Opus 5.5 agent, with `.github/workflows/wheels.yml`
       (manual dispatch and version tags only); then the unit verification
       record
-- [ ] G4 app: DD draft rev 1 written 2026-10-01
-      (docs/v-model/4-detailed-design/app.md, 16 items, 15 UT entries,
-      5 decisions); multi-lens review started 2026-10-01
+- [x] G4 app approved 2026-10-01 (app DD rev 2, 25 items, 25 UT entries,
+      13 decisions, tag g4-app-approved); AR-033, AR-041, SR-030, SR-041,
+      ST-030 and ST-038 changed and approved with it
+- [ ] Implement `mp305-app` from the app DD, test first, by an Opus 5.5
+      agent, after the session revision 5 implementation; then the unit
+      verification record
 - [x] Session implementation reviewed adversarially 2026-10-01 (32
       confirmed findings); session DD rev 4 approved 2026-10-01 (settle
       100 ms; SR-019, SR-022, SR-024, AR-014, AR-025 changed; TBD-023)

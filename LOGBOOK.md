@@ -1683,3 +1683,22 @@ Python tests, Python unit tests in `tests/unit/`, a clippy run of the core
 alone, unstripped release builds and the maturin command; AGENTS.md
 changed accordingly. Wheels are to be built by a GitHub workflow that runs
 only on manual dispatch and on version tags.
+
+### G4 app passed
+
+The user approved the detailed design of the desktop app on 2026-10-01
+(app.md revision 2: 25 design items, 25 unit test entries) and all 13 of
+its decisions as recommended. The commit that holds the approved documents
+carries the tag `g4-app-approved`. Revision 2 had resolved the review of
+revision 1 (33 distinct issues, ten of them blockers around a window close
+that could leave the output on), and was checked once more against the
+issue list before the gate. Approved with it, as changes to approved
+documents: AR-041 (replaced: the full command list in the order sent, the
+recorder thread, a close that waits and reports a failed switch-off, the
+chart of one reading per 250 ms slot), AR-033 (the state directory per OS,
+shared with the library), SR-030 (a quit the OS does not let the app
+intercept leaves the output as it is and keeps the marker), SR-041 (the
+notice outside DC mode), ST-030 and ST-038. AGENTS.md's coverage pattern
+now excludes the app's `ui/` directory and `main.rs`. The app has no
+native save dialog, pins `eframe` 0.36.2 and `egui_plot` 0.37.0, and
+declares Rust 1.95 for itself.

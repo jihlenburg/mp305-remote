@@ -46,8 +46,9 @@ for distribution, or selling derivative products is strictly prohibited.
 Current phase: detailed design and implementation, per module. G1 to G3
 passed on 2026-09-30. Every module of `mp305-core` has passed G4 (protocol
 and transport on 2026-09-30; link, session, store, csv and discovery on
-2026-10-01). The Python library (`mp305-py` and the `mp305` package) passed
-G4 on 2026-10-01; the DD of `mp305-app` is drafted.
+2026-10-01). The Python library (`mp305-py` and the `mp305` package) and
+the desktop app `mp305-app` passed G4 on 2026-10-01; both are to be
+implemented.
 See [TODO.md](TODO.md) for where things stand.
 
 ## Agent anonymity and ownership
@@ -325,7 +326,7 @@ cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo clippy -p mp305-core --all-targets -- -D warnings
 cargo test --workspace
-LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace --exclude mp305-py --ignore-filename-regex '(transport|discovery)/(ble|hid)\.rs'
+LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace --exclude mp305-py --ignore-filename-regex '(transport|discovery)/(ble|hid)\.rs|mp305-app/src/(ui/|main\.rs)'
 env -u CONDA_PREFIX uv run maturin develop -m crates/mp305-py/Cargo.toml
 uv run --no-sync pytest
 uv run --no-sync pytest --cov
@@ -375,9 +376,10 @@ MP305_HIL=1 MP305_HIL_DEVICE=<id> cargo test --workspace -- --ignored hil_
 MP305_HIL=1 MP305_HIL_DEVICE=<id> uv run --no-sync pytest -m hil
 ```
 
-Update this section when the real commands differ. The `--ignore-filename-regex` pattern covers the vendor glue of the
-transports (ADR-0013) and of discovery (ADR-0014); the `ui/` pattern is
-added once the app layout exists.
+Update this section when the real commands differ. The
+`--ignore-filename-regex` pattern covers the vendor glue of the transports
+and of discovery (ADR-0013, ADR-0014) and the app's `ui/` directory and
+`main.rs` (ADR-0008; app DD, decision 9).
 
 ## Repository layout
 
