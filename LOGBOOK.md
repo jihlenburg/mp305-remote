@@ -1483,3 +1483,16 @@ needed no further pass. Nine decisions go to the user at G4 session; the
 items they change (AR-025, AR-027, AR-030, AR-050, SR-009, SR-020, SR-029,
 SR-046, IT-050, DD-TRANS-030, DD-TRANS-031) are marked changed with the
 proposed wording.
+
+### G4 session approved
+
+The user approved the session module design, revision 3 of
+docs/v-model/4-detailed-design/session.md, on 2026-10-01 (commit `40a5925`,
+tag `g4-session-approved`), and with it the nine decisions of its
+section 9: the error variants `AlreadyOpen` and `Cancelled` (AR-050,
+IT-050), the mock's handle and reply time windows and the fixtures module
+(DD-TRANS-030, DD-TRANS-031), the `output` copy rule (SR-020, AR-025),
+the close argument, the marker refresh rate (SR-046), the bind link drop
+and the fast-bind bound (SR-009), the USB-host hint (AR-030), the
+output-off exception (AR-027) and the output-off at close only when the
+output is on (SR-029). The implementation goes to an Opus 5.5 agent.
