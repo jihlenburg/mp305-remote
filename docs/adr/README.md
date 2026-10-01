@@ -30,6 +30,7 @@ Status values: `Proposed` (waiting for the user's approval), `Accepted`,
 | [0012](0012-agent-anonymity-and-ownership.md) | Agent anonymity and ownership | Accepted |
 | [0013](0013-coverage-exclusion-vendor-glue.md) | Coverage exclusion for vendor-library glue in the transports | Accepted |
 | [0014](0014-coverage-exclusion-discovery-glue.md) | Coverage exclusion extended to the discovery glue | Accepted |
+| [0015](0015-python-binding-coverage-and-test-layout.md) | Coverage of the Python binding crate, home of the Python unit tests, and the build settings they need | Accepted |
 
 ## Template
 

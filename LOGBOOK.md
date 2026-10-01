@@ -1661,3 +1661,25 @@ when reconnection follows, and the give-up texts logged at WARN. Items
 changed: DD-SESS-003, 004, 032, 033, 034, 035, 050, 053 and 062, with the
 new DD-SESS-036. UT-SESS-029 case 2 and UT-SESS-056 restated, UT-SESS-041
 reworded, UT-SESS-061 to UT-SESS-065 added. The implementation follows.
+
+### G4 py passed
+
+The user approved the detailed design of the Python library on
+2026-10-01 (py.md revision 2: 35 design items, 28 unit test entries) and
+all 18 of its decisions as recommended. The commit that holds the
+approved documents carries the tag `g4-py-approved`. Revision 2 had
+resolved the review of revision 1 (40 distinct issues) with a redesigned
+concurrency and lifetime model, and was checked once more against the
+issue list before the gate. Approved with it, as changes to approved
+documents: AR-003 (an output-off or a close finishes on the runtime while
+a Ctrl-C propagates, and the process waits for it at exit), AR-014 (wait
+slice 100 ms), AR-015 (the mock is test support that the wheel ships),
+SR-036 (GIL-enabled CPython only), ST-046 (restated, since the library has
+no way to pause polling), IT-003 and IT-014, and in the protocol DD
+`fixtures::reply_route` and `on_air`, `telemetry::parse_payload`
+(DD-PROTO-025, UT-PROTO-024) and `WAIT_SLICE` (DD-PROTO-060). ADR-0015
+accepted: 80 % line coverage for the binding crate measured through the
+Python tests, Python unit tests in `tests/unit/`, a clippy run of the core
+alone, unstripped release builds and the maturin command; AGENTS.md
+changed accordingly. Wheels are to be built by a GitHub workflow that runs
+only on manual dispatch and on version tags.

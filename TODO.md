@@ -107,9 +107,17 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Store DD: amend UT-STORE-005 and 010, state the handling of
       identifiers that cannot round-trip (needs approval)
 - [ ] UT-CSV-003: add the `cv` and `held_above` cases (needs approval)
-- [ ] G4 py: DD draft rev 1 written 2026-10-01
-      (docs/v-model/4-detailed-design/py.md, 27 items, 20 UT entries,
-      6 decisions); multi-lens review started 2026-10-01
+- [x] G4 py approved 2026-10-01 (py DD rev 2, 35 items, 28 UT entries,
+      18 decisions, tag g4-py-approved); ADR-0015 accepted; AR-003, AR-014,
+      AR-015, SR-036, ST-046, IT-003, IT-014, DD-PROTO-025, DD-PROTO-060
+      and UT-PROTO-024 changed and approved with it
+- [ ] Implement the core additions of the py DD by an Opus 5.5 agent:
+      `fixtures::reply_route` and `on_air`, `telemetry::parse_payload`,
+      `timing::WAIT_SLICE`; workspace `[profile.release] strip = "none"`
+- [ ] Implement `mp305-py` and the `mp305` package from the py DD, test
+      first, by an Opus 5.5 agent, with `.github/workflows/wheels.yml`
+      (manual dispatch and version tags only); then the unit verification
+      record
 - [ ] G4 app: DD draft rev 1 written 2026-10-01
       (docs/v-model/4-detailed-design/app.md, 16 items, 15 UT entries,
       5 decisions); multi-lens review started 2026-10-01

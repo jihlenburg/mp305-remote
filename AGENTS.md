@@ -46,7 +46,8 @@ for distribution, or selling derivative products is strictly prohibited.
 Current phase: detailed design and implementation, per module. G1 to G3
 passed on 2026-09-30. Every module of `mp305-core` has passed G4 (protocol
 and transport on 2026-09-30; link, session, store, csv and discovery on
-2026-10-01); the DDs of `mp305-py` and `mp305-app` are still to be written.
+2026-10-01). The Python library (`mp305-py` and the `mp305` package) passed
+G4 on 2026-10-01; the DD of `mp305-app` is drafted.
 See [TODO.md](TODO.md) for where things stand.
 
 ## Agent anonymity and ownership
@@ -130,6 +131,9 @@ Keep these two files current during all work:
 [ADR-0008](docs/adr/0008-quality-standards.md) records the functional safety,
 coding, documentation, coverage and HIL safety standards in this file. Changing
 any of them needs a new ADR.
+[ADR-0015](docs/adr/0015-python-binding-coverage-and-test-layout.md) adds
+the coverage target of the Python binding crate and the home of the Python
+unit tests.
 
 Because unintended or incorrect behavior of the power supply can cause direct
 property damage (DUT destruction, electrical fire) and indirectly human injury,
@@ -204,7 +208,7 @@ A test's level comes from the ID it verifies, not from its directory:
 
 | Level | Verifies | Where |
 |---|---|---|
-| Unit (UT) | DD | `#[cfg(test)] mod tests` next to the code, or `crates/*/tests/ut_*.rs` |
+| Unit (UT) | DD | `#[cfg(test)] mod tests` next to the code, or `crates/*/tests/ut_*.rs`; Python: `tests/unit/` |
 | Integration (IT) | AR | `crates/*/tests/it_*.rs`, Python: `tests/integration/` |
 | System (ST) | SR | `tests/system/` (pytest, usually HIL) |
 | Acceptance (AT) | UR | numbered manual steps in `docs/v-model/8-acceptance-tests.md`, automated parts in `tests/acceptance/` |
@@ -220,7 +224,8 @@ Protocol tests and coverage:
   in a comment. There is no copy of the captures under `crates/`.
 - Python tests use pytest.
 - Coverage is measured with `cargo llvm-cov` and `pytest-cov`. The targets
-  per component are in ADR-0008. GUI drawing code is kept in `ui/` modules
+  per component are in ADR-0008 and ADR-0015 (the binding crate `mp305-py`:
+  80 % of lines, measured through the Python tests). GUI drawing code is kept in `ui/` modules
   and excluded with `cargo llvm-cov --ignore-filename-regex`.
 - Every coverage exclusion (`# pragma: no cover`, an ignore pattern, a file
   excluded as GUI drawing code) and every skipped or ignored test carries a
@@ -318,10 +323,12 @@ with its module). The commands are:
 python3 scripts/check_traceability.py --check
 cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings
+cargo clippy -p mp305-core --all-targets -- -D warnings
 cargo test --workspace
-LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace --ignore-filename-regex '(transport|discovery)/(ble|hid)\.rs'
-uv run maturin develop -m crates/mp305-py/Cargo.toml
+LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace --exclude mp305-py --ignore-filename-regex '(transport|discovery)/(ble|hid)\.rs'
+env -u CONDA_PREFIX uv run maturin develop -m crates/mp305-py/Cargo.toml
 uv run --no-sync pytest
+uv run --no-sync pytest --cov
 uv run --no-sync ruff check
 uv run --no-sync mypy python/mp305
 ```
@@ -329,9 +336,37 @@ uv run --no-sync mypy python/mp305
 The Homebrew Rust toolchain has no `llvm-tools`, so `cargo llvm-cov` takes
 the Homebrew LLVM tools through the two environment variables.
 
-`--no-sync` stops uv from reinstalling a cached older build of the extension
-over the one `maturin develop` just built. Without it, the Python tests can
-pass against stale Rust code.
+`cargo clippy -p mp305-core` builds the core without its `mock` feature.
+The workspace run cannot do that, because the Python binding enables the
+feature and Cargo unifies features within one invocation, so only this
+run catches a missing `cfg` gate. For the same reason the app's release
+binary is built with `cargo build --release -p mp305-app`.
+
+`cargo test`, `clippy` and `llvm-cov` over the workspace need a Python
+3.10 or later interpreter, which PyO3 links into the binding crate's test
+binary.
+
+`env -u CONDA_PREFIX` is needed because maturin refuses to run in a
+conda-based environment. `--no-sync` stops uv from reinstalling a cached
+older build of the extension over the one `maturin develop` just built.
+Without it, the Python tests can pass against stale Rust code.
+
+Coverage of the binding crate `mp305-py` (ADR-0015) is measured through
+the Python tests with an instrumented extension, as one block. The last
+line installs a plain build again, so that the instrumented extension does
+not stay installed:
+
+```sh
+( export LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata
+  source <(cargo llvm-cov show-env --sh)
+  cargo llvm-cov clean --workspace
+  cargo test -p mp305-py
+  env -u CONDA_PREFIX uv run maturin develop -m crates/mp305-py/Cargo.toml
+  uv run --no-sync pytest tests/unit tests/integration
+  cargo llvm-cov report -p mp305-py --summary-only --fail-under-lines 80
+  cargo llvm-cov clean --workspace )
+env -u CONDA_PREFIX uv run maturin develop -m crates/mp305-py/Cargo.toml
+```
 
 HIL tests, only when the user asks for them in the current session:
 
@@ -350,13 +385,15 @@ added once the app layout exists.
 AGENTS.md, README.md, TODO.md, LOGBOOK.md
 docs/
   v-model/        process, requirements, design, test specs, traceability
-    records/      (planned) verification records
+    records/      verification records
   adr/            architecture decision records
   research/       protocol evidence
     captures/     raw hardware captures, never edited
-crates/           (planned) mp305-core, mp305-app, mp305-py
+crates/           mp305-core, mp305-app, mp305-py
 python/mp305/     (planned) Python package
-tests/            (planned) integration/ (Python), system/ and acceptance/ tests
+tests/            (planned) unit/ and integration/ (Python), system/ and
+                  acceptance/ tests; each directory is a package
+                  (`__init__.py`)
 spikes/           throwaway experiments, outside the Cargo workspace
 scripts/          repository tooling (traceability check)
 ```
