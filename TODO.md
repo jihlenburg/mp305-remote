@@ -84,8 +84,16 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Implement the session module from its DD, test first, by an Opus 5.5
       agent (started 2026-10-01), with the mock, fixtures and error
       additions of its decisions 1 and 2; then the unit verification record
-- [ ] G4 per module: DD files for discovery, store, csv, then mp305-py and
-      mp305-app
+- [x] G4 store, G4 csv and G4 discovery approved 2026-10-01 (store rev 2,
+      csv rev 2, discovery rev 2; tags g4-store-approved, g4-csv-approved,
+      g4-discovery-approved); ADR-0014 accepted; AR-014, AR-032, SR-001,
+      IT-014, IT-032, DD-PROTO-051 and DD-TRANS-002 changed and approved
+- [ ] Implement the approved changes outside the new modules:
+      `SetpointRange.min` (DD-PROTO-051), `Display` for `Kind`
+      (DD-TRANS-002), the five timing constants (AR-014)
+- [ ] Implement store, csv (with `civil`) and discovery from their DDs,
+      test first, by Opus 5.5 agents; then the unit verification records
+- [ ] G4 per module: DD files for mp305-py and mp305-app
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents
       (user's instruction); the session keeps DD, review, gates, records
 

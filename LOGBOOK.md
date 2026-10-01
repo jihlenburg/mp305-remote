@@ -1496,3 +1496,29 @@ the close argument, the marker refresh rate (SR-046), the bind link drop
 and the fast-bind bound (SR-009), the USB-host hint (AR-030), the
 output-off exception (AR-027) and the output-off at close only when the
 output is on (SR-029). The implementation goes to an Opus 5.5 agent.
+
+### Store, csv and discovery design reviews
+
+Independent reviews of the three remaining core DDs, each drafted while
+the session implementation ran. Store (revision 1, 13 findings): no
+`sync_all` before the rename and a fixed temp name; a transient read error
+would have destroyed a valid host ID; two processes starting on an empty
+directory could end with two IDs; the marker file held only the time while
+SR-046 asks for the identifier too; the retry path of the generator was
+untestable; the parse rules were undefined. Csv (revision 1, 10 findings):
+the Python helper could not reach the writer, so a second implementation
+of the format would have appeared; the two time columns could differ by a
+millisecond; the fixture offsets and the rounding of the electrical
+columns were unstated. Discovery (revision 1, 17 findings, one blocker):
+on Linux BlueZ replays its cache as "discovered" events when the event
+stream is taken, so a supply that is off or busy would have been reported
+as found; `connect` had no time bound and `btleplug`'s connect waits
+forever; concurrent scans on one adapter would stop each other; cached or
+template names gave fake unit characters; vendor calls sat in `mod.rs`
+against IT-002; decidable rules sat in the excluded glue. Revision 2 of
+each resolves everything (the revision rows list the changes); the store
+and csv re-check found only minor items, folded in. Discovery's re-check
+was requested. ADR-0014 (the coverage exclusion extended to the discovery
+glue) is proposed for the G4 discovery gate, together with changes to
+AR-032, IT-032, AR-014, DD-PROTO-051, DD-TRANS-002 and SR-001 and the
+store's two dependencies.

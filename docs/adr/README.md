@@ -29,6 +29,7 @@ Status values: `Proposed` (waiting for the user's approval), `Accepted`,
 | [0011](0011-licensing-gplv3-with-commons-clause.md) | License under GNU GPLv3 with Commons Clause | Accepted |
 | [0012](0012-agent-anonymity-and-ownership.md) | Agent anonymity and ownership | Accepted |
 | [0013](0013-coverage-exclusion-vendor-glue.md) | Coverage exclusion for vendor-library glue in the transports | Accepted |
+| [0014](0014-coverage-exclusion-discovery-glue.md) | Coverage exclusion extended to the discovery glue | Accepted |
 
 ## Template
 

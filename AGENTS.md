@@ -44,8 +44,9 @@ testing DUTs in a lab) is permitted; commercial sale of the software, charging
 for distribution, or selling derivative products is strictly prohibited.
 
 Current phase: detailed design and implementation, per module. G1 to G3
-passed on 2026-09-30; the protocol module passed G4 on 2026-09-30 and is
-the first module to be implemented.
+passed on 2026-09-30. Every module of `mp305-core` has passed G4 (protocol
+and transport on 2026-09-30; link, session, store, csv and discovery on
+2026-10-01); the DDs of `mp305-py` and `mp305-app` are still to be written.
 See [TODO.md](TODO.md) for where things stand.
 
 ## Agent anonymity and ownership
@@ -318,7 +319,7 @@ python3 scripts/check_traceability.py --check
 cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
-LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace --ignore-filename-regex 'transport/(ble|hid)\.rs'
+LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata cargo llvm-cov --workspace --ignore-filename-regex '(transport|discovery)/(ble|hid)\.rs'
 uv run maturin develop -m crates/mp305-py/Cargo.toml
 uv run --no-sync pytest
 uv run --no-sync ruff check
@@ -340,8 +341,8 @@ MP305_HIL=1 MP305_HIL_DEVICE=<id> uv run --no-sync pytest -m hil
 ```
 
 Update this section when the real commands differ. The `--ignore-filename-regex` pattern covers the vendor glue of the
-transports (ADR-0013); the `ui/` pattern is added once the app layout
-exists.
+transports (ADR-0013) and of discovery (ADR-0014); the `ui/` pattern is
+added once the app layout exists.
 
 ## Repository layout
 
