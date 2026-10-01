@@ -9,7 +9,7 @@ revision 6 `telemetry::parse_payload` (DD-PROTO-025, UT-PROTO-024),
 functions `fixtures::reply_route` and `fixtures::on_air`. Also the
 workspace release profile `strip = "none"` (ADR-0015).
 
-Commit: uncommitted. Diff summary: `Cargo.toml` (release profile);
+Commit: `ccdcd2f` (the run was made on the tree that this commit holds). Diff summary: `Cargo.toml` (release profile);
 `crates/mp305-core/src/store/names.rs` (`storable`) and `store/mod.rs`
 (`set`, `present`, `clear`); `csv.rs` (test only); `protocol/ops/mod.rs`
 (`expect_reply` split into `expect_opcode` and `expect_len`),
