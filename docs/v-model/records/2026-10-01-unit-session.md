@@ -6,7 +6,7 @@ implemented from docs/v-model/4-detailed-design/session.md revision 4
 (commit `4caaf7f`), together with the approved changes outside the module
 that it depends on.
 
-Commit: `uncommitted`. Diff summary: new `crates/mp305-core/src/session/`
+Commit: `c4e86fb` (the run was made on the tree that this commit holds). Diff summary: new `crates/mp305-core/src/session/`
 (`mod.rs`, `state.rs`, `texts.rs`, `task.rs`, `doubles.rs`,
 `tests/{mod,connect,control,events,loss,close}.rs`) and
 `protocol/fixtures.rs`; `lib.rs` (`pub mod session`); `error.rs` (nine
