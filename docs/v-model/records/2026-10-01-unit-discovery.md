@@ -5,7 +5,7 @@ Date: 2026-10-01. Level: unit (UT-DISC). Scope: `mp305-core`, module
 revision 2 (tag `g4-discovery-approved`), with the test entry UT-DISC-009
 of revision 3.
 
-Commit: uncommitted. Diff summary: new `crates/mp305-core/src/discovery/`
+Commit: `111c103` (the run was made on the tree that this commit holds). Diff summary: new `crates/mp305-core/src/discovery/`
 (`mod.rs`, `classify.rs`, `ble.rs`, `hid.rs`); `error.rs`
 (`Error::NotFound { causes }`); `lib.rs` (`pub mod discovery`);
 discovery.md (revision 3: UT-DISC-009); `traceability.md`; this record;
