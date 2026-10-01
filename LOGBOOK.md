@@ -1598,3 +1598,14 @@ in the main session, coding goes to Opus agents, mechanical checks to
 Sonnet, with one independent review per design or safety-relevant module
 on Opus; one reviewer per artifact, findings deduplicated before any
 verification, no multi-round fan-outs.
+
+### Csv and civil modules implemented
+
+The `csv` and `civil` modules of `mp305-core` implemented test first by a
+delegated agent from csv DD revision 2: `header()`, `format_row()` and the
+`Writer`, and the calendar conversion with the two RFC 3339 formatters
+that `session::texts` now calls. Verification in the main session: all
+gates pass, 241 tests; line coverage 100 % and 99.1 % of the two files,
+95.8 % of `mp305-core`. Open: UT-CSV-003 is to gain the `cv` and
+`held_above` cases. The record is
+docs/v-model/records/2026-10-01-unit-csv.md.

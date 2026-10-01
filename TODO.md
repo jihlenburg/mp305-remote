@@ -91,8 +91,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Implement the approved changes outside the new modules:
       `SetpointRange.min` (DD-PROTO-051), `Display` for `Kind`
       (DD-TRANS-002), the five timing constants (AR-014)
-- [ ] Implement store, csv (with `civil`) and discovery from their DDs,
-      test first, by Opus 5.5 agents; then the unit verification records
+- [x] csv and civil implemented 2026-10-01 (7 tests, record
+      docs/v-model/records/2026-10-01-unit-csv.md)
+- [ ] Implement store and discovery from their DDs, test first, by Opus
+      5.5 agents in worktrees (started 2026-10-01); then the records
+- [ ] UT-CSV-003: add the `cv` and `held_above` cases (needs approval)
 - [ ] G4 py: DD draft rev 1 written 2026-10-01
       (docs/v-model/4-detailed-design/py.md, 27 items, 20 UT entries,
       6 decisions); multi-lens review started 2026-10-01

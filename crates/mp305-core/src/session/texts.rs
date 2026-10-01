@@ -2,11 +2,13 @@
 //! text of a loss while connecting), DD-SESS-051 (the give-up texts).
 //!
 //! The user-facing texts of the session, defined once so that the app and
-//! the library show the same wording, and the RFC 3339 formatter they use.
+//! the library show the same wording, and the RFC 3339 formatter they use
+//! (the calendar arithmetic lives in [`crate::civil`], DD-CSV-003).
 //! Products render or log these texts and derive none of their own.
 
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::time::SystemTime;
 
+use crate::civil;
 use crate::link::LossReason;
 use crate::transport::description::Kind;
 
@@ -76,62 +78,18 @@ pub fn unclean_exit(since: SystemTime) -> String {
     )
 }
 
-/// `t` in RFC 3339 at second precision, UTC, with a `Z` suffix. A time
-/// before the epoch, or one too far ahead to convert, formats as the epoch.
+/// `t` in RFC 3339 at second precision, UTC, with a `Z` suffix, through
+/// [`civil::rfc3339`]. A time before the epoch formats as the epoch.
 #[must_use]
 pub fn rfc3339(t: SystemTime) -> String {
-    let secs = t.duration_since(UNIX_EPOCH).map_or(0, |d| d.as_secs());
-    civil(secs).unwrap_or_else(|| "1970-01-01T00:00:00Z".to_string())
-}
-
-/// Seconds since the epoch as `YYYY-MM-DDTHH:MM:SSZ`, by the civil-from-days
-/// conversion (proleptic Gregorian calendar) in checked `i64` arithmetic;
-/// `None` on an overflow.
-fn civil(secs: u64) -> Option<String> {
-    let secs = i64::try_from(secs).ok()?;
-    let days = secs.checked_div(86_400)?;
-    let rest = secs.checked_rem(86_400)?;
-    let (hour, minute, second) = (
-        rest.checked_div(3_600)?,
-        rest.checked_rem(3_600)?.checked_div(60)?,
-        rest.checked_rem(60)?,
-    );
-    // Days since 0000-03-01, in eras of 400 years (146 097 days); the
-    // day count is never negative here.
-    let z = days.checked_add(719_468)?;
-    let era = z.checked_div(146_097)?;
-    let doe = z.checked_sub(era.checked_mul(146_097)?)?;
-    let yoe = doe
-        .checked_sub(doe.checked_div(1_460)?)?
-        .checked_add(doe.checked_div(36_524)?)?
-        .checked_sub(doe.checked_div(146_096)?)?
-        .checked_div(365)?;
-    let doy = doe.checked_sub(
-        yoe.checked_mul(365)?
-            .checked_add(yoe.checked_div(4)?)?
-            .checked_sub(yoe.checked_div(100)?)?,
-    )?;
-    let mp = doy.checked_mul(5)?.checked_add(2)?.checked_div(153)?;
-    let day = doy
-        .checked_sub(mp.checked_mul(153)?.checked_add(2)?.checked_div(5)?)?
-        .checked_add(1)?;
-    let month = if mp < 10 {
-        mp.checked_add(3)?
-    } else {
-        mp.checked_sub(9)?
-    };
-    let year = yoe
-        .checked_add(era.checked_mul(400)?)?
-        .checked_add(i64::from(month <= 2))?;
-    Some(format!(
-        "{year:04}-{month:02}-{day:02}T{hour:02}:{minute:02}:{second:02}Z"
-    ))
+    civil::rfc3339(t)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use core::time::Duration;
+    use std::time::UNIX_EPOCH;
 
     fn at(secs: u64) -> SystemTime {
         UNIX_EPOCH + Duration::from_secs(secs)
