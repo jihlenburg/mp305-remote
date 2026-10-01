@@ -77,8 +77,15 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] IT-020, IT-021, IT-022 (link integration tests in
       crates/mp305-core/tests/it_link_*.rs) once the mock's sends can be
       observed from tests (frame log or a shared record)
-- [ ] G4 per module: DD files for session, discovery, store, csv, then
-      mp305-py and mp305-app
+- [x] G4 session approved 2026-10-01 (DD rev 3, 27 items, 33 UT entries,
+      tag g4-session-approved); AR-025, AR-027, AR-030, AR-050, SR-009,
+      SR-020, SR-029, SR-046, IT-050, DD-TRANS-030 and DD-TRANS-031 changed
+      and approved with it
+- [ ] Implement the session module from its DD, test first, by an Opus 5.5
+      agent (started 2026-10-01), with the mock, fixtures and error
+      additions of its decisions 1 and 2; then the unit verification record
+- [ ] G4 per module: DD files for discovery, store, csv, then mp305-py and
+      mp305-app
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents
       (user's instruction); the session keeps DD, review, gates, records
 

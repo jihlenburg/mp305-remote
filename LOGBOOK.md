@@ -1443,3 +1443,43 @@ in-crate tests (41 new), 4 external tests and 6 doctests pass; line
 coverage 96.4 % of `mp305-core` with the ADR-0013 exclusion; `task.rs`
 inspected against DD-LINK-020; traceability without defects. The record is
 docs/v-model/records/2026-10-01-unit-link.md.
+
+### Session design review
+
+An independent review of docs/v-model/4-detailed-design/session.md
+revision 1 returned 40 findings, one of them a blocker: a session that
+runs control commands one at a time keeps an output-off from reaching the
+link's urgent queue, and a setpoint command built before the output-off
+could switch the output back on. The other main ones: the guard order was
+impossible as written and could prompt the user for a call that would be
+refused anyway; the deferred grant's `0xC9` did not set the freshness
+marker; copying `output` 1 into a setpoint command is a reading of SR-020
+and AR-025 that the user has to approve; an output-off answered status 1
+left the output on; close did not cover a pending remote request, released
+with a changed `output` byte and could not be called with `&self`; a loss
+was handled twice; the link transition table was incomplete; commands
+queued before a loss could run after a reconnection; `ready()` was not
+defined on every path; the `0xC3` fixture offsets were wrong; several test
+cases could not happen on the mock; every test used the same identifier on
+a process-wide registry. Revision 2 resolves all of them (its revision row
+lists the changes), puts the output-off and close on a priority channel
+that cancels queued and unwritten commands, and lists seven decisions for
+G4: two new error variants (AR-050), the test infrastructure (DD-TRANS-030
+and DD-TRANS-031, a fixtures module), the `output` copy rule (SR-020,
+AR-025), the close argument, the marker refresh rate (SR-046), the link
+drop during the bind (SR-009), and the USB-host hint on timeouts (AR-030).
+A focused second review of revision 2 was requested.
+
+The second pass on revision 2 found five more majors (the session cannot
+see whether its `0xC8` was written, so an output-off always cancels the
+command in progress with a "may have been applied" reason; no fast-bind
+retry, since it would trip the link's loss count; the command arm stays
+enabled during the connect flow; two event channels the task never
+awaits; one close test expected the wrong release byte) and six minors;
+revision 3 resolves them. The final check found no blocker or major and
+three minors (a closing flag, the `FaultsChanged` order, the fast-bind
+bound in the SR-009 wording), applied in the same revision. The reviewer
+needed no further pass. Nine decisions go to the user at G4 session; the
+items they change (AR-025, AR-027, AR-030, AR-050, SR-009, SR-020, SR-029,
+SR-046, IT-050, DD-TRANS-030, DD-TRANS-031) are marked changed with the
+proposed wording.

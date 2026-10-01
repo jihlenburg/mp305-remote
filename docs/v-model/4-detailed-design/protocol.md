@@ -14,8 +14,11 @@ review").
 
 Rust module tree: `mp305_core::protocol` with the submodules `frame`,
 `ble`, `hid`, `ops` (one file per opcode pair), `policy`, `units`,
-`timing` and `error`. Every source file starts with
-`//! Implements: DD-PROTO-nnn, ...`. The Refines column names only the AR
+`timing` and `error`, plus `fixtures` under `cfg(any(test, feature = "mock"))`
+(the capture frames `C3_CAPTURE`, `E1_BLE`, `E1_USB`, `C5_SETTINGS` with
+their citations and `c3_with(..)` for variants, shared by the tests of the
+other modules; added with the session DD, test support only). Every source
+file starts with `//! Implements: DD-PROTO-nnn, ...`. The Refines column names only the AR
 items of this module; requirements and other modules' items appear in the
 rationale.
 
@@ -234,3 +237,4 @@ chargeError 0, wavePause 1, waveTime 1600.
 | 1 | 2026-09-30 | First draft for G4 of the protocol module | not yet approved |
 | 2 | 2026-09-30 | Independent review resolved: bind payload 18 bytes as captured (SR-007, IT-011, IT-026 and ST-008 changed); `NEVER` covers `0xF0` to `0xFE`; the HID decoder follows the device's parser in every state and judges the address at the end; `policy::check` takes the frame and checks the length; `Frame::new` is crate-private; `from_reading` bounds the copied fields and refuses a non-DC reading; `SetpointRange` for rejected setpoints with the pre-rounding rule; `Reading::from_raw`, `reply_opcode`, `route`, `HostId` bytes, `Version`, the supply constants and `Skipped` added; `classify` returns a `Result`; Refines restricted to this module's AR items; Status column; documentation as DD-PROTO-070; UT table with concrete bytes and paths. | user, 2026-09-30 (G4 protocol) |
 | 3 | 2026-09-30 | Editorial: the property tests (UT-PROTO-003, UT-PROTO-014) live in `crates/mp305-core/src/protocol/props.rs`, not under `tests/`, because `Frame::new` is crate-private by design. Test paths only; no design statement, expected result or ID changed. | editorial, no approval needed |
+| 4 | 2026-10-01 | Editorial: the `fixtures` module (test support under the `mock` feature) named in the module tree, from the session DD (session.md section 9, decision 2). No design statement, expected result or ID changed. | editorial, no approval needed |
