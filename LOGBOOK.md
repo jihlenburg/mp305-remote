@@ -1644,3 +1644,20 @@ session: all gates pass, 273 tests; line coverage 99.6 % of
 for the adapter state change, and whether a scan whose only enabled
 transport has no backend should fail instead of returning an empty list.
 The record is docs/v-model/records/2026-10-01-unit-discovery.md.
+
+### Session DD revision 5 approved
+
+The user approved revision 5 of the session DD on 2026-10-01:
+resynchronisation after a timed-out or dropped `0xC8` in place of the
+fixed wait (new DD-SESS-036), a late `0xC9` moving the settle time, the
+output-off overlay also for a reading inside the settle time of the
+accepted command with its mode check before the remote request, a
+`close(true)` that sends its output-off also after a failed decision poll
+or with an unknown output state and returns `LinkLost` on a lost link,
+`accepted` only from `remoteCon` 1 frames; for the product designs,
+commands taken in the order of their first poll, a cancel-safe
+`SessionEvents::next`, the link state going straight to `Reconnecting`
+when reconnection follows, and the give-up texts logged at WARN. Items
+changed: DD-SESS-003, 004, 032, 033, 034, 035, 050, 053 and 062, with the
+new DD-SESS-036. UT-SESS-029 case 2 and UT-SESS-056 restated, UT-SESS-041
+reworded, UT-SESS-061 to UT-SESS-065 added. The implementation follows.
