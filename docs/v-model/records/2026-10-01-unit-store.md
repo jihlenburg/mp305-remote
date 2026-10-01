@@ -4,7 +4,7 @@ Date: 2026-10-01. Level: unit (UT-STORE). Scope: `mp305-core`, module
 `store`, implemented from docs/v-model/4-detailed-design/store.md revision
 2 (tag `g4-store-approved`).
 
-Commit: `uncommitted`. Diff summary: new `crates/mp305-core/src/store/`
+Commit: `42e96f8` (the run was made on the tree that this commit holds). Diff summary: new `crates/mp305-core/src/store/`
 (`mod.rs`, `names.rs`, `files.rs`); `lib.rs` (`pub mod store`);
 `crates/mp305-core/Cargo.toml` (`getrandom` 0.4, dev dependency `tempfile`
 3; both were already in `Cargo.lock`, which gains two dependency lines);
