@@ -1702,3 +1702,15 @@ notice outside DC mode), ST-030 and ST-038. AGENTS.md's coverage pattern
 now excludes the app's `ui/` directory and `main.rs`. The app has no
 native save dialog, pins `eframe` 0.36.2 and `egui_plot` 0.37.0, and
 declares Rust 1.95 for itself.
+
+### Store and csv test entries amended
+
+The user approved on 2026-10-01 the amendments that the store and csv
+implementations had left open. Store DD revision 3: an identifier that a
+marker file cannot give back unchanged (empty, a line break, surrounding
+ASCII whitespace) is refused by `set` and has no marker for `present` and
+`clear` (DD-STORE-004, new UT-STORE-011); UT-STORE-005 gains the
+unreadable-marker case and UT-STORE-010 the two cases of the `create_new`
+fallback, which the tests already cover. Csv DD revision 3: UT-CSV-003
+gains the `cv` and `held_above` spellings of the mode column. The code
+for the identifier rule and the two csv cases follows.

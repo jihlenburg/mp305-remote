@@ -104,9 +104,12 @@ Open and finished work, grouped by V-model phase. The process is described in
       whose only enabled transport has no backend should fail instead of
       returning an empty list; align DD-DISC-011's `ble::find` signature
       with DD-DISC-012 (editorial)
-- [ ] Store DD: amend UT-STORE-005 and 010, state the handling of
-      identifiers that cannot round-trip (needs approval)
-- [ ] UT-CSV-003: add the `cv` and `held_above` cases (needs approval)
+- [x] Store DD rev 3 and csv DD rev 3 approved 2026-10-01: UT-STORE-005
+      and 010 amended, identifiers that cannot be stored are refused
+      (DD-STORE-004, UT-STORE-011), UT-CSV-003 gains `cv` and `held_above`
+- [ ] Implement store DD rev 3 (`names::storable`, UT-STORE-011) and the
+      two csv cases, with the core additions of the py DD, by one Opus 5.5
+      agent (started 2026-10-01)
 - [x] G4 py approved 2026-10-01 (py DD rev 2, 35 items, 28 UT entries,
       18 decisions, tag g4-py-approved); ADR-0015 accepted; AR-003, AR-014,
       AR-015, SR-036, ST-046, IT-003, IT-014, DD-PROTO-025, DD-PROTO-060
