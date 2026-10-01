@@ -1539,3 +1539,36 @@ found three more majors (a deprecated `hidapi` call that can panic, a
 timed-out OS connect left pending, the veto contradicting its rationale),
 resolved before the gate. Every module of `mp305-core` now has an
 approved design.
+
+### Session implementation review
+
+The session module, implemented by a delegated agent from DD revision 3
+(166 tests, all gates passing in the main session, 93.7 % line coverage),
+went through an adversarial review before any commit: seven reviewers with
+different lenses (conformance of the connect flow, of control, of loss and
+close; concurrency; safety; test quality; the mock, fixtures and errors),
+and one independent skeptic per blocker or major finding, prompted to
+refute it. 32 findings were confirmed and none refuted; they reduce to
+about fifteen distinct issues. Blockers: an `output_off` during the
+connect flow or a reconnection attempt discarded the flow, so `ready()`
+never resolved; a second `output_off` did not cancel the commands queued
+before it, so off, on, off ended with the output on; an output-off right
+after an accepted setpoint sent the old setpoints back, so the next
+output-on would have applied the old voltage (a gap in the design, SR-022).
+Also: the firmware publishes a command's effect into `0xC3` on a later UI
+task pass (firmware notes, commands 5.7 and 6.1), so over USB the first
+reading after a `0xC9` can show the old state; a close after a cancelled
+in-flight command judged the output from an older reading; the close
+cleared the marker even when its output-off failed; a NaN limit switched
+the limit off; several tests asserted less than their specification.
+Revision 4 of the session DD holds the design changes (the settle rule of
+100 ms, the output-off taking the last accepted setpoints, user limits on
+copied setpoints, the close and marker rules, validated limits), with
+SR-019, SR-022, SR-024, AR-014 and AR-025 changed and TBD-023 added. The
+user approved revision 4 on 2026-10-01 and chose 100 ms for the settle
+time. The user also gave standing permission on 2026-10-01 to commit and
+push verified work without asking each time; gate approvals and design
+changes still go to the user first. The same kind of review ran on the
+drafts of the Python library design (71 confirmed findings) and the
+desktop app design (80 confirmed, ten of them blockers around the window
+close path leaving the output on); both drafts are being revised.

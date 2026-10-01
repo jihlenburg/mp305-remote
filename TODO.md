@@ -93,7 +93,19 @@ Open and finished work, grouped by V-model phase. The process is described in
       (DD-TRANS-002), the five timing constants (AR-014)
 - [ ] Implement store, csv (with `civil`) and discovery from their DDs,
       test first, by Opus 5.5 agents; then the unit verification records
-- [ ] G4 per module: DD files for mp305-py and mp305-app
+- [ ] G4 py: DD draft rev 1 written 2026-10-01
+      (docs/v-model/4-detailed-design/py.md, 27 items, 20 UT entries,
+      6 decisions); multi-lens review started 2026-10-01
+- [ ] G4 app: DD draft rev 1 written 2026-10-01
+      (docs/v-model/4-detailed-design/app.md, 16 items, 15 UT entries,
+      5 decisions); multi-lens review started 2026-10-01
+- [x] Session implementation reviewed adversarially 2026-10-01 (32
+      confirmed findings); session DD rev 4 approved 2026-10-01 (settle
+      100 ms; SR-019, SR-022, SR-024, AR-014, AR-025 changed; TBD-023)
+- [ ] Session: fix the confirmed defects and implement DD rev 4 (Opus 5.5
+      agent, started 2026-10-01); then gates, record, commit
+- [ ] TBD-023: measure on hardware how long after a 0xC9 the 0xC3 shows
+      the new setpoints and output state (bench session, user)
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents
       (user's instruction); the session keeps DD, review, gates, records
 
