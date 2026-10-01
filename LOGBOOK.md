@@ -1623,3 +1623,24 @@ gates pass, 259 tests; line coverage 94.8 % to 100 % of the three files,
 inputs, and identifiers with surrounding whitespace or a line break
 cannot round-trip (the DD is to say what happens). The record is
 docs/v-model/records/2026-10-01-unit-store.md.
+
+### Discovery module implemented
+
+The `discovery` module of `mp305-core` implemented test first by a
+delegated agent from discovery DD revision 2: the pure classifiers, the
+sighting accumulator, the identifier shape test and the connect plan in
+`classify.rs`; the scan, the `find` before every Bluetooth connect and
+the bounded connect in `mod.rs`; the vendor calls in the glue files
+`ble.rs` and `hid.rs` (excluded from coverage under ADR-0014);
+`Error::NotFound`. No scan was started and no device was opened. A second
+delegated agent inspected the glue for UT-DISC-010 and UT-DISC-011 and
+found every point present. One log line was missing (an adapter state
+change was dropped without a DEBUG line) and was added. The user approved
+on 2026-10-01 a new test entry UT-DISC-009 (three tests of `mod.rs` that
+reach no backend; discovery DD revision 3), which brings the line
+coverage of `mod.rs` from 40 % to 84.6 %. Verification in the main
+session: all gates pass, 273 tests; line coverage 99.6 % of
+`classify.rs`, 95.5 % of `mp305-core`. Open: the wording of DD-DISC-012
+for the adapter state change, and whether a scan whose only enabled
+transport has no backend should fail instead of returning an empty list.
+The record is docs/v-model/records/2026-10-01-unit-discovery.md.

@@ -1,7 +1,8 @@
 //! The crate-wide error type.
 //!
 //! Implements: AR-050 (the variants the protocol module needs; the others
-//! follow with their modules), DD-TRANS-040, DD-LINK-050, DD-SESS-060.
+//! follow with their modules), DD-TRANS-040, DD-LINK-050, DD-SESS-060,
+//! DD-DISC-020.
 
 use core::fmt;
 use core::time::Duration;
@@ -90,6 +91,13 @@ pub enum Error {
         /// Why.
         reason: String,
     },
+    /// No supply was found: a scan returned nothing, or the identifier to
+    /// connect to is not advertising (SR-005). `discovery::not_found` builds
+    /// it.
+    NotFound {
+        /// The states in which a supply does not advertise, as one text.
+        causes: String,
+    },
 }
 
 /// Writes a duration as `<n> ms` below 1 s and as `<n> s` with one decimal
@@ -161,6 +169,7 @@ impl fmt::Display for Error {
                 "a session to {identifier} is already open in this process"
             ),
             Error::Cancelled { reason } => write!(f, "the command was cancelled: {reason}"),
+            Error::NotFound { causes } => write!(f, "no supply found: {causes}"),
         }
     }
 }

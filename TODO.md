@@ -95,8 +95,15 @@ Open and finished work, grouped by V-model phase. The process is described in
       docs/v-model/records/2026-10-01-unit-csv.md)
 - [x] store implemented 2026-10-01 (17 tests, record
       docs/v-model/records/2026-10-01-unit-store.md)
-- [ ] Implement discovery from its DD, test first, by an Opus 5.5 agent in
-      a worktree (started 2026-10-01); then the record
+- [x] discovery implemented 2026-10-01 (11 tests and 3 doctests, two
+      inspections, record
+      docs/v-model/records/2026-10-01-unit-discovery.md); UT-DISC-009
+      added with the user's approval (discovery DD rev 3)
+- [ ] Discovery DD: put to the user the wording of DD-DISC-012 for the
+      adapter state change (it names no peripheral) and whether a scan
+      whose only enabled transport has no backend should fail instead of
+      returning an empty list; align DD-DISC-011's `ble::find` signature
+      with DD-DISC-012 (editorial)
 - [ ] Store DD: amend UT-STORE-005 and 010, state the handling of
       identifiers that cannot round-trip (needs approval)
 - [ ] UT-CSV-003: add the `cv` and `held_above` cases (needs approval)
