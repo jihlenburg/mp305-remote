@@ -2810,7 +2810,14 @@ mod tests {
             rows: 12,
         };
         assert_eq!(m.recording_line(), "Recording: 12 rows in /x/a.csv");
-        assert_eq!(m.recording_placeholder(), "/rec/mp305-YYYYMMDD-HHMMSS.csv");
+        // Built with the path API: the separator is the platform's.
+        assert_eq!(
+            m.recording_placeholder(),
+            PathBuf::from("/rec")
+                .join("mp305-YYYYMMDD-HHMMSS.csv")
+                .display()
+                .to_string()
+        );
         let banner = Shown {
             kind: ShownKind::Banner(BannerKind::Error),
             text: "e".into(),
