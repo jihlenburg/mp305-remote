@@ -2041,3 +2041,34 @@ since the minimum Rust version 1.85 lacks the replacement; commit
 future is rejected (removed; commit `700e1cf`). The record is
 docs/v-model/records/2026-10-02-unit-integration-linux.md.
 
+### First build and test run on Windows
+
+With the user's permission to install what is needed in the Windows VM
+(Windows 11 Pro 22H2, ARM64): Visual Studio Build Tools 2022 with the
+C++ workload were installed, and under `C:\mp305` an x86_64 Rust 1.99
+toolchain, uv, an x86_64 CPython 3.10 and the source archive of the
+public repository. The x86_64 toolchain is the project's Windows target
+(SR-036) and runs there under Windows' x64 emulation. No hardware was
+involved; the dongle was not attached.
+
+Result at commit `6250dd0`: every gate passes (format, both clippy runs,
+355 core tests, 132 app tests, the binding crate's 34 tests, the app's
+release build, the Python extension, 196 Python tests with 6 skipped,
+`ruff`, `mypy`). Two errors in tests were found and fixed on the way: a
+round-trip of a time ending in 999 ns, which Windows' 100 ns clock steps
+cannot hold (commit `b92d669`), and an expected path with a forward slash
+written into it (commit `6250dd0`). One test of the binding crate
+(UT-PY-022 (e), waiters wake "within 10 ms") failed in the first run of
+every freshly built test binary and passed in all 18 later runs, which
+fits the emulation's translation of a new binary; the test is unchanged
+and py DD revision 6 is drafted for the user's approval (100 ms, and the
+POSIX-only cases of UT-PY-024 named). Five Python tests and one Rust test
+are POSIX only, so the wait at exit after an uncaught Ctrl-C is not
+verified on Windows. The record is
+docs/v-model/records/2026-10-02-unit-integration-windows.md.
+
+During the work the Windows VM's "pause when idle" setting was off; it
+was switched back on afterwards, and the VM was left running as found.
+Uninstalling "Visual Studio Build Tools 2022" and deleting `C:\mp305`
+undoes the installation.
+

@@ -346,7 +346,9 @@ binary is built with `cargo build --release -p mp305-app`.
 
 `cargo test`, `clippy` and `llvm-cov` over the workspace need a Python
 3.10 or later interpreter, which PyO3 links into the binding crate's test
-binary.
+binary. On Windows that binary also needs the interpreter's directory on
+the `PATH`, so that it finds the Python DLL; without it the binary ends
+before any test runs.
 
 `env -u CONDA_PREFIX` is needed because maturin refuses to run in a
 conda-based environment. `--no-sync` stops uv from reinstalling a cached

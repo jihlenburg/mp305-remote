@@ -148,6 +148,16 @@ Open and finished work, grouped by V-model phase. The process is described in
       gates pass on Ubuntu 24.04.5 aarch64 with Rust 1.99 (record
       docs/v-model/records/2026-10-02-unit-integration-linux.md); two
       findings of Rust 1.99's clippy fixed
+- [x] Windows build and mock test suites in the Windows VM 2026-10-02
+      (x86_64 toolchain under emulation, Rust 1.99): all gates pass
+      (record docs/v-model/records/2026-10-02-unit-integration-windows.md);
+      two test errors fixed (100 ns clock steps, a path separator)
+- [ ] Py DD rev 6 drafted 2026-10-02, approval pending: UT-PY-022 (e)
+      allows 100 ms (the test missed 10 ms on the first run of a fresh
+      binary under emulation), UT-PY-024 names its POSIX-only cases
+- [ ] Windows: the wait at exit after an uncaught Ctrl-C (DD-PY-008) has
+      no test there (the three cases are POSIX only); decide whether a
+      Windows variant with CTRL_C_EVENT is wanted
 - [ ] The Ubuntu VM wants a reboot after its dist-upgrade (new kernel
       7.0.0-38); left to the user, since Parallels Tools must come back on
       the new kernel
