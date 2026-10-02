@@ -139,11 +139,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] System tests written 2026-10-02 (`tests/system/`, 72 tests: 52 need
       the supply and are skipped without `MP305_HIL`, 20 run without one);
       no test has run on the supply yet
-- [ ] System tests rev 12 and ADR-0016 drafted 2026-10-02, approval
-      pending: the person needed over Bluetooth, the tests' opt-ins and
-      pre-flight, ST-003, ST-006, ST-012, ST-014, ST-017, ST-023. Still
-      open until a hardware run: ST-043 step 1, ST-050 step 3, the HID
-      path after a re-plug (SR-055)
+- [x] System tests rev 12 approved and ADR-0016 accepted 2026-10-02 (the
+      person needed over Bluetooth, the tests' opt-ins and pre-flight as
+      HIL rules in AGENTS.md, ST-003, 006, 012, 014, 017, 023 corrected)
+- [ ] Still open in the system tests until a hardware run: ST-043 step 1,
+      ST-050 step 3, the HID path after a re-plug (SR-055)
 - [x] Linux build and mock test suites in the Ubuntu VM 2026-10-02: all
       gates pass on Ubuntu 24.04.5 aarch64 with Rust 1.99 (record
       docs/v-model/records/2026-10-02-unit-integration-linux.md); two
@@ -152,9 +152,8 @@ Open and finished work, grouped by V-model phase. The process is described in
       (x86_64 toolchain under emulation, Rust 1.99): all gates pass
       (record docs/v-model/records/2026-10-02-unit-integration-windows.md);
       two test errors fixed (100 ns clock steps, a path separator)
-- [ ] Py DD rev 6 drafted 2026-10-02, approval pending: UT-PY-022 (e)
-      allows 100 ms (the test missed 10 ms on the first run of a fresh
-      binary under emulation), UT-PY-024 names its POSIX-only cases
+- [x] Py DD rev 6 approved 2026-10-02: UT-PY-022 (e) allows 100 ms (test
+      changed), UT-PY-024 names its POSIX-only cases
 - [ ] Windows: the wait at exit after an uncaught Ctrl-C (DD-PY-008) has
       no test there (the three cases are POSIX only); decide whether a
       Windows variant with CTRL_C_EVENT is wanted

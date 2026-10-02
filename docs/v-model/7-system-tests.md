@@ -1,6 +1,6 @@
 # 7. System test specification (ST)
 
-Status: approved (G2, user, 2026-09-30; ST-008 changes approved 2026-09-30, revisions 8 and 9; later revisions approved as their rows say); revision 12 drafted, approval pending
+Status: approved (G2, user, 2026-09-30; ST-008 changes approved 2026-09-30, revisions 8 and 9; later revisions approved as their rows say, the latest revision 12 on 2026-10-02)
 
 System tests verify the system requirements in
 [2-system-requirements.md](2-system-requirements.md), revision 8. Both
@@ -128,4 +128,4 @@ column means CI.
 | 9 | 2026-09-30 | ST-008 changed with SR-007: bind frame with one zero byte. | user, 2026-09-30 (with G4 protocol) |
 | 10 | 2026-10-01 | ST-046 restated from the py DD (py.md section 8, decision 7): the library has no way to pause polling, so the test streams readings for 20 s; the paused-polling clause of SR-051 stays verified on the mock. Approved with G4 py. | user, 2026-10-01 (G4 py) |
 | 11 | 2026-10-01 | ST-030 (Cmd+Q and the Dock's Quit on macOS) and ST-038 (step 8, the notice outside DC mode) changed with SR-030 and SR-041 from the app DD (app.md section 8, decisions 7 and 13). Approved with G4 app. | user, 2026-10-01 (G4 app) |
-| 12 | 2026-10-02 | From writing the automated system tests, approval pending: section 1 states that over Bluetooth every entry with a control command needs a person for the remote-control prompt, and names the opt-ins of the tests; ST-003 (a result carries no vendor or product number and no serial), ST-006 (step 2 is IT-012), ST-012 and ST-014 (a person), ST-017 (a stray `0xC9` is a counted late reply, not an event), ST-023 (step 3). Still open until a run on hardware: ST-043 step 1, ST-050 step 3, and the HID path after a re-plug. | pending |
+| 12 | 2026-10-02 | From writing the automated system tests: section 1 states that over Bluetooth every entry with a control command needs a person for the remote-control prompt, and names the opt-ins of the tests; ST-003 (a result carries no vendor or product number and no serial), ST-006 (step 2 is IT-012), ST-012 and ST-014 (a person), ST-017 (a stray `0xC9` is a counted late reply, not an event), ST-023 (step 3). Still open until a run on hardware: ST-043 step 1, ST-050 step 3, and the HID path after a re-plug. | user, 2026-10-02 |

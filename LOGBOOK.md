@@ -2072,3 +2072,18 @@ was switched back on afterwards, and the VM was left running as found.
 Uninstalling "Visual Studio Build Tools 2022" and deleting `C:\mp305`
 undoes the installation.
 
+### System tests revision 12, ADR-0016 and py DD revision 6 approved
+
+The user approved on 2026-10-02: 7-system-tests.md revision 12 (a person
+is needed over Bluetooth for the remote-control prompt; ST-003, ST-006,
+ST-012, ST-014, ST-017 and ST-023 corrected against what the library
+exposes); ADR-0016, accepted (the opt-ins `MP305_HIL_LOAD`,
+`MP305_HIL_PERSON`, `MP305_HIL_DEVICE_HID` and `MP305_HIL_RECORD`, the
+pre-flight check and the teardown fixture as HIL rules; AGENTS.md lists
+them); and py DD revision 6 (UT-PY-022 (e) allows 100 ms for the waiters
+to wake, UT-PY-024 names its POSIX-only cases). The bound in the test of
+UT-PY-022 (e) was changed from 10 ms to 100 ms; the binding crate's 34
+tests pass in three runs on macOS. The user also allowed the reboot of
+the Ubuntu VM and chose the first connection from the Mac (ST-013) as the
+next hardware step.
+

@@ -532,7 +532,7 @@ mod tests {
             let (n, at) = waiter.await.unwrap();
             assert_eq!(n, 1);
             let after = at.duration_since(closed).unwrap_or(Duration::ZERO);
-            assert!(after < Duration::from_millis(10), "{after:?}");
+            assert!(after < Duration::from_millis(100), "{after:?}");
         }
         assert!(feed.ended());
         assert!(lock(&feed.state).ended);

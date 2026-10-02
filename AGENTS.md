@@ -133,6 +133,8 @@ Keep these two files current during all work:
 [ADR-0008](docs/adr/0008-quality-standards.md) records the functional safety,
 coding, documentation, coverage and HIL safety standards in this file. Changing
 any of them needs a new ADR.
+[ADR-0016](docs/adr/0016-hil-opt-ins-and-preflight.md) adds the further
+opt-ins and the pre-flight check of the hardware-in-the-loop tests.
 [ADR-0015](docs/adr/0015-python-binding-coverage-and-test-layout.md) adds
 the coverage target of the Python binding crate and the home of the Python
 unit tests.
@@ -286,6 +288,29 @@ enforce this themselves and connect only to that unit.
   `addopts = "-m 'not hil' --strict-markers"`, so a plain pytest run leaves
   them out. A `conftest.py` fixture skips them unless both variables are set,
   and connects only to `MP305_HIL_DEVICE`.
+
+Further opt-ins describe the bench (ADR-0016); the tests check them, and an
+agent sets none of them unless the user asks for it in the current session:
+
+- `MP305_HIL_LOAD=A` or `B`: the named load of 8-acceptance-tests.md is on
+  the output. Only the entries that name that load run; every other HIL
+  test skips. Without the variable the entries with a load skip.
+- `MP305_HIL_PERSON=1`, with `pytest -s`: a person is at the supply. The
+  entries that need one skip without it and tell the person on the
+  terminal what to do and when. Over Bluetooth every entry with a control
+  command needs a person, for the remote-control prompt.
+- `MP305_HIL_DEVICE_HID=<path>`: the HID path of the same unit, for the one
+  entry that uses both transports at once (ST-043).
+- `MP305_HIL_RECORD=<file>`: the run writes its record there (OS,
+  transport, the supply's versions, the result per test ID).
+
+Before the first test that connects, a run connects once and stops when
+the output is on (its close switches the output off); tests that only
+discover make no connection. Every connection of a HIL test is opened with
+user limits of 5 V and 0.1 A unless the entry documents more, and a
+fixture switches the output off, restores the setpoints the supply had and
+has the person undo front-panel changes in teardown, also after a failure.
+`tests/system/README.md` lists what each test needs and does.
 
 The run commands are in the Commands section.
 

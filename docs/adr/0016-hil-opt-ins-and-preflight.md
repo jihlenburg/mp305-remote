@@ -1,8 +1,8 @@
 # ADR-0016: Further opt-ins and a pre-flight check for hardware-in-the-loop tests
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-10-02
-- Decided by: pending (proposed by the agent after the system tests were written)
+- Decided by: user, on the agent's recommendation (2026-10-02, after the system tests were written)
 - Related: ADR-0008, AGENTS.md ("Working with the real device",
   "Hardware-in-the-loop tests"), 7-system-tests.md section 1,
   `tests/system/conftest.py`, `tests/system/README.md`
@@ -65,4 +65,4 @@ session, as for `MP305_HIL`.
 A hardware run is described by its variables, which the run's record
 keeps. The person tests are run by the user in a terminal, since they
 read answers from standard input. AGENTS.md's HIL section lists the
-variables once this ADR is accepted.
+variables.
