@@ -85,8 +85,17 @@ file name and the event timestamp (`t`) in a comment, for example
 | `2026-09-29T194319-ble-readonly.jsonl` | Bluetooth LE | denied (`19 FF`) | Hardware: deny test | System V1.6.0.40, Firmware V2.0.2.0 |
 | `2026-09-29T201428-ble-readonly.jsonl` | Bluetooth LE | allowed (`19 00`) | Hardware: read-only spike after the firmware update | `0xE1` still reports 1.6.0.40 / 2.0.2.0; update status open |
 
-All were recorded by [spikes/ble_readonly/](../../spikes/ble_readonly/),
+These four were recorded by [spikes/ble_readonly/](../../spikes/ble_readonly/),
 which lists what it sends.
+
+| Capture | Transport | What was sent | LOGBOOK entry (2026-10-02) | Firmware version |
+|---|---|---|---|---|
+| `2026-10-02T103456-vm-dongle-scan-linux.jsonl` | Bluetooth LE, advertising only (Linux VM, USB dongle) | nothing above the link layer (active scan) | USB Bluetooth dongle in the VMs | not read |
+| `2026-10-02T104520-vm-dongle-scan-windows.jsonl` | Bluetooth LE, advertising only (Windows VM, USB dongle) | nothing above the link layer (active scan) | USB Bluetooth dongle in the VMs | not read |
+
+These two come from [spikes/vm_dongle_scan/](../../spikes/vm_dongle_scan/).
+They are transcribed from the scripts' console output, hold only the
+supply's advertisements, and mask the last three octets of its address.
 
 ## Firmware version
 

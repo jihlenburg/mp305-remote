@@ -41,8 +41,12 @@ Open and finished work, grouped by V-model phase. The process is described in
       for Parallels
 - [x] TBD-017 settled 2026-09-30: opt-in automatic reconnection per
       session (UR-037), USB recommended for unattended runs
-- [ ] Buy a USB Bluetooth dongle for the Parallels VMs and check that
-      Linux and Windows see the supply over it (TBD-009)
+- [x] USB Bluetooth dongle for the Parallels VMs at hand 2026-10-02
+      (ASUS, `0b05:1d70`); Linux and Windows see the supply's advertising
+      over it (spikes/vm_dongle_scan, TBD-009)
+- [ ] Connect to the supply from the Linux and the Windows VM over the
+      dongle (read-only first), then the Bluetooth system tests there;
+      needs the user's go-ahead and a Rust toolchain in the guests
 - [ ] TBD-018: read-only Bluetooth spike that records the unsolicited
       `0xC5` when a setting is changed on the front panel
 - [x] Rewrite 2-system-requirements.md (revision 8) and 7-system-tests.md

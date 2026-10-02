@@ -1,0 +1,7 @@
+{"meta": {"spike": "vm_dongle_scan", "script": "scan_linux.sh", "started": "2026-10-02T10:34:56Z", "duration_s": 15, "host": "Parallels VM on macOS 27.0 (Apple arm64)", "os": "Ubuntu 24.04.4 LTS, Linux 6.17.0-22-generic aarch64", "stack": "BlueZ 5.72 (bluetoothctl)", "adapter": "ASUS USB dongle 0b05:1d70 (Realtek controller, bcdDevice 2.00) as hci0", "sent": "nothing above the link layer (active scan); no connection", "firmware": "not read in this run (see LOGBOOK 2026-09-29 for the unit's versions)", "note": "The last three octets of the supply's Bluetooth address are masked in this file. Advertisements of other devices in range are not recorded, only their count. Transcribed from the script's console output."}}
+{"event": "new", "address": "0C:3D:5E:xx:xx:xx", "address_type": "public", "name": "0000MP305B  S             E!K"}
+{"event": "rssi", "address": "0C:3D:5E:xx:xx:xx", "rssi_dbm": -30}
+{"event": "rssi", "address": "0C:3D:5E:xx:xx:xx", "rssi_dbm": -29}
+{"event": "rssi", "address": "0C:3D:5E:xx:xx:xx", "rssi_dbm": -31}
+{"event": "info", "address": "0C:3D:5E:xx:xx:xx", "address_type": "public", "name": "0000MP305B  S             E!K", "alias": "0000MP305B  S             E!K", "uuids": ["0000af00-0000-1000-8000-00805f9b34fb"], "manufacturer_data": {"key": "0xabba", "value": "AF FA 01 35 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"}, "connected": false, "paired": false}
+{"result": {"supply_seen": true, "devices_seen": 22}}

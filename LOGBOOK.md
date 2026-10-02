@@ -1861,3 +1861,40 @@ exit, UT-PY-015 (g) and UT-PY-024 (l)). No code changed. With this the
 deviations 1, 2 and 4 of the app unit record and 1 and 2 of the Python
 unit record are closed.
 
+### USB Bluetooth dongle in the VMs
+
+Spike `spikes/vm_dongle_scan`, with the user's go-ahead for a scan only
+(no connection). The user plugged in a USB Bluetooth dongle (ASUS, USB
+`0b05:1d70`, a Realtek controller); the supply was on with nothing
+connected to its output. Transport: Bluetooth LE, advertising only.
+Sent: nothing above the link layer; the OS scans actively, so scan
+requests went out and the scan response with the name came back. No
+frame of the protocol was sent, and the firmware versions were not read
+(they are in the entries of 2026-09-29).
+
+The dongle was assigned to one Parallels VM at a time. Ubuntu 24.04.4
+(Linux 6.17, BlueZ 5.72) brought it up as `hci0` without any install; a
+15 s scan with `bluetoothctl` listed the supply with its 29-character
+name, a public address, RSSI -29 to -31 dBm, the service UUID `AF00` and
+the manufacturer data `AF FA 01 35 02 00` plus 14 zero bytes under
+`0xABBA`. Windows 11 Pro 22H2 (ARM64) loaded Microsoft's generic
+Bluetooth driver for it; a 15 s run of the advertisement watcher reported
+the supply four times, each time as a connectable advertisement with the
+manufacturer data and the UUID and no name, followed by a scan response
+with the name, at -28 to -30 dBm. Both match what macOS captured on
+2026-09-29, and both of discovery's rules (the name layout, the
+manufacturer data without a name) apply. The unit characters `E!K` follow
+from the reported address by the firmware's formula with the least
+significant address byte first, which confirms the formula on hardware.
+
+TBD-009 is answered for seeing the supply; connecting from the VMs is
+still to be tried. Captures:
+docs/research/captures/2026-10-02T103456-vm-dongle-scan-linux.jsonl and
+2026-10-02T104520-vm-dongle-scan-windows.jsonl (transcribed from the
+console output, with the last three octets of the supply's address
+masked and other devices in range left out). Afterwards both VMs were
+suspended again, the dongle's assignment removed, the Windows VM's
+"pause when idle" setting switched back on and the temporary files in
+the Windows guest deleted; in the Ubuntu guest the Bluetooth service was
+started and left running.
+
