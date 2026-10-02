@@ -136,8 +136,18 @@ Open and finished work, grouped by V-model phase. The process is described in
       approved 2026-10-02 (AR-002, AR-004, AR-016, AR-017 and twelve IT
       entries worded as the approved designs and the code have it;
       `_native.WAIT_SLICE_S`)
-- [ ] Write the system tests (`tests/system/`) from 7-system-tests.md by
-      an Opus 5.5 agent, without hardware (started 2026-10-02)
+- [x] System tests written 2026-10-02 (`tests/system/`, 72 tests: 52 need
+      the supply and are skipped without `MP305_HIL`, 20 run without one);
+      no test has run on the supply yet
+- [ ] System test document: put to the user what writing the tests
+      showed (the entries that need a person over Bluetooth although
+      their method names none; ST-006 step 2 and ST-050 step 3, which the
+      library cannot reach; `MP305_HIL_DEVICE_HID` for ST-043; ST-003's
+      vendor and product IDs, which `Found` does not carry; ST-017's
+      event; ST-023 step 3; the HID path after a re-plug, SR-055)
+- [ ] First hardware run of the system tests on macOS over Bluetooth
+      (the user's go-ahead in the session; start with the entries that
+      need neither a load nor a person), then USB, then the VMs
 - [ ] System level (ST): the hardware runs on macOS, and on Linux and
       Windows in the VMs with the dongle; needs the user's go-ahead per
       session, the supply, and a Rust toolchain in the guests

@@ -1940,3 +1940,37 @@ on the mock. The user also decided the next step: the system tests are
 to be written without hardware; running them on the supply needs a
 separate go-ahead.
 
+### System tests written
+
+The automated entries of 7-system-tests.md written as pytest tests in
+`tests/system/` by a delegated agent without any hardware: 72 tests for
+45 entries, of which 52 use the supply and carry the `hil` marker. No
+test has run on the supply. In the main session, with no `MP305_`
+variable set: the 20 tests without a supply ran twice (19 pass, ST-037
+skips until it is given CSV files), all 52 HIL tests are skipped by the
+gate with its reason, the whole Python suite passes (201 tests), `ruff`
+is clean and the traceability check reports no defect.
+
+The safety rules sit in `tests/system/conftest.py`, which was read in
+the main session: a HIL test is skipped unless `MP305_HIL=1` and
+`MP305_HIL_DEVICE` are set, and connects only to that unit; a pre-flight
+connection stops the run when the output is on at the start (its close
+switches the output off); every connection of a test goes through a
+guard with user limits of 5 V and 0.1 A, whose teardown switches the
+output off (on a new connection if the test's own is gone), restores the
+setpoints the supply had and has the person undo front-panel changes,
+also after a failure; entries with a load or a person need a second
+opt-in (`MP305_HIL_LOAD`, `MP305_HIL_PERSON` with `pytest -s`); a test
+without the marker cannot reach a real transport. A run can write its
+record (OS, transport, the supply's versions, the result per ST ID) to
+the file `MP305_HIL_RECORD` names. `tests/system/README.md` lists what
+each test does to the supply.
+
+Open, for the user: several entries need a person over Bluetooth for
+the remote-control prompt although their method names none; ST-006 step
+2 and ST-050 step 3 cannot be reached through the library; ST-043 step 1
+needs a second identifier (`MP305_HIL_DEVICE_HID`); `Found` carries no
+vendor or product ID for ST-003; after a USB re-plug the HID path may
+change, which SR-055's reconnection to the same identifier does not
+cover.
+
