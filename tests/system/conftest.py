@@ -367,14 +367,15 @@ def _find_unit(identifier: str) -> Unit | None:
 
 
 @pytest.fixture(scope="session")
-def hil_unit(pytestconfig: pytest.Config) -> Unit:
-    """The HIL gate, then the unit and its transport, then a pre-flight check.
+def hil_unit() -> Unit:
+    """The HIL gate, then the unit and its transport, found by discovery.
 
     Skips every test that requests it unless `MP305_HIL=1` and
     `MP305_HIL_DEVICE` are set; nothing touches a transport before that.
-    The pre-flight connects once with the default state directory, keeps the
-    supply's versions for the record (SR-012) and stops the run when the
-    output is on at the start.
+    It only scans and enumerates: no connection is made here, so the
+    entries that only discover (ST-001 to ST-003) send nothing to the
+    supply. The pre-flight connection is `preflight`, which every test that
+    connects gets through `supply`.
     """
     problem = OPT_INS.gate_problem()
     if problem is not None:
@@ -387,6 +388,18 @@ def hil_unit(pytestconfig: pytest.Config) -> Unit:
             "is the supply on, with remote control enabled and no other app connected?"
         )
     RECORD.unit = {"identifier": unit.identifier, "transport": unit.transport}
+    return unit
+
+
+@pytest.fixture(scope="session")
+def preflight(hil_unit: Unit, pytestconfig: pytest.Config) -> Unit:
+    """One connection before the first test that connects.
+
+    It connects with the default state directory, keeps the supply's
+    versions for the record (SR-012) and stops the run when the output is on
+    at the start (its close switches the output off).
+    """
+    unit = hil_unit
     person = Person(OPT_INS.person, _interactive(pytestconfig))
 
     def on_prompt(event: Event) -> None:
@@ -889,10 +902,11 @@ class Guard:
 
 @pytest.fixture
 def supply(
-    hil_unit: Unit, request: pytest.FixtureRequest, pytestconfig: pytest.Config
+    preflight: Unit, request: pytest.FixtureRequest, pytestconfig: pytest.Config
 ) -> Iterator[Guard]:
     """The guard every connection to the supply goes through (see `Guard`)."""
-    guard = Guard(hil_unit, Person(OPT_INS.person, _interactive(pytestconfig)), request.node.nodeid)
+    present = Person(OPT_INS.person, _interactive(pytestconfig))
+    guard = Guard(preflight, present, request.node.nodeid)
     yield guard
     problems = guard.finish()
     if problems:

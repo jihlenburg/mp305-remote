@@ -1974,3 +1974,22 @@ vendor or product ID for ST-003; after a USB re-plug the HID path may
 change, which SR-055's reconnection to the same identifier does not
 cover.
 
+### First system test on hardware: ST-002 on macOS over Bluetooth
+
+With the user's go-ahead for discovery only. Transport: Bluetooth LE,
+advertising only, from the Mac's own adapter (macOS 27.0.1). Sent:
+nothing above the link layer; no connection. Firmware versions: not read
+(see the entries of 2026-09-29). The supply was on with remote control
+enabled and nothing connected to its output.
+
+Before the run, the HIL gate of `tests/system/conftest.py` was changed:
+it connected once at the start of every hardware run to check the output
+state, which a discovery-only run must not do; the pre-flight is now its
+own fixture, used by the tests that connect. One 5 s scan through the
+library then found the supply (`unit E!K`, RSSI -22 dBm, remote flag
+set) under the identifier the spike of 2026-09-29 had seen on this Mac;
+this was the first contact of the new code with the supply. ST-002
+passed: the default scan took 10.003 s, the 1 s scan 1.006 s and the 60 s
+scan 60.006 s, and 0.5 s and 61 s raise `ValueError`. Verification
+record: docs/v-model/records/2026-10-02-system-macos-ble-discovery.md.
+

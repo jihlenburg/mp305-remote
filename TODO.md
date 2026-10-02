@@ -145,9 +145,13 @@ Open and finished work, grouped by V-model phase. The process is described in
       library cannot reach; `MP305_HIL_DEVICE_HID` for ST-043; ST-003's
       vendor and product IDs, which `Found` does not carry; ST-017's
       event; ST-023 step 3; the HID path after a re-plug, SR-055)
-- [ ] First hardware run of the system tests on macOS over Bluetooth
-      (the user's go-ahead in the session; start with the entries that
-      need neither a load nor a person), then USB, then the VMs
+- [x] First hardware run 2026-10-02: ST-002 on macOS over Bluetooth
+      passes (three scans, no connection; record
+      docs/v-model/records/2026-10-02-system-macos-ble-discovery.md)
+- [ ] Next hardware runs of the system tests (the user's go-ahead per
+      session): the first connection on macOS over Bluetooth with a person
+      to press ALLOW (ST-013 and the entries without a load), then USB,
+      then the VMs
 - [ ] System level (ST): the hardware runs on macOS, and on Linux and
       Windows in the VMs with the dongle; needs the user's go-ahead per
       session, the supply, and a Rust toolchain in the guests
