@@ -74,9 +74,8 @@ Open and finished work, grouped by V-model phase. The process is described in
       agent (2026-10-01): 41 tests, 96.4 % line coverage, record
       docs/v-model/records/2026-10-01-unit-link.md
 - [x] Link DD rev 3 (four implementation gaps) approved 2026-10-01
-- [ ] IT-020, IT-021, IT-022 (link integration tests in
-      crates/mp305-core/tests/it_link_*.rs) once the mock's sends can be
-      observed from tests (frame log or a shared record)
+- [ ] IT-020, IT-021, IT-022 (link integration tests): part of the
+      integration level started 2026-10-02 (see below)
 - [x] G4 session approved 2026-10-01 (DD rev 3, 27 items, 33 UT entries,
       tag g4-session-approved); AR-025, AR-027, AR-030, AR-050, SR-009,
       SR-020, SR-029, SR-046, IT-050, DD-TRANS-030 and DD-TRANS-031 changed
@@ -120,11 +119,18 @@ Open and finished work, grouped by V-model phase. The process is described in
       line coverage, record docs/v-model/records/2026-10-02-unit-py.md);
       the intermittent failure was UT-PY-009 (a) reading its log records
       too early and is fixed
-- [ ] Py DD rev 4 drafted 2026-10-02 (`__exit__` and other exceptions,
+- [x] Py DD rev 4 approved 2026-10-02 (`__exit__` and other exceptions,
       the log thread's exit hook, UT-PY-024 (d) and (l), UT-PY-015 (g);
-      the code already behaves so): needs approval
+      no code change)
 - [ ] Run `.github/workflows/wheels.yml` once by manual dispatch (the
       user's decision); Linux and Windows wheels are unverified
+- [ ] Integration level (IT-001 to IT-052), started 2026-10-02: the
+      automated tests of the core (`crates/mp305-core/tests/it_*.rs`), the
+      app (`crates/mp305-app/tests/it_*.rs`) and the library
+      (`tests/integration/`) by three Opus 5.5 agents in worktrees; the
+      inspection entries (IT-001, 002, 004, 014, 016, 017, 041, 042) by
+      one delegated agent; then the records
+      `docs/v-model/records/2026-10-02-integration-*.md`
 - [x] G4 app approved 2026-10-01 (app DD rev 2, 25 items, 25 UT entries,
       13 decisions, tag g4-app-approved); AR-033, AR-041, SR-030, SR-041,
       ST-030 and ST-038 changed and approved with it
@@ -132,8 +138,8 @@ Open and finished work, grouped by V-model phase. The process is described in
       (129 tests, 96.2 % line coverage of the non-drawing code, record
       docs/v-model/records/2026-10-02-unit-app.md with the UT-APP-020 and
       021 inspections)
-- [ ] App DD rev 4 drafted 2026-10-02 (three test entries corrected,
-      three statements added; the code already behaves so): needs approval
+- [x] App DD rev 4 approved 2026-10-02 (three test entries corrected,
+      three statements added; no code change)
 - [ ] UT-APP-011 and UT-APP-015 do not pin the first poll of DD-APP-003
       (they pass with it removed); strengthen them or add a case
 - [ ] UT-APP-021 demonstration (build and sign the macOS bundle) and

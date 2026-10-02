@@ -1848,3 +1848,16 @@ does with other exceptions, the log thread's exit hook, two test cases).
 AGENTS.md's phase paragraph, layout and the note on the coverage block
 were updated. The record is docs/v-model/records/2026-10-02-unit-py.md.
 
+### App DD revision 4 and py DD revision 4 approved
+
+The user approved on 2026-10-02 the two revisions that state what the
+product code already does: app DD revision 4 (UT-APP-006 (k), UT-APP-027
+(d) and UT-APP-028 (a) and (b) corrected to match the design items of
+revision 3; how the calls of a dropped session are answered,
+`DisconnectUnasked` on the failed-build path, the form of drawing
+functions) and py DD revision 4 (`__exit__` and exceptions other than
+`Mp305Error`, the log thread's exit hook, UT-PY-024 (d) with 1 s for the
+exit, UT-PY-015 (g) and UT-PY-024 (l)). No code changed. With this the
+deviations 1, 2 and 4 of the app unit record and 1 and 2 of the Python
+unit record are closed.
+
