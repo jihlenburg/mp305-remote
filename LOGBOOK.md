@@ -1791,3 +1791,13 @@ revision 4: an adapter state change is not fed to the accumulator, and a
 scan whose enabled transports all lack a backend fails. The
 implementations follow.
 
+### Discovery DD revision 4 implemented
+
+`Discovery::scan` now returns `Error::Transport` when Bluetooth is the
+only enabled transport and there is no adapter, instead of an empty list
+(DD-DISC-010); the test of UT-DISC-009 (2) was changed first and seen to
+fail. Session revision 6 and store revision 4 needed no code change.
+Verification in the main session: all gates pass, 289 tests; line
+coverage 95.3 % of `mp305-core`. The record is
+docs/v-model/records/2026-10-02-unit-core-amendments.md.
+

@@ -219,12 +219,15 @@ impl Discovery {
     /// `options.usb` is set, both at once. The results are concatenated,
     /// Bluetooth first. A backend that fails is logged at WARN and the
     /// other's results are returned; an enabled transport without a backend
-    /// is skipped with a WARN log. An empty list means no supply was found;
-    /// the products then show [`not_found`].
+    /// is skipped with a WARN log when another one ran. An empty list means
+    /// no supply was found (or no transport was enabled); the products then
+    /// show [`not_found`].
     ///
     /// # Errors
     ///
-    /// [`Error::Transport`] when every backend that ran failed.
+    /// [`Error::Transport`] when every backend that ran failed, and when a
+    /// transport was enabled but none of the enabled ones had a backend to
+    /// run, so that a missing adapter is not reported as "no supply found".
     pub async fn scan(&self, options: ScanOptions) -> Result<Vec<Found>, Error> {
         log::info!(target: LOG_TARGET, "scan start {options:?}");
         let bluetooth = async {
@@ -245,6 +248,13 @@ impl Discovery {
             }
         };
         let (bluetooth, usb) = tokio::join!(bluetooth, usb);
+        // The USB side has a backend whenever it is enabled, so only the
+        // Bluetooth side can be enabled and unable to run.
+        if options.bluetooth && bluetooth.is_none() && usb.is_none() {
+            return Err(Error::Transport {
+                message: "no backend for the enabled transports: Bluetooth".to_string(),
+            });
+        }
         let found = merge(bluetooth, usb)?;
         for supply in &found {
             log::info!(target: LOG_TARGET, "found {supply}");
@@ -500,7 +510,12 @@ mod tests {
             usb: false,
             ..ScanOptions::default()
         };
-        assert_eq!(discovery.scan(options).await, Ok(vec![]));
+        assert_eq!(
+            discovery.scan(options).await,
+            Err(Error::Transport {
+                message: "no backend for the enabled transports: Bluetooth".to_string()
+            })
+        );
         let none = ScanOptions {
             bluetooth: false,
             usb: false,

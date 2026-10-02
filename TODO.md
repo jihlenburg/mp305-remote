@@ -101,7 +101,8 @@ Open and finished work, grouped by V-model phase. The process is described in
       added with the user's approval (discovery DD rev 3)
 - [x] Discovery DD rev 4 approved 2026-10-02 (DD-DISC-012 wording; a scan
       without a backend for its enabled transports fails, DD-DISC-010)
-- [ ] Implement discovery DD rev 4 (the scan error, UT-DISC-009 (2))
+- [x] Discovery DD rev 4 implemented 2026-10-02 (record
+      docs/v-model/records/2026-10-02-unit-core-amendments.md)
 - [x] Store DD rev 3 and csv DD rev 3 approved 2026-10-01: UT-STORE-005
       and 010 amended, identifiers that cannot be stored are refused
       (DD-STORE-004, UT-STORE-011), UT-CSV-003 gains `cv` and `held_above`
