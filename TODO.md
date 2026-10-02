@@ -157,12 +157,23 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Windows: the wait at exit after an uncaught Ctrl-C (DD-PY-008) has
       no test there (the three cases are POSIX only); decide whether a
       Windows variant with CTRL_C_EVENT is wanted
-- [ ] The Ubuntu VM wants a reboot after its dist-upgrade (new kernel
-      7.0.0-38); left to the user, since Parallels Tools must come back on
-      the new kernel
 - [x] First hardware run 2026-10-02: ST-002 on macOS over Bluetooth
       passes (three scans, no connection; record
       docs/v-model/records/2026-10-02-system-macos-ble-discovery.md)
+- [x] ST-002 on Linux over the dongle 2026-10-02: passes (record
+      docs/v-model/records/2026-10-02-system-linux-ble-discovery.md); the
+      Ubuntu VM was rebooted onto kernel 7.0.0-38 before
+- [ ] Discovery DD rev 5 drafted 2026-10-02, approval pending: read
+      `properties()` before `stop_scan`, since on BlueZ the signal
+      strength is gone afterwards (found on hardware; SR-001, ST-001);
+      then implement and verify on Linux with the dongle
+- [ ] ST-002 on Windows: repeat when the dongle is plugged in again (the
+      attempt of 2026-10-02 lost the dongle with the Mac's USB hub); note
+      that `prlctl exec` runs as SYSTEM unless `--current-user` is given
+- [ ] The first connection from the Mac (ST-013) is agreed with the user
+      and waits for the user at the supply to press ALLOW. Tell the user
+      first that every close sends one `0xC8` release frame
+      (`remoteCon` 0), the first `0xC8` this unit will have received
 - [ ] Next hardware runs of the system tests (the user's go-ahead per
       session): the first connection on macOS over Bluetooth with a person
       to press ALLOW (ST-013 and the entries without a load), then USB,

@@ -2087,3 +2087,32 @@ tests pass in three runs on macOS. The user also allowed the reboot of
 the Ubuntu VM and chose the first connection from the Mac (ST-013) as the
 next hardware step.
 
+### ST-002 on Linux over the dongle; an attempt on Windows
+
+The Ubuntu VM was rebooted with the user's permission and came back on
+kernel 7.0.0-38 with command access intact. The user being away from the
+supply, the agreed first connection from the Mac was not started (it
+needs a person to press ALLOW). Within the session's go-ahead for scans
+without a connection, the library's own discovery was run in the VMs
+instead.
+
+Linux (Ubuntu 24.04.5, BlueZ 5.72, the dongle assigned to the VM).
+Transport: Bluetooth LE, advertising only. Sent: nothing above the link
+layer; no connection. Firmware versions not read (entries of
+2026-09-29). One 5 s scan through the library found the supply with its
+name, the unit characters `E!K` and the remote flag, but without a
+signal strength. ST-002 then passed: default scan 10.048 s, 1 s scan
+1.052 s, 60 s scan 60.064 s. Finding: `rssi` is `None` on BlueZ because
+DD-DISC-012 reads `properties()` after `stop_scan`, when BlueZ has
+dropped the RSSI; discovery DD revision 5 is drafted for approval (read
+before `stop_scan`). Verification record:
+docs/v-model/records/2026-10-02-system-linux-ble-discovery.md.
+
+Windows: the library reported `no backend for the enabled transports:
+Bluetooth`, as SYSTEM and as the logged-in user, and Windows itself
+listed no radio and no default Bluetooth adapter. During the attempt the
+Mac lost every USB device (the hub with the dongle was disconnected), so
+the attempt is inconclusive and is to be repeated. Afterwards the
+dongle's assignment was removed, the Windows VM's "pause when idle" was
+switched back on, and both VMs were left running as found.
+
