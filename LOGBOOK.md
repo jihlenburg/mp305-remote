@@ -1749,3 +1749,45 @@ the input of UT-SESS-044 (5), the release built from the latest reading
 when its own poll fails, and an output-off whose mode check fails while a
 remote request is open. The record is
 docs/v-model/records/2026-10-01-unit-session-rev5.md.
+
+## 2026-10-02
+
+### Product implementations reviewed; design revisions approved
+
+The desktop app and the Python library were implemented test first by
+delegated agents in isolated worktrees from their approved designs (the
+Python agent reported that much of its code was written before its
+tests). In the main session all gates passed on both trees: the app with
+116 tests and 96.2 % line coverage of its non-drawing code, the library
+with 32 Rust and 122 Python tests, 95.7 % line coverage of the Python
+code and 91.4 % of the binding crate. Neither is committed yet.
+
+One independent reviewer read the safety path of each product. For the
+app: one blocker (in the moments after an answered Output ON the stored
+reading still shows the output off, so a close skipped the question and
+left the output on without a marker), one major (a reading from before a
+failed switch-off counted as confirmation) and three minor findings, all
+of them gaps in the approved design. For the library: two major findings
+(a failed output-off lost when Ctrl-C lands in the slice in which it
+completes; no test holding the exit wait for an interrupted output-off)
+and three minor ones. A second delegated agent inspected the app for
+UT-APP-020 and UT-APP-021 and found every point present, with two small
+differences in `ui/` (three widget helpers with other signatures, the
+scan range as a number in drawing code). Three Python test entries could
+not pass against the approved core (UT-PY-024 answered its output-off
+after the core's 500 ms bound; UT-PY-008 (f) injected readings the link
+ignores); their tests were kept as specified and marked as expected
+failures.
+
+The user approved on 2026-10-02: app DD revision 3 with AR-041
+(architecture revision 10): `output_on_done`, the witness rule for a
+failed switch-off, the command `DisconnectUnasked`, the stopped worker,
+the two texts, UT-APP-026 to UT-APP-028; py DD revision 3: a failed
+safety sequence always logged at ERROR, `pending_safety()` empty in a
+forked child, UT-PY-024 and UT-PY-008 (f) restated with three new cases,
+`ruff` excluding `docs/research`; session DD revision 6 and store DD
+revision 4, which state what the code already does; discovery DD
+revision 4: an adapter state change is not fed to the accumulator, and a
+scan whose enabled transports all lack a backend fails. The
+implementations follow.
+

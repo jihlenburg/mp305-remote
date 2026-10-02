@@ -99,33 +99,44 @@ Open and finished work, grouped by V-model phase. The process is described in
       inspections, record
       docs/v-model/records/2026-10-01-unit-discovery.md); UT-DISC-009
       added with the user's approval (discovery DD rev 3)
-- [ ] Discovery DD: put to the user the wording of DD-DISC-012 for the
-      adapter state change (it names no peripheral) and whether a scan
-      whose only enabled transport has no backend should fail instead of
-      returning an empty list; align DD-DISC-011's `ble::find` signature
-      with DD-DISC-012 (editorial)
+- [x] Discovery DD rev 4 approved 2026-10-02 (DD-DISC-012 wording; a scan
+      without a backend for its enabled transports fails, DD-DISC-010)
+- [ ] Implement discovery DD rev 4 (the scan error, UT-DISC-009 (2))
 - [x] Store DD rev 3 and csv DD rev 3 approved 2026-10-01: UT-STORE-005
       and 010 amended, identifiers that cannot be stored are refused
       (DD-STORE-004, UT-STORE-011), UT-CSV-003 gains `cv` and `held_above`
 - [x] Store DD rev 3, the two csv cases and the core additions of the py
       DD implemented 2026-10-01 (277 tests, record
       docs/v-model/records/2026-10-01-unit-core-additions.md)
-- [ ] UT-STORE-011: add the planted-marker step that the test already
-      makes (needs approval)
+- [x] Store DD rev 4 approved 2026-10-02 (UT-STORE-011 with the
+      planted-marker step; no code change)
 - [x] G4 py approved 2026-10-01 (py DD rev 2, 35 items, 28 UT entries,
       18 decisions, tag g4-py-approved); ADR-0015 accepted; AR-003, AR-014,
       AR-015, SR-036, ST-046, IT-003, IT-014, DD-PROTO-025, DD-PROTO-060
       and UT-PROTO-024 changed and approved with it
 - [ ] Implement `mp305-py` and the `mp305` package from the py DD, test
-      first, by an Opus 5.5 agent, with `.github/workflows/wheels.yml`
-      (manual dispatch and version tags only); then the unit verification
-      record
+      first, by an Opus 5.5 agent in a worktree (started 2026-10-01; rev 2
+      implemented and reviewed 2026-10-02, not committed), with
+      `.github/workflows/wheels.yml` (manual dispatch and version tags
+      only); py DD rev 3 approved 2026-10-02 after the safety review (two
+      major, three minor findings): implement it, then the unit
+      verification record
+- [ ] One Python test failed once in nine suite runs, under an
+      instrumented build and load (its name was not captured); harden the
+      timing-sensitive tests
 - [x] G4 app approved 2026-10-01 (app DD rev 2, 25 items, 25 UT entries,
       13 decisions, tag g4-app-approved); AR-033, AR-041, SR-030, SR-041,
       ST-030 and ST-038 changed and approved with it
 - [ ] Implement `mp305-app` from the app DD, test first, by an Opus 5.5
-      agent, after the session revision 5 implementation; then the unit
-      verification record
+      agent in a worktree (started 2026-10-01; rev 2 implemented and
+      reviewed 2026-10-02, not committed); app DD rev 3 approved
+      2026-10-02 after the safety review (one blocker, one major, three
+      minor findings): implement it, then the unit verification record
+      with the UT-APP-020 and 021 inspections
+- [ ] UT-APP-011 and UT-APP-015 do not pin the first poll of DD-APP-003
+      (they pass with it removed); strengthen them or add a case
+- [ ] UT-APP-021 demonstration (build and sign the macOS bundle) and
+      UT-APP-024 (manual, with the supply): user's bench session
 - [x] Session implementation reviewed adversarially 2026-10-01 (32
       confirmed findings); session DD rev 4 approved 2026-10-01 (settle
       100 ms; SR-019, SR-022, SR-024, AR-014, AR-025 changed; TBD-023)
@@ -137,10 +148,8 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Session DD rev 5 implemented 2026-10-01 (289 tests, record
       docs/v-model/records/2026-10-01-unit-session-rev5.md); the session
       tests use `fixtures::reply_route` and `on_air`
-- [ ] Session DD: put to the user UT-SESS-044 (5) ("never `Ready`"), the
-      release built from the latest reading when its poll fails
-      (DD-SESS-053 (b)), and an output-off whose mode check fails while a
-      remote request is open (DD-SESS-035)
+- [x] Session DD rev 6 approved 2026-10-02 (UT-SESS-044 (5), DD-SESS-053
+      (b), DD-SESS-035; no code change, the code already behaves so)
 - [ ] TBD-023: measure on hardware how long after a 0xC9 the 0xC3 shows
       the new setpoints and output state (bench session, user)
 - [ ] From 2026-10-01 implementation work is delegated to Opus 5.5 agents
