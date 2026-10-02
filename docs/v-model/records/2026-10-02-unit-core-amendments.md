@@ -8,7 +8,7 @@ DD-DISC-012), session.md revision 6 and store.md revision 4, which state
 what the code already did (DD-SESS-035, DD-SESS-053, UT-SESS-044 (5),
 UT-STORE-011).
 
-Commit: uncommitted. Diff summary: `crates/mp305-core/src/discovery/mod.rs`
+Commit: `9acf5d4` (the run was made on the tree that this commit holds). Diff summary: `crates/mp305-core/src/discovery/mod.rs`
 (`scan` returns `Error::Transport` when Bluetooth is the only enabled
 transport and there is no adapter; the UT-DISC-009 test for it, changed
 first and seen to fail); `traceability.md`; this record; TODO.md;
