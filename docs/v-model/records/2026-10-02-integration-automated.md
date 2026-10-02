@@ -6,7 +6,7 @@ IT-041, IT-050, IT-052). The inspection entries have their own records of
 the same date (`integration-layout`, `-lints`, `-timing`, `-ble`, `-hid`,
 `-app`, `-packaging`).
 
-Commit: uncommitted. Diff summary: new `crates/mp305-core/tests/it_*.rs`
+Commit: `6e8ed18` (the run was made on the tree that this commit holds). Diff summary: new `crates/mp305-core/tests/it_*.rs`
 (20 files) with `tests/common/mod.rs`; new
 `crates/mp305-app/tests/it_worker.rs` and `it_model.rs`; new
 `tests/integration/` (`conftest.py`, `core_errors.py`, `test_runtime.py`,

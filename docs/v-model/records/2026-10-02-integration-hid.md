@@ -2,7 +2,7 @@
 
 Date: 2026-10-02. Level: integration (IT-017). Method: inspection.
 
-Commit: uncommitted. Diff summary: none in `transport/hid.rs` and
+Commit: `6e8ed18` (the run was made on the tree that this commit holds). Diff summary: none in `transport/hid.rs` and
 `transport/hid_report.rs`.
 
 The inspection was made by a delegated agent that read the files without

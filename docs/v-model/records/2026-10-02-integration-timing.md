@@ -2,7 +2,7 @@
 
 Date: 2026-10-02. Level: integration (IT-014). Method: inspection.
 
-Commit: uncommitted. Diff summary: the literals found by this inspection replaced
+Commit: `6e8ed18` (the run was made on the tree that this commit holds). Diff summary: the literals found by this inspection replaced
 by values derived from `protocol::timing`: the prompt bounds in
 `crates/mp305-core/src/session/task.rs`, the scan default and range in
 `crates/mp305-app/src/model.rs`, and the wait slice of the Python package

@@ -2,7 +2,7 @@
 
 Date: 2026-10-02. Level: integration (IT-004). Method: inspection.
 
-Commit: uncommitted. Diff summary: the lint attributes added to the crate roots
+Commit: `6e8ed18` (the run was made on the tree that this commit holds). Diff summary: the lint attributes added to the crate roots
 (`crates/mp305-core/src/lib.rs`, `crates/mp305-app/src/lib.rs` and `main.rs`,
 `crates/mp305-py/src/lib.rs`), where before only the manifests' `[lints]`
 tables set them.

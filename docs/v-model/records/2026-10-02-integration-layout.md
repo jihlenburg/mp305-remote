@@ -2,7 +2,7 @@
 
 Date: 2026-10-02. Level: integration (IT-001, IT-002). Method: inspection.
 
-Commit: uncommitted. Diff summary: the integration tests and the fixes listed in
+Commit: `6e8ed18` (the run was made on the tree that this commit holds). Diff summary: the integration tests and the fixes listed in
 the record `2026-10-02-integration-automated.md`; nothing of the layout changed.
 
 The inspection was made by a delegated agent that read the files without

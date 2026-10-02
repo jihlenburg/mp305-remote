@@ -2,7 +2,7 @@
 
 Date: 2026-10-02. Level: integration (IT-042). Method: inspection.
 
-Commit: uncommitted. Diff summary: none in the packaging files.
+Commit: `6e8ed18` (the run was made on the tree that this commit holds). Diff summary: none in the packaging files.
 
 The inspection was made by a delegated agent that read the files without
 changing them and gave file and line for every point; its tables were
