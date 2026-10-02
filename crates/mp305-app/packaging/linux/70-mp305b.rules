@@ -1,0 +1,4 @@
+# Implements: DD-APP-040 (hidraw access to the ISDT MP305B for the logged-in user).
+# Copy to /etc/udev/rules.d/, then run udevadm control --reload-rules and
+# udevadm trigger, and plug the supply in again.
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="28e9", ATTRS{idProduct}=="028a", TAG+="uaccess"

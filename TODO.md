@@ -128,12 +128,12 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] G4 app approved 2026-10-01 (app DD rev 2, 25 items, 25 UT entries,
       13 decisions, tag g4-app-approved); AR-033, AR-041, SR-030, SR-041,
       ST-030 and ST-038 changed and approved with it
-- [ ] Implement `mp305-app` from the app DD, test first, by an Opus 5.5
-      agent in a worktree (started 2026-10-01; rev 2 implemented and
-      reviewed 2026-10-02, not committed); app DD rev 3 approved
-      2026-10-02 after the safety review (one blocker, one major, three
-      minor findings): implement it, then the unit verification record
-      with the UT-APP-020 and 021 inspections
+- [x] `mp305-app` implemented 2026-10-02 from app DD rev 2 and rev 3
+      (129 tests, 96.2 % line coverage of the non-drawing code, record
+      docs/v-model/records/2026-10-02-unit-app.md with the UT-APP-020 and
+      021 inspections)
+- [ ] App DD rev 4 drafted 2026-10-02 (three test entries corrected,
+      three statements added; the code already behaves so): needs approval
 - [ ] UT-APP-011 and UT-APP-015 do not pin the first poll of DD-APP-003
       (they pass with it removed); strengthen them or add a case
 - [ ] UT-APP-021 demonstration (build and sign the macOS bundle) and

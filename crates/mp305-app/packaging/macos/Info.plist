@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Implements: DD-APP-040 (the checked-in Info.plist of the macOS bundle).
+  scripts/bundle_macos.sh copies this file into the bundle and writes the
+  package version into both version keys of the copy; 0.0.0 is a placeholder.
+-->
+<plist version="1.0">
+<dict>
+	<key>CFBundleExecutable</key>
+	<string>mp305-app</string>
+	<key>CFBundleIdentifier</key>
+	<string>de.ihlems.mp305-remote</string>
+	<key>CFBundleName</key>
+	<string>MP305 Remote</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.0</string>
+	<key>CFBundleVersion</key>
+	<string>0.0.0</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>MP305 Remote uses Bluetooth to find and control your ISDT MP305B power supply.</string>
+</dict>
+</plist>

@@ -1801,3 +1801,24 @@ Verification in the main session: all gates pass, 289 tests; line
 coverage 95.3 % of `mp305-core`. The record is
 docs/v-model/records/2026-10-02-unit-core-amendments.md.
 
+### Desktop app implemented
+
+`mp305-app` implemented test first by a delegated agent from app DD
+revision 2 and, after the safety review, revision 3: the worker that owns
+the session, the model, the actions with the close step, the app core,
+the recorder, the texts, the drawing code and eframe glue in `ui/`, and
+the packaging files (macOS bundle script and `Info.plist`, the Linux udev
+rule, the README). The revision 3 changes close the review's findings: an
+answered output-on counts as "may be on" until a reading shows its
+effect, a failed switch-off is confirmed only by a reading from during
+the close, `DisconnectUnasked` for the phases in which the app cannot
+ask, and a stopped worker noticed on the next frame. Verification in the
+main session: all gates pass, 129 app tests in three runs, line coverage
+96.2 % of the non-drawing code (target 80 %); the release build passes;
+the binary was not run. Three test entries of revision 3 contradicted
+the design items approved with them; the tests follow the design items
+and the corrections are drafted as revision 4, approval pending. Not
+verified: the bundle demonstration of UT-APP-021 and the manual
+UT-APP-024, which need a screen and the supply. The record is
+docs/v-model/records/2026-10-02-unit-app.md.
+

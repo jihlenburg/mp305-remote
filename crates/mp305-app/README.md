@@ -1,0 +1,110 @@
+# MP305 Remote
+
+MP305 Remote is the desktop app of this project. It finds an ISDT MP305B
+bench power supply over Bluetooth LE or USB, connects to it, and shows its
+readings, setpoints, output state, faults and settings. It sets the voltage
+and the current limit, switches the output on and off, requests and
+releases remote control, applies your own voltage and current limits,
+charts voltage, current and power over a window of 10 s to 10 min, and
+records the readings to a CSV file. Closing the window while the output may
+be on asks first whether to switch it off.
+
+Read the [bench safety](#bench-safety) note before you connect a load.
+
+## Build and run
+
+The app is part of the Cargo workspace of this repository and needs Rust
+1.95 or later.
+
+### macOS
+
+Build the app bundle with the script at the root of the repository:
+
+```sh
+scripts/bundle_macos.sh
+```
+
+It builds a release binary and makes `target/release/bundle/MP305 Remote.app`,
+signed ad hoc for this machine. Open the bundle from Finder or with
+`open "target/release/bundle/MP305 Remote.app"`.
+
+- macOS asks for the Bluetooth permission at the first scan. Allow it, or
+  the app finds supplies over USB only.
+- A bundle that macOS quarantined (for example one copied from another
+  machine) is ad hoc signed only, so macOS refuses to open it with a double
+  click. Open it once with Open from its context menu in Finder.
+- A rebuilt bundle has a new signature, so macOS may ask for the Bluetooth
+  permission again.
+
+### Linux
+
+- Bluetooth needs BlueZ running, and your user must be allowed to use it.
+- The app needs the run-time libraries `libudev` and `libdbus-1`.
+- Building it needs the packages `pkg-config`, `libudev-dev` and
+  `libdbus-1-dev` (Debian and Ubuntu names).
+- USB access needs the udev rule `packaging/linux/70-mp305b.rules` of this
+  crate. Copy it to `/etc/udev/rules.d/`, load it, and plug the supply in
+  again:
+
+  ```sh
+  sudo cp crates/mp305-app/packaging/linux/70-mp305b.rules /etc/udev/rules.d/
+  sudo udevadm control --reload-rules
+  sudo udevadm trigger
+  ```
+
+Build and run:
+
+```sh
+cargo build --release -p mp305-app
+target/release/mp305-app
+```
+
+### Windows
+
+Bluetooth LE needs Windows 10 22H2 or later; nothing else is to be
+installed. Build the app with the C runtime linked statically, so that no
+Visual C++ runtime is needed on the machine that runs it (in PowerShell):
+
+```powershell
+$env:RUSTFLAGS = "-C target-feature=+crt-static"
+cargo build --release -p mp305-app
+```
+
+The result is `target\release\mp305-app.exe`. A release build opens no
+console window; the log then goes to the file named by `MP305_LOG_FILE`
+(see Logging).
+
+## Logging
+
+The app writes its log with millisecond timestamps.
+
+- `RUST_LOG` sets the filter, for example `RUST_LOG=debug`. Without it the
+  app logs at `info`.
+- `MP305_LOG_FILE` names a file the log is appended to instead of stderr.
+  A file that does not open is reported on stderr, which is then used.
+
+For the frame-time log of system test ST-038, set
+`RUST_LOG=mp305_app::frames=trace,mp305_core::frames=trace` and
+`MP305_LOG_FILE` to the file the log goes to:
+
+- macOS: start the binary inside the bundle from a terminal, so that it
+  sees the variables:
+
+  ```sh
+  RUST_LOG=mp305_app::frames=trace,mp305_core::frames=trace \
+  MP305_LOG_FILE="$HOME/mp305-st038.log" \
+  "target/release/bundle/MP305 Remote.app/Contents/MacOS/mp305-app"
+  ```
+
+- Linux: the same with `target/release/mp305-app`.
+- Windows (PowerShell), since the release build has no console:
+
+  ```powershell
+  $env:RUST_LOG = "mp305_app::frames=trace,mp305_core::frames=trace"
+  $env:MP305_LOG_FILE = "$env:USERPROFILE\mp305-st038.log"
+  target\release\mp305-app.exe
+  ```
+
+## Bench safety
+
+Set a hardware current limit and the OCP mode on the supply's front panel. Keep only a load on the output that is safe at the supply's settings. The supply keeps the output on when the link drops, and the app cannot switch it off then. Prefer USB over Bluetooth for unattended runs.
