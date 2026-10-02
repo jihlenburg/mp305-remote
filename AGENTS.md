@@ -47,8 +47,9 @@ Current phase: detailed design and implementation, per module. G1 to G3
 passed on 2026-09-30. Every module of `mp305-core` has passed G4 (protocol
 and transport on 2026-09-30; link, session, store, csv and discovery on
 2026-10-01). The Python library (`mp305-py` and the `mp305` package) and
-the desktop app `mp305-app` passed G4 on 2026-10-01; both are to be
-implemented.
+the desktop app `mp305-app` passed G4 on 2026-10-01 and were implemented
+and unit tested on 2026-10-02; integration, system and acceptance testing
+are next.
 See [TODO.md](TODO.md) for where things stand.
 
 ## Agent anonymity and ownership
@@ -317,8 +318,8 @@ version belongs to is inferred.
 
 ## Commands
 
-The Cargo workspace exists since 2026-09-30 (the Python package follows
-with its module). The commands are:
+The Cargo workspace exists since 2026-09-30 and the Python package since
+2026-10-02. The commands are:
 
 ```sh
 python3 scripts/check_traceability.py --check
@@ -355,7 +356,9 @@ Without it, the Python tests can pass against stale Rust code.
 Coverage of the binding crate `mp305-py` (ADR-0015) is measured through
 the Python tests with an instrumented extension, as one block. The last
 line installs a plain build again, so that the instrumented extension does
-not stay installed:
+not stay installed. In a sandbox without process substitution, write the
+output of `cargo llvm-cov show-env --sh` to a file and source that file;
+otherwise nothing is measured:
 
 ```sh
 ( export LLVM_COV=/opt/homebrew/opt/llvm@22/bin/llvm-cov LLVM_PROFDATA=/opt/homebrew/opt/llvm@22/bin/llvm-profdata
@@ -392,10 +395,11 @@ docs/
   research/       protocol evidence
     captures/     raw hardware captures, never edited
 crates/           mp305-core, mp305-app, mp305-py
-python/mp305/     (planned) Python package
-tests/            (planned) unit/ and integration/ (Python), system/ and
+python/mp305/     Python package
+tests/            unit/ and integration/ (Python), system/ and
                   acceptance/ tests; each directory is a package
                   (`__init__.py`)
 spikes/           throwaway experiments, outside the Cargo workspace
-scripts/          repository tooling (traceability check)
+scripts/          repository tooling (traceability check, macOS bundle)
+.github/workflows/  the wheel build, on manual dispatch and version tags only
 ```

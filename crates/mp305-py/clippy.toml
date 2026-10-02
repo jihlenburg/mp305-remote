@@ -1,0 +1,10 @@
+# DD-PY-004: these `Duration` methods panic on a negative, non-finite or
+# huge value. Float seconds go through `convert::seconds` instead.
+disallowed-methods = [
+    { path = "core::time::Duration::from_secs_f64", reason = "panics on a bad value; use convert::seconds (DD-PY-022)" },
+    { path = "core::time::Duration::from_secs_f32", reason = "panics on a bad value; use convert::seconds (DD-PY-022)" },
+    { path = "core::time::Duration::mul_f64", reason = "panics on a bad value (DD-PY-004)" },
+    { path = "core::time::Duration::mul_f32", reason = "panics on a bad value (DD-PY-004)" },
+    { path = "core::time::Duration::div_f64", reason = "panics on a bad value (DD-PY-004)" },
+    { path = "core::time::Duration::div_f32", reason = "panics on a bad value (DD-PY-004)" },
+]

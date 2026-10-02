@@ -1,0 +1,10 @@
+# Type aliases that exist only in python/mp305/_native.pyi (DD-PY-061): the
+# named tuple types of the native boundary, the dispatcher and the state path.
+mp305._native.ReadingTuple
+mp305._native.InfoTuple
+mp305._native.FoundTuple
+mp305._native.CountersTuple
+mp305._native.EventTuple
+mp305._native.SentTuple
+mp305._native.Dispatch
+mp305._native.StatePath

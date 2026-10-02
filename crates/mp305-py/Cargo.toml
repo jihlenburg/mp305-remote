@@ -11,6 +11,9 @@ rust-version.workspace = true
 name = "mp305_py"
 crate-type = ["cdylib", "rlib"]
 
+# The workspace lints, with `unsafe_code` denied instead of forbidden so that
+# a future `ffi` module could allow it locally (DD-PY-004), and the panicking
+# `Duration` float methods of `clippy.toml` denied.
 [lints.rust]
 unsafe_code = "deny"
 missing_docs = "deny"
@@ -22,6 +25,19 @@ panic = "deny"
 indexing_slicing = "deny"
 arithmetic_side_effects = "deny"
 missing_docs_in_private_items = "warn"
+disallowed_methods = "deny"
 
 [dependencies]
-mp305-core = { path = "../mp305-core" }
+# The mock is test support that ships with the wheel (py DD, decision 1).
+mp305-core = { path = "../mp305-core", features = ["mock"] }
+pyo3 = { version = "0.29", features = ["abi3-py310"] }
+tokio = { version = "1", features = ["rt-multi-thread", "time", "sync", "macros"] }
+futures = "0.3"
+directories = "6"
+log = "0.4"
+
+[build-dependencies]
+pyo3-build-config = { version = "0.29", features = ["resolve-config"] }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["net"] }

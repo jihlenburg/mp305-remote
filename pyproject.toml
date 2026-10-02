@@ -1,0 +1,87 @@
+[build-system]
+requires = ["maturin>=1.9.4,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "mp305"
+dynamic = ["version"]
+description = "Remote control for the ISDT MP305B bench power supply over Bluetooth LE and USB"
+readme = "crates/mp305-py/README.md"
+requires-python = ">=3.10"
+license = "LicenseRef-GPL-3.0-only-with-Commons-Clause-1.0"
+license-files = ["LICENSE"]
+dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Rust",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
+]
+
+[tool.maturin]
+manifest-path = "crates/mp305-py/Cargo.toml"
+module-name = "mp305._native"
+python-source = "python"
+exclude = ["**/__pycache__/**"]
+
+[dependency-groups]
+dev = [
+    "maturin>=1.9.4",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+    "numpy",
+    "tomli; python_version < '3.11'",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "hil: needs a real MP305B; runs only with MP305_HIL=1 and MP305_HIL_DEVICE",
+    "spec(id): the test specification entry this test implements",
+]
+addopts = "-m 'not hil' --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+# DD-PY-060 names only "spikes". The firmware research scripts under
+# docs/research are evidence tools like the spikes and may not be edited with
+# the implementation, so they are excluded too (deviation reported for
+# approval). scripts/ stays linted.
+extend-exclude = ["spikes", "docs/research"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "B", "S", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S603", "D"]
+
+[tool.mypy]
+strict = true
+python_version = "3.10"
+files = ["python/mp305"]
+
+[tool.coverage.run]
+source = ["mp305"]
+parallel = true
+patch = ["subprocess"]
+
+[tool.coverage.report]
+fail_under = 90

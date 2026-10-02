@@ -115,16 +115,16 @@ Open and finished work, grouped by V-model phase. The process is described in
       18 decisions, tag g4-py-approved); ADR-0015 accepted; AR-003, AR-014,
       AR-015, SR-036, ST-046, IT-003, IT-014, DD-PROTO-025, DD-PROTO-060
       and UT-PROTO-024 changed and approved with it
-- [ ] Implement `mp305-py` and the `mp305` package from the py DD, test
-      first, by an Opus 5.5 agent in a worktree (started 2026-10-01; rev 2
-      implemented and reviewed 2026-10-02, not committed), with
-      `.github/workflows/wheels.yml` (manual dispatch and version tags
-      only); py DD rev 3 approved 2026-10-02 after the safety review (two
-      major, three minor findings): implement it, then the unit
-      verification record
-- [ ] One Python test failed once in nine suite runs, under an
-      instrumented build and load (its name was not captured); harden the
-      timing-sensitive tests
+- [x] `mp305-py` and the `mp305` package implemented 2026-10-02 from py
+      DD rev 2 and rev 3 (34 Rust and 128 Python tests, 96.2 % and 91.5 %
+      line coverage, record docs/v-model/records/2026-10-02-unit-py.md);
+      the intermittent failure was UT-PY-009 (a) reading its log records
+      too early and is fixed
+- [ ] Py DD rev 4 drafted 2026-10-02 (`__exit__` and other exceptions,
+      the log thread's exit hook, UT-PY-024 (d) and (l), UT-PY-015 (g);
+      the code already behaves so): needs approval
+- [ ] Run `.github/workflows/wheels.yml` once by manual dispatch (the
+      user's decision); Linux and Windows wheels are unverified
 - [x] G4 app approved 2026-10-01 (app DD rev 2, 25 items, 25 UT entries,
       13 decisions, tag g4-app-approved); AR-033, AR-041, SR-030, SR-041,
       ST-030 and ST-038 changed and approved with it

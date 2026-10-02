@@ -1,0 +1,90 @@
+# Builds the wheels of the Python library (DD-PY-062, py DD decision 3).
+#
+# Runs only on manual dispatch and on version tags, never on pushes to
+# branches or on pull requests. Each job builds one abi3 wheel (GIL-enabled
+# CPython 3.10 and later), installs it into a clean CPython 3.10 environment,
+# imports `mp305` and runs `tests/unit` on the mock before it uploads the
+# wheel as a workflow artifact. Publishing to an index is a separate decision.
+
+name: wheels
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  wheel:
+    name: wheel ${{ matrix.target }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            target: aarch64-apple-darwin
+          - os: macos-13
+            target: x86_64-apple-darwin
+          # No manylinux_2_35 image exists, so the Linux wheels are built on
+          # Ubuntu 22.04 hosts and checked against manylinux_2_35.
+          - os: ubuntu-22.04
+            target: x86_64-unknown-linux-gnu
+          - os: ubuntu-22.04-arm
+            target: aarch64-unknown-linux-gnu
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+    env:
+      MACOSX_DEPLOYMENT_TARGET: "13.0"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install the Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libdbus-1-dev libudev-dev
+          # The repair step bundles libdbus-1 and libudev into the wheel
+          # (py DD, decision 13); it needs patchelf.
+          python -m pip install "maturin[patchelf]>=1.9.4,<2.0"
+
+      - name: Build the wheel (Linux)
+        if: runner.os == 'Linux'
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.target }}
+          manylinux: "off"
+          args: --release --out dist --compatibility manylinux_2_35
+
+      - name: Build the wheel (macOS, Windows)
+        if: runner.os != 'Linux'
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.target }}
+          args: --release --out dist
+
+      - name: Install the wheel into a clean CPython 3.10 and run the unit tests
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/clean"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            PY="$RUNNER_TEMP/clean/Scripts/python.exe"
+          else
+            PY="$RUNNER_TEMP/clean/bin/python"
+          fi
+          "$PY" -m pip install --upgrade pip
+          "$PY" -m pip install dist/*.whl pytest numpy tomli
+          "$PY" -c "import mp305; print(mp305.__version__)"
+          "$PY" -m pytest tests/unit
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheel-${{ matrix.target }}
+          path: dist/*.whl

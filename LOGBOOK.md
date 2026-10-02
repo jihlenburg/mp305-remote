@@ -1822,3 +1822,29 @@ verified: the bundle demonstration of UT-APP-021 and the manual
 UT-APP-024, which need a screen and the supply. The record is
 docs/v-model/records/2026-10-02-unit-app.md.
 
+### Python library implemented
+
+The binding crate `mp305-py` and the package `mp305` implemented by a
+delegated agent from py DD revision 2 and, after the safety review,
+revision 3: the runtime and the blocking wait in 100 ms slices, the feed
+with its forwarder, the safety calls that outlive a Ctrl-C with their
+exit hook, the error mapping, the log bridge, the mock bridge, the
+`Mp305` class, the helpers `stream()`, `to_csv()` and `ramp()`, the stub
+and the packaging, and a wheel workflow that runs only on manual dispatch
+and version tags (never run). The agent reported that much of the
+revision 2 code was written before its tests. Revision 3 closes the
+review's findings: a failed output-off or close is always logged at
+ERROR, `pending_safety()` is empty in a forked child, the exit hook's
+warning sits inside its interrupt handling, `close()` catches only
+`Mp305Error`, and the restated entries UT-PY-024 and UT-PY-008 (f) pass
+without expected failures. The one intermittent test failure was traced
+to UT-PY-009 (a) reading log records before their delivery and fixed.
+Verification in the main session: all gates pass, 34 Rust and 128 Python
+tests (the Python suite three times), line coverage 96.2 % of the Python
+code (target 90 %) and 91.5 % of the binding crate (target 80 %). Not
+exercised: the real discovery and connect, and any platform but macOS
+arm64. Py DD revision 4 is drafted, approval pending (what `__exit__`
+does with other exceptions, the log thread's exit hook, two test cases).
+AGENTS.md's phase paragraph, layout and the note on the coverage block
+were updated. The record is docs/v-model/records/2026-10-02-unit-py.md.
+
