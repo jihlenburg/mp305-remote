@@ -5,7 +5,7 @@ Python library on the user's MP305B, the first run of a system test on
 hardware, with the user's go-ahead in the session for discovery only (no
 connection).
 
-Commit: uncommitted. Diff summary: `tests/system/conftest.py` (the
+Commit: `977ebea`. Diff summary: `tests/system/conftest.py` (the
 pre-flight connection moved out of the HIL gate into its own fixture, so
 that the entries that only discover make no connection); this record;
 TODO.md; LOGBOOK.md. The library under test is the build of commit
