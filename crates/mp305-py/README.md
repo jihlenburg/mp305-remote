@@ -9,11 +9,14 @@ License v3.0 with the Commons Clause Condition v1.0.
 
 ## Installation
 
+The library is not published to a package index yet. Build it from the
+repository (Rust and [uv](https://docs.astral.sh/uv/) needed):
+
 ```sh
-pip install mp305
+uv run maturin develop -m crates/mp305-py/Cargo.toml
 ```
 
-Wheels are built for GIL-enabled CPython 3.10 and later on macOS 13 and
+Wheels are planned for GIL-enabled CPython 3.10 and later on macOS 13 and
 later (arm64, x86_64), Linux manylinux_2_35 (x86_64, aarch64) and Windows 10
 22H2 and later (x86_64). On macOS the first Bluetooth scan asks for the
 Bluetooth permission of the terminal or app that runs Python.

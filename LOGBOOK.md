@@ -2011,3 +2011,13 @@ uv were installed for the VM's user and the repository cloned at
 `libudev-dev` and others) could not be installed yet, because a
 `dist-upgrade` that the VM's owner started holds the package lock.
 
+### READMEs brought up to date
+
+The top-level README still said "design phase" and showed a planned API
+that does not exist. It now states what exists and what is verified (unit
+and integration level on the mock; on the supply only discovery), shows
+the library's real API, says how to build from source, and corrects the
+device facts. The library's README said `pip install mp305`, although
+nothing is published to a package index; it now says to build from the
+repository.
+
