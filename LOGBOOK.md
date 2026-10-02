@@ -2021,3 +2021,23 @@ device facts. The library's README said `pip install mp305`, although
 nothing is published to a package index; it now says to build from the
 repository.
 
+### First build and test run on Linux
+
+At the user's request the stuck `aptitude dist-upgrade` in the throw-away
+Ubuntu VM was stopped (it had waited for over an hour on the `docker.io`
+question whether to restart the daemon) and run again without questions;
+it finished cleanly, the VM is now Ubuntu 24.04.5 and asks for a reboot
+(new kernel 7.0.0-38), which was not done. The build packages were then
+installed, and the workspace was built and tested there from a clone of
+the public repository: Linux 6.17 aarch64, Rust 1.99.0, no hardware.
+
+Result at commit `700e1cf`: every gate passes (format, both clippy runs,
+522 Rust tests, docs, the app's release build, the Python extension, 201
+Python tests, `ruff`, `mypy`, traceability). Two findings on the way,
+both from Rust 1.99 being newer than the Mac's 1.98: `fetch_update` on
+atomics is deprecated there (kept under a commented `allow(deprecated)`,
+since the minimum Rust version 1.85 lacks the replacement; commit
+`ff63181`), and a redundant `#[must_use]` on a function returning a boxed
+future is rejected (removed; commit `700e1cf`). The record is
+docs/v-model/records/2026-10-02-unit-integration-linux.md.
+

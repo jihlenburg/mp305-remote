@@ -144,9 +144,13 @@ Open and finished work, grouped by V-model phase. The process is described in
       pre-flight, ST-003, ST-006, ST-012, ST-014, ST-017, ST-023. Still
       open until a hardware run: ST-043 step 1, ST-050 step 3, the HID
       path after a re-plug (SR-055)
-- [ ] Linux build and mock test suites in the Ubuntu VM: Rust 1.99 and uv
-      installed and the repository cloned 2026-10-02; the build packages
-      wait for the package lock that the owner's dist-upgrade holds
+- [x] Linux build and mock test suites in the Ubuntu VM 2026-10-02: all
+      gates pass on Ubuntu 24.04.5 aarch64 with Rust 1.99 (record
+      docs/v-model/records/2026-10-02-unit-integration-linux.md); two
+      findings of Rust 1.99's clippy fixed
+- [ ] The Ubuntu VM wants a reboot after its dist-upgrade (new kernel
+      7.0.0-38); left to the user, since Parallels Tools must come back on
+      the new kernel
 - [x] First hardware run 2026-10-02: ST-002 on macOS over Bluetooth
       passes (three scans, no connection; record
       docs/v-model/records/2026-10-02-system-macos-ble-discovery.md)
