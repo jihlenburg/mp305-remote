@@ -864,6 +864,9 @@ impl Task {
             if let Err(mpsc::error::TrySendError::Full(_)) =
                 readings.try_send(SessionEvent::Reading(timed))
             {
+                // `fetch_update` is deprecated from Rust 1.99 on in favour of
+                // `try_update`, which the crate's minimum Rust version (1.85) lacks.
+                #[allow(deprecated)]
                 let _ = self.shared.dropped_readings.fetch_update(
                     Ordering::SeqCst,
                     Ordering::SeqCst,

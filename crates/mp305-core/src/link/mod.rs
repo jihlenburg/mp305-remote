@@ -163,6 +163,9 @@ impl Shared {
             Counter::Late => &self.late_replies,
         };
         // The closure always returns `Some`, so the update cannot fail.
+        // `fetch_update` is deprecated from Rust 1.99 on in favour of
+        // `try_update`, which the crate's minimum Rust version (1.85) lacks.
+        #[allow(deprecated)]
         let _ = cell.fetch_update(Ordering::SeqCst, Ordering::SeqCst, |n| {
             Some(n.saturating_add(1))
         });

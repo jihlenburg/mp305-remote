@@ -352,6 +352,9 @@ impl Transport for Mock {
     }
 
     async fn close(&self) -> Result<(), Error> {
+        // `fetch_update` is deprecated from Rust 1.99 on in favour of
+        // `try_update`, which the crate's minimum Rust version (1.85) lacks.
+        #[allow(deprecated)]
         let _ = self
             .handle
             .closes
