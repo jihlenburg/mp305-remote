@@ -371,9 +371,11 @@ mod tests {
             Ok(UNIX_EPOCH + Duration::from_nanos(1_790_848_800_123_999_999))
         );
         assert_eq!(wall_ns(UNIX_EPOCH - Duration::from_secs(1)), 0);
+        // A multiple of 100 ns: Windows keeps system time in 100 ns steps, so
+        // a value ending in 999 ns would come back as 900 ns there.
         assert_eq!(
-            wall_ns(UNIX_EPOCH + Duration::from_nanos(1_790_848_800_123_999_999)),
-            1_790_848_800_123_999_999
+            wall_ns(UNIX_EPOCH + Duration::from_nanos(1_790_848_800_123_999_900)),
+            1_790_848_800_123_999_900
         );
         assert_eq!(wall_seconds(UNIX_EPOCH - Duration::from_secs(1)), 0.0);
     }
