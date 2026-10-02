@@ -1,6 +1,6 @@
 # 6. Integration test specification (IT)
 
-Status: approved (G3, user, 2026-09-30; IT-011, IT-026 and IT-017 changes approved 2026-09-30, revisions 3 and 4); revision 10 drafted, approval pending
+Status: approved (G3, user, 2026-09-30; IT-011, IT-026 and IT-017 changes approved 2026-09-30, revisions 3 and 4; later revisions approved as their rows say, the latest revision 10 on 2026-10-02)
 
 Integration tests verify the architecture items in
 [3-architecture.md](3-architecture.md). They run without hardware against
@@ -85,4 +85,4 @@ Fixtures used by several entries:
 | 7 | 2026-10-01 | IT-026 editorial: the 31 s silence is the prompt bind's. | editorial, no approval needed |
 | 8 | 2026-10-01 | IT-014 (three more literals) and IT-032 (the classifier names and parameters, the veto, the empty unit identifier of a data-only sighting, the accumulator) changed with AR-014 and AR-032; approved with G4 discovery. | user, 2026-10-01 (G4 discovery) |
 | 9 | 2026-10-01 | IT-003 (after the interrupt no further `0xC8` of the cancelled request is sent; the session keeps polling) and IT-014 (`mp305-py` included, `WAIT_SLICE`) changed from the py DD (py.md section 8, decisions 18 and 10). Approved with G4 py. | user, 2026-10-01 (G4 py) |
-| 10 | 2026-10-02 | From the implementation of the integration tests and the inspections, approval pending. Corrected against the approved designs and the code: IT-002 and IT-004 (with AR-002, AR-004), IT-010 (62 and 12 bytes; the length byte 0; the `C8_170` fixture note), IT-011 (payload lengths 18, 0, 0 and 11), IT-015 (a delaying test transport), IT-016 and IT-017 (with AR-016, AR-017), IT-018 (the guard's lines), IT-022 (the request is an immediate link request), IT-028 (IT-029's scenarios for two events), IT-042 (the Windows minimum), IT-050 (the app's mapping is verified at the unit level). | pending |
+| 10 | 2026-10-02 | From the implementation of the integration tests and the inspections. Corrected against the approved designs and the code: IT-002 and IT-004 (with AR-002, AR-004), IT-010 (62 and 12 bytes; the length byte 0; the `C8_170` fixture note), IT-011 (payload lengths 18, 0, 0 and 11), IT-015 (a delaying test transport), IT-016 and IT-017 (with AR-016, AR-017), IT-018 (the guard's lines), IT-022 (the request is an immediate link request), IT-028 (IT-029's scenarios for two events), IT-042 (the Windows minimum), IT-050 (the app's mapping is verified at the unit level). | user, 2026-10-02 |

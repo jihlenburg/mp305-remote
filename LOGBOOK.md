@@ -1928,3 +1928,15 @@ docs/v-model/records/2026-10-02-integration-automated.md and the seven
 inspection records of the same date. Not covered at this level: anything
 on the supply (ST-008, ST-039, ST-040 and the other system tests).
 
+### Architecture revision 11, integration tests revision 10 and py DD revision 5 approved
+
+The user approved on 2026-10-02 the wording corrections that the
+integration level had shown to be needed: AR-002, AR-004, AR-016 and
+AR-017, twelve integration entries (IT-002, 004, 010, 011, 015, 016,
+017, 018, 022, 028, 042, 050) and the native constant `WAIT_SLICE_S` in
+the py DD. No code changed. With this the open points of the integration
+records of 2026-10-02 are closed, and the integration level is verified
+on the mock. The user also decided the next step: the system tests are
+to be written without hardware; running them on the supply needs a
+separate go-ahead.
+
