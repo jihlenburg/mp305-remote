@@ -172,5 +172,5 @@ def number(
 
 
 def wait_slice(remaining: float) -> float:
-    """The next wait of a loop: never negative and at most 0.1 s."""
-    return min(max(remaining, 0.0), 0.1)
+    """The next wait of a loop: never negative and at most the wait slice."""
+    return min(max(remaining, 0.0), _native.WAIT_SLICE_S)

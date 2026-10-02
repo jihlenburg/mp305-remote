@@ -13,6 +13,15 @@
 //! integration test IT-041 reaches `worker`, `model` and `chart`.
 
 #![forbid(unsafe_code)]
+#![deny(missing_docs)]
+#![warn(clippy::missing_docs_in_private_items)]
+#![deny(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    clippy::panic,
+    clippy::indexing_slicing,
+    clippy::arithmetic_side_effects
+)]
 #![cfg_attr(
     test,
     allow(

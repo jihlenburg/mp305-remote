@@ -14,6 +14,15 @@
 //! crate has no `ffi` module; PyO3's macros need no `unsafe` in user code.
 
 #![deny(unsafe_code)]
+#![deny(missing_docs)]
+#![warn(clippy::missing_docs_in_private_items)]
+#![deny(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    clippy::panic,
+    clippy::indexing_slicing,
+    clippy::arithmetic_side_effects
+)]
 #![cfg_attr(
     test,
     allow(
@@ -50,6 +59,7 @@ fn native(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add("SCAN_DEFAULT_S", discover::scan_default_s())?;
     m.add("SCAN_MIN_S", discover::scan_min_s())?;
     m.add("SCAN_MAX_S", discover::scan_max_s())?;
+    m.add("WAIT_SLICE_S", wait::wait_slice_s())?;
     m.add("SUPPLY_MAX_RAW_VOLTAGE", SUPPLY_MAX_RAW_VOLTAGE)?;
     m.add("SUPPLY_MAX_RAW_CURRENT", SUPPLY_MAX_RAW_CURRENT)?;
     m.add("MOCK_HOST_ID", PyBytes::new(py, &mock::MOCK_HOST_ID))?;

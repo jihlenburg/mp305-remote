@@ -1898,3 +1898,33 @@ suspended again, the dongle's assignment removed, the Windows VM's
 the Windows guest deleted; in the Ubuntu guest the Bluetooth service was
 started and left running.
 
+### Integration level verified on the mock
+
+The integration tests of 6-integration-tests.md written by three
+delegated agents in isolated worktrees, which were not allowed to change
+production code: 67 tests in `crates/mp305-core/tests/it_*.rs`, 3 in
+`crates/mp305-app/tests/`, 54 in `tests/integration/`. No test fails and
+no defect in production code was found. A fourth delegated agent made the
+eight inspections (IT-001, 002, 004, 014, 016, 017, 041, 042) without
+changing anything. Two of them led to fixes made in the main session: the
+lint attributes were only in the manifests and are now also in the crate
+roots (IT-004), and five places wrote a bound of `protocol::timing` as a
+literal (the prompt bounds in the session, the scan bounds in the app,
+the wait slice in the Python package) and now derive it (IT-014; the
+native module exports `WAIT_SLICE_S`). Verification in the main session:
+all gates pass, 522 Rust tests and 182 Python tests in three runs; line
+coverage 95.7 % of the workspace without the binding crate, 91.6 % of
+the binding crate, 96.2 % of the Python code.
+
+Twelve integration entries and four architecture items (AR-002, AR-004,
+AR-016, AR-017) were written before the detailed designs and disagree
+with them in wording or in a number (for example the MTU check at
+connect in place of a truncated-notification check, 62 and 12 report
+bytes, payload lengths 18, 0, 0 and 11). The tests follow the approved
+designs and the code; the corrected wording is drafted as architecture
+revision 11, integration tests revision 10 and py DD revision 5,
+approval pending. The records are
+docs/v-model/records/2026-10-02-integration-automated.md and the seven
+inspection records of the same date. Not covered at this level: anything
+on the supply (ST-008, ST-039, ST-040 and the other system tests).
+

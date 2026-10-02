@@ -10,6 +10,15 @@
 //! `MP305_LOG_FILE` (DD-APP-033).
 
 #![forbid(unsafe_code)]
+#![deny(missing_docs)]
+#![warn(clippy::missing_docs_in_private_items)]
+#![deny(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    clippy::panic,
+    clippy::indexing_slicing,
+    clippy::arithmetic_side_effects
+)]
 #![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 
 use std::process::ExitCode;

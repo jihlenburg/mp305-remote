@@ -71,6 +71,12 @@ const CLOSE_RUNNING: &str = "a close without output-off is already running";
 /// The answer channel of a call.
 type Reply = oneshot::Sender<Result<(), Error>>;
 
+/// The whole seconds of a bound of `protocol::timing`, for the `bound_s` of
+/// a prompt event, so that the number is written only there (AR-014).
+fn whole_seconds(bound: Duration) -> u32 {
+    u32::try_from(bound.as_secs()).unwrap_or(u32::MAX)
+}
+
 /// Everything the task starts with.
 pub(crate) struct Setup {
     /// Turns the identifier into a transport.
@@ -1071,7 +1077,7 @@ impl Task {
                 log::warn!(target: LOG_TARGET, "{}", texts::CONFIRM_CONNECTION);
                 self.emit(SessionEvent::Prompt {
                     kind: PromptKind::ConfirmConnection,
-                    bound_s: 30,
+                    bound_s: whole_seconds(timing::BIND),
                     text: texts::CONFIRM_CONNECTION,
                 });
                 self.step = Some(Step::Pending(pending, Then::BindWait));
@@ -1830,7 +1836,7 @@ impl Task {
                 log::warn!(target: LOG_TARGET, "{}", texts::ALLOW_REMOTE_CONTROL);
                 self.emit(SessionEvent::Prompt {
                     kind: PromptKind::AllowRemoteControl,
-                    bound_s: 70,
+                    bound_s: whole_seconds(timing::REMOTE_PROMPT),
                     text: texts::ALLOW_REMOTE_CONTROL,
                 });
                 self.step = Some(Step::Pending(pending, Then::RemoteWait));

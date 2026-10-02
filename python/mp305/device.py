@@ -627,7 +627,7 @@ class Mp305:
                     for t in items:
                         yield reading_from_native(t)
                 raise self._lost()
-            self._session.wait_feed(seq, 0.1)
+            self._session.wait_feed(seq, _native.WAIT_SLICE_S)
 
     def events(self) -> list[Event]:
         """Every event other than a reading not yet returned, in order.

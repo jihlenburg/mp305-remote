@@ -14,6 +14,7 @@ __all__ = [
     "SCAN_DEFAULT_S",
     "SCAN_MIN_S",
     "SCAN_MAX_S",
+    "WAIT_SLICE_S",
     "SUPPLY_MAX_RAW_VOLTAGE",
     "SUPPLY_MAX_RAW_CURRENT",
     "MOCK_HOST_ID",
@@ -72,6 +73,7 @@ StatePath = str | os.PathLike[str]
 SCAN_DEFAULT_S: float
 SCAN_MIN_S: float
 SCAN_MAX_S: float
+WAIT_SLICE_S: float
 SUPPLY_MAX_RAW_VOLTAGE: int
 SUPPLY_MAX_RAW_CURRENT: int
 MOCK_HOST_ID: bytes

@@ -43,12 +43,25 @@ pub const COMMANDS_TARGET: &str = "mp305_app::commands";
 /// The number of lines the event log keeps.
 pub const LOG_LINES: usize = 200;
 
-/// The default scan time in seconds.
-pub const SCAN_S_DEFAULT: u32 = 10;
+/// The whole seconds of a bound of the core's `protocol::timing`, so that
+/// the number is written only there (AR-014).
+const fn whole_seconds(bound: Duration) -> u32 {
+    let seconds = bound.as_secs();
+    if seconds > u32::MAX as u64 {
+        u32::MAX
+    } else {
+        seconds as u32
+    }
+}
 
-/// The scan time range in seconds, 1 to 60 (SR-002): `SetScanTime` clamps
-/// to it and the scan time slider offers it, so the range exists once.
-pub const SCAN_S_RANGE: core::ops::RangeInclusive<u32> = 1..=60;
+/// The default scan time in seconds (the core's `timing::SCAN_DEFAULT`).
+pub const SCAN_S_DEFAULT: u32 = whole_seconds(timing::SCAN_DEFAULT);
+
+/// The scan time range in seconds, 1 to 60 (SR-002; the core's
+/// `timing::SCAN_MIN` and `timing::SCAN_MAX`): `SetScanTime` clamps to it
+/// and the scan time slider offers it, so the range exists once.
+pub const SCAN_S_RANGE: core::ops::RangeInclusive<u32> =
+    whole_seconds(timing::SCAN_MIN)..=whole_seconds(timing::SCAN_MAX);
 
 /// The default chart window in seconds.
 pub const WINDOW_S_DEFAULT: u32 = 60;

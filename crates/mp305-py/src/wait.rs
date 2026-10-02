@@ -27,6 +27,14 @@ use crate::feed::Feed;
 use crate::logbridge;
 use crate::runtime;
 
+/// `WAIT_SLICE_S`, the wait slice in seconds, for the wait loops the Python
+/// package runs itself, so that the number is written only in the core's
+/// `protocol::timing` (AR-014).
+#[must_use]
+pub fn wait_slice_s() -> f64 {
+    WAIT_SLICE.as_secs_f64()
+}
+
 /// Waits for `fut` in slices with the GIL released; called under the guard
 /// of `runtime::enter`. After each slice that did not finish, pending
 /// signals are checked (an interrupt drops the future under the guard,

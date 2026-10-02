@@ -128,13 +128,17 @@ Open and finished work, grouped by V-model phase. The process is described in
       no code change)
 - [ ] Run `.github/workflows/wheels.yml` once by manual dispatch (the
       user's decision); Linux and Windows wheels are unverified
-- [ ] Integration level (IT-001 to IT-052), started 2026-10-02: the
-      automated tests of the core (`crates/mp305-core/tests/it_*.rs`), the
-      app (`crates/mp305-app/tests/it_*.rs`) and the library
-      (`tests/integration/`) by three Opus 5.5 agents in worktrees; the
-      inspection entries (IT-001, 002, 004, 014, 016, 017, 041, 042) by
-      one delegated agent; then the records
-      `docs/v-model/records/2026-10-02-integration-*.md`
+- [x] Integration level verified 2026-10-02 on the mock: 70 Rust and 54
+      Python integration tests and eight inspection entries (records
+      docs/v-model/records/2026-10-02-integration-*.md); the lint
+      attributes and the timing literals found by the inspections fixed
+- [ ] Architecture rev 11, integration tests rev 10 and py DD rev 5
+      drafted 2026-10-02 (AR-002, AR-004, AR-016, AR-017 and twelve IT
+      entries worded as the approved designs and the code have it;
+      `_native.WAIT_SLICE_S`): need approval
+- [ ] System level (ST): the hardware runs on macOS, and on Linux and
+      Windows in the VMs with the dongle; needs the user's go-ahead per
+      session, the supply, and a Rust toolchain in the guests
 - [x] G4 app approved 2026-10-01 (app DD rev 2, 25 items, 25 UT entries,
       13 decisions, tag g4-app-approved); AR-033, AR-041, SR-030, SR-041,
       ST-030 and ST-038 changed and approved with it

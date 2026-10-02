@@ -5,6 +5,16 @@
 //!
 //! Implements: AR-001, AR-002, AR-004.
 
+#![forbid(unsafe_code)]
+#![deny(missing_docs)]
+#![warn(clippy::missing_docs_in_private_items)]
+#![deny(
+    clippy::unwrap_used,
+    clippy::expect_used,
+    clippy::panic,
+    clippy::indexing_slicing,
+    clippy::arithmetic_side_effects
+)]
 #![cfg_attr(
     test,
     allow(
