@@ -7,7 +7,7 @@ running scan back to its caller, `scan` reads `properties()` of each
 counted id before it stops the scan, and `find` stops the scan at once as
 before.
 
-Commit: uncommitted. Diff summary: `discovery/ble.rs` (`watch`, `scan`,
+Commit: `fd8e6bd`. Diff summary: `discovery/ble.rs` (`watch`, `scan`,
 `find`); discovery.md (revision 5 approved); `traceability.md`; this
 record; TODO.md; LOGBOOK.md. Written and checked in the main session.
 
