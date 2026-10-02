@@ -91,7 +91,6 @@ pub struct Deps {
 /// # Errors
 ///
 /// `texts::deps_failed(step, text)` for the step that failed.
-#[must_use]
 pub fn real_deps() -> BoxFuture<'static, Result<Deps, String>> {
     Box::pin(async {
         let dir = paths::state_dir()
