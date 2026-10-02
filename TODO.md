@@ -139,12 +139,14 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] System tests written 2026-10-02 (`tests/system/`, 72 tests: 52 need
       the supply and are skipped without `MP305_HIL`, 20 run without one);
       no test has run on the supply yet
-- [ ] System test document: put to the user what writing the tests
-      showed (the entries that need a person over Bluetooth although
-      their method names none; ST-006 step 2 and ST-050 step 3, which the
-      library cannot reach; `MP305_HIL_DEVICE_HID` for ST-043; ST-003's
-      vendor and product IDs, which `Found` does not carry; ST-017's
-      event; ST-023 step 3; the HID path after a re-plug, SR-055)
+- [ ] System tests rev 12 and ADR-0016 drafted 2026-10-02, approval
+      pending: the person needed over Bluetooth, the tests' opt-ins and
+      pre-flight, ST-003, ST-006, ST-012, ST-014, ST-017, ST-023. Still
+      open until a hardware run: ST-043 step 1, ST-050 step 3, the HID
+      path after a re-plug (SR-055)
+- [ ] Linux build and mock test suites in the Ubuntu VM: Rust 1.99 and uv
+      installed and the repository cloned 2026-10-02; the build packages
+      wait for the package lock that the owner's dist-upgrade holds
 - [x] First hardware run 2026-10-02: ST-002 on macOS over Bluetooth
       passes (three scans, no connection; record
       docs/v-model/records/2026-10-02-system-macos-ble-discovery.md)

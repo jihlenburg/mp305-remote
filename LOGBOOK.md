@@ -1993,3 +1993,21 @@ passed: the default scan took 10.003 s, the 1 s scan 1.006 s and the 60 s
 scan 60.006 s, and 0.5 s and 61 s raise `ValueError`. Verification
 record: docs/v-model/records/2026-10-02-system-macos-ble-discovery.md.
 
+### System tests revision 12 and ADR-0016 drafted
+
+Drafted for the user's approval, from what writing the system tests
+showed: 7-system-tests.md revision 12 (over Bluetooth every entry with a
+control command needs a person for the remote-control prompt; the
+opt-ins of the tests; ST-003, ST-006, ST-012, ST-014, ST-017 and ST-023
+corrected) and ADR-0016 (proposed: the opt-ins `MP305_HIL_LOAD`,
+`MP305_HIL_PERSON`, `MP305_HIL_DEVICE_HID` and `MP305_HIL_RECORD`, the
+pre-flight check, and the teardown fixture as HIL rules of AGENTS.md).
+ST-043 step 1, ST-050 step 3 and the HID path after a re-plug stay open
+until a run on hardware.
+
+Preparing a Linux build in the Ubuntu VM (no hardware): Rust 1.99.0 and
+uv were installed for the VM's user and the repository cloned at
+`1ae5549`. The build packages (`pkg-config`, `libdbus-1-dev`,
+`libudev-dev` and others) could not be installed yet, because a
+`dist-upgrade` that the VM's owner started holds the package lock.
+
