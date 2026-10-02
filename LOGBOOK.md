@@ -2116,3 +2116,19 @@ the attempt is inconclusive and is to be repeated. Afterwards the
 dongle's assignment was removed, the Windows VM's "pause when idle" was
 switched back on, and both VMs were left running as found.
 
+### Discovery DD revision 5 approved and implemented
+
+The user approved discovery DD revision 5 on 2026-10-02 (read
+`properties()` at the end of the scan window, before `stop_scan`) and
+chose this over an added fallback from the RSSI events. Implemented in
+the main session in `discovery/ble.rs`: `watch` hands the running scan to
+its caller, `scan` reads the properties and then stops, `find` stops at
+once. All gates pass (522 Rust tests). One 5 s scan through the library
+on macOS (advertising only, no connection) still finds the supply with
+name, unit, remote flag and RSSI. The effect on Linux is not verified,
+since the dongle was not plugged in. The user also approved the first
+connection from the Mac (ST-013) for a later moment, knowing that each
+close sends one `0xC8` release frame, the first `0xC8` this unit will
+receive. The record is
+docs/v-model/records/2026-10-02-unit-discovery-rev5.md.
+

@@ -183,11 +183,13 @@ impl Drop for ScanStop {
 
 /// The scan loop shared by [`scan`] and [`find`]: takes the scan lock,
 /// snapshots the ids the adapter holds into [`Sightings::new`], takes the
-/// event stream, starts the scan, feeds every event to
-/// [`Sightings::note`] for `bound` (or until the stream ends), and stops
-/// the scan. With `wanted`, the loop ends at the first `note` that counts
-/// `wanted` and returns its id. (ADR-0014: inspection UT-DISC-010, IT-032,
-/// ST-001.)
+/// event stream, starts the scan, and feeds every event to
+/// [`Sightings::note`] for `bound` (or until the stream ends). With
+/// `wanted`, the loop ends at the first `note` that counts `wanted` and
+/// returns its id. The scan is still running when this returns: the caller
+/// ends it with [`ScanStop::finish`] on the guard it gets, and a guard that
+/// is dropped instead issues the stop itself. (ADR-0014: inspection
+/// UT-DISC-010, IT-032, ST-001.)
 ///
 /// # Errors
 ///
@@ -198,7 +200,7 @@ async fn watch(
     lock: Arc<Mutex<()>>,
     wanted: Option<&str>,
     bound: Duration,
-) -> Result<(Sightings, Option<PeripheralId>), Error> {
+) -> Result<(Sightings, Option<PeripheralId>, ScanStop), Error> {
     let mut scan = ScanStop {
         adapter: None,
         lock: Some(lock.lock_owned().await),
@@ -235,16 +237,16 @@ async fn watch(
             break;
         }
     }
-    scan.finish().await;
-    Ok((sightings, hit))
+    Ok((sightings, hit, scan))
 }
 
-/// The Bluetooth scan: [`watch`] for `duration`, then `properties()` for
-/// each counted id in `seen()` order, the advertised name chosen by
-/// `classify::advertised_name`, and the sighting classified by
-/// `classify::advertisement`. An id the adapter no longer holds after the
-/// scan is skipped at DEBUG. (ADR-0014: inspection UT-DISC-010, IT-032,
-/// ST-001, ST-002.)
+/// The Bluetooth scan: [`watch`] for `duration`, then, while the scan still
+/// runs, `properties()` for each counted id in `seen()` order (BlueZ drops
+/// a device's RSSI when discovery stops), then the stop, then the
+/// advertised name chosen by `classify::advertised_name` and the sighting
+/// classified by `classify::advertisement`. An id the adapter no longer
+/// holds at the end of the scan is skipped at DEBUG. (ADR-0014: inspection
+/// UT-DISC-010, IT-032, ST-001, ST-002.)
 ///
 /// # Errors
 ///
@@ -254,7 +256,8 @@ pub(crate) async fn scan(
     lock: Arc<Mutex<()>>,
     duration: Duration,
 ) -> Result<Vec<Found>, Error> {
-    let (sightings, _) = watch(adapter, lock, None, duration).await?;
+    // An early return below drops `stop`, which then issues the stop itself.
+    let (sightings, _, stop) = watch(adapter, lock, None, duration).await?;
     let held: HashMap<String, Peripheral> = adapter
         .peripherals()
         .await
@@ -262,7 +265,7 @@ pub(crate) async fn scan(
         .into_iter()
         .filter_map(|peripheral| id_text(&peripheral.id()).map(|text| (text, peripheral)))
         .collect();
-    let mut found = Vec::new();
+    let mut read = Vec::new();
     for id in sightings.seen() {
         let Some(peripheral) = held.get(&id) else {
             log::debug!(target: LOG_TARGET, "{id} no longer held by the adapter");
@@ -273,6 +276,11 @@ pub(crate) async fn scan(
             .await
             .map_err(transport_error)?
             .unwrap_or_default();
+        read.push((id, properties));
+    }
+    stop.finish().await;
+    let mut found = Vec::new();
+    for (id, properties) in read {
         let name = classify::advertised_name(
             properties.advertisement_name.as_deref(),
             properties.local_name.as_deref(),
@@ -303,7 +311,8 @@ pub(crate) async fn find(
     identifier: &str,
     bound: Duration,
 ) -> Result<Option<PeripheralId>, Error> {
-    let (_, hit) = watch(adapter, lock, Some(identifier), bound).await?;
+    let (_, hit, stop) = watch(adapter, lock, Some(identifier), bound).await?;
+    stop.finish().await;
     Ok(hit)
 }
 

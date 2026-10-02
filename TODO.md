@@ -163,17 +163,19 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] ST-002 on Linux over the dongle 2026-10-02: passes (record
       docs/v-model/records/2026-10-02-system-linux-ble-discovery.md); the
       Ubuntu VM was rebooted onto kernel 7.0.0-38 before
-- [ ] Discovery DD rev 5 drafted 2026-10-02, approval pending: read
-      `properties()` before `stop_scan`, since on BlueZ the signal
-      strength is gone afterwards (found on hardware; SR-001, ST-001);
-      then implement and verify on Linux with the dongle
+- [x] Discovery DD rev 5 approved and implemented 2026-10-02 (read
+      `properties()` before `stop_scan`; record
+      docs/v-model/records/2026-10-02-unit-discovery-rev5.md)
+- [ ] Verify on Linux with the dongle that the scan now reports a signal
+      strength (the purpose of discovery DD rev 5; not yet seen on BlueZ)
 - [ ] ST-002 on Windows: repeat when the dongle is plugged in again (the
       attempt of 2026-10-02 lost the dongle with the Mac's USB hub); note
       that `prlctl exec` runs as SYSTEM unless `--current-user` is given
 - [ ] The first connection from the Mac (ST-013) is agreed with the user
-      and waits for the user at the supply to press ALLOW. Tell the user
-      first that every close sends one `0xC8` release frame
-      (`remoteCon` 0), the first `0xC8` this unit will have received
+      and waits for the user at the supply to press ALLOW. The user
+      approved it on 2026-10-02 knowing that every close sends one `0xC8`
+      release frame (`remoteCon` 0), the first `0xC8` this unit receives;
+      start it only when the user says they are at the supply
 - [ ] Next hardware runs of the system tests (the user's go-ahead per
       session): the first connection on macOS over Bluetooth with a person
       to press ALLOW (ST-013 and the entries without a load), then USB,
