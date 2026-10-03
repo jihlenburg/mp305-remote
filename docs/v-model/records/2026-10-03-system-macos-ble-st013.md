@@ -5,7 +5,7 @@ first connection of the library to the user's MP305B, with the user's
 go-ahead in the session for ST-013 including the release frame that
 every close sends, and the user at the supply.
 
-Commit: uncommitted. The run was made on commit `0ad7503` plus the change
+Commit: `e0a723d`. The run was made on commit `0ad7503` plus the change
 of the find bound to 10 s (AR-014 revision 12, DD-DISC-011 revision 6,
 DD-PROTO-060 revision 7, approved by the user on 2026-10-03 before the
 run), which is committed together with this record.
