@@ -2414,3 +2414,52 @@ own adapter. Windows needs a machine whose USB is not this Mac's: a
 native Windows PC, or a Windows VM on halobox with the dongle passed
 through. On halobox the dongle's adapter (hci1) was left switched off, so
 that the library keeps using the built-in adapter (hci0).
+
+### ST-013 on halobox with the user at the supply: findings on Linux
+
+With the user at the supply and the go-ahead for halobox
+(`MP305_HIL_PERSON=1`). Transport: Bluetooth LE from halobox, first with
+its built-in adapter, then with the ASUS dongle as its only adapter (the
+built-in one unbound from `btusb` for that time). ST-013 is not verified.
+
+Built-in adapter (MediaTek): nine attempts, no connection. The connect
+did not complete within 10 s four times; the scan right after each of
+those did not find the supply; twice the find before the connect did not
+see it. Nothing was sent to the supply in these attempts.
+
+Dongle: three attempts, each connected. The user pressed ALLOW in the
+first; the next two needed no prompt, so the supply remembers the host.
+The pre-flight read the versions (1.6.0.51 and 2.0.2.0, as on
+2026-10-03), the output off and the setpoints 12.0 V and 0.5 A. Then its
+close failed each time with "the close did not complete within 1.0 s",
+so the test never ran. Sent: bind, information request, readings, and
+the release frame of each close. The output stayed off.
+
+Measured on halobox without frames of the protocol: a plain connect
+takes 15.6 s through the built-in adapter and 0.8 to 2.1 s through the
+dongle; a plain disconnect takes 2.3 to 2.8 s; a discovery of 10 s scans
+for Bluetooth LE for about 5.3 s; the dongle, listening for 40 s without
+duplicate filtering (spikes/dongle_acl_path, the new `scan` action),
+received 41 advertisements of the supply, 0.40 to 2.57 s apart.
+
+Findings, all for the user to decide (TODO.md):
+
+1. The link bounds the transport's close with 1 s. BlueZ needs more than
+   2 s to disconnect, so on Linux every close ends with an error, also
+   after everything else went well.
+2. When the library gives up a connect after 10 s, BlueZ carries on with
+   it in the background. The supply then stops advertising and the next
+   scan does not find it.
+3. The built-in adapter of halobox hears the supply's advertising only
+   every few seconds, and Linux scans for Bluetooth LE only about half
+   of a discovery, so the 10 s bounds for finding and connecting are too
+   tight there. Through the dongle they hold.
+4. With two adapters the library uses whichever comes first. The
+   identifier names one adapter, so the supply is then "not found".
+
+Halobox was put back: the built-in adapter is bound again, the dongle is
+unbound from `btusb` and still plugged in. Record:
+docs/v-model/records/2026-10-04-system-linux-ble-halobox.md. The commit
+`b0e8b50` holds the record and announces this entry and the TODO items,
+which a failed edit script left out of it; they follow in the next
+commit.
