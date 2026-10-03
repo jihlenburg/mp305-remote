@@ -92,8 +92,7 @@ fn version(payload: &[u8], offset: usize) -> Version {
 /// [`Reason::Value`] for a non-ASCII model or name.
 pub fn parse(frame: &Frame) -> Result<Info, Reason> {
     let len = frame.payload().len();
-    let layout = if len <= BLE_LEN || (len > BLE_LEN && len < (BLE_LEN.saturating_add(USB_LEN)) / 2)
-    {
+    let layout = if len <= BLE_LEN || len < (BLE_LEN.saturating_add(USB_LEN)) / 2 {
         BLE_LEN
     } else {
         USB_LEN
