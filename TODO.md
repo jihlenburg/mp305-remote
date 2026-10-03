@@ -177,9 +177,18 @@ Open and finished work, grouped by V-model phase. The process is described in
       find bound became 10 s first (AR-014 rev 12)
 - [ ] System tests: tear the `frame_log` fixture down after the `supply`
       guard, so that the kept log covers the close and its release reply
-- [ ] Next system tests on macOS over Bluetooth with the user at the
-      supply: the entries without a load (each connection needs one ALLOW
-      for remote control on the supply's screen)
+- [x] System tests on macOS over Bluetooth, batches A and B, 2026-10-03:
+      18 entries pass in whole or in their automated part (record
+      docs/v-model/records/2026-10-03-system-macos-ble-batch1.md)
+- [ ] Put to the user: a connect right after a disconnect missed the
+      supply once within the 10 s find bound ("no supply found"); a
+      second scan window inside `connect`, or a documentation note
+- [ ] Update docs/research (TBD-012): remote control seen on hardware
+      2026-10-03 (prompt, `0xC9` 00 after ALLOW, commands applied, release
+      answered)
+- [ ] Remaining system tests on macOS over Bluetooth: batch C (the person
+      entries, run by the user with `pytest -s`) and batch D (Load A and
+      Load B); then USB, then the VMs
 - [ ] Next hardware runs of the system tests (the user's go-ahead per
       session): the first connection on macOS over Bluetooth with a person
       to press ALLOW (ST-013 and the entries without a load), then USB,

@@ -2159,3 +2159,21 @@ the close because of the fixture order, so the release's reply is not in
 the record. Verification record:
 docs/v-model/records/2026-10-03-system-macos-ble-st013.md.
 
+### System tests on macOS over Bluetooth, batches A and B
+
+With the user at the supply pressing ALLOW when asked, and nothing
+connected to the output. Transport: Bluetooth LE. Firmware: System
+Version 1.6.0.51, Firmware Version 2.0.2.0. Batch A (read-only entries,
+polls and the release at close only): 8 passed, 2 skipped as expected,
+and ST-043 step 2 failed once because its connect, right after the
+pre-flight's disconnect, did not see the supply within the 10 s find
+bound. Batch B (control commands at 5 V and 0.1 A, the output switched
+on and off, nothing connected): 11 passed, the repeat of ST-043 step 2
+included. The first `0xC8` commands this unit received: the remote
+request put the prompt on the screen, the reply after ALLOW was `0xC9`
+00, setpoints and output changes were applied and reported back, the
+release at close was answered (TBD-012). Every teardown left the output
+off and the setpoints restored. Open: the connect right after a
+disconnect. Verification record:
+docs/v-model/records/2026-10-03-system-macos-ble-batch1.md.
+
