@@ -2274,3 +2274,15 @@ found, the Ubuntu VM was rebooted twice, the built `btusb` lies in
 assignment ("ask"). `prlctl` 27.0.1 has no switch for a VM's Bluetooth
 sharing setting, so sharing the Mac's own Bluetooth with a VM was not
 tried.
+
+### The dongle after a power cycle
+
+The user unplugged the dongle and plugged it in again, on the same port
+of the Mac. That removes the loaded firmware: the controller reports HCI
+revision `0x000e` and LMP subversion `0x8761` again. The run against the
+Mac's built-in Bluetooth (spikes/dongle_acl_path, without a VM) gives the
+same result as before: the Mac got the dongle's read request and answered
+it, three requests are reported as sent, and no data packet arrives on
+bulk IN. The loopback test returns no packet either. Nothing was sent to
+the supply. So the dongle fails in the same way with and without the
+firmware, also on the Mac itself. Capture: `2026-10-03T225259-dongle-acl-mac.jsonl`.

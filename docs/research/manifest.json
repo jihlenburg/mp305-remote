@@ -3,8 +3,8 @@
   "scope": "Current research files except this manifest; historical snapshots keep their own hashes",
   "files": {
     "README.md": {
-      "bytes": 8566,
-      "sha256": "47977fedf0be9952c74c2fc0b5a3056818dca19ea368f6738621d528a8479722"
+      "bytes": 8772,
+      "sha256": "c59bddd0045a99bd9899a77d3d184c7a0c62b5b05e8a7290ad114c4a17ca09f1"
     },
     "captures/2026-09-29T193614-ble-readonly.jsonl": {
       "bytes": 9639,
@@ -37,6 +37,10 @@
     "captures/2026-10-03T224614-dongle-acl-mac.jsonl": {
       "bytes": 6115,
       "sha256": "da5521ecb4ca879d9998d750c2ad97e6af23d8dca9fc05c81c77479e54baed4e"
+    },
+    "captures/2026-10-03T225259-dongle-acl-mac.jsonl": {
+      "bytes": 5872,
+      "sha256": "c80222c3ea295e5c1fc7301460a1f27e6207c0d54a92bda9d1088e6842aceed5"
     },
     "device/README.md": {
       "bytes": 861,
