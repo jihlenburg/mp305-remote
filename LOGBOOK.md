@@ -2320,3 +2320,65 @@ supply's firmware versions were not read.
 Not run: ST-002 and ST-013 from halobox. They need `MP305_HIL`, and the
 user has not asked for hardware tests from this machine; the question is
 put to the user.
+
+### Clippy 1.93 on halobox, and a simpler condition in the info parser
+
+The user asked to fix clippy on halobox and gave the go-ahead to do with
+that machine what is necessary. `rust-clippy` 1.93.1 was installed there
+from the distribution. UT-PY-020 then failed on a real finding of that
+version: `nonminimal_bool` in `ops::info::parse`, where the layout choice
+read `a || (!a && b)`. It is now `a || b` (DD-PROTO-023, behaviour
+unchanged, commit `615d949`). The newer clippy versions used so far (1.98
+on the Mac, 1.99 in the VMs) do not report the old form. Gates on the
+Mac: `cargo fmt --all --check`, both clippy runs, `cargo test
+--workspace` (522 tests pass). On halobox afterwards: `pytest` has 201
+passed and 1 skipped, and `cargo test --workspace --exclude mp305-app`
+passes with 390 tests.
+
+### The dongle in the Windows VM again
+
+The user asked whether the dongle can be tested from the Windows VM. It
+was, on 2026-10-03, while it sat on the USB hub: the scan worked and the
+connection failed (record 2026-10-03-system-vm-ble.md). Repeated now with
+the dongle on a port of the Mac, after its power cycle:
+
+- Windows drives it as "Generic Bluetooth Adapter", the radio is on.
+- A scan through the library finds nothing in 8 s, twice, and the
+  advertisement watcher of spikes/vm_dongle_scan sees no advertisement of
+  any device in 15 s, while the Mac sees the supply at -36 dBm at the
+  same time. Windows' own lookup of the supply's address returns no
+  device, so no connection could be attempted.
+- After the adapter was disabled and enabled in Windows it no longer
+  enumerates there ("Unknown USB Device (Port Reset Failed)"), also after
+  a suspend and resume of the VM. On the Mac the dongle still answers
+  through libusb.
+- During the first of these attempts the supply stopped advertising for
+  some minutes (not seen from the Mac in 5 s and 10 s, nor from halobox)
+  and was back seconds after the dongle was taken from the VM. A second
+  attempt did not reproduce this, so the cause is not known.
+
+Nothing was sent to the supply from Windows. The VM's "pause when idle"
+is on again and the dongle's assignment is removed, but the VM takes the
+dongle back on resume and shows it as the failed USB device until the
+dongle is unplugged or the VM restarts. Both Ubuntu VMs were stopped by
+the user in the meantime.
+
+### ST-002 passes on halobox; ST-013 reaches the bind and needs a person
+
+With the user's go-ahead for halobox. Transport: Bluetooth LE with the
+machine's own adapter (MediaTek, BlueZ 5.85). ST-002 passes: 10.025 s,
+1.023 s and 60.025 s. ST-013 was started without a person: the
+pre-flight connection reached the supply, sent the bind request and got
+the answer that the host is unknown (the supply showed its prompt), then
+gave up, as nobody was there to press ALLOW. Sent to the supply: the bind
+request only; no reading was requested and no control frame was sent.
+This is the first exchange of protocol frames from Linux, so the
+connection path works on native BlueZ. The supply's firmware versions
+were not read (see the entry on ST-013 of 2026-10-03).
+
+Finding in the system tests: when the pre-flight needs a person and none
+is there, the following test fails instead of skipping. Its connect
+collides with the close of the pre-flight's session, which still runs in
+the background ("a session ... is already open in this process"), and at
+exit that close had not completed within 1.0 s. Record:
+docs/v-model/records/2026-10-04-system-linux-ble-halobox.md.

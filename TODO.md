@@ -179,16 +179,24 @@ Open and finished work, grouped by V-model phase. The process is described in
       packet to its USB host, with its firmware loaded and also on the
       Mac without a VM (spikes/dongle_acl_path). Parallels, the guests,
       the supply and the library are cleared
-- [ ] Put to the user 2026-10-04: the go-ahead for ST-002 and ST-013
-      from halobox (ST-013 needs a person at the supply to press ALLOW,
-      halobox being a new host), then the remaining Bluetooth system
-      tests from Linux there
+- [x] ST-002 on Linux, native (halobox), 2026-10-04: passes (record
+      docs/v-model/records/2026-10-04-system-linux-ble-halobox.md); the
+      user gave the go-ahead for that machine
+- [ ] ST-013 from halobox with a person at the supply to press ALLOW
+      (`MP305_HIL_PERSON=1`, `pytest -s`); the attempt of 2026-10-04
+      reached the bind and the supply's prompt. Then the remaining
+      Bluetooth system tests from Linux there
+- [ ] System tests: when the pre-flight needs a person and none is there,
+      the next test fails with "a session ... is already open" instead of
+      skipping, because the pre-flight's background close still runs
+      (seen on halobox 2026-10-04). Wait for that close, or skip the run
 - [ ] Put to the user: a Bluetooth adapter or a native machine for
       Windows; then ST-013 from Windows. Trying the dongle in halobox
       would show whether the unit is faulty
-- [ ] Put to the user: UT-PY-020 fails on a machine with cargo and
-      without clippy (halobox, 2026-10-04). Skip in that case (a change
-      to the test's specification) or install clippy there
+- [x] UT-PY-020 on halobox 2026-10-04: clippy installed there at the
+      user's request, and the one finding of clippy 1.93 fixed
+      (`615d949`, DD-PROTO-023). The test still fails on a machine with
+      cargo and without clippy, since it skips only without cargo
 - [x] ST-013 on macOS over Bluetooth 2026-10-03: the first connection of
       the library to the supply passes (record
       docs/v-model/records/2026-10-03-system-macos-ble-st013.md); the
