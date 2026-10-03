@@ -94,6 +94,12 @@ Not answered: why macOS loses the bulk IN data of this device (a
 full-speed device on an Apple silicon Mac, macOS 27.0.1). Parallels and
 libusb both go through the same USB host layer of macOS, and both fail.
 
+A second side result: the `scan` action of `host_hci.py` listens without
+duplicate filtering and prints when the peer's advertisements arrive. In
+halobox the dongle received 41 advertisements of the supply in 40 s, 0.40
+to 2.57 s apart (LOGBOOK 2026-10-04, "ST-013 on halobox with the user at
+the supply").
+
 A side result is in docs/research/device-model.md, section 2.1: the
 supply's Bluetooth chip reports link-layer version 5.3 and the company
 identifier of the CH58x's maker.

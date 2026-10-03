@@ -18,7 +18,8 @@ adapter down:
     hciconfig hci1 down
     python3 host_hci.py connect --hci 1 --peer mac --capture FILE
 
-`connect` scans, connects to the peer, reads the peer's link-layer features
+`scan` listens for the peer's advertising without duplicate filtering and
+prints when each advertisement arrived. `connect` scans, connects to the peer, reads the peer's link-layer features
 and version, sends an ATT Exchange MTU Request and an ATT Read By Group
 Type Request, waits for data, and disconnects. It sends no frame of the
 supply's own protocol. `--peer mac` needs mac_peripheral.py running and
@@ -219,6 +220,45 @@ def loopback(dongle):
     dongle.events(0.5)
 
 
+def scan(dongle, peer, seconds):
+    """Active scan without duplicate filtering: when does the peer's advertising arrive?"""
+    dongle.cmd(0x0C03)
+    dongle.events(1.0)
+    dongle.cmd(0x0C01, bytes.fromhex("ffffffffffffff3f"))
+    dongle.events(0.2)
+    dongle.cmd(0x2001, bytes.fromhex("1f00000000000000"))
+    dongle.events(0.2)
+    # Scan window equal to the interval (10 ms): the receiver listens all the time.
+    dongle.cmd(0x200B, struct.pack("<BHHBB", 1, 0x0010, 0x0010, 0, 0))
+    dongle.events(0.2)
+    dongle.cmd(0x200C, b"\x01\x00")
+    start = time.time()
+    times, others = [], set()
+    end = start + seconds
+    while time.time() < end:
+        for event in dongle.events(0.2, record=False):
+            if event[0] != 0x3E or event[2] != 0x02:
+                continue
+            addr, data, kind = event[6:12], event[13:-1], event[4]
+            if peer == "supply":
+                hit = addr[:2:-1] == SUPPLY_OUI
+            else:
+                hit = MAC_MARK in data
+            if hit and kind == 0:
+                times.append(time.time() - start)
+            elif not hit:
+                others.add(addr)
+    dongle.cmd(0x200C, b"\x00\x00")
+    dongle.events(0.3)
+    gaps = [round(b - a, 2) for a, b in zip(times, times[1:])]
+    print(f"{seconds:.0f} s scan: {len(times)} advertisements of the peer, {len(others)} other addresses")
+    if times:
+        print("first after", round(times[0], 2), "s; gaps in s:", gaps)
+        if gaps:
+            ordered = sorted(gaps)
+            print("gap min", ordered[0], "median", ordered[len(ordered) // 2], "max", ordered[-1])
+
+
 def connect(dongle, peer, capture):
     started = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     result = {"peer_seen": False, "connected": False}
@@ -339,15 +379,18 @@ def connect(dongle, peer, capture):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=["loopback", "connect"])
+    parser.add_argument("action", choices=["loopback", "connect", "scan"])
     parser.add_argument("--peer", choices=["supply", "mac"], default="supply")
     parser.add_argument("--capture")
     parser.add_argument("--hci", type=int, help="Linux: use hciN through the HCI user channel")
+    parser.add_argument("--seconds", type=float, default=30.0, help="scan: how long to listen")
     args = parser.parse_args()
     dongle = UsbDongle() if args.hci is None else SocketDongle(args.hci)
     try:
         if args.action == "loopback":
             loopback(dongle)
+        elif args.action == "scan":
+            scan(dongle, args.peer, args.seconds)
         else:
             connect(dongle, args.peer, args.capture)
     finally:

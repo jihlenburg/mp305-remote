@@ -66,3 +66,42 @@ readings.
 ST-013 from Linux needs one run with a person at the supply who presses
 ALLOW (`MP305_HIL_PERSON=1`, `pytest -s`). After that the supply knows
 the host and the entries without a person can run from this machine.
+
+## Second session, with a person at the supply
+
+2026-10-04, 01:40 to 01:56 local time, commit `fcb1131` (the library's
+code is that of `615d949`). `MP305_HIL_PERSON=1` was set, the user was at
+the supply. ST-013 is still not verified. What the runs showed:
+
+| Adapter of halobox | Attempts | Outcome |
+|---|---|---|
+| Built in (MediaTek, USB `13d3:3604`) | 9 | never connected: 4 times "connect did not complete within 10 s", 3 times the scan of the HIL gate did not find the supply (each time right after such a connect), 2 times the find before the connect did not see it within 10 s |
+| ASUS USB-BT600 dongle, plugged into halobox, as the only adapter | 3 | connected each time; the pre-flight's close then failed: "the close did not complete within 1.0 s" |
+
+Through the dongle the pre-flight read the supply: model `MP305B`,
+application version 1.6.0.51, hardware revision 2.0.2.0, output off,
+setpoints 12.0 V and 0.5 A, live mode DC. The user pressed ALLOW in the
+first of the three attempts. The second and third needed no prompt, so
+the supply remembers the host. Sent to the supply in these three
+sessions: the bind request, the information request, readings, and the
+release frame of the close. The output stayed off.
+
+Measurements on the same machine, without frames of the protocol:
+
+- A plain connect with BlueZ's own tool takes 15.6 s through the built-in
+  adapter and 0.8 to 2.1 s through the dongle. The library's bound is
+  10 s.
+- A plain disconnect takes 2.3 to 2.8 s. The library bounds the close of
+  the transport with 1 s.
+- Within one discovery of 10 s the controller scans for Bluetooth LE for
+  about 5.3 s only. The built-in adapter then reports the supply after
+  0.7 to 4.3 s, and in one of eight scans not at all.
+- The dongle, listening without pause for 40 s, received 41
+  advertisements of the supply, 0.40 to 2.57 s apart (median 0.84 s).
+
+Findings (TODO.md): on Linux the close bound of 1 s is shorter than what
+BlueZ needs to disconnect, so every close reports a failure; after the
+library gives up a connect, BlueZ goes on with it in the background and
+takes the supply's advertising away from the next scan; with two
+adapters the library uses whichever comes first, which need not be the
+one the identifier names.
