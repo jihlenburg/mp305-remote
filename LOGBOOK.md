@@ -2177,3 +2177,32 @@ off and the setpoints restored. Open: the connect right after a
 disconnect. Verification record:
 docs/v-model/records/2026-10-03-system-macos-ble-batch1.md.
 
+### The VMs over the dongle: scans work, connections do not
+
+With the user's go-ahead for scans and one read-only connection per VM.
+Transport: Bluetooth LE through the USB dongle (`0b05:1d70`, a Realtek
+RTL8761) in the Parallels VMs. Sent to the supply: nothing above the
+link layer except one unanswered ATT Exchange MTU Request per connection
+attempt; no frame of the protocol, no bind, no prompt. Firmware versions
+not read (no connection got that far; see the entry on ST-013 above).
+
+Windows (the logged-in user, x86_64 build under emulation): the library
+finds the supply (RSSI -34 dBm) and ST-002 passes (10.016 s, 1.047 s,
+60.031 s); the "no adapter" of 2026-10-02 was the unplugged hub. Linux:
+the scan reports RSSI -29 dBm, which verifies discovery DD revision 5.
+The connections failed in both: on Windows the OS connect did not
+complete (Windows' own stack reports the supply unreachable after 38 s),
+on Linux the link came up and the service discovery timed out. An HCI
+capture on Linux shows the ATT Exchange MTU Request going out and no
+data packet ever coming in, with a request of 517 and of 247; the same
+dongle also received no data from the user's Mac as a second peer.
+Neither guest loaded a vendor firmware for the dongle. Conclusion: the
+dongle as driven in the VMs can scan but receives no data, so this is a
+limit of the test setup, not a finding about the supply or the library.
+Connecting from Linux and Windows stays unverified. Handling: passing
+the dongle between VMs by suspend and resume left it unresponsive once;
+a VM reboot fixed it. The temporary BlueZ setting used for the test
+(`ExchangeMTU`) was removed again, both VMs were left running and the
+dongle's assignment removed. Record:
+docs/v-model/records/2026-10-03-system-vm-ble.md.
+

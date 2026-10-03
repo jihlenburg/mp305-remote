@@ -166,11 +166,16 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Discovery DD rev 5 approved and implemented 2026-10-02 (read
       `properties()` before `stop_scan`; record
       docs/v-model/records/2026-10-02-unit-discovery-rev5.md)
-- [ ] Verify on Linux with the dongle that the scan now reports a signal
-      strength (the purpose of discovery DD rev 5; not yet seen on BlueZ)
-- [ ] ST-002 on Windows: repeat when the dongle is plugged in again (the
-      attempt of 2026-10-02 lost the dongle with the Mac's USB hub); note
-      that `prlctl exec` runs as SYSTEM unless `--current-user` is given
+- [x] Signal strength on Linux verified 2026-10-03 (RSSI -29 dBm through
+      the library on BlueZ; discovery DD rev 5)
+- [x] ST-002 on Windows 2026-10-03: passes with the dongle present
+      (record docs/v-model/records/2026-10-03-system-vm-ble.md)
+- [ ] Connecting from the VMs fails below the library: the dongle
+      (`0b05:1d70`, RTL8761, generic drivers in both guests) scans but
+      receives no data packets. Get a working adapter for the VMs: the
+      dongle's vendor driver in Windows (ask the user for the model), a
+      Linux kernel entry or firmware for it, or another dongle; then
+      ST-013 from Linux and Windows
 - [x] ST-013 on macOS over Bluetooth 2026-10-03: the first connection of
       the library to the supply passes (record
       docs/v-model/records/2026-10-03-system-macos-ble-st013.md); the
