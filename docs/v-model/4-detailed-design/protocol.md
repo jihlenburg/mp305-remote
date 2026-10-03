@@ -184,7 +184,7 @@ Payload layout of `0xC5`, 11 bytes (protocol.md 4.3; code, layout hardware):
 
 | ID | Design item | Refines | Status | Rationale |
 |---|---|---|---|---|
-| DD-PROTO-060 | `timing` defines `pub const` `Duration`s with a source comment each: `BIND: 30 s`, `REMOTE_PROMPT: 70 s`, `REPLY: 1 s`, `OUTPUT_OFF_ACK: 500 ms`, `POLL_PAUSE: 100 ms`, `USB_KEEPALIVE: 2 s`, `LINK_LOSS_REPORT: 4 s`, `RECONNECT_RETRY: 5 s`, `RECONNECT_GIVE_UP: 10 min`, `SETTLE: 100 ms`, `SCAN_DEFAULT: 10 s`, `SCAN_MIN: 1 s`, `SCAN_MAX: 60 s`, `FIND: 4 s`, `CONNECT: 10 s`, `WAIT_SLICE: 100 ms` (source comment "AR-003, the Python wait slice"). No other module in `mp305-core` or `mp305-py` writes these numbers (checked by IT-014). | AR-014 | approved (rev 6) | device-model.md 12. |
+| DD-PROTO-060 | `timing` defines `pub const` `Duration`s with a source comment each: `BIND: 30 s`, `REMOTE_PROMPT: 70 s`, `REPLY: 1 s`, `OUTPUT_OFF_ACK: 500 ms`, `POLL_PAUSE: 100 ms`, `USB_KEEPALIVE: 2 s`, `LINK_LOSS_REPORT: 4 s`, `RECONNECT_RETRY: 5 s`, `RECONNECT_GIVE_UP: 10 min`, `SETTLE: 100 ms`, `SCAN_DEFAULT: 10 s`, `SCAN_MIN: 1 s`, `SCAN_MAX: 60 s`, `FIND: 10 s`, `CONNECT: 10 s`, `WAIT_SLICE: 100 ms` (source comment "AR-003, the Python wait slice"). No other module in `mp305-core` or `mp305-py` writes these numbers (checked by IT-014). | AR-014 | approved (rev 7) | device-model.md 12. |
 
 ## 7. Documentation
 
@@ -248,3 +248,4 @@ chargeError 0, wavePause 1, waveTime 1600.
 | 4 | 2026-10-01 | Editorial: the `fixtures` module (test support under the `mock` feature) named in the module tree, from the session DD (session.md section 9, decision 2). No design statement, expected result or ID changed. | editorial, no approval needed |
 | 5 | 2026-10-01 | DD-PROTO-051 marked changed from the discovery DD review (discovery.md section 5, decision 2): `Error::SetpointRange` gains `min`, the existing callers pass 0 and their texts do not change; UT-PROTO-004's literal gains the field. Approved with G4 discovery. | user, 2026-10-01 (G4 discovery) |
 | 6 | 2026-10-01 | From the py DD (py.md section 8, decisions 8, 9 and 10): `fixtures::reply_route` and `fixtures::on_air` (test support) in the module tree; `telemetry::parse_payload` (DD-PROTO-025, UT-PROTO-024); `WAIT_SLICE` and `mp305-py` in DD-PROTO-060, whose list now also names the six constants that AR-014 revisions 6 and 7 added and the code already defines. Approved with G4 py. | user, 2026-10-01 (G4 py) |
+| 7 | 2026-10-03 | DD-PROTO-060 with AR-014 revision 12: `FIND` is 10 s. | user, 2026-10-03 |

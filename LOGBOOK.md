@@ -2132,3 +2132,30 @@ close sends one `0xC8` release frame, the first `0xC8` this unit will
 receive. The record is
 docs/v-model/records/2026-10-02-unit-discovery-rev5.md.
 
+## 2026-10-03
+
+### First connection: ST-013 on macOS over Bluetooth, the find bound 10 s
+
+With the user at the supply and the go-ahead for ST-013 including the
+release frame of every close. The first attempt failed before any prompt:
+the library's 4 s scan before the connect did not see the supply, which
+macOS reports only every few seconds (the research note of 2026-09-29
+asked for at least 10 s). Measured: a 4 s scan saw the supply in 6 of 8
+tries, a 10 s scan in 3 of 3. The user approved the change of the find
+bound to 10 s (AR-014 revision 12, DD-DISC-011 revision 6, DD-PROTO-060
+revision 7); the reconnection attempts of SR-055 can now take up to 20 s.
+All gates pass after the change (522 Rust tests).
+
+The second attempt passed. Transport: Bluetooth LE from the Mac's own
+adapter. Sent: the bind (refused fast, allowed by the user at the prompt
+of the pre-flight connection), `0xE0`, `0xC2` polls, and one release
+frame (`0xC8`, `remoteCon` 0) at each of the two closes; no command with
+`remoteCon` 1 or 2. Firmware versions from the `0xE1` reply: System
+Version 1.6.0.51, Firmware Version 2.0.2.0, so the update of 2026-09-29
+has taken effect (the entries of that day recorded 1.6.0.40). Result:
+268 readings in 60 s with the output off, the shortest gap between a
+reply and the next request 101 ms. Open: the kept frame log ends before
+the close because of the fixture order, so the release's reply is not in
+the record. Verification record:
+docs/v-model/records/2026-10-03-system-macos-ble-st013.md.
+

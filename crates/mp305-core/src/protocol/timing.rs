@@ -38,7 +38,7 @@ pub const SCAN_MIN: Duration = Duration::from_secs(1);
 pub const SCAN_MAX: Duration = Duration::from_secs(60);
 /// The scan for one known identifier before a connect gives up (the
 /// discovery DD, DD-DISC-011).
-pub const FIND: Duration = Duration::from_secs(4);
+pub const FIND: Duration = Duration::from_secs(10);
 /// The bound on the OS connect, which has no timeout of its own (the
 /// discovery DD, DD-DISC-011).
 pub const CONNECT: Duration = Duration::from_secs(10);
@@ -72,7 +72,7 @@ mod tests {
         assert_eq!(SCAN_DEFAULT, Duration::from_secs(10));
         assert_eq!(SCAN_MIN, Duration::from_secs(1));
         assert_eq!(SCAN_MAX, Duration::from_secs(60));
-        assert_eq!(FIND, Duration::from_secs(4));
+        assert_eq!(FIND, Duration::from_secs(10));
         assert_eq!(CONNECT, Duration::from_secs(10));
         assert_eq!(WAIT_SLICE, Duration::from_millis(100));
     }
