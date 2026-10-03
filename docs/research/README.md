@@ -97,6 +97,20 @@ These two come from [spikes/vm_dongle_scan/](../../spikes/vm_dongle_scan/).
 They are transcribed from the scripts' console output, hold only the
 supply's advertisements, and mask the last three octets of its address.
 
+| Capture | Transport | What was sent | LOGBOOK entry (2026-10-04) | Firmware version |
+|---|---|---|---|---|
+| `2026-10-03T224341-dongle-acl-supply.jsonl` | Bluetooth LE, raw HCI through the USB dongle on the Mac, no VM | a connection, link-layer feature and version queries, ATT Exchange MTU Request, ATT Read By Group Type Request; no frame of the protocol | The dongle delivers no received data, also without a VM | not read |
+| `2026-10-03T224614-dongle-acl-mac.jsonl` | the same, with the Mac's built-in Bluetooth as the peer instead of the supply | nothing to the supply | The dongle delivers no received data, also without a VM | does not apply |
+
+These two come from [spikes/dongle_acl_path/](../../spikes/dongle_acl_path/).
+Their file names carry the UTC time, so they are dated 2026-10-03 for runs
+made shortly after midnight local time on 2026-10-04. They hold the HCI
+packets of the dongle (`hci` says which kind, `hex` is the packet without
+the transport's type byte), mask the last three octets of the peer's
+address, and leave out the advertisements of other devices. The
+advertising reports carry the time the scan ended, not the time they
+arrived.
+
 ## Firmware version
 
 The device reports its versions in the `0xE1` reply to `0xE0`, over

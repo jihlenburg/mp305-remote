@@ -55,6 +55,7 @@ few things itself (section 3). Everything else is the main MCU's answer.
 | Notifications must be enabled on both characteristics on every connection; the CH58x resets them on disconnect and drops a reply whose characteristic has them off (the main MCU then retransmits for about 5 s). | code, ch58x "Connection handling", "Notifications" |
 | The CH58x holds one frame per direction. A second write before the first was forwarded (about 1.25 ms) replaces it. | code, ch58x "Pacing on BLE" |
 | Bluetooth writes are dropped silently while a USB host is active (section 4.3). | code, ch58x "Interface arbitration" |
+| The link layer reports Bluetooth version 5.3 (version `0x0C`), company identifier `0x07D7` (Nanjing Qinheng Microelectronics, the maker of the CH58x, by the Bluetooth SIG's list of company identifiers), subversion `0xA180` and the LE feature set `FF 79 7D 0C 9E 00 00 00`. The address is a public one. | hardware, `2026-10-03T224341-dongle-acl-supply.jsonl`, t = 9.384 and t = 11.484, read with a USB dongle by spikes/dongle_acl_path |
 
 ### 2.2 USB HID
 

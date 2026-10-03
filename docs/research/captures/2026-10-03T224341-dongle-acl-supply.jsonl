@@ -1,0 +1,43 @@
+{"meta": {"spike": "dongle_acl_path", "script": "host_hci.py connect --peer supply", "started": "2026-10-03T22:43:41Z", "host": "macOS 27.0.1 (arm64), no virtual machine", "stack": "none: HCI through libusb (pyusb), one pending read on bulk IN", "adapter": "ASUS USB-BT600, USB 0b05:1d70 (Realtek RTL8761CU), on a port of the Mac", "adapter_version": {"hci_version": 14, "hci_revision": "0x7bf1", "lmp_version": 14, "company": "0x005d", "lmp_subversion": "0x5762"}, "peer": "the MP305B", "sent": "active scan, connection, link-layer feature and version queries, ATT Exchange MTU Request, ATT Read By Group Type Request, disconnect; no frame of the supply's protocol", "firmware": "the supply's versions were not read in this run", "note": "The last three octets of the peer's address are masked (xxxxxx). Advertisements of other devices are not recorded, only their count."}}
+{"t": 0.002, "hci": "command", "hex": "030c00"}
+{"t": 0.009, "hci": "event", "hex": "0e0403030c00"}
+{"t": 1.026, "hci": "command", "hex": "011000"}
+{"t": 1.03, "hci": "event", "hex": "0e0c020110000ef17b0e5d006257"}
+{"t": 1.533, "hci": "command", "hex": "010c08ffffffffffffff3f"}
+{"t": 1.534, "hci": "event", "hex": "0e0402010c00"}
+{"t": 1.791, "hci": "command", "hex": "0120081f00000000000000"}
+{"t": 1.792, "hci": "event", "hex": "0e0402012000"}
+{"t": 2.046, "hci": "command", "hex": "0b200701100010000000"}
+{"t": 2.047, "hci": "event", "hex": "0e04020b2000"}
+{"t": 2.295, "hci": "command", "hex": "0c20020100"}
+{"t": 8.313, "hci": "command", "hex": "0c20020000"}
+{"t": 8.314, "hci": "event", "hex": "0e04020c2000"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010000xxxxxx5e3d0c1f020106030200af17ffbaabaffa013502000000000000000000000000000000e8"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010400xxxxxx5e3d0c1f1e09303030304d50333035422020532020202020202020202020202045214be8"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010000xxxxxx5e3d0c1f020106030200af17ffbaabaffa013502000000000000000000000000000000ea"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010400xxxxxx5e3d0c1f1e09303030304d50333035422020532020202020202020202020202045214bea"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010000xxxxxx5e3d0c1f020106030200af17ffbaabaffa013502000000000000000000000000000000ee"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010400xxxxxx5e3d0c1f1e09303030304d50333035422020532020202020202020202020202045214bee"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010000xxxxxx5e3d0c1f020106030200af17ffbaabaffa013502000000000000000000000000000000ee"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010400xxxxxx5e3d0c1f1e09303030304d50333035422020532020202020202020202020202045214bee"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010000xxxxxx5e3d0c1f020106030200af17ffbaabaffa013502000000000000000000000000000000ea"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010400xxxxxx5e3d0c1f1e09303030304d50333035422020532020202020202020202020202045214bea"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010000xxxxxx5e3d0c1f020106030200af17ffbaabaffa013502000000000000000000000000000000ea"}
+{"t": 8.634, "hci": "event", "hex": "3e2b02010400xxxxxx5e3d0c1f1e09303030304d50333035422020532020202020202020202020202045214bea"}
+{"t": 8.636, "hci": "command", "hex": "0d2019600030000000xxxxxx5e3d0c00180028000000c80000000000"}
+{"t": 8.637, "hci": "event", "hex": "0f0400020d20"}
+{"t": 9.362, "hci": "event", "hex": "3e1301000c000000xxxxxx5e3d0c28000000c80000"}
+{"t": 9.364, "hci": "command", "hex": "1620020c00"}
+{"t": 9.366, "hci": "event", "hex": "0f0400021620"}
+{"t": 9.384, "hci": "event", "hex": "3e0c04000c00ff797d0c9e000000"}
+{"t": 11.399, "hci": "command", "hex": "1d04020c00"}
+{"t": 11.4, "hci": "event", "hex": "0f0400021d04"}
+{"t": 11.484, "hci": "event", "hex": "0c08000c000cd70780a1"}
+{"t": 13.459, "hci": "acl out", "hex": "0c0007000300040002f700"}
+{"t": 13.484, "hci": "event", "hex": "1305010c000100"}
+{"t": 16.492, "hci": "acl out", "hex": "0c000b0007000400100100ffff0028"}
+{"t": 16.534, "hci": "event", "hex": "1305010c000100"}
+{"t": 19.513, "hci": "command", "hex": "0604030c0013"}
+{"t": 19.513, "hci": "event", "hex": "0f0400020604"}
+{"t": 19.534, "hci": "event", "hex": "0504000c0016"}
+{"result": {"peer_seen": true, "connected": true, "advertisers_seen": 30, "peer_address_type": 0, "rssi_dbm": -18, "remote_features": "ff797d0c9e000000", "remote_version": {"ll_version": 12, "company": "0x07d7", "subversion": "0xa180"}, "acl_out": 2, "acl_out_completed": 2, "acl_in": 0, "link_dropped_reason": null}}

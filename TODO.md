@@ -44,9 +44,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] USB Bluetooth dongle for the Parallels VMs at hand 2026-10-02
       (ASUS, `0b05:1d70`); Linux and Windows see the supply's advertising
       over it (spikes/vm_dongle_scan, TBD-009)
-- [ ] Connect to the supply from the Linux and the Windows VM over the
-      dongle (read-only first), then the Bluetooth system tests there;
-      needs the user's go-ahead and a Rust toolchain in the guests
+- [ ] Connect to the supply from the Linux and the Windows VM
+      (read-only first), then the Bluetooth system tests there; needs the
+      user's go-ahead. Blocked since 2026-10-04: the dongle at hand
+      delivers no received data (spikes/dongle_acl_path), so this needs
+      another adapter or native machines
 - [ ] TBD-018: read-only Bluetooth spike that records the unsolicited
       `0xC5` when a setting is changed on the front panel
 - [x] Rewrite 2-system-requirements.md (revision 8) and 7-system-tests.md
@@ -170,12 +172,14 @@ Open and finished work, grouped by V-model phase. The process is described in
       the library on BlueZ; discovery DD rev 5)
 - [x] ST-002 on Windows 2026-10-03: passes with the dongle present
       (record docs/v-model/records/2026-10-03-system-vm-ble.md)
-- [ ] Connecting from the VMs fails below the library: the dongle
-      (`0b05:1d70`, RTL8761, generic drivers in both guests) scans but
-      receives no data packets. Get a working adapter for the VMs: the
-      dongle's vendor driver in Windows (ask the user for the model), a
-      Linux kernel entry or firmware for it, or another dongle; then
-      ST-013 from Linux and Windows
+- [x] Why connecting from the VMs fails, found 2026-10-04: the dongle
+      (ASUS USB-BT600, `0b05:1d70`, RTL8761CU) hands no received data
+      packet to its USB host, with its firmware loaded and also on the
+      Mac without a VM (spikes/dongle_acl_path). Parallels, the guests,
+      the supply and the library are cleared
+- [ ] Put to the user: another Bluetooth adapter for the VMs, or native
+      Linux and Windows machines; then ST-013 from Linux and Windows.
+      Trying the dongle on a PC would show whether the unit is faulty
 - [x] ST-013 on macOS over Bluetooth 2026-10-03: the first connection of
       the library to the supply passes (record
       docs/v-model/records/2026-10-03-system-macos-ble-st013.md); the

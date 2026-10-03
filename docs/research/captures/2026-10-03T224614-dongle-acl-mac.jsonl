@@ -1,0 +1,66 @@
+{"meta": {"spike": "dongle_acl_path", "script": "host_hci.py connect --peer mac", "started": "2026-10-03T22:46:14Z", "host": "macOS 27.0.1 (arm64), no virtual machine", "stack": "none: HCI through libusb (pyusb), one pending read on bulk IN", "adapter": "ASUS USB-BT600, USB 0b05:1d70 (Realtek RTL8761CU), on a port of the Mac", "adapter_version": {"hci_version": 14, "hci_revision": "0x7bf1", "lmp_version": 14, "company": "0x005d", "lmp_subversion": "0x5762"}, "peer": "the Mac's built-in Bluetooth (mac_peripheral.py)", "sent": "active scan, connection, link-layer feature and version queries, ATT Read By Type Request for the test characteristic, ATT Exchange MTU Request, ATT Read By Group Type Request, disconnect; no frame of the supply's protocol", "firmware": "the supply's versions were not read in this run", "note": "The last three octets of the peer's address are masked (xxxxxx). Advertisements of other devices are not recorded, only their count."}}
+{"t": 0.002, "hci": "command", "hex": "030c00"}
+{"t": 0.017, "hci": "event", "hex": "0e0403030c00"}
+{"t": 1.054, "hci": "command", "hex": "011000"}
+{"t": 1.055, "hci": "event", "hex": "0e0c020110000ef17b0e5d006257"}
+{"t": 1.559, "hci": "command", "hex": "010c08ffffffffffffff3f"}
+{"t": 1.56, "hci": "event", "hex": "0e0402010c00"}
+{"t": 1.823, "hci": "command", "hex": "0120081f00000000000000"}
+{"t": 1.824, "hci": "event", "hex": "0e0402012000"}
+{"t": 2.086, "hci": "command", "hex": "0b200701100010000000"}
+{"t": 2.087, "hci": "event", "hex": "0e04020b2000"}
+{"t": 2.355, "hci": "command", "hex": "0c20020100"}
+{"t": 8.411, "hci": "command", "hex": "0c20020000"}
+{"t": 8.413, "hci": "event", "hex": "3e0c02010401f04cf70f044400ca"}
+{"t": 8.415, "hci": "event", "hex": "3e14020100019c36125da1eb0807ff4c001202d402df"}
+{"t": 8.418, "hci": "event", "hex": "3e0c020104019c36125da1eb00df"}
+{"t": 8.419, "hci": "event", "hex": "0e04020c2000"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad6"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d8"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad2"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d2"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad2"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d2"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ade"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00de"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad6"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d6"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ade"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00de"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad6"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d8"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad2"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d2"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ade"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00de"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad6"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d6"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ade"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00de"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad6"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d6"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad5"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d6"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad6"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d5"}
+{"t": 8.738, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ad2"}
+{"t": 8.738, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00d2"}
+{"t": 8.741, "hci": "command", "hex": "0d2019600030000000xxxxxx74d0bc00180028000000c80000000000"}
+{"t": 8.741, "hci": "event", "hex": "0f0400020d20"}
+{"t": 8.809, "hci": "event", "hex": "3e1301000c000000xxxxxx74d0bc28000000c80000"}
+{"t": 8.811, "hci": "command", "hex": "1620020c00"}
+{"t": 8.813, "hci": "event", "hex": "0f0400021620"}
+{"t": 8.893, "hci": "event", "hex": "3e0c04000c00fd79790800000000"}
+{"t": 10.842, "hci": "command", "hex": "1d04020c00"}
+{"t": 10.843, "hci": "event", "hex": "0f0400021d04"}
+{"t": 10.845, "hci": "event", "hex": "0c08000c000c0f008002"}
+{"t": 12.907, "hci": "acl out", "hex": "0c00190015000400080100ffff01006761696462353033706d02003d5a"}
+{"t": 12.944, "hci": "event", "hex": "1305010c000100"}
+{"t": 15.949, "hci": "acl out", "hex": "0c0007000300040002f700"}
+{"t": 16.094, "hci": "event", "hex": "1305010c000100"}
+{"t": 18.99, "hci": "acl out", "hex": "0c000b0007000400100100ffff0028"}
+{"t": 19.098, "hci": "event", "hex": "1305010c000100"}
+{"t": 22.054, "hci": "command", "hex": "0604030c0013"}
+{"t": 22.054, "hci": "event", "hex": "0f0400020604"}
+{"t": 22.094, "hci": "event", "hex": "0504000c0016"}
+{"result": {"peer_seen": true, "connected": true, "advertisers_seen": 31, "peer_address_type": 0, "rssi_dbm": -34, "remote_features": "fd79790800000000", "remote_version": {"ll_version": 12, "company": "0x000f", "subversion": "0x0280"}, "acl_out": 3, "acl_out_completed": 3, "acl_in": 0, "link_dropped_reason": null}}

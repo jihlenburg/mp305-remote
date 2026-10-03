@@ -66,3 +66,18 @@ Connecting from Linux and Windows is not verified on hardware. It needs
 a Bluetooth adapter that works in the VMs (the dongle's vendor driver in
 Windows; on Linux a kernel that loads its firmware, or another dongle),
 or native machines.
+
+## Follow-up, 2026-10-04
+
+The question left open in point 4 is settled (LOGBOOK 2026-10-04, "The
+dongle delivers no received data, also without a VM";
+spikes/dongle_acl_path). The dongle is an ASUS USB-BT600 (Realtek
+RTL8761CU). With its firmware loaded by a `btusb` that knows it, the
+connection from the Linux VM fails in the same way. Driven from the Mac
+through libusb, without a VM, it also receives no data packet, from the
+supply and from the Mac's built-in Bluetooth, although that peer got the
+dongle's request and answered it. So neither the missing firmware nor the
+USB passthrough is the cause: the dongle delivers no received data to its
+host. A Linux kernel that loads the firmware, named under "Open" above,
+does not help. The vendor driver in Windows was not tried. Another
+adapter or native machines are needed.

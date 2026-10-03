@@ -2206,3 +2206,71 @@ a VM reboot fixed it. The temporary BlueZ setting used for the test
 dongle's assignment removed. Record:
 docs/v-model/records/2026-10-03-system-vm-ble.md.
 
+## 2026-10-04
+
+### The dongle delivers no received data, also without a VM
+
+This continues "The VMs over the dongle: scans work, connections do not"
+of 2026-10-03, within the same go-ahead of the user (scans and a
+read-only connection). The user named the dongle, an ASUS USB-BT600 (USB
+`0b05:1d70`, Realtek RTL8761CU), and moved it from the USB hub to a port
+of the Mac. Transport: Bluetooth LE through the dongle, in the Ubuntu VM
+and on the Mac itself. Sent to the supply, per connection: link-layer
+feature and version queries, one ATT Exchange MTU Request and one ATT
+Read By Group Type Request, both unanswered; no frame of the protocol, no
+bind, no prompt. The supply's firmware versions were not read (see the
+entry on ST-013 of 2026-10-03).
+
+What was done and found:
+
+1. Firmware. The stock `btusb` of the Ubuntu VM (Linux 7.0.0-38) binds
+   the dongle as a generic adapter. A `btusb` built in the VM with the
+   entry of the upstream patch of July 2026 for `0b05:1d70` loads
+   `rtl_bt/rtl8761cu_fw.bin` (kernel log: `RTL: fw version 0x7bf15762`).
+   The connection to the supply fails as before, so loading this
+   firmware does not cure it.
+2. USB trace in the VM (`usbmon`): the driver's two reads on the bulk IN
+   endpoint are submitted when the adapter opens and never complete.
+   Commands, events and bulk OUT work.
+3. The same on the Mac without a VM. A script that speaks HCI to the
+   dongle through libusb connects to the supply, gets the link-layer
+   features and version, keeps the link for 10 s with a supervision
+   timeout of 2 s, has both requests reported as sent, and receives
+   nothing on bulk IN. Parallels and the guests' drivers are therefore
+   not the cause either.
+4. A second peer. The Mac's built-in Bluetooth advertised a test service
+   and printed the read request it got from the dongle, and answered it.
+   The answer did not arrive at the dongle's host. The direction from the
+   host to the peer works; the direction from the peer to the host stops
+   in the dongle or on its bulk IN pipe. That clears the supply.
+5. On a hub and on a port of the Mac the result is the same.
+6. HCI local loopback returns no packet in the VM and none on the Mac
+   through libusb, so that test decides nothing on this controller. The
+   controller does not know "Set Controller To Host Flow Control", and
+   setting the host buffer size changes nothing.
+7. With USB 3.0 support switched off for the VM the dongle does not
+   enumerate at all. The setting is on again.
+
+Conclusion: this dongle hands no received data packet to its USB host on
+any host tried here, so the failed connections of 2026-10-03 say nothing
+about the supply, the library, BlueZ, Windows or Parallels. Not decided:
+whether the unit is faulty or whether it only fails on this Mac's USB
+ports. The upstream patch reports the model working on Linux with the
+same driver entry and firmware, and only another host can tell. Connecting
+from Linux and Windows stays unverified and needs another adapter or
+native machines.
+
+Side result for docs/research/device-model.md, section 2.1: the supply's
+link layer reports Bluetooth 5.3, company identifier `0x07D7` (Nanjing
+Qinheng Microelectronics, the maker of the CH58x), subversion `0xA180`
+and the feature set `FF 79 7D 0C 9E 00 00 00`.
+
+Spike: spikes/dongle_acl_path. Captures:
+`2026-10-03T224341-dongle-acl-supply.jsonl` and
+`2026-10-03T224614-dongle-acl-mac.jsonl` (UTC in the names; local time
+was past midnight). State left: the Ubuntu VM and the Windows VM run as
+found, the Ubuntu VM was rebooted twice, the built `btusb` lies in
+`/root/btusb-bt600` in the VM and is not loaded, the dongle has no VM
+assignment ("ask"). `prlctl` 27.0.1 has no switch for a VM's Bluetooth
+sharing setting, so sharing the Mac's own Bluetooth with a VM was not
+tried.
