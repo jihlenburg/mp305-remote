@@ -44,11 +44,13 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] USB Bluetooth dongle for the Parallels VMs at hand 2026-10-02
       (ASUS, `0b05:1d70`); Linux and Windows see the supply's advertising
       over it (spikes/vm_dongle_scan, TBD-009)
-- [ ] Connect to the supply from the Linux and the Windows VM
-      (read-only first), then the Bluetooth system tests there; needs the
-      user's go-ahead. Blocked since 2026-10-04: the dongle at hand
-      delivers no received data (spikes/dongle_acl_path), so this needs
-      another adapter or native machines
+- [ ] Connect to the supply from Linux and from Windows (read-only
+      first), then the Bluetooth system tests there; needs the user's
+      go-ahead. The dongle at hand delivers no received data
+      (spikes/dongle_acl_path, 2026-10-04). Linux: the user's machine
+      "halobox" (native, own Bluetooth) is set up and sees the supply
+      since 2026-10-04. Windows: needs another adapter or a native
+      machine
 - [ ] TBD-018: read-only Bluetooth spike that records the unsolicited
       `0xC5` when a setting is changed on the front panel
 - [x] Rewrite 2-system-requirements.md (revision 8) and 7-system-tests.md
@@ -177,9 +179,16 @@ Open and finished work, grouped by V-model phase. The process is described in
       packet to its USB host, with its firmware loaded and also on the
       Mac without a VM (spikes/dongle_acl_path). Parallels, the guests,
       the supply and the library are cleared
-- [ ] Put to the user: another Bluetooth adapter for the VMs, or native
-      Linux and Windows machines; then ST-013 from Linux and Windows.
-      Trying the dongle on a PC would show whether the unit is faulty
+- [ ] Put to the user 2026-10-04: the go-ahead for ST-002 and ST-013
+      from halobox (ST-013 needs a person at the supply to press ALLOW,
+      halobox being a new host), then the remaining Bluetooth system
+      tests from Linux there
+- [ ] Put to the user: a Bluetooth adapter or a native machine for
+      Windows; then ST-013 from Windows. Trying the dongle in halobox
+      would show whether the unit is faulty
+- [ ] Put to the user: UT-PY-020 fails on a machine with cargo and
+      without clippy (halobox, 2026-10-04). Skip in that case (a change
+      to the test's specification) or install clippy there
 - [x] ST-013 on macOS over Bluetooth 2026-10-03: the first connection of
       the library to the supply passes (record
       docs/v-model/records/2026-10-03-system-macos-ble-st013.md); the

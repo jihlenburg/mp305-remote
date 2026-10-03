@@ -2286,3 +2286,37 @@ it, three requests are reported as sent, and no data packet arrives on
 bulk IN. The loopback test returns no packet either. Nothing was sent to
 the supply. So the dongle fails in the same way with and without the
 firmware, also on the Mac itself. Capture: `2026-10-03T225259-dongle-acl-mac.jsonl`.
+
+### Halobox, a native Linux machine with its own Bluetooth
+
+The user made a second machine available for the Linux runs: "halobox",
+an AMD64 mini PC with Ubuntu 26.04 LTS (Linux 7.0.0-31, x86_64), BlueZ
+5.85 and a built-in Bluetooth adapter (USB `13d3:3604`), reached over
+SSH. Its access details are in the user's own repository for that
+machine and stay out of this one.
+
+Set up there: a clone of the public repository at `a5e3f01` in
+`~/mp305b`, and the package `libudev-dev`, which the build of `hidapi`
+needs (the only system change; logged in the machine's own logbook). The
+Python extension builds with the system's Rust 1.93.1 and a CPython
+3.10.20 managed by uv. The app is not built there, because it needs Rust
+1.95.
+
+Tests without hardware, as a check of the build and not as a
+verification record (the Linux record is
+docs/v-model/records/2026-10-02-unit-integration-linux.md):
+`cargo test --workspace --exclude mp305-app` passes with 390 tests and no
+failure. `pytest` has 200 passed, 1 skipped and 1 failed: UT-PY-020
+(`test_clippy_config_and_clippy`) fails with "no such command: clippy",
+because the machine has cargo without clippy and the test skips only
+when cargo is missing.
+
+Hardware, scans only: the OS sees the supply (`btmgmt find -l`, RSSI
+-56 dBm), and the library's `discover` finds it on native BlueZ 5.85 as
+one unit, `E!K`, with the remote flag set and RSSI -53 dBm. No
+connection was made and nothing above the link layer was sent. The
+supply's firmware versions were not read.
+
+Not run: ST-002 and ST-013 from halobox. They need `MP305_HIL`, and the
+user has not asked for hardware tests from this machine; the question is
+put to the user.
