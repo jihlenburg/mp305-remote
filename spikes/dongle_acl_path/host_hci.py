@@ -1,14 +1,22 @@
-"""Spike: speak HCI to the USB Bluetooth dongle from the Mac through libusb.
+"""Spike: speak HCI to the USB Bluetooth dongle directly, without the
+operating system's Bluetooth stack.
 
-No virtual machine and no operating system Bluetooth stack is in the path.
-Commands go out on the control endpoint, events come in on interrupt IN
-0x81, ACL data goes out on bulk OUT 0x02 and comes in on bulk IN 0x82.
-
-Run with the dongle on the host (no VM holds it):
+On the Mac the script goes through libusb: commands go out on the control
+endpoint, events come in on interrupt IN 0x81, ACL data goes out on bulk
+OUT 0x02 and comes in on bulk IN 0x82. No virtual machine may hold the
+dongle:
 
     uv run --no-project --with pyusb python host_hci.py loopback
     uv run --no-project --with pyusb python host_hci.py connect --peer supply --capture FILE
     uv run --no-project --with pyusb python host_hci.py connect --peer mac --capture FILE
+
+On Linux `--hci N` takes the adapter hciN through the kernel's HCI user
+channel instead, which hands the script every packet and keeps BlueZ out.
+The kernel's `btusb` then does the USB transfers. As root, with the
+adapter down:
+
+    hciconfig hci1 down
+    python3 host_hci.py connect --hci 1 --peer mac --capture FILE
 
 `connect` scans, connects to the peer, reads the peer's link-layer features
 and version, sends an ATT Exchange MTU Request and an ATT Read By Group
@@ -19,17 +27,16 @@ the script reports when it arrives.
 """
 
 import argparse
+import ctypes
 import datetime
 import json
 import platform
+import select
+import socket
 import struct
 import sys
 import threading
 import time
-
-import usb.backend.libusb1
-import usb.core
-import usb.util
 
 LIBUSB = "/opt/homebrew/lib/libusb-1.0.dylib"
 VID, PID = 0x0B05, 0x1D70
@@ -44,23 +51,15 @@ MAC_CHAR = bytes.fromhex("01006761696462353033706d02003d5a")
 
 
 class Dongle:
-    """The dongle's HCI transport, with a log of what crossed it."""
+    """An HCI transport to the dongle, with a log of what crossed it."""
+
+    stack = ""
 
     def __init__(self):
-        backend = usb.backend.libusb1.get_backend(find_library=lambda _: LIBUSB)
-        self.dev = usb.core.find(idVendor=VID, idProduct=PID, backend=backend)
-        if self.dev is None:
-            sys.exit("the dongle is not on the host")
-        self.dev.set_configuration()
-        usb.util.claim_interface(self.dev, 0)
         self.t0 = time.time()
         self.log = []
         self.secret = None
         self.acl_in = []
-        self.running = True
-        # One read stays pending on bulk IN and is never aborted: libusb on
-        # macOS clears the pipe after an aborted read.
-        threading.Thread(target=self._bulk_reader, daemon=True).start()
 
     def note(self, kind, data):
         text = data.hex()
@@ -68,34 +67,68 @@ class Dongle:
             text = text.replace(self.secret.hex(), "xxxxxx" + self.secret[3:].hex())
         self.log.append({"t": round(time.time() - self.t0, 3), "hci": kind, "hex": text})
 
-    def _bulk_reader(self):
-        while self.running:
-            try:
-                data = bytes(self.dev.read(0x82, 1028, timeout=4000))
-            except usb.core.USBTimeoutError:
-                continue
-            except usb.core.USBError:
-                return
-            self.acl_in.append(data)
-            self.note("acl in", data)
-
     def cmd(self, opcode, params=b""):
         packet = struct.pack("<HB", opcode, len(params)) + params
-        self.dev.ctrl_transfer(0x20, 0, 0, 0, packet)
+        self.send_command(packet)
         self.note("command", packet)
 
     def acl_out(self, handle, cid, payload):
         l2cap = struct.pack("<HH", len(payload), cid) + payload
         packet = struct.pack("<HH", handle, len(l2cap)) + l2cap
-        self.dev.write(0x02, packet, timeout=1000)
+        self.send_acl(packet)
         self.note("acl out", packet)
+
+    def close(self):
+        self.cmd(0x0C03)
+        self.events(0.5)
+
+
+class UsbDongle(Dongle):
+    """The dongle through libusb (the Mac)."""
+
+    stack = "none: HCI through libusb (pyusb), one pending read on bulk IN"
+
+    def __init__(self):
+        super().__init__()
+        import usb.backend.libusb1
+        import usb.core
+        import usb.util
+
+        self.usb = usb
+        backend = usb.backend.libusb1.get_backend(find_library=lambda _: LIBUSB)
+        self.dev = usb.core.find(idVendor=VID, idProduct=PID, backend=backend)
+        if self.dev is None:
+            sys.exit("the dongle is not on the host")
+        self.dev.set_configuration()
+        usb.util.claim_interface(self.dev, 0)
+        self.running = True
+        # One read stays pending on bulk IN and is never aborted: libusb on
+        # macOS clears the pipe after an aborted read.
+        threading.Thread(target=self._bulk_reader, daemon=True).start()
+
+    def _bulk_reader(self):
+        while self.running:
+            try:
+                data = bytes(self.dev.read(0x82, 1028, timeout=4000))
+            except self.usb.core.USBTimeoutError:
+                continue
+            except self.usb.core.USBError:
+                return
+            self.acl_in.append(data)
+            self.note("acl in", data)
+
+    def send_command(self, packet):
+        self.dev.ctrl_transfer(0x20, 0, 0, 0, packet)
+
+    def send_acl(self, packet):
+        self.dev.write(0x02, packet, timeout=1000)
 
     def events(self, seconds, stop=None, record=True):
         out, end = [], time.time() + seconds
         while time.time() < end:
             try:
                 event = bytes(self.dev.read(0x81, 255, timeout=60))
-            except usb.core.USBTimeoutError:
+            except self.usb.core.USBTimeoutError:
                 continue
             out.append(event)
             if record:
@@ -105,9 +138,52 @@ class Dongle:
         return out
 
     def close(self):
-        self.cmd(0x0C03)
-        self.events(0.5)
+        super().close()
         self.running = False
+
+
+class SocketDongle(Dongle):
+    """An adapter of Linux through the HCI user channel (root, adapter down)."""
+
+    def __init__(self, index):
+        super().__init__()
+        self.stack = f"none: the kernel's HCI user channel of hci{index} (btusb does the USB transfers)"
+        self.sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_RAW, socket.BTPROTO_HCI)
+
+        class SockaddrHci(ctypes.Structure):
+            _fields_ = [("family", ctypes.c_ushort), ("dev", ctypes.c_ushort), ("channel", ctypes.c_ushort)]
+
+        libc = ctypes.CDLL("libc.so.6", use_errno=True)
+        addr = SockaddrHci(socket.AF_BLUETOOTH, index, 1)  # 1 is HCI_CHANNEL_USER
+        if libc.bind(self.sock.fileno(), ctypes.byref(addr), ctypes.sizeof(addr)) != 0:
+            sys.exit(f"cannot take hci{index}: errno {ctypes.get_errno()} (root? adapter down?)")
+
+    def send_command(self, packet):
+        self.sock.send(b"\x01" + packet)
+
+    def send_acl(self, packet):
+        self.sock.send(b"\x02" + packet)
+
+    def events(self, seconds, stop=None, record=True):
+        out, end = [], time.time() + seconds
+        while time.time() < end:
+            ready, _, _ = select.select([self.sock], [], [], 0.06)
+            if not ready:
+                continue
+            packet = self.sock.recv(2048)
+            if packet[0] == 0x02:
+                self.acl_in.append(packet[1:])
+                self.note("acl in", packet[1:])
+                continue
+            if packet[0] != 0x04:
+                continue
+            event = packet[1:]
+            out.append(event)
+            if record:
+                self.note("event", event)
+            if stop and stop(event):
+                break
+        return out
 
 
 def local_version(dongle):
@@ -136,7 +212,7 @@ def loopback(dongle):
     if handle is not None:
         payload = bytes(range(16))
         packet = struct.pack("<HH", handle | 0x2000, len(payload)) + payload
-        dongle.dev.write(0x02, packet, timeout=1000)
+        dongle.send_acl(packet)
         done = [e for e in dongle.events(2.0) if e[0] == 0x13]
         print("completed-packets events:", len(done), "packets back:", len(dongle.acl_in))
     dongle.cmd(0x1802, b"\x00")
@@ -237,9 +313,11 @@ def connect(dongle, peer, capture):
     meta = {
         "spike": "dongle_acl_path", "script": "host_hci.py connect --peer " + peer,
         "started": started,
-        "host": f"macOS {platform.mac_ver()[0]} ({platform.machine()}), no virtual machine",
-        "stack": "none: HCI through libusb (pyusb), one pending read on bulk IN",
-        "adapter": "ASUS USB-BT600, USB 0b05:1d70 (Realtek RTL8761CU), on a port of the Mac",
+        "host": (f"macOS {platform.mac_ver()[0]}" if platform.system() == "Darwin"
+                 else f"{platform.system()} {platform.release()}")
+                + f" ({platform.machine()}), no virtual machine",
+        "stack": dongle.stack,
+        "adapter": "ASUS USB-BT600, USB 0b05:1d70 (Realtek RTL8761CU), on a USB port of the machine",
         "adapter_version": version,
         "peer": "the MP305B" if peer == "supply" else "the Mac's built-in Bluetooth (mac_peripheral.py)",
         "sent": "active scan, connection, link-layer feature and version queries, "
@@ -264,8 +342,9 @@ def main():
     parser.add_argument("action", choices=["loopback", "connect"])
     parser.add_argument("--peer", choices=["supply", "mac"], default="supply")
     parser.add_argument("--capture")
+    parser.add_argument("--hci", type=int, help="Linux: use hciN through the HCI user channel")
     args = parser.parse_args()
-    dongle = Dongle()
+    dongle = UsbDongle() if args.hci is None else SocketDongle(args.hci)
     try:
         if args.action == "loopback":
             loopback(dongle)

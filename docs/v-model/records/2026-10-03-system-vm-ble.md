@@ -81,3 +81,10 @@ USB passthrough is the cause: the dongle delivers no received data to its
 host. A Linux kernel that loads the firmware, named under "Open" above,
 does not help. The vendor driver in Windows was not tried. Another
 adapter or native machines are needed.
+
+Second follow-up, 2026-10-04: in a native Linux PC the same dongle
+receives data, also without its firmware (LOGBOOK 2026-10-04, "The dongle
+works on halobox: the fault is on the Mac's side"). The loss is tied to
+this Mac's USB host side, which Parallels and libusb share. A VM on this
+Mac will therefore not connect through this dongle, whatever the guest
+loads.

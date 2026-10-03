@@ -102,8 +102,9 @@ supply's advertisements, and mask the last three octets of its address.
 | `2026-10-03T224341-dongle-acl-supply.jsonl` | Bluetooth LE, raw HCI through the USB dongle on the Mac, no VM | a connection, link-layer feature and version queries, ATT Exchange MTU Request, ATT Read By Group Type Request; no frame of the protocol | The dongle delivers no received data, also without a VM | not read |
 | `2026-10-03T224614-dongle-acl-mac.jsonl` | the same, with the Mac's built-in Bluetooth as the peer instead of the supply | nothing to the supply | The dongle delivers no received data, also without a VM | does not apply |
 | `2026-10-03T225259-dongle-acl-mac.jsonl` | the same, after the dongle was unplugged and plugged in again (no firmware loaded) | nothing to the supply | The dongle after a power cycle | does not apply |
+| `2026-10-03T233607-dongle-acl-mac-linux.jsonl` | the same test with the dongle in the Linux machine halobox (HCI user channel, no firmware loaded), peer: the Mac's built-in Bluetooth | nothing to the supply | The dongle works on halobox: the fault is on the Mac's side | does not apply |
 
-These three come from [spikes/dongle_acl_path/](../../spikes/dongle_acl_path/).
+These four come from [spikes/dongle_acl_path/](../../spikes/dongle_acl_path/).
 Their file names carry the UTC time, so they are dated 2026-10-03 for runs
 made shortly after midnight local time on 2026-10-04. They hold the HCI
 packets of the dongle (`hci` says which kind, `hex` is the packet without

@@ -46,11 +46,11 @@ Open and finished work, grouped by V-model phase. The process is described in
       over it (spikes/vm_dongle_scan, TBD-009)
 - [ ] Connect to the supply from Linux and from Windows (read-only
       first), then the Bluetooth system tests there; needs the user's
-      go-ahead. The dongle at hand delivers no received data
-      (spikes/dongle_acl_path, 2026-10-04). Linux: the user's machine
+      go-ahead. The dongle at hand delivers no received data on this
+      Mac (spikes/dongle_acl_path, 2026-10-04). Linux: the user's machine
       "halobox" (native, own Bluetooth) is set up and sees the supply
-      since 2026-10-04. Windows: needs another adapter or a native
-      machine
+      since 2026-10-04. Windows: needs a machine that is not a VM on
+      this Mac
 - [ ] TBD-018: read-only Bluetooth spike that records the unsolicited
       `0xC5` when a setting is changed on the front panel
 - [x] Rewrite 2-system-requirements.md (revision 8) and 7-system-tests.md
@@ -177,8 +177,10 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Why connecting from the VMs fails, found 2026-10-04: the dongle
       (ASUS USB-BT600, `0b05:1d70`, RTL8761CU) hands no received data
       packet to its USB host, with its firmware loaded and also on the
-      Mac without a VM (spikes/dongle_acl_path). Parallels, the guests,
-      the supply and the library are cleared
+      Mac without a VM (spikes/dongle_acl_path). The guests, the supply
+      and the library are cleared. In the Linux PC halobox the same
+      dongle works, so the loss is on this Mac's USB host side, which
+      Parallels and libusb share
 - [x] ST-002 on Linux, native (halobox), 2026-10-04: passes (record
       docs/v-model/records/2026-10-04-system-linux-ble-halobox.md); the
       user gave the go-ahead for that machine
@@ -190,9 +192,9 @@ Open and finished work, grouped by V-model phase. The process is described in
       the next test fails with "a session ... is already open" instead of
       skipping, because the pre-flight's background close still runs
       (seen on halobox 2026-10-04). Wait for that close, or skip the run
-- [ ] Put to the user: a Bluetooth adapter or a native machine for
-      Windows; then ST-013 from Windows. Trying the dongle in halobox
-      would show whether the unit is faulty
+- [ ] Put to the user: a machine for the Windows runs whose USB is not
+      this Mac's (a native Windows PC, or a Windows VM on halobox with
+      the dongle passed through); then ST-013 from Windows
 - [x] UT-PY-020 on halobox 2026-10-04: clippy installed there at the
       user's request, and the one finding of clippy 1.93 fixed
       (`615d949`, DD-PROTO-023). The test still fails on a machine with

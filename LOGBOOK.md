@@ -2382,3 +2382,35 @@ collides with the close of the pre-flight's session, which still runs in
 the background ("a session ... is already open in this process"), and at
 exit that close had not completed within 1.0 s. Record:
 docs/v-model/records/2026-10-04-system-linux-ble-halobox.md.
+
+### The dongle works on halobox: the fault is on the Mac's side
+
+The user plugged the ASUS dongle into halobox. It runs there on its
+factory firmware (HCI revision `0x000e`; the firmware loaded on the Mac
+side was lost with the power) under the stock `btusb`, which binds it as
+a generic adapter. The test of spikes/dongle_acl_path, now with a second
+transport (the kernel's HCI user channel, `--hci 1`), was run against
+the Mac's built-in Bluetooth as the peer. Nothing was sent to the supply.
+
+Result: the dongle receives data on halobox. Four data packets arrived
+from the Mac, among them the answer `hello` to the read request and the
+answer to the MTU exchange (capture
+`2026-10-03T233607-dongle-acl-mac-linux.jsonl`). The loopback test
+returns its packet there as well.
+
+This settles the point left open in "The dongle delivers no received
+data, also without a VM": the unit is sound, and the loss happens on the
+Mac, where Parallels and libusb both use the USB host layer of macOS
+(27.0.1, Apple silicon). Why macOS loses the bulk IN data of this
+full-speed device is not known.
+
+Correction to point 6 of that entry: the loopback test does decide
+something. It works on halobox, so its failure on the Mac, in the VM and
+through libusb, showed the same loss of bulk IN data as the connection
+tests.
+
+Consequence for the hardware runs: Linux is covered by halobox with its
+own adapter. Windows needs a machine whose USB is not this Mac's: a
+native Windows PC, or a Windows VM on halobox with the dongle passed
+through. On halobox the dongle's adapter (hci1) was left switched off, so
+that the library keeps using the built-in adapter (hci0).

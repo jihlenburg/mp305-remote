@@ -1,0 +1,78 @@
+{"meta": {"spike": "dongle_acl_path", "script": "host_hci.py connect --peer mac", "started": "2026-10-03T23:36:07Z", "host": "Linux 7.0.0-31-generic (x86_64), no virtual machine", "stack": "none: the kernel's HCI user channel of hci1 (btusb does the USB transfers)", "adapter": "ASUS USB-BT600, USB 0b05:1d70 (Realtek RTL8761CU), on a USB port of the machine", "adapter_version": {"hci_version": 14, "hci_revision": "0x000e", "lmp_version": 14, "company": "0x005d", "lmp_subversion": "0x8761"}, "peer": "the Mac's built-in Bluetooth (mac_peripheral.py)", "sent": "active scan, connection, link-layer feature and version queries, ATT Read By Type Request for the test characteristic, ATT Exchange MTU Request, ATT Read By Group Type Request, disconnect; no frame of the supply's protocol", "firmware": "the supply's versions were not read in this run", "note": "The last three octets of the peer's address are masked (xxxxxx). Advertisements of other devices are not recorded, only their count."}}
+{"t": 0.002, "hci": "command", "hex": "030c00"}
+{"t": 0.013, "hci": "event", "hex": "0e0403030c00"}
+{"t": 1.041, "hci": "command", "hex": "011000"}
+{"t": 1.046, "hci": "event", "hex": "0e0c020110000e0e000e5d006187"}
+{"t": 1.588, "hci": "command", "hex": "010c08ffffffffffffff3f"}
+{"t": 1.592, "hci": "event", "hex": "0e0402010c00"}
+{"t": 1.833, "hci": "command", "hex": "0120081f00000000000000"}
+{"t": 1.838, "hci": "event", "hex": "0e0402012000"}
+{"t": 2.08, "hci": "command", "hex": "0b200701100010000000"}
+{"t": 2.084, "hci": "event", "hex": "0e04020b2000"}
+{"t": 2.326, "hci": "command", "hex": "0c20020100"}
+{"t": 8.344, "hci": "command", "hex": "0c20020000"}
+{"t": 8.35, "hci": "event", "hex": "0e04020c2000"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.652, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c2"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.652, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c2"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.652, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.652, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.652, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.652, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.652, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c2"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5abf"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "event", "hex": "3e0c02010400xxxxxx74d0bc00c0"}
+{"t": 8.653, "hci": "event", "hex": "3e2402010000xxxxxx74d0bc1802011a020a0c110701006761696462353033706d01003d5ac0"}
+{"t": 8.653, "hci": "command", "hex": "0d2019600030000000xxxxxx74d0bc00180028000000c80000000000"}
+{"t": 8.658, "hci": "event", "hex": "0f0400020d20"}
+{"t": 9.329, "hci": "event", "hex": "3e1301000c000000xxxxxx74d0bc28000000c80000"}
+{"t": 9.33, "hci": "command", "hex": "1620020c00"}
+{"t": 9.334, "hci": "event", "hex": "0f0400021620"}
+{"t": 9.393, "hci": "event", "hex": "3e0c04000c00fd79790800000000"}
+{"t": 10.445, "hci": "acl in", "hex": "0c200b0007000400100100ffff0028"}
+{"t": 11.351, "hci": "command", "hex": "1d04020c00"}
+{"t": 11.356, "hci": "event", "hex": "0f0400021d04"}
+{"t": 11.358, "hci": "event", "hex": "0c08000c000c0f008002"}
+{"t": 13.411, "hci": "acl out", "hex": "0c00190015000400080100ffff01006761696462353033706d02003d5a"}
+{"t": 13.444, "hci": "event", "hex": "1305010c000100"}
+{"t": 13.545, "hci": "acl in", "hex": "0c200d00090004000907200068656c6c6f"}
+{"t": 16.444, "hci": "acl out", "hex": "0c0007000300040002f700"}
+{"t": 16.593, "hci": "event", "hex": "1305010c000100"}
+{"t": 16.695, "hci": "acl in", "hex": "0c2007000300040003f700"}
+{"t": 19.473, "hci": "acl out", "hex": "0c000b0007000400100100ffff0028"}
+{"t": 19.593, "hci": "event", "hex": "1305010c000100"}
+{"t": 19.695, "hci": "acl in", "hex": "0c2018001400040011060100050000180600090001180a000e000a18"}
+{"t": 22.53, "hci": "command", "hex": "0604030c0013"}
+{"t": 22.648, "hci": "event", "hex": "0f0400020604"}
+{"t": 22.693, "hci": "event", "hex": "0504000c0016"}
+{"result": {"peer_seen": true, "connected": true, "advertisers_seen": 23, "peer_address_type": 0, "rssi_dbm": -64, "remote_features": "fd79790800000000", "remote_version": {"ll_version": 12, "company": "0x000f", "subversion": "0x0280"}, "acl_out": 3, "acl_out_completed": 3, "acl_in": 4, "link_dropped_reason": null}}

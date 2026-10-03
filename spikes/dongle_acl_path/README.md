@@ -11,7 +11,7 @@ On 2026-10-03 the Linux and the Windows VM could scan through the dongle
 link came up and no data packet ever arrived
 (docs/v-model/records/2026-10-03-system-vm-ble.md). Which part loses the
 data: the guest's driver or missing firmware, the USB passthrough of
-Parallels, the supply, or the dongle?
+Parallels, the supply, the dongle, or the Mac?
 
 ## Method
 
@@ -33,8 +33,10 @@ the controller on bulk IN `0x82`. The scripts watch each of them.
   service. The first request is a read of the test characteristic, and
   `mac_peripheral.py` prints every read request that reaches it.
 
-`host_hci.py` needs the dongle on the host: no VM may hold it (suspend a VM
-that does). It needs libusb from Homebrew. The commands are in the scripts'
+On the Mac `host_hci.py` needs the dongle on the host: no VM may hold it
+(suspend a VM that does). It needs libusb from Homebrew. On Linux
+`--hci N` runs the same test through the kernel's HCI user channel of
+hciN, as root with the adapter down. The commands are in the scripts'
 headers. In the capture files the advertising reports are written when the
 scan ends, so they all carry that time.
 
@@ -50,9 +52,11 @@ too (HCI revision `0x7bf1`, LMP subversion `0x5762`).
 
 ## Answer
 
-It is the dongle. It hands no received data packet to its USB host, on
-any host tried (2026-10-04; LOGBOOK, "The dongle delivers no received
-data, also without a VM").
+The dongle on this Mac's USB. The same dongle works on a PC, so the unit
+is sound; on the Mac its received data never reaches the USB host, with
+and without a VM (2026-10-04; LOGBOOK, "The dongle delivers no received
+data, also without a VM" and "The dongle works on halobox: the fault is
+on the Mac's side").
 
 1. With the firmware loaded in the Linux VM the connection to the supply
    fails as before. A USB trace (`usbmon`) shows the driver's two reads on
@@ -67,20 +71,28 @@ data, also without a VM").
    (`2026-10-03T224614-dongle-acl-mac.jsonl`) the Mac printed the read
    request and answered it. The answer never arrived on bulk IN. So the
    direction from the host to the peer works, and the direction from the
-   peer to the host stops inside the dongle or on its bulk IN pipe.
-4. That clears Parallels, the guests' drivers, the supply and the library.
-   It makes no difference whether the dongle sits on a USB hub or on a
-   port of the Mac.
-5. The loopback test decides nothing. No packet comes back in the VM, and
-   none comes back on the Mac either, so on this controller the test does
-   not tell a broken pipe from a loopback mode that does not echo.
-6. The controller answers "Set Controller To Host Flow Control" with
-   "unknown command", and setting the host buffer size changes nothing.
+   peer to the host is lost.
+4. That clears the guests' drivers, the supply and the library. On the
+   Mac it makes no difference whether the dongle sits on a USB hub or on
+   a port of the Mac, whether its firmware is loaded, or whether a VM is
+   in the path.
+5. In the Linux machine halobox (x86_64, kernel 7.0, the stock `btusb`
+   without the firmware) the same script, through the kernel's HCI user
+   channel, receives four data packets from the Mac, among them the
+   answer to the read request
+   (`2026-10-03T233607-dongle-acl-mac-linux.jsonl`). The loopback test
+   returns its packet there too.
+6. So the loopback test is a valid test on this controller, and its
+   failure on the Mac, in the VM and through libusb, shows the same loss
+   as the connection tests: nothing sent by the dongle on bulk IN arrives
+   at a host on this Mac.
+7. On the Mac the controller answers "Set Controller To Host Flow
+   Control" with "unknown command", and setting the host buffer size
+   changes nothing.
 
-Not answered: whether this unit would deliver data on a PC. The upstream
-patch reports the model working on Linux with the same driver entry and
-firmware (A2DP and ASHA). The unit at hand, or how it behaves on this
-Mac's USB ports, differs from that, and only another host can tell which.
+Not answered: why macOS loses the bulk IN data of this device (a
+full-speed device on an Apple silicon Mac, macOS 27.0.1). Parallels and
+libusb both go through the same USB host layer of macOS, and both fail.
 
 A side result is in docs/research/device-model.md, section 2.1: the
 supply's Bluetooth chip reports link-layer version 5.3 and the company
