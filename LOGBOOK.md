@@ -2948,3 +2948,46 @@ about other devices (`44b2463`), checked on the raw record of ST-013.
 Drafted and pending the user's approval: DD-PY-006 (py DD revision 7),
 which keeps the dependencies' TRACE lines out of the log bridge. Record:
 docs/v-model/records/2026-10-05-system-linux-ble-noperson.md.
+
+### Independent review of ADR-0018
+
+One independent review of the pending proposal for a reduced hardware
+verification (ADR-0018, the hardware verification plan, system tests
+revision 13, acceptance tests revision 10, process revision 3), made
+before the user decides. Nothing was changed in the proposal.
+
+Checked and fine: the counts of the cells in the ADR, the plan and the
+two matrices agree; all 50 ST and 36 AT entries and their Verifies
+columns are those of the baseline; the traceability check passes; the
+corrected front-panel procedures match their requirements.
+
+Findings, to be worked in or decided before an approval:
+
+1. Blocker. Decision 8 keeps "all physical fault checks", but ST-027
+   (the physical OCP trip) is a reuse cell on Linux and Windows, and so
+   are ST-014, ST-021 and ST-024, which trace to hazards.
+2. Blocker. The baseline's Linux and Windows cells were "VM", which
+   stood for CI until a dongle was at hand. The proposal counts them as
+   hardware cells and drops the VM and CI codes without a decision that
+   says so. With no Windows machine, every Windows cell stays open.
+3. AGENTS.md is not amended: it says acceptance tests run against a
+   release build and a real supply, and its verification record lists no
+   fields of a reuse record.
+4. An acceptance reuse cell can rest on a system reuse cell (AT-017 over
+   USB on ST-014 and ST-033), so no loaded reading over USB would ever
+   run on that OS.
+5. ST-038's sharing of the 30 min memory check between transports is not
+   among the ADR's decisions.
+6. Weak equivalence for ST-048 and ST-009 (prompt timing and callback
+   delivery differ between the Bluetooth backends), and for ST-014 and
+   ST-015 (their named prerequisites run without a load).
+7. Reuse that saves nothing: ST-033 and the USB cells of ST-024, ST-035,
+   AT-003, AT-017 and AT-029 run without a person.
+8. Out of date: ADR-0017 is accepted and implemented; ST-013 passes on
+   Linux through the dongle, which the plan should name as the adapter;
+   Windows has no test machine; the macOS results of 2026-10-03 predate
+   the new connect and close bounds.
+9. The reuse record needs the user's sign-off for system cells, and a
+   source result from the current build.
+
+The proposal stays pending. The findings are in TODO.md.

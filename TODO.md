@@ -290,6 +290,14 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] User approval of ADR-0018, ST revision 13, AT revision 10 and process
       revision 3 (drafted 2026-10-04). The approved baselines remain in
       force until approval. ADR-0017 is a separate pending decision.
+- [ ] ADR-0018 before approval: work in the independent review of
+      2026-10-05 (LOGBOOK, "Independent review of ADR-0018"). Two
+      blockers: ST-027 (the physical OCP trip) and ST-014, ST-021,
+      ST-024 lose their hardware evidence on Linux and Windows although
+      decision 8 keeps every physical fault check; and the counts treat
+      the baseline's VM cells, which stood for CI, as hardware cells, so
+      the withdrawal of that substitute and the open Windows column are
+      not stated as decisions
 - [ ] After approval, implement the ST-019/ST-049 procedure corrections,
       prepare the missing acceptance scripts and release artifacts, then
       execute the reduced matrices and record each reuse analysis. No
