@@ -2991,3 +2991,32 @@ Findings, to be worked in or decided before an approval:
    source result from the current build.
 
 The proposal stays pending. The findings are in TODO.md.
+
+### Decisions of the user on the log bridge, ST-034 and ADR-0018
+
+Put to the user as multiple choice on 2026-10-05; each answer is the
+recommended option unless noted.
+
+1. Log bridge: records of dependencies pass only at DEBUG and above.
+   This approves py DD revision 7 (DD-PY-006, UT-PY-002); the approved
+   document is in the commit that holds this entry.
+2. ST-034: where the link cannot keep up with a rate, the count is what
+   the link delivers and one warning per stream is logged, as SR-034
+   says. The wording goes into the reworked revision 13 of the system
+   tests.
+3. ADR-0018, hazard-related cells: ST-027, ST-014, ST-015, ST-021 and
+   ST-024 stay hardware on every OS and transport.
+4. ADR-0018, Windows: its cells are hardware obligations, the gap is
+   stated, and Windows is deferred for now (the user's own words on
+   ST-048 and ST-009: "defer windows for now"). No reuse is defined for
+   Windows.
+5. ADR-0018, cells without a person (ST-033, the USB cells of ST-035,
+   AT-003, AT-017 and AT-029): direct runs.
+6. ADR-0018, ST-048 and ST-009: read from the user's answer as hardware
+   on Linux, Windows deferred as in point 4.
+7. ADR-0018, rules for reuse, all four: the user signs off system reuse
+   records; the source result is from the current build or re-reviewed;
+   no acceptance reuse on top of a reused system cell; the memory check
+   of ST-038 is per transport.
+8. ADR-0018 is to be reworked with the small reuse set that is left and
+   brought back for one approval.

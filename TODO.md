@@ -191,11 +191,11 @@ Open and finished work, grouped by V-model phase. The process is described in
       dongle): ST-002, ST-004, ST-013, ST-033 pass, and the parts
       without a person of ST-012, ST-017, ST-031, ST-039 and ST-043
       (record docs/v-model/records/2026-10-05-system-linux-ble-noperson.md)
-- [ ] Put to the user: ST-034 fails on Linux at 4 readings per second
-      (86 of 120 in 30 s; the link delivers 2.5 to 3.3 per second with
-      BlueZ's default connection interval). The library warns as SR-034
-      says. Decide: the entry's expected result for a link that cannot
-      keep up, or a faster link on Linux
+- [x] ST-034 decided by the user 2026-10-05: a link that cannot keep
+      up delivers what it has, with one warning per stream (SR-034)
+- [ ] ST-034: word the expected result in the reworked revision 13 of
+      the system tests, change the test after the approval, rerun on
+      Linux
 - [ ] The system tests on Linux that need a person, Load A or B, or USB
       (halobox, the dongle); needs the user at the supply
 - [x] Decided by the user 2026-10-04 (ADR-0017): close bound 5 s,
@@ -216,10 +216,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] System tests: the run record masks Bluetooth addresses and
       leaves out the dependencies' lines and discovery's lines about
       other devices (`44b2463`, 2026-10-05)
-- [ ] Approval of py DD revision 7 (DD-PY-006): the log bridge passes
-      records of dependencies only at DEBUG and above, so their TRACE
-      lines no longer flood the queue (5383, 1073 and 1633 records
-      dropped in the runs of 2026-10-05). Then implement
+- [x] py DD revision 7 (DD-PY-006) approved by the user 2026-10-05:
+      the log bridge passes records of dependencies only at DEBUG and
+      above
+- [ ] Implement py DD revision 7 (started 2026-10-05), verify on the
+      Mac and on halobox (no dropped records in a connect on Linux)
 - [ ] Check on Linux whether a Bluetooth link outlives its process
       (BlueZ owns the connection): the app's dropped close at exit and a
       killed Python process rely on "the link drops, the supply clears
@@ -290,14 +291,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] User approval of ADR-0018, ST revision 13, AT revision 10 and process
       revision 3 (drafted 2026-10-04). The approved baselines remain in
       force until approval. ADR-0017 is a separate pending decision.
-- [ ] ADR-0018 before approval: work in the independent review of
-      2026-10-05 (LOGBOOK, "Independent review of ADR-0018"). Two
-      blockers: ST-027 (the physical OCP trip) and ST-014, ST-021,
-      ST-024 lose their hardware evidence on Linux and Windows although
-      decision 8 keeps every physical fault check; and the counts treat
-      the baseline's VM cells, which stood for CI, as hardware cells, so
-      the withdrawal of that substitute and the open Windows column are
-      not stated as decisions
+- [ ] Rework ADR-0018 (started 2026-10-05) along the review and the
+      user's decisions of 2026-10-05 (LOGBOOK): the hazard-related
+      entries and the cells without a person are hardware, Windows is a
+      deferred hardware obligation without reuse, the four reuse rules,
+      the amendments to AGENTS.md; then one approval
 - [ ] After approval, implement the ST-019/ST-049 procedure corrections,
       prepare the missing acceptance scripts and release artifacts, then
       execute the reduced matrices and record each reuse analysis. No
