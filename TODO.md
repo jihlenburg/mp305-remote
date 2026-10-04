@@ -219,8 +219,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] py DD revision 7 (DD-PY-006) approved by the user 2026-10-05:
       the log bridge passes records of dependencies only at DEBUG and
       above
-- [ ] Implement py DD revision 7 (started 2026-10-05), verify on the
-      Mac and on halobox (no dropped records in a connect on Linux)
+- [x] py DD revision 7 implemented 2026-10-05 and verified at unit
+      level on the Mac (record
+      docs/v-model/records/2026-10-05-unit-py-rev7.md)
+- [ ] py DD revision 7 on Linux: a connect with the frame log on shows
+      no "log records were dropped"
 - [ ] Check on Linux whether a Bluetooth link outlives its process
       (BlueZ owns the connection): the app's dropped close at exit and a
       killed Python process rely on "the link drops, the supply clears

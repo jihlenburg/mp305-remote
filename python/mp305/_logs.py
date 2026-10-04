@@ -70,7 +70,9 @@ def set_log_level(level: int) -> None:
     `set_log_level(5)` switches the frame log (`mp305.core.frames`, level
     TRACE) on in one call. A level above WARNING acts as WARNING: the
     library never switches off its own WARNING and ERROR records, although
-    the user's `logging` configuration still can.
+    the user's `logging` configuration still can. Records of the Bluetooth
+    dependencies (`mp305.deps.`) arrive only at DEBUG and above, whatever
+    the level.
 
     Args:
         level: A `logging` level; 5 is TRACE.

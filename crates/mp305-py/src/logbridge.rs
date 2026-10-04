@@ -1,8 +1,12 @@
 //! Implements: DD-PY-006
 //!
 //! The bridge from the `log` crate to Python's `logging`. One `log::Log`
-//! is installed per process; it queues every record at or above a gate
-//! (default WARN) with the time of the Rust call, and never touches Python.
+//! is installed per process; it queues every record that [`admits`] lets
+//! through, with the time of the Rust call, and never touches Python. A
+//! record of the project's own crates (`mp305_core`, `mp305_py`) passes at
+//! a gate (default WARN); a record of any other crate passes only at DEBUG
+//! and above, whatever the gate, so the TRACE lines of the Bluetooth
+//! dependencies never enter the queue. Nothing is formatted below the gate.
 //! Records reach `logging` only on Python threads: in the pump of a
 //! blocking call, or on the delivery thread `mp305-log` that loops
 //! `log_wait`. One emitter at a time (the log token) keeps the order.
@@ -88,7 +92,7 @@ impl Default for Queue {
 /// The process-wide queue.
 static QUEUE: Mutex<Queue> = Mutex::new(Queue::new());
 /// The gate as a `LevelFilter` discriminant; records above it are not
-/// queued.
+/// queued, and records of other crates are capped at DEBUG ([`admits`]).
 static GATE: AtomicUsize = AtomicUsize::new(LevelFilter::Warn as usize);
 /// Notified on every push.
 static ARRIVED: tokio::sync::Notify = tokio::sync::Notify::const_new();
@@ -110,7 +114,7 @@ static BRIDGE: Bridge = Bridge;
 
 impl Log for Bridge {
     fn enabled(&self, metadata: &Metadata<'_>) -> bool {
-        metadata.level() as usize <= GATE.load(Ordering::Relaxed)
+        admits(current_gate(), metadata.target(), metadata.level())
     }
 
     fn log(&self, record: &log::Record<'_>) {
@@ -128,6 +132,45 @@ impl Log for Bridge {
     }
 
     fn flush(&self) {}
+}
+
+/// The gate in [`GATE`] as a `LevelFilter`. Only [`set_gate`] and the
+/// initial value write [`GATE`], both with a `LevelFilter` discriminant, so
+/// the fallback (WARN, the default gate) is never taken.
+fn current_gate() -> LevelFilter {
+    let raw = GATE.load(Ordering::Relaxed);
+    [
+        LevelFilter::Off,
+        LevelFilter::Error,
+        LevelFilter::Warn,
+        LevelFilter::Info,
+        LevelFilter::Debug,
+        LevelFilter::Trace,
+    ]
+    .into_iter()
+    .find(|filter| *filter as usize == raw)
+    .unwrap_or(LevelFilter::Warn)
+}
+
+/// Whether `target` is one of the project's own crates: exactly
+/// `mp305_core` or `mp305_py`, or one of them followed by `::`.
+fn is_own(target: &str) -> bool {
+    ["mp305_core", "mp305_py"].into_iter().any(|own| {
+        target
+            .strip_prefix(own)
+            .is_some_and(|rest| rest.is_empty() || rest.starts_with("::"))
+    })
+}
+
+/// Whether a record of `target` at `level` is queued under `gate`: a
+/// record of the project's own crates (a target that is `mp305_core` or
+/// `mp305_py`, or starts with one of them and `::`) passes at the gate; a
+/// record of any other crate passes at the gate too, but never at TRACE,
+/// whatever the gate. Pure, so that the bridge's `enabled` decides before
+/// anything is formatted.
+#[must_use]
+pub fn admits(gate: LevelFilter, target: &str, level: Level) -> bool {
+    level <= gate && (level <= Level::Debug || is_own(target))
 }
 
 /// Installs the bridge as the process's logger, once. A `SetLoggerError`
@@ -460,6 +503,28 @@ mod tests {
                 LevelFilter::Warn,
             ]
         );
+    }
+
+    /// Test: UT-PY-002
+    #[test]
+    fn admits_own_crates_at_the_gate_and_others_from_debug() {
+        let trace = LevelFilter::Trace;
+        assert!(admits(trace, "mp305_core::frames", Level::Trace));
+        assert!(admits(trace, "mp305_py::safety", Level::Trace));
+        assert!(!admits(trace, "bluez_async::events", Level::Trace));
+        assert!(admits(trace, "bluez_async::events", Level::Debug));
+        assert!(!admits(trace, "mp305_corelike::x", Level::Trace));
+        let warn = LevelFilter::Warn;
+        assert!(admits(
+            warn,
+            "btleplug::corebluetooth::adapter",
+            Level::Warn
+        ));
+        assert!(!admits(
+            warn,
+            "btleplug::corebluetooth::adapter",
+            Level::Info
+        ));
     }
 
     /// Test: UT-PY-002

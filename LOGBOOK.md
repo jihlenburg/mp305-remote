@@ -3050,3 +3050,25 @@ revision 13, acceptance tests revision 10 and process revision 3.
 
 The traceability check passes; the counts in the ADR, the plan and the
 two matrices agree. No device I/O.
+
+### Log bridge: dependencies capped at DEBUG, implemented
+
+A coding agent implemented py DD revision 7; the main session read the
+change and ran the gates again. `logbridge::admits` lets a record of the
+project's own crates pass at the gate and a record of any other crate
+only at DEBUG and above. UT-PY-002 passes with its new cases; all gates
+pass on the Mac (525 Rust tests, 201 Python tests with 1 skipped).
+Record: docs/v-model/records/2026-10-05-unit-py-rev7.md. The check on
+Linux, where the flood was seen, is still to come.
+
+### Further decisions of the user
+
+Put to the user as multiple choice on 2026-10-05, each answer the
+recommended option:
+
+1. The reworked ADR-0018 is approved, with system tests revision 13,
+   acceptance tests revision 10, process revision 3 and the amendments
+   to AGENTS.md.
+2. ST-043 and ST-050 state a recovery within 30 s instead of 10 s.
+3. The notes on the work on halobox are committed in that machine's own
+   repository, without a push.
