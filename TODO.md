@@ -212,6 +212,25 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Put to the user: a machine for the Windows runs whose USB is not
       this Mac's (a native Windows PC, or a Windows VM on halobox with
       the dongle passed through); then ST-013 from Windows
+- [x] Assess the attached NINA-B506 as an alternative Bluetooth controller
+      (2026-10-04): USB enumeration identifies its FTDI UART and J-Link.
+      NXP's MCX W71 HCI Black Box example provides a plausible UART-to-BlueZ
+      path for Ubuntu, requiring EVK adaptation and hardware validation.
+      Current board firmware is unknown; no flashing or implementation
+      was performed. Findings and sources are in
+      `docs/research/asus-usb-bt600-macos.md`.
+- [ ] Diagnose the ASUS USB-BT600 receive path on the Mac (started
+      2026-10-04, requested by the user after reconnecting the dongle):
+      expose USB errors, compare local loopback transfer parameters and
+      initialization, and distinguish a probe defect from a host/device
+      compatibility problem. No power-supply commands are needed.
+      Ubuntu 26.04 VM comparison completed 2026-10-04: both stock btusb
+      and direct libusb reproduce zero received ACL bytes, with valid
+      USB traces of successful writes and pending reads cancelled at
+      timeout or cleanup. Bluetooth and the driver were restored. Record:
+      `docs/research/asus-usb-bt600-macos.md`. The exact host/device defect
+      remains open; another physical controller path and the modern
+      IOUSBHost API have not yet been compared.
 - [x] UT-PY-020 on halobox 2026-10-04: clippy installed there at the
       user's request, and the one finding of clippy 1.93 fixed
       (`615d949`, DD-PROTO-023). The test still fails on a machine with

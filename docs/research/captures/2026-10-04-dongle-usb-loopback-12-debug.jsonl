@@ -1,0 +1,6 @@
+{"t": 0.014289, "kind": "meta", "spike": "dongle_acl_path", "script": "usb_loopback.py", "started": "2026-10-04T10:26:09.714777+00:00", "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O", "adapter": "ASUS USB-BT600 0b05:1d70", "firmware": "controller version recorded in HCI Read Local Version reply; no supply", "parameters": {"capture": "docs/research/captures/2026-10-04-dongle-usb-loopback-12-debug.jsonl", "read_size": 64, "payload_size": 16, "timeout_ms": 1500, "read_before_write": false, "set_configuration": false, "set_alt": false, "clear_halt": false, "stop_at_command_complete": true}, "command": "spikes/dongle_acl_path/usb_loopback.py --capture docs/research/captures/2026-10-04-dongle-usb-loopback-12-debug.jsonl --read-size 64 --stop-at-command-complete"}
+{"t": 0.020706, "kind": "usb_status", "operation": "init", "result": 0, "error": null}
+{"t": 0.020796, "kind": "usb_status", "operation": "get_configuration", "result": 0, "error": null}
+{"t": 0.020857, "kind": "configuration", "value": 1, "kernel_driver": 1}
+{"t": 0.020997, "kind": "usb_status", "operation": "claim_interface", "result": -3, "error": "LIBUSB_ERROR_ACCESS"}
+{"t": 0.021018, "kind": "failure", "error": "RuntimeError('claim_interface: LIBUSB_ERROR_ACCESS')"}

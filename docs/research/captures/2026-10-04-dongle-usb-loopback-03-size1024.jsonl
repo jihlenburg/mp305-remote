@@ -1,0 +1,23 @@
+{"t": 0.013899, "kind": "meta", "spike": "dongle_acl_path", "script": "usb_loopback.py", "started": "2026-10-04T10:24:53.114100+00:00", "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O", "adapter": "ASUS USB-BT600 0b05:1d70", "firmware": "controller version recorded in HCI Read Local Version reply; no supply", "parameters": {"capture": "docs/research/captures/2026-10-04-dongle-usb-loopback-03-size1024.jsonl", "read_size": 1024, "payload_size": 16, "timeout_ms": 1500, "read_before_write": false, "set_configuration": false, "set_alt": false, "clear_halt": false}, "command": "spikes/dongle_acl_path/usb_loopback.py --capture docs/research/captures/2026-10-04-dongle-usb-loopback-03-size1024.jsonl --read-size 1024"}
+{"t": 0.018846, "kind": "usb_status", "operation": "init", "result": 0, "error": null}
+{"t": 0.018927, "kind": "usb_status", "operation": "get_configuration", "result": 0, "error": null}
+{"t": 0.018987, "kind": "configuration", "value": 1, "kernel_driver": 0}
+{"t": 0.019138, "kind": "usb_status", "operation": "claim_interface", "result": 0, "error": null}
+{"t": 0.022848, "kind": "hci_command", "hex": "030c00", "result": 3}
+{"t": 0.029843, "kind": "hci_event", "result": 0, "transferred": 6, "hex": "0e0403030c00"}
+{"t": 0.338889, "kind": "hci_command", "hex": "011000", "result": 3}
+{"t": 0.339818, "kind": "hci_event", "result": 0, "transferred": 14, "hex": "0e0c020110000e0e000e5d006187"}
+{"t": 0.649929, "kind": "hci_command", "hex": "02180101", "result": 4}
+{"t": 0.65084, "kind": "hci_event", "result": 0, "transferred": 13, "hex": "030b00010013ab1fe282b00100"}
+{"t": 0.652895, "kind": "hci_event", "result": 0, "transferred": 13, "hex": "030b00020013ab1fe282b00000"}
+{"t": 0.654833, "kind": "hci_event", "result": 0, "transferred": 13, "hex": "030b00030013ab1fe282b00000"}
+{"t": 0.65684, "kind": "hci_event", "result": 0, "transferred": 13, "hex": "030b00040013ab1fe282b00000"}
+{"t": 0.658857, "kind": "hci_event", "result": 0, "transferred": 6, "hex": "0e0402021800"}
+{"t": 1.170619, "kind": "bulk_out", "result": 0, "transferred": 20, "hex": "01201000000102030405060708090a0b0c0d0e0f"}
+{"t": 2.842603, "kind": "bulk_in", "result": -7, "error": "LIBUSB_ERROR_TIMEOUT", "transferred": 0, "hex": "", "elapsed_s": 1.671552}
+{"t": 2.843893, "kind": "hci_event", "result": 0, "transferred": 7, "hex": "13050101000100"}
+{"t": 3.151728, "kind": "result", "loopback_handles": [1], "bulk_in": [{"result": -7, "error": "LIBUSB_ERROR_TIMEOUT", "transferred": 0, "hex": "", "elapsed_s": 1.671552}], "payload_matches": false, "completion_events": ["13050101000100"], "version_events": ["0e0c020110000e0e000e5d006187"]}
+{"t": 3.155992, "kind": "hci_command", "hex": "030c00", "result": 3}
+{"t": 3.169089, "kind": "hci_event", "result": 0, "transferred": 6, "hex": "0e0403030c00"}
+{"t": 3.373183, "kind": "cleanup", "operation": "HCI Reset", "result": "sent; replies retained"}
+{"t": 3.374205, "kind": "cleanup", "operation": "release_interface", "result": 0}

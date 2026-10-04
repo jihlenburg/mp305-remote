@@ -15,10 +15,28 @@ Parallels, the supply, the dongle, or the Mac?
 
 ## Method
 
+The follow-up of 2026-10-04 asks whether the Mac failure comes from the
+probe's transfer parameters or initialization, or from USB handling below
+it. `usb_loopback.py` calls libusb directly, reports status and partial
+byte counts, varies receive size and initialization, and uses only local
+controller loopback. It resets the dongle on exit. It makes no radio
+connection and sends no power-supply commands. Each JSONL capture is
+created exclusively under `docs/research/captures/`.
+
 HCI over USB uses four pipes: commands on the control endpoint, events on
 interrupt IN `0x81`, data to the controller on bulk OUT `0x02`, data from
 the controller on bulk IN `0x82`. The scripts watch each of them.
 
+- `linux_loopback.py --hci N --capture FILE`: the recorded Linux HCI
+  user-channel local-loopback probe. It verifies the adapter's USB ID,
+  retains events and resets the controller in cleanup.
+- `usb_loopback.py --detach-kernel-driver --capture FILE`: the direct
+  libusb probe on Linux, temporarily detaching interface 0 and reattaching
+  its original driver afterwards.
+- `usbmon_probe.py --capture FILE -- python3 PROBE ...`: wraps a Linux
+  probe with USB tracing filtered to this dongle's bus and device address.
+  It requires root and the usbmon module. The JSONL retains raw text lines
+  unchanged. It records software requests and callbacks, not wire packets.
 - `vm_loopback.py`, in the Linux VM as root: HCI local loopback through a
   raw HCI socket. One data packet goes out and should come back. No radio
   traffic.
@@ -52,11 +70,20 @@ too (HCI revision `0x7bf1`, LMP subversion `0x5762`).
 
 ## Answer
 
-The dongle on this Mac's USB. The same dongle works on a PC, so the unit
-is sound; on the Mac its received data never reaches the USB host, with
-and without a VM (2026-10-04; LOGBOOK, "The dongle delivers no received
-data, also without a VM" and "The dongle works on halobox: the fault is
-on the Mac's side").
+The dongle fails in the tested Mac USB setup. The same unit receives
+data on a PC; on the Mac neither the VM nor the native probe receives
+its connection data (2026-10-04; LOGBOOK, "The dongle delivers no
+received data, also without a VM" and "The dongle works on halobox:
+the fault is on the Mac's side"). The follow-up
+[USB API experiments](../../docs/research/asus-usb-bt600-macos.md)
+reproduce local-loopback failure through IOUSBLib without libusb. The
+precise host/device compatibility defect remains unidentified.
+
+The repeated Ubuntu 26.04.1 ARM64 comparison on 2026-10-04 reproduced
+the local-loopback failure through both stock `btusb` and direct libusb.
+The retained USB traces show successful writes and reads that deliver
+zero bytes before cancellation. Captures, setup, discarded trace attempts
+and restoration are detailed in the linked USB API record.
 
 1. With the firmware loaded in the Linux VM the connection to the supply
    fails as before. A USB trace (`usbmon`) shows the driver's two reads on

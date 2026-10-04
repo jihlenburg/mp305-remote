@@ -1,0 +1,36 @@
+{"kind":"meta","script":"iokit_loopback.c","epoch":1791109648,"kernel":"27.0.0","architecture":"arm64","adapter":"ASUS 0b05:1d70","transport":"IOUSBLib directly, no libusb","sent":"HCI reset/version/local loopback and one 20-byte ACL packet; no radio or supply commands"}
+{"kind":"status","operation":"device_plugin","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"status","operation":"device_open","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"status","operation":"get_configuration","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"status","operation":"interface_open","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"pipe","pipe":1,"direction":1,"endpoint":1,"type":3,"max_packet":64,"interval":1}
+{"kind":"status","operation":"pipe_status","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"pipe","pipe":2,"direction":0,"endpoint":2,"type":2,"max_packet":64,"interval":0}
+{"kind":"status","operation":"pipe_status","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"pipe","pipe":3,"direction":1,"endpoint":2,"type":2,"max_packet":64,"interval":0}
+{"kind":"status","operation":"pipe_status","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"status","operation":"event_source","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"command","size":3,"hex":"030c00"}
+{"kind":"status","operation":"command_write","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"event","size":6,"hex":"0e0403030c00"}
+{"kind":"command","size":3,"hex":"011000"}
+{"kind":"status","operation":"command_write","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"event","size":14,"hex":"0e0c020110000e0e000e5d006187"}
+{"kind":"command","size":4,"hex":"02180101"}
+{"kind":"status","operation":"command_write","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"event","size":13,"hex":"030b00010013ab1fe282b00100"}
+{"kind":"event","size":13,"hex":"030b00020013ab1fe282b00000"}
+{"kind":"event","size":13,"hex":"030b00030013ab1fe282b00000"}
+{"kind":"event","size":13,"hex":"030b00040013ab1fe282b00000"}
+{"kind":"event","size":6,"hex":"0e0402021800"}
+{"kind":"status","operation":"bulk_out","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"bulk_out","size":20,"hex":"01201000000102030405060708090a0b0c0d0e0f"}
+{"kind":"status","operation":"bulk_in","status":"0xe0004051","description":"(iokit/usb) transaction timed out"}
+{"kind":"result","bulk_status":"0xe0004051","valid_bytes":0,"payload_matches":false}
+{"kind":"status","operation":"bulk_in_pipe_status_after","status":"0xe000404f","description":"(iokit/usb) pipe has stalled, error needs to be cleared"}
+{"kind":"event","size":7,"hex":"13050101000100"}
+{"kind":"command","size":3,"hex":"030c00"}
+{"kind":"status","operation":"command_write","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"event","size":6,"hex":"0e0403030c00"}
+{"kind":"status","operation":"interface_close","status":"0x00000000","description":"(os/kern) successful"}
+{"kind":"status","operation":"device_close","status":"0x00000000","description":"(os/kern) successful"}

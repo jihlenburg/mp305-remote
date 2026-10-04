@@ -1,0 +1,18 @@
+{"t": 0.002783, "kind": "meta", "spike": "dongle_acl_path", "script": "linux_loopback.py", "started": "2026-10-04T12:32:14.462365+00:00", "host": "Linux-7.0.0-38-generic-aarch64-with-glibc2.43", "adapter": "ASUS USB-BT600 0b05:1d70", "usb_path": "/sys/devices/pci0000:00/0000:00:03.0/usb1/1-2/1-2.1", "os_release": "PRETTY_NAME=\"Ubuntu 26.04.1 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"26.04\"\nVERSION=\"26.04.1 LTS (Resolute Raccoon)\"\nVERSION_CODENAME=resolute\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=resolute\nLOGO=ubuntu-logo\n", "command": "linux_loopback.py --hci 0 --capture 2026-10-04-dongle-usb-loopback-17-ubuntu-btusb.jsonl", "transport": "HCI user channel through btusb", "firmware": "Read Local Version reply retained; no power supply"}
+{"t": 0.003087, "kind": "hci", "hci": "command", "hex": "030c00"}
+{"t": 0.012032, "kind": "hci", "hci": "event", "hex": "0e0403030c00"}
+{"t": 0.324267, "kind": "hci", "hci": "command", "hex": "011000"}
+{"t": 0.329664, "kind": "hci", "hci": "event", "hex": "0e0c020110000e0e000e5d006187"}
+{"t": 0.6431, "kind": "hci", "hci": "command", "hex": "02180101"}
+{"t": 0.647223, "kind": "hci", "hci": "event", "hex": "030b00010013ab1fe282b00100"}
+{"t": 0.650854, "kind": "hci", "hci": "event", "hex": "030b00020013ab1fe282b00000"}
+{"t": 0.653342, "kind": "hci", "hci": "event", "hex": "030b00030013ab1fe282b00000"}
+{"t": 0.6563, "kind": "hci", "hci": "event", "hex": "030b00040013ab1fe282b00000"}
+{"t": 0.65928, "kind": "hci", "hci": "event", "hex": "0e0402021800"}
+{"t": 1.156263, "kind": "hci", "hci": "acl out", "hex": "01201000000102030405060708090a0b0c0d0e0f"}
+{"t": 1.16035, "kind": "hci", "hci": "event", "hex": "13050101000100"}
+{"t": 4.204938, "kind": "result", "payload_matches": false, "received_packets": 0, "handles": [1], "completion_events": ["13050101000100"]}
+{"t": 4.205551, "kind": "hci", "hci": "command", "hex": "030c00"}
+{"t": 4.215511, "kind": "hci", "hci": "event", "hex": "0e0403030c00"}
+{"t": 4.723489, "kind": "cleanup", "operation": "HCI Reset", "result": "sent; replies retained"}
+{"t": 4.739264, "kind": "cleanup", "operation": "close HCI user channel", "result": "closed"}

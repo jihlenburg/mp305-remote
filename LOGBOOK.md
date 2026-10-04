@@ -2678,3 +2678,93 @@ the changed fields, cell counts, reuse sources and document links, and
 the regenerated traceability matrix reported no defects. TODO.md records
 the pending approval and follow-up work. No device I/O was performed,
 test result promoted, failure waived or commit made for this proposal.
+
+### ASUS dongle local loopback through independent USB APIs
+
+The user reconnected the ASUS USB-BT600 to the Mac and requested a root
+cause investigation. Twelve completed local-loopback probes through the
+libusb C API returned receive timeouts with zero bytes, while their HCI
+outbound completion events arrived. Receive sizes, packet lengths,
+read-before-write ordering, endpoint halt clearing, alternate-setting
+selection, reconfiguration, timeout duration and interrupt polling did
+not change the result. One overlapping invocation was refused exclusive
+access and is retained as an inconclusive attempt.
+
+A separate C probe through Apple's IOUSBLib, without libusb, reproduced
+the failure. Bulk IN returned `0xe0004051` (USB transaction timeout),
+then its pipe status was `0xe000404f` (stalled). This localizes the
+reproduction below libusb and the Bluetooth host stack, but does not
+identify which host/device behavior causes it. It qualifies the earlier
+heading "The dongle works on halobox: the fault is on the Mac's side":
+the Mac setup is implicated, but an exact Apple driver or hardware defect
+has not been established.
+
+Record: `docs/research/asus-usb-bt600-macos.md`. Captures:
+`2026-10-04-dongle-usb-loopback-01-default.jsonl` through
+`2026-10-04-dongle-usb-loopback-14-iokit.jsonl`, as individually listed
+there. Transport: the dongle's USB HCI interface; controller HCI revision
+`0x000e`, LMP subversion `0x8761`. Every completed probe reset the
+controller and released its interface afterwards. No radio connection
+was made and nothing was sent to the supply. The user was asked to move
+the idle dongle to another Mac port for comparison.
+
+### Ubuntu VM comparison prepared
+
+The user requested attaching the ASUS dongle to Ubuntu 26.04 and testing
+there. The stopped Ubuntu 26.04.1 ARM64 VM was started and Parallels
+confirmed that USB `0b05:1d70` is attached to it. Its autoconnect rule was
+changed from asking to this VM. The VM has no Parallels Tools and its
+SSH port refuses connections. Console input did not open a terminal;
+the user was asked to start the SSH service in the guest.
+
+Local-loopback probes for Linux's HCI user channel and direct libusb,
+plus a usbmon capture wrapper filtered to this dongle, were prepared and
+syntax checked. No new Ubuntu diagnostic run or supply I/O has occurred.
+The research record and TODO retain this comparison as pending.
+
+### Ubuntu VM reproduces the ASUS dongle receive failure
+
+After the user installed OpenSSH Server, the Ubuntu 26.04.1 ARM64 VM
+was accessed over SSH. It runs kernel 7.0.0-38-generic and the stock btusb
+driver. Local loopback through both the HCI user channel and direct
+libusb reproduced zero received ACL packets. Outgoing USB writes and the
+controller's completion events succeeded. usbmon showed the guest's
+receive requests remaining pending until timeout or teardown, then
+returning cancellation status with zero bytes. This confirms that the
+VM does not avoid the receive failure, without identifying its exact
+host/device cause.
+
+Captures: `2026-10-04-dongle-usb-loopback-15-ubuntu-btusb.jsonl`,
+`16-ubuntu-libusb.jsonl`, `17-ubuntu-btusb.jsonl` and
+`18-ubuntu-libusb.jsonl`, with the same date/prefix for each and a paired
+`-usbmon.jsonl` capture. Case 15 could not bind the busy adapter. The
+initial usbmon reader failed on EAGAIN in cases 15 and 16; those empty
+traces remain retained and inconclusive. The reader was repaired and
+cases 17 and 18 produced valid traces. Guest and local capture hashes
+match. Record and exact procedure:
+`docs/research/asus-usb-bt600-macos.md`, "Ubuntu VM comparison".
+
+Transport: dongle USB HCI through Parallels 27.0.1; controller firmware
+HCI revision 0x000e, LMP subversion 0x8761, read in every completed probe.
+No firmware was loaded and no supply command or radio connection was
+made. Completed probes reset the dongle; libusb restored its driver.
+The temporary Bluetooth service mask was removed, Bluetooth restored
+active and enabled, hci0 restored UP RUNNING, and usbmon unloaded.
+The VM remains running with the dongle attached. TODO and the spike
+documentation were updated; the precise compatibility defect remains
+open. These diagnostic runs do not credit any ST or AT result.
+
+### NINA-B506 controller feasibility inspected
+
+The user asked how their attached u-blox NINA-B506 evaluation board
+could be used. Read-only USB and serial enumeration found the board's
+FTDI UART and SEGGER J-Link interfaces. Vendor documentation identifies
+the MCX W71 radio and a factory beacon demo. NXP's HCI Black Box example
+and its source were inspected: it transports commands and ACL data over
+UART, providing a plausible route to a BlueZ controller in Ubuntu after
+adaptation to the EVK. This remains inferred feasibility, with no
+hardware confirmation of the HCI path or production design decision.
+The current application firmware was not identified and no device
+command or flash operation was performed. Findings and primary sources
+were added to `docs/research/asus-usb-bt600-macos.md`; TODO records the
+completed assessment.

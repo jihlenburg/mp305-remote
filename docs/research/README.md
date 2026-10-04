@@ -113,6 +113,13 @@ address, and leave out the advertisements of other devices. The
 advertising reports carry the time the scan ended, not the time they
 arrived.
 
+The later adapter-only investigation is in
+[ASUS USB-BT600 receive failure on macOS](asus-usb-bt600-macos.md).
+It catalogs the `2026-10-04-dongle-usb-loopback-*.jsonl` captures, their
+commands and controller versions. These use local HCI loopback over USB,
+send nothing to the supply and make no radio connection. The LOGBOOK
+entry is "ASUS dongle local loopback through independent USB APIs".
+
 ## Firmware version
 
 The device reports its versions in the `0xE1` reply to `0xE0`, over
