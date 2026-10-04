@@ -6,12 +6,14 @@ Remote control for the ISDT MP305B portable bench power supply
 Repository: <https://github.com/jihlenburg/mp305-remote>. The name leaves
 room for the MP305A later.
 
-> Status: implemented, not yet verified on the supply. The Rust core, the
-> desktop app and the Python library exist and pass their unit and
-> integration tests against a scripted mock of the supply. On a real
-> MP305B only discovery has been tested so far; the system and acceptance
-> tests on hardware are still to be run. Nothing is released: there are no
-> published wheels or app binaries. See [TODO.md](TODO.md) and
+> Status: implemented, verification on the supply under way. The Rust core,
+> the desktop app and the Python library exist and pass their unit and
+> integration tests against a scripted mock of the supply on macOS, Linux
+> and Windows. On a real MP305B a part of the system tests has passed over
+> Bluetooth, from macOS and from Linux; USB and the acceptance tests are
+> still to be run. Windows is not yet verified on hardware: there is no
+> Windows test machine with a working path to the supply. Nothing is
+> released: there are no published wheels or app binaries. See [TODO.md](TODO.md) and
 > [LOGBOOK.md](LOGBOOK.md) for progress.
 
 ## What it is

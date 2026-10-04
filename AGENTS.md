@@ -138,6 +138,9 @@ opt-ins and the pre-flight check of the hardware-in-the-loop tests.
 [ADR-0015](docs/adr/0015-python-binding-coverage-and-test-layout.md) adds
 the coverage target of the Python binding crate and the home of the Python
 unit tests.
+[ADR-0018](docs/adr/0018-focused-hardware-verification.md) says what a
+hardware cell of the coverage tables demands and where evidence may be
+reused.
 
 Because unintended or incorrect behavior of the power supply can cause direct
 property damage (DUT destruction, electrical fire) and indirectly human injury,
@@ -244,7 +247,13 @@ A level counts as verified when every test specification entry of that level
 has a recorded passing result, or a failure the user explicitly accepted as a
 known deviation (logged, with a TODO item). A result can come from an
 automated test (including HIL), a manual procedure, inspection, demonstration
-or analysis. Each verification run gets a record in
+or analysis. For a cell that an approved coverage table marks `R`
+(ADR-0018) the result is a reuse record: the source result and its raw
+evidence, the target artifacts and platform, the relevant code and
+dependency changes, the target's current unit and integration results, its
+hardware prerequisites from direct runs, the argument with its limits, and
+the user's sign-off. A hardware cell without a host stays open; it is not
+downgraded to mock tests. Each verification run gets a record in
 `docs/v-model/records/YYYY-MM-DD-<level>-<scope>.md` with the commit hash (or
 `uncommitted` plus a diff summary), OS, transport, the device firmware version
 for hardware runs (or a pointer to the LOGBOOK entry that records it), the
@@ -253,8 +262,9 @@ exact command or procedure, and pass or fail per test ID.
 System tests run on real hardware over each transport the SRs name.
 Acceptance tests are validation: they run against a release build (app binary
 and installed wheel) and a real MP305B, and the user performs or witnesses
-them. An agent may prepare and assist, but never records an AT as passed on
-its own.
+them. The only exceptions are the cells that an approved coverage table
+marks for reuse (ADR-0018). An agent may prepare and assist, but never
+records an AT as passed on its own.
 
 ## Working with the real device
 

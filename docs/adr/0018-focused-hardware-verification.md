@@ -1,10 +1,10 @@
 # ADR-0018: Focused hardware verification and evidence reuse
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-10-04, reworked 2026-10-05
-- Decided by: pending approval of the reworked matrices; the user
-  authorized preparing the proposal on 2026-10-04 and decided the points
-  of an independent review on 2026-10-05 (LOGBOOK, "Independent review of
+- Decided by: user, 2026-10-05, on the reworked proposal; the user
+  authorized preparing it on 2026-10-04 and decided the points of an
+  independent review on 2026-10-05 (LOGBOOK, "Independent review of
   ADR-0018" and "Decisions of the user on the log bridge, ST-034 and
   ADR-0018")
 - Related: ADR-0001, ADR-0002, ADR-0008, ADR-0016, ADR-0017 (accepted);
@@ -42,11 +42,9 @@ this text is the result.
 
 Existing firmware findings, passing tests and failed attempts remain
 evidence with their original scopes. No previous failure is accepted as
-a deviation by this proposal.
+a deviation by this decision.
 
 ## Decision
-
-Proposed, not yet in force:
 
 1. Keep all 50 ST entries and all 36 AT entries, their requirement
    mappings, the supported platforms and both transports. Each entry
@@ -68,7 +66,7 @@ Proposed, not yet in force:
    artifacts. Every other hardware cell is a direct run.
 5. Hazard-related entries are never reuse cells: ST-014, ST-015, ST-021,
    ST-024, ST-027 and every other entry that the first draft already
-   kept. Entries that need no person over a transport are not reuse
+   kept as hardware. Entries that need no person over a transport are not reuse
    cells there either (ST-033, ST-035 over USB, AT-003, AT-017 and AT-029
    over USB), nor are ST-009 and ST-048, whose timing runs through each
    OS's Bluetooth stack.
@@ -108,7 +106,7 @@ Proposed, not yet in force:
     rules, all physical fault and priority-off checks, and the existing
     completion and user-approval gates. No production change is
     authorized by this ADR.
-11. On approval AGENTS.md is amended in three places, so that the
+11. AGENTS.md is amended in three places, so that the
     standing rules and this ADR agree: "Verification records" names the
     reuse record and its fields and says that a cell marked `R` in an
     approved coverage table is verified by that record instead of a run;

@@ -193,9 +193,10 @@ Open and finished work, grouped by V-model phase. The process is described in
       (record docs/v-model/records/2026-10-05-system-linux-ble-noperson.md)
 - [x] ST-034 decided by the user 2026-10-05: a link that cannot keep
       up delivers what it has, with one warning per stream (SR-034)
-- [ ] ST-034: word the expected result in the reworked revision 13 of
-      the system tests, change the test after the approval, rerun on
-      Linux
+- [ ] Test code for the approved ST changes (started 2026-10-05):
+      ST-034 (a link that cannot keep up), ST-043 and ST-050 (30 s),
+      ST-019 and ST-049 (release and request around the front-panel
+      edit); then rerun on hardware
 - [ ] The system tests on Linux that need a person, Load A or B, or USB
       (halobox, the dongle); needs the user at the supply
 - [x] Decided by the user 2026-10-04 (ADR-0017): close bound 5 s,
@@ -228,9 +229,8 @@ Open and finished work, grouped by V-model phase. The process is described in
       (BlueZ owns the connection): the app's dropped close at exit and a
       killed Python process rely on "the link drops, the supply clears
       the grant" (DD-APP-023, py DD). From the review of ADR-0017
-- [ ] ST-043 and ST-050 expect a recovery within 10 s; the design gives
-      reconnection attempts every 5 to 35 s (5 to 20 s before ADR-0017).
-      Settle the tolerance with the system tests' revision 13
+- [x] ST-043 and ST-050: recovery within 30 s instead of 10 s, decided
+      by the user 2026-10-05 (ST revision 14)
 - [ ] Find bound on Linux: a discovery of 10 s scans for Bluetooth LE
       for about 5.3 s, and halobox's built-in adapter missed the supply
       in one of eight scans. Measure before proposing a change
@@ -291,9 +291,9 @@ Open and finished work, grouped by V-model phase. The process is described in
       36 AT entries, replace 54 repeated hardware cells with conditional
       evidence reuse, retain safety/platform checks, and define compatible
       release ST/AT sessions. Coverage and traceability checks pass.
-- [ ] User approval of ADR-0018, ST revision 13, AT revision 10 and process
-      revision 3 (drafted 2026-10-04). The approved baselines remain in
-      force until approval. ADR-0017 is a separate pending decision.
+- [x] ADR-0018 accepted by the user 2026-10-05 after its rework, with
+      ST revision 13, AT revision 10 and process revision 3; AGENTS.md
+      amended and the README's status brought up to date
 - [x] ADR-0018 reworked 2026-10-05 along the review and the user's
       decisions (LOGBOOK, "ADR-0018 reworked after its review"): 3 system
       and 6 acceptance reuse cells left, Windows deferred, the hazard

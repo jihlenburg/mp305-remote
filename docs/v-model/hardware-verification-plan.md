@@ -1,19 +1,20 @@
 # Focused hardware verification plan
 
-Status: proposed, 2026-10-04; reworked on 2026-10-05 after an independent
-review and the user's decisions on it. Pending approval of ADR-0018, ST
-revision 13, AT revision 10 and process revision 3. This document
+Status: approved by the user on 2026-10-05 with ADR-0018, ST revision 13,
+AT revision 10 and process revision 3 (first draft of 2026-10-04,
+reworked on 2026-10-05 after an independent review and the user's
+decisions on it). This document
 organizes execution and evidence; the ST and AT entries remain the sole
 definitions of what each test verifies.
 
 ## Scope
 
 All 50 ST and 36 AT entries remain. All supported OS and transport
-combinations remain. The proposed matrices are in
+combinations remain. The matrices are in
 [7-system-tests.md](7-system-tests.md#2-coverage) and
 [8-acceptance-tests.md](8-acceptance-tests.md#2-coverage).
 
-| Level | Hardware cells in the baseline | Hardware cells proposed | Conditional reuse cells |
+| Level | Hardware cells in the baseline | Hardware cells now | Conditional reuse cells |
 |---|---:|---:|---:|
 | ST | 210 | 207 | 3 |
 | AT | 177 | 171 | 6 |
@@ -21,15 +22,15 @@ combinations remain. The proposed matrices are in
 
 A cell is one entry on one OS and transport, not an invocation, person
 action or time estimate. Analysis, inspection and n/a cells are excluded.
-No test or platform is declared passed by approving this plan.
+No test or platform is declared passed by the approval of this plan.
 
 What "hardware" means changes. The baseline's Linux and Windows cells
 carried the code `VM`: the Parallels VMs on the Mac, with the supply
 passed through for USB and a USB Bluetooth dongle for Bluetooth, and with
 CI as the substitute for Bluetooth until a dongle was at hand. That
 dongle cannot carry a connection on the Mac, with or without a VM
-(LOGBOOK 2026-10-04), so the VM route gives no Bluetooth evidence. The
-proposal replaces `VM` and `CI` by `H`: the procedure on an actual host
+(LOGBOOK 2026-10-04), so the VM route gives no Bluetooth evidence.
+ADR-0018 replaces `VM` and `CI` by `H`: the procedure on an actual host
 with a working path to the supply. A missing host leaves the cell open.
 
 Per platform:
@@ -143,7 +144,7 @@ and outside-DC behavior; no new production behavior is specified. The
 expected result of ST-034 (SR-034, UR-028) is reworded for a link that
 cannot keep up with a rate, as SR-034 already says.
 
-After approval, update `tests/system/test_control.py` for ST-019 and
+To do in the test code: update `tests/system/test_control.py` for ST-019 and
 ST-049, `tests/system/test_library.py` for ST-034, and the written app
 procedures for ST-038, AT-023, AT-034 and AT-037. Audit the corresponding
 acceptance scripts before execution; `tests/acceptance/` currently
@@ -192,11 +193,11 @@ Mac, so its VMs are out for Bluetooth. Windows hardware work is deferred.
 There is no implicit acceptance of the Linux findings or of the Windows
 gap.
 
-## Execution order after approval
+## Execution order
 
 | Work package | Entries and artifacts | Bench and coordination |
 |---|---|---|
-| Review and implement | Approve the draft; apply the amendments to AGENTS.md; implement the ST-019, ST-049 and ST-034 changes; review source diffs; build the release app/wheel and required AT scripts | No device I/O. |
+| Review and implement | Implement the ST-019, ST-049 and ST-034 changes in the test code; review source diffs; build the release app/wheel and required AT scripts | No device I/O. |
 | No-load reference completion | macOS BLE ST-001, ST-005, ST-007 to ST-010, ST-019, ST-031 interrupt, ST-045, ST-049; complete ST-039/ST-047 log inputs; rerun the connect- and close-sensitive entries on the current build | One instruction at a time. Bind tests with fresh host IDs last, then confirm the normal host again. Discovery-off controls must be identified before asking for a front-panel change. |
 | Loss and recovery | ST-028, ST-050, and witnessed AT-024/AT-030/AT-037 where their separate preconditions are met | State the exact power, adapter or cable action and restore it. ST-028 output-off and AT-024 output-on are distinct cases. |
 | USB reference | Every applicable macOS USB `H` cell, especially ST-003, ST-011, ST-040, ST-043 and ST-046 | Confirm the same unit's HID path. Transport arbitration gets a separate two-transport session. |
@@ -207,10 +208,10 @@ gap.
 | Windows | Deferred | Needs a host with a working path to the supply first. |
 
 The full matrices, not this scheduling table, determine completion.
-Future runs use the exact existing entry procedures until their changed
-versions are approved and implemented. This document is not a new HIL
+Future runs use the existing test code of an entry until its changed
+procedure is implemented. This document is not a new HIL
 selector: the current suite still runs all selected tests. Do not skip
-tests silently to obtain a green run under the proposed matrix.
+tests silently to obtain a green run under the matrix.
 
 ## Combining executions without losing observations
 
@@ -236,10 +237,8 @@ tests silently to obtain a green run under the proposed matrix.
 
 ## Approval boundary
 
-This draft changes verification methods and selected procedures. Approval
-is needed before implementing or re-verifying the changed items, under
-AGENTS.md process rule 5. Approving it accepts the matrices, the reuse
-rules, these procedures and the amendments to AGENTS.md that ADR-0018
-lists; it does not accept a test failure, mark a level complete or relax
-any HIL condition. ADR-0017 is a separate decision, accepted and
+The approval of 2026-10-05 accepts the matrices, the reuse rules, the
+changed procedures and the amendments to AGENTS.md that ADR-0018 lists.
+It does not accept a test failure, mark a level complete or relax any
+HIL condition. ADR-0017 is a separate decision, accepted and
 implemented on 2026-10-04.

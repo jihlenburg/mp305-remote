@@ -3072,3 +3072,27 @@ recommended option:
 2. ST-043 and ST-050 state a recovery within 30 s instead of 10 s.
 3. The notes on the work on halobox are committed in that machine's own
    repository, without a push.
+
+### ADR-0018 accepted; system tests revisions 13 and 14, acceptance tests revision 10, process revision 3
+
+Approved by the user on 2026-10-05 (the decisions are in the entry
+above). The approved documents are in the commit that holds this entry:
+ADR-0018 (accepted), docs/v-model/hardware-verification-plan.md,
+7-system-tests.md revision 13 (coverage, ST-012, ST-019, ST-034, ST-035,
+ST-038, ST-049) and revision 14 (ST-043 and ST-050: recovery within
+30 s), 8-acceptance-tests.md revision 10, and the process document
+revision 3.
+
+With the approval, as ADR-0018 decides: AGENTS.md is amended in three
+places (the list of ADRs behind the standards, the reuse record under
+"Verification records", and the exception for reuse cells in the
+sentence on tests on real hardware), and the README's status says what
+has been verified on the supply and that Windows is not yet verified on
+hardware.
+
+Impact, from the traceability matrix: no requirement or design item
+changes. The test code is to follow for ST-019 and ST-049 (the explicit
+release and request around the front-panel edit), ST-034 (the result for
+a link that cannot keep up) and ST-043 and ST-050 (30 s). Until then the
+tests run with their previous code. No test result is approved by this
+entry.

@@ -1,11 +1,10 @@
 # Development process: V-model
 
-Status: changed (revision 3, approval pending). Approved baseline: revision 2, user, 2026-09-30. The evidence-reuse and combined-execution rules in "Verification and validation" are proposed under ADR-0018.
+Status: approved (process baseline, user, 2026-09-30; revision 3 with ADR-0018, user, 2026-10-05)
 
 The project follows the V-model
-([ADR-0001](../adr/0001-v-model-docs-as-code.md)). The process baseline is
-approved; the revision 3 changes wait for review and approval, which
-[TODO.md](../../TODO.md) tracks.
+([ADR-0001](../adr/0001-v-model-docs-as-code.md)). The process is approved;
+[TODO.md](../../TODO.md) tracks the work.
 
 Each design level on the left side of the V has a matching verification level
 on the right side. The test specification for a level is written at the same
@@ -240,7 +239,7 @@ on the named OS and transport. A native host and a VM whose device
 pass-through works are eligible; missing hardware leaves that cell open.
 No cell falls back to CI without a device.
 
-Proposed revision 3 under [ADR-0018](../adr/0018-focused-hardware-verification.md):
+Since revision 3 ([ADR-0018](../adr/0018-focused-hardware-verification.md)):
 only cells explicitly marked for reuse in an approved coverage table may
 use an equivalence analysis instead of a repeated hardware execution. The
 analysis identifies the passing source result, artifacts, relevant changes,
@@ -292,4 +291,4 @@ editorial in the revision table.
 |---|---|---|---|
 | 1 | 2026-09-29 | First draft, revised the same day after an independent review | not yet approved |
 | 2 | 2026-09-30 | Editorial: the V-model is stated as the project process. No process rule changed. | user, 2026-09-30 (process baseline) |
-| 3 | 2026-10-04 | Define conditional evidence reuse only where approved ST/AT matrices permit it, actual-host hardware obligations, and combined execution with per-ID results and witnessed release acceptance. Correct the stale introductory claim that the approved process still awaited approval. Reworked on 2026-10-05 after the review of ADR-0018: no cell falls back to CI, the source of a reuse is from the build under test, prerequisites count only as direct runs, and the user signs every reuse record off. ADR-0018. | pending user approval |
+| 3 | 2026-10-04 | Define conditional evidence reuse only where approved ST/AT matrices permit it, actual-host hardware obligations, and combined execution with per-ID results and witnessed release acceptance. Correct the stale introductory claim that the approved process still awaited approval. Reworked on 2026-10-05 after the review of ADR-0018: no cell falls back to CI, the source of a reuse is from the build under test, prerequisites count only as direct runs, and the user signs every reuse record off. ADR-0018. | user, 2026-10-05 |
