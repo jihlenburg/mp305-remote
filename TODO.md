@@ -235,6 +235,19 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Remaining system tests on macOS over Bluetooth: batch C (the person
       entries, run by the user with `pytest -s`) and batch D (Load A and
       Load B); then USB, then the VMs
+- [x] Prepare a reduced hardware verification matrix (2026-10-04,
+      requested by the user): ADR-0018 and
+      docs/v-model/hardware-verification-plan.md retain all 50 ST and
+      36 AT entries, replace 54 repeated hardware cells with conditional
+      evidence reuse, retain safety/platform checks, and define compatible
+      release ST/AT sessions. Coverage and traceability checks pass.
+- [ ] User approval of ADR-0018, ST revision 13, AT revision 10 and process
+      revision 3 (drafted 2026-10-04). The approved baselines remain in
+      force until approval. ADR-0017 is a separate pending decision.
+- [ ] After approval, implement the ST-019/ST-049 procedure corrections,
+      prepare the missing acceptance scripts and release artifacts, then
+      execute the reduced matrices and record each reuse analysis. No
+      unrun entry is passed by the proposal.
 - [ ] Continue macOS Bluetooth system tests with the user at the supply and
       nothing connected to the output (started 2026-10-04): remaining
       person-assisted entries. ST-012 screen comparison passed; ST-019
@@ -243,11 +256,12 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] Confirm output off and restoration to 12.00 V and 0.500 A after
       ST-019 of 2026-10-04 before another hardware run (user confirmed both
       2026-10-04).
-- [ ] Review ST-019 against the firmware's front-panel remote-control
-      lock (2026-10-04): editing requires ending the grant; the test must
-      account for explicitly requesting control again. Any change to the
-      approved procedure needs the user's approval before implementation.
-      Check the related mode-change procedures of ST-049 as well.
+- [x] Review ST-019 against the firmware's front-panel remote-control
+      lock (2026-10-04): the library must explicitly release before the
+      front-panel edit and request control afterwards. Front-panel
+      revocation alone leaves the local grant stale until a command fails.
+      Corrected procedures for ST-019, ST-038, ST-049, AT-023 and AT-034
+      are drafted under ADR-0018; approval and implementation remain open.
 - [x] System-test teardown: request control explicitly after a lost or
       denied grant before restoring settings (2026-10-04); mock check and
       ST-023 hardware teardown pass, final reading 12.00 V, 0.500 A, off.

@@ -2645,3 +2645,36 @@ a control frame. On the teardown instruction the user restored DC
 mode; final telemetry confirmed 12.00 V, 0.500 A and output off.
 All retained readings showed output off. Record:
 `docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+### Reduced hardware verification plan drafted
+
+The user requested streamlining after the firmware-guided hardware tests
+and authorized preparation of a concrete reduced matrix. ADR-0018 and
+`docs/v-model/hardware-verification-plan.md` were drafted, with proposed
+ST revision 13, AT revision 10 and process revision 3. Approval is pending;
+the existing baselines remain in force, and ADR-0017 stays separate.
+
+All 50 ST and 36 AT entries and their requirement mappings remain. The
+draft replaces 36 of 210 ST hardware cells with same-transport analysis
+for ten entries on Linux and Windows, and 18 of 177 AT hardware cells
+with same-OS release evidence for six USB entries. This leaves 333 direct
+hardware obligations and 54 conditional reuse obligations across the two
+matrices. A cell is an entry/OS/transport combination, not a run or time
+estimate. Reuse needs passing source evidence, current target tests,
+target hardware prerequisites and an equivalence record. Acceptance
+retains release artifacts and the user's observation or review. Safety,
+platform, fault, loss and restoration checks remain hardware obligations.
+
+ST-019 was corrected in the draft to release control explicitly before
+the front-panel edit and request it again afterwards. The session's
+request operation returns immediately if its local state is still
+granted, so simply requesting after a front-panel revocation would not
+reliably grant control again. Related front-panel preparation was drafted
+for ST-038, ST-049, AT-023 and AT-034; AT-037 now names the tested host
+and its USB variant. These changes have not been implemented or verified.
+
+The matrix audit preserved every test ID and Verifies mapping, checked
+the changed fields, cell counts, reuse sources and document links, and
+the regenerated traceability matrix reported no defects. TODO.md records
+the pending approval and follow-up work. No device I/O was performed,
+test result promoted, failure waived or commit made for this proposal.

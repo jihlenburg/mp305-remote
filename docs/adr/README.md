@@ -32,6 +32,7 @@ Status values: `Proposed` (waiting for the user's approval), `Accepted`,
 | [0014](0014-coverage-exclusion-discovery-glue.md) | Coverage exclusion extended to the discovery glue | Accepted |
 | [0015](0015-python-binding-coverage-and-test-layout.md) | Coverage of the Python binding crate, home of the Python unit tests, and the build settings they need | Accepted |
 | [0016](0016-hil-opt-ins-and-preflight.md) | Further opt-ins and a pre-flight check for hardware-in-the-loop tests | Accepted |
+| [0018](0018-focused-hardware-verification.md) | Focused hardware verification and evidence reuse | Proposed |
 
 ## Template
 

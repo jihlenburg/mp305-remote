@@ -1,10 +1,10 @@
 # Development process: V-model
 
-Status: approved (process baseline, user, 2026-09-30)
+Status: changed (revision 3, approval pending). Approved baseline: revision 2, user, 2026-09-30. The evidence-reuse and combined-execution rules in "Verification and validation" are proposed under ADR-0018.
 
 The project follows the V-model
-([ADR-0001](../adr/0001-v-model-docs-as-code.md)). The process details in this
-document are a recommendation and wait for review and approval, which
+([ADR-0001](../adr/0001-v-model-docs-as-code.md)). The process baseline is
+approved; the revision 3 changes wait for review and approval, which
 [TODO.md](../../TODO.md) tracks.
 
 Each design level on the left side of the V has a matching verification level
@@ -235,9 +235,31 @@ its own.
 
 System tests run on real hardware over each transport the SRs name.
 7-system-tests.md and 8-acceptance-tests.md each contain a coverage table of
-test by OS by transport. Where hardware for a combination is missing, the
-table says so and names the substitute: CI without a device, or a user
-report.
+test by OS by transport. A hardware cell requires the applicable procedure
+on the named OS and transport. Native hosts and working device pass-through
+are eligible; missing hardware leaves that cell open.
+
+Proposed revision 3 under [ADR-0018](../adr/0018-focused-hardware-verification.md):
+only cells explicitly marked for reuse in an approved coverage table may
+use an equivalence analysis instead of a repeated hardware execution. The
+analysis identifies the passing source result, artifacts, relevant changes,
+current target unit/integration results and target hardware prerequisites.
+It explains the shared behavior and any platform or transport differences.
+The prerequisites and limits are in
+[hardware-verification-plan.md](hardware-verification-plan.md). Missing or
+contradictory evidence leaves the cell open. A reuse result is recorded as
+verified by analysis, never as a hardware run on the target combination.
+Acceptance reuse also requires a witnessed source on the same OS and
+release artifacts, and the user's review of the equivalence conclusion.
+
+Compatible executions may share setup, traces and observations when each
+entry's complete procedure and expected results are satisfied. Each ID
+keeps its own result and evidence references; automated tests keep only
+their own spec ID. Combined ST/AT work uses release artifacts and preserves
+the user's acceptance observations. Development-build results cannot be
+relabeled as acceptance results. Required fresh sessions, loads, HIL
+opt-ins, output-off teardown and settings restoration remain mandatory.
+Neither reuse nor batching changes the level-completion rule above.
 
 ## Changing an approved document
 
@@ -267,3 +289,4 @@ editorial in the revision table.
 |---|---|---|---|
 | 1 | 2026-09-29 | First draft, revised the same day after an independent review | not yet approved |
 | 2 | 2026-09-30 | Editorial: the V-model is stated as the project process. No process rule changed. | user, 2026-09-30 (process baseline) |
+| 3 | 2026-10-04 | Define conditional evidence reuse only where approved ST/AT matrices permit it, actual-host hardware obligations, and combined execution with per-ID results and witnessed release acceptance. Correct the stale introductory claim that the approved process still awaited approval. ADR-0018. | pending user approval |
