@@ -220,8 +220,9 @@ Open and finished work, grouped by V-model phase. The process is described in
       the library to the supply passes (record
       docs/v-model/records/2026-10-03-system-macos-ble-st013.md); the
       find bound became 10 s first (AR-014 rev 12)
-- [ ] System tests: tear the `frame_log` fixture down after the `supply`
+- [x] System tests: tear the `frame_log` fixture down after the `supply`
       guard, so that the kept log covers the close and its release reply
+      (2026-10-04; fixture dependency added, lint and setup order checked)
 - [x] System tests on macOS over Bluetooth, batches A and B, 2026-10-03:
       18 entries pass in whole or in their automated part (record
       docs/v-model/records/2026-10-03-system-macos-ble-batch1.md)
@@ -234,6 +235,48 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] Remaining system tests on macOS over Bluetooth: batch C (the person
       entries, run by the user with `pytest -s`) and batch D (Load A and
       Load B); then USB, then the VMs
+- [ ] Continue macOS Bluetooth system tests with the user at the supply and
+      nothing connected to the output (started 2026-10-04): remaining
+      person-assisted entries. ST-012 screen comparison passed; ST-019
+      failed after front-panel revocation, with a teardown error. Record:
+      docs/v-model/records/2026-10-04-system-macos-ble-person.md.
+- [x] Confirm output off and restoration to 12.00 V and 0.500 A after
+      ST-019 of 2026-10-04 before another hardware run (user confirmed both
+      2026-10-04).
+- [ ] Review ST-019 against the firmware's front-panel remote-control
+      lock (2026-10-04): editing requires ending the grant; the test must
+      account for explicitly requesting control again. Any change to the
+      approved procedure needs the user's approval before implementation.
+      Check the related mode-change procedures of ST-049 as well.
+- [x] System-test teardown: request control explicitly after a lost or
+      denied grant before restoring settings (2026-10-04); mock check and
+      ST-023 hardware teardown pass, final reading 12.00 V, 0.500 A, off.
+      JSON records retain each phase's result and failure reason.
+- [x] ST-023 step 2 on macOS Bluetooth (2026-10-04): the user disabled
+      remote control on the front panel; the next command raised
+      `RemoteControlLostError`, and restoration passed. Record:
+      docs/v-model/records/2026-10-04-system-macos-ble-person.md.
+- [x] Complete ST-048 on macOS Bluetooth (2026-10-04): all three cases
+      passed in coordinated repetitions with confirmed user actions.
+      Unanswered-prompt denial arrived after 61.827 s. No control
+      command was sent while permission was pending in the delayed-Allow
+      case. Final setpoints 12.00 V and 0.500 A, output off. Earlier
+      timeout attempts were allowed or their button actions are uncertain.
+      Record: the macOS person-test record of 2026-10-04.
+- [x] Fix the stale-reading restoration check exposed by ST-048
+      (2026-10-04): always read settled values on an open connection and
+      verify the restored setpoints and output off. Mock checks and the
+      non-HIL system suite pass. Hardware restoration from 1.00 V to
+      12.00 V was confirmed in the 03:01 ST-048 attempt, output off.
+- [x] Clarify the LED connection timing for the 2026-10-04 hardware runs:
+      the user confirmed connecting it after the tests, resolving the
+      no-load setup of ST-012, ST-019, ST-023 and ST-048. Disconnection
+      and output off were confirmed before the later ST-048 repetitions.
+- [x] ST-021 on macOS Bluetooth (2026-10-04): `set_voltage(1.0)` in PD
+      mode raised `ModeError` without a control frame. The user restored
+      DC mode; final telemetry confirmed 12.00 V, 0.500 A and output off.
+      One initial discovery failed; the retry passed. Record:
+      docs/v-model/records/2026-10-04-system-macos-ble-person.md.
 - [ ] Next hardware runs of the system tests (the user's go-ahead per
       session): the first connection on macOS over Bluetooth with a person
       to press ALLOW (ST-013 and the entries without a load), then USB,

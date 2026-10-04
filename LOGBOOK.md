@@ -2463,3 +2463,185 @@ docs/v-model/records/2026-10-04-system-linux-ble-halobox.md. The commit
 `b0e8b50` holds the record and announces this entry and the TODO items,
 which a failed edit script left out of it; they follow in the next
 commit.
+
+### Person-assisted system tests on macOS over Bluetooth
+
+The user asked to continue hardware system testing, selected macOS
+Bluetooth and confirmed being at the supply: DC mode, CC selected, output
+off, nothing connected to the output, remote control enabled and no other
+app connected. The extension was rebuilt from the production code of
+`6f985e0`; the proposed ADR-0017 remains unimplemented.
+
+ST-012 screen comparison: first setup failed when the pre-flight's scan
+missed the supply within 10 s after discovery had found it; the retry
+passed with the user's confirmation. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+The successful pre-flight read System Version 1.6.0.51 and hardware
+revision 2.0.2.0 on 2026-10-04, with the output off and setpoints 12.00 V
+and 0.500 A. The user confirmed the values on the supply's screens.
+
+ST-019: failed after the front-panel change because the supply returned
+`C9 01`; teardown also reported a restoration error. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+### Firmware UI review after ST-019
+
+The user reported that settings could not be edited under remote control
+and that the screen asked whether to disable remote control, then asked
+for the existing firmware information to be consulted. The V51 UI paths
+confirm the lock, the active-control dialog, the action that clears the
+grant and the `C9 01` response to an active command without a grant.
+Findings and source links were added to
+`docs/research/device/ui-and-analog.md` and `device-model.md`.
+
+ST-019's command did copy the front-panel 4.00 V into its 0.080 A request,
+but the request was refused. All 308 readings in its kept log show output
+off. The test did not pass; its approved procedure remains unchanged.
+The user was asked to confirm output off and restore the original
+12.00 V and 0.500 A after the teardown reported an error.
+
+The kept log stopped before teardown. The `supply` fixture now depends
+on `frame_log`, keeping it alive through restoration and close. Lint and
+pytest's fixture plan pass; no new hardware run has used this change yet.
+
+### Restoration before the next front-panel test
+
+The user confirmed output off and the original setpoints 12.00 V and
+0.500 A restored after ST-019. The test guard now explicitly requests
+remote control again before restoration from the lost or denied state
+and rechecks output off and DC mode after the grant. This uses the
+existing API and HIL restoration rule; no approved test result changed.
+A mock exercise confirms the request before the restoring commands and
+output zero throughout. The JSON recorder retains separate setup, call
+and teardown reports, preserving both reasons when call and teardown
+fail.
+
+### ST-023 front-panel revocation verified
+
+ST-023 step 2 on macOS Bluetooth passed, including teardown; the user
+confirmed disabling remote control, and the final reading confirmed
+12.00 V, 0.500 A, output off. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+### ST-048 denial and the next cleanup finding
+
+ST-048 case 1 passed; case 2 failed after the user accidentally allowed
+the request that was to remain unanswered, and case 3 did not run.
+Record: `docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+Case 2's teardown reported success but the retained final reading showed
+1.00 V, 0.500 A, output off. Its cached reading had allowed restoration
+to be skipped after the new command. The guard now reads settled values
+on each open DC connection after the output-off step, and verifies the
+values after restoration. Mock checks cover the stale reading and an
+acknowledged but unapplied restoration. The user confirmed manually
+restoring 12.00 V and 0.500 A with output off.
+
+The user then reported a 12 V, 1 W LED on the output. No hardware test
+was active at that point; only mock checks were running. The user
+confirmed disconnecting the LED and output off before the next run.
+The timing of its connection relative to the earlier runs was put to
+the user for the verification record.
+
+### ST-048 timeout retry accepted without a reported button press
+
+ST-048 case 2 failed again: the supply returned `C9 00` after 9.537 s,
+and the user reported pressing nothing. The unanswered-prompt result
+remains failed and the cause is not established. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+The user had confirmed the LED disconnected. Pre-flight and final
+telemetry both showed 1.00 V, 0.500 A, output off; the screen confirmed
+1.00 V. This differs from the earlier restoration confirmation, but
+the timing of that difference is unknown. This run preserved its own
+initial values and did not exercise changed-setpoint restoration.
+The user then confirmed manually restoring 12.00 V and 0.500 A with
+the LED disconnected and output off.
+
+The firmware's pending-dialog dismissal and grant callbacks were
+reviewed again. Their identified paths do not explain the acceptance
+without a reported button press. No production or specification change
+was made.
+
+### ST-048 connection retry missed the supply
+
+The 03:00 retry confirmed 12.00 V, 0.500 A and output off in pre-flight,
+then failed to find the supply in the test's next 10 s scan. No test
+control request was sent. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+### ST-048 prompt confirmation and hardware restoration check
+
+The 03:01 ST-048 timeout attempt received acceptance after 10.154 s
+and failed its expected-denial assertion. The user then reported
+confirming the prompt, so this attempt does not verify the timeout.
+Whether that clarification also corrects the earlier report of no
+button press was put to the user. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+The revised guard restored the changed voltage from 1.00 V to 12.00 V.
+The final reading confirmed 12.00 V, 0.500 A and output off, and the
+release was acknowledged. This verifies changed-setpoint restoration
+on hardware. Every retained reading showed output off.
+
+### Correction: uncertain button action in the ST-048 timeout retry
+
+This qualifies "ST-048 timeout retry accepted without a reported button
+press" and "ST-048 prompt confirmation and hardware restoration check".
+The user said they were no longer sure about the earlier button action
+and requested repetition with clear instructions. The 02:53 attempt is
+inconclusive for an unanswered prompt; it does not establish acceptance
+without a button press. The 03:01 attempt was allowed by the user.
+Raw test results and frame logs are retained unchanged.
+
+### Coordinated ST-048 denial repeated
+
+ST-048 case 1 was repeated with a separate Deny instruction and the
+user's confirmation of that action. One invocation failed before the
+prompt when the scan missed the supply; the retry passed, including
+teardown. Final telemetry confirmed 12.00 V, 0.500 A and output off.
+Record: `docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+### Coordinated ST-048 unanswered prompt passed
+
+ST-048 case 2 passed: the device sent `C9 01` after 61.827 s, before
+the library's 70 s fallback, and the library raised the expected denial.
+The user confirmed touching nothing and observed the prompt disappear.
+Final telemetry confirmed 12.00 V, 0.500 A and output off. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+### Coordinated ST-048 delayed Allow passed
+
+ST-048 case 3 passed. The user confirmed pressing Allow after the
+explicit instruction following the test's 10 s countdown. No control
+command was sent while permission was pending; both commands were sent
+after the grant. Teardown restored 12.00 V and 0.500 A, confirmed by
+final telemetry with output off. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.
+
+All three ST-048 cases now have passing results on macOS Bluetooth
+with the user's actions established. Earlier inconclusive timeout
+attempts and scan failures remain recorded. No production code or
+approved specification was changed by this repetition.
+
+### LED connection timing clarified
+
+This resolves the timing question in "ST-048 denial and the next cleanup
+finding". Asked whether the LED was connected during ST-012, ST-019,
+ST-023 and ST-048 or afterwards, the user replied that they connected
+it after the latest test. Those earlier runs therefore had no LED load.
+The user had separately confirmed disconnection and output off before
+the later ST-048 repetitions. The verification record and TODO were
+updated; test outcomes are unchanged. No device command was sent for
+this clarification.
+
+### ST-021 mode refusal verified on macOS Bluetooth
+
+The user selected PD mode and confirmed output off and the LED
+disconnected. Initial discovery failed once; the retry passed ST-021
+in all phases. `set_voltage(1.0)` raised `ModeError` without sending
+a control frame. On the teardown instruction the user restored DC
+mode; final telemetry confirmed 12.00 V, 0.500 A and output off.
+All retained readings showed output off. Record:
+`docs/v-model/records/2026-10-04-system-macos-ble-person.md`.

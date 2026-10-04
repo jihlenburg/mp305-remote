@@ -1,0 +1,47 @@
+{
+  "record": "system tests (7-system-tests.md)",
+  "started": "2026-10-04T00:27:03+00:00",
+  "finished": "2026-10-04T00:27:23+00:00",
+  "commit": "6f985e03714a334d9776183a4822110063eaf5d0 (uncommitted changes)",
+  "os": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+    "machine": "arm64",
+    "platform": "macOS-27.0.1-arm64-arm-64bit"
+  },
+  "python": "3.10.19 (main, Oct 31 2025, 23:18:55) [Clang 21.1.4 ]",
+  "mp305": "0.1.0",
+  "unit": {
+    "identifier": "72de66a3-7c9b-58a3-a45b-cf098194d568",
+    "transport": "ble"
+  },
+  "opt_ins": {
+    "hil": true,
+    "load": null,
+    "person": true,
+    "device_hid": null
+  },
+  "supply": null,
+  "supply_changes": [],
+  "preflight": {},
+  "results": {
+    "ST-012": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "outcome": "failed"
+    }
+  },
+  "tests": {
+    "tests/system/test_readings.py::test_st012_reported_values_match_the_supply_screens": {
+      "spec": "ST-012",
+      "hil": true,
+      "outcome": "error in setup",
+      "reason": "config))\n    \n        def on_prompt(event: Event) -> None:\n            if not person.available:\n                raise NeedsPerson(event.prompt)\n            person.say(\"Pre-flight check: press ALLOW on the supply's screen now.\")\n    \n        try:\n>           dev = Mp305.connect(\n                unit.identifier,\n                on_prompt=on_prompt,\n                max_voltage=SAFE_VOLTAGE,\n                max_current=SAFE_CURRENT,\n            )\n\ntests/system/conftest.py:416: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \npython/mp305/device.py:262: in connect\n    return cls._attach(native, on_prompt, None, Limits(max_voltage, max_current), reconnect)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ncls = <class 'mp305.device.Mp305'>\nnative = <mp305._native.Session object at 0x10afaa730>\non_prompt = <function preflight.<locals>.on_prompt at 0x10afbbb50>\nrecord = None, limits = Limits(max_voltage=5.0, max_current=0.1)\nreconnect = False\n\n    @classmethod\n    def _attach(\n        cls,\n        native: _native.Session,\n        on_prompt: Callable[[Event], None] | None,\n        record: MockRecord | None,\n        limits: Limits,\n        reconnect: bool,\n    ) -> Mp305:\n        \"\"\"Builds the object and waits until the session is ready.\n    \n        On an `Exception`, the session is closed (output off) and the first\n        exception propagates. On any other `BaseException` (a Ctrl-C, also\n        one from `on_prompt`), the close starts in the background and the\n        exception propagates at once.\n        \"\"\"\n        device = cls(native, on_prompt, record, limits, reconnect)\n        try:\n>           info = native.ready(device._handle)\nE           mp305.errors.NotFoundError: no supply found: the supply is off or out of range; another app (WebLink in a browser, ISDT's Polying app) is connected to it; a USB host is talking to it; remote control is disabled on the supply\n\npython/mp305/device.py:334: NotFoundError"
+    }
+  },
+  "observations": {},
+  "csv_files": [],
+  "frame_logs": {}
+}

@@ -1,0 +1,70 @@
+{
+  "record": "system tests (7-system-tests.md)",
+  "started": "2026-10-04T00:27:47+00:00",
+  "finished": "2026-10-04T00:29:16+00:00",
+  "commit": "6f985e03714a334d9776183a4822110063eaf5d0 (uncommitted changes)",
+  "os": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+    "machine": "arm64",
+    "platform": "macOS-27.0.1-arm64-arm-64bit"
+  },
+  "python": "3.10.19 (main, Oct 31 2025, 23:18:55) [Clang 21.1.4 ]",
+  "mp305": "0.1.0",
+  "unit": {
+    "identifier": "72de66a3-7c9b-58a3-a45b-cf098194d568",
+    "transport": "ble"
+  },
+  "opt_ins": {
+    "hil": true,
+    "load": null,
+    "person": true,
+    "device_hid": null
+  },
+  "supply": {
+    "model": "MP305B",
+    "application_version": "1.6.0.51",
+    "hardware_revision": "2.0.2.0",
+    "bootloader": null,
+    "name": null
+  },
+  "supply_changes": [],
+  "preflight": {
+    "connected": true,
+    "output_on": false,
+    "set_voltage": 12.0,
+    "set_current": 0.5,
+    "live_mode": "dc"
+  },
+  "results": {
+    "ST-012": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "outcome": "passed"
+    }
+  },
+  "tests": {
+    "tests/system/test_readings.py::test_st012_reported_values_match_the_supply_screens": {
+      "spec": "ST-012",
+      "hil": true,
+      "supply": {
+        "model": "MP305B",
+        "application_version": "1.6.0.51",
+        "hardware_revision": "2.0.2.0",
+        "bootloader": null,
+        "name": null
+      },
+      "duration_s": 74.739,
+      "outcome": "passed"
+    }
+  },
+  "observations": {
+    "ST-012": {
+      "reported": "model MP305B, application version 1.6.0.51, hardware revision 2.0.2.0, name None, live mode dc, set voltage 12.00 V, current limit 0.500 A"
+    }
+  },
+  "csv_files": [],
+  "frame_logs": {}
+}

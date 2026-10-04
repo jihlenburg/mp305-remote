@@ -1,8 +1,84 @@
 # Display, touch and analog interfaces
 
-Updated 2026-09-30. MP305B V51 main processor addresses are used throughout.
+Updated 2026-10-04. MP305B V51 main processor addresses are used throughout.
 Numeric accesses and call sequences below are **confirmed in code**.
 Physical component and signal names remain **inferred** where stated.
+
+## Front-panel controls while remote control is granted
+
+**Confirmed in code, reviewed 2026-10-04:** the UI blocks ordinary
+front-panel actions while `remote_granted` is set and offers a dialog to
+give control back to the front panel. The relevant V51 paths are:
+
+- [UI construction at 0x2E158](../firmware/v51/canonical/main/functions/0002e158_FUN_0002e158.c)
+  creates the full-screen object `DAT_1ffe03c4` and makes it active when
+  `remote_granted == 1`.
+- [Input dispatch at 0x14B14](../firmware/v51/canonical/main/functions/00014b14_FUN_00014b14.c)
+  routes the main-screen action to that object while remote control is
+  granted. [Event registration at 0x21A50](../firmware/v51/canonical/main/functions/00021a50_FUN_00021a50.c)
+  connects its event to `0x5EEAC` and the dialog's action to `0x5B034`.
+- [The active-control dialog at 0x5EEAC](../firmware/v51/canonical/main/functions/0005eeac_FUN_0005eeac.c)
+  selects string index `0x27`, hides the allow button, configures the
+  other button and sets `DAT_1fffab10 = 1`.
+- [The action at 0x5B034](../firmware/v51/canonical/main/functions/0005b034_FUN_0005b034.c)
+  clears `remote_granted` and `remote_request` and sets bit 2 of the
+  reply-work mask when the active-control dialog is confirmed with
+  `DAT_1fffab0f == 0`. [The generic dialog-close path at 0x1BA58](../firmware/v51/canonical/main/functions/0001ba58_FUN_0001ba58.c)
+  sets `DAT_1fffab0f = 1` first, so dismissing this active-control dialog
+  through that path preserves the grant.
+- [The C8 handler at 0x1B7F4](../firmware/v51/canonical/main/functions/0001b7f4_cmd_c8_dc_control.c)
+  returns `C9 01` for `remoteCon = 1` without a grant and does not apply
+  the requested setpoints. A new `remoteCon = 2` request is needed to
+  regain control over Bluetooth, with the Allow prompt again.
+
+**Confirmed on hardware, 2026-10-04:** during ST-019 the user reported
+that settings could not be changed while remote control was active and
+that the screen asked whether to disable remote control. The stored log
+contains two unsolicited `C9 01` replies, then a reading with a front-panel
+voltage change to 4.00 V. The library copied that value into its 0.080 A
+command, which received another `C9 01` and raised `RemoteControlLostError`.
+All 308 readings in that test's kept log show the output off. The log
+alone does not establish which physical action produced each unsolicited
+reply. See the [run record](../../v-model/records/2026-10-04-system-macos-ble-person.md)
+for the exact timings, firmware version and the teardown limitation.
+
+**Inference for testing:** ST-019 cannot assume that the user can edit
+the setpoint while the host retains its grant. Its procedure needs to
+account for the permission change and a subsequent explicit request for
+remote control. The approved test specification has not been changed.
+ST-023 step 2 already covers a command after front-panel revocation.
+
+## Unanswered remote-control request
+
+**Confirmed in code, reviewed 2026-10-04:**
+[the pending dialog at 0x5F434](../firmware/v51/canonical/main/functions/0005f434_FUN_0005f434.c)
+sets `DAT_1fffab10 = 0` and exposes the Allow button.
+[The idle timer at 0x1E7B4](../firmware/v51/canonical/main/functions/0001e7b4_FUN_0001e7b4.c)
+calls the generic dialog-close path after its 60000 ms threshold.
+For the remote dialog, `0x1BA58` targets the Deny button. With the
+pending-state flag zero, `0x5B034` clears the grant and request and
+queues a denied reply. In contrast,
+[the Allow callback at 0x5AF88](../firmware/v51/canonical/main/functions/0005af88_FUN_0005af88.c)
+sets the grant and queues its reply. The registration at `0x21A50`
+binds these callbacks to the two buttons.
+
+**Observed on hardware, 2026-10-04:** the standalone ST-048 timeout
+attempt at 02:53 received `C9 00` 9.537 s after the request. The
+subsequent active command also received `C9 00`. Output stayed off.
+The user initially reported pressing nothing, but later said that they
+were unsure about that attempt and requested repetition with clear
+instructions. The attempt is inconclusive for unanswered-prompt
+behavior and establishes no automatic-grant rule. A later timeout
+attempt at 03:01 was allowed by the user and likewise cannot verify
+the timeout. The expected ST-048 result remains unchanged.
+See the [run record](../../v-model/records/2026-10-04-system-macos-ble-person.md#st-048-timeout-retry-acceptance-without-a-reported-button-press).
+
+**Confirmed on hardware, 2026-10-04:** in the coordinated repetition
+at 03:08 the user explicitly confirmed touching nothing. The device
+sent `C9 01` after 61.827 s and the prompt disappeared. The library
+raised `RemoteControlDeniedError` on that reply, before its 70 s
+fallback. Output remained off and the setpoints remained 12.00 V and
+0.500 A. See [ST-048 case 2](../../v-model/records/2026-10-04-system-macos-ble-person.md#case-2-unanswered-prompt).
 
 ## Display controller and SPI
 

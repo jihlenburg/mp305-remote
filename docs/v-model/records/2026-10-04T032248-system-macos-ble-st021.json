@@ -1,0 +1,55 @@
+{
+  "record": "system tests (7-system-tests.md)",
+  "started": "2026-10-04T01:22:48+00:00",
+  "finished": "2026-10-04T01:22:58+00:00",
+  "commit": "6f985e03714a334d9776183a4822110063eaf5d0 (uncommitted changes)",
+  "os": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+    "machine": "arm64",
+    "platform": "macOS-27.0.1-arm64-arm-64bit"
+  },
+  "python": "3.10.19 (main, Oct 31 2025, 23:18:55) [Clang 21.1.4 ]",
+  "mp305": "0.1.0",
+  "unit": null,
+  "opt_ins": {
+    "hil": true,
+    "load": null,
+    "person": true,
+    "device_hid": null
+  },
+  "supply": null,
+  "supply_changes": [],
+  "preflight": {},
+  "results": {
+    "ST-021": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "outcome": "failed"
+    }
+  },
+  "tests": {
+    "tests/system/test_control.py::test_st021_no_command_outside_dc_mode": {
+      "spec": "ST-021",
+      "hil": true,
+      "phases": {
+        "setup": {
+          "outcome": "failed",
+          "duration_s": 10.046,
+          "reason": "tests/system/conftest.py:407: in hil_unit\n    pytest.fail(\nE   Failed: MP305_HIL_DEVICE='72de66a3-7c9b-58a3-a45b-cf098194d568' was not found over USB or Bluetooth; is the supply on, with remote control enabled and no other app connected?"
+        },
+        "teardown": {
+          "outcome": "passed",
+          "duration_s": 0.0
+        }
+      },
+      "outcome": "error in setup",
+      "reason": "tests/system/conftest.py:407: in hil_unit\n    pytest.fail(\nE   Failed: MP305_HIL_DEVICE='72de66a3-7c9b-58a3-a45b-cf098194d568' was not found over USB or Bluetooth; is the supply on, with remote control enabled and no other app connected?"
+    }
+  },
+  "observations": {},
+  "csv_files": [],
+  "frame_logs": {}
+}

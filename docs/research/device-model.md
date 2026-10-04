@@ -145,11 +145,12 @@ gate (code, commands 3). `rc` is payload byte 0.
 
 | Rule | Evidence |
 |---|---|
-| `rc = 2` requests control. Over USB it is granted at once, reply status 0. Over Bluetooth there is no reply; the device shows "Allow Remote Control" and later sends the reply of the current mode's command (`C9`, `E3`, `E9` or `EF`) with status 0 (allowed) or 1 (denied, or no key press for about 60 s, or another screen open). | code, commands 3, hostlink 6; not observed on hardware (TBD-012) |
+| `rc = 2` requests control. Over USB it is granted at once, reply status 0. Over Bluetooth there is no immediate reply; the device shows "Allow Remote Control" and later sends the reply of the current mode's command (`C9`, `E3`, `E9` or `EF`) with status 0 (allowed) or 1 (denied, or no key press for about 60 s, or another screen open). | code, commands 3, hostlink 6; BLE DC Allow, Deny and unanswered-prompt denial confirmed on hardware in ST-048, 2026-10-04 (61.827 s unanswered); [evidence](device/ui-and-analog.md#unanswered-remote-control-request). Other modes and USB remain code evidence for this rule (TBD-012). |
 | While a request is pending, every control command gets no reply at all. | code, commands 3 |
 | `rc = 1` applies the command only while the grant is held; without it the reply is status 1 and nothing is applied. | code, commands 3 |
 | `rc = 0` releases the grant, but only when sent with the command of the current mode; in another mode the reply is `FF` and the grant stays. | code, commands 3 |
 | The grant is cleared on link loss, on device power-off and at boot. The device does not switch the output off when it clears the grant. | code, hostlink 6 |
+| With remote control granted, the front-panel UI routes ordinary actions to an active-control dialog. Confirming its disable action clears the grant; a later active command gets status 1 until control is requested again. | confirmed in code and the lock/dialog observed on hardware, 2026-10-04; [UI paths and ST-019 evidence](device/ui-and-analog.md#front-panel-controls-while-remote-control-is-granted) |
 | Reads, settings writes (`C6`) and the program, profile and charge writes are not gated by the grant or the bind. | code, commands 2, 5.6; permissions.md |
 
 ## 6. Request and reply discipline

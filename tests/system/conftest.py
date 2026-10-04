@@ -52,7 +52,14 @@ import mp305
 from mp305 import Event, Info, LiveMode, Mp305, Reading, _native
 from mp305 import device as mp305_device
 from mp305.types import event_from_native
-from tests.system.support import ROOT, SAFE_CURRENT, SAFE_VOLTAGE, FrameLog, wait_until
+from tests.system.support import (
+    ROOT,
+    SAFE_CURRENT,
+    SAFE_VOLTAGE,
+    FrameLog,
+    settled_reading,
+    wait_until,
+)
 
 _log = logging.getLogger("tests.system")
 
@@ -109,7 +116,6 @@ class OptIns:
 
 OPT_INS = OptIns.from_env()
 """The opt-ins of this run."""
-
 
 class NeedsPerson(BaseException):
     """Raised from a prompt callback in teardown when nobody is there to confirm.
@@ -233,6 +239,15 @@ class RunRecord:
         entry = self.tests.setdefault(item.nodeid, {})
         entry.setdefault("spec", _spec(item))
         entry.setdefault("hil", item.get_closest_marker("hil") is not None)
+        # Keep both failures when the test and its safety teardown fail. The
+        # overall outcome below still counts the test as failed only once.
+        phase: dict[str, Any] = {
+            "outcome": report.outcome,
+            "duration_s": round(report.duration, 3),
+        }
+        if report.failed or report.skipped:
+            phase["reason"] = str(report.longreprtext)[-2000:]
+        entry.setdefault("phases", {})[report.when] = phase
         if report.when == "call":
             entry["duration_s"] = round(report.duration, 3)
         if report.skipped:
@@ -785,12 +800,27 @@ class Guard:
         if self.original is None:
             return True
         try:
-            reading = dev.read(timeout=3.0)
-            if (reading.set_voltage, reading.set_current) == self.original:
-                return True
+            # A command returns at its acknowledgment, before telemetry has
+            # settled. ST-048 exposed a cached reading that still showed the
+            # original setpoints after the supply had accepted a new value.
+            reading = settled_reading(dev)
             if reading.output_on or reading.live_mode is not LiveMode.DC:
                 problems.append("setpoints not restored: the output is on or the mode is not DC")
                 return False
+            if (reading.set_voltage, reading.set_current) == self.original:
+                return True
+            # ST-023 deliberately revokes the grant. Setpoint calls in the
+            # resulting Lost state require an explicit request first. After
+            # the person answers, recheck the output before restoring values.
+            if dev.remote_state in ("lost", "denied"):
+                dev.request_remote_control()
+                reading = settled_reading(dev)
+                if reading.output_on or reading.live_mode is not LiveMode.DC:
+                    problems.append(
+                        "setpoints not restored after the remote request: "
+                        "the output is on or the mode is not DC"
+                    )
+                    return False
             volts, amps = self.original
             # The user limits guarded the test; the restore puts back what the
             # supply had, with the output confirmed off.
@@ -799,6 +829,18 @@ class Guard:
                 dev.set_voltage(volts)
             if reading.set_current != amps:
                 dev.set_current_limit(amps)
+            restored = settled_reading(dev)
+            if (
+                restored.output_on
+                or restored.live_mode is not LiveMode.DC
+                or (restored.set_voltage, restored.set_current) != self.original
+            ):
+                problems.append(
+                    f"restoration not confirmed: expected {self.original}, output off, DC; "
+                    f"read {restored.set_voltage} V, {restored.set_current} A, "
+                    f"output_on={restored.output_on}, mode={restored.live_mode.value}"
+                )
+                return False
             return True
         except (mp305.Mp305Error, NeedsPerson) as error:
             problems.append(f"restoring the setpoints {self.original} failed: {error!r}")
@@ -866,8 +908,9 @@ class Guard:
                     confirmed_off = self._off(dev, problems) or confirmed_off
                 else:
                     confirmed_off = True
-                if not restored:
-                    restored = self._restore_setpoints(dev, problems)
+                # A cached value can predate the last acknowledged command.
+                # Always check an open connection with settled readings.
+                restored = self._restore_setpoints(dev, problems)
             state = dev.link_state
             try:
                 dev.close()
@@ -902,9 +945,16 @@ class Guard:
 
 @pytest.fixture
 def supply(
-    preflight: Unit, request: pytest.FixtureRequest, pytestconfig: pytest.Config
+    preflight: Unit,
+    frame_log: FrameLog,
+    request: pytest.FixtureRequest,
+    pytestconfig: pytest.Config,
 ) -> Iterator[Guard]:
-    """The guard every connection to the supply goes through (see `Guard`)."""
+    """The guard every connection to the supply goes through (see `Guard`).
+
+    Depending on `frame_log` keeps it alive through this fixture's teardown,
+    so the run retains the output-off, restoration and release exchanges.
+    """
     present = Person(OPT_INS.person, _interactive(pytestconfig))
     guard = Guard(preflight, present, request.node.nodeid)
     yield guard
