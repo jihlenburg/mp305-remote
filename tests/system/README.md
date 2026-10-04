@@ -138,6 +138,14 @@ observations the entries record for their TBDs, the CSV files written, and
 the frame logs the tests kept. The verification record of the run
 (`docs/v-model/records/`) cites it.
 
+The record is written so that it can go into the repository. Of the
+unit's own Bluetooth address only the maker's prefix stays (on Linux and
+Windows the identifier is that address); every other address is masked
+whole. The kept logs go without the lines of the Bluetooth dependencies,
+which trace every device in range, and without discovery's DEBUG lines
+about other devices. The checks of the tests themselves use the complete
+logs.
+
 ## What each test does to the supply
 
 "Person" means the entry needs `MP305_HIL_PERSON=1`; "BLE person" means

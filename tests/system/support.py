@@ -466,6 +466,59 @@ def first_reading(dev: Any, condition: Callable[[Any], bool], timeout: float) ->
     return None
 
 
+_ADDRESS = re.compile(
+    r"(?<![0-9A-Fa-f])"
+    r"([0-9A-Fa-f]{2}(?P<sep>[:_])(?:[0-9A-Fa-f]{2}(?P=sep)){4}[0-9A-Fa-f]{2})"
+    r"(?![0-9A-Fa-f])"
+)
+"""A Bluetooth address as an OS prints it (`0C:3D:...`) or as in a BlueZ path (`0C_3D_...`)."""
+
+_LOG_LINE = re.compile(r"^\S+ (\S+) (\S+) ")
+"""The logger and the level of a line of the kept log."""
+
+
+def address_of(identifier: str | None) -> str | None:
+    """The Bluetooth address inside `identifier` as twelve lower-case hex digits, if it has one."""
+    match = None if identifier is None else _ADDRESS.search(identifier)
+    return None if match is None else re.sub(r"[:_]", "", match.group(1)).lower()
+
+
+def mask_addresses(text: str, own: str | None = None) -> str:
+    """Masks every Bluetooth address in `text` for a record that may be published.
+
+    The address `own` (from `address_of`) keeps its first three octets, the
+    maker's prefix; every other address is masked whole.
+    """
+
+    def swap(match: re.Match[str]) -> str:
+        sep = match.group("sep")
+        octets = match.group(1).split(sep)
+        keep = 3 if own is not None and "".join(octets).lower() == own else 0
+        return sep.join(octets[:keep] + ["xx"] * (6 - keep))
+
+    return _ADDRESS.sub(swap, text)
+
+
+def record_lines(lines: Iterable[str], identifier: str | None) -> list[str]:
+    """The lines of a kept log that go into the run record.
+
+    Left out are the lines of the Bluetooth dependencies (`mp305.deps.`),
+    which trace every device in range, and discovery's DEBUG lines about
+    devices other than the unit of the run.
+    """
+    kept = []
+    for line in lines:
+        match = _LOG_LINE.match(line)
+        logger, level = (match.group(1), match.group(2)) if match else ("", "")
+        if logger.startswith("mp305.deps."):
+            continue
+        other = identifier is None or identifier not in line
+        if logger == "mp305.core.discovery" and level == "DEBUG" and other:
+            continue
+        kept.append(line)
+    return kept
+
+
 def wait_until(condition: Callable[[], Any], timeout: float, step: float = 0.05) -> Any:
     """Polls `condition` every `step` s until it is truthy or `timeout` passed.
 

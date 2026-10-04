@@ -57,6 +57,9 @@ from tests.system.support import (
     SAFE_CURRENT,
     SAFE_VOLTAGE,
     FrameLog,
+    address_of,
+    mask_addresses,
+    record_lines,
     settled_reading,
     wait_until,
 )
@@ -290,7 +293,13 @@ class RunRecord:
         return dict(sorted(out.items()))
 
     def write(self, path: pathlib.Path) -> None:
-        """Writes the record as JSON."""
+        """Writes the record as JSON, without the addresses of devices in range.
+
+        The record may end up in the repository: the unit's own address keeps
+        only its maker's prefix, other addresses are masked whole, and the
+        kept logs go without the dependency traces (`record_lines`).
+        """
+        identifier = None if self.unit is None else self.unit.get("identifier")
         data = {
             "record": "system tests (7-system-tests.md)",
             "started": self.started.isoformat(timespec="seconds"),
@@ -320,12 +329,16 @@ class RunRecord:
             "observations": self.observations,
             "csv_files": self.csv_files,
             "frame_logs": {
-                spec: [{"transport": t, "lines": log.lines()} for t, log in logs]
+                spec: [
+                    {"transport": t, "lines": record_lines(log.lines(), identifier)}
+                    for t, log in logs
+                ]
                 for spec, logs in sorted(self.logs.items())
             },
         }
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(data, indent=2, default=str) + "\n", encoding="utf-8")
+        text = json.dumps(data, indent=2, default=str)
+        path.write_text(mask_addresses(text, address_of(identifier)) + "\n", encoding="utf-8")
 
 
 def _commit() -> str:
