@@ -159,12 +159,12 @@
       "sha256": "131053a4f0ac13f911a5084e39cf4ef20d6864918b5b295b409b4f91a5c38c4a"
     },
     "device/ui-and-analog.md": {
-      "bytes": 7643,
-      "sha256": "9ad2e7b18839a612ccb2b07ac0479359cec373c72051ba1c56cbbd48aa417781"
+      "bytes": 12521,
+      "sha256": "6d0d73cf3f92aa2706757627e7880bc87429bd2fad1467be470fe7f131041e58"
     },
     "device-model.md": {
-      "bytes": 21174,
-      "sha256": "7ebe4df395759a8b754977edef7d706ae9838df63d887a7b75a0adc58257b3c7"
+      "bytes": 21808,
+      "sha256": "0c22bb58bc423ab584d07baaacdb2e2bf5bf394474fb95ffed5105c0ae207abb"
     },
     "firmware/README.md": {
       "bytes": 1105,
