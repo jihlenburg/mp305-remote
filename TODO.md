@@ -199,7 +199,11 @@ Open and finished work, grouped by V-model phase. The process is described in
       integration level on the Mac (record
       docs/v-model/records/2026-10-04-unit-integration-adr0017.md); the
       READMEs carry the one-adapter note
-- [ ] ADR-0017 on hardware: ST-013 from halobox with the new bounds
+- [ ] ADR-0017 on hardware: ST-013 from halobox. Tried 2026-10-04
+      through the built-in adapter: no connect within 20 s (plain
+      connects there take 1 s to more than 40 s; its MT7925 module also
+      runs the Wi-Fi on 2.4 GHz). The awaited cancel worked. Repeat with
+      the ASUS dongle in halobox, or with halobox off 2.4 GHz Wi-Fi
 - [ ] Check on Linux whether a Bluetooth link outlives its process
       (BlueZ owns the connection): the app's dropped close at exit and a
       killed Python process rely on "the link drops, the supply clears

@@ -2856,3 +2856,37 @@ inspection. All gates pass (524 Rust tests, 201 Python tests with 1
 skipped, coverage 95.75 %). Record:
 docs/v-model/records/2026-10-04-unit-integration-adr0017.md. Not yet
 verified on hardware.
+
+### ST-013 on halobox with the new bounds: the built-in adapter is the limit
+
+With the user's go-ahead of this session to repeat ST-013 from Linux.
+Transport: Bluetooth LE from halobox through its built-in adapter alone
+(the dongle is in the Mac), commit `459c394`. Nothing was sent to the
+supply: no connection came up. The supply's firmware versions were not
+read (see the entry on ST-013 of 2026-10-03).
+
+Halobox first: the pull, the build and the tests without hardware pass
+there (392 Rust tests without the app, 201 Python tests with 1 skipped,
+clippy 1.93 included).
+
+ST-013, four attempts: the gate's scan missed the supply once, the find
+missed it once, and the connect did not complete within 20 s twice. The
+new cancel was logged both times ("connect ... expired; disconnect
+issued"), and the attempt after it found the supply advertising again,
+so an abandoned connect no longer takes the supply away.
+
+The reason for the failures is the adapter. Plain connects through it
+with BlueZ's own tool took 0.96, 15.87 and 4.31 s and once nothing
+within 40 s, with and without a scan running, while the Mac saw the
+supply in three of three scans. The adapter is the Bluetooth half of a
+MediaTek MT7925 Wi-Fi module, and the machine's Wi-Fi link uses the
+2.4 GHz band among others (2412 MHz) with no wired network attached;
+that this is the cause is inferred. The connect bound of 20 s, chosen
+with a slowest connect of 15.7 s in mind, therefore does not make this
+adapter reliable. The bound stays what ADR-0017 says; the adapter is
+not suited for these runs as the machine is set up.
+
+ST-013 from Linux stays unverified. It needs the dongle in halobox, or
+the built-in adapter with the Wi-Fi off the 2.4 GHz band. Record:
+docs/v-model/records/2026-10-04-system-linux-ble-halobox.md, third
+session.

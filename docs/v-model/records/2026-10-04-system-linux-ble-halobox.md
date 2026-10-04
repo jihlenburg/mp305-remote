@@ -105,3 +105,48 @@ library gives up a connect, BlueZ goes on with it in the background and
 takes the supply's advertising away from the next scan; with two
 adapters the library uses whichever comes first, which need not be the
 one the identifier names.
+
+## Third session, with the bounds of ADR-0017
+
+2026-10-04, 18:06 to 18:20 local time, commit `459c394` (connect bound
+20 s, close bound 5 s, the cancel of a failed connect awaited). Within
+the user's go-ahead of this session to repeat ST-013 from Linux. Only
+`MP305_HIL` was set. Adapter: the built-in one alone (the dongle was not
+in the machine). ST-013 is still not verified.
+
+| Attempt | Outcome |
+|---|---|
+| 1 | the scan of the HIL gate did not find the supply |
+| 2 | "connect did not complete within 20 s"; log: "connect to hci0/dev_... expired; disconnect issued" |
+| 3 | the same, 36 s later |
+| 4 | the find before the connect did not see the supply within 10 s |
+
+Nothing was sent to the supply; no connection came up. The Mac saw the
+supply in three of three scans of 10 s during this time.
+
+What the session shows:
+
+- The awaited cancel works. After each expired connect the next attempt
+  found the supply advertising again, where on 2026-10-04 at night the
+  scan after a given-up connect never found it.
+- The built-in adapter is the limit, not the bounds. Plain connects with
+  BlueZ's own tool through it took 0.96, 15.87 and 4.31 s and once gave
+  no result within 40 s, with and without a scan running. In the trace
+  of attempt 4 the controller reported the supply once in the first scan
+  window of 5.5 s, after 5.1 s, and not at all in the second of 5.2 s.
+- The machine's Wi-Fi and Bluetooth are one module (MediaTek MT7925,
+  kernel driver `mt7925e`), and the Wi-Fi link uses the 2.4 GHz band
+  among others (2412 MHz, which overlaps the advertising channel at
+  2402 MHz). The wired network ports have no link. That the Wi-Fi is the
+  cause of the poor reception is inferred, not shown.
+
+Tests without hardware on this machine at the same commit:
+`cargo test --workspace --exclude mp305-app` passes with 392 tests, and
+`pytest` has 201 passed and 1 skipped.
+
+## Open
+
+ST-013 from Linux needs an adapter that hears the supply: the ASUS
+dongle in halobox, through which the connect took 0.8 to 2.1 s, or the
+built-in adapter with the machine's Wi-Fi off the 2.4 GHz band or on a
+wired network.
