@@ -2838,3 +2838,21 @@ The user also had the uncommitted diagnosis of the dongle's USB receive
 path committed as it was (`a370fc9`); its files were then added to the
 research manifest (`a119b26`), and two stale manifest hashes from the
 person tests' commit were refreshed.
+
+### ADR-0017 implemented and verified at unit and integration level
+
+A coding agent implemented the approved revision; the main session
+inspected the result and ran the gates again. `timing::CONNECT` is 20 s
+and `timing::CLOSE` 5 s; the link closes the transport under `CLOSE`;
+the discovery glue awaits the cancel of a connect that expired or failed
+and bounds a connect as a whole with `FIND + CONNECT + CLOSE`; the
+transport stub has a close delay for UT-LINK-025. The READMEs say that
+the first Bluetooth adapter is used and that a close takes two to three
+seconds on Linux.
+
+Verification on the Mac: UT-PROTO-060 and UT-LINK-025 pass, UT-DISC-010
+passes by inspection for the points of revision 7, IT-014 passes by
+inspection. All gates pass (524 Rust tests, 201 Python tests with 1
+skipped, coverage 95.75 %). Record:
+docs/v-model/records/2026-10-04-unit-integration-adr0017.md. Not yet
+verified on hardware.

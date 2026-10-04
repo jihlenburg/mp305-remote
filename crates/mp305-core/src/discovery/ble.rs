@@ -316,13 +316,15 @@ pub(crate) async fn find(
     Ok(hit)
 }
 
-/// A connect still in flight. Dropped while armed (the connect timed out,
-/// or the caller's bound cancelled it), it fetches the peripheral and
-/// calls `disconnect()` on a spawned task, logged at WARN, so that an OS
-/// connect request left pending cannot complete later and hold the supply.
-/// (ADR-0014: inspection UT-DISC-010.)
+/// A connect still in flight. Armed from before the connect until
+/// `connect_ble` returned `Ok` or the awaited `disconnect()` of [`cancel`]
+/// returned. Dropped while armed (the caller's bound or the caller itself
+/// dropped the connect future), it fetches the peripheral and calls
+/// `disconnect()` once on a spawned task, best effort and logged at WARN,
+/// so that an OS connect request left pending cannot complete later and
+/// hold the supply. (ADR-0014: inspection UT-DISC-010.)
 struct PendingConnect {
-    /// The adapter; `None` once the connect completed.
+    /// The adapter; `None` once the guard is disarmed.
     adapter: Option<Adapter>,
     /// The peripheral being connected.
     id: PeripheralId,
@@ -357,15 +359,34 @@ impl Drop for PendingConnect {
     }
 }
 
-/// Connects to the peripheral `id` through `Guarded::connect_ble` under
-/// `timing::CONNECT`, with the best-effort disconnect of
-/// [`PendingConnect`] after an expiry. (ADR-0014: inspection UT-DISC-010,
-/// ST-001.)
+/// Fetches the peripheral of `pending` and awaits its `disconnect()`,
+/// disarming `pending` as soon as that `disconnect()` returned, so that
+/// the guard does not repeat it. (ADR-0014: inspection UT-DISC-010.)
 ///
 /// # Errors
 ///
-/// [`Error::Transport`] when the connect fails or does not complete within
-/// `timing::CONNECT`.
+/// The `btleplug` error of `peripheral()` or of `disconnect()`.
+async fn cancel(adapter: &Adapter, pending: &mut PendingConnect) -> Result<(), btleplug::Error> {
+    let peripheral = adapter.peripheral(&pending.id).await?;
+    let outcome = peripheral.disconnect().await;
+    pending.adapter = None;
+    outcome
+}
+
+/// Connects to the peripheral `id` through `Guarded::connect_ble` under
+/// `timing::CONNECT`. When the connect expires or returns an error, the OS
+/// may hold a pending connect or a link that came up before the failure,
+/// so the peripheral's `disconnect()` is awaited under `timing::CLOSE`
+/// ([`cancel`]) and its outcome logged, at WARN after an expiry and at
+/// DEBUG after an error of the connect (where a refused disconnect only
+/// means that no link was up), before the error is returned. A connect
+/// future dropped on the way leaves the disconnect to [`PendingConnect`].
+/// (ADR-0014: inspection UT-DISC-010, ST-001.)
+///
+/// # Errors
+///
+/// [`Error::Transport`] when the connect does not complete within
+/// `timing::CONNECT`; the connect's own error when it fails.
 pub(crate) async fn connect(
     adapter: &Adapter,
     id: &PeripheralId,
@@ -374,16 +395,39 @@ pub(crate) async fn connect(
         adapter: Some(adapter.clone()),
         id: id.clone(),
     };
-    match tokio::time::timeout(timing::CONNECT, Guarded::connect_ble(adapter, id)).await {
-        Ok(outcome) => {
-            pending.adapter = None;
-            outcome
-        }
-        Err(_) => Err(Error::Transport {
-            message: format!(
-                "connect did not complete within {} s",
-                timing::CONNECT.as_secs()
+    let (error, level, what) =
+        match tokio::time::timeout(timing::CONNECT, Guarded::connect_ble(adapter, id)).await {
+            Ok(Ok(guarded)) => {
+                pending.adapter = None;
+                return Ok(guarded);
+            }
+            Ok(Err(error)) => (error, log::Level::Debug, "failed"),
+            Err(_) => (
+                Error::Transport {
+                    message: format!(
+                        "connect did not complete within {} s",
+                        timing::CONNECT.as_secs()
+                    ),
+                },
+                log::Level::Warn,
+                "expired",
             ),
-        }),
+        };
+    match tokio::time::timeout(timing::CLOSE, cancel(adapter, &mut pending)).await {
+        Ok(Ok(())) => {
+            log::log!(target: LOG_TARGET, level, "connect to {id} {what}; disconnect issued");
+        }
+        Ok(Err(cause)) => {
+            log::log!(target: LOG_TARGET, level, "connect to {id} {what}; disconnect failed: {cause}");
+        }
+        Err(_) => {
+            log::log!(
+                target: LOG_TARGET,
+                level,
+                "connect to {id} {what}; disconnect did not complete within {} s",
+                timing::CLOSE.as_secs()
+            );
+        }
     }
+    Err(error)
 }

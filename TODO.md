@@ -195,10 +195,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] ADR-0017 and its revision approved by the user 2026-10-04: AR-014
       (rev 13), IT-014 (rev 11), protocol DD rev 8, link DD rev 4,
       discovery DD rev 7
-- [ ] Implement ADR-0017 (started 2026-10-04): the timing constants, the
-      link's close bound, the awaited cancel in the discovery glue, the
-      stub's close delay and the tests; verify on the Mac and on
-      halobox; add the one-adapter note to the README
+- [x] ADR-0017 implemented 2026-10-04 and verified at unit and
+      integration level on the Mac (record
+      docs/v-model/records/2026-10-04-unit-integration-adr0017.md); the
+      READMEs carry the one-adapter note
+- [ ] ADR-0017 on hardware: ST-013 from halobox with the new bounds
 - [ ] Check on Linux whether a Bluetooth link outlives its process
       (BlueZ owns the connection): the app's dropped close at exit and a
       killed Python process rely on "the link drops, the supply clears

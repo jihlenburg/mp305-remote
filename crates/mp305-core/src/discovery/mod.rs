@@ -320,14 +320,17 @@ impl Discovery {
 
 impl Connector for Discovery {
     /// Connects to the supply with `identifier` under the bound
-    /// `timing::FIND + timing::CONNECT` as a whole, the wait for the scan
-    /// lock included.
+    /// `timing::FIND + timing::CONNECT + timing::CLOSE` as a whole (the
+    /// find, the connect and the cancel of a connect that expired or
+    /// failed), the wait for the scan lock included.
     fn connect<'a>(
         &'a self,
         identifier: &'a str,
     ) -> BoxFuture<'a, Result<Guarded<AnyTransport>, Error>> {
         Box::pin(async move {
-            let bound = timing::FIND.saturating_add(timing::CONNECT);
+            let bound = timing::FIND
+                .saturating_add(timing::CONNECT)
+                .saturating_add(timing::CLOSE);
             tokio::time::timeout(bound, self.reach(identifier))
                 .await
                 .unwrap_or_else(|_| {

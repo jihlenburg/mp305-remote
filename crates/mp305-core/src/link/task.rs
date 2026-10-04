@@ -643,7 +643,7 @@ impl State {
         }
         tokio::spawn(async move {
             // Best effort: the link is already reported lost.
-            let _ = timeout(timing::REPLY, guard.close()).await;
+            let _ = timeout(timing::CLOSE, guard.close()).await;
         });
         answer_leftovers(commands, &lost, &Ok(()));
     }
@@ -662,12 +662,12 @@ impl State {
         self.shared.set_loss(CLOSED_BY_HOST);
         // Dropped without a `LinkLost` event.
         self.events = None;
-        let result = match timeout(timing::REPLY, guard.close()).await {
+        let result = match timeout(timing::CLOSE, guard.close()).await {
             Ok(result) => result,
             Err(_) => Err(Error::Transport {
                 message: format!(
                     "the close did not complete within {}",
-                    duration_text(timing::REPLY)
+                    duration_text(timing::CLOSE)
                 ),
             }),
         };

@@ -39,9 +39,15 @@ pub const SCAN_MAX: Duration = Duration::from_secs(60);
 /// The scan for one known identifier before a connect gives up (the
 /// discovery DD, DD-DISC-011).
 pub const FIND: Duration = Duration::from_secs(10);
-/// The bound on the OS connect, which has no timeout of its own (the
-/// discovery DD, DD-DISC-011).
-pub const CONNECT: Duration = Duration::from_secs(10);
+/// The bound on the OS connect, which has no timeout of its own, together
+/// with the service discovery and the subscriptions; the Linux kernel gives
+/// up creating an LE link after 20 s (the discovery DD, DD-DISC-011,
+/// ADR-0017).
+pub const CONNECT: Duration = Duration::from_secs(20);
+/// The bound on closing the transport, and on the cancel of a connect that
+/// expired or failed; BlueZ waits 2 s before it disconnects (DD-LINK-041,
+/// DD-DISC-011, ADR-0017).
+pub const CLOSE: Duration = Duration::from_secs(5);
 /// The longest a blocking Python call waits before it checks for Ctrl-C
 /// again (AR-003, the Python wait slice).
 pub const WAIT_SLICE: Duration = Duration::from_millis(100);
@@ -53,7 +59,7 @@ mod tests {
 
     /// Test: UT-PROTO-060
     #[test]
-    fn the_nine_bounds_have_their_values() {
+    fn the_first_bounds_have_their_values() {
         assert_eq!(BIND, Duration::from_secs(30));
         assert_eq!(REMOTE_PROMPT, Duration::from_secs(70));
         assert_eq!(REPLY, Duration::from_secs(1));
@@ -73,7 +79,8 @@ mod tests {
         assert_eq!(SCAN_MIN, Duration::from_secs(1));
         assert_eq!(SCAN_MAX, Duration::from_secs(60));
         assert_eq!(FIND, Duration::from_secs(10));
-        assert_eq!(CONNECT, Duration::from_secs(10));
+        assert_eq!(CONNECT, Duration::from_secs(20));
+        assert_eq!(CLOSE, Duration::from_secs(5));
         assert_eq!(WAIT_SLICE, Duration::from_millis(100));
     }
 }

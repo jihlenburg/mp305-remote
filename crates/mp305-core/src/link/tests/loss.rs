@@ -305,6 +305,38 @@ async fn close_resolves_everything_and_closes_the_transport() {
 
 /// Test: UT-LINK-025
 #[tokio::test(start_paused = true)]
+async fn a_slow_close_within_the_bound_succeeds() {
+    let r = rig(Kind::Ble, Duration::ZERO);
+    r.stub.set_close_delay(ms(3_000));
+    let Rig {
+        link, stub, start, ..
+    } = r;
+    link.close().await.unwrap();
+    assert_eq!(Instant::now() - start, ms(3_000));
+    assert_eq!(stub.closes(), 1);
+}
+
+/// Test: UT-LINK-025
+#[tokio::test(start_paused = true)]
+async fn a_close_beyond_the_bound_is_reported() {
+    let r = rig(Kind::Ble, Duration::ZERO);
+    r.stub.set_close_delay(ms(6_000));
+    let Rig {
+        link, stub, start, ..
+    } = r;
+    let result = link.close().await;
+    assert_eq!(Instant::now() - start, timing::CLOSE);
+    assert_eq!(
+        result.unwrap_err(),
+        Error::Transport {
+            message: "the close did not complete within 5.0 s".to_string()
+        }
+    );
+    assert_eq!(stub.closes(), 1);
+}
+
+/// Test: UT-LINK-025
+#[tokio::test(start_paused = true)]
 async fn dropping_the_link_ends_it() {
     let r = rig(Kind::Ble, Duration::ZERO);
     let Rig {

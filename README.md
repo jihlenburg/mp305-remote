@@ -77,6 +77,13 @@ whatever form it takes. In short:
   vendor ID `0x28E9` and product ID `0x028A`. No driver is needed. On
   Linux a udev rule lets non-root users open the device.
 
+The library and the app use the first Bluetooth adapter the operating
+system lists. With more than one adapter, disable or unplug the others: on
+Linux an identifier names the adapter the supply was found through, so a
+supply found through one adapter is not found through another. Closing a
+Bluetooth connection takes two to three seconds on Linux, because BlueZ
+waits 2 s before it disconnects.
+
 [docs/research/device-model.md](docs/research/device-model.md) describes the
 supply as a host sees it and says for every fact whether it comes from the
 firmware or was seen on hardware. For the firmware itself, start with the

@@ -44,7 +44,7 @@ struct Rig {
     tx: mpsc::UnboundedSender<RawIncoming>,
     /// The stub's record of sends.
     sends: Sends,
-    /// The stub's failure switch and close counter.
+    /// The stub's failure switch, close counter and close delay.
     stub: StubHandle,
     /// The link's start, also `connected_at`.
     start: Instant,

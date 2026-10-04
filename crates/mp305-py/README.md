@@ -21,6 +21,11 @@ later (arm64, x86_64), Linux manylinux_2_35 (x86_64, aarch64) and Windows 10
 22H2 and later (x86_64). On macOS the first Bluetooth scan asks for the
 Bluetooth permission of the terminal or app that runs Python.
 
+The library uses the first Bluetooth adapter the operating system lists.
+With more than one adapter, disable or unplug the others. On Linux `close`
+takes two to three seconds over Bluetooth, because BlueZ waits 2 s before
+it disconnects.
+
 ## Example
 
 ```python

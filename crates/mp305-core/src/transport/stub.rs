@@ -30,6 +30,8 @@ pub struct StubHandle {
     fail_next: Arc<Mutex<Option<String>>>,
     /// How often `close` was called.
     closes: Arc<AtomicUsize>,
+    /// How long each `close` takes on the Tokio clock (zero by default).
+    close_delay: Arc<Mutex<Duration>>,
 }
 
 impl StubHandle {
@@ -46,6 +48,21 @@ impl StubHandle {
     pub fn closes(&self) -> usize {
         self.closes.load(Ordering::SeqCst)
     }
+
+    /// Makes every later `close` take `delay` on the Tokio clock after it
+    /// was counted (zero by default; UT-LINK-025).
+    pub fn set_close_delay(&self, delay: Duration) {
+        if let Ok(mut current) = self.close_delay.lock() {
+            *current = delay;
+        }
+    }
+
+    /// How long each `close` takes, zero if the switch cannot be read.
+    fn close_delay(&self) -> Duration {
+        self.close_delay
+            .lock()
+            .map_or(Duration::ZERO, |delay| *delay)
+    }
 }
 
 /// The double.
@@ -58,7 +75,7 @@ pub struct Stub {
     sends: Sends,
     /// The channel the test feeds.
     rx: mpsc::UnboundedReceiver<RawIncoming>,
-    /// The failure switch and the close counter.
+    /// The failure switch, the close counter and the close delay.
     handle: StubHandle,
 }
 
@@ -86,7 +103,8 @@ impl Stub {
         (stub, tx, sends)
     }
 
-    /// A handle to the failure switch and the close counter.
+    /// A handle to the failure switch, the close counter and the close
+    /// delay.
     #[must_use]
     pub fn handle(&self) -> StubHandle {
         self.handle.clone()
@@ -130,6 +148,7 @@ impl Transport for Stub {
 
     async fn close(&self) -> Result<(), Error> {
         self.handle.closes.fetch_add(1, Ordering::SeqCst);
+        tokio::time::sleep(self.handle.close_delay()).await;
         Ok(())
     }
 
