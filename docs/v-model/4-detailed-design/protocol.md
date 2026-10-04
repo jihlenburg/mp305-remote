@@ -184,7 +184,7 @@ Payload layout of `0xC5`, 11 bytes (protocol.md 4.3; code, layout hardware):
 
 | ID | Design item | Refines | Status | Rationale |
 |---|---|---|---|---|
-| DD-PROTO-060 | `timing` defines `pub const` `Duration`s with a source comment each: `BIND: 30 s`, `REMOTE_PROMPT: 70 s`, `REPLY: 1 s`, `OUTPUT_OFF_ACK: 500 ms`, `POLL_PAUSE: 100 ms`, `USB_KEEPALIVE: 2 s`, `LINK_LOSS_REPORT: 4 s`, `RECONNECT_RETRY: 5 s`, `RECONNECT_GIVE_UP: 10 min`, `SETTLE: 100 ms`, `SCAN_DEFAULT: 10 s`, `SCAN_MIN: 1 s`, `SCAN_MAX: 60 s`, `FIND: 10 s`, `CONNECT: 10 s`, `WAIT_SLICE: 100 ms` (source comment "AR-003, the Python wait slice"). No other module in `mp305-core` or `mp305-py` writes these numbers (checked by IT-014). | AR-014 | approved (rev 7) | device-model.md 12. |
+| DD-PROTO-060 | `timing` defines `pub const` `Duration`s with a source comment each: `BIND: 30 s`, `REMOTE_PROMPT: 70 s`, `REPLY: 1 s`, `OUTPUT_OFF_ACK: 500 ms`, `POLL_PAUSE: 100 ms`, `USB_KEEPALIVE: 2 s`, `LINK_LOSS_REPORT: 4 s`, `RECONNECT_RETRY: 5 s`, `RECONNECT_GIVE_UP: 10 min`, `SETTLE: 100 ms`, `SCAN_DEFAULT: 10 s`, `SCAN_MIN: 1 s`, `SCAN_MAX: 60 s`, `FIND: 10 s`, `CONNECT: 20 s`, `CLOSE: 5 s`, `WAIT_SLICE: 100 ms` (source comment "AR-003, the Python wait slice"). No other module in `mp305-core` or `mp305-py` writes these numbers (checked by IT-014). | AR-014 | approved (rev 8) | device-model.md 12. |
 
 ## 7. Documentation
 
@@ -235,7 +235,7 @@ chargeError 0, wavePause 1, waveTime 1600.
 | UT-PROTO-040 | DD-PROTO-040, DD-PROTO-041 | `policy::check` for `Frame::new(op, [])` with every opcode 0 to 255; for `0x18` with 17, 18 and 19 bytes; for `0xC8` with 10, 11 and 12 bytes; `never_reason` for each listed opcode and for `0xC2`. | Only `0xE0` and `0xC2` pass the empty-payload sweep; `0x18` passes only with 18, `0xC8` only with 11, the others `BadLength`; every other opcode `NotAllowed`; each listed opcode has a non-empty reason, `0xC2` has none. | `crates/mp305-core/src/protocol/policy.rs` |
 | UT-PROTO-050 | DD-PROTO-050 | `volts(1300)`, `amps(1000)`, `watts(25)`, `watt_hours(123)`, `seconds(3600)`, `celsius(-6)`. | 13.0, 1.0, 0.25, 12.3, 3600, -6. | `crates/mp305-core/src/protocol/units.rs` |
 | UT-PROTO-051 | DD-PROTO-051, DD-PROTO-052 | `RawVoltage::from_volts` with NaN, infinity, -0.01, 30.004, 30.005, 1.004, 1.005, 1.006, and 4.5 with `max_volts` 4.0; `RawCurrent::from_amps` with 1.0004, 1.0005, 5.0004, 5.0005, and 0.06 with `max_amps` 0.05; the two constants. | `SetpointRange` for NaN, infinity, -0.01; 3000; `SetpointRange`; 100, 101, 101; `SetpointRange` with `max` 4.0; 1000, 1001, 5000, `SetpointRange`, `SetpointRange`; 3000 and 5000. | `crates/mp305-core/src/protocol/units.rs` |
-| UT-PROTO-060 | DD-PROTO-060 | Read every constant. | The nine values of DD-PROTO-060. | `crates/mp305-core/src/protocol/timing.rs` |
+| UT-PROTO-060 | DD-PROTO-060 | Read every constant. | The values of DD-PROTO-060, one assertion per constant. | `crates/mp305-core/src/protocol/timing.rs` |
 | UT-PROTO-070 | DD-PROTO-070 | `cargo doc -p mp305-core` under `deny(missing_docs)`; inspect the rustdoc of the five types for the byte tables and links; run the doctests. | Builds without warnings; tables and links present; doctests pass, including the `compile_fail` ones. | inspection plus `cargo test --doc -p mp305-core`, record `unit-protocol` |
 
 ## 9. Revisions
@@ -249,3 +249,4 @@ chargeError 0, wavePause 1, waveTime 1600.
 | 5 | 2026-10-01 | DD-PROTO-051 marked changed from the discovery DD review (discovery.md section 5, decision 2): `Error::SetpointRange` gains `min`, the existing callers pass 0 and their texts do not change; UT-PROTO-004's literal gains the field. Approved with G4 discovery. | user, 2026-10-01 (G4 discovery) |
 | 6 | 2026-10-01 | From the py DD (py.md section 8, decisions 8, 9 and 10): `fixtures::reply_route` and `fixtures::on_air` (test support) in the module tree; `telemetry::parse_payload` (DD-PROTO-025, UT-PROTO-024); `WAIT_SLICE` and `mp305-py` in DD-PROTO-060, whose list now also names the six constants that AR-014 revisions 6 and 7 added and the code already defines. Approved with G4 py. | user, 2026-10-01 (G4 py) |
 | 7 | 2026-10-03 | DD-PROTO-060 with AR-014 revision 12: `FIND` is 10 s. | user, 2026-10-03 |
+| 8 | 2026-10-04 | DD-PROTO-060 with AR-014 revision 13: `CONNECT` is 20 s and the new `CLOSE` is 5 s. UT-PROTO-060 no longer counts the constants (it said nine since revision 1). | user, 2026-10-04 |

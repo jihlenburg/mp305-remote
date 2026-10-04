@@ -189,26 +189,32 @@ Open and finished work, grouped by V-model phase. The process is described in
       now remembered) and the readings of the pre-flight work; the close
       fails on its bound. Rerun after the decisions below, then the
       remaining Bluetooth system tests from Linux
-- [ ] Put to the user (Linux, seen on halobox 2026-10-04): the close of
-      the transport is bounded with 1 s, BlueZ needs 2.3 to 2.8 s to
-      disconnect, so every close reports an error. A longer bound for
-      the close (link DD, timing)
-- [ ] Put to the user (Linux): after a connect that the library gave up
-      (10 s), BlueZ completes it in the background and the supply stops
-      advertising. Cancel the connect at the OS when giving up
-      (transport and discovery glue)
-- [ ] Put to the user (Linux): the 10 s bounds for find and connect are
-      too tight with halobox's built-in adapter (a plain connect takes
-      15.6 s; a discovery scans for LE only about half the time). An
-      LE-only discovery filter on BlueZ, longer bounds, or the dongle as
-      the documented adapter for the Linux runs
-- [ ] Put to the user: with two Bluetooth adapters the library uses the
-      first one, which need not be the one the identifier names (seen on
-      halobox 2026-10-04)
+- [x] Decided by the user 2026-10-04 (ADR-0017): close bound 5 s,
+      connect bound 20 s, an abandoned connect is cancelled before the
+      error returns, one Bluetooth adapter is the supported setup
+- [x] ADR-0017 and its revision approved by the user 2026-10-04: AR-014
+      (rev 13), IT-014 (rev 11), protocol DD rev 8, link DD rev 4,
+      discovery DD rev 7
+- [ ] Implement ADR-0017 (started 2026-10-04): the timing constants, the
+      link's close bound, the awaited cancel in the discovery glue, the
+      stub's close delay and the tests; verify on the Mac and on
+      halobox; add the one-adapter note to the README
+- [ ] Check on Linux whether a Bluetooth link outlives its process
+      (BlueZ owns the connection): the app's dropped close at exit and a
+      killed Python process rely on "the link drops, the supply clears
+      the grant" (DD-APP-023, py DD). From the review of ADR-0017
+- [ ] ST-043 and ST-050 expect a recovery within 10 s; the design gives
+      reconnection attempts every 5 to 35 s (5 to 20 s before ADR-0017).
+      Settle the tolerance with the system tests' revision 13
+- [ ] Find bound on Linux: a discovery of 10 s scans for Bluetooth LE
+      for about 5.3 s, and halobox's built-in adapter missed the supply
+      in one of eight scans. Measure before proposing a change
 - [ ] System tests: when the pre-flight needs a person and none is there,
       the next test fails with "a session ... is already open" instead of
       skipping, because the pre-flight's background close still runs
-      (seen on halobox 2026-10-04). Wait for that close, or skip the run
+      (seen on halobox 2026-10-04). Changed 2026-10-04: the pre-flight
+      waits for that close. To verify on hardware with a host the supply
+      does not know
 - [ ] Put to the user: a machine for the Windows runs whose USB is not
       this Mac's (a native Windows PC, or a Windows VM on halobox with
       the dongle passed through); then ST-013 from Windows

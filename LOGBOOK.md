@@ -2768,3 +2768,73 @@ The current application firmware was not identified and no device
 command or flash operation was performed. Findings and primary sources
 were added to `docs/research/asus-usb-bt600-macos.md`; TODO records the
 completed assessment.
+
+### Measurements and decisions for the bounds on Linux
+
+Entered on 2026-10-04 in the afternoon; the measurements and the user's
+decisions are from the night before, after the entry "ST-013 on halobox
+with the user at the supply: findings on Linux", and had not been logged.
+
+Measured on halobox with BlueZ's own tool (`bluetoothctl connect` and
+`disconnect`), without a frame of the protocol; the supply showed no
+prompt. Built-in adapter alone (MediaTek): connects 15.69, 2.82, 0.85
+and 3.33 s, disconnects 2.16, 2.22, 2.14 and 2.59 s. ASUS dongle: connects
+1.08, 0.95 and 1.76 s and one refused after 1.77 s
+("le-connection-abort-by-local"), disconnects 2.19 s three times; with
+the earlier series of the dongle (connects 2.14, 1.67 and 1.17 s,
+disconnects 2.29, 2.29 and 2.84 s) and the 15.6 s of the first connect
+through the built-in adapter, a plain connect took 0.8 to 15.7 s and a
+disconnect 2.1 to 2.8 s. Read in the sources, not measured: BlueZ 5.85
+arms a timer of 2 s before it disconnects (`DISCONNECT_TIMER`,
+`src/device.c`), and the Linux kernel gives up creating an LE link after
+20 s (`HCI_LE_CONN_TIMEOUT`, `include/net/bluetooth/hci.h`, 6.12).
+
+The user decided, each on the recommendation put to them:
+
+1. The close of the transport gets its own bound of 5 s.
+2. An abandoned connect is cancelled at the OS before the error returns.
+3. The connect bound is 20 s.
+4. One Bluetooth adapter is the supported setup; documentation only.
+
+Drafted from these, all pending the user's approval and none
+implemented: AR-014 (architecture revision 13), IT-014 (integration
+tests revision 11), DD-PROTO-060 and UT-PROTO-060 (protocol DD revision
+8), DD-LINK-040, DD-LINK-041 and UT-LINK-025 (link DD revision 4),
+DD-DISC-011 and UT-DISC-010 (discovery DD revision 7), an editorial note
+on the stub in the transport DD (revision 9), and ADR-0017.
+
+One independent review of the draft. Worked in: the numbers above are
+now logged and cited; a connect that fails after the OS link is up is
+cancelled like an expired one (the code disconnects only on a too small
+MTU, so a failed service discovery left the link up); the guard of the
+pending connect stays armed until the awaited cancel returned; the fetch
+of the peripheral is inside the close bound; UT-LINK-025 names the close
+delay the stub needs; IT-014 also lists 35; ADR-0017 no longer claims
+that a dropped close at exit has reached BlueZ. Left open and in TODO.md:
+whether a link outlives its process on BlueZ, which the app's exit and a
+killed Python process rely on not happening, and the 10 s tolerance of
+ST-043 and ST-050 against reconnection attempts every 5 to 35 s.
+
+Also changed, in the system tests and without a change to a
+specification: when the pre-flight needs a person and none is there, it
+now waits for the background close of its connection, so that the tests
+after it skip instead of failing with "a session is already open".
+
+### ADR-0017 and the revision for the bounds on Linux approved
+
+The user approved the reviewed revision on 2026-10-04: ADR-0017
+(accepted), AR-014 (architecture revision 13), IT-014 (integration
+tests revision 11), DD-PROTO-060 and UT-PROTO-060 (protocol DD revision
+8), DD-LINK-040, DD-LINK-041 and UT-LINK-025 (link DD revision 4),
+DD-DISC-011 and UT-DISC-010 (discovery DD revision 7), with the cancel
+after a failed connect that the review added. The approved documents are
+in the commit that holds this entry. Impact, from the traceability
+matrix and the review: the timing constants and their test, the link's
+close and its test with a new close delay in the transport stub, the
+discovery glue's connect; no item of the session, Python or app designs
+changes. Implementation and verification follow.
+
+The user also had the uncommitted diagnosis of the dongle's USB receive
+path committed as it was (`a370fc9`); its files were then added to the
+research manifest (`a119b26`), and two stale manifest hashes from the
+person tests' commit were refreshed.

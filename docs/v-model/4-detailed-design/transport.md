@@ -91,8 +91,8 @@ ID. Tests run on a paused Tokio clock (`#[tokio::test(start_paused = true)]`,
 `tokio` with `test-util`). `Stub` is a test double under the `mock` feature
 that implements `Transport` with a channel the test feeds, a configurable
 send delay, a `Vec` that records sends with their write-start clock times,
-a `fail_next_send(text)` switch and a `closes()` counter (the last three
-added for the link tests, link DD section 8). `test_log` is also reachable
+a `fail_next_send(text)` switch, a `closes()` counter and a close delay
+(the last four added for the link tests, link DD section 8). `test_log` is also reachable
 from the link's in-crate tests. Log
 capture uses one static `log::Log` installed once per test binary that
 collects records by target.
@@ -130,3 +130,4 @@ collects records by target.
 | 6 | 2026-10-01 | DD-TRANS-030 (`Reply.from`) and DD-TRANS-031 (`Mock::handle` with `sent` and `closes`) marked changed from the session DD review (session.md section 9, decision 2), approved with G4 session. Editorial: DD-TRANS-032 names the session's `MockConnector`. | user, 2026-10-01 (G4 session); editorial part needs no approval |
 | 7 | 2026-10-01 | DD-TRANS-002 marked changed from the discovery DD review (discovery.md section 5, decision 6): `Kind` gets a `Display`. Approved with G4 discovery. | user, 2026-10-01 (G4 discovery) |
 | 8 | 2026-10-01 | UT-TRANS-033 and UT-TRANS-034 added: the unit tests of `Reply.from` and `MockHandle` that revision 6 introduced without a specification entry (found by the session implementation review). Approved by the user on 2026-10-01 with session revision 4. | user, 2026-10-01 |
+| 9 | 2026-10-04 | Editorial: the preamble of the unit test specification names the stub's close delay, a switch of the test double that UT-LINK-025 needs (link.md revision 4). No design item or test entry of this document changes. | editorial |
