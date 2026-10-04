@@ -120,39 +120,102 @@ def test_st018_the_first_command_requests_remote_control(
 @pytest.mark.hil
 @pytest.mark.spec("ST-019")
 def test_st019_a_command_copies_the_front_panel_change(
-    hil_unit: Unit, person: Person, controls: Person, supply: Guard, frame_log: FrameLog
+    hil_unit: Unit,
+    person: Person,
+    controls: Person,
+    supply: Guard,
+    frame_log: FrameLog,
+    observe: Callable[[str, object], None],
 ) -> None:
-    """Steps 1 to 3: 3 V, 0.05 A, output off; 4 V on the front panel; 0.08 A within 2 s."""
+    """Steps 1 to 4: 3 V, 0.05 A, output off; release; 4 V on the front panel; 0.08 A.
+
+    The supply locks its front panel while a host holds remote control, so
+    the test releases it before the person changes the voltage and requests
+    it again afterwards (over Bluetooth the person presses allow). The 2 s
+    bound starts at the reading that shows 4 V after the grant, so it leaves
+    out the person's wait for the prompt. That reading arrives at least
+    100 ms after the request returned, and so after the grant's `0xC9`.
+    The settle time and the age of the reading the library built the
+    command from are checked afterwards on the frame log's offsets.
+    """
     dev = supply.connect()
     # Step 1.
     dev.set_voltage(3.0)
     dev.set_current_limit(0.05)
     dev.output_off()
     # Step 2.
-    person.say("On the supply's front panel, change the voltage to 4.00 V now.")
+    dev.release_remote_control()
+    assert dev.remote_state == "none"
+    person.say("On the supply's front panel, change the voltage to 4.00 V now (output off).")
 
     def four_volts() -> bool:
         r = dev.reading
-        return r is not None and r.set_voltage == 4.0
+        return r is not None and round(r.set_voltage, 2) == 4.0
 
     assert wait_until(four_volts, 180.0, step=0.05), "4.00 V not seen within 180 s"
-    seen = time.monotonic()
-    # Step 3: within 2 s.
+    # Step 3.
     start = frame_log.mark()
+    person.say("The test requests remote control again; over Bluetooth press ALLOW when asked.")
+    dev.request_remote_control()
+    granted = time.time()
+    assert dev.remote_state == "granted"
+    # Step 4: a reading with 4 V at least 100 ms after the grant, then 0.08 A within 2 s.
+    qualifying = first_reading(
+        dev,
+        lambda r: round(r.set_voltage, 2) == 4.0 and r.timestamp - granted >= 0.1,
+        5.0,
+    )
+    seen = time.monotonic()
+    assert qualifying is not None, "no reading with 4.00 V within 5 s of the grant"
+    assert not qualifying.output_on
+    called = time.monotonic()
     dev.set_current_limit(0.08)
-    assert time.monotonic() - seen <= 2.0
+    returned = time.monotonic()
+    observe("seen_to_call_s", round(called - seen, 3))
+    observe("call_s", round(returned - called, 3))
+    assert called - seen <= 2.0
+    confirmed = first_reading(
+        dev,
+        lambda r: (
+            round(r.set_voltage, 2) == 4.0 and round(r.set_current, 3) == 0.08 and not r.output_on
+        ),
+        5.0,
+    )
     frame_log.settle()
-    command = frame_log.sent(0xC8, start)[-1]
-    readings = [f for f in frame_log.received(0xC3) if f.index < command.index]
+    request = [f for f in frame_log.sent(0xC8, start) if control(f.payload).remote_con == 2][0]
+    actives = [
+        f
+        for f in _after(frame_log.sent(0xC8, start), request.index)
+        if control(f.payload).remote_con == 1
+    ]
+    assert len(actives) == 1, [f.payload.hex() for f in actives]
+    command = actives[0]
+    source = [f for f in frame_log.received(0xC3, start) if f.index < command.index][-1]
+    before = [f for f in frame_log.received(0xC9, start) if f.index < source.index]
+    assert before, "no 0xC9 before the source reading"
+    settle_ms = source.offset_ms - before[-1].offset_ms
+    age_ms = command.offset_ms - source.offset_ms
+    observe("source_after_c9_ms", settle_ms)
+    observe("source_age_ms", age_ms)
+    observe("source_is_the_observed_reading", source.payload == qualifying.raw)
+    assert settle_ms >= 100
+    assert age_ms <= 1000
     c = control(command.payload)
-    t = telemetry(readings[-1].payload)
+    t = telemetry(source.payload)
+    assert t.set_voltage == 400
     assert (c.set_voltage, c.set_current, c.output) == (400, 80, 0)
-    assert (c.real_change, c.voltage_slow, c.current_over) == (
+    assert (c.set_voltage, c.real_change, c.voltage_slow, c.current_over, c.output) == (
+        t.set_voltage,
         t.real_change,
         t.voltage_slow,
         t.current_over,
+        t.output,
     )
     assert (c.model, c.refresh, c.remote_con) == (t.model, 0, 1)
+    acks = _after(frame_log.received(0xC9, start), command.index)
+    assert acks, "no reply to the command"
+    assert acks[0].payload == b"\x00"
+    assert confirmed is not None, "telemetry did not confirm 4.00 V, 0.080 A, output off"
 
 
 # ST-020
@@ -609,23 +672,43 @@ def test_st048_run3_nothing_is_sent_while_the_request_is_pending(
 @pytest.mark.hil
 @pytest.mark.spec("ST-049")
 def test_st049_no_release_outside_dc_mode(
-    hil_unit: Unit, person: Person, controls: Person, supply: Guard, frame_log: FrameLog
+    hil_unit: Unit,
+    person: Person,
+    controls: Person,
+    supply: Guard,
+    frame_log: FrameLog,
+    observe: Callable[[str, object], None],
 ) -> None:
-    """Remote control, PD mode on the front panel, then close."""
+    """Remote control, output off; the grant disabled and PD mode on the front panel; close.
+
+    The supply locks its front panel while a host holds remote control, so
+    the person first confirms disabling the grant there. The library's
+    connection stays open through both front-panel actions.
+    """
     dev = supply.connect()
     dev.request_remote_control()
+    dev.output_off()
     supply.restore_by_person(
         "Switch the supply back to DC mode on its front panel.",
         verify=lambda: (r := supply.peek()) is not None and r.live_mode is LiveMode.DC,
     )
-    person.say("Put the supply in PD mode on its front panel now (output off).")
+    start = frame_log.mark()
+    person.wait_enter(
+        "On the supply's front panel, confirm disabling remote control in the dialog it "
+        "offers. Leave the output off."
+    )
+    person.say("Now put the supply in PD mode on its front panel (output off).")
 
     def pd() -> bool:
         r = dev.reading
         return r is not None and r.live_mode is LiveMode.PD
 
     assert wait_until(pd, 180.0, step=0.2), "PD mode not seen within 180 s"
-    changed = [f for f in frame_log.received(0xC3) if telemetry(f.payload).model == 2][0]
+    frame_log.settle()
+    changed = [f for f in frame_log.received(0xC3, start) if telemetry(f.payload).model == 2][0]
+    rejected = [f for f in frame_log.received(0xC9, start) if f.payload == b"\x01"]
+    observe("unsolicited_c9_01", len(rejected))
+    observe("remote_state_before_close", dev.remote_state)
     dev.close()
     frame_log.settle()
     releases = [

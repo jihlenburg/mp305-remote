@@ -172,7 +172,7 @@ above.
 | ST-016 | none | | Mock only. |
 | ST-017 | none | | Mock only; step 1 checks the frame log of ST-013. |
 | ST-018 | both | BLE person | Sets 1.00 V; over Bluetooth the person waits 3 s, then allows remote control. |
-| ST-019 | both | person | Sets 3 V, 0.05 A, output off; the person sets 4 V on the front panel; the test sets 0.08 A. |
+| ST-019 | both | person | Sets 3 V, 0.05 A, output off; releases remote control; the person sets 4 V on the front panel; requests remote control again (over Bluetooth the person allows); within 2 s of a 4 V reading after the grant, sets 0.08 A; the teardown restores the setpoints. |
 | ST-020 | both | BLE person | 20 voltage and current changes from 1 V to 4.8 V and 10 mA to 86 mA, output off. |
 | ST-021 | both | person | The person selects program or PD mode; `set_voltage(1.0)` is refused; the person selects DC mode again. |
 | ST-022 | both | Load A, BLE person | 5 V and 0.1 A into Load A, output on, five queued changes (1 V to 3 V) and output off. Step 4 (BLE, person): the person switches Bluetooth off on the host with the output on, then on again; the test reconnects and switches the output off after the person allows remote control. |
@@ -198,7 +198,7 @@ above.
 | ST-046 | USB | | Takes remote control, reads for 20 s, sets 1.00 V. |
 | ST-047 | none | | Checks the frame logs of ST-006, ST-008 and ST-018 of the same run. |
 | ST-048 | BLE | person | Sets 1.00 V three times: the person denies; nobody presses (about 60 s); the person allows after 10 s while a second call is queued. |
-| ST-049 | both | person | Takes remote control; the person selects PD mode; the test closes; the person selects DC mode again. |
+| ST-049 | both | person | Takes remote control, output off; the person confirms disabling the grant on the front panel, then selects PD mode with the connection open; the test closes; the person selects DC mode again. |
 | ST-050 | BLE (steps 1, 4), USB (step 2) | person | Reconnection on: Bluetooth off for 20 s, or the USB cable out and in. Step 4: reconnection off, Bluetooth off. |
 
 ST-039 and ST-047, and ST-017 step 1, carry the `hil` marker although they
