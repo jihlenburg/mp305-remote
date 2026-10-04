@@ -117,6 +117,12 @@ class OptIns:
 OPT_INS = OptIns.from_env()
 """The opt-ins of this run."""
 
+# How long the pre-flight waits for the background close of a connection
+# that needed a person, in seconds: the close of the transport is bounded
+# (`timing::CLOSE`), and the release before it by the reply bound.
+PREFLIGHT_CLOSE_WAIT_S = 10.0
+
+
 class NeedsPerson(BaseException):
     """Raised from a prompt callback in teardown when nobody is there to confirm.
 
@@ -430,10 +436,19 @@ def preflight(hil_unit: Unit, pytestconfig: pytest.Config) -> Unit:
             max_current=SAFE_CURRENT,
         )
     except NeedsPerson:
+        # The library closes this attempt in the background (DD-PY-044). The
+        # next connect of the run must not meet that close half way, or it
+        # fails with "a session is already open" instead of skipping.
+        closed = wait_until(lambda: not _native.pending_safety(), PREFLIGHT_CLOSE_WAIT_S)
         RECORD.preflight = {
             "connected": False,
             "reason": "the supply does not recognise this installation's host ID",
         }
+        if not closed:
+            pytest.fail(
+                "the pre-flight connection needed a person, and its close was still running "
+                f"after {PREFLIGHT_CLOSE_WAIT_S:g} s; start the run again"
+            )
         return unit
     reading = dev.reading
     RECORD.note_info(dev.info, None)
