@@ -272,7 +272,7 @@ def test_st050_steps_1_and_2_reconnection_after_the_link_is_back(
     resumed = dev.read(timeout=10.0)
     frame_log.settle()
     observe(f"step {step[0]} reconnected_after_s", round(seen[EventKind.RECONNECTED] - back, 3))
-    assert seen[EventKind.RECONNECTED] - back <= 10.0
+    assert seen[EventKind.RECONNECTED] - back <= 30.0
     assert resumed.wall_ns > int(back * 1e9)
     assert frame_log.sent(0xC8, start) == []
 

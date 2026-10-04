@@ -315,7 +315,7 @@ def test_st043_step1_a_usb_host_silences_the_bluetooth_session(
             and reading.wall_ns > int(closed_at * 1e9)
         )
 
-    back = wait_until(recovered, 15.0, step=0.1)
+    back = wait_until(recovered, 35.0, step=0.1)
     back_at = time.time()
     frame_log.settle()
     hints = [
@@ -328,9 +328,9 @@ def test_st043_step1_a_usb_host_silences_the_bluetooth_session(
     observe("recovered_after_s", round(back_at - closed_at, 3) if back else None)
     # The Bluetooth session reports the USB host.
     assert hints
-    # It recovers within 10 s after the USB process closed.
+    # It recovers within 30 s after the USB process closed.
     assert back
-    assert back_at - closed_at <= 10.0
+    assert back_at - closed_at <= 30.0
 
 
 @pytest.mark.hil

@@ -170,6 +170,13 @@ def _csv_path(opt_ins: OptIns, tmp_path: pathlib.Path) -> pathlib.Path:
     return tmp_path / "ST-034.csv"
 
 
+SLOW_TEXT = "the supply delivers fewer readings than the requested rate"
+"""The warning of SR-034 for a transport that cannot keep up."""
+
+SR013_RATE = 2.0
+"""The readings per second every transport delivers at least (SR-013)."""
+
+
 @pytest.mark.hil
 @pytest.mark.spec("ST-034")
 def test_st034_stream_at_three_rates_and_write_csv(
@@ -179,14 +186,23 @@ def test_st034_stream_at_three_rates_and_write_csv(
     run_record: RunRecord,
     tmp_path: pathlib.Path,
     observe: Callable[[str, object], None],
+    caplog: pytest.LogCaptureFixture,
 ) -> None:
     """Steps 1 to 3 on the supply (step 4 is the mock test below)."""
     dev = supply.connect()
     # Step 1: 0.1, 2 and 4 per second for 30 s each.
     counts = {}
+    warnings = {}
     for rate in (0.1, 2.0, 4.0):
+        caplog.clear()
         counts[rate] = len(list(mp305.stream(dev, rate, duration=30.0)))
+        warnings[rate] = sum(
+            1
+            for r in caplog.records
+            if r.name == "mp305" and r.levelno == logging.WARNING and SLOW_TEXT in r.getMessage()
+        )
     observe("counts", {str(k): v for k, v in counts.items()})
+    observe("slow_warnings", {str(k): v for k, v in warnings.items()})
     # Step 2: 30 s to CSV.
     path = _csv_path(opt_ins, tmp_path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -198,7 +214,15 @@ def test_st034_stream_at_three_rates_and_write_csv(
     with pytest.raises(ValueError):
         mp305.stream(dev, 4.1)
     for rate, count in counts.items():
-        assert abs(count - rate * 30.0) <= 0.1 * rate * 30.0, (rate, count)
+        full = rate * 30.0
+        if warnings[rate] == 0:
+            # The stream kept up: the count is within 10 % of the rate.
+            assert abs(count - full) <= 0.1 * full, (rate, count)
+        else:
+            # The link cannot keep up with the rate (SR-034): what it
+            # delivers, not below the 2 per second of SR-013, one warning.
+            assert warnings[rate] == 1, (rate, warnings[rate])
+            assert 0.9 * min(rate, SR013_RATE) * 30.0 <= count < full, (rate, count)
     assert csv_problems(data) == []
     assert len(data.decode("utf-8").splitlines()) - 1 == rows
 
