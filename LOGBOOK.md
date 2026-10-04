@@ -2890,3 +2890,31 @@ ST-013 from Linux stays unverified. It needs the dongle in halobox, or
 the built-in adapter with the Wi-Fi off the 2.4 GHz band. Record:
 docs/v-model/records/2026-10-04-system-linux-ble-halobox.md, third
 session.
+
+## 2026-10-05
+
+### ST-013 passes on Linux through the dongle
+
+The user switched the supply on with remote control enabled and plugged
+the ASUS dongle into halobox. Transport: Bluetooth LE from halobox
+through the dongle as its only adapter (the built-in one unbound from
+`btusb` for the run and bound again afterwards), commit `dda48f8`. Only
+`MP305_HIL` was set. Firmware of the supply, read in the run: System
+Version 1.6.0.51, Firmware Version 2.0.2.0.
+
+ST-013 passed at the first attempt: 195 readings in 60 s with the output
+off, the shortest time from a reply to the next request 101 ms. The
+supply recognised the host without a prompt. Sent: bind, information
+request, reading requests and the release frame of each close, in the
+pre-flight's session and in the test's. The connect took 2.4 s and the
+close of the transport 1.9 s, so the close bound of ADR-0017 is what
+lets this run pass. This is the first system test with a connection
+verified on Linux. Record:
+docs/v-model/records/2026-10-05-system-linux-ble-st013.md, with the
+run's record file reduced and masked.
+
+Found in the test harness on Linux: the retained log takes in the TRACE
+lines of the Bluetooth dependencies (6705 lines in this run, with the
+identifiers of other devices in range, removed from the stored copy),
+and the library's log bridge dropped 5383 records during the connect.
+Both are in TODO.md.
