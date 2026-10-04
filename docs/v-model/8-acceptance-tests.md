@@ -32,13 +32,19 @@ Status: changed, revision 10, approval pending under
 `H` requires the applicable procedure on the named OS and transport, on
 real hardware with the release app and installed release wheel as
 applicable. The user performs or witnesses it. The actual host, adapter,
-firmware, artifact hashes and observations are recorded. Native hosts or
-working device pass-through are eligible. Missing hardware remains open.
+firmware, artifact hashes and observations are recorded. A native host or
+a VM whose device pass-through works is eligible. The baseline's codes
+`VM` and `CI` are withdrawn: missing hardware leaves the cell open.
 
-`R` is permitted only for the six USB cells per OS listed below. It
-requires the user-witnessed Bluetooth acceptance result for that entry
-on the same OS and release artifacts, the corresponding same-transport
-system evidence, and the USB hardware prerequisites listed in
+The Windows cells are hardware obligations that are open and deferred,
+as in the system tests: no Windows host with a working path to the
+supply exists. No reuse is defined for Windows.
+
+`R` is permitted only for the USB cells of AT-012, AT-013 and AT-014 on
+macOS and on Linux. It requires the user-witnessed Bluetooth acceptance
+result for that entry on the same OS and release artifacts, the matching
+system entry on the same OS over USB verified by a direct run (not by
+reuse), and the USB hardware prerequisites listed in
 [the execution plan](hardware-verification-plan.md#acceptance-evidence-reuse).
 The user reviews the equivalence conclusion. Record it as acceptance by
 analysis, not as a witnessed USB execution. No development-build ST run
@@ -54,21 +60,21 @@ steps, not a Bluetooth bind on USB.
 |---|---|---|---|---|---|---|
 | AT-001 | H | H | H | H | H | H |
 | AT-002 | H | H | H | H | H | H |
-| AT-003 | H | R | H | R | H | R |
+| AT-003 | H | H | H | H | H | H |
 | AT-004 | H | H | H | H | H | H |
 | AT-005 | H | H | H | H | H | H |
 | AT-006 | H | H | H | H | H | H |
 | AT-007 | H | H | H | H | H | H |
-| AT-008 | H | H | H | H | H | H |
+| AT-008 | H | H (TBD-004) | H | H (TBD-004) | H | H (TBD-004) |
 | AT-009 | H | H | H | H | H | H |
 | AT-010 | H | H | H | H | H | H |
 | AT-011 | H | H | H | H | H | H |
-| AT-012 | H | R | H | R | H | R |
-| AT-013 | H | R | H | R | H | R |
-| AT-014 | H | R | H | R | H | R |
+| AT-012 | H | R | H | R | H | H |
+| AT-013 | H | R | H | R | H | H |
+| AT-014 | H | R | H | R | H | H |
 | AT-015 | H | H | H | H | H | H |
 | AT-016 | H | H | H | H | H | H |
-| AT-017 | H | R | H | R | H | R |
+| AT-017 | H | H | H | H | H | H |
 | AT-018 | H | H | H | H | H | H |
 | AT-019 | I | I | I | I | I | I |
 | AT-020 | H | H | H | H | H | H |
@@ -79,14 +85,14 @@ steps, not a Bluetooth bind on USB.
 | AT-026 | H | H | H | H | H | H |
 | AT-027 | H | n/a | H | n/a | H | n/a |
 | AT-028 | H | H | H | H | H | H |
-| AT-029 | H | R | H | R | H | R |
+| AT-029 | H | H | H | H | H | H |
 | AT-030 | H | H | H | H | H | H |
 | AT-031 | I | I | I | I | I | I |
 | AT-032 | H | n/a | H | n/a | H | n/a |
 | AT-033 | I | I | I | I | I | I |
 | AT-034 | H | H | H | H | H | H |
 | AT-035 | n/a | H | n/a | H | n/a | H |
-| AT-036 | H | H | H | H | H | H |
+| AT-036 | H | H (TBD-004) | H | H (TBD-004) | H | H (TBD-004) |
 | AT-037 | H | H | H | H | H | H |
 
 AT-027 remains Bluetooth-only. USB ownership and interference are covered
@@ -102,7 +108,7 @@ automated test in `tests/acceptance/` that the user starts and watches.
 |---|---|---|---|---|---|
 | AT-001 | UR-001 | 1. Start the app and connect over Bluetooth; confirm on the supply. 2. Disconnect. 3. Connect a USB cable and connect over USB. 4. Repeat steps 1 to 3 with the Python library. | Every connection succeeds and shows live readings. | manual | approved (prior baseline) |
 | AT-002 | UR-002 | 1. Search for supplies with the app and with `mp305` while the supply is on. 2. Compare the unit identifier shown with the last three characters of the name on the supply's Web Link screen or in a Bluetooth scanner. 3. Connect by the identifier shown. 4. If a second MP305B is available, repeat with both on. | Each supply is listed with its own identifier, and over Bluetooth it is the three trailing name characters. The software connects only to the one chosen. With two supplies found, the library refuses to connect without an identifier. Without a second unit, step 4 is recorded as not run and ST-004 (mock transport) is cited instead. | manual | approved (prior baseline) |
-| AT-003 | UR-003 | 1. With the library, set 5.00 V and 0.100 A. 2. Read a measurement. 3. Compare the supply's screen. | The library takes and returns floats in V and A (5.0, 0.1). The screen shows 5.00 V and 0.100 A. No raw values appear in the API. | script (`tests/acceptance/test_units.py`) | changed (rev 10, approval pending) |
+| AT-003 | UR-003 | 1. With the library, set 5.00 V and 0.100 A. 2. Read a measurement. 3. Compare the supply's screen. | The library takes and returns floats in V and A (5.0, 0.1). The screen shows 5.00 V and 0.100 A. No raw values appear in the API. | script (`tests/acceptance/test_units.py`) | approved (prior baseline) |
 | AT-004 | UR-004 | 1. On the front panel, set 3.00 V and 0.050 A, output off. 2. Connect the app. 3. Look before touching any control. | The app shows 3.00 V, 0.050 A, output off, DC mode, no fault and the supply's versions before any control is enabled. The supply's setpoints are unchanged. | manual | approved (prior baseline) |
 | AT-005 | UR-005 | 1. Connect the app, output off. 2. Change the voltage to 4.00 V. 3. Start and stop a CSV recording. 4. Press "Output on". | The output stays off through steps 2 and 3 and switches on only at step 4. | manual | approved (prior baseline) |
 | AT-006 | UR-006 | 1. Load A on the output, 5.00 V, 0.100 A, output on from the app. 2. Press "Output off"; the app's log shows the time from the press to the supply's acknowledgment. 3. Repeat with `psu.output_off()` in Python, which returns after the acknowledgment. 4. Watch the voltage on the app or a meter. | The supply acknowledges within 0.5 s in both cases, and the measured voltage falls to about 0 V right after. | manual | approved (prior baseline) |
@@ -116,7 +122,7 @@ automated test in `tests/acceptance/` that the user starts and watches.
 | AT-014 | UR-014 | 1. Start a recording. 2. Switch Load A on and off over 10 s. 3. Stop. 4. Open the file. | The CSV has a header with units and a row per reading with time, voltage, current, power, output state and mode. The on and off steps are visible. | manual | changed (rev 10, approval pending) |
 | AT-015 | UR-015 | 1. Run a script that finds the supply, connects, sets 5 V and 0.1 A, switches the output on and off, and reads measurements, with plain function calls. | The script runs top to bottom without asyncio and finishes with the output off. | script (`tests/acceptance/test_python_api.py`) | approved (prior baseline) |
 | AT-016 | UR-016 | 1. `set_voltage` above the range. 2. Connect with a fresh host ID and press deny. 3. Connect with a fresh host ID and press nothing. 4. Over Bluetooth, call `set_voltage(1.0)` and press deny on the remote-control prompt. 5. Switch off the supply while connected, then make a call. 6. Search with the supply switched off. | 1 `SetpointRangeError`, 2 `ConnectionDeniedError`, 3 `Mp305TimeoutError`, 4 `RemoteControlDeniedError`, 5 `LinkLostError`, 6 `NotFoundError`. A command the supply rejects cannot be caused on demand with a real supply; ST-023 covers it with the mock transport. | script (`tests/acceptance/test_python_errors.py`) with manual steps 2 to 5 | approved (prior baseline) |
-| AT-017 | UR-017 | 1. Load A, 5 V, 0.1 A, output on. 2. Read a measurement and inspect it. | The object has float voltage, current and power in V, A and W, the output state, the regulation mode and the list of active faults. | script (`tests/acceptance/test_python_telemetry.py`) | changed (rev 10, approval pending) |
+| AT-017 | UR-017 | 1. Load A, 5 V, 0.1 A, output on. 2. Read a measurement and inspect it. | The object has float voltage, current and power in V, A and W, the output state, the regulation mode and the list of active faults. | script (`tests/acceptance/test_python_telemetry.py`) | approved (prior baseline) |
 | AT-018 | UR-018 | 1. Run `with` block that switches the output on and ends normally. 2. Run one that raises inside the block. | In both cases the output is off afterwards and the supply is no longer under remote control. | script (`tests/acceptance/test_context_manager.py`) | approved (prior baseline) |
 | AT-019 | UR-019 | Inspect the Cargo workspace and the dependencies of `mp305-app` and `mp305-py`. | Both depend on `mp305-core`. Neither contains protocol encoding or decoding of its own. | inspection | approved (prior baseline) |
 | AT-020 | UR-020 | 1. Inspect `mp305-app`'s dependencies. 2. Start the release app on each OS in the coverage table and connect. | The app uses egui and runs on each OS tested. | inspection plus manual | approved (prior baseline) |
@@ -127,7 +133,7 @@ automated test in `tests/acceptance/` that the user starts and watches.
 | AT-026 | UR-026 | 1. Connect with the app and with the library, over Bluetooth and over USB. 2. Compare with the supply's information screen. | Model, application version and hardware revision match on both transports. The USB layout is recorded for TBD-010. | manual | approved (prior baseline) |
 | AT-027 | UR-027 | 1. Connect WebLink in Chrome to the supply over Bluetooth. 2. Search with the app and with the library. 3. Disconnect WebLink, disable remote control on the supply's screen, search again. | In both cases the app and the library report that no supply was found and list the possible reasons: off or out of range, another app connected, a USB host active, remote control disabled on the supply. Restore remote control. | manual | approved (prior baseline) |
 | AT-028 | UR-028 | 1. Load A, 5 V, 0.1 A, output on. 2. Stream readings at 2 per second for 60 s to a CSV file with the helper. 3. Open the file. | About 120 rows (at least 110), each with time, voltage, current and power in V, A and W. | script (`tests/acceptance/test_python_logging.py`) | approved (prior baseline) |
-| AT-029 | UR-029 | 1. No load, 0.100 A. 2. Ramp from 1 V to 5 V in 1 V steps, 1 s each, while logging. | The logged setpoints step 1, 2, 3, 4, 5 V at about 1 s intervals. The ramp stops at 5 V. | script (`tests/acceptance/test_python_ramp.py`) | changed (rev 10, approval pending) |
+| AT-029 | UR-029 | 1. No load, 0.100 A. 2. Ramp from 1 V to 5 V in 1 V steps, 1 s each, while logging. | The logged setpoints step 1, 2, 3, 4, 5 V at about 1 s intervals. The ramp stops at 5 V. | script (`tests/acceptance/test_python_ramp.py`) | approved (prior baseline) |
 | AT-030 | UR-030 | 1. Connect, 5.00 V, 0.100 A, nothing on the output, output on. 2. Kill the process (for example `kill -9`, or close the laptop lid until the link drops). 3. Start the software again and connect to the same supply. 4. Switch the output off. | On the restart the software warns, before any control, that the previous session may have left the output on, naming the supply. Nothing is connected throughout. | manual | approved (prior baseline) |
 | AT-031 | UR-031 | Read the README of the app and of the library. | Both carry the unattended-run bench-safety note (front-panel current limit and OCP, safe load, the output stays on when the link drops, prefer USB for unattended runs). | inspection | approved (prior baseline) |
 | AT-032 | UR-032 | 1. Clear the remembered host ID, connect over Bluetooth with the app, press allow, disconnect. 2. Connect again and watch the supply's screen. 3. Repeat steps 1 and 2 with the library. | On the second connection no prompt appears, the software connects within 5 s and tells the user the supply recognised it. The record settles TBD-006. | manual | approved (prior baseline) |
@@ -151,4 +157,4 @@ automated test in `tests/acceptance/` that the user starts and watches.
 | 7 | 2026-09-30 | Editorial: the CI coverage note states the Linux and Windows gap directly. No test procedure changed. | not yet approved |
 | 8 | 2026-09-30 | Matched UR revision 8: AT-002, AT-004, AT-008, AT-010, AT-016, AT-024, AT-026, AT-027, AT-031 rewritten; AT-032 to AT-036 added for UR-032 to UR-036; coverage table with the VM code for Parallels (TBD-009). | not yet approved |
 | 9 | 2026-09-30 | AT-037 for UR-037 (automatic reconnection); AT-024 and AT-031 match the TBD-017 decision. | user, 2026-09-30 (G1) |
-| 10 | 2026-10-04 | Conditional same-OS release evidence reuse for USB AT-003, AT-012, AT-013, AT-014, AT-017 and AT-029. Correct front-panel preparation in AT-023 and AT-034; make AT-037 explicit for the tested OS and USB. Keep witnessed release hardware results for every other applicable cell. ADR-0018 and the execution plan define reuse and combined ST/AT evidence. | pending user approval |
+| 10 | 2026-10-05 | Coverage: the codes `VM` and `CI` give way to `H`, hardware on an actual host with the release artifacts; the Windows cells are open and deferred. Conditional same-OS reuse of the witnessed Bluetooth result only for the USB cells of AT-012, AT-013 and AT-014 on macOS and Linux, and only on a system entry that was run directly; AT-003, AT-017 and AT-029 need no person over USB and stay direct runs (the user's decisions of 2026-10-05 on the review of the first draft of 2026-10-04). The TBD-004 notes on the USB cells of AT-008 and AT-036 are kept. Correct front-panel preparation in AT-023 and AT-034; make AT-037 explicit for the tested OS and USB. ADR-0018 and the execution plan define reuse and combined ST/AT evidence. | pending user approval |

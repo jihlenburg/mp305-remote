@@ -291,11 +291,10 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [ ] User approval of ADR-0018, ST revision 13, AT revision 10 and process
       revision 3 (drafted 2026-10-04). The approved baselines remain in
       force until approval. ADR-0017 is a separate pending decision.
-- [ ] Rework ADR-0018 (started 2026-10-05) along the review and the
-      user's decisions of 2026-10-05 (LOGBOOK): the hazard-related
-      entries and the cells without a person are hardware, Windows is a
-      deferred hardware obligation without reuse, the four reuse rules,
-      the amendments to AGENTS.md; then one approval
+- [x] ADR-0018 reworked 2026-10-05 along the review and the user's
+      decisions (LOGBOOK, "ADR-0018 reworked after its review"): 3 system
+      and 6 acceptance reuse cells left, Windows deferred, the hazard
+      and no-person entries direct runs, four reuse rules
 - [ ] After approval, implement the ST-019/ST-049 procedure corrections,
       prepare the missing acceptance scripts and release artifacts, then
       execute the reduced matrices and record each reuse analysis. No

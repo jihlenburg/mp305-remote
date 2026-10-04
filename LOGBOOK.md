@@ -3020,3 +3020,33 @@ recommended option unless noted.
    of ST-038 is per transport.
 8. ADR-0018 is to be reworked with the small reuse set that is left and
    brought back for one approval.
+
+### ADR-0018 reworked after its review
+
+The proposal was reworked along the review and the user's decisions and
+stays pending: ADR-0018, the hardware verification plan, system tests
+revision 13, acceptance tests revision 10 and process revision 3.
+
+- A hardware cell is the procedure on an actual host; the baseline's
+  codes `VM` and `CI` are withdrawn as an explicit decision, and a
+  missing host leaves the cell open.
+- Windows is deferred: 70 system and 59 acceptance cells stay open, no
+  reuse is defined for it, and neither level can be closed before a host
+  exists.
+- Reuse is left for 3 system cells (ST-012 on Linux over both
+  transports, ST-035 on Linux over Bluetooth) and 6 acceptance cells
+  (the USB cells of AT-012, AT-013 and AT-014 on macOS and Linux). The
+  system matrix has 207 hardware cells, the acceptance matrix 171.
+- The hazard-related entries (ST-014, ST-015, ST-021, ST-024, ST-027),
+  the prompt entries ST-009 and ST-048 and the entries without a person
+  are direct runs again; their rows are back to the baseline's status.
+- The four reuse rules, the ST-034 wording for a link that cannot keep
+  up (not below the 2 per second of SR-013, exactly one warning), the
+  kept TBD-004 notes on AT-008 and AT-036, and the list of amendments to
+  AGENTS.md that an approval brings.
+- The plan names the Linux results of 2026-10-05, the dongle on halobox
+  as the Linux adapter, and that the macOS results of 2026-10-03 predate
+  the bounds of ADR-0017.
+
+The traceability check passes; the counts in the ADR, the plan and the
+two matrices agree. No device I/O.

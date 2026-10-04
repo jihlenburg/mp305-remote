@@ -236,8 +236,9 @@ its own.
 System tests run on real hardware over each transport the SRs name.
 7-system-tests.md and 8-acceptance-tests.md each contain a coverage table of
 test by OS by transport. A hardware cell requires the applicable procedure
-on the named OS and transport. Native hosts and working device pass-through
-are eligible; missing hardware leaves that cell open.
+on the named OS and transport. A native host and a VM whose device
+pass-through works are eligible; missing hardware leaves that cell open.
+No cell falls back to CI without a device.
 
 Proposed revision 3 under [ADR-0018](../adr/0018-focused-hardware-verification.md):
 only cells explicitly marked for reuse in an approved coverage table may
@@ -249,8 +250,10 @@ The prerequisites and limits are in
 [hardware-verification-plan.md](hardware-verification-plan.md). Missing or
 contradictory evidence leaves the cell open. A reuse result is recorded as
 verified by analysis, never as a hardware run on the target combination.
-Acceptance reuse also requires a witnessed source on the same OS and
-release artifacts, and the user's review of the equivalence conclusion.
+The source result is from the build under test or reviewed again against
+its commit, a prerequisite counts only when it was run directly, and the
+user signs every reuse record off. Acceptance reuse also requires a
+witnessed source on the same OS and release artifacts.
 
 Compatible executions may share setup, traces and observations when each
 entry's complete procedure and expected results are satisfied. Each ID
@@ -289,4 +292,4 @@ editorial in the revision table.
 |---|---|---|---|
 | 1 | 2026-09-29 | First draft, revised the same day after an independent review | not yet approved |
 | 2 | 2026-09-30 | Editorial: the V-model is stated as the project process. No process rule changed. | user, 2026-09-30 (process baseline) |
-| 3 | 2026-10-04 | Define conditional evidence reuse only where approved ST/AT matrices permit it, actual-host hardware obligations, and combined execution with per-ID results and witnessed release acceptance. Correct the stale introductory claim that the approved process still awaited approval. ADR-0018. | pending user approval |
+| 3 | 2026-10-04 | Define conditional evidence reuse only where approved ST/AT matrices permit it, actual-host hardware obligations, and combined execution with per-ID results and witnessed release acceptance. Correct the stale introductory claim that the approved process still awaited approval. Reworked on 2026-10-05 after the review of ADR-0018: no cell falls back to CI, the source of a reuse is from the build under test, prerequisites count only as direct runs, and the user signs every reuse record off. ADR-0018. | pending user approval |
