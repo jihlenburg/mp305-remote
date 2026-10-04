@@ -187,9 +187,17 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] ST-013 from Linux 2026-10-05: passes from halobox through the
       ASUS dongle with the bounds of ADR-0017 (record
       docs/v-model/records/2026-10-05-system-linux-ble-st013.md)
-- [ ] The remaining Bluetooth system tests from Linux (halobox, through
-      the dongle); needs the user's go-ahead, and a person for the
-      entries with control commands
+- [x] System tests on Linux without a person 2026-10-05 (halobox, the
+      dongle): ST-002, ST-004, ST-013, ST-033 pass, and the parts
+      without a person of ST-012, ST-017, ST-031, ST-039 and ST-043
+      (record docs/v-model/records/2026-10-05-system-linux-ble-noperson.md)
+- [ ] Put to the user: ST-034 fails on Linux at 4 readings per second
+      (86 of 120 in 30 s; the link delivers 2.5 to 3.3 per second with
+      BlueZ's default connection interval). The library warns as SR-034
+      says. Decide: the entry's expected result for a link that cannot
+      keep up, or a faster link on Linux
+- [ ] The system tests on Linux that need a person, Load A or B, or USB
+      (halobox, the dongle); needs the user at the supply
 - [x] Decided by the user 2026-10-04 (ADR-0017): close bound 5 s,
       connect bound 20 s, an abandoned connect is cancelled before the
       error returns, one Bluetooth adapter is the supported setup
@@ -205,11 +213,13 @@ Open and finished work, grouped by V-model phase. The process is described in
       halobox's built-in adapter no connect came up on 2026-10-04 (plain
       connects there take 1 s to more than 40 s; its MT7925 module also
       runs the Wi-Fi on 2.4 GHz); the awaited cancel worked
-- [ ] System tests on Linux: the retained log takes in the TRACE lines
-      of the Bluetooth dependencies, which name every device in range,
-      and the log bridge dropped 5383 records during a connect (halobox
-      2026-10-05). Keep the dependencies out of the retained log, and
-      check that the frame checks (ST-017, ST-039, ST-047) lose no line
+- [x] System tests: the run record masks Bluetooth addresses and
+      leaves out the dependencies' lines and discovery's lines about
+      other devices (`44b2463`, 2026-10-05)
+- [ ] Approval of py DD revision 7 (DD-PY-006): the log bridge passes
+      records of dependencies only at DEBUG and above, so their TRACE
+      lines no longer flood the queue (5383, 1073 and 1633 records
+      dropped in the runs of 2026-10-05). Then implement
 - [ ] Check on Linux whether a Bluetooth link outlives its process
       (BlueZ owns the connection): the app's dropped close at exit and a
       killed Python process rely on "the link drops, the supply clears

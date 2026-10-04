@@ -2918,3 +2918,33 @@ lines of the Bluetooth dependencies (6705 lines in this run, with the
 identifiers of other devices in range, removed from the stored copy),
 and the library's log bridge dropped 5383 records during the connect.
 Both are in TODO.md.
+
+### System tests on Linux without a person: nine pass, ST-034 fails on the rate
+
+With the user's go-ahead ("fire at will") for the Linux entries that
+need no person. Transport: Bluetooth LE from halobox through the dongle
+as its only adapter, commit `5e7a84d`. Only `MP305_HIL` was set. Firmware
+of the supply, read in the run: System Version 1.6.0.51, Firmware Version
+2.0.2.0. No control command was sent; the output stayed off.
+
+Passed: ST-002, ST-004, ST-013, ST-033, and the parts without a person
+of ST-012, ST-017 (step 1), ST-031 (step 2), ST-039 and ST-043 (step 2).
+42 tests skipped (a person, a load or USB needed).
+
+Failed: ST-034. At 4 per second the stream delivered 86 readings in 30 s
+instead of 120; at 0.1 and 2 per second the counts were right. The link
+on Linux delivers 2.5 to 3.3 readings per second (ST-013: 147 and 195 in
+60 s), and the library logged its warning as SR-034 asks when the
+transport cannot keep up. The entry's tolerance is not met, so the
+result is a failure and stays one until the user decides. Two tries with
+a shorter connection interval for the adapter (15 ms, then 15 to 20 ms,
+set in the kernel's debug settings and put back afterwards) gave no
+count: BlueZ aborted one connect, and in the other a write did not
+complete within 1 s.
+
+Also done: the record writer of the system tests now masks Bluetooth
+addresses and leaves out the dependencies' lines and discovery's lines
+about other devices (`44b2463`), checked on the raw record of ST-013.
+Drafted and pending the user's approval: DD-PY-006 (py DD revision 7),
+which keeps the dependencies' TRACE lines out of the log bridge. Record:
+docs/v-model/records/2026-10-05-system-linux-ble-noperson.md.
