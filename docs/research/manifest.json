@@ -3,8 +3,12 @@
   "scope": "Current research files except this manifest; historical snapshots keep their own hashes",
   "files": {
     "README.md": {
-      "bytes": 9061,
-      "sha256": "6d282d291d18cff31232e6098164388c9fd6df5465848a1b135459a6a05ba2bc"
+      "bytes": 9456,
+      "sha256": "9e07b23ba511b4183219bd3e480e307611c2f5d616ee4127e4a2f899f16892a3"
+    },
+    "asus-usb-bt600-macos.md": {
+      "bytes": 13871,
+      "sha256": "ea018a702ad146172c0fa8b42216a4715306a9310ff17e0c5c7032495e554107"
     },
     "captures/2026-09-29T193614-ble-readonly.jsonl": {
       "bytes": 9639,
@@ -45,6 +49,94 @@
     "captures/2026-10-03T233607-dongle-acl-mac-linux.jsonl": {
       "bytes": 7415,
       "sha256": "612a6d12f5b21813af40def0e3230007d98a180c647e9e45d8814b8996c947b2"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-01-default.jsonl": {
+      "bytes": 3052,
+      "sha256": "874539b0fdd4137afb834c48d18ff3a6290360f072797bf0b8ab71b34702c14c"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-02-size64.jsonl": {
+      "bytes": 2964,
+      "sha256": "ce58303607933a1e09d9fcde6af2ba44e886d237a4b3835b2780595c8ee3a6df"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-03-size1024.jsonl": {
+      "bytes": 2972,
+      "sha256": "d502ed3bcc1209101705faa7164d214746f72946cd9d4f608dc7fddd2b7010b6"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-04-before.jsonl": {
+      "bytes": 2984,
+      "sha256": "446b57642c32d2ab011d84dbc295b9b01bd9aa461aa6088783e64593c4cccfb5"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-05-clearhalt.jsonl": {
+      "bytes": 3076,
+      "sha256": "fdfdb49b883fe96cbd9fe10f327fef76ead4590629aa640c813c5d2ed98217cb"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-06-alt0.jsonl": {
+      "bytes": 3059,
+      "sha256": "dc88d2fe4a77d7ad4be89cc748831513b9dab0f7bfee8a0012b0270506afa8ad"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-07-config.jsonl": {
+      "bytes": 3081,
+      "sha256": "98288d9bcc0b0129cf6cb8205d2b3835d799a8d90e9197e0bff3543dc0839b93"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-08-fullpacket.jsonl": {
+      "bytes": 3078,
+      "sha256": "3312071393ff5fdbc30175c88bd1affbb69e15e3f3f54fa547b7d6dfef89712f"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-09-twopackets.jsonl": {
+      "bytes": 3213,
+      "sha256": "963075c0f76710f99edf3936440c170d3a856709733a185303613f6bace4e8c6"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-10-longwait.jsonl": {
+      "bytes": 2993,
+      "sha256": "22e8516a0b4e816b47bc57856a16c6ce7a6030a9d8189c7192ad0082212dbd7d"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-11-no-idle-polls.jsonl": {
+      "bytes": 3035,
+      "sha256": "615d6e668ec5beea249ef878666b2361f7d5da4b3ceeec894ba8fd4fa8e785b6"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-12-debug.jsonl": {
+      "bytes": 1243,
+      "sha256": "4bc52fec9d39a220aefbe8379a172a77cda1a6cd84a7d60e35b7d41a506fc45b"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-13-debug-serial.jsonl": {
+      "bytes": 3032,
+      "sha256": "e15e397af2748df6efed66e4ae387b556a08ed820bbfbdff54fd6559a84b9180"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-14-iokit.jsonl": {
+      "bytes": 3213,
+      "sha256": "f2f2aaa8187cadf415f81da8918b8c076453b369bbb699921539629e491795f4"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-15-ubuntu-btusb-usbmon.jsonl": {
+      "bytes": 1217,
+      "sha256": "ab91ffe7ead8c56fab282798c3a20c9888ffe12638b0c0b450025cd0e37187b5"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-15-ubuntu-btusb.jsonl": {
+      "bytes": 1084,
+      "sha256": "a8d83104b03644037455e2eb3c070f22dca50235a81c78e7a35cee457990724e"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-16-ubuntu-libusb-usbmon.jsonl": {
+      "bytes": 1278,
+      "sha256": "8a5b49b843f05e0f8d0c2c82922e8fa38945baf5cf15556be277f4c4642db17f"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-16-ubuntu-libusb.jsonl": {
+      "bytes": 3279,
+      "sha256": "00aaec54290212904a24acd5c7f5970e293b8bf3acd94055effb29a680668d87"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-17-ubuntu-btusb-usbmon.jsonl": {
+      "bytes": 4820,
+      "sha256": "a7755d4315825beb534885333fc23cd1d2bcbe8bb2dc6ba96df790bbc8d706b8"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-17-ubuntu-btusb.jsonl": {
+      "bytes": 2369,
+      "sha256": "7bf56f85d190543fae9b7a52acadb6c550389d7010a3587acdf18d08bef743e6"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-18-ubuntu-libusb-usbmon.jsonl": {
+      "bytes": 27019,
+      "sha256": "3f834b472d939516aa1e503e6932e37403a8d4976307cb49417a3fe1f4d42eb3"
+    },
+    "captures/2026-10-04-dongle-usb-loopback-18-ubuntu-libusb.jsonl": {
+      "bytes": 3281,
+      "sha256": "5e5bd13dfd6906c070ff69ad56d976d99011e5e78642f28b6956cc196d22e2ad"
     },
     "device/README.md": {
       "bytes": 861,
