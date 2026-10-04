@@ -5,7 +5,7 @@ and integration (IT-014). Scope: the implementation of ADR-0017 (AR-014
 revision 13, protocol DD revision 8, link DD revision 4, discovery DD
 revision 7).
 
-Commit: uncommitted. Diff summary: `timing::CONNECT` 20 s and the new
+Commit: `1cbcb09` (the run was made on the tree that this commit holds). Diff summary: `timing::CONNECT` 20 s and the new
 `timing::CLOSE` 5 s; the link closes the transport under `CLOSE`; the
 discovery glue awaits the cancel of a connect that expired or failed and
 bounds a connect as a whole with `FIND + CONNECT + CLOSE`; the transport
