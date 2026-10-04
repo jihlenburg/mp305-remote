@@ -3096,3 +3096,25 @@ release and request around the front-panel edit), ST-034 (the result for
 a link that cannot keep up) and ST-043 and ST-050 (30 s). Until then the
 tests run with their previous code. No test result is approved by this
 entry.
+
+### Test code for the approved entries, and the rerun on Linux
+
+The test code follows the approved entries: ST-034 (a stream that the
+link cannot keep up with logs exactly one warning and stays above the
+floor of SR-013), ST-043 and ST-050 (recovery within 30 s), changed in
+the main session, and ST-019 and ST-049 (the release and request around
+the front-panel edit, the grant disabled on the front panel before PD
+mode), changed by a coding agent and read in the main session. Lint and
+the system tests without a supply pass. ST-019, ST-043 step 1, ST-049 and
+ST-050 need a person or USB and have not run in their new form.
+
+Rerun on Linux with the user's go-ahead for the entries without a
+person: halobox through the dongle as its only adapter, commit
+`fc542ab`, only `MP305_HIL` set, firmware read in the run as before
+(1.6.0.51 and 2.0.2.0). All ten tests pass, ST-034 among them (75
+readings at 4 per second with one warning, 60 at 2 per second and 3 at
+0.1 per second without). No log record was dropped, so the cap for
+dependencies of py DD revision 7 does on Linux what it was made for,
+and the run's record file needed no reduction by hand. No control
+command was sent; the output stayed off. Record:
+docs/v-model/records/2026-10-05-system-linux-ble-noperson-rerun.md.

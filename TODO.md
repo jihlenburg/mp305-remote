@@ -193,10 +193,12 @@ Open and finished work, grouped by V-model phase. The process is described in
       (record docs/v-model/records/2026-10-05-system-linux-ble-noperson.md)
 - [x] ST-034 decided by the user 2026-10-05: a link that cannot keep
       up delivers what it has, with one warning per stream (SR-034)
-- [ ] Test code for the approved ST changes (started 2026-10-05):
-      ST-034 (a link that cannot keep up), ST-043 and ST-050 (30 s),
-      ST-019 and ST-049 (release and request around the front-panel
-      edit); then rerun on hardware
+- [x] Test code for the approved ST changes 2026-10-05: ST-034, ST-043
+      and ST-050 (`fc542ab`), ST-019 and ST-049 (`547a498`). ST-034
+      passes on Linux (record
+      docs/v-model/records/2026-10-05-system-linux-ble-noperson-rerun.md)
+- [ ] Run ST-019, ST-049, ST-043 step 1 and ST-050 in their new form on
+      hardware (a person, and USB for ST-043 step 1)
 - [ ] The system tests on Linux that need a person, Load A or B, or USB
       (halobox, the dongle); needs the user at the supply
 - [x] Decided by the user 2026-10-04 (ADR-0017): close bound 5 s,
@@ -223,8 +225,8 @@ Open and finished work, grouped by V-model phase. The process is described in
 - [x] py DD revision 7 implemented 2026-10-05 and verified at unit
       level on the Mac (record
       docs/v-model/records/2026-10-05-unit-py-rev7.md)
-- [ ] py DD revision 7 on Linux: a connect with the frame log on shows
-      no "log records were dropped"
+- [x] py DD revision 7 on Linux 2026-10-05: no log record dropped in
+      the rerun of the system tests on halobox
 - [ ] Check on Linux whether a Bluetooth link outlives its process
       (BlueZ owns the connection): the app's dropped close at exit and a
       killed Python process rely on "the link drops, the supply clears
