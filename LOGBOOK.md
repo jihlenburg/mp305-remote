@@ -3518,3 +3518,13 @@ tests and all 52 visual baselines. Workspace and core-only clippy, formatting,
 the release build and isolated traceability pass with zero defects. The
 local bundle was rebuilt and signed with the startup default. No native
 interaction or hardware command was performed in this task.
+
+### Retro app change published
+
+Committed and pushed the approved app work to `main` as
+`85d910bc29b99e7245ee4979958676c8214801a2`, together with the annotated
+`g4-app-rev6-approved` tag. This is the approved source for app DD revision 6,
+including the user's Retro startup choice and compact-frame refinements.
+The remote accepted both refs in one atomic push. The separate HID source
+changes, spike and their local traceability defect remain uncommitted.
+Updated TODO.md and the commit verification record with the published hash.

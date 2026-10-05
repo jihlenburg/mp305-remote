@@ -1,8 +1,9 @@
 # Retro app commit verification
 
-Date: 2026-10-05. Source: staged, uncommitted over
-`a395da7f54481394ffa1ce398009ca9f9d3e739d`. The resulting approved app DD
-revision 6 commit is identified by `g4-app-rev6-approved`.
+Date: 2026-10-05. Verified source commit:
+`85d910bc29b99e7245ee4979958676c8214801a2`, based on
+`a395da7f54481394ffa1ce398009ca9f9d3e739d`. App DD revision 6 is approved
+at this commit, identified by `g4-app-rev6-approved`.
 Platform: macOS 27.0.1, arm64. Transport: mock or none. Firmware: not applicable.
 
 Scope: the integrated Retro presentation, compact frame and controls,

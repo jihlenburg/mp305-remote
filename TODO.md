@@ -56,8 +56,9 @@ acceptance matrices, which are backlog (the sections below).
       (2026-10-05): Standard remains available in Details; fresh-window,
       theme-switch and state-preservation checks pass. The isolated app
       change passes all 541 workspace tests, lint and traceability checks.
-- [ ] Commit and push the approved Retro app change and approval tag
-      (authorised 2026-10-05).
+- [x] Commit and push the approved Retro app change (2026-10-05):
+      `85d910bc29b99e7245ee4979958676c8214801a2` on `main`, with
+      `g4-app-rev6-approved`. Separate HID work remains local.
 - [x] Retro theme and compact mode in the production app
       (2026-10-05): app DD revision 6 approved and implemented; shared grid,
       consistent controls, compact aligned setpoints, clean device cards,
