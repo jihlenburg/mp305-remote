@@ -60,8 +60,13 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          manylinux: "off"
-          args: --release --out dist --compatibility manylinux_2_35
+          # Built on the host, not in a container (no manylinux_2_35 image
+          # exists), and tagged manylinux_2_35. The tag goes through this
+          # input alone: together with `--compatibility` in `args` maturin
+          # sees two platform tags and refuses.
+          manylinux: "2_35"
+          container: "off"
+          args: --release --out dist
 
       - name: Build the wheel (macOS, Windows)
         if: runner.os != 'Linux'
