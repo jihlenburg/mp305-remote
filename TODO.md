@@ -110,7 +110,12 @@ acceptance matrices, which are backlog (the sections below).
 Later, not for 0.1: calibration of the readings against a precision
 load; Windows on hardware; the over-current and load tests; the stray
 "Shouldn't get anything but Ok!" that the Bluetooth library logs at
-close on macOS.
+close on macOS; the hardware revision shown over USB too, from the
+identity bytes of the version reply now that their layout is seen
+(DD-PROTO-023, LOGBOOK 2026-10-06); a pairing step on the host that
+records which USB and Bluetooth identities are one unit (the user's
+question of 2026-10-06; the supply has no serial number and its settings
+cannot hold one).
 
 - [ ] Check the new icon on native Windows and Linux desktops; formats and
       packaging inspected on macOS (2026-10-06).

@@ -470,8 +470,14 @@ Any other type returns 30 payload bytes:
 | 28 | Two zero bytes |
 
 WebLink's USB field list (8-byte serial, hardware, bootloader, application,
-10-byte name) is a finding on top of these two layouts. It has not been seen
-on a USB connection (TBD-010).
+10-byte name) is a finding on top of these two layouts. The 30-byte layout
+was seen on a USB connection on 2026-10-06 (LOGBOOK, "The USB version
+reply seen on hardware"): `MP305B` and two zero bytes, then
+`02 00 02 00 01 01 00 01` (the hardware revision 2.0.2.0, then what is
+inferred to be the bootloader version 1.1.0.1), `01 06 00 33`, `MP305B`
+and two zero bytes, two zero bytes. What WebLink calls the serial is the
+model name; the reply holds nothing per unit (TBD-010 closed for the
+layout; the meaning of the last four identity bytes stays inferred).
 
 Bluetooth, on AF02 without an address byte and on AF01 with address byte
 `0x31`, matches the type 6 field order (confirmed on hardware, captures

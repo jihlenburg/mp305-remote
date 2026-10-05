@@ -3712,3 +3712,30 @@ The user authorized committing and pushing the app icon integration on
 `g4-app-rev8-approved`. The existing root README edit remains outside this
 commit. The verification results are those of "App icon integrated" above;
 no implementation or asset changed after that verification.
+
+### The USB version reply seen on hardware
+
+The user asked whether the supply's save and load of settings could be
+used to keep a unique device identifier on the unit, so that one unit is
+recognised over USB and over Bluetooth and after a replug. Assessment
+given in chat: no. The settings (`C6`) have no spare field, every one of
+them is a narrow, user-visible, partly functional value; the program and
+profile writes (`D2`, `D6`, `DA`) switch the output off, can leave the
+device busy, show up in its menus and have never been exercised on
+hardware. The alternative put forward is a pairing step on the host (the
+app's names, or a small table in the state directory), not a write to
+the supply. Noted in TODO.md as a later idea.
+
+Before that, the one place that might already hold a unit identity was
+read: the USB version reply, whose layout had never been seen on hardware
+(TBD-010). With the user's yes, a connect over USB from the Mac (MP305B
+1.6.0.51; the output was on at 12.00 V with the user's 0.032 A load and
+the library's close switched it off, as announced): the reply is
+`E1 4D 50 33 30 35 42 00 00 02 00 02 00 01 01 00 01 01 06 00 33 4D 50 33
+30 35 42 00 00 00 00`, the 30-byte layout of protocol.md 4.4. The eight
+bytes from the bootloader's identity block are `02 00 02 00 01 01 00 01`:
+the hardware revision 2.0.2.0, as over Bluetooth, and then `01 01 00 01`,
+read as the bootloader version 1.1.0.1 (inferred). Nothing in the reply is
+per unit. device-model.md 1 and protocol.md 4.4 record it. The library
+already keeps the eight bytes raw (`Info.bootloader_raw`); showing the
+hardware revision over USB from them is a later change to DD-PROTO-023.
