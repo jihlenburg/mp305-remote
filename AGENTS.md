@@ -48,8 +48,12 @@ passed on 2026-09-30. Every module of `mp305-core` has passed G4 (protocol
 and transport on 2026-09-30; link, session, store, csv and discovery on
 2026-10-01). The Python library (`mp305-py` and the `mp305` package) and
 the desktop app `mp305-app` passed G4 on 2026-10-01 and were implemented
-and unit tested on 2026-10-02; integration, system and acceptance testing
-are next.
+and unit tested on 2026-10-02. The first release, 0.1.0, is gated by the
+short checklist of [ADR-0019](docs/adr/0019-lean-first-release.md) ("Release
+0.1" in TODO.md): hands-on checks with `scripts/hardware_check.py` and the
+app, the automated gates, and a build. The system and acceptance test
+matrices are backlog and do not gate it; do not start matrix runs unless
+the user asks. The supply's own readings are the reference.
 See [TODO.md](TODO.md) for where things stand.
 
 ## Agent anonymity and ownership

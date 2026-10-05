@@ -3118,3 +3118,35 @@ dependencies of py DD revision 7 does on Linux what it was made for,
 and the run's record file needed no reduction by hand. No control
 command was sent; the output stayed off. Record:
 docs/v-model/records/2026-10-05-system-linux-ble-noperson-rerun.md.
+
+### Change of course: a lean first release (ADR-0019)
+
+The user was at the supply with one load, a 12 V, 1 W LED lamp, and no
+multimeter. Told that the lamp fits neither load of the test
+specifications, the user decided: "We trust the readings of the mp305b.
+period.", and then: "you will now find a way to finish the software
+without all of this overcomplicated setup. we're a remote control
+library not the space shuttle program. we can always calibrate later
+with a precision load."
+
+Recorded as ADR-0019, accepted on that word: release 0.1.0 is gated by
+a short hands-on checklist (the new `scripts/hardware_check.py` over
+Bluetooth and USB on macOS and over Bluetooth on Linux, the app by hand
+on macOS), the automated gates and a build. The system and acceptance
+matrices become backlog and gate nothing; the supply's own readings are
+the reference. AGENTS.md's paragraph on the current phase says so, and
+TODO.md starts with the checklist.
+
+First check, macOS over Bluetooth, the lamp on the output, the user at
+the supply, firmware 1.6.0.51 and 2.0.2.0 as read: the script passed 9
+of 9 steps twice. With 12 V and a 0.1 A limit the supply held 0.100 A at
+about 9.35 V and the library reported CC; with a 0.2 A limit it gave
+12.00 V at 0.094 A (1.13 W) and CV. Setpoints were set, read back and
+restored, the output switched on and off, 20 readings arrived in 10 s
+each time. Between the runs the user set the limit to 0.1 A on the front
+panel. Noted for later: the power value of the first reading after
+switching on lags, and the Bluetooth library logs "Shouldn't get
+anything but Ok!" at close on macOS.
+
+The run of ST-019 and ST-049 that was prepared before the decision was
+not made.

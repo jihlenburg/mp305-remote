@@ -4,6 +4,28 @@ Open and finished work, grouped by V-model phase. The process is described in
 [docs/v-model/README.md](docs/v-model/README.md). Planned work lives here;
 [LOGBOOK.md](LOGBOOK.md) records only what happened.
 
+## Release 0.1 (ADR-0019)
+
+The first release is gated by this checklist, not by the system and
+acceptance matrices, which are backlog (the sections below).
+
+- [x] Library check on macOS over Bluetooth 2026-10-05
+      (`scripts/hardware_check.py`, 9 of 9 steps twice: CC at a 0.1 A
+      limit and CV at 0.2 A, a 12 V lamp as the load)
+- [ ] Library check on macOS over USB (the first USB contact with the
+      real supply)
+- [ ] Library check on Linux over Bluetooth (halobox, the dongle)
+- [ ] App by hand on macOS: connect, set, output on and off, chart, CSV
+- [ ] Fix what the checks find
+- [ ] Build the release artifacts (wheels, the app)
+- [ ] README: what was checked on hardware and what was not
+- [ ] Tag v0.1.0
+
+Later, not for 0.1: calibration of the readings against a precision
+load; Windows on hardware; the over-current and load tests; the stray
+"Shouldn't get anything but Ok!" that the Bluetooth library logs at
+close on macOS.
+
 ## Phase status
 
 | Gate | Level | Status |

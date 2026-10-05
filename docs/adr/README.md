@@ -34,6 +34,7 @@ Status values: `Proposed` (waiting for the user's approval), `Accepted`,
 | [0016](0016-hil-opt-ins-and-preflight.md) | Further opt-ins and a pre-flight check for hardware-in-the-loop tests | Accepted |
 | [0017](0017-connect-and-close-bounds-from-linux.md) | Bounds for connect and close after the first runs on Linux | Accepted |
 | [0018](0018-focused-hardware-verification.md) | Focused hardware verification and evidence reuse | Accepted |
+| [0019](0019-lean-first-release.md) | A lean path to the first release | Accepted |
 
 ## Template
 
