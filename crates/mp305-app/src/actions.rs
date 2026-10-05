@@ -351,7 +351,8 @@ fn has_session(model: &Model) -> bool {
     )
 }
 
-/// The value of the setpoint field of `kind`, when it can be applied.
+/// The value of the setpoint field of `kind`, when it can be applied
+/// ([`Model::apply_enabled`]: valid and edited, the rule of the Set button).
 fn valid_value(model: &Model, kind: FieldKind) -> Option<f64> {
     if !model.apply_enabled(kind) {
         return None;
@@ -740,6 +741,61 @@ mod tests {
         );
         assert!(handle(&mut idle, UiAction::ApplyLimits, c, &mut ids).is_empty());
         assert_eq!(idle.limits.max_volts, Some(12.0));
+    }
+
+    /// Test: UT-APP-036
+    #[test]
+    fn apply_on_an_unedited_setpoint_field_sends_nothing() {
+        let mut m = connected_model();
+        let mut ids = IdSource::new();
+        let c = clock_s(1.0);
+        // Both fields follow the supply (13.00 V, 1.000 A) and are valid.
+        for kind in [FieldKind::Voltage, FieldKind::Current] {
+            assert!(!m.field(kind).edited);
+            assert!(matches!(m.field(kind).state, FieldState::Valid { .. }));
+            assert!(m.setpoint_enabled());
+            assert!(!m.apply_enabled(kind));
+        }
+        let before = m.clone();
+        for action in [UiAction::ApplyVoltage, UiAction::ApplyCurrent] {
+            assert!(handle(&mut m, action, c, &mut ids).is_empty());
+        }
+        assert_eq!(m, before);
+
+        // An edited valid field is sent, as before.
+        handle(
+            &mut m,
+            UiAction::EditField(FieldKind::Voltage, "12".into()),
+            c,
+            &mut ids,
+        );
+        assert!(m.apply_enabled(FieldKind::Voltage));
+        let sent = handle(&mut m, UiAction::ApplyVoltage, c, &mut ids);
+        assert_eq!(sent, vec![Command::SetVoltage { id: 1, volts: 12.0 }]);
+        handle(
+            &mut m,
+            UiAction::EditField(FieldKind::Current, "0.5".into()),
+            c,
+            &mut ids,
+        );
+        let sent = handle(&mut m, UiAction::ApplyCurrent, c, &mut ids);
+        assert_eq!(sent, vec![Command::SetCurrentLimit { id: 2, amps: 0.5 }]);
+
+        // Once the supply reports the values, the fields follow it again and
+        // Enter sends nothing more.
+        m.apply(
+            UiReading {
+                sid: 1,
+                reading: r(0, 0, 0, 1200, 500, at_s(1.5)),
+            },
+            at_s(1.5),
+        );
+        assert!(!m.voltage.edited && !m.current.edited);
+        let pending = m.pending.clone();
+        for action in [UiAction::ApplyVoltage, UiAction::ApplyCurrent] {
+            assert!(handle(&mut m, action, c, &mut ids).is_empty());
+        }
+        assert_eq!(m.pending, pending);
     }
 
     /// Test: UT-APP-006

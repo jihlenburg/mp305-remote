@@ -43,7 +43,10 @@ with mp305.Mp305.connect(max_voltage=12.0) as dev:  # one supply nearby
 ```
 
 `mp305.discover()` lists the supplies in range; pass one `identifier` to
-`Mp305.connect` when there are several. `mp305.to_csv()` records readings to
+`Mp305.connect` when there are several. A supply on a USB cable is also seen
+over Bluetooth until a USB host talks to it, so it can show up twice: pass
+`bluetooth=False` (or `usb=False`) to `Mp305.connect` to choose the
+transport. The library never picks between two entries. `mp305.to_csv()` records readings to
 a CSV file and `mp305.ramp()` steps the voltage or the current limit. Over
 Bluetooth the supply asks on its screen to confirm the first connection and
 to allow remote control; pass `on_prompt` to be told while a call waits.

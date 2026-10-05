@@ -1,4 +1,4 @@
-"""UT-PY-011 and UT-PY-012: discovery, connect and the connect flow."""
+"""UT-PY-011, UT-PY-012 and UT-PY-029: discovery, connect and the connect flow."""
 
 from __future__ import annotations
 
@@ -89,7 +89,8 @@ def test_c_one_found() -> None:
 
 @pytest.mark.spec("UT-PY-011")
 def test_d_several_found() -> None:
-    supplies = [found("UT-PY-011-d1"), found("UT-PY-011-d2", "hid")]
+    # Two over Bluetooth: one hid and one ble entry get the text of UT-PY-029.
+    supplies = [found("UT-PY-011-d1"), found("UT-PY-011-d2")]
     with testing.mock_discovery(supplies) as record:
         with pytest.raises(NotFoundError) as info:
             Mp305.connect()
@@ -109,6 +110,77 @@ def test_e_the_seams_are_restored() -> None:
             raise RuntimeError("inside")
     assert (device._discover, device._open_session) == before
     assert device._open_session is _native.Session.connect
+
+
+@pytest.mark.spec("UT-PY-029")
+def test_a_one_unit_on_usb_and_over_bluetooth_is_explained() -> None:
+    supplies = [found("UT-PY-029-a-ble"), found("UT-PY-029-a-hid", "hid")]
+    with testing.mock_discovery(supplies) as record:
+        with pytest.raises(NotFoundError) as info:
+            Mp305.connect()
+    assert str(info.value) == (
+        "found one supply on USB and one over Bluetooth; a supply on a USB cable is"
+        " also seen over Bluetooth until a USB host talks to it. Pass usb=False or"
+        " bluetooth=False to choose a transport, or pass one identifier: "
+        + "; ".join(f.description for f in supplies)
+    )
+    assert info.value.found == tuple(supplies)
+    assert record.attempts() == 0
+    # Two over USB and one over Bluetooth keep the plain text.
+    three = [*supplies, found("UT-PY-029-a-hid2", "hid")]
+    with testing.mock_discovery(three):
+        with pytest.raises(NotFoundError) as info:
+            Mp305.connect()
+    assert str(info.value).startswith("several supplies found; pass one identifier: ")
+
+
+@pytest.mark.spec("UT-PY-029")
+def test_b_a_chosen_transport_is_the_only_one_scanned(monkeypatch: pytest.MonkeyPatch) -> None:
+    supplies = [found("UT-PY-029-b-ble"), found("UT-PY-029-b-hid", "hid")]
+    with testing.mock_discovery(supplies):
+        with Mp305.connect(bluetooth=False) as dev:
+            assert dev.identifier == "UT-PY-029-b-hid"
+            assert dev.transport == "hid"
+        with Mp305.connect(usb=False) as dev:
+            assert dev.identifier == "UT-PY-029-b-ble"
+            assert dev.transport == "ble"
+        with pytest.raises(NotFoundError) as info:
+            Mp305.connect(bluetooth=False, usb=False)
+        assert info.value.found == ()
+    calls: list[Any] = []
+    monkeypatch.setattr(device, "_discover", lambda *args: calls.append(args) or [])
+    for bluetooth, usb in ((True, True), (False, True), (True, False), (False, False)):
+        with pytest.raises(NotFoundError):
+            Mp305.connect(bluetooth=bluetooth, usb=usb, scan_time=2.0)
+    assert calls == [
+        (2.0, True, True),
+        (2.0, False, True),
+        (2.0, True, False),
+        (2.0, False, False),
+    ]
+
+
+@pytest.mark.spec("UT-PY-029")
+def test_c_an_identifier_with_a_transport_choice_is_refused(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[Any] = []
+    monkeypatch.setattr(device, "_discover", lambda *args: calls.append(args) or [])
+    monkeypatch.setattr(device, "_open_session", lambda *args: calls.append(args))
+    for flags in ({"usb": False}, {"bluetooth": False}, {"bluetooth": False, "usb": False}):
+        with pytest.raises(ValueError) as info:
+            Mp305.connect("UT-PY-029-c", **flags)
+        assert not isinstance(info.value, SetpointRangeError)
+        assert str(info.value) == (
+            "bluetooth and usb choose the transports of the scan without an identifier;"
+            " leave them at True when an identifier is given"
+        )
+    for wrong in ({"usb": 0}, {"bluetooth": 1}, {"usb": None}, {"bluetooth": "no"}):
+        with pytest.raises(TypeError, match="bluetooth and usb must be bools"):
+            Mp305.connect(**wrong)
+        with pytest.raises(TypeError, match="bluetooth and usb must be bools"):
+            Mp305.connect("UT-PY-029-c", **wrong)
+    assert calls == []
 
 
 @pytest.mark.spec("UT-PY-012")

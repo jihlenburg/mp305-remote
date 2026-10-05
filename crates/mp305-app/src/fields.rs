@@ -4,11 +4,15 @@
 //! conversion (`RawVoltage::from_volts`, `RawCurrent::from_amps`), so the
 //! field and the session (SR-024) cannot disagree at a rounding edge, and
 //! a value outside the supply's range or the user's limits is refused in
-//! the field with the core's text. Nothing is sent while typing.
+//! the field with the core's text. Nothing is sent while typing. A field
+//! that follows the supply's reported setpoint is checked only against the
+//! user's limits, as the core checks a setpoint it copies into a command
+//! ([`followed`]).
 
 use mp305_core::protocol::units::{
     self, RawCurrent, RawVoltage, SUPPLY_MAX_RAW_CURRENT, SUPPLY_MAX_RAW_VOLTAGE,
 };
+use mp305_core::session::state::check_copied;
 
 use crate::model::Limits;
 use crate::texts;
@@ -98,6 +102,32 @@ pub fn parse(text: &str, kind: FieldKind, limits: &Limits) -> FieldState {
     }
 }
 
+/// The state of a setpoint field that follows the supply's raw setpoint
+/// `raw`: `Valid` unless a user limit is set and `raw` is above it, else
+/// `Invalid` with the core's text. This is the question the core asks of a
+/// setpoint it copies from a reading into a command
+/// (`mp305_core::session::state::check_copied`, guard (7) of
+/// DD-SESS-032), asked through that same function; the other setpoint is
+/// passed as 0, which no limit refuses. The supply's rated range is not
+/// applied, because the supply may report a setpoint up to its firmware
+/// bound (30.50 V, 5.100 A) and the core accepts such a copy.
+/// `Model::limit_notice` asks the same function, so the notice, Output ON
+/// and the followed field agree. A limit field is parsed as typed text.
+#[must_use]
+pub fn followed(kind: FieldKind, raw: u16, limits: &Limits) -> FieldState {
+    let (checked, value) = match kind {
+        FieldKind::Voltage => (check_copied(raw, 0, limits), units::volts(raw)),
+        FieldKind::Current => (check_copied(0, raw, limits), units::amps(raw)),
+        FieldKind::MaxVoltage | FieldKind::MaxCurrent => {
+            return parse(&display(kind, raw), kind, limits);
+        }
+    };
+    match checked {
+        Ok(()) => FieldState::Valid { value, raw },
+        Err(e) => FieldState::Invalid(e.to_string()),
+    }
+}
+
 /// Whether `text` is an optional `+` or `-`, then digits and at most one
 /// `.`, with at least one digit.
 fn is_decimal(text: &str) -> bool {
@@ -168,14 +198,15 @@ impl Field {
 
     /// The supply reports the raw setpoint `raw`: an edited field that
     /// holds it stops being edited, then a field that is not edited shows
-    /// it.
+    /// it, with the state of [`followed`] (the user's limits only, as the
+    /// core checks a copied setpoint).
     pub fn follow(&mut self, kind: FieldKind, raw: u16, limits: &Limits) {
         if self.edited && matches!(self.state, FieldState::Valid { raw: held, .. } if held == raw) {
             self.edited = false;
         }
         if !self.edited {
             self.text = display(kind, raw);
-            self.state = parse(&self.text, kind, limits);
+            self.state = followed(kind, raw, limits);
         }
     }
 

@@ -314,7 +314,7 @@ pub fn inline_setpoint(
     ui.spacing_mut().item_spacing.x = 6.0;
     ui.horizontal(|ui| {
         actions.extend(value_edit_style(ui, model, kind, 64.0, apply.clone(), true));
-        let enabled = model.apply_enabled(kind) && model.field(kind).edited;
+        let enabled = model.apply_enabled(kind);
         let caption = if theme::is_retro(ui) {
             "SET"
         } else {
@@ -366,7 +366,7 @@ pub fn setpoint(
     ui.horizontal(|ui| {
         ui.add_sized([SETPOINT_LABEL_WIDTH, 28.0], egui::Label::new(dim(name)));
         actions.extend(value_edit(ui, model, kind, SETPOINT_WIDTH, apply.clone()));
-        let enabled = model.apply_enabled(kind) && model.field(kind).edited;
+        let enabled = model.apply_enabled(kind);
         let response = ui.add_enabled(
             enabled,
             egui::Button::new(label::SET_BUTTON)

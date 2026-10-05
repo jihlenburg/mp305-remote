@@ -219,11 +219,12 @@ def mock_discovery(
 ) -> Iterator[MockRecord]:
     """Replaces discovery and the connect with the mock while active.
 
-    `Mp305.connect()` and `discover()` then see `found`, and a connect to an
-    identifier in it runs `scripts` (or the default script of its transport)
-    on the mock; any other identifier raises `NotFoundError`. Process-wide
-    and not thread-safe; both seams are restored on exit, also on an
-    exception.
+    `Mp305.connect()` and `discover()` then see the entries of `found`
+    whose transport the call scans (`bluetooth` keeps the "ble" entries,
+    `usb` the "hid" ones), and a connect to an identifier in `found` runs
+    `scripts` (or the default script of its transport) on the mock; any
+    other identifier raises `NotFoundError`. Process-wide and not
+    thread-safe; both seams are restored on exit, also on an exception.
 
     Args:
         found: What discovery returns.
@@ -236,7 +237,8 @@ def mock_discovery(
     by_identifier = {f.identifier: f for f in found}
 
     def fake_discover(scan_time: float, bluetooth: bool, usb: bool) -> list[Found]:
-        return list(found)
+        scanned = {"ble": bluetooth, "hid": usb}
+        return [f for f in found if scanned.get(f.transport, False)]
 
     def fake_open(
         identifier: str,

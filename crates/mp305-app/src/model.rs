@@ -22,7 +22,7 @@ pub use mp305_core::transport::description::Kind;
 pub use tokio::time::Instant;
 
 use mp305_core::protocol::timing;
-use mp305_core::protocol::units::{RawCurrent, RawVoltage};
+use mp305_core::session::state::check_copied;
 use mp305_core::session::SessionEvent;
 
 use crate::actions::CLOSE_BOUND;
@@ -940,10 +940,23 @@ impl Model {
         })
     }
 
-    /// Re-parses the setpoint fields under the limits in force.
+    /// Re-checks the setpoint fields under the limits in force: an edited
+    /// field (or one without a reading) is re-parsed, a field that follows
+    /// the supply follows the stored reading again (`Field::follow`).
     pub fn reparse_setpoints(&mut self) {
-        self.voltage.reparse(FieldKind::Voltage, &self.limits);
-        self.current.reparse(FieldKind::Current, &self.limits);
+        let limits = self.limits;
+        let raw = self.reading.map(|r| r.reading.raw);
+        for (kind, reported) in [
+            (FieldKind::Voltage, raw.map(|r| r.set_voltage)),
+            (FieldKind::Current, raw.map(|r| r.set_current)),
+        ] {
+            let field = self.field_mut(kind);
+            match reported {
+                // A field that follows the supply is checked as followed.
+                Some(raw) if !field.edited => field.follow(kind, raw, &limits),
+                _ => field.reparse(kind, &limits),
+            }
+        }
     }
 
     // ----- Enabled states (DD-APP-010) -----
@@ -1013,10 +1026,17 @@ impl Model {
         self.phase == Phase::Connected && self.dc() && self.remote == RemoteState::Granted
     }
 
-    /// Whether the field of `kind` can be applied.
+    /// Whether the setpoint field of `kind` can be applied: setpoints can
+    /// be changed, and the field holds a valid value the user edited. A
+    /// field that still follows the supply's own setpoint is not applied,
+    /// so that Enter in an unedited field sends nothing (over Bluetooth it
+    /// would raise the remote-control prompt). The Set button's enabled
+    /// state and the apply action (`ApplyVoltage`, `ApplyCurrent`, also
+    /// sent by Enter) both use this one rule.
     #[must_use]
     pub fn apply_enabled(&self, kind: FieldKind) -> bool {
-        self.setpoint_enabled() && matches!(self.field(kind).state, FieldState::Valid { .. })
+        let field = self.field(kind);
+        self.setpoint_enabled() && field.edited && matches!(field.state, FieldState::Valid { .. })
     }
 
     /// Whether the limit fields can be applied.
@@ -1104,12 +1124,22 @@ impl Model {
     }
 
     /// The notice of setpoints above the user's limits: `Some` when the
-    /// core refuses the reading's setpoints under the limits in force.
+    /// core refuses the reading's raw setpoints under the limits in force,
+    /// asked through the core's own check of copied setpoints
+    /// (`mp305_core::session::state::check_copied`): a setpoint exceeds the
+    /// limits only when a limit is set and the setpoint is above it. The
+    /// rated range is not applied; the supply may report a setpoint up to
+    /// its firmware bound. Output ON and the followed fields
+    /// ([`fields::followed`]) use the same check.
     #[must_use]
     pub fn limit_notice(&self) -> Option<String> {
         let reading = self.reading?.reading;
-        let over = RawVoltage::from_volts(reading.set_volts, &self.limits).is_err()
-            || RawCurrent::from_amps(reading.set_amps, &self.limits).is_err();
+        let over = check_copied(
+            reading.raw.set_voltage,
+            reading.raw.set_current,
+            &self.limits,
+        )
+        .is_err();
         over.then(|| texts::limit_notice(reading.set_volts, reading.set_amps))
     }
 
@@ -2469,6 +2499,97 @@ mod tests {
         assert_eq!(
             m.remote_notice().as_deref(),
             Some("Remote control was lost. Press Request remote control to take it again.")
+        );
+    }
+
+    /// Test: UT-APP-037
+    #[test]
+    fn setpoints_above_the_rated_range_exceed_only_a_user_limit() {
+        // 30.40 V and 5.080 A: above the rated range, within the firmware's
+        // bounds (3050, 5100 raw) that the core accepts for a copy.
+        let mut m = connected_model();
+        m.apply(reading(1, r(0, 0, 0, 3040, 5080, at_s(1.0))), at_s(1.0));
+        assert_eq!(m.limit_notice(), None);
+        assert!(m.output_on_enabled());
+        assert_eq!(m.voltage.text, "30.40");
+        assert!(matches!(
+            m.voltage.state,
+            FieldState::Valid { raw: 3040, .. }
+        ));
+        assert_eq!(m.current.text, "5.080");
+        assert!(matches!(
+            m.current.state,
+            FieldState::Valid { raw: 5080, .. }
+        ));
+        assert!(!m.voltage.edited && !m.current.edited);
+
+        // A limit at the setpoint is not exceeded.
+        m.limits.max_volts = Some(30.4);
+        m.reparse_setpoints();
+        assert_eq!(m.limit_notice(), None);
+        assert!(m.output_on_enabled());
+        assert!(matches!(
+            m.voltage.state,
+            FieldState::Valid { raw: 3040, .. }
+        ));
+
+        // A user limit below the setpoint: the notice as before, Output ON
+        // disabled and the followed field invalid with the core's text.
+        m.limits.max_volts = Some(30.0);
+        m.reparse_setpoints();
+        assert_eq!(
+            m.limit_notice().as_deref(),
+            Some(
+                "The supply's setpoints (30.40 V, 5.080 A) exceed your limits; set lower \
+                 values before switching the output on."
+            )
+        );
+        assert!(!m.output_on_enabled());
+        assert_eq!(
+            m.voltage.state,
+            FieldState::Invalid("voltage 30.4 is outside 0 to 30".into())
+        );
+        assert_eq!(m.voltage.text, "30.40");
+        assert!(matches!(
+            m.current.state,
+            FieldState::Valid { raw: 5080, .. }
+        ));
+
+        // The same through a reading: the field follows under the limit.
+        m.apply(reading(1, r(0, 0, 0, 3041, 5080, at_s(1.5))), at_s(1.5));
+        assert_eq!(
+            m.voltage.state,
+            FieldState::Invalid("voltage 30.41 is outside 0 to 30".into())
+        );
+        assert!(m.limit_notice().is_some());
+
+        // A current limit below the setpoint, the voltage limit removed.
+        m.limits = Limits {
+            max_volts: None,
+            max_amps: Some(5.0),
+        };
+        m.reparse_setpoints();
+        assert!(matches!(
+            m.voltage.state,
+            FieldState::Valid { raw: 3041, .. }
+        ));
+        assert_eq!(
+            m.current.state,
+            FieldState::Invalid("current 5.08 is outside 0 to 5".into())
+        );
+        assert!(m.limit_notice().is_some());
+        assert!(!m.output_on_enabled());
+
+        // An edited field is still parsed under the rated range.
+        m.limits = Limits::none();
+        m.reparse_setpoints();
+        assert_eq!(m.limit_notice(), None);
+        let limits = m.limits;
+        m.voltage.edit("30.4".into(), FieldKind::Voltage, &limits);
+        m.reparse_setpoints();
+        assert_eq!(
+            m.voltage.state,
+            FieldState::Invalid("voltage 30.4 is outside 0 to 30".into())
         );
     }
 

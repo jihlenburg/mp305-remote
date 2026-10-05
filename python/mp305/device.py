@@ -104,6 +104,25 @@ def discover(
     return _discover(scan, bluetooth, usb)
 
 
+def _several_text(found: Sequence[Found]) -> str:
+    """The text of `NotFoundError` when discovery found more than one supply.
+
+    One `hid` and one `ble` entry are most likely one unit: a supply on a
+    USB cable keeps advertising until a USB host talks to it. The supply has
+    no USB serial number, so the two cannot be proven to be one unit, and
+    the text names the cause and the remedy instead of choosing (SR-004).
+    """
+    listing = "; ".join(f.description for f in found)
+    transports = sorted(f.transport for f in found)
+    if transports == ["ble", "hid"]:
+        return (
+            "found one supply on USB and one over Bluetooth; a supply on a USB cable is"
+            " also seen over Bluetooth until a USB host talks to it. Pass usb=False or"
+            " bluetooth=False to choose a transport, or pass one identifier: " + listing
+        )
+    return "several supplies found; pass one identifier: " + listing
+
+
 def host_id(state_dir: StatePath | None = None) -> bytes:
     """The 16-byte host ID of this installation, created on first use.
 
@@ -215,11 +234,16 @@ class Mp305:
         max_current: float | None = None,
         state_dir: StatePath | None = None,
         scan_time: float = SCAN_DEFAULT_S,
+        bluetooth: bool = True,
+        usb: bool = True,
     ) -> Mp305:
         """Connects to a supply and waits until it is ready.
 
-        Without an identifier, discovery runs first and the connection is
-        made only when exactly one supply was found.
+        Without an identifier, discovery runs first over the transports that
+        `bluetooth` and `usb` choose, and the connection is made only when
+        exactly one supply was found. A supply on a USB cable is also seen
+        over Bluetooth until a USB host talks to it, so it is found twice;
+        pass `usb=False` or `bluetooth=False` to choose one transport.
 
         Args:
             identifier: The supply's identifier as `discover()` reports it.
@@ -230,14 +254,22 @@ class Mp305:
             max_current: The user's current limit in A, or None.
             state_dir: The state directory; None for the default.
             scan_time: The scan time in s when no identifier is given.
+            bluetooth: Whether the scan without an identifier covers
+                Bluetooth LE; must stay True when an identifier is given.
+            usb: Whether the scan without an identifier covers USB HID;
+                must stay True when an identifier is given.
 
         Returns:
             The ready connection.
 
         Raises:
             TypeError: For an argument of the wrong type.
+            ValueError: For an identifier together with `bluetooth=False`
+                or `usb=False`.
             SetpointRangeError: For a limit or scan time out of range.
-            NotFoundError: When no supply, or several, were found.
+            NotFoundError: When no supply, or several, were found. With one
+                supply on USB and one over Bluetooth, the text explains that
+                these are likely one unit and how to choose a transport.
             Mp305Error: Or one of its subclasses, when the connection fails.
         """
         max_voltage, max_current = _limits(max_voltage, max_current)
@@ -246,17 +278,20 @@ class Mp305:
             raise TypeError("reconnect must be a bool")
         if identifier is not None and not isinstance(identifier, str):
             raise TypeError("identifier must be a str or None")
+        if not isinstance(bluetooth, bool) or not isinstance(usb, bool):
+            raise TypeError("bluetooth and usb must be bools")
+        if identifier is not None and not (bluetooth and usb):
+            raise ValueError(
+                "bluetooth and usb choose the transports of the scan without an identifier;"
+                " leave them at True when an identifier is given"
+            )
         _logs.ensure_started()
         if identifier is None:
-            found = _discover(scan, True, True)
+            found = _discover(scan, bluetooth, usb)
             if not found:
                 raise NotFoundError(_native.not_found_text(), found=())
             if len(found) > 1:
-                raise NotFoundError(
-                    "several supplies found; pass one identifier: "
-                    + "; ".join(f.description for f in found),
-                    found=tuple(found),
-                )
+                raise NotFoundError(_several_text(found), found=tuple(found))
             identifier = found[0].identifier
         native = _open_session(identifier, state_dir, reconnect, max_voltage, max_current)
         return cls._attach(native, on_prompt, None, Limits(max_voltage, max_current), reconnect)

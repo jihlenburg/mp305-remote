@@ -68,7 +68,17 @@ def find(args: argparse.Namespace) -> str | None:
     for supply in found:
         print(f"     found {supply.description}", flush=True)
     if len(found) != 1:
-        note("find the supply", False, f"{len(found)} found; one expected (or pass --identifier)")
+        hint = ""
+        if sorted(f.transport for f in found) == ["ble", "hid"]:
+            hint = (
+                "; a supply on a USB cable is also seen over Bluetooth until a USB host"
+                " talks to it, so pass --usb or --ble to choose a transport"
+            )
+        note(
+            "find the supply",
+            False,
+            f"{len(found)} found; one expected (or pass --identifier){hint}",
+        )
         return None
     signal = "" if found[0].rssi is None else f", signal {found[0].rssi} dBm"
     note("find the supply", True, f"{found[0].transport}{signal}")

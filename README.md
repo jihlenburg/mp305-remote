@@ -41,6 +41,11 @@ room for the MP305A later.
   # disconnects, also when an exception is in flight.
   ```
 
+  A supply on a USB cable is also seen over Bluetooth until a USB host
+  talks to it, and the library never picks between two entries. Pass
+  `bluetooth=False` (or `usb=False`) to `connect` to choose the transport,
+  or pass the identifier that `mp305.discover()` returned.
+
 Both sit on one Rust library, `mp305-core`, which implements the device
 protocol, the two transports, and the rules for talking to the supply
 safely (what may be sent, in which order, and what a lost link means).
@@ -84,6 +89,11 @@ whatever form it takes. In short:
   a udev rule lets non-root users open the device. The
   [native app check](docs/v-model/records/2026-10-05-unit-app-retro-native.md)
   records the tested setup; it does not establish cross-platform USB coverage.
+  The supply has no USB serial number, so its USB identifier is the device
+  path, which changes when the cable is replugged or the supply is switched
+  off and on. A running session with reconnection finds it again when it is
+  the only MP305B on USB; with two of them on USB it does not reconnect by
+  itself.
 
 The library and the app use the first Bluetooth adapter the operating
 system lists. With more than one adapter, disable or unplug the others: on
