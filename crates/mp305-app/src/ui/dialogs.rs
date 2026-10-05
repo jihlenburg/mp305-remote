@@ -21,8 +21,7 @@ const WIDTH: f32 = 340.0;
 /// Draws the close question while it is open.
 pub fn show(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
     let mut actions = Vec::new();
-    let (Some(title), Some(question)) = (model.close_dialog_title(), model.close_question(now))
-    else {
+    let (Some(title), Some(_)) = (model.close_dialog_title(), model.close_question(now)) else {
         return actions;
     };
     egui::Window::new(RichText::new(title).strong())
@@ -32,37 +31,46 @@ pub fn show(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
         .resizable(false)
         .default_width(WIDTH)
         .show(ui.ctx(), |ui| {
-            ui.add(egui::Label::new(&question.text).wrap());
-            ui.add_space(theme::PAD);
-            ui.horizontal(|ui| {
-                if question.switch_off {
-                    actions.extend(widgets::outlined(
-                        ui,
-                        true,
-                        label::SWITCH_OFF,
-                        UiAction::CloseAnswer(CloseChoice::SwitchOff),
-                    ));
-                    actions.extend(widgets::outlined(
-                        ui,
-                        true,
-                        label::LEAVE_ON,
-                        UiAction::CloseAnswer(CloseChoice::LeaveOn),
-                    ));
-                } else {
-                    actions.extend(widgets::outlined(
-                        ui,
-                        true,
-                        label::DISCONNECT,
-                        UiAction::CloseAnswer(CloseChoice::LeaveOn),
-                    ));
-                }
+            actions.extend(content(ui, model, now));
+        });
+    actions
+}
+
+/// Shared question content; compact mode keeps it above the fixed output row.
+pub fn content(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
+    let mut actions = Vec::new();
+    if let Some(question) = model.close_question(now) {
+        ui.add(egui::Label::new(&question.text).wrap());
+        ui.add_space(8.0);
+        ui.horizontal_wrapped(|ui| {
+            if question.switch_off {
                 actions.extend(widgets::outlined(
                     ui,
                     true,
-                    label::CANCEL,
-                    UiAction::CloseAnswer(CloseChoice::Cancel),
+                    label::SWITCH_OFF,
+                    UiAction::CloseAnswer(CloseChoice::SwitchOff),
                 ));
-            });
+                actions.extend(widgets::outlined(
+                    ui,
+                    true,
+                    label::LEAVE_ON,
+                    UiAction::CloseAnswer(CloseChoice::LeaveOn),
+                ));
+            } else {
+                actions.extend(widgets::outlined(
+                    ui,
+                    true,
+                    label::DISCONNECT,
+                    UiAction::CloseAnswer(CloseChoice::LeaveOn),
+                ));
+            }
+            actions.extend(widgets::outlined(
+                ui,
+                true,
+                label::CANCEL,
+                UiAction::CloseAnswer(CloseChoice::Cancel),
+            ));
         });
+    }
     actions
 }

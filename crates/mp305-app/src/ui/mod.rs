@@ -1,4 +1,4 @@
-//! Implements: DD-APP-030 (the eframe glue), DD-APP-031 (the screens'
+//! Implements: DD-APP-034, DD-APP-035, DD-APP-030 (the eframe glue), DD-APP-031 (the screens'
 //! module tree).
 //!
 //! Coverage: excluded from the measurement as GUI drawing code and eframe
@@ -13,9 +13,11 @@
 //! about the supply.
 
 mod chart;
+mod compact;
 mod connect;
 mod details;
 mod dialogs;
+mod frame;
 pub mod launch;
 mod panel;
 mod screens;
@@ -26,6 +28,7 @@ mod theme;
 mod widgets;
 
 pub use launch::launch;
+pub use theme::Theme;
 
 use eframe::egui;
 
@@ -38,6 +41,8 @@ use crate::frametime;
 pub struct View {
     /// Whether the details panel is open.
     pub details: bool,
+    /// Selected appearance; switching it never changes device state.
+    pub theme: Theme,
 }
 
 /// The eframe app: the glue between eframe and [`AppCore`].

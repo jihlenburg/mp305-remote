@@ -38,15 +38,21 @@ const FIELDS: [(FieldKind, &str); 4] = [
 /// Draws the status lines into the space `ui` offers.
 pub fn show(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
     let mut actions = Vec::new();
-    egui::ScrollArea::vertical()
-        .id_salt("status")
-        .min_scrolled_height(0.0)
-        .auto_shrink([false, true])
-        .max_height(ui.available_height().max(0.0))
-        .show(ui, |ui| {
-            ui.spacing_mut().item_spacing.y = 8.0;
-            actions.extend(lines(ui, model, now));
-        });
+    let mut bounds = ui.available_rect_before_wrap();
+    bounds.max.y = (bounds.bottom() - 4.0).max(bounds.top());
+    ui.scope_builder(egui::UiBuilder::new().max_rect(bounds), |ui| {
+        // Scroll content and focus outlines cannot paint into the fixed footer.
+        ui.set_clip_rect(ui.clip_rect().intersect(bounds));
+        egui::ScrollArea::vertical()
+            .id_salt("status")
+            .min_scrolled_height(0.0)
+            .auto_shrink([false, true])
+            .max_height(ui.available_height().max(0.0))
+            .show(ui, |ui| {
+                ui.spacing_mut().item_spacing.y = 8.0;
+                actions.extend(lines(ui, model, now));
+            });
+    });
     actions
 }
 
@@ -56,15 +62,15 @@ fn line(ui: &mut egui::Ui, text: &str, color: egui::Color32) {
 }
 
 /// The status lines.
-fn lines(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
+pub fn lines(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
     let mut actions = Vec::new();
     for shown in model.banners_to_show(now) {
         let color = match shown.kind {
-            ShownKind::Fatal | ShownKind::Loss | ShownKind::Banner(_) => theme::LIVE,
+            ShownKind::Fatal | ShownKind::Loss | ShownKind::Banner(_) => theme::colors(ui).live,
             ShownKind::Reconnect
             | ShownKind::ModeNotice
             | ShownKind::LimitNotice
-            | ShownKind::RemoteNotice => theme::TEXT,
+            | ShownKind::RemoteNotice => theme::colors(ui).text,
         };
         line(ui, &shown.text, color);
         let reconnect = shown.kind == ShownKind::Reconnect && model.reconnect_enabled();
@@ -94,10 +100,12 @@ fn lines(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
         });
     }
     if let Some(prompt) = model.prompt_line(now) {
-        ui.add(egui::Label::new(RichText::new(prompt).color(theme::TEXT).strong()).wrap());
+        ui.add(
+            egui::Label::new(RichText::new(prompt).color(theme::colors(ui).text).strong()).wrap(),
+        );
     }
     if let Some(closing) = model.closing_line() {
-        line(ui, closing, theme::TEXT);
+        line(ui, closing, theme::colors(ui).text);
     }
     if model.close_anyway_enabled()
         && widgets::quiet_button(ui, true, label::CLOSE_ANYWAY, theme::SMALL)
@@ -116,12 +124,16 @@ fn lines(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
     if let Some(reading) = model.reading {
         let faults = reading.reading.faults;
         if !faults.is_empty() {
-            line(ui, &texts::faults_line(faults), theme::LIVE);
+            line(ui, &texts::faults_line(faults), theme::colors(ui).live);
         }
     }
     for (kind, name) in FIELDS {
         if let Some(error) = model.field_error(kind) {
-            line(ui, &texts::field_error_line(name, &error), theme::LIVE);
+            line(
+                ui,
+                &texts::field_error_line(name, &error),
+                theme::colors(ui).live,
+            );
         }
     }
     for pending in model.pending.values() {

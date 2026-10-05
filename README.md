@@ -10,8 +10,9 @@ room for the MP305A later.
 > the desktop app and the Python library exist and pass their unit and
 > integration tests against a scripted mock of the supply on macOS, Linux
 > and Windows. On a real MP305B a part of the system tests has passed over
-> Bluetooth, from macOS and from Linux; USB and the acceptance tests are
-> still to be run. Windows is not yet verified on hardware: there is no
+> Bluetooth, from macOS and from Linux. Focused USB and desktop UI checks
+> have also run on macOS; system and acceptance coverage remains incomplete.
+> Windows is not yet verified on hardware: there is no
 > Windows test machine with a working path to the supply. Nothing is
 > released: there are no published wheels or app binaries. See [TODO.md](TODO.md) and
 > [LOGBOOK.md](LOGBOOK.md) for progress.
@@ -20,7 +21,10 @@ room for the MP305A later.
 
 - `mp305-app`, a desktop app for macOS, Linux and Windows to set voltage
   and current limit, switch the output, watch live readings on a chart and
-  record them to CSV ([crates/mp305-app/README.md](crates/mp305-app/README.md)).
+  record them to CSV. It opens in the Retro theme, with Standard available
+  in Details, and becomes a graph-free instrument panel at small window
+  sizes, down to 320 by 320 points
+  ([crates/mp305-app/README.md](crates/mp305-app/README.md)).
 - `mp305`, a Python library for test scripts
   ([crates/mp305-py/README.md](crates/mp305-py/README.md)):
 
@@ -75,9 +79,11 @@ whatever form it takes. In short:
   supply asks on its screen whether to allow the connection (seen from
   macOS), and according to the firmware it asks again before a host may
   control it.
-- USB (from the firmware, not yet observed on hardware): a HID device with
-  vendor ID `0x28E9` and product ID `0x028A`. No driver is needed. On
-  Linux a udev rule lets non-root users open the device.
+- USB: a HID device with vendor ID `0x28E9` and product ID `0x028A`,
+  observed on the supply from macOS. No vendor driver is needed. On Linux
+  a udev rule lets non-root users open the device. The
+  [native app check](docs/v-model/records/2026-10-05-unit-app-retro-native.md)
+  records the tested setup; it does not establish cross-platform USB coverage.
 
 The library and the app use the first Bluetooth adapter the operating
 system lists. With more than one adapter, disable or unplug the others: on
@@ -120,4 +126,3 @@ You may freely use, inspect, and modify the software for personal, educational,
 research, and internal business operations (such as powering and testing DUTs on
 an engineering bench). Selling the software, charging fees for distribution, or
 offering paid commercial derivative products or services is strictly prohibited.
-

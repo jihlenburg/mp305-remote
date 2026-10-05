@@ -1,0 +1,9 @@
+[package]
+name = "mp305-retro-preview"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+eframe = "=0.36.2"
+egui_kittest = { version = "=0.36.2", features = ["eframe", "wgpu"] }

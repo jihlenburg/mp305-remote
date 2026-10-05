@@ -32,22 +32,30 @@ const LINE_WIDTH: f32 = 1.5;
 pub fn show(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
     let series = model.chart.series(model.window_s);
     let window = f64::from(model.window_s);
-    let gap = theme::PAD;
+    let gap = if theme::is_retro(ui) { 8.0 } else { theme::PAD };
     let mut actions = Vec::new();
+    let footer_frame = theme::footer_frame();
     egui::Panel::bottom("chart-window")
-        .exact_size(CHOICES_HEIGHT)
-        .frame(egui::Frame::NONE)
+        .exact_size(CHOICES_HEIGHT + f32::from(footer_frame.inner_margin.top))
+        .frame(footer_frame)
         .show(ui, |ui| {
             actions.extend(window_choices(ui, model));
         });
     ui.horizontal(|ui| {
-        ui.heading(if matches!(model.phase, crate::model::Phase::Lost { .. }) {
+        let title = if matches!(model.phase, crate::model::Phase::Lost { .. }) {
             "Last readings"
         } else {
             "Live readings"
+        };
+        ui.heading(if theme::is_retro(ui) {
+            title.to_uppercase()
+        } else {
+            title.into()
         });
         ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
-            ui.label(widgets::dim("Time before latest reading"));
+            if ui.available_width() > 210.0 {
+                ui.label(widgets::dim("Time before latest reading"));
+            }
         });
     });
     let plots = ui.available_height() - 2.0 * gap - 3.0 * ui.spacing().item_spacing.y;
@@ -57,7 +65,7 @@ pub fn show(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
         (
             "Voltage",
             label::VOLTS,
-            theme::VOLTS,
+            theme::colors(ui).volts,
             series.volts,
             1.0_f64,
             false,
@@ -65,7 +73,7 @@ pub fn show(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
         (
             "Current",
             label::AMPS,
-            theme::AMPS,
+            theme::colors(ui).amps,
             series.amps,
             0.1_f64,
             false,
@@ -73,7 +81,7 @@ pub fn show(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
         (
             "Power",
             label::WATTS,
-            theme::WATTS,
+            theme::colors(ui).watts,
             series.watts,
             1.0_f64,
             true,
@@ -114,7 +122,7 @@ pub fn show(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
             .show_y(false)
             .show_background(false)
             .show_grid([false, true])
-            .grid_color(theme::RULE)
+            .grid_color(theme::colors(ui).rule)
             .grid_spacing(24.0..=80.0)
             .grid_fade(0.4)
             .show_axes([last, true])
@@ -136,6 +144,39 @@ pub fn show(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
 /// The window choices, right-aligned, in reading order.
 fn window_choices(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
     let mut actions = Vec::new();
+    if theme::is_retro(ui) {
+        let width = (ui.available_width() - 20.0) / 6.0;
+        ui.horizontal(|ui| {
+            ui.spacing_mut().item_spacing.x = 4.0;
+            for (seconds, text) in texts::WINDOW_CHOICES {
+                let selected = model.window_s == seconds;
+                let colors = theme::colors(ui);
+                if ui
+                    .add_sized(
+                        [width, CHOICES_HEIGHT],
+                        egui::Button::new(RichText::new(text).font(theme::text(12.0)).color(
+                            if selected {
+                                egui::Color32::BLACK
+                            } else {
+                                colors.dim
+                            },
+                        ))
+                        .fill(if selected {
+                            colors.watts
+                        } else {
+                            egui::Color32::from_rgb(21, 23, 35)
+                        })
+                        .stroke(egui::Stroke::NONE)
+                        .corner_radius(6),
+                    )
+                    .clicked()
+                {
+                    actions.push(UiAction::SetWindow(seconds));
+                }
+            }
+        });
+        return actions;
+    }
     ui.allocate_ui_with_layout(
         egui::vec2(ui.available_width(), CHOICES_HEIGHT),
         Layout::right_to_left(Align::Center),

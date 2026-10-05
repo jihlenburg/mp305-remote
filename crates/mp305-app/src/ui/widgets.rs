@@ -1,4 +1,4 @@
-//! Implements: DD-APP-031 (the widgets the screens share).
+//! Implements: DD-APP-034, DD-APP-035, DD-APP-031 (the widgets the screens share).
 //!
 //! Coverage: excluded from the measurement as GUI drawing code (ADR-0008;
 //! app DD, section 8, decision 9); UT-APP-020 inspects this file instead.
@@ -8,6 +8,7 @@
 //! none decides what a click may do.
 
 use eframe::egui::{self, Align, CursorIcon, Layout, RichText, Stroke, WidgetInfo, WidgetType};
+use std::sync::Arc;
 
 use crate::actions::UiAction;
 use crate::fields::FieldKind;
@@ -30,12 +31,30 @@ const OUTPUT_KEY_TEXT: f32 = 14.0;
 /// pointer, faded while not `enabled`.
 pub fn quiet_response(ui: &mut egui::Ui, enabled: bool, text: &str, size: f32) -> egui::Response {
     ui.scope(|ui| {
+        let colors = theme::colors(ui);
+        let retro = theme::is_retro(ui);
         let widgets = &mut ui.visuals_mut().widgets;
         widgets.inactive.fg_stroke.color = theme::DIM;
-        widgets.hovered.fg_stroke.color = theme::TEXT;
-        widgets.active.fg_stroke.color = theme::TEXT;
-        let button = egui::Button::new(RichText::new(text).size(size)).frame(false);
+        widgets.hovered.fg_stroke.color = colors.text;
+        widgets.active.fg_stroke.color = colors.text;
+        let label = if retro {
+            RichText::new(text.to_uppercase())
+                .font(theme::caption(ui, 16.0))
+                .color(colors.watts)
+        } else {
+            RichText::new(text).size(size)
+        };
+        let mut button = egui::Button::new(label).frame(retro);
+        if retro {
+            ui.spacing_mut().button_padding = egui::vec2(12.0, 4.0);
+            button = button
+                .min_size(egui::vec2(88.0, 32.0))
+                .corner_radius(8)
+                .fill(egui::Color32::from_rgb(21, 23, 35))
+                .stroke(Stroke::NONE);
+        }
         let response = ui.add_enabled(enabled, button);
+        response.widget_info(|| WidgetInfo::labeled(WidgetType::Button, enabled, text));
         focus_outline(ui, &response);
         if enabled {
             response.on_hover_cursor(CursorIcon::PointingHand)
@@ -63,9 +82,44 @@ pub fn quiet(ui: &mut egui::Ui, enabled: bool, text: &str, action: UiAction) -> 
 /// A button with a thin outline and no fill, for the answers of a
 /// dialog and the buttons of the details panel; reports `action`.
 pub fn outlined(ui: &mut egui::Ui, enabled: bool, text: &str, action: UiAction) -> Vec<UiAction> {
-    let button = egui::Button::new(RichText::new(text).color(theme::TEXT))
+    if theme::is_retro(ui) {
+        let colors = theme::colors(ui);
+        // Allocate in the parent so wrapped rows know the full button width.
+        let padding = ui.spacing().button_padding;
+        ui.spacing_mut().button_padding = egui::vec2(12.0, 4.0);
+        let primary = text == label::CONNECT;
+        let response = ui.add_enabled(
+            enabled,
+            egui::Button::new(
+                RichText::new(text.to_uppercase())
+                    .font(theme::caption(ui, 16.0))
+                    .color(if primary {
+                        egui::Color32::BLACK
+                    } else {
+                        colors.watts
+                    }),
+            )
+            .min_size(egui::vec2(88.0, 32.0))
+            .corner_radius(8)
+            .stroke(Stroke::NONE)
+            .fill(if primary {
+                colors.volts
+            } else {
+                egui::Color32::from_rgb(21, 23, 35)
+            }),
+        );
+        ui.spacing_mut().button_padding = padding;
+        response.widget_info(|| WidgetInfo::labeled(WidgetType::Button, enabled, text));
+        focus_outline(ui, &response);
+        return if response.clicked() {
+            vec![action]
+        } else {
+            Vec::new()
+        };
+    }
+    let button = egui::Button::new(RichText::new(text).color(theme::colors(ui).text))
         .fill(egui::Color32::TRANSPARENT)
-        .stroke(Stroke::new(1.0, theme::RULE))
+        .stroke(Stroke::new(1.0, theme::colors(ui).rule))
         .min_size(egui::vec2(0.0, 28.0));
     let response = ui.add_enabled(enabled, button);
     focus_outline(ui, &response);
@@ -82,7 +136,7 @@ fn focus_outline(ui: &egui::Ui, response: &egui::Response) {
         ui.painter().rect_stroke(
             response.rect,
             theme::RADIUS,
-            Stroke::new(1.0, theme::TEXT),
+            Stroke::new(1.0, theme::colors(ui).text),
             egui::StrokeKind::Inside,
         );
     }
@@ -160,17 +214,71 @@ fn value_edit(
     width: f32,
     apply: UiAction,
 ) -> Vec<UiAction> {
+    value_edit_style(ui, model, kind, width, apply, false)
+}
+
+/// An editable numeric string with layout-only padding and compact punctuation.
+fn numeric_layout(ui: &egui::Ui, buffer: &dyn egui::TextBuffer, _width: f32) -> Arc<egui::Galley> {
+    let source = buffer.as_str();
+    let (whole, fraction) = source.split_once('.').unwrap_or((source, ""));
+    let font = egui::FontId::new(16.0, theme::mono_bold());
+    let cell = ui
+        .painter()
+        .layout_no_wrap("0".into(), font.clone(), theme::TEXT)
+        .size()
+        .x;
+    let cells = u8::try_from(2_usize.saturating_sub(whole.chars().count())).unwrap_or(0);
+    let format = egui::TextFormat {
+        font_id: font,
+        color: theme::colors(ui).text,
+        ..Default::default()
+    };
+    let mut job = egui::text::LayoutJob::default();
+    job.append(whole, f32::from(cells) * cell, format.clone());
+    if source.contains('.') {
+        job.append(
+            ".",
+            0.0,
+            egui::TextFormat {
+                font_id: egui::FontId::new(16.0, theme::bold()),
+                ..format.clone()
+            },
+        );
+        job.append(fraction, 0.0, format);
+    }
+    ui.fonts_mut(|fonts| fonts.layout_job(job))
+}
+
+/// Shared editing and action semantics for normal and compact numeric fields.
+fn value_edit_style(
+    ui: &mut egui::Ui,
+    model: &Model,
+    kind: FieldKind,
+    width: f32,
+    apply: UiAction,
+    compact: bool,
+) -> Vec<UiAction> {
     let mut actions = Vec::new();
     let mut text = model.field(kind).text.clone();
-    let response = ui
-        .add(
-            egui::TextEdit::singleline(&mut text)
-                .id_salt(("field", format!("{kind:?}")))
-                .font(egui::TextStyle::Monospace)
-                .desired_width(width)
-                .margin(egui::vec2(6.0, 3.0)),
-        )
-        .on_hover_text(model.hint(kind));
+    let mut layouter = numeric_layout;
+    let mut edit = egui::TextEdit::singleline(&mut text)
+        .id_salt(("field", format!("{kind:?}")))
+        .font(egui::TextStyle::Monospace)
+        .desired_width(width)
+        .margin(egui::vec2(6.0, 3.0));
+    if compact {
+        edit = edit
+            .font(egui::FontId::new(16.0, theme::mono_bold()))
+            .layouter(&mut layouter)
+            .vertical_align(Align::Center)
+            .margin(egui::vec2(6.0, 2.0));
+    }
+    let response = if compact {
+        ui.add_sized([width + 12.0, 28.0], edit)
+    } else {
+        ui.add(edit)
+    }
+    .on_hover_text(model.hint(kind));
     let name = match kind {
         FieldKind::Voltage => label::VOLTAGE,
         FieldKind::Current => label::CURRENT,
@@ -192,6 +300,54 @@ fn value_edit(
     if response.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter)) {
         actions.push(apply);
     }
+    actions
+}
+
+/// Compact field and Set button; eligibility and actions match the full panel.
+pub fn inline_setpoint(
+    ui: &mut egui::Ui,
+    model: &Model,
+    kind: FieldKind,
+    apply: UiAction,
+) -> Vec<UiAction> {
+    let mut actions = Vec::new();
+    ui.spacing_mut().item_spacing.x = 6.0;
+    ui.horizontal(|ui| {
+        actions.extend(value_edit_style(ui, model, kind, 64.0, apply.clone(), true));
+        let enabled = model.apply_enabled(kind) && model.field(kind).edited;
+        let caption = if theme::is_retro(ui) {
+            "SET"
+        } else {
+            label::SET_BUTTON
+        };
+        let response = ui
+            .add_enabled_ui(enabled, |ui| {
+                let button = if theme::is_retro(ui) {
+                    egui::Button::new(
+                        RichText::new(caption)
+                            .font(theme::caption(ui, 16.0))
+                            .color(theme::colors(ui).watts),
+                    )
+                    .fill(egui::Color32::from_rgb(21, 23, 35))
+                    .stroke(Stroke::NONE)
+                    .corner_radius(7)
+                } else {
+                    egui::Button::new(caption).frame(true)
+                };
+                ui.add_sized([38.0, 28.0], button)
+            })
+            .inner;
+        let name = if kind == FieldKind::Voltage {
+            "Set voltage"
+        } else {
+            "Set current"
+        };
+        response.widget_info(|| WidgetInfo::labeled(WidgetType::Button, enabled, name));
+        focus_outline(ui, &response);
+        if response.clicked() {
+            actions.push(apply);
+        }
+    });
     actions
 }
 
@@ -247,7 +403,11 @@ pub fn form_field(
     });
     ui.label(dim(model.hint(kind)));
     if let Some(error) = model.field_error(kind) {
-        ui.label(RichText::new(error).size(theme::SMALL).color(theme::LIVE));
+        ui.label(
+            RichText::new(error)
+                .size(theme::SMALL)
+                .color(theme::colors(ui).live),
+        );
     }
     actions
 }
@@ -257,6 +417,11 @@ pub fn form_field(
 /// The half that matches the reading is lit, `On` in the live colour and
 /// `Off` neutral; without a reading neither is.
 pub fn output_key(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
+    output_key_sized(ui, model, OUTPUT_KEY_HEIGHT)
+}
+
+/// The same two model-controlled output actions at a chosen presentation height.
+pub fn output_key_sized(ui: &mut egui::Ui, model: &Model, height: f32) -> Vec<UiAction> {
     let mut actions = Vec::new();
     let lit = model.reading.map(|r| r.reading.output_on);
     let width = (ui.available_width() - ui.spacing().item_spacing.x) / 2.0;
@@ -266,30 +431,60 @@ pub fn output_key(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
                 label::OUTPUT_OFF,
                 model.output_off_enabled(),
                 lit == Some(false),
-                theme::RULE,
+                theme::colors(ui).rule,
                 UiAction::OutputOff,
             ),
             (
                 label::OUTPUT_ON,
                 model.output_on_enabled(),
                 lit == Some(true),
-                theme::OUTPUT_ACTIVE,
+                theme::colors(ui).output_active,
                 UiAction::OutputOn,
             ),
         ] {
+            let retro = theme::is_retro(ui);
+            let colors = theme::colors(ui);
+            let background = if retro {
+                if text == label::OUTPUT_OFF {
+                    colors.live
+                } else {
+                    colors.volts
+                }
+            } else if active {
+                fill
+            } else {
+                colors.window
+            };
             let button = egui::Button::new(
-                RichText::new(text).font(egui::FontId::new(OUTPUT_KEY_TEXT, theme::bold())),
+                RichText::new(if retro {
+                    text.to_uppercase()
+                } else {
+                    text.to_owned()
+                })
+                .font(theme::caption(
+                    ui,
+                    if retro { 18.0 } else { OUTPUT_KEY_TEXT },
+                ))
+                .color(if retro {
+                    egui::Color32::BLACK
+                } else {
+                    colors.text
+                }),
             )
-            .fill(if active { fill } else { theme::WINDOW })
+            .fill(background)
+            .corner_radius(if retro { 18 } else { theme::RADIUS })
             .stroke(Stroke::new(
                 1.0,
-                if active { theme::DIM } else { theme::RULE },
+                if active {
+                    theme::DIM
+                } else {
+                    theme::colors(ui).rule
+                },
             ));
             let response = ui
-                .add_enabled_ui(enabled, |ui| {
-                    ui.add_sized([width, OUTPUT_KEY_HEIGHT], button)
-                })
+                .add_enabled_ui(enabled, |ui| ui.add_sized([width, height], button))
                 .inner;
+            response.widget_info(|| WidgetInfo::labeled(WidgetType::Button, enabled, text));
             focus_outline(ui, &response);
             if response.clicked() {
                 actions.push(action);

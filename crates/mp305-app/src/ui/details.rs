@@ -1,4 +1,4 @@
-//! Implements: DD-APP-031 (the details panel).
+//! Implements: DD-APP-034, DD-APP-035, DD-APP-031 (the details panel).
 //!
 //! Coverage: excluded from the measurement as GUI drawing code (ADR-0008;
 //! app DD, section 8, decision 9); UT-APP-020 inspects this file instead.
@@ -16,7 +16,7 @@ use crate::actions::UiAction;
 use crate::fields::FieldKind;
 use crate::model::{Instant, Model, Screen, SCAN_S_RANGE};
 use crate::texts::{self, label};
-use crate::ui::{theme, widgets, View};
+use crate::ui::{theme, widgets, Theme, View};
 
 /// The width of the panel in points.
 const WIDTH: f32 = 340.0;
@@ -26,9 +26,10 @@ const LOG_HEIGHT: f32 = 160.0;
 /// Draws the details panel while it is open.
 pub fn show(ui: &mut egui::Ui, model: &Model, view: &mut View, now: Instant) -> Vec<UiAction> {
     let mut actions = Vec::new();
+    let mut open = view.details;
     let height = ui.ctx().content_rect().height() - 4.0 * theme::PAD - 32.0;
     egui::Window::new(label::DETAILS)
-        .open(&mut view.details)
+        .open(&mut open)
         .anchor(Align2::RIGHT_TOP, egui::vec2(-theme::PAD, theme::PAD))
         .collapsible(false)
         .resizable(false)
@@ -37,12 +38,34 @@ pub fn show(ui: &mut egui::Ui, model: &Model, view: &mut View, now: Instant) -> 
         .max_height(height.max(120.0))
         .vscroll(true)
         .show(ui.ctx(), |ui| {
-            actions.extend(friendly_name(ui, model));
-            match model.screen() {
-                Screen::Main => actions.extend(connected(ui, model, now)),
-                Screen::Connection => actions.extend(unconnected(ui, model, now)),
-            }
+            actions.extend(content(ui, model, view, now));
         });
+    view.details = open;
+    actions
+}
+
+/// Shared content for the full window and compact scrollable upper panel.
+pub fn content(ui: &mut egui::Ui, model: &Model, view: &mut View, now: Instant) -> Vec<UiAction> {
+    let mut actions = Vec::new();
+    ui.horizontal(|ui| {
+        ui.label("Theme");
+        ui.selectable_value(&mut view.theme, Theme::Standard, "Standard");
+        ui.selectable_value(&mut view.theme, Theme::Retro, "Retro");
+    });
+    ui.add_space(8.0);
+    if model.screen() == Screen::Main {
+        actions.extend(widgets::outlined(
+            ui,
+            model.disconnect_enabled(),
+            label::DISCONNECT,
+            UiAction::Disconnect,
+        ));
+    }
+    actions.extend(friendly_name(ui, model));
+    match model.screen() {
+        Screen::Main => actions.extend(connected(ui, model, now)),
+        Screen::Connection => actions.extend(unconnected(ui, model, now)),
+    }
     actions
 }
 
@@ -77,10 +100,10 @@ fn friendly_name(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
         ui.label(widgets::dim("Saving name..."));
     }
     if let Some(error) = &model.names.error {
-        ui.add(egui::Label::new(RichText::new(error).color(theme::LIVE)).wrap());
+        ui.add(egui::Label::new(RichText::new(error).color(theme::colors(ui).live)).wrap());
     }
     if let Err(error) = crate::names::validate(&model.names.draft) {
-        ui.add(egui::Label::new(RichText::new(error).color(theme::LIVE)).wrap());
+        ui.add(egui::Label::new(RichText::new(error).color(theme::colors(ui).live)).wrap());
     }
     ui.add(egui::Label::new(widgets::dim("Names are saved on this computer, separately for USB and Bluetooth. USB names may need reassignment after reconnecting or rebooting. Clear the field to remove a name.")).wrap());
     if model.names.target.is_none() {

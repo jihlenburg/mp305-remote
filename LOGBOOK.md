@@ -3297,3 +3297,224 @@ Verification: [staged app commit record](docs/v-model/records/2026-10-05-unit-ap
 140 unit tests and 3 integration tests pass, clippy passes, and traceability
 of the staged source set has zero defects. The local full working tree still
 contains the previously documented HID test-specification defect.
+
+### App commit published and LCARS exploration requested
+
+Committed and pushed the approved app work as
+`a395da7f54481394ffa1ce398009ca9f9d3e739d` on `main`, together with
+`g4-app-rev5-approved`. The separate HID changes remain local.
+The user then requested an LCARS-style UI theme. Started an isolated
+simulated preview under `spikes/lcars_ui` to make the appearance reviewable
+before changing the approved production theme design.
+
+### LCARS preview and responsive compact panel
+
+Built `spikes/lcars_ui` as an isolated interactive simulation with no device
+transport or recording file writes. Added curved orange bands, peach/lilac/blue
+controls and OFL-licensed Antonio labels. Readings retain B612 Mono digit
+columns and compact decimal punctuation. Packaged and opened a separate macOS
+preview app. Native Details and simulated Output OFF worked at 760 by 520;
+the user liked the appearance and requested a smaller mode without graphs.
+
+Added automatic compact presentation below 760 points wide or 520 points high,
+with a 360 by 320 minimum. It retains readings, setpoints, power/state, separate
+output controls, recording and Details. Graphs return when enlarged. Rendered
+14 images at seven sizes and checked output, Details, setpoint, recording and
+state preservation across resizing. Built and signed the updated bundle;
+native restart was blocked by the Mac's locked screen. No hardware was
+operated for this preview.
+
+Prepared app DD revision 6 for an optional LCARS theme and compact mode in both
+themes, with Standard as the default. DD-APP-030/031 are changed and
+DD-APP-034/035 plus their test specifications are proposed, approval pending.
+Production app code remains at the published revision 5. Regenerated
+traceability; the only defect remains the separate pre-existing UT-DISC-012.
+The preview and proposed design are uncommitted.
+
+Exploration record: [LCARS and compact preview](docs/research/lcars-ui-preview.md).
+
+### Compact preview refined and reopened
+
+The user requested the new preview and then asked for a better compact layout.
+Reduced the minimum to 320 by 272, increased the main digits to 34 points,
+halved the decorative rail width, and made secondary controls smaller and
+outlined. The output buttons remain prominent at 36 points high. Added visible
+unapplied-edit labels. Fifteen rendered cases and interaction checks passed,
+including invalid input, recording and Output OFF, and state preservation
+across resizing. Updated the pending DD revision 6 dimensions and regenerated
+traceability; the same separate UT-DISC-012 defect remains.
+
+Rebuilt, signed and reopened the updated preview through the native UI, then
+resized it into the refined compact layout. The user asked about LCARS
+fixed-width fonts; Iosevka Fixed Bold and Antonio in fixed digit cells were
+discussed. The preview still uses B612 Mono Bold. No real hardware was used.
+
+Exploration record: [compact refinement](docs/research/lcars-ui-preview.md#compact-layout-refinement),
+including one transient headless raster anomaly that did not recur in the
+repeat render or native view.
+
+### Compact setpoint rows aligned
+
+The user requested vertical alignment of the setpoint fields and SET buttons
+with the voltage/current readings. Both controls now use the visible numeral
+row centre, derived from a fixed digit sample so changing readings do not move
+the controls. The columns remain shared between voltage and current. The
+existing 15 renders and interaction checks pass. Rebuilt, signed and reopened
+the preview, resized it to compact mode and visually confirmed the alignment.
+Updated the pending DD revision 6 presentation rule and traceability; the
+separate UT-DISC-012 defect remains. No production code or hardware changed.
+
+Exploration record: [setpoint row alignment](docs/research/lcars-ui-preview.md#setpoint-row-alignment).
+
+### Compact readability review
+
+The user asked whether all alignments, sizes and positions were satisfactory.
+Review found undersized setpoint values and unequal setpoint decimal positions.
+Increased these digits from 14 to 16 points, reserved whole-number columns
+through text layout without modifying the editable strings, and used compact
+decimal punctuation. Added a separator above the power/status row. The
+geometry check confirms matching decimal positions at all compact sizes and
+with invalid input. Existing interaction checks pass; rebuilt and signed the
+preview. Updated the pending app design and traceability; the separate
+UT-DISC-012 defect remains.
+
+The headless invalid-input image again showed the previously reported raster
+anomaly. Rendering every pass did not resolve it; this is now an explicit
+open TODO before production snapshot adoption. Normal minimum-size rendering
+was reviewed successfully. No production code or hardware changed.
+
+Exploration record: [setpoint readability](docs/research/lcars-ui-preview.md#setpoint-readability-and-decimal-alignment).
+
+### LCARS integration approved
+
+On 2026-10-05 the user accepted the reviewed preview and requested integration
+into the actual app. This approves app DD revision 6, including optional
+Standard/LCARS selection, automatic compact mode down to 320 by 272, the
+reviewed typography and aligned controls, and their test specifications. The
+approved document is currently uncommitted over
+`a395da7f54481394ffa1ce398009ca9f9d3e739d`; its commit hash and gate tag will be
+recorded when a commit is authorised. Started production implementation from
+the approved design, reusing the real model, actions and chart data.
+
+### Retro presentation grid and production integration
+
+The user requested integration of the reviewed preview, then a shared layout
+and typography grid, cleaner device cards and the name Retro. Implemented
+Standard/Retro selection in Details, responsive compact mode down to 320 by
+272, shared aligned readout/setpoint rows, consistent secondary controls and
+chart choices, and less prominent endpoint identifiers. Exact identities
+remain in accessible labels, tooltips and Details. The model and action
+handler are shared. Antonio and its license are embedded and the font licenses
+are included in the macOS bundle. The prototype now lives in
+`spikes/retro_ui`; its research record is `docs/research/retro-ui-preview.md`.
+Historical research links have a redirect document.
+
+The apparent image-preview corruption was investigated against saved pixels
+and opaque contact sheets. Production snapshot files are correct; no renderer
+workaround was retained. Adopted 50 reviewed baselines. Rebuilt and signed the
+release app, opened it, and selected Retro through the native UI. The earlier
+scan found both transports; a fresh scan in the final build was still pending
+at the end of the native check. No hardware control command was sent.
+
+Verification: [app theme and responsive layout](docs/v-model/records/2026-10-05-unit-app-retro.md),
+543 workspace tests pass, including 144 app unit tests and three app integration
+tests; lint, formatting and bundle checks pass. Traceability was regenerated;
+the separate pre-existing UT-DISC-012 defect remains. No commit or push was made.
+
+### Running Retro app inspected on hardware
+
+At the user's request, inspected the running app, selected the discovered
+USB endpoint and connected successfully. Operated the already authorised
+12 V, 1 W lamp through the native UI. Settled readings were 12.00 V, 0.095 A
+and about 1.13 W in CV. Output OFF worked with Details open, both in the full
+window and at the 320 by 272 minimum. Native resizing worked and restored
+the chart history collected while compact. Restored the original window,
+left the app connected with output off, and kept the 12.00 V and 0.200 A
+setpoints unchanged. The earlier pending native-check TODO is complete.
+Found one cosmetic issue, the redundant `OFF · off` status, and recorded it
+in TODO.md. No production code changed.
+
+Verification: [native app and lamp inspection](docs/v-model/records/2026-10-05-unit-app-retro-native.md),
+supplemental evidence for UT-APP-029, 030, 031 and 035. This is not an
+acceptance test or a system matrix run.
+
+### Button spacing corrected across the app
+
+The user's screenshot identified controls against the divider and requested
+an audit of all button distances. Added equal 24-point Retro divider insets
+without narrowing the control content, 8-point full footer padding and
+4-point compact connection footer padding. Clipped scrolling status content
+above the fixed footer. The geometry check also exposed a compact Cancel
+button extending into the right gutter; dialog buttons now wrap correctly.
+Updated the approved app presentation details to reflect the user's request.
+
+Correction to "Running Retro app inspected on hardware": that inspection
+did not detect the missing button margins. The new geometry checks and 33
+reviewed replacement images cover this defect. All 50 snapshots pass.
+Rebuilt and signed the app. The old window closed, but its process remained
+after the earlier USB timeout. Native automation returned
+`cgWindowNotFound`, so reopening and inspecting the new build remains in
+TODO.md. No output or setpoint command was sent during this correction.
+
+Verification: [button spacing](docs/v-model/records/2026-10-05-unit-app-button-spacing.md),
+144 app unit tests and three integration tests pass, including all nine UI
+tests. Lint, formatting and bundle checks pass. Traceability retains the
+separate existing UT-DISC-012 defect. No commit or push was made.
+
+### Updated app reopened after access retry
+
+The user requested another computer-access retry, which succeeded. Reopened
+the updated bundle, selected Retro and inspected the discovery screen and
+Details. Native discovery showed the revised divider and footer spacing.
+The user resumed interacting with the app, so further input stopped and the
+app remained open. Connected and compact native checks remain in TODO.md.
+No connection, output or setpoint command was sent during this retry.
+
+Verification: later native retry added to the
+[button spacing record](docs/v-model/records/2026-10-05-unit-app-button-spacing.md).
+
+### Compact frame and typography refined
+
+The user requested a more complete compact frame and accepted additional
+window area. Increased the minimum height by 48 points to 320 by 320,
+retained both curved frame bands, and added control padding. Unified action
+lettering, tightened power decimal punctuation and removed the duplicate
+output-off status. Kept the setpoint column stable when warnings introduce
+a scrollbar. Updated app DD revision 6 within the user's requested scope.
+
+Reviewed and adopted 33 replacement and two new output-off images. Rebuilt
+and signed the app, reopened it, selected Retro and connected the saved USB
+endpoint GW300. Native full-size button clearances and the single OFF label
+were visible. Repeated native edge and corner drags did not resize the
+window, so the new compact native check remains open in TODO.md. Left the
+app open and connected with output off and unchanged 12.00 V and 0.200 A
+setpoints. No output or setpoint command was sent.
+
+Verification: [compact frame and typography](docs/v-model/records/2026-10-05-unit-app-compact-frame.md),
+145 app unit tests and three integration tests pass, including ten UI test
+functions and all 52 snapshots. Lint, formatting and bundle checks pass.
+Traceability retains the separate existing UT-DISC-012 defect. No commit
+or push was made.
+
+### Retro startup default and app commit approved
+
+On 2026-10-05 the user accepted the compact refinements, requested Retro as
+the startup theme, and authorised documentation updates, committing and
+pushing. Implemented the requested default and recorded its rationale in
+ADR-0020 and app DD revision 6. Standard remains selectable in Details for
+the current window. Extended UT-APP-034 to check a fresh Retro window after
+Standard was selected. Updated both user guides and the prototype's current
+status; earlier verification records retain their historical results.
+
+Prepared the complete app presentation change, including the prototype,
+fonts, tests and reviewed snapshots. The separate HID owner-thread change
+and spike remain outside the commit. The approved app DD revision 6 source
+is identified by the new `g4-app-rev6-approved` tag; earlier approval tags
+are retained.
+
+Verification: [isolated Retro commit record](docs/v-model/records/2026-10-05-unit-app-retro-commit.md),
+541 workspace tests pass, including 145 app unit tests, three app integration
+tests and all 52 visual baselines. Workspace and core-only clippy, formatting,
+the release build and isolated traceability pass with zero defects. The
+local bundle was rebuilt and signed with the startup default. No native
+interaction or hardware command was performed in this task.

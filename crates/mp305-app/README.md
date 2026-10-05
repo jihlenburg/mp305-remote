@@ -28,6 +28,21 @@ unplugging. On macOS they are also scoped to the current boot, because the
 USB registry identifier is not permanent. USB and Bluetooth entries are not
 automatically merged, and the app controls one selected connection at a time.
 
+## Appearance and compact mode
+
+The app opens in Retro, with curved frame bands, condensed labels, consistent
+action sizes and fixed-width measurement digits. Choose Standard or Retro at
+the top of Details. The selection lasts for the current window; each new
+window starts in Retro. Full endpoint identifiers remain in Details and
+tooltips.
+
+Shrink the window below 760 points wide or 520 points high to hide the graphs
+and use the compact instrument panel, down to 320 by 320 points. The compact
+Retro frame keeps both curved bands and space around the controls. Output
+controls stay below scrollable warnings and Details. Enlarging the window
+restores the graphs, including readings collected while they were hidden.
+Edits, the selected supply and recording survive resizing and theme changes.
+
 ## UI regression checks
 
 ```sh
@@ -37,9 +52,12 @@ cargo test -p mp305-app ui::tests
 These tests click and type into the actual egui screens, checking the commands
 they produce without connecting to hardware. They cover duplicate device
 names, renaming, invalid setpoints, recording, chart windows and Output OFF
-while other windows are open. Fifteen image baselines cover the default and
-minimum window sizes, connection loss, edited fields, recording, Details,
-the close question, and a Retina display scale.
+while other windows are open. Fifty-two image baselines cover both themes at
+full and compact sizes, connection loss, edited fields, recording, Details,
+the close question and a Retina display scale. Interaction tests also check
+Retro startup, theme changes, resizing, shared decimal columns, control
+alignment, visible frame bands, clean off status and incoming readings while
+plots are hidden.
 
 Baselines live in `tests/snapshots/`. A mismatch writes `.new.png` and
 `.diff.png` alongside the baseline. Review the images before replacing a
@@ -145,3 +163,8 @@ For the frame-time log of system test ST-038, set
 ## Bench safety
 
 Set a hardware current limit and the OCP mode on the supply's front panel. Keep only a load on the output that is safe at the supply's settings. The supply keeps the output on when the link drops, and the app cannot switch it off then. Prefer USB over Bluetooth for unattended runs.
+
+## Fonts
+
+B612 and Antonio are embedded under the SIL Open Font License. Their license
+texts are in `assets/fonts/OFL.txt` and `assets/fonts/OFL-Antonio.txt`.

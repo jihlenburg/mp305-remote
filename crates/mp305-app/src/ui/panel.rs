@@ -1,4 +1,4 @@
-//! Implements: DD-APP-031 (the main screen).
+//! Implements: DD-APP-034, DD-APP-035, DD-APP-031 (the main screen).
 //!
 //! Coverage: excluded from the measurement as GUI drawing code (ADR-0008;
 //! app DD, section 8, decision 9); UT-APP-020 inspects this file instead.
@@ -29,13 +29,16 @@ const DOT: f32 = 8.0;
 pub fn show(ui: &mut egui::Ui, model: &Model, view: &mut View, now: Instant) -> Vec<UiAction> {
     let mut actions = Vec::new();
     let footer_height = if model.recording_stop_enabled() {
-        56.0
+        64.0
+    } else if theme::is_retro(ui) {
+        32.0
     } else {
         28.0
     };
+    let footer_frame = theme::footer_frame();
     egui::Panel::bottom("front-footer")
-        .exact_size(footer_height)
-        .frame(egui::Frame::NONE)
+        .exact_size(footer_height + f32::from(footer_frame.inner_margin.top))
+        .frame(footer_frame)
         .show(ui, |ui| {
             if model.recording_stop_enabled() {
                 ui.add(egui::Label::new(widgets::dim(model.recording_line())).truncate())
@@ -44,13 +47,26 @@ pub fn show(ui: &mut egui::Ui, model: &Model, view: &mut View, now: Instant) -> 
             actions.extend(bottom_row(ui, model, view));
         });
     actions.extend(top_line(ui, model));
-    ui.add_space(theme::PAD);
-    actions.extend(readouts(ui, model));
-    ui.add_space(theme::PAD);
+    ui.add_space(gap(ui));
+    if theme::is_retro(ui) {
+        actions.extend(crate::ui::compact::readings(ui, model));
+    } else {
+        actions.extend(readouts(ui, model));
+    }
+    ui.add_space(gap(ui));
     actions.extend(widgets::output_key(ui, model));
-    ui.add_space(theme::PAD);
+    ui.add_space(gap(ui));
     actions.extend(status::show(ui, model, now));
     actions
+}
+
+/// Retro reserves some window space for its frame; reduce internal gaps.
+fn gap(ui: &egui::Ui) -> f32 {
+    if theme::is_retro(ui) {
+        8.0
+    } else {
+        theme::PAD
+    }
 }
 
 /// The model name, the transport dim, and Disconnect at the right.
@@ -61,8 +77,11 @@ fn top_line(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
         |found| model.device_name(found),
     );
     ui.add(
-        egui::Label::new(RichText::new(name).font(egui::FontId::new(18.0, theme::bold())))
-            .truncate(),
+        egui::Label::new(RichText::new(name).font(theme::caption(
+            ui,
+            if theme::is_retro(ui) { 24.0 } else { 18.0 },
+        )))
+        .truncate(),
     )
     .on_hover_text(model.supply_line());
     ui.horizontal(|ui| {
@@ -108,8 +127,12 @@ fn readouts(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
         &volts,
         NUMERAL_PLACES,
         label::VOLTS,
-        theme::VOLTS,
-        theme::NUMERAL,
+        theme::colors(ui).volts,
+        if theme::is_retro(ui) {
+            34.0
+        } else {
+            theme::NUMERAL
+        },
     );
     actions.extend(widgets::setpoint(
         ui,
@@ -118,15 +141,19 @@ fn readouts(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
         label::SET,
         UiAction::ApplyVoltage,
     ));
-    ui.add_space(theme::PAD);
+    ui.add_space(gap(ui));
     quantity_label(ui, model, FieldKind::Current, "Current");
     widgets::readout(
         ui,
         &amps,
         NUMERAL_PLACES,
         label::AMPS,
-        theme::AMPS,
-        theme::NUMERAL,
+        theme::colors(ui).amps,
+        if theme::is_retro(ui) {
+            34.0
+        } else {
+            theme::NUMERAL
+        },
     );
     actions.extend(widgets::setpoint(
         ui,
@@ -135,7 +162,7 @@ fn readouts(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
         label::SET,
         UiAction::ApplyCurrent,
     ));
-    ui.add_space(theme::PAD);
+    ui.add_space(gap(ui));
     ui.horizontal(|ui| {
         ui.label(widgets::dim("Power"));
         widgets::readout(
@@ -143,14 +170,14 @@ fn readouts(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
             &watts,
             POWER_PLACES,
             label::WATTS,
-            theme::WATTS,
+            theme::colors(ui).watts,
             theme::POWER,
         );
         if let Some(reading) = model.reading {
             let regulation = reading.reading.regulation;
             let color = match regulation {
-                RegulationMode::Cv => theme::VOLTS,
-                RegulationMode::Cc => theme::AMPS,
+                RegulationMode::Cv => theme::colors(ui).volts,
+                RegulationMode::Cc => theme::colors(ui).amps,
                 RegulationMode::Off
                 | RegulationMode::HeldAboveSetpoint
                 | RegulationMode::Unknown(_) => theme::DIM,
@@ -158,9 +185,20 @@ fn readouts(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
             ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
                 ui.add(
                     egui::Label::new(
-                        RichText::new(regulation.to_string())
-                            .font(egui::FontId::new(theme::BODY, theme::bold()))
-                            .color(color),
+                        RichText::new(if theme::is_retro(ui) {
+                            format!(
+                                "{} · {regulation}",
+                                if reading.reading.output_on {
+                                    "ON"
+                                } else {
+                                    "OFF"
+                                }
+                            )
+                        } else {
+                            regulation.to_string()
+                        })
+                        .font(egui::FontId::new(theme::BODY, theme::bold()))
+                        .color(color),
                     )
                     .truncate(),
                 );
@@ -175,7 +213,14 @@ fn quantity_label(ui: &mut egui::Ui, model: &Model, kind: FieldKind, name: &str)
     ui.scope(|ui| {
         ui.spacing_mut().interact_size.y = theme::SMALL;
         ui.horizontal(|ui| {
-            ui.label(widgets::dim(name));
+            ui.label(widgets::dim(name).font(theme::caption(
+                ui,
+                if theme::is_retro(ui) {
+                    16.0
+                } else {
+                    theme::SMALL
+                },
+            )));
             ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
                 if model.field(kind).edited {
                     ui.label(widgets::dim(label::NOT_APPLIED));
@@ -193,7 +238,7 @@ fn bottom_row(ui: &mut egui::Ui, model: &Model, view: &mut View) -> Vec<UiAction
         if model.recording_stop_enabled() {
             let (dot, _) = ui.allocate_exact_size(egui::vec2(DOT, DOT), egui::Sense::hover());
             ui.painter()
-                .circle_filled(dot.center(), DOT / 2.0, theme::LIVE);
+                .circle_filled(dot.center(), DOT / 2.0, theme::colors(ui).live);
             if widgets::quiet_response(ui, true, label::STOP, theme::BODY)
                 .on_hover_text(model.recording_line())
                 .clicked()

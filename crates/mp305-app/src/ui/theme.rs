@@ -1,13 +1,12 @@
-//! Implements: DD-APP-031 (the look of the screens).
+//! Implements: DD-APP-031, DD-APP-034 (selectable presentation).
 //!
 //! Coverage: excluded from the measurement as GUI drawing code (ADR-0008;
 //! app DD, section 8, decision 9); UT-APP-020 inspects this file instead.
 //!
 //! The design tokens (colours, type sizes, spacing) and their installation
-//! at start-up: the B612 fonts, embedded in the binary, and one dark style
-//! for both OS themes. Colour means quantity: amber is volts and teal is
-//! amps everywhere; the live colour marks the output on, a recording and
-//! faults. Nothing else is coloured.
+//! at start-up: embedded B612 measurement fonts, Antonio Retro labels,
+//! and a dark style for both OS themes. Each presentation uses consistent
+//! quantity colours across the readouts and graphs.
 
 use std::sync::Arc;
 
@@ -15,6 +14,112 @@ use eframe::egui::{
     self, Color32, CornerRadius, FontData, FontDefinitions, FontFamily, FontId, Margin, Stroke,
     TextStyle,
 };
+
+/// A per-window presentation choice, with no effect on device commands.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum Theme {
+    /// The original restrained instrument palette.
+    Standard,
+    /// Default presentation with condensed labels, curved bands and the Retro palette.
+    #[default]
+    Retro,
+}
+
+/// Colours shared by every screen in the selected presentation.
+pub struct Colors {
+    /// Main background.
+    pub window: Color32,
+    /// Secondary background.
+    pub column: Color32,
+    /// Dividers and grid lines.
+    pub rule: Color32,
+    /// Normal text.
+    pub text: Color32,
+    /// Secondary text.
+    pub dim: Color32,
+    /// Voltage readings and traces.
+    pub volts: Color32,
+    /// Current readings and traces.
+    pub amps: Color32,
+    /// Power readings and traces.
+    pub watts: Color32,
+    /// Errors and active recording.
+    pub live: Color32,
+    /// Selected output-on fill.
+    pub output_active: Color32,
+}
+
+impl Theme {
+    /// Presentation colours, independent of connection state.
+    #[must_use]
+    pub const fn colors(self) -> Colors {
+        match self {
+            Self::Standard => Colors {
+                window: WINDOW,
+                column: COLUMN,
+                rule: RULE,
+                text: TEXT,
+                dim: DIM,
+                volts: VOLTS,
+                amps: AMPS,
+                watts: WATTS,
+                live: LIVE,
+                output_active: OUTPUT_ACTIVE,
+            },
+            Self::Retro => Colors {
+                window: Color32::BLACK,
+                column: Color32::BLACK,
+                rule: Color32::from_rgb(39, 35, 46),
+                text: Color32::from_rgb(244, 232, 224),
+                dim: Color32::from_rgb(162, 158, 181),
+                volts: Color32::from_rgb(255, 204, 153),
+                amps: Color32::from_rgb(204, 170, 221),
+                watts: Color32::from_rgb(153, 170, 238),
+                live: Color32::from_rgb(238, 153, 136),
+                output_active: Color32::from_rgb(255, 204, 153),
+            },
+        }
+    }
+}
+
+/// Whether this UI uses the Retro style installed from the window's `View`.
+#[must_use]
+pub fn is_retro(ui: &egui::Ui) -> bool {
+    ui.visuals().panel_fill == Color32::BLACK
+}
+
+/// The active drawing palette; child widgets inherit the installed style.
+#[must_use]
+pub fn colors(ui: &egui::Ui) -> Colors {
+    if is_retro(ui) {
+        Theme::Retro.colors()
+    } else {
+        Theme::Standard.colors()
+    }
+}
+
+/// Condensed Retro label or the standard proportional label at `size`.
+#[must_use]
+pub fn caption(ui: &egui::Ui, size: f32) -> FontId {
+    FontId::new(
+        size,
+        if is_retro(ui) {
+            FontFamily::Name("Antonio".into())
+        } else {
+            bold()
+        },
+    )
+}
+
+/// Installs a changed presentation style without touching fonts or model state.
+pub fn apply(ctx: &egui::Context, selected: Theme) {
+    if ctx.style_of(egui::Theme::Dark).visuals.panel_fill != selected.colors().window {
+        let selected_style = selected_style(selected);
+        ctx.set_style_of(egui::Theme::Dark, selected_style.clone());
+        ctx.set_style_of(egui::Theme::Light, selected_style);
+        ctx.request_repaint();
+    }
+}
 
 /// The window background.
 pub const WINDOW: Color32 = Color32::from_rgb(0x15, 0x17, 0x1B);
@@ -53,8 +158,19 @@ pub const UNIT: f32 = 4.0;
 pub const PAD: f32 = 16.0;
 /// The padding inside the left column, as a frame margin.
 pub const PAD_MARGIN: i8 = 16;
+/// Clear space on each side of the full Retro panel divider.
+pub const COLUMN_GUTTER: i8 = 24;
+
 /// The corner radius of keys, fields and windows.
 pub const RADIUS: u8 = 6;
+
+/// Separate full footer controls from the rule above them in both themes.
+pub fn footer_frame() -> egui::Frame {
+    egui::Frame::NONE.inner_margin(Margin {
+        top: 8,
+        ..Margin::ZERO
+    })
+}
 
 /// The font data name of B612 Regular.
 const B612: &str = "B612-Regular";
@@ -124,6 +240,10 @@ fn fonts() -> FontDefinitions {
             B612_MONO_BOLD,
             &include_bytes!("../../assets/fonts/B612Mono-Bold.ttf")[..],
         ),
+        (
+            "Antonio",
+            &include_bytes!("../../assets/fonts/Antonio.ttf")[..],
+        ),
     ] {
         fonts
             .font_data
@@ -151,7 +271,48 @@ fn fonts() -> FontDefinitions {
     fonts
         .families
         .insert(mono_bold(), with(B612_MONO_BOLD, &monospace));
+    fonts.families.insert(
+        FontFamily::Name("Antonio".into()),
+        with("Antonio", &proportional),
+    );
     fonts
+}
+
+/// The selected style, keeping explanatory body text in B612 in both themes.
+fn selected_style(selected: Theme) -> egui::Style {
+    let mut style = style();
+    if selected == Theme::Retro {
+        let colors = selected.colors();
+        style.text_styles.insert(
+            TextStyle::Heading,
+            FontId::new(24.0, FontFamily::Name("Antonio".into())),
+        );
+        style.text_styles.insert(
+            TextStyle::Button,
+            FontId::new(18.0, FontFamily::Name("Antonio".into())),
+        );
+        style.visuals.panel_fill = colors.window;
+        style.visuals.window_fill = colors.column;
+        style.visuals.extreme_bg_color = colors.window;
+        style.visuals.text_edit_bg_color = Some(colors.window);
+        style.visuals.window_stroke = Stroke::new(1.0, colors.amps);
+        style.visuals.window_corner_radius = CornerRadius::same(14);
+        style.visuals.override_text_color = Some(colors.text);
+        style.visuals.selection.bg_fill = Color32::from_rgb(66, 47, 75);
+        style.visuals.error_fg_color = colors.live;
+        for widget in [
+            &mut style.visuals.widgets.inactive,
+            &mut style.visuals.widgets.hovered,
+            &mut style.visuals.widgets.active,
+            &mut style.visuals.widgets.open,
+        ] {
+            widget.bg_fill = colors.window;
+            widget.weak_bg_fill = colors.window;
+            widget.bg_stroke = Stroke::new(1.0, colors.amps);
+            widget.corner_radius = CornerRadius::same(8);
+        }
+    }
+    style
 }
 
 /// The style: the token colours on egui's dark visuals, quiet frameless

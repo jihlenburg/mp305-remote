@@ -1,4 +1,4 @@
-//! Implements: DD-APP-030 (`launch`), DD-APP-023 (the macOS menu hook).
+//! Implements: DD-APP-034, DD-APP-035, DD-APP-030 (`launch`), DD-APP-023 (the macOS menu hook).
 //!
 //! Coverage: excluded from the measurement as eframe glue that decides
 //! nothing (ADR-0008; app DD, section 8, decision 9); UT-APP-020 inspects
@@ -27,7 +27,7 @@ use crate::worker::{self, Wake};
 const INNER_SIZE: [f32; 2] = [900.0, 580.0];
 
 /// The window's minimum inner size in points.
-const MIN_INNER_SIZE: [f32; 2] = [760.0, 520.0];
+const MIN_INNER_SIZE: [f32; 2] = [320.0, 320.0];
 
 /// Runs the app until its window closes.
 #[must_use]

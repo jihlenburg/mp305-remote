@@ -31,6 +31,64 @@ acceptance matrices, which are backlog (the sections below).
 - [x] Correct readout decimal alignment and excessive punctuation spacing
       from the user's visual review (2026-10-05): fixed digit columns,
       compact decimal punctuation, geometry and screenshot checks pass
+- [x] Retro theme preview (2026-10-05): isolated interactive simulation,
+      rendered at full and compact sizes; native Output OFF with Details
+      open checked. User liked the preview and requested a smaller mode
+- [x] Super compact Retro preview (2026-10-05): automatic graph-free panel
+      down to 360 by 320; 14 renders and output, Details, setpoint,
+      recording and resize/state checks pass
+- [x] Restart the compact-mode preview and check native resizing
+      (2026-10-05): updated preview reopened and resized into compact mode
+- [x] Refine compact preview after user feedback (2026-10-05): 320 by 272,
+      larger digits, narrower rails, quieter secondary controls and visible
+      unapplied edits; 15 renders and interaction/validation checks pass
+- [x] Align compact setpoint fields and SET buttons with the visible
+      voltage/current reading rows (2026-10-05); reviewed minimum-size render
+      and existing interaction checks pass
+- [x] Review compact setpoint readability, decimal columns and power/status
+      separation (2026-10-05): 16-point digits, aligned decimal columns,
+      compact punctuation and row separator; geometry/input checks pass
+- [x] Investigate the apparent image corruption before snapshot adoption
+      (2026-10-05): saved production pixel data and opaque contact sheets are
+      correct; the image-preview display was misleading. Fifty baselines
+      were reviewed and pass without rendering workarounds.
+- [x] Make Retro the startup theme and update current documentation
+      (2026-10-05): Standard remains available in Details; fresh-window,
+      theme-switch and state-preservation checks pass. The isolated app
+      change passes all 541 workspace tests, lint and traceability checks.
+- [ ] Commit and push the approved Retro app change and approval tag
+      (authorised 2026-10-05).
+- [x] Retro theme and compact mode in the production app
+      (2026-10-05): app DD revision 6 approved and implemented; shared grid,
+      consistent controls, compact aligned setpoints, clean device cards,
+      50 snapshot baselines and nine interaction/geometry tests pass.
+      Release bundle rebuilt, signed and opened with the new theme.
+- [x] Native hardware check of the integrated theme (2026-10-05): USB
+      connected; lamp on/off and Output OFF with Details open worked at
+      full and 320 by 272 sizes. Graph history survived resizing. Left the
+      output off, original setpoints unchanged and original window restored.
+- [x] Refine the compact Retro frame and typography (2026-10-05): complete
+      upper and lower bands, control padding at a 320 by 320 minimum,
+      consistent action labels and power punctuation. All 52 snapshots,
+      145 app unit tests and three integration tests pass; bundle rebuilt.
+      Native compact resizing remains in the check below.
+- [x] Remove the redundant `OFF · off` status label (2026-10-05): show
+      one OFF label when output and regulation are both off; other states
+      retain their regulation indication. Automated and native checks pass.
+- [x] Audit button spacing in full and compact layouts (2026-10-05):
+      24-point divider insets, 8-point full footer padding, compact dialog
+      wrapping and clipped scrolling status; 50 snapshots and app checks pass.
+      Release bundle rebuilt and signed.
+- [x] Reopen the updated bundle (2026-10-05): native access worked on a
+      later retry. Retro discovery and Details were visible; discovery
+      confirmed the new divider and footer spacing.
+- [x] Complete the native connected spacing check (2026-10-05): reopened
+      the updated bundle, connected GW300 over USB and inspected Set,
+      Disconnect, output, Record and Details clearances. Output stayed off
+      and setpoints stayed at 12.00 V and 0.200 A.
+- [ ] Complete the native compact spacing check at the new 320 by 320
+      minimum. Automated geometry and visual checks pass, but repeated
+      native edge and corner drags did not resize the window (2026-10-05).
 - [x] Persistent app names for multiple supplies (2026-10-05):
       exact transport and OS identity (macOS USB names also scoped to the
       host boot), app DD revision 5 approved, save/reopen/error and UI tests pass

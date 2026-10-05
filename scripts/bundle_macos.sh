@@ -23,6 +23,8 @@ mkdir -p "$bundle/Contents/MacOS" "$bundle/Contents/Resources"
 cp target/release/mp305-app "$bundle/Contents/MacOS/mp305-app"
 cp crates/mp305-app/packaging/macos/Info.plist "$plist"
 cp crates/mp305-app/README.md "$bundle/Contents/Resources/README.md"
+mkdir -p "$bundle/Contents/Resources/licenses"
+cp crates/mp305-app/assets/fonts/OFL*.txt "$bundle/Contents/Resources/licenses/"
 
 # 3. The package version of mp305-app, from cargo metadata.
 version=$(cargo metadata --no-deps --format-version 1 | python3 -c '
