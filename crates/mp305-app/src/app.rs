@@ -1,4 +1,4 @@
-//! Implements: DD-APP-022, DD-APP-021 (the close step's place in the
+//! Implements: DD-APP-015, DD-APP-022, DD-APP-021 (the close step's place in the
 //! frame), DD-APP-032 (where the notes are logged).
 //!
 //! `AppCore`: the frame logic and the action dispatch, outside `ui/`, so
@@ -50,6 +50,8 @@ pub struct LogicOutput {
 /// The frame logic and the action dispatch of the app.
 #[derive(Debug)]
 pub struct AppCore {
+    /// Local file worker, independent of the device worker.
+    names: Option<crate::names::Service>,
     /// The model.
     model: Model,
     /// Commands to the worker; `None` after `on_exit`.
@@ -75,15 +77,22 @@ impl AppCore {
         wake: Wake,
         recording_dir: PathBuf,
     ) -> Result<AppCore, String> {
+        let names = crate::names::Service::start(crate::paths::state_dir(), wake.clone());
         let (shell, port) = Shell::start(build, wake)?;
         let model = Model::new(recording_dir, Instant::now());
-        Ok(AppCore::with_port(port, Some(shell), model))
+        let mut core = AppCore::with_port(port, Some(shell), model);
+        match names {
+            Ok(service) => core.names = Some(service),
+            Err(error) => core.model.names.error = Some(error),
+        }
+        Ok(core)
     }
 
     /// A core around `port`, for the tests without a worker.
     #[must_use]
     pub fn with_port(port: Port, shell: Option<Shell>, model: Model) -> AppCore {
         AppCore {
+            names: None,
             model,
             commands: Some(port.commands),
             events: port.events,
@@ -122,6 +131,12 @@ impl AppCore {
             note(&frametime::reading_note(reading.reading.at, clock.now));
             self.model.apply(reading, clock.now);
         }
+        if let Some(names) = &self.names {
+            while let Some(report) = names.poll() {
+                self.model.names.apply(report);
+            }
+        }
+        self.model.sync_name_target();
         let (step, commands, bring_forward) = actions::close_step(
             &mut self.model,
             input.close_requested,
@@ -149,6 +164,19 @@ impl AppCore {
         for action in actions {
             let commands = actions::handle(&mut self.model, action, clock, &mut self.ids);
             self.send(commands, clock.now);
+            self.model.sync_name_target();
+            if let Some(request) = self.model.names.queued.take() {
+                let result = self
+                    .names
+                    .as_ref()
+                    .ok_or_else(|| "Device names are unavailable.".to_string())
+                    .and_then(|names| names.send(request.clone()));
+                if let Err(error) = result {
+                    self.model
+                        .names
+                        .apply(crate::names::Report::Saved(request, Err(error)));
+                }
+            }
         }
     }
 
@@ -162,6 +190,7 @@ impl AppCore {
     /// DD-APP-006, and shuts the shell down within [`SHUTDOWN_BOUND`];
     /// `None` without a shell. The one place where the UI thread waits.
     pub fn on_exit(&mut self) -> Option<ShutdownReport> {
+        self.names = None;
         self.commands = None;
         let report = self
             .shell
@@ -494,5 +523,42 @@ mod tests {
         core.logic(input(false, None), clock_s(1.0));
         assert_eq!(core.model().fatal, None);
         assert_eq!(core.model().phase, Phase::Connected);
+    }
+    /// Test: UT-APP-033
+    #[test]
+    fn local_names_are_saved_without_sending_a_device_command() {
+        use std::sync::{mpsc as std_mpsc, Arc};
+        let dir = tempfile::tempdir().unwrap();
+        let (wake_tx, wake_rx) = std_mpsc::channel();
+        let service = crate::names::Service::start(
+            Ok(dir.path().into()),
+            Arc::new(move || {
+                let _ = wake_tx.send(());
+            }),
+        )
+        .unwrap();
+        let (mut core, mut ends) = core(connected_model());
+        core.names = Some(service);
+        wake_rx.recv_timeout(Duration::from_secs(3)).unwrap();
+        core.logic(input(false, None), clock_s(0.0));
+        core.dispatch(
+            vec![UiAction::EditName("Bench".into()), UiAction::SaveName],
+            clock_s(0.0),
+        );
+        assert!(core.model.names.saving.is_some());
+        wake_rx.recv_timeout(Duration::from_secs(3)).unwrap();
+        core.logic(input(false, None), clock_s(0.0));
+        assert_eq!(core.model.names.alias(&found_a()), Some("Bench"));
+        assert!(core.model.output_off_enabled());
+        assert!(sent(&mut ends).is_empty());
+        core.names = None;
+        core.dispatch(
+            vec![UiAction::EditName("Unsaved".into()), UiAction::SaveName],
+            clock_s(0.0),
+        );
+        assert_eq!(core.model.names.alias(&found_a()), Some("Bench"));
+        assert!(core.model.names.error.is_some());
+        assert!(core.model.names.saving.is_none());
+        assert!(sent(&mut ends).is_empty());
     }
 }

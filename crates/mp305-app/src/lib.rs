@@ -40,6 +40,7 @@ pub mod fields;
 pub mod frametime;
 pub mod logging;
 pub mod model;
+pub mod names;
 pub mod paths;
 pub mod recording;
 pub mod shell;

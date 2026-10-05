@@ -1,4 +1,4 @@
-//! Implements: DD-APP-010, DD-APP-011, DD-APP-014 (the model's methods for
+//! Implements: DD-APP-015, DD-APP-010, DD-APP-011, DD-APP-014 (the model's methods for
 //! the screens).
 //!
 //! The non-drawing state of the app: what the screens show, the
@@ -239,6 +239,8 @@ impl From<UiReading> for Incoming {
 /// The non-drawing state of the app (DD-APP-010).
 #[derive(Clone, Debug, PartialEq)]
 pub struct Model {
+    /// Host-local friendly names, independent of device control.
+    pub names: crate::names::State,
     /// Where the app is with the supply.
     pub phase: Phase,
     /// The current connection attempt's number.
@@ -326,6 +328,7 @@ impl Model {
     #[must_use]
     pub fn new(recording_dir: PathBuf, started: Instant) -> Model {
         Model {
+            names: crate::names::State::default(),
             phase: Phase::Idle,
             sid: None,
             connected: None,
@@ -366,6 +369,34 @@ impl Model {
             output_on_done: None,
             started,
         }
+    }
+
+    /// Keeps the name draft attached to the selected or connected endpoint.
+    pub fn sync_name_target(&mut self) {
+        let found = if self.screen() == Screen::Connection && self.phase == Phase::Idle {
+            self.selected_found()
+        } else {
+            self.connected.as_ref()
+        }
+        .cloned();
+        self.names.select(found.as_ref());
+    }
+
+    /// Preferred display name; never used as the connection identifier.
+    #[must_use]
+    pub fn device_name(&self, found: &Found) -> String {
+        self.names
+            .alias(found)
+            .map(str::to_string)
+            .unwrap_or_else(|| {
+                if found.name.is_empty() {
+                    texts::THE_SUPPLY.to_string()
+                } else if found.name.contains("MP305") {
+                    "MP305B".to_string()
+                } else {
+                    found.name.clone()
+                }
+            })
     }
 
     /// Changes the model from an event or a reading (DD-APP-011); every

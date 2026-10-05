@@ -8,7 +8,7 @@
 
 use std::path::Path;
 
-use crate::model::{Faults, Limits, LiveMode, RemoteState};
+use crate::model::{Faults, Kind, Limits, LiveMode, RemoteState};
 use crate::worker::{ErrorKind, ErrorText, What};
 
 /// The answer to a second `Scan` while one runs.
@@ -106,8 +106,47 @@ pub const WINDOW_CHOICES: [(u32, &str); 6] = [
     (600, "10 min"),
 ];
 
+/// The line on the empty right side of the connection screen.
+pub const CONNECT_HINT: &str = "Switch the supply on and enable remote control, then scan";
+/// A measured voltage before the first reading, as wide as `30.00`.
+pub const NO_VOLTS: &str = "--.--";
+/// A measured current before the first reading, as wide as `5.000`.
+pub const NO_AMPS: &str = "-.---";
+/// A power before the first reading.
+pub const NO_WATTS: &str = "--.--";
+
 /// The labels of the screens (DD-APP-031).
 pub mod label {
+    /// The button that opens the details panel, and the panel's title.
+    pub const DETAILS: &str = "Details";
+    /// The button that starts a recording.
+    pub const RECORD: &str = "Record";
+    /// The button that stops the recording.
+    pub const STOP: &str = "Stop";
+    /// The label of the voltage setpoint field.
+    pub const SET: &str = "set";
+    /// The label of the current limit field.
+    pub const LIMIT: &str = "limit";
+    /// The button that applies an edited setpoint field.
+    pub const SET_BUTTON: &str = "Set";
+    /// The off half of the output key.
+    pub const OFF: &str = "Off";
+    /// The on half of the output key.
+    pub const ON: &str = "On";
+    /// The unit of a voltage.
+    pub const VOLTS: &str = "V";
+    /// The unit of a current.
+    pub const AMPS: &str = "A";
+    /// The unit of a power.
+    pub const WATTS: &str = "W";
+    /// The scan button once a scan ran.
+    pub const SCAN_AGAIN: &str = "Scan again";
+    /// The details row of the connection.
+    pub const CONNECTION: &str = "Connection";
+    /// The USB transport.
+    pub const USB: &str = "USB";
+    /// The Bluetooth transport.
+    pub const BLUETOOTH: &str = "Bluetooth";
     /// The window title and the app's name.
     pub const APP_TITLE: &str = "MP305 Remote";
     /// The dismiss button of a banner.
@@ -556,6 +595,66 @@ pub fn recording_state(state: &str, rows: Option<u64>, path: Option<&Path>) -> S
     }
 }
 
+/// The transport as the screens name it: `USB` or `Bluetooth`.
+#[must_use]
+pub fn transport_name(kind: Kind) -> &'static str {
+    match kind {
+        Kind::Hid => label::USB,
+        Kind::Ble => label::BLUETOOTH,
+    }
+}
+
+/// A raw power in 10 mW steps without its unit: `6.17`.
+#[must_use]
+pub fn watts_number(raw: u16) -> String {
+    format!("{}.{:02}", raw / 100, raw % 100)
+}
+
+/// `<field name>: <error>`, the status line of an invalid field.
+#[must_use]
+pub fn field_error_line(name: &str, error: &str) -> String {
+    format!("{name}: {error}")
+}
+
+/// `Waiting for the supply: <what>`, a command that has no answer yet.
+#[must_use]
+pub fn pending_line(what: What) -> String {
+    format!("Waiting for the supply: {what}")
+}
+
+/// The hover text of a found supply: `Unit <unit>, remote control flag
+/// <flag>`.
+#[must_use]
+pub fn found_hint(unit: &str, remote: &str) -> String {
+    format!("Unit {unit}, remote control flag {remote}")
+}
+
+/// A time axis label in seconds before now: `-30 s`, and `0 s` at now.
+#[must_use]
+pub fn axis_seconds(seconds: f64) -> String {
+    if seconds.abs() < 0.5 {
+        "0 s".to_string()
+    } else {
+        format!("{seconds:.0} s")
+    }
+}
+
+/// A value axis label with as many decimals as the grid `step` needs.
+#[must_use]
+pub fn axis_value(value: f64, step: f64) -> String {
+    let decimals = if step >= 1.0 {
+        0
+    } else if step >= 0.1 {
+        1
+    } else if step >= 0.01 {
+        2
+    } else {
+        3
+    };
+    let shown = if value.abs() < 0.0005 { 0.0 } else { value };
+    format!("{shown:.decimals$}")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -764,5 +863,28 @@ mod tests {
             Some("Remote control was lost. Press Request remote control to take it again.")
         );
         assert_eq!(remote_notice(RemoteState::Granted), None);
+    }
+
+    /// Test: UT-APP-023
+    #[test]
+    fn the_texts_of_the_redesigned_screen() {
+        assert_eq!(transport_name(Kind::Hid), "USB");
+        assert_eq!(transport_name(Kind::Ble), "Bluetooth");
+        assert_eq!(watts_number(617), "6.17");
+        assert_eq!(watts_number(15_000), "150.00");
+        assert_eq!(
+            field_error_line("Voltage (V)", "not a number"),
+            "Voltage (V): not a number"
+        );
+        assert_eq!(
+            pending_line(What::SetVoltage),
+            "Waiting for the supply: set voltage"
+        );
+        assert_eq!(found_hint("A1B", "on"), "Unit A1B, remote control flag on");
+        assert_eq!(axis_seconds(-30.0), "-30 s");
+        assert_eq!(axis_seconds(-0.0), "0 s");
+        assert_eq!(axis_value(12.0, 5.0), "12");
+        assert_eq!(axis_value(0.25, 0.05), "0.25");
+        assert_eq!(axis_value(-0.0, 0.1), "0.0");
     }
 }

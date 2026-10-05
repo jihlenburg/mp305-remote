@@ -23,6 +23,9 @@ futures = "0.3"
 log = "0.4"
 env_logger = "0.11"
 directories = "6"
+# Host-local names, saved atomically off the UI thread (DD-APP-015).
+serde_json = "1"
+tempfile = "3"
 
 # The version eframe resolves; it gives `EventLoopBuilderExtMacOS`, which
 # eframe does not re-export (DD-APP-023).
@@ -32,4 +35,4 @@ winit = { version = "=0.30.13", default-features = false }
 [dev-dependencies]
 mp305-core = { path = "../mp305-core", features = ["mock"] }
 tokio = { version = "1", features = ["test-util"] }
-tempfile = "3"
+egui_kittest = { version = "=0.36.2", features = ["eframe", "wgpu", "snapshot"] }

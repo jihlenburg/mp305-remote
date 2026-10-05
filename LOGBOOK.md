@@ -3170,3 +3170,130 @@ start, but the screen is huge and cluttered. Asked for a layout, the
 user chose "side by side": the readouts and controls in a narrow column
 on the left, the chart on the right. The redesign changes the drawing
 code only and is under way.
+
+### App visual review and automated UI test design
+
+The user requested a thorough visual review and authorised hardware for UI
+checks. Reviewed the existing uncommitted side-by-side design, its typography
+and the approved drawing specification. Drafted app DD revision 5 with the
+layout rules and UT-APP-029 to UT-APP-031, pending approval. The native macOS
+accessibility tree exposes the standard buttons and allows clicking Scan;
+the custom discovery rows need accessible names. Selected egui_kittest for
+repeatable interaction and rendered image checks of the actual screens.
+The approval impact is recorded in app DD section 8a. No output command sent.
+
+### Native app interaction check during visual review
+
+Opened the release bundle built from the existing uncommitted UI and HID
+changes and used native accessibility and pointer/keyboard input. Scan found
+Bluetooth and USB entries. Connected over USB, firmware 1.6.0.51 as shown in
+Details; the Bluetooth version remains the one recorded in "USB and the app
+meet the real supply" and the preceding release check. The supply reported
+output off, 12.00 V and 0.200 A setpoints. Entered 0.100 A, applied it with
+Enter, then restored 0.200 A the same way. Details confirmed 12.00 V, 0.200 A,
+output off and zero measured V/A/W before Disconnect. No output-on command.
+This was an exploratory UI check, not a system or acceptance matrix run.
+
+The check found misaligned setpoint fields, discovery rows absent from the
+accessibility tree, a long identifier expanding the Details window, and
+negative chart ranges at zero readings. Native coordinate clicks followed by
+paste and Enter work for text fields; setting accessibility text directly
+does not reliably deliver egui input. The pending UI tests cover these cases.
+Traceability regeneration reports one pre-existing defect outside this work:
+UT-DISC-012 in the uncommitted HID owner code has no test specification.
+
+### Lifetime of local device names
+
+Checked the identity lifetime after the user's follow-up. The installed Apple
+SDK declares the CoreBluetooth peer UUID persistent. hidapi 2.6.7 constructs
+macOS paths from the IORegistry entry ID (`DevSrvsID`); Apple's IOKitLib.h
+states that this ID is global across processes and valid only until reboot.
+App restarts therefore need not lose a name while the registry entry remains,
+but a reboot must invalidate trust in a USB alias even if the number repeats.
+Updated the pending app DD revision 5 and its name test to require boot scoping
+for macOS USB aliases. This is source evidence, not a hardware reboot test.
+Sources: the installed CoreBluetooth CBPeer.h and IOKit IOKitLib.h headers,
+and https://github.com/apple-oss-distributions/IOKitUser/blob/main/IOKitLib.h.
+
+### App visual and naming design approved
+
+The user directed work to continue while away on 2026-10-05, approving the
+concrete app DD revision 5 proposal and its identity-lifetime clarification.
+Approved items: DD-APP-010, DD-APP-014, DD-APP-015, DD-APP-020, DD-APP-022,
+DD-APP-030, DD-APP-031, UT-APP-020 and UT-APP-029 to UT-APP-033. Documents are
+uncommitted on base 2528dabe26ca43a08994e11ed2367fa2647b401f; the approval
+covers the revision 5 changes in this working tree. No commit authorised.
+The user subsequently authorised output on/off with the attached 12 V, 1 W
+LED lamp. Hardware checks will use USB, restore the original setpoints and
+finish with the output off.
+
+### App visual layout, names and UI regression checks completed
+
+Implemented app DD revision 5: compact side-by-side layout, embedded B612
+fixed-width measurements, aligned fields and unit baselines, readable muted
+text, accessible device selection and controls, three aligned plots and
+non-modal Details. Status scrolling and reserved footer space keep output
+controls visible at the minimum size. Local names are saved atomically on a
+file worker and keyed by exact transport identity, with macOS USB boot
+scoping. Names never change device commands. Added egui interaction checks,
+geometry assertions and 15 visually reviewed screenshot baselines. Documented
+how to run and review them in the app README. The app DD module inventory and
+harness feature list received editorial updates, with no changed expected
+result or design rule.
+
+Verification: [app unit and UI record](docs/v-model/records/2026-10-05-unit-app-ui.md),
+539 workspace tests pass, app coverage 96.46%, clippy passes, release bundle
+built and signed. Traceability still reports the previously recorded
+UT-DISC-012 defect outside this app work. No commit made.
+
+### Lamp operated through the real egui controls
+
+The Mac was locked, so native window input could not continue. Added the
+exploratory `spikes/hardware_ui` harness, which drives the actual app screens
+through egui input and the production USB worker. At the user's authorisation,
+it used the attached 12 V, 1 W LED lamp and the exact USB endpoint
+`DevSrvsID:4295529386`. The unit reported system version 1.6.0.51; the Bluetooth
+firmware remains 2.0.2.0 from the earlier release check that day. The first
+reading confirmed output off and 12.00 V / 0.200 A setpoints. The UI applied
+0.100 A and restored 0.200 A, started CSV recording, switched the lamp on
+(12.00 V, about 0.095 A and 1.13 W, CV), opened Details and the disconnect
+question, and switched output off while both remained open. Stopped the CSV,
+restored the original setpoints and disconnected with output off confirmed.
+The 44-row CSV includes off/on/off readings. This was not an acceptance test.
+
+Verification: [USB UI record](docs/v-model/records/2026-10-05-app-ui-usb.md).
+Immutable observations: `docs/research/captures/2026-10-05-ui-usb-01.jsonl`;
+CSV moved unchanged to `docs/research/captures/2026-10-05-ui-usb.csv`.
+
+### Readout alignment corrected after visual feedback
+
+The user pointed out the different decimal positions of voltage and current
+and the oversized gap after the decimal point. The previous renderer padded
+the whole string to five monospace cells, aligning its end but not its
+decimal. Corrected the renderer to use shared whole/fractional columns,
+fixed-width digits and compact decimal punctuation within the existing
+DD-APP-031 layout. The displayed precision remains two decimal places for
+volts and three for amps. Extended the existing geometry check to inspect
+actual painted decimal/unit positions across both precisions and missing
+readings. Reviewed the changed screenshot baselines and rebuilt the bundle.
+
+Verification: [decimal alignment record](docs/v-model/records/2026-10-05-unit-app-decimals.md).
+
+Reopened the corrected release bundle and connected through the native UI
+to the same USB supply. The screen shows aligned decimals at 0.00 V and
+0.000 A, output off, with 12.00 V / 0.200 A setpoints. Left the app connected
+for review; no setpoint or output command sent in this follow-up.
+
+### App changes approved for commit and push
+
+The user accepted the corrected UI and authorised committing and pushing on
+2026-10-05. Prepared the app UI, persistent names, fonts, regression checks,
+hardware UI spike and evidence as one app change. Kept the pre-existing HID
+owner-thread source changes and its separate spike outside the commit.
+The original `g4-app-approved` tag is retained; app DD revision 5 is recorded
+by the new `g4-app-rev5-approved` tag on this change.
+
+Verification: [staged app commit record](docs/v-model/records/2026-10-05-unit-app-commit.md),
+140 unit tests and 3 integration tests pass, clippy passes, and traceability
+of the staged source set has zero defects. The local full working tree still
+contains the previously documented HID test-specification defect.

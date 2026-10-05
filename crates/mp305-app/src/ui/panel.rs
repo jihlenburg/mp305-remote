@@ -3,156 +3,216 @@
 //! Coverage: excluded from the measurement as GUI drawing code (ADR-0008;
 //! app DD, section 8, decision 9); UT-APP-020 inspects this file instead.
 //!
-//! The main screen: the supply and its readings, the setpoint fields,
-//! Output ON and Output OFF, remote control, the limits, the connection
-//! buttons, the recording controls, the chart, and the closing line.
+//! The left column of the main screen, the remote front panel: the model
+//! and transport with Disconnect, the measured voltage with its setpoint
+//! field, the measured current with its limit field, the power with the
+//! regulation, the output key, the status lines, and Record and Details
+//! at the bottom. The chart fills the right side (`chart`), everything
+//! else is in the details panel (`details`).
 
-use eframe::egui;
+use eframe::egui::{self, Align, Layout, RichText};
 
 use crate::actions::UiAction;
-use crate::fields::FieldKind;
-use crate::model::{Instant, Model};
-use crate::texts::label;
-use crate::ui::{chart, connect, screens};
+use crate::fields::{self, FieldKind};
+use crate::model::{Instant, Model, RegulationMode};
+use crate::texts::{self, label};
+use crate::ui::{status, theme, widgets, View};
 
-/// The width of the recording path field in points.
-const PATH_WIDTH: f32 = 360.0;
+/// Shared whole and fractional digit columns for volts and amps.
+const NUMERAL_PLACES: [usize; 2] = [2, 3];
+/// Whole and fractional digit columns for power (`150.00`).
+const POWER_PLACES: [usize; 2] = [3, 2];
+/// The size of the recording dot in points.
+const DOT: f32 = 8.0;
 
-/// Draws the main screen.
-pub fn show(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
+/// Draws the left column of the main screen.
+pub fn show(ui: &mut egui::Ui, model: &Model, view: &mut View, now: Instant) -> Vec<UiAction> {
     let mut actions = Vec::new();
-    ui.heading(model.supply_line());
-    if let Some(line) = model.closing_line() {
-        ui.strong(line);
-    }
-    if model.close_anyway_enabled() {
-        actions.extend(screens::button(
-            ui,
-            true,
-            label::CLOSE_ANYWAY,
-            UiAction::CloseAnyway,
-        ));
-    }
-    ui.columns(3, |columns| {
-        if let [left, middle, right] = columns {
-            left.strong(label::SUPPLY);
-            screens::rows(left, "info", &model.info_rows());
-            middle.strong(label::READINGS);
-            screens::rows(middle, "reading", &model.reading_rows());
-            right.strong(label::SETTINGS);
-            screens::rows(right, "settings", &model.settings_rows());
-        }
-    });
-    ui.separator();
-    actions.extend(setpoints(ui, model, now));
-    ui.horizontal(|ui| {
-        actions.extend(screens::button(
-            ui,
-            model.output_on_enabled(),
-            label::OUTPUT_ON,
-            UiAction::OutputOn,
-        ));
-        actions.extend(screens::button(
-            ui,
-            model.output_off_enabled(),
-            label::OUTPUT_OFF,
-            UiAction::OutputOff,
-        ));
-    });
-    ui.horizontal(|ui| {
-        ui.label(model.remote_line());
-        actions.extend(screens::button(
-            ui,
-            model.request_remote_enabled(),
-            label::REQUEST_REMOTE,
-            UiAction::RequestRemoteControl,
-        ));
-        actions.extend(screens::button(
-            ui,
-            model.release_remote_enabled(),
-            label::RELEASE_REMOTE,
-            UiAction::ReleaseRemoteControl,
-        ));
-    });
-    ui.separator();
-    actions.extend(connect::limit_fields(ui, model, now));
-    actions.extend(connect::reconnect_checkbox(ui, model, now));
-    ui.horizontal(|ui| {
-        actions.extend(screens::button(
-            ui,
-            model.disconnect_enabled(),
-            label::DISCONNECT,
-            UiAction::Disconnect,
-        ));
-        if model.reconnect_enabled() {
-            actions.extend(screens::button(
-                ui,
-                true,
-                label::RECONNECT,
-                UiAction::Reconnect,
-            ));
-        }
-    });
-    ui.separator();
-    actions.extend(recording(ui, model, now));
-    ui.separator();
-    actions.extend(chart::show(ui, model, now));
-    actions
-}
-
-/// The two setpoint fields with their hints, apply buttons and the `not
-/// applied` mark while edited.
-fn setpoints(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
-    let mut actions = Vec::new();
-    ui.strong(label::SETPOINTS);
-    for (kind, name, apply) in [
-        (FieldKind::Voltage, label::VOLTAGE, UiAction::ApplyVoltage),
-        (FieldKind::Current, label::CURRENT, UiAction::ApplyCurrent),
-    ] {
-        actions.extend(screens::field(ui, model, kind, name, apply.clone()));
-        ui.horizontal(|ui| {
-            actions.extend(screens::button(
-                ui,
-                model.apply_enabled(kind),
-                label::APPLY,
-                apply,
-            ));
-            if model.field(kind).edited {
-                ui.weak(label::NOT_APPLIED);
+    let footer_height = if model.recording_stop_enabled() {
+        56.0
+    } else {
+        28.0
+    };
+    egui::Panel::bottom("front-footer")
+        .exact_size(footer_height)
+        .frame(egui::Frame::NONE)
+        .show(ui, |ui| {
+            if model.recording_stop_enabled() {
+                ui.add(egui::Label::new(widgets::dim(model.recording_line())).truncate())
+                    .on_hover_text(model.recording_line());
             }
+            actions.extend(bottom_row(ui, model, view));
         });
-    }
+    actions.extend(top_line(ui, model));
+    ui.add_space(theme::PAD);
+    actions.extend(readouts(ui, model));
+    ui.add_space(theme::PAD);
+    actions.extend(widgets::output_key(ui, model));
+    ui.add_space(theme::PAD);
+    actions.extend(status::show(ui, model, now));
     actions
 }
 
-/// The recording controls: the path field with the automatic name as its
-/// placeholder, start, stop, the state and the row count.
-fn recording(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
+/// The model name, the transport dim, and Disconnect at the right.
+fn top_line(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
     let mut actions = Vec::new();
-    ui.strong(label::RECORDING);
+    let name = model.connected.as_ref().map_or_else(
+        || texts::THE_SUPPLY.to_string(),
+        |found| model.device_name(found),
+    );
+    ui.add(
+        egui::Label::new(RichText::new(name).font(egui::FontId::new(18.0, theme::bold())))
+            .truncate(),
+    )
+    .on_hover_text(model.supply_line());
     ui.horizontal(|ui| {
-        let mut path = model.recording_path.clone();
-        let response = ui.add(
-            egui::TextEdit::singleline(&mut path)
-                .desired_width(PATH_WIDTH)
-                .hint_text(model.recording_placeholder()),
-        );
-        if response.changed() {
-            actions.push(UiAction::EditRecordingPath(path));
+        if let Some(kind) = model.transport {
+            ui.label(widgets::dim(format!(
+                "MP305B / {}",
+                texts::transport_name(kind)
+            )));
         }
-        actions.extend(screens::button(
+        ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
+            actions.extend(widgets::quiet(
+                ui,
+                model.disconnect_enabled(),
+                label::DISCONNECT,
+                UiAction::Disconnect,
+            ));
+        });
+    });
+    actions
+}
+
+/// Volts with the setpoint, amps with the limit, and the power with the
+/// regulation.
+fn readouts(ui: &mut egui::Ui, model: &Model) -> Vec<UiAction> {
+    let mut actions = Vec::new();
+    let raw = model.reading.map(|r| r.reading.raw);
+    let volts = raw.map_or_else(
+        || texts::NO_VOLTS.to_string(),
+        |r| fields::display(FieldKind::Voltage, r.voltage),
+    );
+    let amps = raw.map_or_else(
+        || texts::NO_AMPS.to_string(),
+        |r| fields::display(FieldKind::Current, r.current),
+    );
+    let watts = raw.map_or_else(
+        || texts::NO_WATTS.to_string(),
+        |r| texts::watts_number(r.power),
+    );
+
+    quantity_label(ui, model, FieldKind::Voltage, "Voltage");
+    widgets::readout(
+        ui,
+        &volts,
+        NUMERAL_PLACES,
+        label::VOLTS,
+        theme::VOLTS,
+        theme::NUMERAL,
+    );
+    actions.extend(widgets::setpoint(
+        ui,
+        model,
+        FieldKind::Voltage,
+        label::SET,
+        UiAction::ApplyVoltage,
+    ));
+    ui.add_space(theme::PAD);
+    quantity_label(ui, model, FieldKind::Current, "Current");
+    widgets::readout(
+        ui,
+        &amps,
+        NUMERAL_PLACES,
+        label::AMPS,
+        theme::AMPS,
+        theme::NUMERAL,
+    );
+    actions.extend(widgets::setpoint(
+        ui,
+        model,
+        FieldKind::Current,
+        label::SET,
+        UiAction::ApplyCurrent,
+    ));
+    ui.add_space(theme::PAD);
+    ui.horizontal(|ui| {
+        ui.label(widgets::dim("Power"));
+        widgets::readout(
+            ui,
+            &watts,
+            POWER_PLACES,
+            label::WATTS,
+            theme::WATTS,
+            theme::POWER,
+        );
+        if let Some(reading) = model.reading {
+            let regulation = reading.reading.regulation;
+            let color = match regulation {
+                RegulationMode::Cv => theme::VOLTS,
+                RegulationMode::Cc => theme::AMPS,
+                RegulationMode::Off
+                | RegulationMode::HeldAboveSetpoint
+                | RegulationMode::Unknown(_) => theme::DIM,
+            };
+            ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
+                ui.add(
+                    egui::Label::new(
+                        RichText::new(regulation.to_string())
+                            .font(egui::FontId::new(theme::BODY, theme::bold()))
+                            .color(color),
+                    )
+                    .truncate(),
+                );
+            });
+        }
+    });
+    actions
+}
+
+/// A stable quantity heading; edited status uses the same row.
+fn quantity_label(ui: &mut egui::Ui, model: &Model, kind: FieldKind, name: &str) {
+    ui.scope(|ui| {
+        ui.spacing_mut().interact_size.y = theme::SMALL;
+        ui.horizontal(|ui| {
+            ui.label(widgets::dim(name));
+            ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
+                if model.field(kind).edited {
+                    ui.label(widgets::dim(label::NOT_APPLIED));
+                }
+            });
+        });
+    });
+}
+
+/// Record (Stop with a dot while recording) at the left, Details at the
+/// right.
+fn bottom_row(ui: &mut egui::Ui, model: &Model, view: &mut View) -> Vec<UiAction> {
+    let mut actions = Vec::new();
+    ui.horizontal(|ui| {
+        if model.recording_stop_enabled() {
+            let (dot, _) = ui.allocate_exact_size(egui::vec2(DOT, DOT), egui::Sense::hover());
+            ui.painter()
+                .circle_filled(dot.center(), DOT / 2.0, theme::LIVE);
+            if widgets::quiet_response(ui, true, label::STOP, theme::BODY)
+                .on_hover_text(model.recording_line())
+                .clicked()
+            {
+                actions.push(UiAction::StopRecording);
+            }
+        } else if widgets::quiet_button(
             ui,
             model.recording_start_enabled(),
-            label::START_RECORDING,
-            UiAction::StartRecording,
-        ));
-        actions.extend(screens::button(
-            ui,
-            model.recording_stop_enabled(),
-            label::STOP_RECORDING,
-            UiAction::StopRecording,
-        ));
+            label::RECORD,
+            theme::BODY,
+        ) {
+            actions.push(UiAction::StartRecording);
+        }
+        ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
+            if widgets::quiet_button(ui, true, label::DETAILS, theme::BODY) {
+                view.details = !view.details;
+            }
+        });
     });
-    ui.label(model.recording_line());
     actions
 }

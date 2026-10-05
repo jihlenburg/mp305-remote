@@ -3,14 +3,20 @@
 //! Coverage: excluded from the measurement as GUI drawing code (ADR-0008;
 //! app DD, section 8, decision 9); UT-APP-020 inspects this file instead.
 //!
-//! The close question as a non-modal window, so that Output OFF stays
-//! clickable while it is open (SR-041).
+//! The close question as a non-modal window in the middle of the screen,
+//! so that the output key's Off stays clickable while it is open
+//! (SR-041). Its texts and buttons are the model's; only the look follows
+//! the tokens.
 
-use eframe::egui;
+use eframe::egui::{self, Align2, RichText};
 
 use crate::actions::{CloseChoice, UiAction};
 use crate::model::{Instant, Model};
 use crate::texts::label;
+use crate::ui::{theme, widgets};
+
+/// The width of the close question in points.
+const WIDTH: f32 = 340.0;
 
 /// Draws the close question while it is open.
 pub fn show(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
@@ -19,25 +25,43 @@ pub fn show(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
     else {
         return actions;
     };
-    egui::Window::new(title)
+    egui::Window::new(RichText::new(title).strong())
+        .id(egui::Id::new("close-question"))
+        .anchor(Align2::RIGHT_CENTER, egui::vec2(-theme::PAD, 0.0))
         .collapsible(false)
         .resizable(false)
+        .default_width(WIDTH)
         .show(ui.ctx(), |ui| {
-            ui.label(&question.text);
+            ui.add(egui::Label::new(&question.text).wrap());
+            ui.add_space(theme::PAD);
             ui.horizontal(|ui| {
                 if question.switch_off {
-                    if ui.button(label::SWITCH_OFF).clicked() {
-                        actions.push(UiAction::CloseAnswer(CloseChoice::SwitchOff));
-                    }
-                    if ui.button(label::LEAVE_ON).clicked() {
-                        actions.push(UiAction::CloseAnswer(CloseChoice::LeaveOn));
-                    }
-                } else if ui.button(label::DISCONNECT).clicked() {
-                    actions.push(UiAction::CloseAnswer(CloseChoice::LeaveOn));
+                    actions.extend(widgets::outlined(
+                        ui,
+                        true,
+                        label::SWITCH_OFF,
+                        UiAction::CloseAnswer(CloseChoice::SwitchOff),
+                    ));
+                    actions.extend(widgets::outlined(
+                        ui,
+                        true,
+                        label::LEAVE_ON,
+                        UiAction::CloseAnswer(CloseChoice::LeaveOn),
+                    ));
+                } else {
+                    actions.extend(widgets::outlined(
+                        ui,
+                        true,
+                        label::DISCONNECT,
+                        UiAction::CloseAnswer(CloseChoice::LeaveOn),
+                    ));
                 }
-                if ui.button(label::CANCEL).clicked() {
-                    actions.push(UiAction::CloseAnswer(CloseChoice::Cancel));
-                }
+                actions.extend(widgets::outlined(
+                    ui,
+                    true,
+                    label::CANCEL,
+                    UiAction::CloseAnswer(CloseChoice::Cancel),
+                ));
             });
         });
     actions

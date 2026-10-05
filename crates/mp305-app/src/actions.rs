@@ -1,4 +1,4 @@
-//! Implements: DD-APP-020, DD-APP-021.
+//! Implements: DD-APP-015, DD-APP-020, DD-APP-021.
 //!
 //! What the UI can ask for, its translation into commands, and the close
 //! step that decides, once per frame, what a window close request does.
@@ -90,6 +90,10 @@ pub enum CloseChoice {
 /// What the UI can ask for (DD-APP-020).
 #[derive(Clone, Debug, PartialEq)]
 pub enum UiAction {
+    /// Edit the friendly name of the selected endpoint.
+    EditName(String),
+    /// Save a local name, without sending a device command.
+    SaveName,
     /// Start a scan.
     Scan,
     /// Set the scan time in seconds.
@@ -157,6 +161,14 @@ pub fn handle(
     ids: &mut IdSource,
 ) -> Vec<Command> {
     match action {
+        UiAction::EditName(text) => {
+            model.names.draft = text;
+            Vec::new()
+        }
+        UiAction::SaveName => {
+            model.names.request_save();
+            Vec::new()
+        }
         UiAction::Scan => scan(model, ids),
         UiAction::SetScanTime(seconds) => {
             model.scan_s = seconds.clamp(*SCAN_S_RANGE.start(), *SCAN_S_RANGE.end());

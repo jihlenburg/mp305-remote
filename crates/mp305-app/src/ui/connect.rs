@@ -1,136 +1,143 @@
-//! Implements: DD-APP-031 (the connection screen).
+//! Implements: DD-APP-031.
 //!
-//! Coverage: excluded from the measurement as GUI drawing code (ADR-0008;
-//! app DD, section 8, decision 9); UT-APP-020 inspects this file instead.
-//!
-//! The connection screen: the scan, the list of found supplies, connect
-//! and cancel, the reconnect checkbox, the limit fields and the bench
-//! safety note, which is readable without a network.
+//! Discovery presents distinct, accessible endpoints before an explicit
+//! connection. Friendly names never replace the connection identifier.
+//! Coverage: excluded as GUI drawing code (ADR-0008; app DD, section 8,
+//! decision 9); UT-APP-020 inspects it, UT-APP-029 exercises its controls.
 
-use eframe::egui;
+use eframe::egui::{self, Align, Layout, RichText, WidgetInfo, WidgetType};
 
 use crate::actions::UiAction;
-use crate::fields::FieldKind;
-use crate::model::{Instant, Model, SCAN_S_RANGE};
+use crate::model::{Instant, Model};
 use crate::texts::{self, label};
-use crate::ui::screens;
+use crate::ui::{status, theme, widgets, View};
 
-/// Draws the connection screen.
-pub fn show(ui: &mut egui::Ui, model: &Model, now: Instant) -> Vec<UiAction> {
+/// Draws the discovery column and its explicit connect action.
+pub fn show(ui: &mut egui::Ui, model: &Model, view: &mut View, now: Instant) -> Vec<UiAction> {
     let mut actions = Vec::new();
-    ui.horizontal(|ui| {
-        actions.extend(screens::button(
-            ui,
-            model.scan_enabled(),
-            label::SCAN,
-            UiAction::Scan,
-        ));
-        let mut seconds = model.scan_s;
-        let slider = egui::Slider::new(&mut seconds, SCAN_S_RANGE)
-            .suffix(" s")
-            .text(label::SCAN_TIME);
-        if ui.add_enabled(model.scan_enabled(), slider).changed() {
-            actions.push(UiAction::SetScanTime(seconds));
-        }
-        if model.is_scanning() {
-            ui.spinner();
-            ui.label(label::SCANNING);
-        }
-    });
-    ui.heading(label::SUPPLIES);
-    egui::Grid::new("found")
-        .num_columns(label::COLUMNS.len())
-        .striped(true)
+    egui::Panel::bottom("connect-footer")
+        .exact_size(28.0)
+        .frame(egui::Frame::NONE)
         .show(ui, |ui| {
-            for column in label::COLUMNS {
-                ui.strong(column);
+            if widgets::quiet_button(ui, true, label::DETAILS, theme::BODY) {
+                view.details = !view.details;
             }
-            ui.end_row();
-            for row in model.found_rows() {
-                if ui.selectable_label(row.selected, &row.name).clicked() {
-                    actions.push(UiAction::Select(row.identifier.clone()));
+        });
+    ui.heading(label::APP_TITLE);
+    ui.label(widgets::dim("Bench power supply"));
+    ui.add_space(theme::PAD);
+    ui.horizontal(|ui| {
+        ui.label(label::SUPPLIES);
+        ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
+            actions.extend(widgets::outlined(
+                ui,
+                model.scan_enabled(),
+                if model.found.is_empty() {
+                    label::SCAN
+                } else {
+                    label::SCAN_AGAIN
+                },
+                UiAction::Scan,
+            ));
+        });
+    });
+    if model.is_scanning() {
+        ui.horizontal(|ui| {
+            ui.spinner();
+            ui.label(widgets::dim(label::SCANNING));
+        });
+    }
+    ui.add_space(theme::UNIT);
+    egui::ScrollArea::vertical()
+        .id_salt("found")
+        .auto_shrink([false, true])
+        .max_height(ui.available_height() * 0.5)
+        .show(ui, |ui| {
+            for found in &model.found {
+                let name = model.device_name(found);
+                let identity = format!(
+                    "{} / {}",
+                    texts::transport_name(found.transport),
+                    found.identifier
+                );
+                let mut job = egui::text::LayoutJob::default();
+                job.wrap.max_rows = 3;
+                job.append(
+                    &name,
+                    0.0,
+                    egui::TextFormat {
+                        font_id: egui::FontId::new(theme::BODY, theme::bold()),
+                        color: theme::TEXT,
+                        ..Default::default()
+                    },
+                );
+                job.append(
+                    &format!("\n{identity}"),
+                    0.0,
+                    egui::TextFormat {
+                        font_id: theme::mono(theme::SMALL),
+                        color: theme::DIM,
+                        ..Default::default()
+                    },
+                );
+                let selected = model.selected.as_deref() == Some(&found.identifier);
+                let response = ui.add_enabled(
+                    model.scan_enabled(),
+                    egui::Button::new(job)
+                        .frame(true)
+                        .wrap()
+                        .selected(selected)
+                        .min_size(egui::vec2(ui.available_width(), 68.0)),
+                );
+                response.widget_info(|| {
+                    WidgetInfo::selected(
+                        WidgetType::SelectableLabel,
+                        model.scan_enabled(),
+                        selected,
+                        format!("{name}, {identity}"),
+                    )
+                });
+                let hint = format!(
+                    "{}\n{}",
+                    found,
+                    texts::found_hint(
+                        &found.unit_id,
+                        &found
+                            .remote_flag
+                            .map_or_else(|| "not reported".into(), |v| v.to_string())
+                    )
+                );
+                if response.on_hover_text(hint).clicked() {
+                    actions.push(UiAction::Select(found.identifier.clone()));
                 }
-                ui.label(&row.unit);
-                ui.label(&row.transport);
-                ui.label(&row.signal);
-                ui.label(&row.remote);
-                ui.end_row();
             }
         });
     if let Some(message) = &model.scan_message {
-        ui.label(message);
+        ui.add(egui::Label::new(widgets::dim(message)).wrap());
     }
-    ui.horizontal(|ui| {
-        actions.extend(screens::button(
-            ui,
-            model.connect_enabled(),
-            label::CONNECT,
-            UiAction::Connect,
-        ));
-        if let Some(line) = model.connecting_line() {
-            ui.spinner();
-            ui.label(line);
-            actions.extend(screens::button(
-                ui,
-                model.disconnect_enabled(),
-                label::CANCEL,
-                UiAction::Disconnect,
-            ));
-        }
-    });
-    actions.extend(reconnect_checkbox(ui, model, now));
-    ui.separator();
-    actions.extend(limit_fields(ui, model, now));
-    ui.separator();
-    egui::CollapsingHeader::new(label::BENCH_SAFETY)
-        .default_open(true)
-        .show(ui, |ui| {
-            ui.label(texts::BENCH_SAFETY);
-            ui.hyperlink_to(label::BENCH_SAFETY_LINK, texts::BENCH_SAFETY_URL);
-        });
+    ui.add_space(theme::UNIT);
+    actions.extend(widgets::outlined(
+        ui,
+        model.connect_enabled(),
+        label::CONNECT,
+        UiAction::Connect,
+    ));
+    ui.add_space(theme::PAD);
+    actions.extend(status::show(ui, model, now));
     actions
 }
 
-/// The reconnect checkbox.
-pub fn reconnect_checkbox(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
-    let mut on = model.reconnect;
-    if ui
-        .checkbox(&mut on, label::RECONNECT_AUTOMATICALLY)
-        .changed()
-    {
-        vec![UiAction::SetReconnect(on)]
-    } else {
-        Vec::new()
-    }
-}
-
-/// The two limit fields with their hints, the limits in force and the
-/// apply button.
-pub fn limit_fields(ui: &mut egui::Ui, model: &Model, _now: Instant) -> Vec<UiAction> {
-    let mut actions = Vec::new();
-    ui.strong(label::LIMITS);
-    actions.extend(screens::field(
-        ui,
-        model,
-        FieldKind::MaxVoltage,
-        label::MAX_VOLTAGE,
-        UiAction::ApplyLimits,
-    ));
-    actions.extend(screens::field(
-        ui,
-        model,
-        FieldKind::MaxCurrent,
-        label::MAX_CURRENT,
-        UiAction::ApplyLimits,
-    ));
-    ui.horizontal(|ui| {
-        actions.extend(screens::button(
-            ui,
-            model.apply_limits_enabled(),
-            label::APPLY_LIMITS,
-            UiAction::ApplyLimits,
-        ));
-        ui.label(model.limits_text());
+/// Connection guidance and the offline bench note, directly visible.
+pub fn hint(ui: &mut egui::Ui) {
+    ui.add_space(48.0);
+    ui.heading("Connect your supply");
+    ui.add_space(8.0);
+    ui.add(egui::Label::new(RichText::new(texts::CONNECT_HINT).color(theme::DIM)).wrap());
+    ui.add_space(8.0);
+    ui.add(egui::Label::new("Select a device on the left, then connect. You can give each connection a friendly name in Details.").wrap());
+    ui.with_layout(Layout::bottom_up(Align::Min), |ui| {
+        ui.hyperlink_to(label::BENCH_SAFETY_LINK, texts::BENCH_SAFETY_URL);
+        ui.add(egui::Label::new(widgets::dim(texts::BENCH_SAFETY)).wrap());
+        ui.label(RichText::new(label::BENCH_SAFETY).strong());
     });
-    actions
 }

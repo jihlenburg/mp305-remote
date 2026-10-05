@@ -18,10 +18,24 @@ acceptance matrices, which are backlog (the sections below).
 - [ ] Library check on Linux over Bluetooth (halobox, the dongle)
 - [ ] App by hand on macOS: connect, set, output on and off and the
       chart worked over USB on 2026-10-05 (first contact of the app with
-      the supply). Still to try: recording a CSV, and Bluetooth
-- [ ] App screen redesign (started 2026-10-05): the user finds the
-      screen huge and cluttered and chose a side-by-side layout (readouts
-      and controls left, chart right); then a second look by the user
+      the supply). CSV and lamp controls also passed through the real egui
+      screens and USB worker in a headless harness on 2026-10-05, 44 rows.
+      Native launch, selection and USB readout review also passed after the
+      decimal alignment correction on 2026-10-05. Still to try: Bluetooth
+- [x] App screen redesign (2026-10-05): compact side-by-side layout,
+      fixed-width readouts and aligned fields, accessible controls,
+      15 reviewed screenshot baselines and interaction tests; app DD
+      revision 5 approved and implemented
+- [x] User's second look at the rebuilt app, accepted after the decimal
+      alignment correction on 2026-10-05
+- [x] Correct readout decimal alignment and excessive punctuation spacing
+      from the user's visual review (2026-10-05): fixed digit columns,
+      compact decimal punctuation, geometry and screenshot checks pass
+- [x] Persistent app names for multiple supplies (2026-10-05):
+      exact transport and OS identity (macOS USB names also scoped to the
+      host boot), app DD revision 5 approved, save/reopen/error and UI tests pass
+- [ ] Resolve the pre-existing UT-DISC-012 traceability defect in the
+      separate uncommitted HID owner-thread work (found 2026-10-05)
 - [ ] Fix what the checks find
 - [ ] Build the release artifacts (wheels, the app)
 - [ ] README: what was checked on hardware and what was not

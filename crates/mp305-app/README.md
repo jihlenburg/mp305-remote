@@ -11,6 +11,43 @@ be on asks first whether to switch it off.
 
 Read the [bench safety](#bench-safety) note before you connect a load.
 
+## Controls and device names
+
+Select a supply, then press Connect. The left column keeps the measurements,
+setpoints and output buttons visible; Details holds settings and recording
+options. Editing a setpoint does not send it until you press Enter or Set.
+Record starts a CSV; Stop finishes it. Choose a file in Details, or leave the
+field empty to use a timestamped file in your Documents directory.
+
+To name a supply, select it and open Details, enter a Device name, then press
+Save name. Clear the field and save to remove the name. Names are saved on
+this computer, separately for each transport and exact OS identifier. They
+survive app restarts. Bluetooth names follow the OS peripheral identity.
+USB names follow the attached USB endpoint and can need reassignment after
+unplugging. On macOS they are also scoped to the current boot, because the
+USB registry identifier is not permanent. USB and Bluetooth entries are not
+automatically merged, and the app controls one selected connection at a time.
+
+## UI regression checks
+
+```sh
+cargo test -p mp305-app ui::tests
+```
+
+These tests click and type into the actual egui screens, checking the commands
+they produce without connecting to hardware. They cover duplicate device
+names, renaming, invalid setpoints, recording, chart windows and Output OFF
+while other windows are open. Fifteen image baselines cover the default and
+minimum window sizes, connection loss, edited fields, recording, Details,
+the close question, and a Retina display scale.
+
+Baselines live in `tests/snapshots/`. A mismatch writes `.new.png` and
+`.diff.png` alongside the baseline. Review the images before replacing a
+baseline; do not automatically accept snapshot updates. Rendering needs a
+wgpu adapter, and other operating systems or GPUs may need a visual review
+of rasterization differences. Native window behavior and real hardware
+remain separate hands-on checks.
+
 ## Build and run
 
 The app is part of the Cargo workspace of this repository and needs Rust

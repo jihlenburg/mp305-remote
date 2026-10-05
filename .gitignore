@@ -34,3 +34,7 @@ lcov.info
 /docs/research/**/*.elf
 /docs/research/**/*.gpr
 /docs/research/**/*.rep/
+
+# UI snapshot candidates and diffs are local review artifacts.
+**/tests/snapshots/**/*.diff.png
+**/tests/snapshots/**/*.new.png

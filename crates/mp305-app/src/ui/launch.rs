@@ -4,7 +4,8 @@
 //! nothing (ADR-0008; app DD, section 8, decision 9); UT-APP-020 inspects
 //! this file instead.
 //!
-//! Starts the logger and the window. On macOS winit's default menu is
+//! Starts the logger and the window, and installs the fonts and the
+//! style (`theme`). On macOS winit's default menu is
 //! switched off, so that no Quit item (key equivalent Cmd+Q) ends the app
 //! through `terminate:` without a close request; Cmd+Q then arrives through
 //! egui's default quit shortcut as a close request, which DD-APP-021
@@ -23,10 +24,10 @@ use crate::ui::App;
 use crate::worker::{self, Wake};
 
 /// The window's inner size in points.
-const INNER_SIZE: [f32; 2] = [1100.0, 760.0];
+const INNER_SIZE: [f32; 2] = [900.0, 580.0];
 
 /// The window's minimum inner size in points.
-const MIN_INNER_SIZE: [f32; 2] = [800.0, 560.0];
+const MIN_INNER_SIZE: [f32; 2] = [760.0, 520.0];
 
 /// Runs the app until its window closes.
 #[must_use]
@@ -54,7 +55,7 @@ pub fn launch() -> ExitCode {
             let ctx = cc.egui_ctx.clone();
             let wake: Wake = Arc::new(move || ctx.request_repaint());
             let core = AppCore::start(worker::real_deps(), wake, paths::recording_dir())?;
-            Ok(Box::new(App::new(core)))
+            Ok(Box::new(App::new(core, &cc.egui_ctx)))
         }),
     );
     match result {
