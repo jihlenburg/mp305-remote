@@ -80,7 +80,8 @@ scripts/bundle_macos.sh
 ```
 
 It builds a release binary and makes `target/release/bundle/MP305 Remote.app`,
-signed ad hoc for this machine. Open the bundle from Finder or with
+signed ad hoc for this machine, with the Retro instrument icon in Finder
+and the Dock. Open the bundle from Finder or with
 `open "target/release/bundle/MP305 Remote.app"`.
 
 - macOS asks for the Bluetooth permission at the first scan. Allow it, or
@@ -114,6 +115,17 @@ cargo build --release -p mp305-app
 target/release/mp305-app
 ```
 
+For an application-menu entry with the icon, install it for your user from
+the repository root (with `~/.local/bin` on your `PATH`):
+
+```sh
+install -Dm755 target/release/mp305-app "$HOME/.local/bin/mp305-app"
+install -Dm644 crates/mp305-app/packaging/linux/de.ihlems.mp305-remote.desktop \
+  "$HOME/.local/share/applications/de.ihlems.mp305-remote.desktop"
+install -Dm644 crates/mp305-app/assets/icons/icon-512.png \
+  "$HOME/.local/share/icons/hicolor/512x512/apps/de.ihlems.mp305-remote.png"
+```
+
 ### Windows
 
 Bluetooth LE needs Windows 10 22H2 or later; nothing else is to be
@@ -125,7 +137,10 @@ $env:RUSTFLAGS = "-C target-feature=+crt-static"
 cargo build --release -p mp305-app
 ```
 
-The result is `target\release\mp305-app.exe`. A release build opens no
+The result is `target\release\mp305-app.exe`, with the instrument icon
+embedded for Explorer and shortcuts. The Windows SDK resource compiler
+(`rc.exe`, included with the MSVC build tools) is used during the build.
+A release build opens no
 console window; the log then goes to the file named by `MP305_LOG_FILE`
 (see Logging).
 
@@ -168,3 +183,10 @@ Set a hardware current limit and the OCP mode on the supply's front panel. Keep 
 
 B612 and Antonio are embedded under the SIL Open Font License. Their license
 texts are in `assets/fonts/OFL.txt` and `assets/fonts/OFL-Antonio.txt`.
+
+## Icon assets
+
+The accepted artwork is `assets/icons/source.png`. The window PNG, Linux
+PNG, Windows ICO and macOS ICNS are committed beside it. To regenerate them
+on macOS, with ImageMagick installed, run `scripts/generate_app_icons.sh`
+from the repository root. Normal builds use the committed files.

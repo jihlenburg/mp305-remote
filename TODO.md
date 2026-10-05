@@ -9,6 +9,10 @@ Open and finished work, grouped by V-model phase. The process is described in
 The first release is gated by this checklist, not by the system and
 acceptance matrices, which are backlog (the sections below).
 
+- [x] Integrate the approved Retro instrument icon (2026-10-06): window
+      icon, macOS bundle, Windows executable resource and Linux launcher.
+      App checks pass; signed release bundle opened and Finder icon reviewed.
+      Windows resource compilation checked with LLVM on macOS.
 - [x] Library check on macOS over Bluetooth 2026-10-05
       (`scripts/hardware_check.py`, 9 of 9 steps twice: CC at a 0.1 A
       limit and CV at 0.2 A, a 12 V lamp as the load)
@@ -106,6 +110,9 @@ Later, not for 0.1: calibration of the readings against a precision
 load; Windows on hardware; the over-current and load tests; the stray
 "Shouldn't get anything but Ok!" that the Bluetooth library logs at
 close on macOS.
+
+- [ ] Check the new icon on native Windows and Linux desktops; formats and
+      packaging inspected on macOS (2026-10-06).
 
 - [x] Fix the app's crash in the USB enumeration on macOS (found
       2026-10-05, a use of freed memory inside `hidapi` after the thread

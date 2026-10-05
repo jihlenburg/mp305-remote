@@ -12,6 +12,10 @@ rust-version = "1.95"
 [lints]
 workspace = true
 
+[build-dependencies]
+# Embed the native executable icon for Windows targets (DD-APP-040).
+winresource = "0.1.31"
+
 [dependencies]
 mp305-core = { path = "../mp305-core" }
 # The pre-1.0 GUI crates are pinned exactly (ADR-0005; app DD, section 8,

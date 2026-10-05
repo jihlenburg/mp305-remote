@@ -1,0 +1,9 @@
+# Implements: DD-APP-040 (the Linux launcher and its icon).
+[Desktop Entry]
+Type=Application
+Name=MP305 Remote
+Comment=Control an ISDT MP305B bench power supply
+Exec=mp305-app
+Icon=de.ihlems.mp305-remote
+Terminal=false
+Categories=Science;Electronics;

@@ -1,4 +1,5 @@
-//! Implements: DD-APP-034, DD-APP-035, DD-APP-030 (`launch`), DD-APP-023 (the macOS menu hook).
+//! Implements: DD-APP-034, DD-APP-035, DD-APP-030 (`launch`), DD-APP-023 (the macOS menu hook),
+//! DD-APP-040 (the window icon).
 //!
 //! Coverage: excluded from the measurement as eframe glue that decides
 //! nothing (ADR-0008; app DD, section 8, decision 9); UT-APP-020 inspects
@@ -33,12 +34,27 @@ const MIN_INNER_SIZE: [f32; 2] = [320.0, 320.0];
 #[must_use]
 pub fn launch() -> ExitCode {
     logging::init();
+    let icon =
+        match eframe::icon_data::from_png_bytes(include_bytes!("../../assets/icons/icon.png")) {
+            Ok(icon) => icon,
+            Err(error) => {
+                logging::launch_failed(&error);
+                return ExitCode::FAILURE;
+            }
+        };
+    #[cfg_attr(not(target_os = "linux"), allow(unused_mut))]
+    let mut viewport = egui::ViewportBuilder::default()
+        .with_title(label::APP_TITLE)
+        .with_icon(icon)
+        .with_inner_size(INNER_SIZE)
+        .with_min_inner_size(MIN_INNER_SIZE);
+    #[cfg(target_os = "linux")]
+    {
+        viewport = viewport.with_app_id("de.ihlems.mp305-remote");
+    }
     #[cfg_attr(not(target_os = "macos"), allow(unused_mut))]
     let mut options = eframe::NativeOptions {
-        viewport: egui::ViewportBuilder::default()
-            .with_title(label::APP_TITLE)
-            .with_inner_size(INNER_SIZE)
-            .with_min_inner_size(MIN_INNER_SIZE),
+        viewport,
         ..Default::default()
     };
     #[cfg(target_os = "macos")]

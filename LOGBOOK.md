@@ -3680,3 +3680,26 @@ the shim `~/.local/bin/python3.10`, which pointed at the removed
 installation, was replaced, and `.venv` was made anew from it (`uv venv
 --clear`, `uv sync`, `maturin develop`). No file of the repository
 changed by this.
+
+### App icon selected
+
+The user accepted the orange Retro instrument icon preview with an amber
+DC symbol and coral/lavender terminals, then requested its integration into
+the app. This authorizes the icon-specific changes in app DD revision 8
+(DD-APP-030 and DD-APP-040, UT-APP-020 and UT-APP-021). The dependency
+impact was checked in traceability.md before editing the design. The source
+is uncommitted over `25c82a6b201fad6f3bd944d3c5696fe002b788c7`; no gate tag
+has been created.
+
+### App icon integrated
+
+Integrated the accepted artwork into the native window, macOS bundle,
+Windows executable resource and Linux desktop entry. Stored the source
+artwork and derived formats in the app assets, with a regeneration script.
+Rebuilt and ad hoc signed the macOS release bundle, opened its connection
+screen and verified its icon in Finder. No scan or device connection was
+made. Native Windows and Linux icon appearance remains unchecked.
+
+Verification: [app icon integration](docs/v-model/records/2026-10-06-unit-app-icon.md),
+app tests and lints, icon formats, Windows resource compilation through LLVM,
+macOS packaging/signature and native Finder inspection, pass.

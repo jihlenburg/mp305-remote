@@ -13,6 +13,8 @@
 	<string>de.ihlems.mp305-remote</string>
 	<key>CFBundleName</key>
 	<string>MP305 Remote</string>
+	<key>CFBundleIconFile</key>
+	<string>mp305.icns</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
