@@ -12,7 +12,8 @@ acceptance matrices, which are backlog (the sections below).
 - [x] Integrate the approved Retro instrument icon (2026-10-06): window
       icon, macOS bundle, Windows executable resource and Linux launcher.
       App checks pass; signed release bundle opened and Finder icon reviewed.
-      Windows resource compilation checked with LLVM on macOS.
+      Windows resource compilation checked with LLVM on macOS. Committed
+      as `ab138bc` with tag `g4-app-rev8-approved` (2026-10-06).
 - [x] Library check on macOS over Bluetooth 2026-10-05
       (`scripts/hardware_check.py`, 9 of 9 steps twice: CC at a 0.1 A
       limit and CV at 0.2 A, a 12 V lamp as the load)

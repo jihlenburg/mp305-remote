@@ -3703,3 +3703,12 @@ made. Native Windows and Linux icon appearance remains unchecked.
 Verification: [app icon integration](docs/v-model/records/2026-10-06-unit-app-icon.md),
 app tests and lints, icon formats, Windows resource compilation through LLVM,
 macOS packaging/signature and native Finder inspection, pass.
+
+### App icon approval commit
+
+The user authorized committing and pushing the app icon integration on
+2026-10-06. The approved app DD revision 8 and its implementation are in
+`ab138bc8a8c8d59f182818a88fb4d6eaba5c9605`, tagged
+`g4-app-rev8-approved`. The existing root README edit remains outside this
+commit. The verification results are those of "App icon integrated" above;
+no implementation or asset changed after that verification.
