@@ -61,12 +61,11 @@ jobs:
         with:
           target: ${{ matrix.target }}
           # Built on the host, not in a container (no manylinux_2_35 image
-          # exists), and tagged manylinux_2_35. The tag goes through this
-          # input alone: together with `--compatibility` in `args` maturin
-          # sees two platform tags and refuses.
-          manylinux: "2_35"
+          # exists), and tagged manylinux_2_35 through `--compatibility`
+          # alone. The action's `manylinux` input stays unset: it would
+          # add a second platform tag, which maturin refuses.
           container: "off"
-          args: --release --out dist
+          args: --release --out dist --compatibility manylinux_2_35
 
       - name: Build the wheel (macOS, Windows)
         if: runner.os != 'Linux'
