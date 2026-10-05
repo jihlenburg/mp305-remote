@@ -113,8 +113,55 @@ close on macOS.
       the user and committed 2026-10-05, tag `g4-discovery-rev8-approved`.
       The app with its current screens has not yet run on the supply with
       the fix
-- [ ] Code review of the library and the app (asked for by the user on
-      2026-10-05, started 2026-10-05)
+- [x] Code review of the library and the app (asked for by the user on
+      2026-10-05, done 2026-10-05 at commit `e30ee35`): one independent
+      static review of `mp305-core`, `mp305-py` with `python/mp305`, and
+      `mp305-app`; 15 findings, listed below, none fixed yet. Which of
+      them are fixed before 0.1.0 is the user's decision; a fix that
+      changes a DD item needs the approval first
+- Findings of the code review of 2026-10-05 (open; "checked" means the
+  cited code was read again in the main session):
+  - [ ] R1 `link/task.rs:209`: a poll time that falls due between the
+        send step and `next_deadline` gets no timer; over Bluetooth
+        polling then stops until a command arrives (checked, rare)
+  - [ ] R2 `python/mp305/device.py:254`: `Mp305.connect()` without an
+        identifier refuses a supply that is on USB and also advertises,
+        as "several supplies" (checked; the app's scan of 2026-10-05
+        listed the one unit twice)
+  - [ ] R3 `discovery/mod.rs:313`: the USB identifier is the HID path,
+        which changes at every plug on macOS, so reconnection and the
+        unclean-exit marker over USB miss the supply afterwards
+  - [ ] R4 `discovery/ble.rs:275`: one failing `properties()` read fails
+        the whole Bluetooth scan (checked)
+  - [ ] R5 `mp305-app/src/ui/widgets.rs:300`: Enter in an unedited
+        setpoint field sends the setpoint although Set is disabled
+        (checked)
+  - [ ] R6 `discovery/hid_owner.rs:91`: no bound on the wait for the
+        owner thread, so one stalled `hidapi` call holds every later USB
+        call and the scan (checked; came with the fix of 2026-10-05)
+  - [ ] R7 `session/task.rs:915`: the marker is rewritten with a full
+        sync once per second on the session task while the output is on,
+        which can delay Output OFF on a slow disk
+  - [ ] R8 `session/task.rs:815`: reading times are the start time plus
+        a monotonic clock that stands still during system sleep, so they
+        fall behind after a sleep the session survives (checked)
+  - [ ] R9 `transport/ble.rs:96`: the MTU check reads the value once and
+        takes `btleplug`'s default of 23 for a negotiated one (Windows,
+        old BlueZ; not reproduced)
+  - [ ] R10 `discovery/mod.rs:206`: `Discovery::new` always starts
+        Bluetooth, also for USB-only use, and no text says "Bluetooth is
+        off on this computer"
+  - [ ] R11 `mp305-app/src/model.rs:1109`: the limit notice uses the
+        rated range where the core accepts the firmware's wider one
+  - [ ] R12 `discovery/hid.rs:124`: a USB connect enumerates every HID
+        device twice
+  - [ ] R13 `mp305-py/src/session.rs:47` and `mp305-app/src/paths.rs:35`:
+        the state directory rule exists twice
+  - [ ] R14 `transport/hid.rs:161`: `Hid::open` asks for a Tokio runtime
+        that its thread does not need
+  - [ ] R15 `transport/ble.rs:219`: `Drop` issues a second disconnect
+        after an orderly close (possibly the stray `btleplug` line at
+        close)
 
 ## Phase status
 

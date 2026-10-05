@@ -3586,3 +3586,23 @@ and DD-DISC-011, UT-DISC-011 and the new UT-DISC-012. The approved
 documents and the fix are in the commit that carries this entry, tagged
 `g4-discovery-rev8-approved`. The user chose a new commit on top of
 `0678e81` over an amended one.
+
+### Code review of the library and the app
+
+The user asked for a code review of the library and the app. One
+independent reviewer read all production code of `mp305-core`, `mp305-py`
+with `python/mp305`, and `mp305-app` at commit `e30ee35`, statically,
+and checked the suspect vendor paths against the sources of `hidapi`
+2.6.7 and `btleplug` 0.13.3. Nothing was run.
+
+Result: 15 findings, listed as R1 to R15 in TODO.md ("Findings of the
+code review of 2026-10-05"). The reviewer found no fault in the session,
+link and close state machines as designed, the protocol codecs, the
+Python wait, pump and safety tasks, the app's close and disconnect rules,
+or the owner thread of the same day. In the main session the cited code
+of R1, R2, R4, R5, R6 and R8 was read again and matches the findings. For
+R2 the app's scan of the same morning is the hardware evidence: the one
+supply, on USB with remote control enabled, was listed over Bluetooth and
+over USB. R3, R9 and R10 rest on OS or vendor behaviour that was not
+reproduced. Nothing is fixed yet; the user decides what is fixed before
+0.1.0.
