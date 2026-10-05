@@ -3150,3 +3150,23 @@ anything but Ok!" at close on macOS.
 
 The run of ST-019 and ST-049 that was prepared before the decision was
 not made.
+
+### USB and the app meet the real supply
+
+Second check of the release list, macOS over USB, at the user's word
+("usb is connected"), the lamp on the output: `scripts/hardware_check.py`
+passed 9 of 9 steps at the first USB contact with the real supply. Found
+as a HID device, connected without a prompt, version 1.6.0.51 (no
+hardware revision over USB, as the firmware says), 12.00 V at 0.095 A
+(1.13 W) into the lamp in CV, 20 readings in 10 s, output off, setpoints
+restored, closed. The USB side had only been read from the firmware
+until now.
+
+The release build of the app was started for the user, also for the
+first time on the real supply. Over USB the user connected, set 12 V and
+0.2 A, switched the output on and off, and the chart showed it; the app
+closed cleanly. Recording was not tried. The user's verdict: a nice
+start, but the screen is huge and cluttered. Asked for a layout, the
+user chose "side by side": the readouts and controls in a narrow column
+on the left, the chart on the right. The redesign changes the drawing
+code only and is under way.

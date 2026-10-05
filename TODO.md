@@ -12,10 +12,16 @@ acceptance matrices, which are backlog (the sections below).
 - [x] Library check on macOS over Bluetooth 2026-10-05
       (`scripts/hardware_check.py`, 9 of 9 steps twice: CC at a 0.1 A
       limit and CV at 0.2 A, a 12 V lamp as the load)
-- [ ] Library check on macOS over USB (the first USB contact with the
-      real supply)
+- [x] Library check on macOS over USB 2026-10-05: 9 of 9 steps at the
+      first USB contact with the real supply (12.00 V, 0.095 A into the
+      lamp, no prompt)
 - [ ] Library check on Linux over Bluetooth (halobox, the dongle)
-- [ ] App by hand on macOS: connect, set, output on and off, chart, CSV
+- [ ] App by hand on macOS: connect, set, output on and off and the
+      chart worked over USB on 2026-10-05 (first contact of the app with
+      the supply). Still to try: recording a CSV, and Bluetooth
+- [ ] App screen redesign (started 2026-10-05): the user finds the
+      screen huge and cluttered and chose a side-by-side layout (readouts
+      and controls left, chart right); then a second look by the user
 - [ ] Fix what the checks find
 - [ ] Build the release artifacts (wheels, the app)
 - [ ] README: what was checked on hardware and what was not
