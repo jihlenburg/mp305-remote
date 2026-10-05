@@ -15,6 +15,7 @@ mod connect;
 mod control;
 mod events;
 mod loss;
+mod robust;
 
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::Arc;
@@ -495,6 +496,7 @@ fn driven(id: &str, kind: Kind, script: Script) -> Driven {
         host_id: host_id(),
         markers: Arc::new(MemoryMarkers::new()),
         wall_origin: Some(wall0()),
+        clock: None,
         shared: Arc::clone(&shared),
         ready: ready_tx,
         events: event_tx,

@@ -54,7 +54,8 @@ const READING_CAPACITY: usize = 1024;
 
 /// How an identifier becomes a guarded transport: discovery implements it
 /// for real devices, `doubles::MockConnector` (under the `mock` feature) over the scripted mock.
-/// Called once at [`Session::connect`] and once per reconnection attempt.
+/// The session calls [`Connector::connect`] once at [`Session::connect`]
+/// and [`Connector::reconnect`] once per automatic reconnection attempt.
 pub trait Connector: Send + Sync + 'static {
     /// Connects to the supply with `identifier`.
     ///
@@ -66,12 +67,45 @@ pub trait Connector: Send + Sync + 'static {
         &'a self,
         identifier: &'a str,
     ) -> BoxFuture<'a, Result<Guarded<AnyTransport>, Error>>;
+
+    /// Connects again to the supply the session was opened with, after a
+    /// loss (DD-SESS-051). `identifier` is the identifier the session was
+    /// opened with. An implementation may reach the same supply under a
+    /// changed operating-system identifier, for example a USB device path
+    /// that changed when the cable was replugged; the session keeps its own
+    /// identifier, registry entry and events either way. The default calls
+    /// [`Connector::connect`].
+    ///
+    /// # Errors
+    ///
+    /// Whatever the backend reports; the session ends the reconnection
+    /// attempt with it.
+    fn reconnect<'a>(
+        &'a self,
+        identifier: &'a str,
+    ) -> BoxFuture<'a, Result<Guarded<AnyTransport>, Error>> {
+        self.connect(identifier)
+    }
 }
+
+/// The marker key of every supply on USB (SR-046, DD-SESS-042). Over USB
+/// the identifier is the HID device path, which changes when the cable is
+/// replugged, the supply is power-cycled or the computer reboots, and the
+/// supply has no USB serial number; a marker keyed by the path would never
+/// be found again. So a session over USB keys its marker with this fixed
+/// key instead, and two supplies on USB share one marker: the warning can
+/// then appear for the other one too, which errs on the safe side. Over
+/// Bluetooth the key is the identifier.
+pub const USB_MARKER_KEY: &str = "usb";
 
 /// Where the unclean-exit marker lives: the store module implements it,
 /// `doubles::MemoryMarkers` is the test double. The calls are synchronous
-/// and run on the session task; a failing call is logged at WARN and never
-/// fails the session call that caused it.
+/// and run on the session task, so an implementation must not block on
+/// slow I/O in `set` and `clear` (the store writes behind, on a thread of
+/// its own); a failing call is logged at WARN and never fails the session
+/// call that caused it. The identifier the session passes is its marker
+/// key: the session's identifier over Bluetooth, [`USB_MARKER_KEY`] over
+/// USB.
 pub trait Markers: Send + Sync + 'static {
     /// The time of the marker for `identifier`, if one is present.
     ///
@@ -93,6 +127,17 @@ pub trait Markers: Send + Sync + 'static {
     ///
     /// The store's error.
     fn clear(&self, identifier: &str) -> Result<(), Error>;
+
+    /// Waits up to `bound` until every earlier `set` and `clear` is on
+    /// disk; `true` when it is, `false` when `bound` expired first. The
+    /// session calls it at an orderly close, after its final clear, on a
+    /// blocking thread. The default returns `true` at once, for an
+    /// implementation whose `set` and `clear` finish their work before they
+    /// return.
+    fn flush(&self, bound: core::time::Duration) -> bool {
+        let _ = bound;
+        true
+    }
 }
 
 /// The options of a session.
@@ -100,9 +145,10 @@ pub trait Markers: Send + Sync + 'static {
 /// Build it with [`Options::new`], or from [`Options::default`] (no
 /// reconnection, no user limits) with the public fields assigned; a struct
 /// literal does not compile outside this module, since the wall-clock
-/// origin for tests is a private field, set through
-/// `Options::with_wall_origin` under the `mock` feature.
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+/// origin and the system clock for tests are private fields, set through
+/// `Options::with_wall_origin` and `Options::with_clock` under the `mock`
+/// feature.
+#[derive(Clone, Copy, Debug, Default)]
 pub struct Options {
     /// Whether a lost link is reconnected (AR-029); can be changed later
     /// with [`Session::set_reconnect`].
@@ -112,6 +158,24 @@ pub struct Options {
     pub limits: Limits,
     /// A fixed wall-clock origin for the reading times, for tests.
     wall_origin: Option<SystemTime>,
+    /// The system clock the reading times are re-anchored to after a
+    /// system sleep, for tests (DD-SESS-004).
+    clock: Option<Clock>,
+}
+
+/// A source of the system time: `SystemTime::now` outside tests.
+pub(crate) type Clock = fn() -> SystemTime;
+
+/// Equal when the public fields and the wall-clock origin are equal and
+/// both or neither have a test clock: function pointers have no reliable
+/// equality.
+impl PartialEq for Options {
+    fn eq(&self, other: &Self) -> bool {
+        self.reconnect == other.reconnect
+            && self.limits == other.limits
+            && self.wall_origin == other.wall_origin
+            && self.clock.is_some() == other.clock.is_some()
+    }
 }
 
 impl Options {
@@ -123,16 +187,29 @@ impl Options {
             reconnect,
             limits,
             wall_origin: None,
+            clock: None,
         }
     }
 
     /// Fixes the wall-clock time that corresponds to the start of the
     /// session task, so that a paused test clock gives deterministic
-    /// wall-clock times (DD-SESS-004).
+    /// wall-clock times (DD-SESS-004). Without [`Options::with_clock`] the
+    /// reading times are then never re-anchored.
     #[cfg(any(test, feature = "mock"))]
     #[must_use]
     pub fn with_wall_origin(mut self, origin: SystemTime) -> Self {
         self.wall_origin = Some(origin);
+        self
+    }
+
+    /// Sets the system clock that the reading times are re-anchored to
+    /// when it has run ahead (DD-SESS-004), so that a test can simulate a
+    /// system sleep. Without a fixed wall-clock origin the session uses
+    /// `SystemTime::now` for both.
+    #[cfg(any(test, feature = "mock"))]
+    #[must_use]
+    pub fn with_clock(mut self, clock: fn() -> SystemTime) -> Self {
+        self.clock = Some(clock);
         self
     }
 }
@@ -530,6 +607,7 @@ impl Session {
             host_id,
             markers,
             wall_origin: options.wall_origin,
+            clock: options.clock,
             shared: Arc::clone(&shared),
             ready: ready_tx,
             events: event_tx,

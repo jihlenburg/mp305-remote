@@ -109,6 +109,9 @@ struct State {
     last_reply_at: Option<Instant>,
     /// Write start of the last successful write; the link's start at first.
     last_sent_at: Instant,
+    /// The instant the last `pick` judged eligibility at, taken by the next
+    /// deadline computation so that both use the same instant.
+    picked_at: Option<Instant>,
 }
 
 /// The task. Runs the loop until the link is lost or closed, then ends it.
@@ -133,6 +136,7 @@ pub(crate) async fn run<T: Transport>(
         count: 0,
         last_reply_at: None,
         last_sent_at: started,
+        picked_at: None,
     };
     match state.run_loop(&mut guard, &mut commands).await {
         End::Lost { reason, failed } => state.end_lost(reason, failed, guard, &mut commands),
@@ -178,7 +182,7 @@ impl State {
         commands: &mut mpsc::UnboundedReceiver<Command>,
     ) -> End {
         loop {
-            let deadline = self.next_deadline(Instant::now());
+            let deadline = self.step_deadline(Instant::now());
             let wake = deadline.unwrap_or_else(Instant::now);
             let step = tokio::select! {
                 biased;
@@ -195,11 +199,28 @@ impl State {
         }
     }
 
+    /// The deadline of the coming select: [`State::next_deadline`] at the
+    /// instant the last `pick` judged eligibility, or at `now` when no pick
+    /// happened since the last call (a frame was in flight, or the loop has
+    /// just started). The pick instant is used once and then forgotten.
+    ///
+    /// Using the pick's own instant means a due time is left out only if it
+    /// was already due when `pick` looked at it (and `pick` then either
+    /// sent it or could not for another reason); a time that falls due
+    /// between the pick and the select still gets its timer (DD-LINK-020).
+    fn step_deadline(&mut self, now: Instant) -> Option<Instant> {
+        let at = self.picked_at.take().unwrap_or(now);
+        self.next_deadline(at)
+    }
+
     /// The earliest of: the in-flight deadline, every expectation deadline,
     /// and, while the link is free, the `0xC2` pacing time when a `0xC2`
     /// waits for it and the keepalive due time on a `Hid` kind. Due times
-    /// are included only while still ahead, so a due time can never make the
-    /// loop spin.
+    /// are included only while still ahead of `now`, the instant the last
+    /// `pick` judged eligibility at. A due time is therefore either acted on
+    /// by that pick or given a timer, and it can make the loop wake at most
+    /// once: the next pass picks at a later instant, after which it is no
+    /// longer ahead, so it can never make the loop spin.
     fn next_deadline(&self, now: Instant) -> Option<Instant> {
         let mut times: Vec<Instant> = self.expectations.iter().map(|e| e.deadline).collect();
         match &self.in_flight {
@@ -453,8 +474,10 @@ impl State {
     }
 
     /// The first eligible candidate of DD-LINK-022, removed from the queue
-    /// when it is a queued one.
+    /// when it is a queued one. Records `now` as the instant of the last pick, for
+    /// [`State::step_deadline`].
     fn pick(&mut self, now: Instant) -> Option<Queued> {
+        self.picked_at = Some(now);
         self.drop_cancelled();
         let open = self.open_replies();
         let rules = EligibilityState {
@@ -697,5 +720,93 @@ fn answer_leftovers(
             }
             Command::SetPolling(_) => {}
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A free link over Bluetooth with the poll on and a reading at `at`.
+    fn polling_state(at: Instant) -> State {
+        State {
+            kind: Kind::Ble,
+            connected_at: at,
+            shared: Arc::new(Shared::default()),
+            events: None,
+            queue: Queue::default(),
+            in_flight: None,
+            expectations: VecDeque::new(),
+            polling: true,
+            block: false,
+            count: 0,
+            last_reply_at: Some(at),
+            last_sent_at: at,
+            picked_at: None,
+        }
+    }
+
+    /// One millisecond before the pace time of a reading at `t0`.
+    fn just_before_pace(t0: Instant) -> Instant {
+        after(t0, timing::POLL_PAUSE - Duration::from_millis(1))
+    }
+
+    /// Test: UT-LINK-030
+    ///
+    /// The pace time falls due between the pick and the later clock read
+    /// of the loop: it still gets its timer, because the deadline is
+    /// computed at the pick's instant. Computing it at the later instant,
+    /// as the loop did before, gives no deadline at all.
+    #[test]
+    fn a_pace_time_due_after_the_pick_still_gets_a_timer() {
+        let t0 = Instant::now();
+        let mut state = polling_state(t0);
+        let pace = after(t0, timing::POLL_PAUSE);
+        assert!(
+            state.pick(just_before_pace(t0)).is_none(),
+            "not yet eligible"
+        );
+        let later = after(pace, Duration::from_millis(1));
+        assert_eq!(state.next_deadline(later), None, "the old computation");
+        assert_eq!(state.step_deadline(later), Some(pace));
+    }
+
+    /// Test: UT-LINK-030
+    ///
+    /// The pick instant is used once; without a pick the deadline is
+    /// computed at the given instant.
+    #[test]
+    fn the_pick_instant_is_used_once() {
+        let t0 = Instant::now();
+        let mut state = polling_state(t0);
+        let pace = after(t0, timing::POLL_PAUSE);
+        let _ = state.pick(just_before_pace(t0));
+        assert_eq!(state.step_deadline(t0), Some(pace));
+        let later = after(pace, Duration::from_millis(1));
+        assert_eq!(state.step_deadline(later), None);
+    }
+
+    /// Test: UT-LINK-030
+    ///
+    /// A due time that `pick` could not act on for another reason (here an
+    /// open `0xC3` expectation, which keeps every `0xC2` back) produces no
+    /// deadline that is already due, so the loop cannot spin on it.
+    #[test]
+    fn a_due_time_pick_cannot_act_on_gives_no_due_deadline() {
+        let t0 = Instant::now();
+        let mut state = polling_state(t0);
+        let pace = after(t0, timing::POLL_PAUSE);
+        let (tx, _rx) = oneshot::channel();
+        state.expectations.push_back(Expectation {
+            request: telemetry::REQUEST,
+            reply: telemetry::REPLY,
+            bound: Duration::from_secs(60),
+            deadline: after(t0, Duration::from_secs(60)),
+            tx,
+        });
+        let now = after(pace, Duration::from_millis(5));
+        assert!(state.pick(now).is_none(), "held back by the expectation");
+        let deadline = state.step_deadline(now);
+        assert!(deadline.is_none_or(|d| d > now), "{deadline:?} is due");
     }
 }

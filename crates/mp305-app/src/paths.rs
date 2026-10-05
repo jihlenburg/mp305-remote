@@ -8,37 +8,19 @@
 use std::path::{Path, PathBuf};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-use directories::{ProjectDirs, UserDirs};
+use directories::UserDirs;
 use mp305_core::civil;
 
 use crate::texts;
 
-/// The state directory from what `ProjectDirs` reports: its `state_dir()`
-/// when the OS has one (Linux), else its `data_local_dir()`.
-///
-/// # Errors
-///
-/// [`texts::NO_HOME`] when the OS reports no home directory (`None`).
-pub fn state_dir_from(dirs: Option<(Option<PathBuf>, PathBuf)>) -> Result<PathBuf, String> {
-    match dirs {
-        Some((Some(state), _)) => Ok(state),
-        Some((None, data_local)) => Ok(data_local),
-        None => Err(texts::NO_HOME.to_string()),
-    }
-}
-
-/// The state directory of `ProjectDirs::from("", "", "mp305")`.
+/// The state directory: the core's rule (`mp305_core::store::default_dir`,
+/// DD-STORE-007), which the Python library uses too.
 ///
 /// # Errors
 ///
 /// [`texts::NO_HOME`] when the OS reports no home directory.
 pub fn state_dir() -> Result<PathBuf, String> {
-    state_dir_from(ProjectDirs::from("", "", "mp305").map(|dirs| {
-        (
-            dirs.state_dir().map(Path::to_path_buf),
-            dirs.data_local_dir().to_path_buf(),
-        )
-    }))
+    mp305_core::store::default_dir().ok_or_else(|| texts::NO_HOME.to_string())
 }
 
 /// Where recordings go by default: the documents directory, else the home
@@ -72,18 +54,11 @@ mod tests {
 
     /// Test: UT-APP-022
     #[test]
-    fn the_state_directory_prefers_the_state_dir() {
+    fn the_state_directory_is_the_one_of_the_core() {
         assert_eq!(
-            state_dir_from(Some((Some(PathBuf::from("/s")), PathBuf::from("/d")))),
-            Ok(PathBuf::from("/s"))
-        );
-        assert_eq!(
-            state_dir_from(Some((None, PathBuf::from("/d")))),
-            Ok(PathBuf::from("/d"))
-        );
-        assert_eq!(
-            state_dir_from(None),
-            Err("the OS reports no home directory".to_string())
+            state_dir().ok(),
+            mp305_core::store::default_dir(),
+            "the app and the library share one state directory"
         );
     }
 

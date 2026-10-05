@@ -2310,6 +2310,7 @@ name = "mp305-core"
 version = "0.1.0"
 dependencies = [
  "btleplug",
+ "directories",
  "futures",
  "getrandom 0.4.3",
  "hidapi",
@@ -2325,7 +2326,6 @@ dependencies = [
 name = "mp305-py"
 version = "0.1.0"
 dependencies = [
- "directories",
  "futures",
  "log",
  "mp305-core",

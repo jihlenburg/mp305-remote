@@ -125,5 +125,7 @@ fn a_marker_survives_reopening_the_store_and_is_gone_after_removal() {
     assert_eq!(reopened.present(identifier).unwrap(), Some(at));
     reopened.clear(identifier).unwrap();
     assert_eq!(reopened.present(identifier).unwrap(), None);
+    // The removal is written behind: another store sees it once flushed.
+    assert!(reopened.flush(Duration::from_secs(30)));
     assert_eq!(Store::new(dir.path()).present(identifier).unwrap(), None);
 }

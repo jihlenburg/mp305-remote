@@ -32,6 +32,7 @@ use futures::future::BoxFuture;
 use tokio::sync::{mpsc, oneshot, watch};
 use tokio::time::{sleep_until, Instant, Sleep};
 
+use crate::error::duration_text;
 use crate::error::Error;
 use crate::link::{DeviceEvent, Events, Link, LossReason, Outcome, Pending, Requested};
 use crate::protocol::frame::Frame;
@@ -47,8 +48,9 @@ use crate::session::state::{
     RemoteInput, RemoteMachine,
 };
 use crate::session::{
-    lock, texts, Command, CommandKind, Connector, LinkState, Markers, Priority, PromptKind,
+    lock, texts, Clock, Command, CommandKind, Connector, LinkState, Markers, Priority, PromptKind,
     ReadyState, Registration, RemoteState, SessionEvent, Shared, TimedReading, LOG_TARGET,
+    USB_MARKER_KEY,
 };
 use crate::transport::description::Kind;
 use crate::transport::guarded::Guarded;
@@ -57,6 +59,13 @@ use crate::transport::AnyTransport;
 /// The interval at which the unclean-exit marker is rewritten while the
 /// output is on (DD-SESS-042).
 const MARKER_INTERVAL: Duration = Duration::from_secs(1);
+
+/// How far the system clock may run ahead of the computed wall-clock time
+/// before the session re-anchors its reading times (DD-SESS-004). Tokio
+/// instants stop during a system sleep on macOS and Linux, while the system
+/// clock goes on; a smaller gap is clock drift or adjustment and is left
+/// alone.
+const REANCHOR_THRESHOLD: Duration = Duration::from_secs(2);
 
 /// The reason given to commands an output-off drained from the queue.
 const SUPERSEDED: &str = "superseded by an output-off";
@@ -89,6 +98,8 @@ pub(crate) struct Setup {
     pub(crate) markers: Arc<dyn Markers>,
     /// The fixed wall-clock origin, for tests.
     pub(crate) wall_origin: Option<SystemTime>,
+    /// The system clock for the re-anchoring, for tests.
+    pub(crate) clock: Option<Clock>,
     /// What the handle reads.
     pub(crate) shared: Arc<Shared>,
     /// The ready state.
@@ -122,6 +133,9 @@ enum Step {
     Sleep(Pin<Box<Sleep>>, Then),
     /// The link's close.
     CloseLink(BoxFuture<'static, Result<(), Error>>, Then),
+    /// The wait for the marker store at a close: `true` when everything
+    /// was on disk in time.
+    MarkerFlush(BoxFuture<'static, bool>, Then),
 }
 
 /// What a step resolved with.
@@ -136,6 +150,8 @@ enum Done {
     Slept,
     /// The link's close result.
     CloseLink(Result<(), Error>),
+    /// The marker store had everything on disk within the bound.
+    MarkerFlush(bool),
 }
 
 /// What a step's result is: the continuation tag of [`Step`].
@@ -175,6 +191,9 @@ enum Then {
     Release,
     /// The link closed during a close.
     CloseLink,
+    /// The marker store finished its writes, or the bound expired, during
+    /// a close.
+    MarkerFlush,
 }
 
 impl Step {
@@ -185,7 +204,8 @@ impl Step {
             | Step::Request(_, then)
             | Step::Pending(_, then)
             | Step::Sleep(_, then)
-            | Step::CloseLink(_, then) => *then,
+            | Step::CloseLink(_, then)
+            | Step::MarkerFlush(_, then) => *then,
         }
     }
 
@@ -197,6 +217,7 @@ impl Step {
             Step::Pending(fut, _) => Pin::new(fut).poll(cx).map(Done::Pending),
             Step::Sleep(fut, _) => fut.as_mut().poll(cx).map(|()| Done::Slept),
             Step::CloseLink(fut, _) => fut.as_mut().poll(cx).map(Done::CloseLink),
+            Step::MarkerFlush(fut, _) => fut.as_mut().poll(cx).map(Done::MarkerFlush),
         }
     }
 }
@@ -290,6 +311,8 @@ enum ClosePhase {
     Release,
     /// Waiting for the link's close.
     Link,
+    /// Waiting for the marker store to have everything on disk.
+    Markers,
 }
 
 /// A close in progress.
@@ -371,10 +394,16 @@ pub(super) struct Task {
     priority: mpsc::UnboundedReceiver<Priority>,
     /// The registry entry.
     registration: Registration,
-    /// The wall-clock time of `instant_origin`.
+    /// The wall-clock time of `instant_origin`; moved forward when the
+    /// system clock ran ahead (DD-SESS-004).
     wall_origin: SystemTime,
     /// The Tokio time the task started.
     instant_origin: Instant,
+    /// The system clock the reading times are re-anchored to; `None` with
+    /// a fixed wall-clock origin and no test clock, then never re-anchored.
+    clock: Option<Clock>,
+    /// The marker store's wait started at the close, with its deadline.
+    marker_flush: Option<(tokio::task::JoinHandle<bool>, Instant)>,
     /// The link, while one exists.
     link: Option<Link>,
     /// The link's events, until they ended or the link was dropped.
@@ -526,6 +555,14 @@ fn unexpected(then: Then) -> Error {
 impl Task {
     /// The task's state at start.
     fn new(setup: Setup) -> Self {
+        let clock = match (setup.clock, setup.wall_origin) {
+            (Some(clock), _) => Some(clock),
+            (None, None) => Some(SystemTime::now as Clock),
+            (None, Some(_)) => None,
+        };
+        let wall_origin = setup
+            .wall_origin
+            .unwrap_or_else(|| clock.map_or_else(SystemTime::now, |now| now()));
         Self {
             connector: setup.connector,
             identifier: setup.identifier,
@@ -538,8 +575,10 @@ impl Task {
             commands: setup.commands,
             priority: setup.priority,
             registration: setup.registration,
-            wall_origin: setup.wall_origin.unwrap_or_else(SystemTime::now),
+            wall_origin,
             instant_origin: Instant::now(),
+            clock,
+            marker_flush: None,
             link: None,
             link_events: None,
             kind: None,
@@ -789,9 +828,24 @@ impl Task {
         self.output_unknown = true;
     }
 
-    /// Calls `f` on the marker store and logs a failure at WARN.
+    /// The key of this session's unclean-exit marker, the one place that
+    /// chooses it (SR-046, DD-SESS-042): [`USB_MARKER_KEY`] for a
+    /// connection over USB, whose identifier (the HID device path) does not
+    /// survive a replug, a power cycle or a reboot; the session's
+    /// identifier otherwise. Every marker call is made after the connector
+    /// returned a transport, so the kind is known; before the first
+    /// connection the identifier is used.
+    fn marker_key(&self) -> &str {
+        match self.kind {
+            Some(Kind::Hid) => USB_MARKER_KEY,
+            Some(Kind::Ble) | None => &self.identifier,
+        }
+    }
+
+    /// Calls `f` on the marker store with the marker key and logs a failure
+    /// at WARN.
     fn marker_call(&self, what: &str, f: impl FnOnce(&dyn Markers, &str) -> Result<(), Error>) {
-        if let Err(error) = f(self.markers.as_ref(), &self.identifier) {
+        if let Err(error) = f(self.markers.as_ref(), self.marker_key()) {
             log::warn!(target: LOG_TARGET, "marker {what} failed: {error}");
         }
     }
@@ -816,6 +870,38 @@ impl Task {
         at.checked_duration_since(self.instant_origin)
             .and_then(|d| self.wall_origin.checked_add(d))
             .unwrap_or(self.wall_origin)
+    }
+
+    /// Re-anchors the wall-clock times after a system sleep (DD-SESS-004).
+    /// Tokio instants do not advance while the system sleeps (macOS,
+    /// Linux), so without this every later reading, CSV and marker time
+    /// would lag by the length of the sleep. When the system clock is ahead
+    /// of the computed wall time of now by more than
+    /// [`REANCHOR_THRESHOLD`], `wall_origin` moves forward by the
+    /// difference, so that the two agree again, and an INFO line says by
+    /// how much. It never moves back: a system clock set back by the user
+    /// must not make reading times run backwards. Without a clock (a fixed
+    /// test origin and no test clock) nothing happens.
+    fn reanchor(&mut self) {
+        let Some(clock) = self.clock else {
+            return;
+        };
+        let system = clock();
+        let computed = self.wall(Instant::now());
+        let Ok(ahead) = system.duration_since(computed) else {
+            return;
+        };
+        if ahead <= REANCHOR_THRESHOLD {
+            return;
+        }
+        if let Some(moved) = self.wall_origin.checked_add(ahead) {
+            self.wall_origin = moved;
+            log::info!(
+                target: LOG_TARGET,
+                "reading times re-anchored: the system clock ran {} ahead",
+                duration_text(ahead)
+            );
+        }
     }
 
     /// Handles one event of the link.
@@ -853,6 +939,7 @@ impl Task {
     /// failed command runs on the first fresh reading, so that it sees the
     /// command's effect.
     fn on_reading(&mut self, raw: RawReading, at: Instant) {
+        self.reanchor();
         let timed = TimedReading {
             at,
             wall: self.wall(at),
@@ -1029,7 +1116,9 @@ impl Task {
     // ----- The connect flow (DD-SESS-010 to DD-SESS-012, DD-SESS-051) -----
 
     /// Starts the connect flow; a reconnection attempt takes a new
-    /// generation. The fault comparison and `accepted` start afresh.
+    /// generation and calls [`Connector::reconnect`], the first connection
+    /// [`Connector::connect`], both with the session's identifier. The
+    /// fault comparison and `accepted` start afresh.
     fn begin_connect(&mut self, reconnect: bool) {
         if reconnect {
             self.new_generation();
@@ -1039,7 +1128,13 @@ impl Task {
         let connector = Arc::clone(&self.connector);
         let identifier = self.identifier.clone();
         self.step = Some(Step::Connect(
-            Box::pin(async move { connector.connect(&identifier).await }),
+            Box::pin(async move {
+                if reconnect {
+                    connector.reconnect(&identifier).await
+                } else {
+                    connector.connect(&identifier).await
+                }
+            }),
             Then::Connector,
         ));
         self.op = Some(Op::Connect(ConnectOp {
@@ -1215,7 +1310,7 @@ impl Task {
             self.reading = Some((raw, at));
         }
         if !op.reconnect {
-            match self.markers.present(&self.identifier) {
+            match self.markers.present(self.marker_key()) {
                 Ok(Some(since)) => {
                     self.marker_active = true;
                     self.emit(SessionEvent::UncleanExitWarning {
@@ -2547,14 +2642,54 @@ impl Task {
                 if let Done::CloseLink(Err(error)) = done {
                     self.close_failed(error);
                 }
+                self.await_markers();
+            }
+            (ClosePhase::Markers, _) => {
+                if !matches!(done, Done::MarkerFlush(true)) {
+                    log::warn!(
+                        target: LOG_TARGET,
+                        "close: the marker store did not finish writing within {}",
+                        duration_text(timing::CLOSE)
+                    );
+                }
                 self.finish_close();
             }
         }
     }
 
+    /// Starts the wait for the marker store, after the close's final clear
+    /// (DD-SESS-053): [`Markers::flush`] with the bound `timing::CLOSE` on a
+    /// blocking thread, so that a slow disk never stalls the task. It runs
+    /// while the link closes; [`Task::await_markers`] collects it.
+    fn start_marker_flush(&mut self) {
+        let markers = Arc::clone(&self.markers);
+        let handle = tokio::task::spawn_blocking(move || markers.flush(timing::CLOSE));
+        self.marker_flush = Some((handle, after(Instant::now(), timing::CLOSE)));
+    }
+
+    /// Waits for the marker store's flush as the last step of the close,
+    /// at most until `timing::CLOSE` after it started; then (e).
+    fn await_markers(&mut self) {
+        let Some((handle, deadline)) = self.marker_flush.take() else {
+            self.finish_close();
+            return;
+        };
+        let wait = async move {
+            matches!(
+                tokio::time::timeout_at(deadline, handle).await,
+                Ok(Ok(true))
+            )
+        };
+        self.step = Some(Step::MarkerFlush(Box::pin(wait), Then::MarkerFlush));
+        self.op = Some(Op::Close(CloseOp {
+            phase: ClosePhase::Markers,
+        }));
+    }
+
     /// (c) the marker, in `Ready` only: cleared unless the close was to
     /// switch the output off and could not confirm it, or its output-off
-    /// cleared it already; then (d) the link's close.
+    /// cleared it already; then the wait for the marker store starts, and
+    /// (d) the link's close runs while it waits.
     fn close_link(&mut self) {
         let cleared = self
             .close_started_at
@@ -2570,6 +2705,7 @@ impl Task {
                 self.clear_marker();
             }
         }
+        self.start_marker_flush();
         self.link_events = None;
         match self.link.take() {
             Some(link) => {
@@ -2578,7 +2714,7 @@ impl Task {
                     phase: ClosePhase::Link,
                 }));
             }
-            None => self.finish_close(),
+            None => self.await_markers(),
         }
     }
 

@@ -13,7 +13,6 @@ use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::Instant;
 
-use directories::ProjectDirs;
 use mp305_core::error::Error;
 use mp305_core::protocol::ops::bind::HostId;
 use mp305_core::protocol::units::Limits;
@@ -37,20 +36,15 @@ use crate::wait;
 /// The log target of the native session.
 const LOG_TARGET: &str = "mp305_py::session";
 
-/// The default state directory of the user: `ProjectDirs` for `mp305`, its
-/// state directory where the OS has one (Linux), else its local data
-/// directory (macOS, Windows). The app uses the same directories.
+/// The default state directory of the user: the core's rule
+/// (`mp305_core::store::default_dir`), which the app uses too, so one user
+/// has one host ID and one marker directory.
 ///
 /// # Errors
 ///
 /// A text when the OS gives no home directory.
 pub fn default_dir() -> Result<PathBuf, &'static str> {
-    let dirs =
-        ProjectDirs::from("", "", "mp305").ok_or("no home directory for the state directory")?;
-    Ok(dirs
-        .state_dir()
-        .unwrap_or_else(|| dirs.data_local_dir())
-        .to_path_buf())
+    mp305_core::store::default_dir().ok_or("no home directory for the state directory")
 }
 
 /// `default_state_dir() -> pathlib.Path`.

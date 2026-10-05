@@ -151,22 +151,30 @@ mod tests {
     }
 
     /// Test: UT-STORE-007
+    ///
+    /// The write is behind: `set` returns `Ok`, and the writer thread logs
+    /// the failure at WARN with the error text the synchronous `set`
+    /// returned (`marker set failed: store: <path>: <os error>`).
     #[test]
     fn set_fails_when_the_markers_directory_is_a_file() {
-        use crate::error::Error;
         use crate::session::Markers;
-        use crate::store::Store;
+        use crate::store::{Store, LOG_TARGET};
+        use crate::transport::test_log;
 
+        let log = test_log::install();
         let dir = tempfile::tempdir().unwrap();
         let markers = dir.path().join("markers");
         fs::write(&markers, b"x").unwrap();
-        let result = Store::new(dir.path()).set("a", std::time::UNIX_EPOCH);
-        let Err(error @ Error::Store { .. }) = result else {
-            panic!("expected Error::Store, got {result:?}");
-        };
-        let text = error.to_string();
-        assert!(text.starts_with("store: "), "{text}");
-        assert!(text.contains(&markers.display().to_string()), "{text}");
+        let store = Store::new(dir.path());
+        assert_eq!(store.set("a", std::time::UNIX_EPOCH), Ok(()));
+        assert!(store.flush(std::time::Duration::from_secs(30)));
+        let prefix = format!("marker set failed: store: {}: ", markers.display());
+        let warned = log
+            .lines(LOG_TARGET)
+            .into_iter()
+            .filter(|(level, text)| *level == log::Level::Warn && text.starts_with(&prefix))
+            .count();
+        assert_eq!(warned, 1);
         assert_eq!(fs::read(&markers).unwrap(), b"x");
     }
 

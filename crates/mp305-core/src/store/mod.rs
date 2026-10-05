@@ -4,10 +4,13 @@
 //! The per-installation state on disk: the 16-byte host ID the bind
 //! presents (SR-049) and one unclean-exit marker per supply identifier
 //! (SR-046). [`Store`] implements [`Markers`] for the session and hands the
-//! host ID to the product, which passes it to `Session::connect`.
+//! host ID to the product, which passes it to `Session::connect`. Marker
+//! writes happen behind the caller, on a writer thread of the store
+//! (`behind`).
 //!
 //! The product chooses the directory (AR-033); the store never decides a
-//! path itself. The layout under it:
+//! path itself. [`default_dir`] is the one rule the products use for the
+//! default. The layout under it:
 //!
 //! | File | Content |
 //! |---|---|
@@ -22,17 +25,20 @@
 //! a corrupt marker is dropped with a warning, since a marker is advisory
 //! (UR-030).
 
+pub(crate) mod behind;
 pub(crate) mod files;
 pub mod names;
 
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use crate::error::Error;
 use crate::protocol::ops::bind::HostId;
 use crate::session::Markers;
+use behind::{Behind, Op};
 
 /// The log target of the store (DD-STORE-006).
 pub const LOG_TARGET: &str = "mp305_core::store";
@@ -52,7 +58,16 @@ const GENERATE_ATTEMPTS: usize = 3;
 /// unclean-exit markers.
 ///
 /// Nothing is cached: every call reads or writes the files, so the app and
-/// a script that share a directory see each other's changes.
+/// a script that share a directory see each other's changes. The one
+/// exception is the write-behind of the markers: `set` and `clear` queue
+/// their operation and return at once, and a writer thread of the store
+/// applies the operations in order, the latest pending one per identifier
+/// replacing an older one that has not started. `present` answers from a
+/// queued or running operation of its identifier, so a read through the
+/// same store (or a clone) observes every earlier `set` and `clear`;
+/// another process sees them once they are on disk. `Markers::flush` waits
+/// until they are; dropping the last clone waits up to 5 s for that and
+/// then leaves the thread to finish alone.
 ///
 /// ```
 /// use mp305_core::session::Markers;
@@ -69,14 +84,21 @@ const GENERATE_ATTEMPTS: usize = 3;
 pub struct Store {
     /// The directory the product chose; created on the first write.
     dir: PathBuf,
+    /// The write-behind of the markers, shared by the clones.
+    behind: Arc<Behind>,
 }
 
 impl Store {
-    /// A store in `dir`. Does no I/O: the directory and its `markers`
-    /// subdirectory are created on the first write that needs them.
+    /// A store in `dir`. Does no I/O and starts no thread: the directory
+    /// and its `markers` subdirectory are created on the first write that
+    /// needs them, the writer thread with the first `set` or `clear`.
     #[must_use]
     pub fn new(dir: impl Into<PathBuf>) -> Store {
-        Store { dir: dir.into() }
+        let dir = dir.into();
+        Store {
+            behind: Arc::new(Behind::new(dir.clone(), apply)),
+            dir,
+        }
     }
 
     /// The host ID of this installation (SR-049): read from `host_id` on
@@ -115,12 +137,7 @@ impl Store {
 
     /// The marker file for `identifier`, and its name for the log.
     fn marker_path(&self, identifier: &str) -> (PathBuf, String) {
-        let name = names::marker_name(identifier);
-        let path = self
-            .dir
-            .join(MARKERS_DIR)
-            .join(format!("{name}.{MARKER_EXTENSION}"));
-        (path, name)
+        marker_path(&self.dir, identifier)
     }
 }
 
@@ -310,9 +327,15 @@ impl Markers for Store {
     /// one is also removed, while a file of another identifier whose name
     /// collided is left alone. An identifier that cannot be stored
     /// ([`names::storable`]) has no marker: `None`, and no file is touched.
+    /// While a `set` or `clear` of `identifier` is queued or running, its
+    /// result is the answer (the time in whole seconds, or `None`) and the
+    /// file is not read.
     fn present(&self, identifier: &str) -> Result<Option<SystemTime>, Error> {
         if names::storable(identifier).is_err() {
             return Ok(None);
+        }
+        if let Some(op) = self.behind.latest(identifier) {
+            return Ok(op.present());
         }
         let (path, _) = self.marker_path(identifier);
         let content = match fs::read(&path) {
@@ -346,43 +369,102 @@ impl Markers for Store {
         }
     }
 
-    /// Writes the marker for `identifier` in one step: `at` in whole
-    /// seconds since the Unix epoch (a time before the epoch as 0) and the
-    /// identifier. Creates the directories if needed. An identifier that
-    /// cannot be stored ([`names::storable`]) is [`Error::Store`]
-    /// `marker identifier <identifier, Debug form> cannot be stored:
-    /// <reason>`, and nothing is written.
+    /// Queues the write of the marker for `identifier` and returns at once
+    /// (write-behind, see [`Store`]): `at` in whole seconds since the Unix
+    /// epoch (a time before the epoch as 0) and the identifier, written in
+    /// one step by the writer thread, which creates the directories if
+    /// needed and logs a failure at WARN (`marker set failed: <error>`). An
+    /// identifier that cannot be stored ([`names::storable`]) is
+    /// [`Error::Store`] `marker identifier <identifier, Debug form> cannot
+    /// be stored: <reason>`, and nothing is queued.
     fn set(&self, identifier: &str, at: SystemTime) -> Result<(), Error> {
         names::storable(identifier).map_err(|reason| Error::Store {
             message: format!("marker identifier {identifier:?} cannot be stored: {reason}"),
         })?;
-        let seconds = at.duration_since(UNIX_EPOCH).map_or(0, |d| d.as_secs());
-        let markers = self.dir.join(MARKERS_DIR);
-        fs::create_dir_all(&markers).map_err(|e| io_error(&markers, &e))?;
-        let (path, name) = self.marker_path(identifier);
-        files::write_atomic(&path, format!("{seconds}\n{identifier}\n").as_bytes())
-            .map_err(|e| io_error(&path, &e))?;
-        log::debug!(target: LOG_TARGET, "marker set {name}");
-        Ok(())
+        self.behind.submit(identifier, Op::Set(at))
     }
 
-    /// Removes the marker for `identifier`; a missing one is not an error.
-    /// An identifier that cannot be stored ([`names::storable`]) has no
-    /// marker: `Ok`, and no file is touched.
+    /// Queues the removal of the marker for `identifier` and returns at
+    /// once (write-behind, see [`Store`]); the writer thread treats a
+    /// missing file as removed and logs any other failure at WARN (`marker
+    /// clear failed: <error>`). An identifier that cannot be stored
+    /// ([`names::storable`]) has no marker: `Ok`, and nothing is queued.
     fn clear(&self, identifier: &str) -> Result<(), Error> {
         if names::storable(identifier).is_err() {
             return Ok(());
         }
-        let (path, name) = self.marker_path(identifier);
-        match fs::remove_file(&path) {
+        self.behind.submit(identifier, Op::Clear)
+    }
+
+    /// Waits up to `bound` until every `set` and `clear` made so far
+    /// through this store or a clone of it is on disk.
+    fn flush(&self, bound: Duration) -> bool {
+        self.behind.flush(bound)
+    }
+}
+
+/// Applies one marker operation to the store in `dir`, synchronously: the
+/// writer thread's work (DD-STORE-004).
+///
+/// # Errors
+///
+/// [`Error::Store`] with the path and the OS error text when a directory
+/// cannot be created, the file cannot be written or removed (a missing
+/// file is removed already).
+fn apply(dir: &Path, identifier: &str, op: Op) -> Result<(), Error> {
+    let (path, name) = marker_path(dir, identifier);
+    match op {
+        Op::Set(at) => {
+            let seconds = at.duration_since(UNIX_EPOCH).map_or(0, |d| d.as_secs());
+            let markers = dir.join(MARKERS_DIR);
+            fs::create_dir_all(&markers).map_err(|e| io_error(&markers, &e))?;
+            files::write_atomic(&path, format!("{seconds}\n{identifier}\n").as_bytes())
+                .map_err(|e| io_error(&path, &e))?;
+            log::debug!(target: LOG_TARGET, "marker set {name}");
+            Ok(())
+        }
+        Op::Clear => match fs::remove_file(&path) {
             Ok(()) => {
                 log::debug!(target: LOG_TARGET, "marker cleared {name}");
                 Ok(())
             }
             Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(()),
             Err(error) => Err(io_error(&path, &error)),
-        }
+        },
     }
+}
+
+/// The marker file for `identifier` in the store at `dir`, and its name
+/// for the log.
+fn marker_path(dir: &Path, identifier: &str) -> (PathBuf, String) {
+    let name = names::marker_name(identifier);
+    let path = dir
+        .join(MARKERS_DIR)
+        .join(format!("{name}.{MARKER_EXTENSION}"));
+    (path, name)
+}
+
+/// The default state directory of the user, the one rule for the app and
+/// the Python library: of `directories::ProjectDirs::from("", "", "mp305")`,
+/// its state directory where the OS has one (Linux:
+/// `$XDG_STATE_HOME/mp305` or `~/.local/state/mp305`), else its local data
+/// directory (macOS: `~/Library/Application Support/mp305`, Windows:
+/// `%LOCALAPPDATA%\mp305\data`). `None` when the OS reports no home
+/// directory. Does no I/O beyond reading the environment.
+#[must_use]
+pub fn default_dir() -> Option<PathBuf> {
+    directories::ProjectDirs::from("", "", "mp305").map(|dirs| {
+        choose_dir(
+            dirs.state_dir().map(Path::to_path_buf),
+            dirs.data_local_dir().to_path_buf(),
+        )
+    })
+}
+
+/// The choice of [`default_dir`]: `state` where the OS has a state
+/// directory, else `data_local`.
+fn choose_dir(state: Option<PathBuf>, data_local: PathBuf) -> PathBuf {
+    state.unwrap_or(data_local)
 }
 
 #[cfg(test)]
@@ -399,6 +481,9 @@ mod tests {
 
     /// 2026-10-01T10:00:00Z in seconds since the Unix epoch.
     const AT: u64 = 1_790_848_800;
+    /// The bound of a test's wait for the writer thread: generous, since a
+    /// test only waits as long as the writes take.
+    const FLUSH: Duration = Duration::from_secs(30);
     /// WebLink's constant host ID (DD-PROTO), as hex.
     const WEBLINK_HEX: &str = "00080808080808080808080808080800";
     /// WebLink's constant host ID (DD-PROTO).
@@ -495,6 +580,8 @@ mod tests {
         let store = open();
         assert_eq!(store.present("a").unwrap(), None);
         store.set("a", at(AT)).unwrap();
+        // The write is behind: on disk once flushed.
+        assert!(store.flush(FLUSH));
         let file = dir.join("markers").join("a-af63dc4c8601ec8c.marker");
         assert_eq!(fs::read(&file).unwrap(), b"1790848800\na\n");
         assert_eq!(store.present("a").unwrap(), Some(at(AT)));
@@ -503,6 +590,7 @@ mod tests {
         reopened.clear("a").unwrap();
         assert_eq!(reopened.present("a").unwrap(), None);
         reopened.clear("a").unwrap();
+        assert!(reopened.flush(FLUSH));
         assert!(!file.exists());
     }
 
@@ -685,6 +773,7 @@ mod tests {
 
         let before_epoch = UNIX_EPOCH - Duration::from_secs(1);
         store.set("c", before_epoch).unwrap();
+        assert!(store.flush(FLUSH));
         assert_eq!(fs::read(marker_file(dir.path(), "c")).unwrap(), b"0\nc\n");
         assert_eq!(store.present("c").unwrap(), Some(UNIX_EPOCH));
 
@@ -823,6 +912,58 @@ mod tests {
             text.contains(&getrandom::Error::UNSUPPORTED.to_string()),
             "{text}"
         );
+    }
+
+    /// Test: UT-STORE-012
+    ///
+    /// Through the real files: reads see the queued operations at once,
+    /// clones share the writer, and dropping the last clone leaves every
+    /// operation on disk.
+    #[test]
+    fn markers_are_written_behind_and_drained_at_the_drop() {
+        let dir = tempfile::tempdir().unwrap();
+        let store = Store::new(dir.path());
+        let clone = store.clone();
+        for n in 0..10 {
+            store.set("a", at(AT + n)).unwrap();
+            assert_eq!(clone.present("a").unwrap(), Some(at(AT + n)));
+        }
+        store.set("b", at(AT)).unwrap();
+        clone.clear("b").unwrap();
+        assert_eq!(store.present("b").unwrap(), None);
+        store.set("c", at(AT)).unwrap();
+        drop(store);
+        drop(clone);
+        assert_eq!(
+            fs::read(marker_file(dir.path(), "a")).unwrap(),
+            b"1790848809\na\n"
+        );
+        assert!(!marker_file(dir.path(), "b").exists());
+        assert_eq!(
+            fs::read(marker_file(dir.path(), "c")).unwrap(),
+            b"1790848800\nc\n"
+        );
+        let reopened = Store::new(dir.path());
+        assert_eq!(reopened.present("a").unwrap(), Some(at(AT + 9)));
+        assert!(reopened.flush(FLUSH), "nothing pending");
+    }
+
+    /// Test: UT-STORE-013
+    #[test]
+    fn the_default_directory_prefers_the_state_directory() {
+        let state = PathBuf::from("/home/u/.local/state/mp305");
+        let data = PathBuf::from("/home/u/.local/share/mp305");
+        assert_eq!(choose_dir(Some(state.clone()), data.clone()), state);
+        assert_eq!(choose_dir(None, data.clone()), data);
+        if let Some(dirs) = directories::ProjectDirs::from("", "", "mp305") {
+            let expected = dirs
+                .state_dir()
+                .unwrap_or_else(|| dirs.data_local_dir())
+                .to_path_buf();
+            assert_eq!(default_dir(), Some(expected));
+        } else {
+            assert_eq!(default_dir(), None);
+        }
     }
 
     /// Test: UT-STORE-010
