@@ -1,0 +1,10 @@
+[package]
+name = "hidapi_macos_thread"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+hidapi = "2.6"
+mp305-core = { path = "../../crates/mp305-core" }
+tokio = { version = "1", features = ["rt"] }

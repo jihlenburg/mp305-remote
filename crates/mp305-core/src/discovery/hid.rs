@@ -5,12 +5,15 @@
 //! Nothing decidable lives here; the classification is in `classify` and
 //! the connect plan in `classify::connect_plan`.
 //!
-//! Every call builds a fresh `HidApi::new()` inside `spawn_blocking`
-//! (enumeration can be slow on Windows because of the stalling serial
-//! request, TBD-013), so no context is stored and no `std::sync` guard is
-//! ever held across an `.await`. `HidApi::new_without_enumerate` is never
-//! used: it sets a process-wide flag and panics after an enumerating
-//! context exists.
+//! Every call builds a fresh `HidApi::new()` on the one owner thread of
+//! `hid_owner`, never on a thread of Tokio's blocking pool: on macOS
+//! `hidapi` ties its process-wide device manager to the thread that first
+//! used it, and that thread must not end (see `hid_owner`). The calls are
+//! awaited, so a slow enumeration (Windows, the stalling serial request,
+//! TBD-013) blocks no runtime thread, no context is stored and no
+//! `std::sync` guard is ever held across an `.await`.
+//! `HidApi::new_without_enumerate` is never used: it sets a process-wide
+//! flag and panics after an enumerating context exists.
 //!
 //! Coverage: this file is excluded from the measurement under ADR-0014.
 //! Every function is verified by inspection (UT-DISC-011), the
@@ -21,9 +24,9 @@ use std::collections::BTreeSet;
 use std::ffi::{CStr, CString};
 
 use hidapi::HidApi;
-use tokio::task::{spawn_blocking, JoinError};
+use tokio::runtime::Handle;
 
-use crate::discovery::{classify, Found, LOG_TARGET};
+use crate::discovery::{classify, hid_owner, Found, LOG_TARGET};
 use crate::error::Error;
 use crate::transport::guarded::Guarded;
 use crate::transport::AnyTransport;
@@ -41,21 +44,10 @@ fn transport_error(error: hidapi::HidError) -> Error {
     }
 }
 
-/// Maps a failed blocking task to the crate error. (ADR-0014: inspection
-/// UT-DISC-011.)
-fn join_error(error: JoinError) -> Error {
-    Error::Transport {
-        message: format!("HID task failed: {error}"),
-    }
-}
-
 /// Probes the USB side: whether a `hidapi` context can be built. A failure
 /// is logged at WARN. (ADR-0014: inspection UT-DISC-010, ST-003.)
 pub(crate) async fn available() -> bool {
-    let probe = spawn_blocking(|| HidApi::new().map(drop).map_err(transport_error))
-        .await
-        .map_err(join_error)
-        .and_then(|outcome| outcome);
+    let probe = hid_owner::run(|| HidApi::new().map(drop).map_err(transport_error)).await;
     match probe {
         Ok(()) => true,
         Err(error) => {
@@ -65,16 +57,16 @@ pub(crate) async fn available() -> bool {
     }
 }
 
-/// Enumerates the HID devices with a fresh context inside `spawn_blocking`,
+/// Enumerates the HID devices with a fresh context on the owner thread,
 /// de-duplicated by path text, first entry kept. (ADR-0014: inspection
 /// UT-DISC-011, ST-003.)
 ///
 /// # Errors
 ///
-/// [`Error::Transport`] when the context cannot be built or the blocking
-/// task fails.
+/// [`Error::Transport`] when the context cannot be built or the owner
+/// thread does not answer.
 pub(crate) async fn enumerate() -> Result<Vec<Enumerated>, Error> {
-    spawn_blocking(|| {
+    hid_owner::run(|| {
         let api = HidApi::new().map_err(transport_error)?;
         let mut paths = BTreeSet::new();
         Ok(api
@@ -92,7 +84,6 @@ pub(crate) async fn enumerate() -> Result<Vec<Enumerated>, Error> {
             .collect())
     })
     .await
-    .map_err(join_error)?
 }
 
 /// The USB scan: the enumeration fed through `classify::hid` with vendor,
@@ -113,19 +104,25 @@ pub(crate) async fn scan() -> Result<Vec<Found>, Error> {
 }
 
 /// Opens the device at `path` (the `CString` the enumeration returned)
-/// through `Guarded::open_hid`, with a fresh context, inside
-/// `spawn_blocking`. (ADR-0014: inspection UT-DISC-011, ST-003.)
+/// through `Guarded::open_hid`, with a fresh context, on the owner thread.
+/// The owner thread belongs to no runtime, so the work enters the caller's
+/// runtime, which the transport's reader needs. (ADR-0014: inspection
+/// UT-DISC-011, ST-003.)
 ///
 /// # Errors
 ///
-/// [`Error::Transport`] when the context cannot be built, the device cannot
-/// be opened, or the blocking task fails.
+/// [`Error::Transport`] when no Tokio runtime is current, the context
+/// cannot be built, the device cannot be opened, or the owner thread does
+/// not answer.
 pub(crate) async fn open(path: &CStr) -> Result<Guarded<AnyTransport>, Error> {
     let path = path.to_owned();
-    spawn_blocking(move || {
+    let runtime = Handle::try_current().map_err(|_| Error::Transport {
+        message: "no Tokio runtime for the HID reader".to_string(),
+    })?;
+    hid_owner::run(move || {
+        let _entered = runtime.enter();
         let api = HidApi::new().map_err(transport_error)?;
         Guarded::open_hid(&api, &path)
     })
     .await
-    .map_err(join_error)?
 }

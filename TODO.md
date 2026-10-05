@@ -105,6 +105,17 @@ load; Windows on hardware; the over-current and load tests; the stray
 "Shouldn't get anything but Ok!" that the Bluetooth library logs at
 close on macOS.
 
+- [x] Fix the app's crash in the USB enumeration on macOS (found
+      2026-10-05, a use of freed memory inside `hidapi` after the thread
+      that first used it ended): every `hidapi` context call on one owner
+      thread, implemented and checked 2026-10-05 (discovery DD revision 8,
+      DD-DISC-013, UT-DISC-012; `spikes/hidapi_macos_thread`). Approved by
+      the user and committed 2026-10-05, tag `g4-discovery-rev8-approved`.
+      The app with its current screens has not yet run on the supply with
+      the fix
+- [ ] Code review of the library and the app (asked for by the user on
+      2026-10-05, started 2026-10-05)
+
 ## Phase status
 
 | Gate | Level | Status |

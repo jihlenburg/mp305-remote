@@ -3528,3 +3528,61 @@ including the user's Retro startup choice and compact-frame refinements.
 The remote accepted both refs in one atomic push. The separate HID source
 changes, spike and their local traceability defect remain uncommitted.
 Updated TODO.md and the commit verification record with the published hash.
+
+### The app crashes in the USB enumeration
+
+During the hands-on check over USB the app ended right after a click on a
+supply. The crash report of macOS (`mp305-app-2026-10-05-074244.ips`, kept
+on the Mac, not in the repository) shows a trap on a thread of the app's
+Tokio blocking pool: `hid_enumerate`, `IOHIDManagerSetDeviceMatchingMultiple`,
+`IOHIDDeviceScheduleWithRunLoop`, `CFRunLoopAddSource`, and there a failed
+check of the run loop object.
+
+Cause, read from the source of `hidapi` 2.6.7 (`mac/hid.c`): the library
+keeps one `IOHIDManager` for the process and schedules it on the run loop
+of the thread that initialises it. The Rust crate never calls `hid_exit`.
+`mp305-core` built a fresh `HidApi::new()` inside `spawn_blocking` for
+every probe, enumeration and open (DD-DISC-013 as approved). Tokio ends a
+thread of its blocking pool after 10 s without work, the run loop of that
+thread is freed, and the next enumeration schedules the devices on the
+freed run loop. It crashes only when the allocator has reused the memory,
+which a window program does quickly and a short script rarely: two tries
+from the Python library, one with scans 14 s apart, did not crash.
+
+Reproduced on demand with `spikes/hidapi_macos_thread` under Guard Malloc
+(`DYLD_INSERT_LIBRARIES=/usr/lib/libgmalloc.dylib`), which unmaps freed
+memory (macOS 27.0.1, arm64): a new thread per enumeration faults in the
+second round; one thread that lives on passes six rounds; so does keeping
+the first thread alive. The USB scan of `mp305-core` at commit `2528dab`,
+called from threads that end, faults in the second round.
+
+Fix, not committed: `discovery/hid_owner.rs`, one thread named
+`mp305-hidapi` that is started at the first call, never ends, and runs
+every `hidapi` context call (probe, enumeration, open) one after the other;
+the callers await the result. The open enters the caller's runtime on that
+thread, because the transport's reader needs one. Discovery DD revision 8
+describes it (DD-DISC-013, with DD-DISC-010 and DD-DISC-011 following,
+UT-DISC-011 changed, UT-DISC-012 new); the items are set to `changed` and
+wait for the user's approval. The code went in before that approval, to
+get the app usable at the bench the same day; nothing is committed.
+
+Checked with the fix: the spike's `library` mode passes six rounds under
+Guard Malloc and finds the supply over USB each time; the three tests of
+UT-DISC-012 pass; `cargo fmt --check`, both clippy runs and `cargo test
+--workspace` (529 passed) and `pytest` (201 passed, 1 skipped) are clean.
+On the supply over USB (MP305B 1.6.0.51, the unit of "USB and the app meet
+the real supply"): through the Python library a scan, a scan from a second
+thread, a connect, one reading, the close and another scan, with nothing
+set and the output off; and a release build of the app from the working
+tree of that morning, driven by synthetic clicks, connected by a click
+more than 20 s after its scan, showed readings and disconnected with the
+release accepted. That is the situation that crashed before.
+
+### Discovery DD revision 8 approved
+
+The user approved revision 8 of the discovery DD on 2026-10-05
+("approved, go ahead with the new commit"): DD-DISC-013 with DD-DISC-010
+and DD-DISC-011, UT-DISC-011 and the new UT-DISC-012. The approved
+documents and the fix are in the commit that carries this entry, tagged
+`g4-discovery-rev8-approved`. The user chose a new commit on top of
+`0678e81` over an amended one.

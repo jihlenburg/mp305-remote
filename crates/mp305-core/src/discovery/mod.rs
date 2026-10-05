@@ -15,6 +15,7 @@
 mod ble;
 pub mod classify;
 mod hid;
+mod hid_owner;
 
 use core::fmt;
 use core::time::Duration;
