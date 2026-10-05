@@ -93,8 +93,10 @@ acceptance matrices, which are backlog (the sections below).
 - [x] Persistent app names for multiple supplies (2026-10-05):
       exact transport and OS identity (macOS USB names also scoped to the
       host boot), app DD revision 5 approved, save/reopen/error and UI tests pass
-- [ ] Resolve the pre-existing UT-DISC-012 traceability defect in the
-      separate uncommitted HID owner-thread work (found 2026-10-05)
+- [x] Resolve the pre-existing UT-DISC-012 traceability defect in the
+      separate uncommitted HID owner-thread work (found 2026-10-05): its
+      specification entry came with the commit of that work, `e30ee35`, on
+      2026-10-05
 - [ ] Fix what the checks find
 - [ ] Build the release artifacts (wheels, the app)
 - [ ] README: what was checked on hardware and what was not
@@ -119,49 +121,89 @@ close on macOS.
       `mp305-app`; 15 findings, listed below, none fixed yet. Which of
       them are fixed before 0.1.0 is the user's decision; a fix that
       changes a DD item needs the approval first
-- Findings of the code review of 2026-10-05 (open; "checked" means the
-  cited code was read again in the main session):
-  - [ ] R1 `link/task.rs:209`: a poll time that falls due between the
+- Findings of the code review of 2026-10-05 ("checked" means the cited
+  code was read again in the main session). The user asked on 2026-10-05
+  for all of them to be fixed and left the how and the order to the
+  session; the fixes started 2026-10-05 and were finished, checked and
+  committed on 2026-10-06 (LOGBOOK 2026-10-06, "The findings of the code
+  review fixed"):
+  - [x] R1 `link/task.rs:209`: a poll time that falls due between the
         send step and `next_deadline` gets no timer; over Bluetooth
         polling then stops until a command arrives (checked, rare)
-  - [ ] R2 `python/mp305/device.py:254`: `Mp305.connect()` without an
+        Done: fixed 2026-10-06: the deadline uses the instant of the last pick
+        (link DD revision 5)
+  - [x] R2 `python/mp305/device.py:254`: `Mp305.connect()` without an
         identifier refuses a supply that is on USB and also advertises,
         as "several supplies" (checked; the app's scan of 2026-10-05
         listed the one unit twice)
-  - [ ] R3 `discovery/mod.rs:313`: the USB identifier is the HID path,
+        Done: fixed 2026-10-06, strictly: `connect` still refuses the pair
+        (SR-004) but explains it and takes `bluetooth=` and `usb=` (py DD
+        revision 8); seen on the supply
+  - [x] R3 `discovery/mod.rs:313`: the USB identifier is the HID path,
         which changes at every plug on macOS, so reconnection and the
         unclean-exit marker over USB miss the supply afterwards
-  - [ ] R4 `discovery/ble.rs:275`: one failing `properties()` read fails
+        Done: fixed 2026-10-06: a reconnection accepts a changed USB path when
+        exactly one MP305B is listed, a first connect stays exact, and USB
+        links share one marker key (discovery DD revision 9, session DD
+        revision 7). Not tried with a replug on hardware
+  - [x] R4 `discovery/ble.rs:275`: one failing `properties()` read fails
         the whole Bluetooth scan (checked)
-  - [ ] R5 `mp305-app/src/ui/widgets.rs:300`: Enter in an unedited
+        Done: fixed 2026-10-06: the peripheral is skipped with a DEBUG line
+        (discovery DD revision 9)
+  - [x] R5 `mp305-app/src/ui/widgets.rs:300`: Enter in an unedited
         setpoint field sends the setpoint although Set is disabled
         (checked)
-  - [ ] R6 `discovery/hid_owner.rs:91`: no bound on the wait for the
+        Done: fixed 2026-10-06: `apply_enabled` requires an edited field, for
+        the button and for Enter (app DD revision 7)
+  - [x] R6 `discovery/hid_owner.rs:91`: no bound on the wait for the
         owner thread, so one stalled `hidapi` call holds every later USB
         call and the scan (checked; came with the fix of 2026-10-05)
-  - [ ] R7 `session/task.rs:915`: the marker is rewritten with a full
+        Done: fixed 2026-10-06: every wait for the owner thread is bounded by
+        `FIND` or `CONNECT` (discovery DD revision 9)
+  - [x] R7 `session/task.rs:915`: the marker is rewritten with a full
         sync once per second on the session task while the output is on,
         which can delay Output OFF on a slow disk
-  - [ ] R8 `session/task.rs:815`: reading times are the start time plus
+        Done: fixed 2026-10-06: the store writes markers behind on its own
+        thread, and the close waits for it, bounded (store DD revision 5,
+        session DD revision 7)
+  - [x] R8 `session/task.rs:815`: reading times are the start time plus
         a monotonic clock that stands still during system sleep, so they
         fall behind after a sleep the session survives (checked)
-  - [ ] R9 `transport/ble.rs:96`: the MTU check reads the value once and
+        Done: fixed 2026-10-06: reading times are re-anchored when the system
+        clock ran more than 2 s ahead (session DD revision 7)
+  - [x] R9 `transport/ble.rs:96`: the MTU check reads the value once and
         takes `btleplug`'s default of 23 for a negotiated one (Windows,
         old BlueZ; not reproduced)
-  - [ ] R10 `discovery/mod.rs:206`: `Discovery::new` always starts
+        Done: fixed 2026-10-06 from the `btleplug` sources: the MTU is read
+        again for 1 s and a reported 23 no longer refuses the link (transport
+        DD revision 10). Not reproduced on hardware
+  - [x] R10 `discovery/mod.rs:206`: `Discovery::new` always starts
         Bluetooth, also for USB-only use, and no text says "Bluetooth is
         off on this computer"
-  - [ ] R11 `mp305-app/src/model.rs:1109`: the limit notice uses the
+        Done: fixed 2026-10-06: Bluetooth starts on first need, a missing
+        adapter is looked up again, and a switched-off radio is named
+        (discovery DD revision 9)
+  - [x] R11 `mp305-app/src/model.rs:1109`: the limit notice uses the
         rated range where the core accepts the firmware's wider one
-  - [ ] R12 `discovery/hid.rs:124`: a USB connect enumerates every HID
+        Done: fixed 2026-10-06: the app uses the core's `check_copied` (app DD
+        revision 7)
+  - [x] R12 `discovery/hid.rs:124`: a USB connect enumerates every HID
         device twice
-  - [ ] R13 `mp305-py/src/session.rs:47` and `mp305-app/src/paths.rs:35`:
+        Done: fixed 2026-10-06: one job and one enumeration per USB connect
+        (discovery DD revision 9)
+  - [x] R13 `mp305-py/src/session.rs:47` and `mp305-app/src/paths.rs:35`:
         the state directory rule exists twice
-  - [ ] R14 `transport/hid.rs:161`: `Hid::open` asks for a Tokio runtime
+        Done: fixed 2026-10-06: `store::default_dir()` in the core, called by
+        both (store DD revision 5)
+  - [x] R14 `transport/hid.rs:161`: `Hid::open` asks for a Tokio runtime
         that its thread does not need
-  - [ ] R15 `transport/ble.rs:219`: `Drop` issues a second disconnect
+        Done: fixed 2026-10-06: no runtime handle in `Hid::open` (transport DD
+        revision 10)
+  - [x] R15 `transport/ble.rs:219`: `Drop` issues a second disconnect
         after an orderly close (possibly the stray `btleplug` line at
         close)
+        Done: fixed 2026-10-06: `Drop` skips the disconnect after a successful
+        close (transport DD revision 10)
 
 ## Phase status
 

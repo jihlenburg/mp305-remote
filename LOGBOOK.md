@@ -3606,3 +3606,77 @@ supply, on USB with remote control enabled, was listed over Bluetooth and
 over USB. R3, R9 and R10 rest on OS or vendor behaviour that was not
 reproduced. Nothing is fixed yet; the user decides what is fixed before
 0.1.0.
+
+## 2026-10-06
+
+### The findings of the code review fixed
+
+The user answered the review of 2026-10-05 with "Please try to fix them
+all... it's your call how and in which order". That is taken as the
+approval of the design changes these fixes need, with the designs chosen
+in the main session; the revision tables say so. All fifteen findings, R1
+to R15 of TODO.md, are fixed. Three coding agents worked in parallel, each
+in its own git worktree (link, session and store; discovery and transport;
+Python and app), from designs written in the main session, which then
+merged the three patches, wired the parts that cross their areas and
+wrote the design documents.
+
+Design choices that were the session's to make:
+
+- R2 and R3 touch SR-004 (the library connects only to the supply the
+  caller names and never picks between several), and the supply has no USB
+  serial number. So `Mp305.connect()` still refuses one USB entry plus one
+  Bluetooth entry, but its error now names the cause (a cabled supply
+  keeps advertising until a USB host talks to it) and `connect` takes
+  `bluetooth=` and `usb=`. A changed USB path is accepted only when a
+  running session reconnects and exactly one MP305B is listed; a first
+  connect stays exact. USB links share one marker key, `usb`.
+- R7: the store writes markers behind on a thread of its own; the session
+  waits for it at the close, bounded by 5 s.
+- R6: every wait for the `hidapi` owner thread is bounded by the existing
+  `FIND` and `CONNECT`; no timing constant was added.
+- R9 is fixed from the sources of `btleplug` 0.13.3 and was not reproduced
+  (Windows is deferred, the BlueZ at hand reports the MTU).
+
+Documents: discovery DD revision 9, transport DD revision 10, link DD
+revision 5, session DD revision 7, store DD revision 5 (with the new
+DD-STORE-007), py DD revision 8, app DD revision 7, integration tests
+revision 12 (IT-033). New test entries: UT-LINK-030, UT-SESS-066 to 069,
+UT-STORE-012 and 013, UT-DISC-013 to 015, UT-TRANS-042, UT-PY-029,
+UT-APP-036 and 037. UT-STORE-004, 005 and 007 and UT-APP-022 changed with
+their designs.
+
+Checked on the merged tree: `cargo fmt --check`, both clippy runs,
+`cargo test --workspace` (578 passed), `pytest` (204 passed, 1 skipped),
+`ruff`, `mypy` and the traceability check are clean. Line coverage of the
+core and the app is 95.95 %, every touched file above its target. On the
+supply over USB (MP305B 1.6.0.51), through the Python library: a USB-only
+scan; the bare `connect()`, refused with the new text and both entries;
+`connect(bluetooth=False)`; and a connect by identifier after a scan from
+a thread that had ended. Not checked on hardware: reconnection after a
+replug (R3), a switched-off Bluetooth radio (R10), the MTU cases (R9), and
+the app with these fixes.
+
+### A check switched the supply's output off
+
+The check above was meant to read only. When `connect(bluetooth=False)`
+connected, the supply's output was on (12.00 V, 0.032 A, limit 0.5 A),
+set by the user or another session since the last look on 2026-10-05,
+when it was off with a limit of 0.2 A. The library switches the output
+off at every close (SR-029), so the close of the check did. The next
+connect read the output as off. The user was told at once; the output was
+not switched on again. A connect through the library is read-only only
+while the output is off.
+
+### The project's Python environment repaired
+
+The Python gates first failed at interpreter start ("No module named
+'encodings'"). The repository's `.venv`, made on 2026-10-02, pointed at a
+uv-managed CPython 3.10.19 that an earlier session had installed in its
+scratch directory under `/private/tmp`, and macOS had since removed most
+of its standard library. Python 3.10.19 was installed again with
+`uv python install 3.10` into uv's own directory under the user's home,
+the shim `~/.local/bin/python3.10`, which pointed at the removed
+installation, was replaced, and `.venv` was made anew from it (`uv venv
+--clear`, `uv sync`, `maturin develop`). No file of the repository
+changed by this.
