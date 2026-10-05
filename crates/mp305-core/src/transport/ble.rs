@@ -1,6 +1,7 @@
 //! Bluetooth LE through `btleplug`: the glue between the `AF00` service and
 //! the `Transport` trait. Nothing testable lives here; the route mapping is
-//! in `ble_route` and the framing in `protocol::ble`.
+//! in `ble_route`, the MTU verdict in `ble_mtu` and the framing in
+//! `protocol::ble`.
 //!
 //! Coverage: this file is excluded from the measurement under ADR-0013.
 //! Every function is verified by inspection (IT-016, UT-TRANS-011) and by
@@ -8,6 +9,7 @@
 //!
 //! Implements: DD-TRANS-010, DD-TRANS-011, DD-TRANS-012, DD-TRANS-026.
 
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 
 use btleplug::api::{
@@ -22,14 +24,11 @@ use tokio::time::Instant;
 use crate::error::Error;
 use crate::protocol::ble::{self as framing, BleRoute, Route};
 use crate::protocol::frame::Frame;
+use crate::transport::ble_mtu::{mtu_verdict, MtuVerdict, MIN_MTU, MTU_STEP};
 use crate::transport::ble_route::{route_of, AF01, AF02};
 use crate::transport::description::{Description, Kind};
 use crate::transport::guarded::LOG_TARGET;
 use crate::transport::{RawIncoming, Transport};
-
-/// The smallest ATT MTU that carries the longest reply (70 bytes plus the
-/// route tag, plus the 3-byte ATT header).
-pub const MIN_MTU: u16 = 74;
 
 /// A connected supply over Bluetooth LE. The module is crate-private:
 /// a `Ble` exists only inside a `Guarded` (DD-TRANS-012).
@@ -46,6 +45,9 @@ pub struct Ble {
     reader: JoinHandle<()>,
     /// The channel the reader delivers on.
     rx: mpsc::UnboundedReceiver<RawIncoming>,
+    /// Set once [`Ble::shut_down`] issued the disconnect and it returned
+    /// without error, so that `Drop` does not disconnect again.
+    disconnected: AtomicBool,
 }
 
 /// Maps a `btleplug` error to the crate error. (ADR-0013: inspection.)
@@ -66,13 +68,13 @@ fn hex(bytes: &[u8]) -> String {
 
 impl Ble {
     /// Connects to the peripheral `os_id` on `adapter`, verifies the
-    /// negotiated MTU, subscribes to AF01 and AF02, and starts the reader.
-    /// (ADR-0013: inspection, IT-016, ST-008.)
+    /// negotiated MTU ([`check_mtu`]), subscribes to AF01 and AF02, and
+    /// starts the reader. (ADR-0013: inspection, IT-016, ST-008.)
     ///
     /// # Errors
     ///
     /// [`Error::Transport`] when the peripheral is not known to the adapter,
-    /// a `btleplug` call fails, the MTU is below [`MIN_MTU`], or a
+    /// a `btleplug` call fails, a negotiated MTU is below [`MIN_MTU`], or a
     /// characteristic is missing.
     pub(crate) async fn connect(adapter: &Adapter, os_id: &PeripheralId) -> Result<Self, Error> {
         // The event stream first, so that a disconnect during connect is seen.
@@ -93,13 +95,9 @@ impl Ble {
             .discover_services()
             .await
             .map_err(transport_error)?;
-        let mtu = peripheral.mtu();
-        log::trace!(target: LOG_TARGET, "ble {os_id}: negotiated ATT MTU {mtu}");
-        if mtu < MIN_MTU {
+        if let Err(error) = check_mtu(&peripheral, os_id).await {
             let _ = peripheral.disconnect().await;
-            return Err(Error::Transport {
-                message: format!("ATT MTU {mtu} below {MIN_MTU}"),
-            });
+            return Err(error);
         }
         let characteristics = peripheral.characteristics();
         let find = |uuid| {
@@ -154,6 +152,7 @@ impl Ble {
             af02,
             reader,
             rx,
+            disconnected: AtomicBool::new(false),
         })
     }
 
@@ -185,13 +184,58 @@ impl Ble {
     }
 
     /// Unsubscribes, disconnects and stops the reader; errors on a link
-    /// already lost are ignored. (ADR-0013: inspection.)
+    /// already lost are ignored. A disconnect that returned without error
+    /// is recorded, so that `Drop` does not repeat it; after a failed one
+    /// `Drop` tries again. (ADR-0013: inspection.)
     pub(crate) async fn shut_down(&self) -> Result<(), Error> {
         let _ = self.peripheral.unsubscribe(&self.af01).await;
         let _ = self.peripheral.unsubscribe(&self.af02).await;
-        let _ = self.peripheral.disconnect().await;
+        if self.peripheral.disconnect().await.is_ok() {
+            self.disconnected.store(true, Ordering::Release);
+        }
         self.reader.abort();
         Ok(())
+    }
+}
+
+/// Reads the ATT MTU after the service discovery and applies
+/// [`mtu_verdict`]: a value at or above [`MIN_MTU`] passes at once; a lower
+/// one is read again every [`MTU_STEP`] for up to `ble_mtu::MTU_WAIT`. At
+/// the end, a value of exactly 23 is logged at WARN and the connect goes on
+/// (the operating system may not report the MTU), and any other value below
+/// [`MIN_MTU`] refuses the link. The value is logged at TRACE.
+/// (ADR-0013: inspection, UT-TRANS-042, ST-008.)
+///
+/// # Errors
+///
+/// [`Error::Transport`] with `ATT MTU <n> below 74` for a refused value.
+async fn check_mtu(peripheral: &Peripheral, os_id: &PeripheralId) -> Result<(), Error> {
+    let mut waited = core::time::Duration::ZERO;
+    loop {
+        let mtu = peripheral.mtu();
+        match mtu_verdict(mtu, waited) {
+            MtuVerdict::Pass => {
+                log::trace!(target: LOG_TARGET, "ble {os_id}: negotiated ATT MTU {mtu}");
+                return Ok(());
+            }
+            MtuVerdict::Wait => {
+                tokio::time::sleep(MTU_STEP).await;
+                waited = waited.saturating_add(MTU_STEP);
+            }
+            MtuVerdict::Unreported => {
+                log::warn!(
+                    target: LOG_TARGET,
+                    "ATT MTU reported as {mtu}; the operating system may not report it, continuing"
+                );
+                return Ok(());
+            }
+            MtuVerdict::Refuse => {
+                log::trace!(target: LOG_TARGET, "ble {os_id}: negotiated ATT MTU {mtu}");
+                return Err(Error::Transport {
+                    message: format!("ATT MTU {mtu} below {MIN_MTU}"),
+                });
+            }
+        }
     }
 }
 
@@ -214,10 +258,14 @@ impl Transport for Ble {
 }
 
 impl Drop for Ble {
-    /// Stops the reader and disconnects on a best-effort basis when a runtime
-    /// is available. (ADR-0013: inspection.)
+    /// Stops the reader and, unless [`Ble::shut_down`] already disconnected,
+    /// disconnects on a best-effort basis when a runtime is available.
+    /// (ADR-0013: inspection.)
     fn drop(&mut self) {
         self.reader.abort();
+        if self.disconnected.load(Ordering::Acquire) {
+            return;
+        }
         if let Ok(handle) = tokio::runtime::Handle::try_current() {
             let peripheral = Arc::clone(&self.peripheral);
             handle.spawn(async move {

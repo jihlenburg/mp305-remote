@@ -15,7 +15,6 @@ use std::sync::{Arc, Mutex};
 use std::thread::JoinHandle;
 
 use hidapi::{HidApi, HidDevice};
-use tokio::runtime::Handle;
 use tokio::sync::{mpsc, oneshot};
 use tokio::time::Instant;
 
@@ -71,15 +70,16 @@ fn hex(bytes: &[u8]) -> String {
 }
 
 /// The I/O thread: drains write jobs, then reads one report, until stopped.
-/// (ADR-0013: inspection, IT-017, ST-040.)
+/// It needs no Tokio runtime: `Instant::now()` falls back to the system
+/// clock outside a runtime, and the sends on the unbounded channel and the
+/// one-shot channels only wake the receiving task. (ADR-0013: inspection,
+/// IT-017, ST-040.)
 fn io_loop(
     device: HidDevice,
     jobs: &std_mpsc::Receiver<Job>,
     tx: &mpsc::UnboundedSender<RawIncoming>,
     stop: &AtomicBool,
-    runtime: &Handle,
 ) {
-    let _guard = runtime.enter();
     let mut decoder = framing::Decoder::new();
     let mut buffer = [0u8; REPORT_LEN];
     while !stop.load(Ordering::Relaxed) {
@@ -149,25 +149,22 @@ fn io_loop(
 
 impl Hid {
     /// Opens the device at `path` with the given `hidapi` context and starts
-    /// the I/O thread. Must be called inside a Tokio runtime. (ADR-0013:
-    /// inspection, IT-017.)
+    /// the I/O thread. Needs no Tokio runtime, so it can run on the owner
+    /// thread of discovery. (ADR-0013: inspection, IT-017.)
     ///
     /// # Errors
     ///
-    /// [`Error::Transport`] when the device cannot be opened or no runtime is
-    /// current.
+    /// [`Error::Transport`] when the device cannot be opened or the I/O
+    /// thread cannot be started.
     pub(crate) fn open(api: &HidApi, path: &CStr) -> Result<Self, Error> {
         let device = api.open_path(path).map_err(transport_error)?;
-        let runtime = Handle::try_current().map_err(|_| Error::Transport {
-            message: "no Tokio runtime for the HID reader".to_string(),
-        })?;
         let (jobs_tx, jobs_rx) = std_mpsc::channel();
         let (tx, rx) = mpsc::unbounded_channel();
         let stop = Arc::new(AtomicBool::new(false));
         let stop_for_thread = Arc::clone(&stop);
         let thread = std::thread::Builder::new()
             .name("mp305-hid".to_string())
-            .spawn(move || io_loop(device, &jobs_rx, &tx, &stop_for_thread, &runtime))
+            .spawn(move || io_loop(device, &jobs_rx, &tx, &stop_for_thread))
             .map_err(|error| Error::Transport {
                 message: error.to_string(),
             })?;

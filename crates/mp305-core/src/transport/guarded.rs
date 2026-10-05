@@ -94,8 +94,8 @@ impl Guarded<AnyTransport> {
     ///
     /// # Errors
     ///
-    /// [`Error::Transport`] when the device cannot be opened or no Tokio
-    /// runtime is current.
+    /// [`Error::Transport`] when the device cannot be opened or its I/O
+    /// thread cannot be started. No Tokio runtime needs to be current.
     pub fn open_hid(api: &hidapi::HidApi, path: &std::ffi::CStr) -> Result<Self, Error> {
         Ok(Self::new(AnyTransport::hid(hid::Hid::open(api, path)?)))
     }

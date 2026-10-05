@@ -5,6 +5,7 @@
 //! Implements: DD-TRANS-001 (module tree, `AnyTransport`).
 
 pub(crate) mod ble;
+pub mod ble_mtu;
 pub mod ble_route;
 pub mod description;
 pub mod guarded;

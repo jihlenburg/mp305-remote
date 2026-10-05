@@ -2,9 +2,10 @@
 //!
 //! The pure part of discovery: the Bluetooth and USB classifiers, the
 //! choice of the advertised name, the sighting accumulator that decides
-//! which events count as "advertising now", the identifier shape test and
-//! the connect plan. No function here touches an OS stack; the glue files
-//! feed them what the OS reported.
+//! which events count as "advertising now", the identifier shape test, the
+//! connect plan and the choice of the USB device a connect opens. No
+//! function here touches an OS stack; the glue files feed them what the OS
+//! reported.
 
 use std::collections::{BTreeSet, HashMap};
 
@@ -112,14 +113,20 @@ pub fn advertisement(
     })
 }
 
+/// Whether a USB HID device is a supply: vendor `0x28E9`, product `0x028A`
+/// and a product string containing `MP305`.
+fn is_supply(vendor_id: u16, product_id: u16, product: Option<&str>) -> bool {
+    vendor_id == HID_VENDOR
+        && product_id == HID_PRODUCT
+        && product.is_some_and(|p| p.contains(HID_PRODUCT_TEXT))
+}
+
 /// Classifies one USB HID device: vendor `0x28E9`, product `0x028A` and a
 /// product string containing `MP305`. The path is both the identifier and
 /// the unit identifier. Rejected devices are logged at DEBUG.
 #[must_use]
 pub fn hid(vendor_id: u16, product_id: u16, product: Option<&str>, path: &str) -> Option<Found> {
-    let name = product.filter(|p| {
-        vendor_id == HID_VENDOR && product_id == HID_PRODUCT && p.contains(HID_PRODUCT_TEXT)
-    });
+    let name = product.filter(|_| is_supply(vendor_id, product_id, product));
     let Some(name) = name else {
         log::debug!(
             target: LOG_TARGET,
@@ -287,6 +294,92 @@ pub fn connect_plan(identifier: &str, ble_known: &[String], hid_paths: &[String]
         Plan::BleFind
     } else {
         Plan::NotFound
+    }
+}
+
+/// One enumerated USB HID device, as the OS reported it.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct HidEntry {
+    /// The device path as text, the identifier over USB.
+    pub path: String,
+    /// The USB vendor identifier.
+    pub vendor_id: u16,
+    /// The USB product identifier.
+    pub product_id: u16,
+    /// The product string, when the device reported one.
+    pub product: Option<String>,
+}
+
+/// Why a connect runs.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Purpose {
+    /// The caller's connect: only the exact identifier is reached
+    /// (SR-004).
+    First,
+    /// The session's automatic reconnection after a link loss: over USB a
+    /// supply whose path changed is reached as well, see [`hid_target`].
+    Again,
+}
+
+/// The USB device a connect opens.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum HidTarget {
+    /// The device at the identifier's path.
+    Exact,
+    /// On a reconnect, the one supply listed, at a path other than the
+    /// identifier.
+    Moved {
+        /// The supply's path now.
+        path: String,
+    },
+    /// No device to open: report "no supply found".
+    NotFound,
+}
+
+/// Decides which enumerated USB device a connect to `identifier` opens.
+///
+/// On [`Purpose::First`]: [`HidTarget::Exact`] when a device has the path
+/// `identifier`, whatever it reports, as a first connect always did; else
+/// [`HidTarget::NotFound`].
+///
+/// On [`Purpose::Again`]: [`HidTarget::Exact`] when a device that classifies
+/// as a supply (the rule of [`hid`]) has the path `identifier`. A path that
+/// now belongs to another device counts as gone, since Linux reuses
+/// `hidraw` numbers. Else [`HidTarget::Moved`] when exactly one listed
+/// device classifies as a supply, logged at WARN with the old and the new
+/// path: the path changes when the cable is replugged or the supply
+/// restarts, and the supply has no USB serial number. Else
+/// [`HidTarget::NotFound`], with no supply or more than one listed.
+pub fn hid_target<'a>(
+    identifier: &str,
+    devices: impl IntoIterator<Item = &'a HidEntry>,
+    purpose: Purpose,
+) -> HidTarget {
+    let mut supplies = Vec::new();
+    for device in devices {
+        let supply = is_supply(
+            device.vendor_id,
+            device.product_id,
+            device.product.as_deref(),
+        );
+        if device.path == identifier && (supply || purpose == Purpose::First) {
+            return HidTarget::Exact;
+        }
+        if supply {
+            supplies.push(device.path.as_str());
+        }
+    }
+    match (purpose, supplies.as_slice()) {
+        (Purpose::Again, [path]) => {
+            log::warn!(
+                target: LOG_TARGET,
+                "the USB path of the supply changed from {identifier} to {path}"
+            );
+            HidTarget::Moved {
+                path: (*path).to_string(),
+            }
+        }
+        _ => HidTarget::NotFound,
     }
 }
 
@@ -489,5 +582,105 @@ pub(crate) mod tests {
             connect_plan("/dev/hidraw9", &[], &ids(&["/dev/hidraw3"])),
             Plan::NotFound
         );
+    }
+
+    /// An enumerated USB device: a supply when `supply` is set, a keyboard
+    /// of another vendor otherwise.
+    fn entry(path: &str, supply: bool) -> HidEntry {
+        if supply {
+            HidEntry {
+                path: path.to_string(),
+                vendor_id: 0x28E9,
+                product_id: 0x028A,
+                product: Some("MP305B".to_string()),
+            }
+        } else {
+            HidEntry {
+                path: path.to_string(),
+                vendor_id: 0x05AC,
+                product_id: 0x024F,
+                product: Some("Keyboard".to_string()),
+            }
+        }
+    }
+
+    /// Test: UT-DISC-015
+    #[test]
+    fn hid_target_takes_the_exact_path_in_both_purposes() {
+        let listed = [entry("DevSrvsID:1", false), entry("DevSrvsID:2", true)];
+        for purpose in [Purpose::First, Purpose::Again] {
+            assert_eq!(
+                hid_target("DevSrvsID:2", &listed, purpose),
+                HidTarget::Exact
+            );
+        }
+        // A first connect opens the exact path whatever the device reports.
+        assert_eq!(
+            hid_target("DevSrvsID:1", &listed, Purpose::First),
+            HidTarget::Exact
+        );
+    }
+
+    /// Test: UT-DISC-015
+    #[test]
+    fn hid_target_on_a_reconnect_never_opens_another_device_at_the_old_path() {
+        // The old path now names a keyboard and the supply moved.
+        let moved = [entry("/dev/hidraw3", false), entry("/dev/hidraw5", true)];
+        assert_eq!(
+            hid_target("/dev/hidraw3", &moved, Purpose::Again),
+            HidTarget::Moved {
+                path: "/dev/hidraw5".to_string()
+            }
+        );
+        // The old path names a keyboard and no supply is listed.
+        let gone = [entry("/dev/hidraw3", false)];
+        assert_eq!(
+            hid_target("/dev/hidraw3", &gone, Purpose::Again),
+            HidTarget::NotFound
+        );
+    }
+
+    /// Test: UT-DISC-015
+    #[test]
+    fn hid_target_takes_the_one_moved_supply_only_on_a_reconnect() {
+        let log = crate::transport::test_log::install();
+        let listed = [entry("/dev/hidraw0", false), entry("/dev/hidraw4", true)];
+        assert_eq!(
+            hid_target("/dev/hidraw3", &listed, Purpose::First),
+            HidTarget::NotFound
+        );
+        assert_eq!(
+            hid_target("/dev/hidraw3", &listed, Purpose::Again),
+            HidTarget::Moved {
+                path: "/dev/hidraw4".to_string()
+            }
+        );
+        assert!(log.lines_here(LOG_TARGET).iter().any(|(l, m)| {
+            *l == log::Level::Warn
+                && m == "the USB path of the supply changed from /dev/hidraw3 to /dev/hidraw4"
+        }));
+    }
+
+    /// Test: UT-DISC-015
+    #[test]
+    fn hid_target_finds_nothing_with_no_supply_or_two() {
+        let two = [entry("DevSrvsID:7", true), entry("DevSrvsID:8", true)];
+        let none = [entry("DevSrvsID:7", false)];
+        let other_product = [HidEntry {
+            product: Some("Other".to_string()),
+            ..entry("DevSrvsID:9", true)
+        }];
+        let no_product = [HidEntry {
+            product: None,
+            ..entry("DevSrvsID:9", true)
+        }];
+        for purpose in [Purpose::First, Purpose::Again] {
+            for listed in [&two[..], &none, &other_product, &no_product, &[]] {
+                assert_eq!(
+                    hid_target("DevSrvsID:1", listed, purpose),
+                    HidTarget::NotFound
+                );
+            }
+        }
     }
 }

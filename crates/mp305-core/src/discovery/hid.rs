@@ -1,40 +1,40 @@
 //! Implements: DD-DISC-013.
 //!
 //! The USB HID side of discovery through `hidapi`: the probe, the
-//! enumeration that feeds `classify::hid`, and the open behind `Guarded`.
-//! Nothing decidable lives here; the classification is in `classify` and
-//! the connect plan in `classify::connect_plan`.
+//! enumeration that feeds `classify::hid`, and the connect that opens a
+//! device behind `Guarded`. Nothing decidable lives here; the
+//! classification is in `classify::hid` and the choice of the device a
+//! connect opens in `classify::hid_target`.
 //!
 //! Every call builds a fresh `HidApi::new()` on the one owner thread of
 //! `hid_owner`, never on a thread of Tokio's blocking pool: on macOS
 //! `hidapi` ties its process-wide device manager to the thread that first
 //! used it, and that thread must not end (see `hid_owner`). The calls are
-//! awaited, so a slow enumeration (Windows, the stalling serial request,
-//! TBD-013) blocks no runtime thread, no context is stored and no
-//! `std::sync` guard is ever held across an `.await`.
+//! awaited under a bound (`timing::FIND` for the probe and the enumeration,
+//! `timing::CONNECT` for the connect), so a slow or stalled enumeration
+//! (Windows, the stalling serial request, TBD-013) blocks no runtime thread
+//! and no caller for longer than its bound; no context is stored and no
+//! `std::sync` guard is ever held across an `.await`. A connect is one
+//! owner-thread job: one context lists the devices and opens the chosen one.
 //! `HidApi::new_without_enumerate` is never used: it sets a process-wide
 //! flag and panics after an enumerating context exists.
 //!
 //! Coverage: this file is excluded from the measurement under ADR-0014.
 //! Every function is verified by inspection (UT-DISC-011), the
-//! classification it feeds by IT-032, and the whole by the system tests on
-//! the supply (ST-001 to ST-003).
+//! classification it feeds by IT-032 and UT-DISC-015, and the whole by the
+//! system tests on the supply (ST-001 to ST-003).
 
 use std::collections::BTreeSet;
-use std::ffi::{CStr, CString};
+use std::ffi::CString;
 
 use hidapi::HidApi;
-use tokio::runtime::Handle;
 
-use crate::discovery::{classify, hid_owner, Found, LOG_TARGET};
+use crate::discovery::classify::{self, HidEntry, HidTarget, Purpose};
+use crate::discovery::{hid_owner, not_found, Found, LOG_TARGET};
 use crate::error::Error;
+use crate::protocol::timing;
 use crate::transport::guarded::Guarded;
 use crate::transport::AnyTransport;
-
-/// One enumerated HID device: the path as text (`to_string_lossy`, the
-/// identifier), the path as the OS returned it (for the open), the vendor
-/// identifier, the product identifier and the product string.
-pub(crate) type Enumerated = (String, CString, u16, u16, Option<String>);
 
 /// Maps a `hidapi` error to the crate error. (ADR-0014: inspection
 /// UT-DISC-011.)
@@ -44,10 +44,14 @@ fn transport_error(error: hidapi::HidError) -> Error {
     }
 }
 
-/// Probes the USB side: whether a `hidapi` context can be built. A failure
-/// is logged at WARN. (ADR-0014: inspection UT-DISC-010, ST-003.)
+/// Probes the USB side: whether a `hidapi` context can be built within
+/// `timing::FIND`. A failure is logged at WARN. (ADR-0014: inspection
+/// UT-DISC-010, ST-003.)
 pub(crate) async fn available() -> bool {
-    let probe = hid_owner::run(|| HidApi::new().map(drop).map_err(transport_error)).await;
+    let probe = hid_owner::run(timing::FIND, || {
+        HidApi::new().map(drop).map_err(transport_error)
+    })
+    .await;
     match probe {
         Ok(()) => true,
         Err(error) => {
@@ -57,72 +61,90 @@ pub(crate) async fn available() -> bool {
     }
 }
 
-/// Enumerates the HID devices with a fresh context on the owner thread,
-/// de-duplicated by path text, first entry kept. (ADR-0014: inspection
-/// UT-DISC-011, ST-003.)
-///
-/// # Errors
-///
-/// [`Error::Transport`] when the context cannot be built or the owner
-/// thread does not answer.
-pub(crate) async fn enumerate() -> Result<Vec<Enumerated>, Error> {
-    hid_owner::run(|| {
-        let api = HidApi::new().map_err(transport_error)?;
-        let mut paths = BTreeSet::new();
-        Ok(api
-            .device_list()
-            .map(|device| {
-                (
-                    device.path().to_string_lossy().into_owned(),
-                    device.path().to_owned(),
-                    device.vendor_id(),
-                    device.product_id(),
-                    device.product_string().map(str::to_string),
-                )
-            })
-            .filter(|(text, ..)| paths.insert(text.clone()))
-            .collect())
-    })
-    .await
+/// The devices `api` lists, each with the path as the OS returned it (for
+/// the open), de-duplicated by path text, first entry kept. Runs on the
+/// owner thread. (ADR-0014: inspection UT-DISC-011.)
+fn list(api: &HidApi) -> Vec<(HidEntry, CString)> {
+    let mut paths = BTreeSet::new();
+    api.device_list()
+        .map(|device| {
+            (
+                HidEntry {
+                    path: device.path().to_string_lossy().into_owned(),
+                    vendor_id: device.vendor_id(),
+                    product_id: device.product_id(),
+                    product: device.product_string().map(str::to_string),
+                },
+                device.path().to_owned(),
+            )
+        })
+        .filter(|(entry, _)| paths.insert(entry.path.clone()))
+        .collect()
 }
 
-/// The USB scan: the enumeration fed through `classify::hid` with vendor,
+/// The USB scan: a fresh context on the owner thread within
+/// `timing::FIND`, its list fed through `classify::hid` with vendor,
 /// product, product string and path. (ADR-0014: inspection UT-DISC-011,
 /// IT-032, ST-003.)
 ///
 /// # Errors
 ///
-/// Whatever [`enumerate`] reports.
+/// [`Error::Transport`] when the context cannot be built or the owner
+/// thread does not answer within `timing::FIND`.
 pub(crate) async fn scan() -> Result<Vec<Found>, Error> {
-    Ok(enumerate()
-        .await?
+    let listed = hid_owner::run(timing::FIND, || {
+        let api = HidApi::new().map_err(transport_error)?;
+        Ok(list(&api))
+    })
+    .await?;
+    Ok(listed
         .into_iter()
-        .filter_map(|(text, _, vendor_id, product_id, product)| {
-            classify::hid(vendor_id, product_id, product.as_deref(), &text)
+        .filter_map(|(entry, _)| {
+            classify::hid(
+                entry.vendor_id,
+                entry.product_id,
+                entry.product.as_deref(),
+                &entry.path,
+            )
         })
         .collect())
 }
 
-/// Opens the device at `path` (the `CString` the enumeration returned)
-/// through `Guarded::open_hid`, with a fresh context, on the owner thread.
-/// The owner thread belongs to no runtime, so the work enters the caller's
-/// runtime, which the transport's reader needs. (ADR-0014: inspection
-/// UT-DISC-011, ST-003.)
+/// Connects to the supply at the HID path `identifier` in one job on the
+/// owner thread, within `timing::CONNECT`: a fresh context lists the
+/// devices, `classify::hid_target` chooses the device for `purpose`, and
+/// the same context opens it through `Guarded::open_hid`. The choice is
+/// logged at INFO. An opened device whose caller stopped waiting is dropped
+/// on the owner thread, which closes it. (ADR-0014: inspection UT-DISC-011,
+/// ST-003.)
 ///
 /// # Errors
 ///
-/// [`Error::Transport`] when no Tokio runtime is current, the context
-/// cannot be built, the device cannot be opened, or the owner thread does
-/// not answer.
-pub(crate) async fn open(path: &CStr) -> Result<Guarded<AnyTransport>, Error> {
-    let path = path.to_owned();
-    let runtime = Handle::try_current().map_err(|_| Error::Transport {
-        message: "no Tokio runtime for the HID reader".to_string(),
-    })?;
-    hid_owner::run(move || {
-        let _entered = runtime.enter();
+/// [`not_found`] when no device is chosen; [`Error::Transport`] when the
+/// context cannot be built, the device cannot be opened, or the owner
+/// thread does not answer within `timing::CONNECT`.
+pub(crate) async fn connect(
+    identifier: &str,
+    purpose: Purpose,
+) -> Result<Guarded<AnyTransport>, Error> {
+    let identifier = identifier.to_string();
+    hid_owner::run(timing::CONNECT, move || {
         let api = HidApi::new().map_err(transport_error)?;
-        Guarded::open_hid(&api, &path)
+        let listed = list(&api);
+        let target =
+            classify::hid_target(&identifier, listed.iter().map(|(entry, _)| entry), purpose);
+        log::info!(target: LOG_TARGET, "connect {identifier} {purpose:?} {target:?}");
+        let wanted = match &target {
+            HidTarget::Exact => identifier.as_str(),
+            HidTarget::Moved { path } => path.as_str(),
+            HidTarget::NotFound => return Err(not_found()),
+        };
+        let path = listed
+            .iter()
+            .find(|(entry, _)| entry.path == wanted)
+            .map(|(_, path)| path)
+            .ok_or_else(not_found)?;
+        Guarded::open_hid(&api, path)
     })
     .await
 }

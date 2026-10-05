@@ -1,7 +1,7 @@
 //! Implements: DD-DISC-010, DD-DISC-011, DD-DISC-012.
 //!
 //! The Bluetooth LE side of discovery through `btleplug`: the adapter
-//! probe, the scan loop that feeds `classify::Sightings`, the reads of
+//! probe, the read of the adapter's power state, the scan loop that feeds `classify::Sightings`, the reads of
 //! `properties()` that feed `classify::advertisement`, the `find` that
 //! looks for one identifier, and the bounded connect behind `Guarded`.
 //! Nothing decidable lives here; which events count, which sightings match
@@ -23,14 +23,16 @@ use core::time::Duration;
 use std::collections::{BTreeSet, HashMap};
 use std::sync::Arc;
 
-use btleplug::api::{Central as _, CentralEvent, Manager as _, Peripheral as _, ScanFilter};
+use btleplug::api::{
+    Central as _, CentralEvent, CentralState, Manager as _, Peripheral as _, ScanFilter,
+};
 use btleplug::platform::{Manager, Peripheral, PeripheralId};
 use futures::StreamExt;
 use tokio::runtime::Handle;
 use tokio::sync::{Mutex, OwnedMutexGuard};
 
 use crate::discovery::classify::{self, SightingEvent, Sightings};
-use crate::discovery::{Found, LOG_TARGET};
+use crate::discovery::{Found, Radio, LOG_TARGET};
 use crate::error::Error;
 use crate::protocol::timing;
 use crate::transport::guarded::Guarded;
@@ -84,6 +86,21 @@ pub(crate) async fn adapter() -> Option<Adapter> {
         Err(error) => {
             log::warn!(target: LOG_TARGET, "no Bluetooth: listing the adapters failed: {error}");
             None
+        }
+    }
+}
+
+/// The power state the adapter reports: only an explicit powered-off state
+/// is [`Radio::Off`]; an unknown state and a failed read (logged at DEBUG)
+/// are [`Radio::Unknown`]. (ADR-0014: inspection UT-DISC-010.)
+pub(crate) async fn radio(adapter: &Adapter) -> Radio {
+    match adapter.adapter_state().await {
+        Ok(CentralState::PoweredOn) => Radio::On,
+        Ok(CentralState::PoweredOff) => Radio::Off,
+        Ok(CentralState::Unknown) => Radio::Unknown,
+        Err(error) => {
+            log::debug!(target: LOG_TARGET, "the adapter state could not be read: {error}");
+            Radio::Unknown
         }
     }
 }
@@ -245,12 +262,14 @@ async fn watch(
 /// a device's RSSI when discovery stops), then the stop, then the
 /// advertised name chosen by `classify::advertised_name` and the sighting
 /// classified by `classify::advertisement`. An id the adapter no longer
-/// holds at the end of the scan is skipped at DEBUG. (ADR-0014: inspection
+/// holds at the end of the scan, and one whose `properties()` read fails,
+/// is skipped at DEBUG and the scan goes on. (ADR-0014: inspection
 /// UT-DISC-010, IT-032, ST-001, ST-002.)
 ///
 /// # Errors
 ///
-/// [`Error::Transport`] when a `btleplug` call fails.
+/// [`Error::Transport`] when the scan loop or the listing of the
+/// adapter's peripherals fails.
 pub(crate) async fn scan(
     adapter: &Adapter,
     lock: Arc<Mutex<()>>,
@@ -271,12 +290,12 @@ pub(crate) async fn scan(
             log::debug!(target: LOG_TARGET, "{id} no longer held by the adapter");
             continue;
         };
-        let properties = peripheral
-            .properties()
-            .await
-            .map_err(transport_error)?
-            .unwrap_or_default();
-        read.push((id, properties));
+        match peripheral.properties().await {
+            Ok(properties) => read.push((id, properties.unwrap_or_default())),
+            Err(error) => {
+                log::debug!(target: LOG_TARGET, "{id} skipped: its properties could not be read: {error}");
+            }
+        }
     }
     stop.finish().await;
     let mut found = Vec::new();
