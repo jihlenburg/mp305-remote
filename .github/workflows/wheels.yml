@@ -27,7 +27,9 @@ jobs:
         include:
           - os: macos-14
             target: aarch64-apple-darwin
-          - os: macos-13
+          # macos-13 was retired by GitHub; macos-15-intel is the Intel
+          # runner that remains.
+          - os: macos-15-intel
             target: x86_64-apple-darwin
           # No manylinux_2_35 image exists, so the Linux wheels are built on
           # Ubuntu 22.04 hosts and checked against manylinux_2_35.
