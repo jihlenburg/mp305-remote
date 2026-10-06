@@ -173,6 +173,7 @@ gate (code, commands 3). `rc` is payload byte 0.
 | Live mode (`model`): 0 DC, 1 program, 2 PD, 3 charge. Each control command works only in its own mode; in another mode the reply is `FF`. | code, commands 3 |
 | A control command with a different `model` requests a mode change and reads no other field. It is refused (`FF`) while the output is on. A mode change resets energy and time. | code, commands 5.7, 6.2 |
 | `D2`, `D6` and `DA` (profile and program writes) switch the output request off. A `D2` without its save byte, or a rejected `D2` or `DA`, leaves the device "busy": output-on and mode changes return `FF` until a later successful save. | code, commands 5.9, 5.13 |
+| A program header with a name and no steps can be written by a host and read back: `D6` with an id, a 16-byte name, 0 steps, save 1 and op 0 answers `D7 00`, `D4` then lists the name with 0 steps over Bluetooth and over USB, the entry survives a power cycle and shows in the supply's program menu; the selected program is not changed. Unused name bytes read back as the bytes written (zeros), a name set on the supply is padded with one zero byte and `FF`. The entry can serve as a nameplate that identifies the unit on either transport (spikes/program_nameplate). | hardware, 2026-10-06 (LOGBOOK, "A nameplate in a program slot"); code for the layouts, commands 5.10, 5.11, 5.14 |
 | `A2` (language) switches the output request off when the value changes. | code, commands 5.3 |
 
 ## 8. Telemetry (`C2` to `C3`)

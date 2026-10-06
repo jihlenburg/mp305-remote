@@ -138,6 +138,34 @@
       "bytes": 3281,
       "sha256": "5e5bd13dfd6906c070ff69ad56d976d99011e5e78642f28b6956cc196d22e2ad"
     },
+    "captures/2026-10-05-ui-usb-01.jsonl": {
+      "bytes": 79318,
+      "sha256": "fa2811050de4af24ca91d01f9902eaf3104c9a18192943b5775c3527afec09b4"
+    },
+    "captures/2026-10-05-ui-usb.csv": {
+      "bytes": 2994,
+      "sha256": "0ba8f43e34b633b08b8d6b07f2cdd655def6648d2e393652423b9f23d08e73d2"
+    },
+    "captures/2026-10-06T020651-program-nameplate.jsonl": {
+      "bytes": 811,
+      "sha256": "de3995fc00b2c9ae84c8c787d2006f6fb9564c6a88de832602fc6894aad0cccd"
+    },
+    "captures/2026-10-06T020733-program-nameplate.jsonl": {
+      "bytes": 1557,
+      "sha256": "48a7844647ddff24315df9659de0f4a666a90851ebc8b670648bcf1b861eb972"
+    },
+    "captures/2026-10-06T020902-program-nameplate.jsonl": {
+      "bytes": 886,
+      "sha256": "8b9f5cef7861953da2a7f746dce46a3041f2515d2eb03607c95eb0639a7c3fd4"
+    },
+    "captures/2026-10-06T020948-program-nameplate-usb.jsonl": {
+      "bytes": 853,
+      "sha256": "8c4016f66cde09330920d28f41ddefc4042810925d8bd12049b75ffc2c19bf4e"
+    },
+    "device-model.md": {
+      "bytes": 22772,
+      "sha256": "dada0552d4d1e0a3b84427a9538deef439e3ee2444da8aa5d93c1a970aabe181"
+    },
     "device/README.md": {
       "bytes": 861,
       "sha256": "acd1088342cefccf442950bfd2c8e430a5e96e5920597ea130e130d156243bcf"
@@ -162,9 +190,9 @@
       "bytes": 12521,
       "sha256": "6d0d73cf3f92aa2706757627e7880bc87429bd2fad1467be470fe7f131041e58"
     },
-    "device-model.md": {
-      "bytes": 21808,
-      "sha256": "0c22bb58bc423ab584d07baaacdb2e2bf5bf394474fb95ffed5105c0ae207abb"
+    "firmware.md": {
+      "bytes": 43905,
+      "sha256": "6e8b2374a019e0b367e480f7fc69e582f822ab826ef193388285c81d25c99ad6"
     },
     "firmware/README.md": {
       "bytes": 1105,
@@ -302,6 +330,14 @@
       "bytes": 4155,
       "sha256": "a0e708665dd813ab69f2a5ce4e1a3f96206732dbba3d9ee76e10865b85b87c16"
     },
+    "firmware/v51/canonical/ble-mmio-candidates.tsv": {
+      "bytes": 30027,
+      "sha256": "a9f6967f64b743f49304ee3dd1855a8fcf6eff19545e827a2a4a80a21198ecd1"
+    },
+    "firmware/v51/canonical/ble-riscv.bin.strings.tsv": {
+      "bytes": 1359,
+      "sha256": "96eca911a329bd07aa1c7ebfa5d1fbedef4882b69385872d63d2dc0705a1977c"
+    },
     "firmware/v51/canonical/ble/README.md": {
       "bytes": 22710,
       "sha256": "13baf27e3dd3600a7632f55ef801333e6afb4c35ea6314fc7db1b42c817a4242"
@@ -313,6 +349,10 @@
     "firmware/v51/canonical/ble/data-references.tsv": {
       "bytes": 2276,
       "sha256": "e154b7b67c2cc00bb2bc58079bb0ad08ead2aba3406942ae597bf9857d54003e"
+    },
+    "firmware/v51/canonical/ble/functions.tsv": {
+      "bytes": 9226,
+      "sha256": "2d4c0498bbffb486acfd0069e422a57b375d04c0a8f3d6442ce3fc56b3369eda"
     },
     "firmware/v51/canonical/ble/functions/ram_00001000_image_entry.c": {
       "bytes": 1142,
@@ -1242,10 +1282,6 @@
       "bytes": 6244,
       "sha256": "3f1f2d95f0098360c7d123a0efa86d585e197d30660a6463899b194ebd8746ae"
     },
-    "firmware/v51/canonical/ble/functions.tsv": {
-      "bytes": 9226,
-      "sha256": "2d4c0498bbffb486acfd0069e422a57b375d04c0a8f3d6442ce3fc56b3369eda"
-    },
     "firmware/v51/canonical/ble/listing.asm": {
       "bytes": 524579,
       "sha256": "a3b809e597371c2f648bea43ddc26a8559e68085eac3e6c1b00e60de3678cadb"
@@ -1265,14 +1301,6 @@
     "firmware/v51/canonical/ble/symbols.tsv": {
       "bytes": 92729,
       "sha256": "88386f5007a715477e4f4058fc61a5d33c9d5190038c56fa68912170231b154a"
-    },
-    "firmware/v51/canonical/ble-mmio-candidates.tsv": {
-      "bytes": 30027,
-      "sha256": "a9f6967f64b743f49304ee3dd1855a8fcf6eff19545e827a2a4a80a21198ecd1"
-    },
-    "firmware/v51/canonical/ble-riscv.bin.strings.tsv": {
-      "bytes": 1359,
-      "sha256": "96eca911a329bd07aa1c7ebfa5d1fbedef4882b69385872d63d2dc0705a1977c"
     },
     "firmware/v51/canonical/charger-limits.json": {
       "bytes": 1264,
@@ -1302,6 +1330,22 @@
       "bytes": 5323,
       "sha256": "1e447b19c7395ea700779b3772c0bf110397e2787ebcc98c81479f98c0f2d1e0"
     },
+    "firmware/v51/canonical/main-arm.bin.strings.tsv": {
+      "bytes": 36037,
+      "sha256": "78bb6a83dcb0be8ef7657736ecb313e4fe4c652cf457fbca9b2b7b22ac57053f"
+    },
+    "firmware/v51/canonical/main-callback-seeds.tsv": {
+      "bytes": 8075,
+      "sha256": "f0155aa57be048742d78f22985de7a30ece81bf8c0000839b2217773d4542ef8"
+    },
+    "firmware/v51/canonical/main-mmio-candidates.tsv": {
+      "bytes": 36245,
+      "sha256": "cb87bcf0eb8463d1a48988275a84c97162470144d57cfd4153776cec6e00237b"
+    },
+    "firmware/v51/canonical/main-scatter-load.json": {
+      "bytes": 484,
+      "sha256": "3eca705c51ea6f6604bee50e20b70ad90b96f4d271ce5c0ff8d426a8c5c81cab"
+    },
     "firmware/v51/canonical/main/README.md": {
       "bytes": 195034,
       "sha256": "ff7b472bc62e5b587459ff9be65f97a699553aefe760ff1727feb431be4dff70"
@@ -1313,6 +1357,10 @@
     "firmware/v51/canonical/main/data-references.tsv": {
       "bytes": 15446,
       "sha256": "0ed5aaa145d991bf95450f906a61bc6230652f40196400ad68f6dde54c3993b7"
+    },
+    "firmware/v51/canonical/main/functions.tsv": {
+      "bytes": 76652,
+      "sha256": "7537046f48020102e1443ec340c779a22aa5914ac59aef75edf85a7ecd41b889"
     },
     "firmware/v51/canonical/main/functions/00010288_application_main.c": {
       "bytes": 130,
@@ -11134,10 +11182,6 @@
       "bytes": 573,
       "sha256": "d586e6e1754b2d8550867e95104012b5761be463f3c4ffa0596938f155da1377"
     },
-    "firmware/v51/canonical/main/functions.tsv": {
-      "bytes": 76652,
-      "sha256": "7537046f48020102e1443ec340c779a22aa5914ac59aef75edf85a7ecd41b889"
-    },
     "firmware/v51/canonical/main/listing.asm": {
       "bytes": 5588371,
       "sha256": "cf13db8dd4b604b606f737828ecf071953358d9be140287c3127c4e919988880"
@@ -11158,25 +11202,25 @@
       "bytes": 809128,
       "sha256": "c4ab5b10315d79eff58c4e4c156baa752f56e9c29bf997c2719c8acf9be09fa4"
     },
-    "firmware/v51/canonical/main-arm.bin.strings.tsv": {
-      "bytes": 36037,
-      "sha256": "78bb6a83dcb0be8ef7657736ecb313e4fe4c652cf457fbca9b2b7b22ac57053f"
-    },
-    "firmware/v51/canonical/main-callback-seeds.tsv": {
-      "bytes": 8075,
-      "sha256": "f0155aa57be048742d78f22985de7a30ece81bf8c0000839b2217773d4542ef8"
-    },
-    "firmware/v51/canonical/main-mmio-candidates.tsv": {
-      "bytes": 36245,
-      "sha256": "cb87bcf0eb8463d1a48988275a84c97162470144d57cfd4153776cec6e00237b"
-    },
-    "firmware/v51/canonical/main-scatter-load.json": {
-      "bytes": 484,
-      "sha256": "3eca705c51ea6f6604bee50e20b70ad90b96f4d271ce5c0ff8d426a8c5c81cab"
-    },
     "firmware/v51/canonical/mmio-literal-candidates.tsv": {
       "bytes": 48134,
       "sha256": "75cc70edcf2704676de5565b2bd12df79c3716a9e175d4a4e28f686bf927ea55"
+    },
+    "firmware/v51/canonical/pd-8051.bin.strings.tsv": {
+      "bytes": 2981,
+      "sha256": "0016782f366637cf9773e108d63bec0fe219f5c86496f80c4b83fa258d126612"
+    },
+    "firmware/v51/canonical/pd-call-seeds.tsv": {
+      "bytes": 7411,
+      "sha256": "0a4825f75dd8d7d468754bf244fc45ffc698443c97b09c35ffb41bca78c22f2c"
+    },
+    "firmware/v51/canonical/pd-mmio-candidates.tsv": {
+      "bytes": 32,
+      "sha256": "be1406a6fbe250ca33d77d144d85d4a692814a768a6c04cfb04a8725b41271a1"
+    },
+    "firmware/v51/canonical/pd-tables.tsv": {
+      "bytes": 13920,
+      "sha256": "e1b57450f9004b42e97e9f2ac8b6b997052c79a7d595af8e3c8ad908a09c2c37"
     },
     "firmware/v51/canonical/pd/README.md": {
       "bytes": 84350,
@@ -11189,6 +11233,10 @@
     "firmware/v51/canonical/pd/data-references.tsv": {
       "bytes": 13,
       "sha256": "c812094e2f351b15e1db5783db65ecdeb51c23bd847724748d9918f11347e9ec"
+    },
+    "firmware/v51/canonical/pd/functions.tsv": {
+      "bytes": 33269,
+      "sha256": "9fae2882ccd714855c7f75842798f4056e769a7c676eabcf8e59ca01777674a4"
     },
     "firmware/v51/canonical/pd/functions/CODE_1000_image_entry.c": {
       "bytes": 2219,
@@ -15218,10 +15266,6 @@
       "bytes": 2225,
       "sha256": "bf39b9c344df6bcbe22cacd0e00b656f4d31ec6c16b67cfb00dd4daad625b8ac"
     },
-    "firmware/v51/canonical/pd/functions.tsv": {
-      "bytes": 33269,
-      "sha256": "9fae2882ccd714855c7f75842798f4056e769a7c676eabcf8e59ca01777674a4"
-    },
     "firmware/v51/canonical/pd/listing.asm": {
       "bytes": 766153,
       "sha256": "b4ce803fe049afee57d7d6f1994540e0a2e92688e19d28b10711ecbfc7816917"
@@ -15241,22 +15285,6 @@
     "firmware/v51/canonical/pd/symbols.tsv": {
       "bytes": 130202,
       "sha256": "124769d215831c2b9e59780b8e53961ce6c073690b2d20a4cb95968716acfbf9"
-    },
-    "firmware/v51/canonical/pd-8051.bin.strings.tsv": {
-      "bytes": 2981,
-      "sha256": "0016782f366637cf9773e108d63bec0fe219f5c86496f80c4b83fa258d126612"
-    },
-    "firmware/v51/canonical/pd-call-seeds.tsv": {
-      "bytes": 7411,
-      "sha256": "0a4825f75dd8d7d468754bf244fc45ffc698443c97b09c35ffb41bca78c22f2c"
-    },
-    "firmware/v51/canonical/pd-mmio-candidates.tsv": {
-      "bytes": 32,
-      "sha256": "be1406a6fbe250ca33d77d144d85d4a692814a768a6c04cfb04a8725b41271a1"
-    },
-    "firmware/v51/canonical/pd-tables.tsv": {
-      "bytes": 13920,
-      "sha256": "e1b57450f9004b42e97e9f2ac8b6b997052c79a7d595af8e3c8ad908a09c2c37"
     },
     "firmware/v51/canonical/read-reply-comparison.json": {
       "bytes": 142805,
@@ -15281,6 +15309,10 @@
     "firmware/v51/canonical/sdk-reference/data-references.tsv": {
       "bytes": 15575,
       "sha256": "c887962386af0844faa6760788d9c83dfea83a8b5a7bfd37e6353edfa7263a16"
+    },
+    "firmware/v51/canonical/sdk-reference/functions.tsv": {
+      "bytes": 42077,
+      "sha256": "741e0bcaba1c898ced6f2cd70ceaa84041f3654177801c2f5e1a014763a2dc60"
     },
     "firmware/v51/canonical/sdk-reference/functions/ram_00040000_thunk_FUN_ram_0006ba46.c": {
       "bytes": 459,
@@ -19470,10 +19502,6 @@
       "bytes": 370,
       "sha256": "495ad85d3ceeb4cb6de48b4ba841e1e32b8a5b42615a4793eaed6dc2583d5583"
     },
-    "firmware/v51/canonical/sdk-reference/functions.tsv": {
-      "bytes": 42077,
-      "sha256": "741e0bcaba1c898ced6f2cd70ceaa84041f3654177801c2f5e1a014763a2dc60"
-    },
     "firmware/v51/canonical/sdk-reference/listing.asm": {
       "bytes": 2928880,
       "sha256": "5ec54d293881e0eb297314456f05e9f66b187f55ea4585758f4a75dd8473407f"
@@ -20262,6 +20290,14 @@
       "bytes": 243,
       "sha256": "745df47270c02868e7d97948718db81f06b9fa2b7e9906d7d1285fc09624e312"
     },
+    "firmware/v51/independent/logs/relocation-assertions.log": {
+      "bytes": 34,
+      "sha256": "9e2eb1ad93b9b7318dac5fb3764df8ac4a4db1b69cbf4ff47d10e99f50704bc8"
+    },
+    "firmware/v51/independent/logs/relocation-check.log": {
+      "bytes": 863,
+      "sha256": "e463bfd1857637bab579ec6247c89e7142bbb643ab161aa38b658f9f67b8b9e0"
+    },
     "firmware/v51/independent/logs/relocation/bridge-routes.log": {
       "bytes": 3248,
       "sha256": "29c43d978c67f2d95da5e7f12297e63846726c8e7c4c8b424a0afb2bb1491198"
@@ -20393,14 +20429,6 @@
     "firmware/v51/independent/logs/relocation/hostlink-timeouts.log": {
       "bytes": 591,
       "sha256": "3226c02dd07ff0d029f8d2dfec52aec54ba33cb4020d5e59d51f13104fb3451f"
-    },
-    "firmware/v51/independent/logs/relocation-assertions.log": {
-      "bytes": 34,
-      "sha256": "9e2eb1ad93b9b7318dac5fb3764df8ac4a4db1b69cbf4ff47d10e99f50704bc8"
-    },
-    "firmware/v51/independent/logs/relocation-check.log": {
-      "bytes": 863,
-      "sha256": "e463bfd1857637bab579ec6247c89e7142bbb643ab161aa38b658f9f67b8b9e0"
     },
     "firmware/v51/independent/logs/report-build.log": {
       "bytes": 14592,
@@ -20550,13 +20578,13 @@
       "bytes": 11930,
       "sha256": "11ce623d55a35823eddd8e58f9f3a76a8e2e5c7e00b14a1d4d4f78b2d3e1cc4b"
     },
-    "firmware.md": {
-      "bytes": 43905,
-      "sha256": "6e8b2374a019e0b367e480f7fc69e582f822ab826ef193388285c81d25c99ad6"
+    "lcars-ui-preview.md": {
+      "bytes": 89,
+      "sha256": "4634792c6997dfdad5e8232782de10a92d9f6e9d28b75dacb91623123a36cd13"
     },
     "protocol.md": {
-      "bytes": 34841,
-      "sha256": "c9bee5c524e8fe018a102de9f04a71f25a2549f8a3beb11aa81c7a7cf0217f55"
+      "bytes": 35292,
+      "sha256": "9852954fcf9c0a29452739bc53e34a6aa2d335548cca1db848ddf514bb8dedac"
     },
     "reference/README.md": {
       "bytes": 586,
@@ -20609,6 +20637,10 @@
     "reference/registers/sources.json": {
       "bytes": 3704,
       "sha256": "9fe695573efdc0259c86cffdd6ad9052117551a697487b5c57ca6d5af8451982"
+    },
+    "retro-ui-preview.md": {
+      "bytes": 8527,
+      "sha256": "8786747026c69205f41bd41521225f98a71ff386a163e13f081e865e5121ec09"
     },
     "structure-map.json": {
       "bytes": 1305,

@@ -3739,3 +3739,31 @@ read as the bootloader version 1.1.0.1 (inferred). Nothing in the reply is
 per unit. device-model.md 1 and protocol.md 4.4 record it. The library
 already keeps the eight bytes raw (`Info.bootloader_raw`); showing the
 hardware revision over USB from them is a later change to DD-PROTO-023.
+
+### A nameplate in a program slot
+
+The user asked for a creative way to identify a unit, and then to try the
+idea at once: the supply's programs have 16-byte names in its serial
+flash, `D4` lists them without the bind or the grant, and `D6` writes a
+header. Spike `spikes/program_nameplate` (bleak over Bluetooth from the
+Mac, the `hidapi` package over USB), MP305B 1.6.0.51, the user at the
+supply, four captures in `docs/research/captures/` named
+`2026-10-06T02*-program-nameplate*.jsonl`:
+
+- Read: one program, `Test1` with 6 steps, selected (`31 D5 01 ...`,
+  `31 DD 01 06`).
+- Write: `12 D6 02 'mp305 7F3A' + zeros, 00 01 00` (id 2, no steps, save,
+  plain op) answered `31 D7 00`; the list then held id 2 `mp305 7F3A`
+  with 0 steps, the selection unchanged.
+- The user power-cycled the supply: the entry is still listed, and the
+  supply shows it in its program menu.
+- Over USB the same `D4` returns the same two entries byte for byte.
+
+So a host can give a unit a name that both transports read back, which
+the supply's version reply cannot provide (the entry above). The writes
+behaved exactly as the firmware notes say (commands.md 5.10, 5.11, 5.14).
+Not tried: a rejected write, a delete, and a remote output-on afterwards.
+The program `mp305 7F3A` is left on the supply; `--delete 2` removes it.
+The research manifest is regenerated for the changed and the new
+research files, including four files another session added on
+2026-10-05.

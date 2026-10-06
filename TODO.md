@@ -112,10 +112,15 @@ load; Windows on hardware; the over-current and load tests; the stray
 "Shouldn't get anything but Ok!" that the Bluetooth library logs at
 close on macOS; the hardware revision shown over USB too, from the
 identity bytes of the version reply now that their layout is seen
-(DD-PROTO-023, LOGBOOK 2026-10-06); a pairing step on the host that
-records which USB and Bluetooth identities are one unit (the user's
-question of 2026-10-06; the supply has no serial number and its settings
-cannot hold one).
+(DD-PROTO-023, LOGBOOK 2026-10-06); a nameplate in a program slot: a
+program header with a name and no steps, written once by the host and
+read back by `D4` over both transports, identifies the unit (shown on
+the supply on 2026-10-06, `spikes/program_nameplate`; the supply has no
+serial number). It would key the app's names and the markers, let a
+reconnection find the right supply among several, and let `connect()`
+join a USB and a Bluetooth entry. Needs the `D4` and `D6` items in the
+protocol DD, an identity type, and a spike for a rejected write and a
+delete first.
 
 - [ ] Check the new icon on native Windows and Linux desktops; formats and
       packaging inspected on macOS (2026-10-06).
