@@ -162,6 +162,10 @@
       "bytes": 853,
       "sha256": "8c4016f66cde09330920d28f41ddefc4042810925d8bd12049b75ffc2c19bf4e"
     },
+    "captures/2026-10-06T021310-program-nameplate.jsonl": {
+      "bytes": 1506,
+      "sha256": "12e5f82f63d125b093d2ab9a62ceb1d03c2814ce87e1c2c9c41e80fcf40dc3fe"
+    },
     "device-model.md": {
       "bytes": 22772,
       "sha256": "dada0552d4d1e0a3b84427a9538deef439e3ee2444da8aa5d93c1a970aabe181"

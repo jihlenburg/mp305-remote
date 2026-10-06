@@ -55,6 +55,10 @@ Captures: `2026-10-06T020651-program-nameplate.jsonl` (the first read),
 the firmware notes (`docs/research/firmware/v51/independent/notes/commands.md`,
 5.10, 5.11, 5.14) byte for byte.
 
-Not tried: a rejected write (an id above 10), a delete, and whether the
-host can switch the output on afterwards (the write clears the busy flag
-on paper, since `save` was 1 and `op` was 0).
+- The user ran `--delete 2`: `12 D6 02` with 16 zero bytes, `00 01 01`
+  answered `31 D7 00` after 90 ms, and `D4` listed the one program `Test1`
+  again (`2026-10-06T021310-program-nameplate.jsonl`).
+
+Not tried: a rejected write (an id above 10), and whether the host can
+switch the output on afterwards (the write clears the busy flag on paper,
+since `save` was 1 and `op` was 0).

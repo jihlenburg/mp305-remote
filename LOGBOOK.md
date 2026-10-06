@@ -3762,8 +3762,10 @@ supply, four captures in `docs/research/captures/` named
 So a host can give a unit a name that both transports read back, which
 the supply's version reply cannot provide (the entry above). The writes
 behaved exactly as the firmware notes say (commands.md 5.10, 5.11, 5.14).
-Not tried: a rejected write, a delete, and a remote output-on afterwards.
-The program `mp305 7F3A` is left on the supply; `--delete 2` removes it.
+The user then ran `--delete 2`: `12 D6 02`, 16 zero bytes, `00 01 01`
+answered `31 D7 00`, and the list holds only `Test1` again (capture
+`2026-10-06T021310-program-nameplate.jsonl`). Not tried: a rejected write
+and a remote output-on afterwards.
 The research manifest is regenerated for the changed and the new
 research files, including four files another session added on
 2026-10-05.
