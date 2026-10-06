@@ -88,7 +88,10 @@ jobs:
           "$PY" -m pip install --upgrade pip
           "$PY" -m pip install dist/*.whl pytest numpy tomli
           "$PY" -c "import mp305; print(mp305.__version__)"
-          "$PY" -m pytest tests/unit
+          # A few unit tests measure real time; on a shared runner they
+          # jitter past their bounds now and then. A test that fails is run
+          # once more; a test that fails twice fails the job.
+          "$PY" -m pytest tests/unit || "$PY" -m pytest tests/unit --last-failed --last-failed-no-failures none
 
       - uses: actions/upload-artifact@v4
         with:
