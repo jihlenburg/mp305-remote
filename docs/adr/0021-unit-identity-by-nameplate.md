@@ -76,8 +76,15 @@ every other persistent write is a functional table.
    `Mp305.connect("Bench 1")`: a scan, then a peek of the candidates (USB
    first) until one carries that label. `Mp305.identity` returns the
    nameplate and the transport-side identity; `set_name(label)` names or
-   renames; `clear_name()` forgets. `discover()` entries carry the cached
-   label.
+   renames; `clear_name()` forgets. Listing supplies and their names has
+   two levels of certainty: `discover()` carries the cached label and token
+   of every entry, instantly and from what the host remembers;
+   `discover(identify=True)` peeks every entry and reads the nameplate from
+   the supply itself (milliseconds over USB, a few seconds per supply over
+   Bluetooth, no prompt, no control). Entries with the same token are one
+   unit, and `units(found)` groups them, so a script can print each supply
+   once with the transports it is reachable on. Neither lists what other
+   programs are connected to; "connected" in this record means reachable.
 7. In the app the friendly name becomes the nameplate: naming writes it to
    the supply, the name field in Details edits it, and the two entries of
    one unit collapse into one card with USB and Bluetooth as the choice
