@@ -1,9 +1,9 @@
 # ADR-0021: Unit identity by a nameplate in a program slot
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-10-06
-- Decided by: pending (the user asked for the record after the spike of
-  2026-10-06; the implementation is for a release after 0.1.0)
+- Decided by: user, 2026-10-06 ("accept the ADR"); the implementation is
+  for a release after 0.1.0
 - Related: SR-004, SR-046, AR-029, AR-032, AR-033, DD-DISC-001, DD-DISC-006,
   DD-DISC-011, DD-SESS-001, DD-SESS-010, DD-SESS-042, DD-SESS-051,
   DD-STORE-004, DD-PY-040, DD-APP-009, DD-APP-015, ADR-0004, ADR-0019;

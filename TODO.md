@@ -118,8 +118,8 @@ read back by `D4` over both transports, identifies the unit (shown on
 the supply on 2026-10-06, `spikes/program_nameplate`; the supply has no
 serial number). It would key the app's names and the markers, let a
 reconnection find the right supply among several, and let `connect()`
-join a USB and a Bluetooth entry. ADR-0021 (proposed 2026-10-06) records the
-design; it starts after 0.1.0, once the user accepts the ADR.
+join a USB and a Bluetooth entry. ADR-0021 (accepted by the user on
+2026-10-06) records the design; it starts after 0.1.0.
 
 - [ ] Check the new icon on native Windows and Linux desktops; formats and
       packaging inspected on macOS (2026-10-06).
