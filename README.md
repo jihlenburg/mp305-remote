@@ -6,16 +6,17 @@ Remote control for the ISDT MP305B portable bench power supply
 Repository: <https://github.com/jihlenburg/mp305-remote>. The name leaves
 room for the MP305A later.
 
-> Status: implemented, verification on the supply under way. The Rust core,
-> the desktop app and the Python library exist and pass their unit and
-> integration tests against a scripted mock of the supply on macOS, Linux
-> and Windows. On a real MP305B a part of the system tests has passed over
-> Bluetooth, from macOS and from Linux. Focused USB and desktop UI checks
-> have also run on macOS; system and acceptance coverage remains incomplete.
-> Windows is not yet verified on hardware: there is no
-> Windows test machine with a working path to the supply. Nothing is
-> released: there are no published wheels or app binaries. See [TODO.md](TODO.md) and
-> [LOGBOOK.md](LOGBOOK.md) for progress.
+> Status: 0.1.0, the first release (2026-10-06). The Rust core, the desktop
+> app and the Python library pass their unit and integration tests against
+> a scripted mock of the supply on macOS, Linux and Windows, and the
+> hands-on checks of [ADR-0019](docs/adr/0019-lean-first-release.md)
+> passed on a real MP305B from macOS and from Linux (see "What was checked
+> on a real supply"). Windows is not verified on hardware: there is no
+> Windows test machine with a working path to the supply. The wheels of the
+> Python library for macOS, Linux and Windows come out of the `wheels`
+> workflow on the release tag; the desktop app is built from source
+> (`scripts/bundle_macos.sh` on macOS). Nothing is on PyPI. See
+> [TODO.md](TODO.md) and [LOGBOOK.md](LOGBOOK.md) for progress.
 
 ## What it is
 
@@ -64,6 +65,48 @@ uv run --no-sync pytest                                 # its tests, on the mock
 
 AGENTS.md lists the full set of commands. The tests need no hardware;
 tests that use a real supply run only when asked for explicitly.
+
+## What was checked on a real supply
+
+Release 0.1.0 follows a short hands-on checklist
+([ADR-0019](docs/adr/0019-lean-first-release.md)), not a full test
+campaign. Everything below was done on one MP305B (firmware 1.6.0.51).
+The supply's own readings are the reference; nothing was measured with a
+second instrument.
+
+Checked:
+
+- The Python library from macOS, over Bluetooth and over USB, with
+  `scripts/hardware_check.py`: find the supply, connect, read, set the
+  voltage and the current limit, switch the output on, read at 2 per
+  second, switch it off, put the old setpoints back, close. The loads were
+  a 12 V lamp, once in constant current and once in constant voltage, and
+  a 12 V module drawing 34 mA.
+- The Python library from Linux (x86-64, Ubuntu 26.04, BlueZ 5.85, a USB
+  Bluetooth adapter) over Bluetooth: the same script, and the part of the
+  system tests that runs without a person at the supply (finding,
+  connecting by identifier, 60 s of readings, streaming to CSV).
+- The desktop app on macOS, over USB and over Bluetooth: connect, the
+  remote-control prompt on the supply, set a limit, output on and off, the
+  chart and a CSV recording.
+
+Not checked:
+
+- Windows on hardware. There is no Windows machine with a working path to
+  the supply; on Windows the code has only run its tests against the mock.
+- USB from Linux.
+- The accuracy of the readings, load regulation, and the fault trips (over
+  current, over voltage, over temperature).
+- Automatic reconnection after a lost link, including a USB cable that
+  was replugged, and the warning after an unclean exit.
+- More than one supply at a time, and runs longer than a few minutes.
+- The complete system and acceptance test specifications in
+  `docs/v-model/`. They describe what could be verified and are a backlog,
+  not a record of what was.
+
+So treat 0.1.0 as an early release: set a hardware current limit on the
+supply's front panel, and keep only a load on the output that is safe at
+the supply's settings.
 
 ## How it talks to the device
 

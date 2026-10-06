@@ -20,13 +20,19 @@ acceptance matrices, which are backlog (the sections below).
 - [x] Library check on macOS over USB 2026-10-05: 9 of 9 steps at the
       first USB contact with the real supply (12.00 V, 0.095 A into the
       lamp, no prompt)
-- [ ] Library check on Linux over Bluetooth (halobox, the dongle)
-- [ ] App by hand on macOS: connect, set, output on and off and the
+- [x] Library check on Linux over Bluetooth (halobox, the dongle),
+      2026-10-06: 9 of 9 steps at 12 V and a 0.1 A limit with the user's
+      12 V module (0.033 A), after a connection-only check the same night
+- [x] App by hand on macOS: connect, set, output on and off and the
       chart worked over USB on 2026-10-05 (first contact of the app with
       the supply). CSV and lamp controls also passed through the real egui
       screens and USB worker in a headless harness on 2026-10-05, 44 rows.
       Native launch, selection and USB readout review also passed after the
-      decimal alignment correction on 2026-10-05. Still to try: Bluetooth
+      decimal alignment correction on 2026-10-05. Bluetooth on 2026-10-06
+      with the installed 0.1.0 bundle, driven by synthetic clicks with the
+      user at the supply: connect, the ALLOW prompt, a 0.1 A limit, output
+      on at 12 V (0.032 A, CV), the chart, 79 CSV rows, output off,
+      disconnect
 - [x] App screen redesign (2026-10-05): compact side-by-side layout,
       fixed-width readouts and aligned fields, accessible controls,
       15 reviewed screenshot baselines and interaction tests; app DD
@@ -104,7 +110,7 @@ acceptance matrices, which are backlog (the sections below).
       2026-10-05
 - [ ] Fix what the checks find
 - [ ] Build the release artifacts (wheels, the app)
-- [ ] README: what was checked on hardware and what was not
+- [x] README: what was checked on hardware and what was not (2026-10-06)
 - [ ] Tag v0.1.0
 
 Later, not for 0.1: calibration of the readings against a precision

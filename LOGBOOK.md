@@ -3769,3 +3769,43 @@ and a remote output-on afterwards.
 The research manifest is regenerated for the changed and the new
 research files, including four files another session added on
 2026-10-05.
+
+### The release checklist: the two Bluetooth checks and the wheels
+
+ADR-0021 was accepted by the user ("accept the ADR, let's finish the
+release checklist"); its implementation follows 0.1.0.
+
+Library check on Linux over Bluetooth (halobox, the dongle as the only
+adapter, with the user's permission to take the built-in adapter away
+with `sudo` for the run and put it back): first a connection-only check
+at the user's request (scan at -49 dBm, connected in 3.2 s, six readings
+with the output off, clean close; through the built-in adapter the same
+check failed twice as it did before the fixes). Then
+`scripts/hardware_check.py --ble --voltage 12 --current 0.1 --seconds 10`
+with the user's 12 V module as the load: 9 of 9 steps, CV at 12.00 V and
+0.033 A, the old setpoints (12.00 V / 0.500 A) back, the user pressed
+ALLOW on the supply.
+
+App over Bluetooth on macOS, the installed 0.1.0 bundle in
+`/Applications`, driven by synthetic clicks with the user at the supply:
+scan (both entries), connect over Bluetooth (ready in 0.3 s after the
+link), a 0.1 A limit typed and applied with Enter, the ALLOW prompt
+answered by the user, remote control granted after 3.2 s, Output On
+(12.00 V, 0.032 A, CV, 0.38 W), the chart, a recording of 79 rows to
+`~/Documents/mp305-20261006-002344.csv`, Output Off, Disconnect without
+the output-off question (the output was off), clean close. With that
+every hands-on item of ADR-0019 has passed. Observed on the way: after
+the supply's power cycle its USB path had changed (`DevSrvsID:4295529386`
+to `DevSrvsID:4295729652`), so the app's host-side name for the USB
+connection no longer matched; that is the case ADR-0021 addresses.
+
+Wheels: the first manual runs of `.github/workflows/wheels.yml` found two
+workflow faults, fixed in `b3bb21b`, `25c82a6` and `4ccbf84`: the Linux
+platform tag was passed twice (the action's `manylinux` input plus
+`--compatibility`), the packaging test pins the `--compatibility` form,
+and `macos-13`, retired by GitHub, left the Intel macOS job queued for
+good; it now runs on `macos-15-intel`. On the way the macOS arm64 job once
+failed two timing-sensitive unit tests on GitHub's runner (`test_stream`,
+`test_safety`), which passed on the next run and pass here and on
+halobox; noted as runner jitter, not changed. The run on the release tag
+is the record of the artifacts.
