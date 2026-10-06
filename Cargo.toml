@@ -4,7 +4,7 @@ members = ["crates/mp305-core", "crates/mp305-app", "crates/mp305-py"]
 exclude = ["spikes"]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "GPL-3.0-only WITH Commons-Clause"
 repository = "https://github.com/jihlenburg/mp305-remote"

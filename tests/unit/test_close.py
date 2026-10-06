@@ -1,4 +1,4 @@
-"""UT-PY-015: `close`, the context manager and the finalizer."""
+"""UT-PY-015 and UT-PY-030: `close`, the context manager and the finalizer."""
 
 from __future__ import annotations
 
@@ -171,3 +171,37 @@ def test_close_ends_only_the_wait_on_another_exception(
         assert dev.closed is False
     finally:
         dev._session = real
+
+
+@pytest.mark.spec("UT-PY-030")
+def test_h_close_without_output_off(caplog: pytest.LogCaptureFixture) -> None:
+    rec = testing.MockRecord()
+    with Mp305._from_mock([output_on_script()], identifier="UT-PY-030-a", record=rec) as dev:
+        dev.set_voltage(1.0)
+        dev.close(output_off=False)
+        assert dev.closed is True
+    # After the voltage's `0xC8` only the release went out, with the output
+    # copied from the reading (on), and no output-off.
+    sent = rec.sent()
+    voltage = next(
+        i
+        for i, f in enumerate(sent)
+        if f.opcode == 0xC8 and frames.control(f.payload).remote_con == 1
+    )
+    c8 = [frames.control(f.payload) for f in sent[voltage + 1 :] if f.opcode == 0xC8]
+    assert [(c.remote_con, c.output) for c in c8] == [(0, 1)]
+    assert rec.closes() == 1
+    assert "close of UT-PY-030-a leaves the output as it is" in messages(
+        caplog, "mp305", logging.WARNING
+    )
+    with pytest.raises(TypeError, match="output_off must be a bool"):
+        dev.close(output_off="no")  # type: ignore[arg-type]
+
+
+@pytest.mark.spec("UT-PY-030")
+def test_i_the_with_block_still_switches_off(mock_device: Factory) -> None:
+    rec = testing.MockRecord()
+    with Mp305._from_mock([output_on_script()], identifier="UT-PY-030-b", record=rec) as dev:
+        dev.set_voltage(1.0)
+    check_close_frames(rec.sent())
+    assert rec.closes() == 1

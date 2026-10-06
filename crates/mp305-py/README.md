@@ -39,7 +39,9 @@ with mp305.Mp305.connect(max_voltage=12.0) as dev:  # one supply nearby
     for reading in mp305.stream(dev, rate=2.0, duration=5.0):
         print(reading.voltage, reading.current, reading.mode)
 # Leaving the block switches the output off, releases remote control and
-# disconnects, also when an exception is in flight.
+# disconnects, also when an exception is in flight. To leave the output on,
+# call dev.close(output_off=False) as the last statement inside the block;
+# the supply then keeps the output on with no host attached.
 ```
 
 `mp305.discover()` lists the supplies in range; pass one `identifier` to

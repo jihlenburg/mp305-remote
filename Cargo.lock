@@ -2289,7 +2289,7 @@ dependencies = [
 
 [[package]]
 name = "mp305-app"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "directories",
  "eframe",
@@ -2308,7 +2308,7 @@ dependencies = [
 
 [[package]]
 name = "mp305-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "btleplug",
  "directories",
@@ -2325,7 +2325,7 @@ dependencies = [
 
 [[package]]
 name = "mp305-py"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "futures",
  "log",

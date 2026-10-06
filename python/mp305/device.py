@@ -744,21 +744,36 @@ class Mp305:
 
     # Closing.
 
-    def close(self) -> None:
+    def close(self, output_off: bool = True) -> None:
         """Switches the output off, releases remote control and disconnects.
+
+        With `output_off=False` the output is left as it is: the library only
+        releases remote control and disconnects, and logs a warning, since the
+        supply then keeps its output on with no host attached. The end of a
+        `with` block, an interrupt and the exit hook always switch the output
+        off; to leave it on, call `close(output_off=False)` as the last
+        statement inside the block.
 
         Idempotent. After an interrupt, or any other exception that is not an
         `Mp305Error`, the close continues in the background, the object is
         closing (not closed), and a later `close` waits for the same sequence.
 
+        Args:
+            output_off: Whether to switch the output off before the release.
+
         Raises:
+            TypeError: When `output_off` is not a bool.
             Mp305Error: Or one of its subclasses, when a step failed; the
                 object is closed anyway.
         """
+        if not isinstance(output_off, bool):
+            raise TypeError("output_off must be a bool")
         if self._closed:
             return None
+        if not output_off:
+            _log.warning("close of %s leaves the output as it is", self._identifier)
         try:
-            self._session.close(True, self._handle)
+            self._session.close(output_off, self._handle)
         except Mp305Error as error:
             self._closed = True
             _log.error("close of %s failed: %s", self._identifier, error)

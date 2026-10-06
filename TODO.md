@@ -6,6 +6,11 @@ Open and finished work, grouped by V-model phase. The process is described in
 
 ## Release 0.1 (ADR-0019)
 
+0.1.1 (2026-10-06, after the user's "there should be a way to exit
+without cutting power"): `Mp305.close(output_off=False)` leaves the
+output as it is (ADR-0022, SR-029 revision 19, DD-PY-043, UT-PY-030).
+
+
 The first release is gated by this checklist, not by the system and
 acceptance matrices, which are backlog (the sections below).
 
@@ -118,7 +123,10 @@ acceptance matrices, which are backlog (the sections below).
 - [x] README: what was checked on hardware and what was not (2026-10-06)
 - [x] Tag v0.1.0, 2026-10-06, on the commit that carries this line
 
-Later, not for 0.1: calibration of the readings against a precision
+Later, not for 0.1: the timing-sensitive unit tests (`test_stream`,
+`test_logging`, `test_safety`, `test_ramp`) jitter past their bounds on
+GitHub's shared runners; the wheel workflow retries a failed test once
+since 2026-10-06, the bounds themselves are untouched; calibration of the readings against a precision
 load; Windows on hardware; the over-current and load tests; the stray
 "Shouldn't get anything but Ok!" that the Bluetooth library logs at
 close on macOS; the hardware revision shown over USB too, from the

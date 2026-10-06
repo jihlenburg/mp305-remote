@@ -39,7 +39,9 @@ room for the MP305A later.
       for reading in mp305.stream(dev, rate=2.0, duration=5.0):
           print(reading.voltage, reading.current)
   # Leaving the block switches the output off, releases remote control and
-  # disconnects, also when an exception is in flight.
+  # disconnects, also when an exception is in flight. To leave the output
+  # on, call dev.close(output_off=False) as the last statement inside the
+  # block; the supply then keeps the output on with no host attached.
   ```
 
   A supply on a USB cable is also seen over Bluetooth until a USB host
