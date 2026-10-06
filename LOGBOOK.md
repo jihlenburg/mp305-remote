@@ -3809,3 +3809,14 @@ failed two timing-sensitive unit tests on GitHub's runner (`test_stream`,
 `test_safety`), which passed on the next run and pass here and on
 halobox; noted as runner jitter, not changed. The run on the release tag
 is the record of the artifacts.
+
+### 0.1.0 tagged
+
+The wheel workflow run 37393898171 on `772f973` built all five wheels and
+each passed the unit tests on the mock in a clean CPython 3.10, the last
+item of the ADR-0019 checklist. `v0.1.0` is the annotated tag on the
+commit that carries this entry; the push of the tag starts the workflow
+once more, and that run's artifacts are the wheels of the release. The
+macOS app of the release is the bundle `scripts/bundle_macos.sh` builds
+from the same commit. Nothing is published on PyPI or as a GitHub
+release; the user decides that separately.

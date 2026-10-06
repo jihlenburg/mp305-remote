@@ -108,10 +108,15 @@ acceptance matrices, which are backlog (the sections below).
       separate uncommitted HID owner-thread work (found 2026-10-05): its
       specification entry came with the commit of that work, `e30ee35`, on
       2026-10-05
-- [ ] Fix what the checks find
-- [ ] Build the release artifacts (wheels, the app)
+- [x] Fix what the checks find (2026-10-06: the USB owner thread, the
+      fifteen review findings, three faults of the wheel workflow)
+- [x] Build the release artifacts (wheels, the app), 2026-10-06: the five
+      wheels of workflow run 37393898171 (macOS arm64 and Intel, Linux
+      x86-64 and ARM, Windows), each installed into a clean CPython 3.10
+      and tested on the mock; the macOS app bundle from
+      `scripts/bundle_macos.sh`, installed in `/Applications`
 - [x] README: what was checked on hardware and what was not (2026-10-06)
-- [ ] Tag v0.1.0
+- [x] Tag v0.1.0, 2026-10-06, on the commit that carries this line
 
 Later, not for 0.1: calibration of the readings against a precision
 load; Windows on hardware; the over-current and load tests; the stray
